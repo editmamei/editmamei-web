@@ -1,0 +1,67 @@
+<script lang="ts"></script>
+
+<section id="install" class="bg-neutral-950 py-16 text-neutral-100 md:py-20">
+	<div class="mx-auto max-w-5xl px-4">
+		<div class="mb-8 max-w-2xl">
+			<p class="mb-2 text-xs font-semibold tracking-wider text-emerald-300 uppercase">
+				Install
+			</p>
+			<h2 class="text-2xl font-bold tracking-tight text-white md:text-3xl">
+				Two commands. Restart your MCP client.
+			</h2>
+			<p class="mt-3 text-base leading-relaxed text-neutral-300">
+				The first installs the package globally. The second registers Editmamei as an MCP server in
+				your Claude Desktop / Cursor / Claude Code config, and drops the Claude skill files into
+				<code class="rounded bg-neutral-800 px-1.5 py-0.5 text-xs">~/.claude/skills/</code>.
+			</p>
+		</div>
+
+		<div
+			class="overflow-hidden rounded-xl border border-neutral-800 bg-neutral-900 font-mono text-sm shadow-lg"
+		>
+			<div class="border-b border-neutral-800 px-4 py-2 text-xs tracking-wide text-neutral-500">
+				terminal
+			</div>
+			<pre
+				class="overflow-x-auto px-4 py-4 leading-relaxed"><code><span class="text-neutral-500">$</span> <span class="text-emerald-300">npm</span> install -g editmamei
+<span class="text-neutral-500">$</span> <span class="text-emerald-300">editmamei</span> install</code></pre>
+		</div>
+
+		<p class="mt-4 text-sm leading-relaxed text-neutral-400">
+			Then restart your MCP client and ask:
+			<span class="italic text-neutral-200">"Is Photoshop connected?"</span> The AI calls
+			<code class="rounded bg-neutral-800 px-1.5 py-0.5 text-xs">photoshop_ping</code> and you'll see
+			your Photoshop version returned.
+		</p>
+
+		<div class="mt-10 grid gap-6 md:grid-cols-2">
+			<div class="rounded-xl border border-neutral-800 bg-neutral-900/60 p-5">
+				<h3 class="text-sm font-semibold tracking-tight text-white">Requirements</h3>
+				<ul class="mt-3 space-y-1.5 text-sm text-neutral-300">
+					<li>Node.js 20 or later</li>
+					<li>Adobe Photoshop 2022 or later (2024+ recommended)</li>
+					<li>Windows 10/11 or macOS 12+</li>
+					<li>An MCP-compatible AI client</li>
+				</ul>
+			</div>
+			<div class="rounded-xl border border-neutral-800 bg-neutral-900/60 p-5">
+				<h3 class="text-sm font-semibold tracking-tight text-white">Supported clients</h3>
+				<ul class="mt-3 space-y-1.5 text-sm text-neutral-300">
+					<li>Claude Desktop</li>
+					<li>Cursor</li>
+					<li>Claude Code</li>
+					<li>Any other MCP host</li>
+				</ul>
+			</div>
+		</div>
+
+		<p class="mt-8 text-sm text-neutral-400">
+			Full setup walkthrough in the
+			<a
+				href="https://github.com/editmamei/editmamei-ce/blob/main/docs/getting-started.md"
+				class="font-semibold text-emerald-300 underline decoration-emerald-700 underline-offset-4 hover:decoration-emerald-300"
+				>Getting Started guide</a
+			>.
+		</p>
+	</div>
+</section>
