@@ -19,8 +19,8 @@
 		</h1>
 
 		<p class="mt-4 text-sm text-neutral-500 italic md:text-base">
-			(Pronounced like <span class="font-medium not-italic text-neutral-700">edamame</span>. Yes, the
-			snack.)
+			(Pronounced like <span class="font-medium text-neutral-700 not-italic">edamame</span>. Yes,
+			the snack.)
 		</p>
 
 		<p class="mx-auto mt-7 max-w-2xl text-lg leading-relaxed text-neutral-700 md:text-xl">
@@ -45,7 +45,7 @@
 		</div>
 
 		<p class="mt-5 text-xs text-neutral-500">
-			Runs on your machine. No cloud. No telemetry. Windows · macOS.
+			Runs locally with the Photoshop you already have installed. Windows · macOS.
 		</p>
 	</div>
 </section>
