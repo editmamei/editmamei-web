@@ -2,7 +2,18 @@
 
 <header class="sticky top-0 z-30 border-b border-neutral-200/80 bg-white/85 backdrop-blur">
 	<div class="mx-auto flex max-w-6xl items-center justify-between gap-6 px-4 py-3">
-		<a href="/" class="flex items-baseline gap-2 font-semibold tracking-tight text-neutral-900">
+		<a
+			href="/"
+			class="flex items-center gap-2.5 font-semibold tracking-tight text-neutral-900"
+			aria-label="Editmamei — home"
+		>
+			<img
+				src="/icons/icon-64.png"
+				alt=""
+				width="32"
+				height="32"
+				class="size-8 shrink-0"
+			/>
 			<span class="text-lg">Editmamei</span>
 			<span class="hidden text-xs font-normal text-neutral-500 italic sm:inline"
 				>· pronounced like edamame</span

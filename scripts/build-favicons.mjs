@@ -20,6 +20,7 @@ const pngTargets = [
 	{ size: 16, name: 'favicon-16.png', kind: 'browser tab' },
 	{ size: 32, name: 'favicon-32.png', kind: 'browser tab' },
 	{ size: 48, name: 'favicon-48.png', kind: 'browser tab / ICO' },
+	{ size: 64, name: 'icon-64.png', kind: 'header lockup (2x of 32px display)' },
 	{ size: 180, name: 'apple-touch-icon.png', kind: 'iOS home screen' },
 	{ size: 192, name: 'icon-192.png', kind: 'Android / PWA' },
 	{ size: 512, name: 'icon-512.png', kind: 'Android / PWA splash' }
