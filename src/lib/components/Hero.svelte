@@ -7,12 +7,6 @@
 	></div>
 
 	<div class="relative z-10 mx-auto max-w-5xl px-4 pt-16 pb-12 text-center md:pt-24 md:pb-16">
-		<p
-			class="mb-3 inline-block rounded-full border border-emerald-200/70 bg-emerald-50 px-3 py-1 text-xs font-semibold tracking-wider text-emerald-800 uppercase"
-		>
-			For working photographers · Windows · macOS
-		</p>
-
 		<h1 class="text-4xl font-bold tracking-tight text-neutral-950 md:text-6xl md:leading-[1.05]">
 			Unlock Photoshop with<br />
 			natural-language photo editing.

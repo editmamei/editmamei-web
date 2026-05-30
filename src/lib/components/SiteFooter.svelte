@@ -19,7 +19,7 @@
 			<div>
 				<p class="text-xs font-semibold tracking-wider text-neutral-500 uppercase">Product</p>
 				<ul class="mt-3 space-y-2 text-sm text-neutral-700">
-					<li><a href="#capabilities" class="hover:text-neutral-950">Features</a></li>
+					<li><a href="/#capabilities" class="hover:text-neutral-950">Features</a></li>
 					<li><a href="/pricing" class="hover:text-neutral-950">Pricing</a></li>
 					<li>
 						<a
@@ -27,7 +27,7 @@
 							class="hover:text-neutral-950">Changelog</a
 						>
 					</li>
-					<li><a href="#demo" class="hover:text-neutral-950">Demo</a></li>
+					<li><a href="/#demo" class="hover:text-neutral-950">Demo</a></li>
 				</ul>
 			</div>
 
