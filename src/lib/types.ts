@@ -59,3 +59,8 @@ export interface EditionRow {
 	community: boolean;
 	pro: boolean;
 }
+
+export interface DemoExample {
+	demo: Demo;
+	prompt: DemoPrompt;
+}

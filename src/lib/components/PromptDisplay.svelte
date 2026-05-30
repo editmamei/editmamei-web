@@ -7,11 +7,17 @@
 		typingSpeedMs?: number;
 		pauseMs?: number;
 		slideDurationMs?: number;
+		currentIndex?: number;
 	}
 
-	let { prompts, typingSpeedMs = 32, pauseMs = 7000, slideDurationMs = 1400 }: Props = $props();
+	let {
+		prompts,
+		typingSpeedMs = 32,
+		pauseMs = 7000,
+		slideDurationMs = 1400,
+		currentIndex = $bindable(0)
+	}: Props = $props();
 
-	let currentIndex = $state(0);
 	let displayedText = $state('');
 	let isTyping = $state(false);
 
