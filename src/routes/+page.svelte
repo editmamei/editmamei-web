@@ -4,11 +4,12 @@
 	import LayerAccordion from '$lib/components/LayerAccordion.svelte';
 	import PromptDisplay from '$lib/components/PromptDisplay.svelte';
 	import Hero from '$lib/components/Hero.svelte';
+	import HowItWorks from '$lib/components/HowItWorks.svelte';
 	import ThreePillars from '$lib/components/ThreePillars.svelte';
 	import CapabilitySurface from '$lib/components/CapabilitySurface.svelte';
 	import WorkflowExamples from '$lib/components/WorkflowExamples.svelte';
 	import EditionsTable from '$lib/components/EditionsTable.svelte';
-	import PrivacySection from '$lib/components/PrivacySection.svelte';
+	import VerifiableSection from '$lib/components/VerifiableSection.svelte';
 	import InstallSection from '$lib/components/InstallSection.svelte';
 	import { demoExamples } from '$lib/demos/examples';
 
@@ -34,10 +35,7 @@
 				Two prompts, two real workups.
 			</h2>
 			{#key demoIndex}
-				<p
-					class="mt-3 text-base leading-relaxed text-neutral-700"
-					in:fade={{ duration: 450 }}
-				>
+				<p class="mt-3 text-base leading-relaxed text-neutral-700" in:fade={{ duration: 450 }}>
 					{activeDemo.summary}
 				</p>
 			{/key}
@@ -66,9 +64,7 @@
 			</div>
 
 			<aside>
-				<p
-					class="mb-2 text-xs font-semibold tracking-wider text-neutral-500 uppercase"
-				>
+				<p class="mb-2 text-xs font-semibold tracking-wider text-neutral-500 uppercase">
 					Layer stack — built non-destructively
 				</p>
 				{#key demoIndex}
@@ -85,9 +81,10 @@
 	</div>
 </section>
 
+<HowItWorks />
 <ThreePillars />
 <CapabilitySurface />
 <WorkflowExamples />
 <EditionsTable />
-<PrivacySection />
+<VerifiableSection />
 <InstallSection />

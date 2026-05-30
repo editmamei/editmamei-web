@@ -85,7 +85,5 @@ export const editionRows: EditionRow[] = [
 	{ feature: 'Create / save / delete custom templates', community: false, pro: true },
 	{ feature: 'Sensei-backed selections (Select Subject, Select Sky)', community: false, pro: true },
 	{ feature: 'Per-channel histograms', community: false, pro: true },
-	{ feature: 'Expanded adjustment-layer types', community: false, pro: true },
-	{ feature: 'Channels, paths, vector masks', community: false, pro: true },
 	{ feature: 'Priority support', community: false, pro: true }
 ];

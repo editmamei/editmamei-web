@@ -10,7 +10,7 @@
 		<p
 			class="mb-3 inline-block rounded-full border border-emerald-200/70 bg-emerald-50 px-3 py-1 text-xs font-semibold tracking-wider text-emerald-800 uppercase"
 		>
-			MCP server · Adobe Photoshop · open beta
+			For working photographers · Windows · macOS
 		</p>
 
 		<h1 class="text-4xl font-bold tracking-tight text-neutral-950 md:text-6xl md:leading-[1.05]">
@@ -18,15 +18,21 @@
 			natural-language photo editing.
 		</h1>
 
+		<p
+			class="mx-auto mt-5 max-w-2xl text-lg font-medium tracking-tight text-neutral-700 md:text-xl"
+		>
+			AI orchestration, not generation.
+		</p>
+
 		<p class="mt-4 text-sm text-neutral-500 italic md:text-base">
 			(Pronounced like <span class="font-medium text-neutral-700 not-italic">edamame</span>. Yes,
 			the snack.)
 		</p>
 
 		<p class="mx-auto mt-7 max-w-2xl text-lg leading-relaxed text-neutral-700 md:text-xl">
-			An MCP server that lets Claude, Cursor, and any MCP-compatible client drive the real Adobe
-			Photoshop you already have installed — across documents, layers, selections, masks, and
-			adjustments, through natural-language conversation.
+			You describe the edit in plain words. The AI plans the steps. Your own copy of Photoshop
+			carries them out — using its standard adjustment layers, masks, selections, and filters. The
+			AI directs; Photoshop edits.
 		</p>
 
 		<div class="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
@@ -45,7 +51,7 @@
 		</div>
 
 		<p class="mt-5 text-xs text-neutral-500">
-			Runs locally with the Photoshop you already have installed. Windows · macOS.
+			Runs on your machine with the Photoshop you already have installed.
 		</p>
 	</div>
 </section>

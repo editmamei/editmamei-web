@@ -11,7 +11,7 @@
 			</h2>
 			<p class="mt-3 text-base leading-relaxed text-neutral-700">
 				Both editions ship from the same npm package. A Pro license unlocks the Pro tool surface on
-				the next MCP-client restart.
+				the next AI-client restart.
 			</p>
 		</div>
 

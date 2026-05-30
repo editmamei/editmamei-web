@@ -8,8 +8,8 @@
 			<div class="md:col-span-2">
 				<p class="text-base font-semibold tracking-tight text-neutral-900">Editmamei</p>
 				<p class="mt-2 max-w-md text-sm leading-relaxed text-neutral-600">
-					Unlock Photoshop with natural-language photo editing. An MCP server that lets your AI
-					assistant drive Adobe Photoshop directly.
+					Unlock Photoshop with natural-language photo editing. AI orchestration, not generation —
+					your AI plans the edit, your Photoshop carries it out.
 				</p>
 				<p class="mt-4 text-sm text-neutral-500 italic">
 					Pairs well with: a layered PSD, a willing AI, and a small bowl of edamame.
@@ -17,11 +17,7 @@
 			</div>
 
 			<div>
-				<p
-					class="text-xs font-semibold tracking-wider text-neutral-500 uppercase"
-				>
-					Product
-				</p>
+				<p class="text-xs font-semibold tracking-wider text-neutral-500 uppercase">Product</p>
 				<ul class="mt-3 space-y-2 text-sm text-neutral-700">
 					<li><a href="#capabilities" class="hover:text-neutral-950">Features</a></li>
 					<li><a href="/pricing" class="hover:text-neutral-950">Pricing</a></li>
@@ -36,11 +32,7 @@
 			</div>
 
 			<div>
-				<p
-					class="text-xs font-semibold tracking-wider text-neutral-500 uppercase"
-				>
-					Resources
-				</p>
+				<p class="text-xs font-semibold tracking-wider text-neutral-500 uppercase">Resources</p>
 				<ul class="mt-3 space-y-2 text-sm text-neutral-700">
 					<li>
 						<a
@@ -60,6 +52,29 @@
 					<li>
 						<a href="https://github.com/editmamei" class="hover:text-neutral-950">GitHub</a>
 					</li>
+					<li>
+						<a
+							href="https://www.instagram.com/editmamei/"
+							rel="me noopener"
+							class="inline-flex items-center gap-1.5 hover:text-neutral-950"
+						>
+							<svg
+								viewBox="0 0 24 24"
+								class="size-4"
+								fill="none"
+								stroke="currentColor"
+								stroke-width="1.8"
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								aria-hidden="true"
+							>
+								<rect x="3" y="3" width="18" height="18" rx="5" />
+								<circle cx="12" cy="12" r="4" />
+								<circle cx="17.5" cy="6.5" r="0.9" fill="currentColor" stroke="none" />
+							</svg>
+							Instagram
+						</a>
+					</li>
 				</ul>
 			</div>
 		</div>
@@ -68,13 +83,7 @@
 			class="mt-10 flex flex-col gap-3 border-t border-neutral-200 pt-6 text-xs text-neutral-500 sm:flex-row sm:items-center sm:justify-between"
 		>
 			<p class="flex items-center gap-2">
-				<img
-					src="/icons/favicon-32.png"
-					alt=""
-					width="20"
-					height="20"
-					class="size-5 rounded-md"
-				/>
+				<img src="/icons/favicon-32.png" alt="" width="20" height="20" class="size-5 rounded-md" />
 				<span>© {year} Editmamei</span>
 			</p>
 			<p class="flex items-center gap-4">
