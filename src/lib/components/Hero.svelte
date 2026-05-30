@@ -25,8 +25,8 @@
 
 		<p class="mx-auto mt-7 max-w-2xl text-lg leading-relaxed text-neutral-700 md:text-xl">
 			An MCP server that lets Claude, Cursor, and any MCP-compatible client drive the real Adobe
-			Photoshop you already have installed — through natural-language conversation, with the full
-			editing surface available.
+			Photoshop you already have installed — across documents, layers, selections, masks, and
+			adjustments, through natural-language conversation.
 		</p>
 
 		<div class="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">

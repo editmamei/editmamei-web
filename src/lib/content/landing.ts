@@ -11,7 +11,7 @@ export const pillars: Pillar[] = [
 	},
 	{
 		title: 'Recipes that reproduce',
-		body: 'Save the edit you just made as a named template. Apply it later — to a different image, on a different day — and the AI reads its own previous reasoning to recreate the look. Editing decisions stop being one-shots.'
+		body: 'A template is a reproducible aesthetic recipe — apply it later to a different image and the AI reads the recipe’s reasoning to recreate the look on the new file. Editing decisions stop being one-shots. Editmamei ships with a small built-in starter set; creating and saving your own is a Pro feature.'
 	}
 ];
 
@@ -26,7 +26,7 @@ export const capabilities: Capability[] = [
 	},
 	{
 		title: 'Smart selections',
-		body: 'Select Subject, Select Sky, Color Range, Magic Wand — plus rectangle and feather. Every selection returns area, edge complexity, and pixel counts, so the AI can verify before committing to a mask or adjustment.'
+		body: 'Color Range, Magic Wand, plus rectangle and feather. Every selection returns area, edge complexity, and pixel counts, so the AI can verify before committing to a mask or adjustment. Pro adds Sensei-backed Select Subject and Select Sky.'
 	},
 	{
 		title: 'Non-destructive adjustments',
@@ -42,11 +42,11 @@ export const capabilities: Capability[] = [
 	},
 	{
 		title: 'Templates',
-		body: 'A reproducible aesthetic recipe — the headline Pro feature. Editmamei captures the session evidence, renders before/after previews, and writes a Claude-authored description of intent and pipeline that survives between sessions.'
+		body: 'A reproducible aesthetic recipe. Every edition ships with a small built-in set to apply. Pro adds the authoring side — capture session evidence, render before/after previews, and save a Claude-authored description of intent and pipeline that survives between sessions.'
 	},
 	{
 		title: 'Visual verification',
-		body: 'Downscaled JPEG previews and 256-bin per-channel histograms return inline, so the AI sees what the document actually looks like — and confirms an operation actually changed pixels instead of trusting a success message.'
+		body: 'Downscaled JPEG previews return inline so the AI sees what the document actually looks like and confirms operations actually changed pixels instead of trusting a success message. Pro adds 256-bin per-channel histograms with mean / stdev / median.'
 	}
 ];
 
@@ -81,11 +81,11 @@ export const editionRows: EditionRow[] = [
 		community: true,
 		pro: true
 	},
-	{ feature: 'Templates system', community: false, pro: true },
-	{ feature: 'Full non-destructive workflow surface', community: false, pro: true },
-	{ feature: 'Smart Object lifecycle tools', community: false, pro: true },
+	{ feature: 'Apply built-in templates', community: true, pro: true },
+	{ feature: 'Create / save / delete custom templates', community: false, pro: true },
+	{ feature: 'Sensei-backed selections (Select Subject, Select Sky)', community: false, pro: true },
+	{ feature: 'Per-channel histograms', community: false, pro: true },
 	{ feature: 'Expanded adjustment-layer types', community: false, pro: true },
-	{ feature: 'Advanced selection refinement', community: false, pro: true },
 	{ feature: 'Channels, paths, vector masks', community: false, pro: true },
 	{ feature: 'Priority support', community: false, pro: true }
 ];
