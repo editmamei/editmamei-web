@@ -67,7 +67,16 @@
 		<div
 			class="mt-10 flex flex-col gap-3 border-t border-neutral-200 pt-6 text-xs text-neutral-500 sm:flex-row sm:items-center sm:justify-between"
 		>
-			<p>© {year} Editmamei</p>
+			<p class="flex items-center gap-2">
+				<img
+					src="/icons/favicon-32.png"
+					alt=""
+					width="20"
+					height="20"
+					class="size-5 rounded-md"
+				/>
+				<span>© {year} Editmamei</span>
+			</p>
 			<p class="flex items-center gap-4">
 				<a href="/privacy" class="hover:text-neutral-800">Privacy</a>
 				<a href="/security" class="hover:text-neutral-800">Security</a>
