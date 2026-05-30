@@ -8,8 +8,8 @@
 			<div class="md:col-span-2">
 				<p class="text-base font-semibold tracking-tight text-neutral-900">Editmamei</p>
 				<p class="mt-2 max-w-md text-sm leading-relaxed text-neutral-600">
-					Unlock Photoshop with natural-language photo editing. AI orchestration, not generation —
-					your AI plans the edit, your Photoshop carries it out.
+					Unlock Photoshop with natural-language photo editing. AI orchestration, not generation.
+					Your AI plans the edit; your Photoshop carries it out.
 				</p>
 				<p class="mt-4 text-sm text-neutral-500 italic">
 					Pairs well with: a layered PSD, a willing AI, and a small bowl of edamame.

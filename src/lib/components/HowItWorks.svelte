@@ -12,14 +12,14 @@
 			<p class="mt-3 text-base leading-relaxed text-neutral-700">
 				For years, getting the look in your head meant nudging sliders and hunting for a tutorial
 				that matched your exact shot. Editmamei plugs your AI chat assistant straight into the
-				desktop Photoshop you already have. You describe what you want in plain words — like you'd
-				tell a friend — and it builds the layers, makes the adjustments, and hands back the finished
+				desktop Photoshop you already have. You describe what you want in plain words, like you'd
+				tell a friend, and it builds the layers, makes the adjustments, and hands back the finished
 				photo.
 			</p>
 		</header>
 
 		<ol class="mb-12 grid gap-4 md:grid-cols-4" aria-label="The four steps of an Editmamei edit">
-			{#each [{ n: '1', title: 'You describe the edit', body: 'In plain language — "warm up the golden hour, lift the shadows, clean up the horizon."' }, { n: '2', title: 'The AI plans the steps', body: 'Which adjustments, which selections, in what order.' }, { n: '3', title: 'Your Photoshop does the editing', body: 'On your machine, using its own standard tools — adjustment layers, masks, selections, filters.' }, { n: '4', title: 'You get a finished photo', body: 'Fully layered, maskable, and editable. Nothing baked in.' }] as step, i (i)}
+			{#each [{ n: '1', title: 'You describe the edit', body: 'In plain language: "warm up the golden hour, lift the shadows, clean up the horizon."' }, { n: '2', title: 'The AI plans the steps', body: 'Which adjustments, which selections, in what order.' }, { n: '3', title: 'Your Photoshop does the editing', body: 'On your machine, using its own standard tools: adjustment layers, masks, selections, filters.' }, { n: '4', title: 'You get a finished photo', body: 'Fully layered, maskable, and editable. Nothing baked in.' }] as step, i (i)}
 				<li class="relative rounded-xl border border-neutral-200 bg-neutral-50/60 p-5">
 					<span
 						class="mb-3 inline-flex size-7 items-center justify-center rounded-full bg-neutral-900 text-xs font-bold text-white"
@@ -121,7 +121,7 @@
 				</div>
 			</div>
 			<p class="mt-6 text-center text-xs text-neutral-500">
-				The AI is the director; Photoshop is the hands. Both live where they already do — the AI in
+				The AI is the director; Photoshop is the hands. Both live where they already do: the AI in
 				the cloud, Photoshop on your computer.
 			</p>
 		</div>
@@ -132,11 +132,11 @@
 				Edited, not generated.
 			</h3>
 			<p class="mt-3 text-base leading-relaxed text-neutral-700">
-				Most "AI photo" tools are <em>generative</em> — they invent new pixels: skies, objects, even
+				Most "AI photo" tools are <em>generative</em>. They invent new pixels: skies, objects, even
 				faces that were never in your shot.
 				<strong class="font-semibold text-neutral-900">Editmamei doesn't do that.</strong>
 				It works only with the pixels you captured, using the same non-generative Photoshop tools professionals
-				have used for years — adjustment layers, masks, selections, filters. The AI is the director, not
+				have used for years: adjustment layers, masks, selections, filters. The AI is the director, not
 				the artist. Your photo is yours, just finished faster.
 			</p>
 		</div>
@@ -153,9 +153,9 @@
 			</p>
 			<p class="mt-3 text-sm leading-relaxed text-neutral-700">
 				Worth being clear about: your AI assistant is a cloud service. When you ask it to analyze an
-				image — for example, the visual-verification preview — a downscaled JPEG is sent to
+				image (for example, the visual-verification preview), a downscaled JPEG is sent to
 				<em>that AI provider</em>, exactly as if you'd dropped the file into a chat with it. That's
-				a property of using a cloud AI and a function of which assistant you choose — not a hop
+				a property of using a cloud AI, and a function of which assistant you choose. Not a hop
 				Editmamei adds.
 			</p>
 		</div>

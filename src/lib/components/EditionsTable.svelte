@@ -7,7 +7,7 @@
 		<div class="mb-10 max-w-2xl">
 			<p class="mb-2 text-xs font-semibold tracking-wider text-neutral-500 uppercase">Editions</p>
 			<h2 class="text-2xl font-bold tracking-tight text-neutral-950 md:text-3xl">
-				Community is free. Pro adds the workflow surface.
+				Community covers the full editing surface. Pro adds three specific upgrades.
 			</h2>
 			<p class="mt-3 text-base leading-relaxed text-neutral-700">
 				Both editions ship from the same npm package. A Pro license unlocks the Pro tool surface on
@@ -19,7 +19,10 @@
 			<table class="w-full text-left text-sm">
 				<thead>
 					<tr class="border-b border-neutral-200 bg-neutral-50">
-						<th scope="col" class="px-5 py-3 text-xs font-semibold tracking-wider text-neutral-500 uppercase">
+						<th
+							scope="col"
+							class="px-5 py-3 text-xs font-semibold tracking-wider text-neutral-500 uppercase"
+						>
 							Feature
 						</th>
 						<th
@@ -65,7 +68,8 @@
 		<p class="mt-6 text-sm text-neutral-600">
 			Detailed comparison and pricing at <a
 				href="/pricing"
-				class="font-semibold text-neutral-900 underline decoration-neutral-300 underline-offset-4 hover:decoration-neutral-700">editmamei.com/pricing</a
+				class="font-semibold text-neutral-900 underline decoration-neutral-300 underline-offset-4 hover:decoration-neutral-700"
+				>editmamei.com/pricing</a
 			>.
 		</p>
 	</div>

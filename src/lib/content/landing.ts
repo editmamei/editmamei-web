@@ -76,14 +76,48 @@ export const workflowExamples: WorkflowExample[] = [
 
 export const editionRows: EditionRow[] = [
 	{
-		feature:
-			'Core editing surface (documents, layers, basic adjustments, filters, selections, masks)',
+		feature: 'Documents (open, save, export; PSD, JPEG, PNG, TIFF, DNG, HEIC, raw)',
+		community: true,
+		pro: true
+	},
+	{
+		feature: 'Layers (create, duplicate, group, merge, transform, reorder, properties)',
+		community: true,
+		pro: true
+	},
+	{
+		feature: 'Non-destructive adjustments (Curves, Levels, Hue/Saturation, Brightness/Contrast)',
+		community: true,
+		pro: true
+	},
+	{
+		feature: 'Filters (Gaussian Blur, Motion Blur, Sharpen, Add Noise)',
+		community: true,
+		pro: true
+	},
+	{
+		feature: 'Smart selections (Color Range, Magic Wand, rectangle, feather, with rich feedback)',
+		community: true,
+		pro: true
+	},
+	{ feature: 'Masks (create from selection, apply, delete)', community: true, pro: true },
+	{
+		feature: 'Layer styles + text (drop shadow, stroke, glow; font, color, alignment)',
+		community: true,
+		pro: true
+	},
+	{
+		feature: 'History + Actions (undo, redo, jump to state, play recorded Photoshop Actions)',
+		community: true,
+		pro: true
+	},
+	{
+		feature: 'Visual preview (inline JPEGs so the AI can see what just changed)',
 		community: true,
 		pro: true
 	},
 	{ feature: 'Apply built-in templates', community: true, pro: true },
 	{ feature: 'Create / save / delete custom templates', community: false, pro: true },
 	{ feature: 'Sensei-backed selections (Select Subject, Select Sky)', community: false, pro: true },
-	{ feature: 'Per-channel histograms', community: false, pro: true },
-	{ feature: 'Priority support', community: false, pro: true }
+	{ feature: 'Per-channel histograms', community: false, pro: true }
 ];
