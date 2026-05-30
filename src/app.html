@@ -4,6 +4,9 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta name="text-scale" content="scale" />
+		<meta name="theme-color" content="#0d2818" />
+
+		<link rel="canonical" href="https://editmamei.com/" />
 
 		<link rel="icon" type="image/x-icon" href="/icons/favicon.ico" />
 		<link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16.png" />
@@ -37,6 +40,50 @@
 			name="twitter:description"
 			content="An MCP server that lets Claude, Cursor, and any MCP client drive the real desktop Photoshop. Pronounced like edamame."
 		/>
+
+		<!--
+			Structured data: tells engines "editmamei" is a real software product
+			made by a real org, not a misspelling of edamame. Three @types:
+			Organization (the brand), SoftwareApplication (the product), WebSite
+			(the site itself). Each as a separate JSON-LD block so engines that
+			parse only one type still get it.
+		-->
+		<script type="application/ld+json">
+			{
+				"@context": "https://schema.org",
+				"@type": "Organization",
+				"name": "Editmamei",
+				"url": "https://editmamei.com/",
+				"logo": "https://editmamei.com/icons/icon-512.png",
+				"sameAs": ["https://github.com/editmamei"]
+			}
+		</script>
+		<script type="application/ld+json">
+			{
+				"@context": "https://schema.org",
+				"@type": "SoftwareApplication",
+				"name": "Editmamei",
+				"description": "An MCP server that lets your AI assistant — Claude, Cursor, Claude Code, and any other MCP-compatible client — drive Adobe Photoshop directly through natural-language conversation. Pronounced like edamame.",
+				"url": "https://editmamei.com/",
+				"image": "https://editmamei.com/icons/icon-512.png",
+				"applicationCategory": "DesignApplication",
+				"operatingSystem": "Windows 10/11, macOS 12+",
+				"softwareRequirements": "Node.js 20+, Adobe Photoshop 2022+, MCP-compatible AI client",
+				"offers": {
+					"@type": "Offer",
+					"price": "0",
+					"priceCurrency": "USD"
+				}
+			}
+		</script>
+		<script type="application/ld+json">
+			{
+				"@context": "https://schema.org",
+				"@type": "WebSite",
+				"name": "Editmamei",
+				"url": "https://editmamei.com/"
+			}
+		</script>
 
 		%sveltekit.head%
 	</head>
