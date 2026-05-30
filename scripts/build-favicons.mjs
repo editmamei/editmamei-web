@@ -8,7 +8,50 @@ import { mkdir, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import sharp from 'sharp';
-import toIco from 'to-ico';
+
+/**
+ * Builds a multi-resolution ICO file from a list of square PNG buffers.
+ * The ICO format is a 6-byte header + a 16-byte directory entry per image
+ * + the concatenated PNG bytes. Each entry holds the image's width/height,
+ * data size, and the offset into the file where its PNG bytes start.
+ *
+ * Replaces `to-ico` (npm), which pulled in a long-deprecated request →
+ * jimp → form-data chain with 14 CVEs we never actually trigger. ICO is
+ * a simple enough format to encode inline.
+ *
+ * Spec: https://en.wikipedia.org/wiki/ICO_(file_format)
+ */
+function buildIco(images) {
+	const headerSize = 6;
+	const entrySize = 16;
+	const directorySize = images.length * entrySize;
+	let dataOffset = headerSize + directorySize;
+
+	const header = Buffer.alloc(headerSize);
+	header.writeUInt16LE(0, 0); // reserved, must be 0
+	header.writeUInt16LE(1, 2); // type: 1 = ICO (2 would be CUR)
+	header.writeUInt16LE(images.length, 4);
+
+	const directory = Buffer.alloc(directorySize);
+	for (let i = 0; i < images.length; i++) {
+		const { size, png } = images[i];
+		const e = i * entrySize;
+		// Width / height: 0 stands for 256 in the ICO header. Anything we
+		// ship is well under 256, so this branch never fires today, but it
+		// keeps the encoder honest if someone adds a 256px size later.
+		directory.writeUInt8(size >= 256 ? 0 : size, e + 0);
+		directory.writeUInt8(size >= 256 ? 0 : size, e + 1);
+		directory.writeUInt8(0, e + 2); // palette size — 0 for non-paletted
+		directory.writeUInt8(0, e + 3); // reserved
+		directory.writeUInt16LE(1, e + 4); // color planes
+		directory.writeUInt16LE(32, e + 6); // bits per pixel (RGBA)
+		directory.writeUInt32LE(png.length, e + 8);
+		directory.writeUInt32LE(dataOffset, e + 12);
+		dataOffset += png.length;
+	}
+
+	return Buffer.concat([header, directory, ...images.map((i) => i.png)]);
+}
 
 const here = dirname(fileURLToPath(import.meta.url));
 const repoRoot = resolve(here, '..');
@@ -44,7 +87,11 @@ for (const { size, name, kind } of pngTargets) {
 }
 
 // favicon.ico: standard multi-resolution bundle of 16, 32, 48.
-const ico = await toIco([buffersBySize.get(16), buffersBySize.get(32), buffersBySize.get(48)]);
+const ico = buildIco([
+	{ size: 16, png: buffersBySize.get(16) },
+	{ size: 32, png: buffersBySize.get(32) },
+	{ size: 48, png: buffersBySize.get(48) }
+]);
 const icoPath = resolve(outDir, 'favicon.ico');
 await writeFile(icoPath, ico);
 console.log(`  wrote favicon.ico          (multi-res 16/32/48, legacy browsers)`);
