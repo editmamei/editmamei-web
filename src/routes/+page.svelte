@@ -36,7 +36,7 @@
 			</h2>
 			{#key demoIndex}
 				<p
-					class="mt-3 min-h-[5rem] text-base leading-relaxed text-neutral-700 md:min-h-[4rem]"
+					class="mt-3 min-h-[10rem] text-base leading-relaxed text-neutral-700 sm:min-h-[7rem] md:min-h-[5rem]"
 					in:fade={{ duration: 450 }}
 				>
 					{activeDemo.summary}

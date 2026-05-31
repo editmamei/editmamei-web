@@ -74,5 +74,5 @@ export const vividRose: Demo = {
 export const vividRoseProPrompt: DemoPrompt = {
 	voice: 'pro',
 	label: 'Pro',
-	text: 'refined warm-toned dimensional grade. capture sharpen, isolated USM pass on the bloom, midtone clarity for foreground presence, single saturation, atmospheric desat on the upper background with the subject masked out, soft focus vignette toward the rose, finish on monochrome film grain at ~90 on soft light. color-guard the petals.'
+	text: 'refined warm-toned dimensional grade. capture sharpen, isolated USM pass on the bloom, midtone clarity, single sat, atmospheric desat behind a masked subject, soft focus vignette, finish on mono film grain ~90 soft light. color-guard the petals.'
 };
