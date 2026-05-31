@@ -85,6 +85,29 @@
 			}
 		</script>
 
+		<!--
+			Microsoft Clarity — cookieless analytics. Heatmaps + session replay
+			within a session, no persistent identifier. No consent banner needed
+			while Clarity stays in cookieless mode. Drop-in marketing infrastructure
+			per editmamei-web/CLAUDE.md "Marketing infrastructure" section; not
+			reconciled into the product's privacy framing (Editmamei/docs/20260530-
+			BRAND_VOICE_GUIDE.md §12 is about the npm package, not the website).
+		-->
+		<script type="text/javascript">
+			(function (c, l, a, r, i, t, y) {
+				c[a] =
+					c[a] ||
+					function () {
+						(c[a].q = c[a].q || []).push(arguments);
+					};
+				t = l.createElement(r);
+				t.async = 1;
+				t.src = 'https://www.clarity.ms/tag/' + i;
+				y = l.getElementsByTagName(r)[0];
+				y.parentNode.insertBefore(t, y);
+			})(window, document, 'clarity', 'script', 'wzto9hvwmu');
+		</script>
+
 		%sveltekit.head%
 	</head>
 	<body data-sveltekit-preload-data="hover">
