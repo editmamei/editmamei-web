@@ -4,7 +4,7 @@ export const setSail: Demo = {
 	slug: 'set-sail',
 	title: 'Set Sail',
 	summary:
-		'A full editorial workup for a wide-angle iPhone sailing shot — the AI’s response to a one-line, hands-off prompt. Deepens sky and ocean toward cobalt, paints golden-hour warmth into the horizon, opens shadows, recovers blown sky highlights, sharpens the rigging, and finishes on a soft focus vignette. Nine layers, non-destructive, captured as a replayable template.',
+		'A full editorial workup for a wide-angle iPhone sailing shot. Deepens sky and ocean toward cobalt, paints golden-hour warmth at the horizon, recovers blown highlights, sharpens the rigging, and finishes on a soft focus vignette.',
 	before: '/demos/set-sail/before.jpg',
 	after: '/demos/set-sail/after.jpg',
 	beforeAlt:

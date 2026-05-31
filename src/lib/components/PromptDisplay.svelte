@@ -83,7 +83,7 @@
 		What they asked for
 	</p>
 
-	<div class="relative h-56 overflow-hidden">
+	<div class="relative h-72 overflow-hidden">
 		{#key currentIndex}
 			<div
 				class="absolute inset-0 flex flex-col"

@@ -35,7 +35,10 @@
 				Two prompts, two real workups.
 			</h2>
 			{#key demoIndex}
-				<p class="mt-3 text-base leading-relaxed text-neutral-700" in:fade={{ duration: 450 }}>
+				<p
+					class="mt-3 min-h-[5rem] text-base leading-relaxed text-neutral-700 md:min-h-[4rem]"
+					in:fade={{ duration: 450 }}
+				>
 					{activeDemo.summary}
 				</p>
 			{/key}
