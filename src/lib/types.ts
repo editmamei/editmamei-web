@@ -22,6 +22,7 @@ export interface Layer {
 export interface Demo {
 	slug: string;
 	title: string;
+	headline: string;
 	summary: string;
 	before: string;
 	after: string;

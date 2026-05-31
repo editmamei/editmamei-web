@@ -16,36 +16,72 @@
 	let demoIndex = $state(0);
 	const prompts = demoExamples.map((e) => e.prompt);
 	const activeDemo = $derived(demoExamples[demoIndex].demo);
+
+	function nextDemo() {
+		demoIndex = (demoIndex + 1) % demoExamples.length;
+	}
+	function prevDemo() {
+		demoIndex = (demoIndex - 1 + demoExamples.length) % demoExamples.length;
+	}
+
+	let touchStartX = 0;
+	let touchStartY = 0;
+	const SWIPE_MIN = 50;
+	const VERTICAL_TOLERANCE = 40;
+
+	function onTouchStart(e: TouchEvent) {
+		if (e.touches.length !== 1) return;
+		touchStartX = e.touches[0].clientX;
+		touchStartY = e.touches[0].clientY;
+	}
+	function onTouchEnd(e: TouchEvent) {
+		if (e.changedTouches.length !== 1) return;
+		const dx = e.changedTouches[0].clientX - touchStartX;
+		const dy = e.changedTouches[0].clientY - touchStartY;
+		if (Math.abs(dy) > VERTICAL_TOLERANCE) return;
+		if (Math.abs(dx) < SWIPE_MIN) return;
+		if (dx < 0) nextDemo();
+		else prevDemo();
+	}
 </script>
 
 <Hero />
 
 <section id="demo" class="border-y border-neutral-200 bg-neutral-50 py-16 md:py-20">
 	<div class="mx-auto max-w-6xl px-4">
-		<header class="mb-8 max-w-2xl">
-			{#key demoIndex}
-				<p
-					class="mb-2 text-xs font-semibold tracking-wider text-neutral-500 uppercase"
-					in:fade={{ duration: 450 }}
-				>
-					The demo · {activeDemo.title}
-				</p>
-			{/key}
-			<h2 class="text-2xl font-bold tracking-tight text-neutral-950 md:text-3xl">
-				Two prompts, two real workups.
-			</h2>
-			{#key demoIndex}
-				<p
-					class="mt-3 min-h-[10rem] text-base leading-relaxed text-neutral-700 sm:min-h-[7rem] md:min-h-[5rem]"
-					in:fade={{ duration: 450 }}
-				>
-					{activeDemo.summary}
-				</p>
-			{/key}
-		</header>
+		<div
+			role="group"
+			aria-roledescription="carousel"
+			aria-label="Demo carousel — swipe to switch demos"
+			ontouchstart={onTouchStart}
+			ontouchend={onTouchEnd}
+		>
+			<header class="mb-8 max-w-2xl">
+				{#key demoIndex}
+					<div in:fade={{ duration: 450 }}>
+						<p class="mb-2 text-xs font-semibold tracking-wider text-neutral-500 uppercase">
+							The demo · {activeDemo.title}
+						</p>
+						<h2 class="text-2xl font-bold tracking-tight text-neutral-950 md:text-3xl">
+							{activeDemo.headline}
+						</h2>
+						<p
+							class="mt-3 min-h-[10rem] text-base leading-relaxed text-neutral-700 sm:min-h-[7rem] md:min-h-[5rem]"
+						>
+							{activeDemo.summary}
+						</p>
+					</div>
+				{/key}
+			</header>
 
-		<div class="mb-8">
-			<PromptDisplay {prompts} bind:currentIndex={demoIndex} />
+			<div class="mb-8">
+				<PromptDisplay
+					{prompts}
+					bind:currentIndex={demoIndex}
+					onPrev={prevDemo}
+					onNext={nextDemo}
+				/>
+			</div>
 		</div>
 
 		<div class="grid gap-8 md:grid-cols-[1fr_360px] md:items-start lg:grid-cols-[1fr_400px]">

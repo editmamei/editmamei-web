@@ -3,6 +3,7 @@ import type { Demo, DemoPrompt } from '$lib/types';
 export const setSail: Demo = {
 	slug: 'set-sail',
 	title: 'Set Sail',
+	headline: 'Set sail.',
 	summary:
 		'A full editorial workup for a wide-angle iPhone sailing shot. Deepens sky and ocean toward cobalt, paints golden-hour warmth at the horizon, recovers blown highlights, sharpens the rigging, and finishes on a soft focus vignette.',
 	before: '/demos/set-sail/before.jpg',

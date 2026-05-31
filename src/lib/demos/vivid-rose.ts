@@ -3,6 +3,7 @@ import type { Demo, DemoPrompt } from '$lib/types';
 export const vividRose: Demo = {
 	slug: 'vivid-rose',
 	title: 'Vivid Rose',
+	headline: 'Bloom the rose.',
 	summary:
 		'A refined, dimensional grade for a close-up garden bloom. Cuts the haze, recovers crispness on the hero flower, deepens local contrast, mutes the background so the rose steps forward, and finishes on a monochromatic film grain.',
 	before: '/demos/vivid-rose/before.jpg',

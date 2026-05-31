@@ -8,6 +8,8 @@
 		pauseMs?: number;
 		slideDurationMs?: number;
 		currentIndex?: number;
+		onPrev?: () => void;
+		onNext?: () => void;
 	}
 
 	let {
@@ -15,8 +17,19 @@
 		typingSpeedMs = 32,
 		pauseMs = 7000,
 		slideDurationMs = 1400,
-		currentIndex = $bindable(0)
+		currentIndex = $bindable(0),
+		onPrev,
+		onNext
 	}: Props = $props();
+
+	function prev() {
+		if (onPrev) onPrev();
+		else currentIndex = (currentIndex - 1 + prompts.length) % prompts.length;
+	}
+	function next() {
+		if (onNext) onNext();
+		else currentIndex = (currentIndex + 1) % prompts.length;
+	}
 
 	let displayedText = $state('');
 	let isTyping = $state(false);
@@ -136,18 +149,56 @@
 		{/key}
 	</div>
 
-	<div class="mt-3 flex items-center justify-center gap-2">
-		{#each prompts as p, i (i)}
-			<button
-				type="button"
-				class="size-2 rounded-full transition-colors {i === currentIndex
-					? 'bg-neutral-800'
-					: 'bg-neutral-300 hover:bg-neutral-400'}"
-				aria-label="Show prompt {i + 1}: {p.label}"
-				aria-current={i === currentIndex ? 'true' : undefined}
-				onclick={() => select(i)}
-			></button>
-		{/each}
+	<div class="mt-3 flex items-center justify-center gap-1">
+		<button
+			type="button"
+			class="grid size-10 place-items-center rounded-full text-neutral-500 transition-colors hover:bg-neutral-100 hover:text-neutral-900"
+			aria-label="Previous prompt"
+			onclick={prev}
+		>
+			<svg class="size-5" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+				<path
+					d="M15 6 L9 12 L15 18"
+					stroke="currentColor"
+					stroke-width="2"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+				/>
+			</svg>
+		</button>
+		<div class="flex items-center gap-1">
+			{#each prompts as p, i (i)}
+				<button
+					type="button"
+					class="grid size-8 place-items-center rounded-full"
+					aria-label="Show prompt {i + 1}: {p.label}"
+					aria-current={i === currentIndex ? 'true' : undefined}
+					onclick={() => select(i)}
+				>
+					<span
+						class="size-2 rounded-full transition-colors {i === currentIndex
+							? 'bg-neutral-800'
+							: 'bg-neutral-300 hover:bg-neutral-400'}"
+					></span>
+				</button>
+			{/each}
+		</div>
+		<button
+			type="button"
+			class="grid size-10 place-items-center rounded-full text-neutral-500 transition-colors hover:bg-neutral-100 hover:text-neutral-900"
+			aria-label="Next prompt"
+			onclick={next}
+		>
+			<svg class="size-5" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+				<path
+					d="M9 6 L15 12 L9 18"
+					stroke="currentColor"
+					stroke-width="2"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+				/>
+			</svg>
+		</button>
 	</div>
 </div>
 
