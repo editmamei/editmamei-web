@@ -3,9 +3,7 @@
 <section id="install" class="bg-neutral-950 py-16 text-neutral-100 md:py-20">
 	<div class="mx-auto max-w-5xl px-4">
 		<div class="mb-8 max-w-2xl">
-			<p class="mb-2 text-xs font-semibold tracking-wider text-emerald-300 uppercase">
-				Install
-			</p>
+			<p class="mb-2 text-xs font-semibold tracking-wider text-emerald-300 uppercase">Install</p>
 			<h2 class="text-2xl font-bold tracking-tight text-white md:text-3xl">
 				Two commands. Restart your MCP client.
 			</h2>
@@ -22,14 +20,17 @@
 			<div class="border-b border-neutral-800 px-4 py-2 text-xs tracking-wide text-neutral-500">
 				terminal
 			</div>
-			<pre
-				class="overflow-x-auto px-4 py-4 leading-relaxed"><code><span class="text-neutral-500">$</span> <span class="text-emerald-300">npm</span> install -g editmamei
-<span class="text-neutral-500">$</span> <span class="text-emerald-300">editmamei</span> install</code></pre>
+			<pre class="overflow-x-auto px-4 py-4 leading-relaxed"><code
+					><span class="text-neutral-500">$</span> <span class="text-emerald-300">npm</span
+					> install -g editmamei
+<span class="text-neutral-500">$</span> <span class="text-emerald-300">editmamei</span
+					> install</code
+				></pre>
 		</div>
 
 		<p class="mt-4 text-sm leading-relaxed text-neutral-400">
 			Then restart your MCP client and ask:
-			<span class="italic text-neutral-200">"Is Photoshop connected?"</span> The AI calls
+			<span class="text-neutral-200 italic">"Is Photoshop connected?"</span> The AI calls
 			<code class="rounded bg-neutral-800 px-1.5 py-0.5 text-xs">photoshop_ping</code> and you'll see
 			your Photoshop version returned.
 		</p>

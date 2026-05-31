@@ -22,9 +22,7 @@
 					class="grid gap-5 rounded-xl border border-neutral-200 bg-neutral-50/50 p-5 md:grid-cols-[1fr_1fr] md:items-start md:gap-7 md:p-7"
 				>
 					<div>
-						<p
-							class="mb-2 text-xs font-semibold tracking-wider text-neutral-500 uppercase"
-						>
+						<p class="mb-2 text-xs font-semibold tracking-wider text-neutral-500 uppercase">
 							Example {i + 1} · {ex.title}
 						</p>
 						<blockquote
@@ -34,9 +32,7 @@
 						</blockquote>
 					</div>
 					<div>
-						<p
-							class="mb-2 text-xs font-semibold tracking-wider text-neutral-500 uppercase"
-						>
+						<p class="mb-2 text-xs font-semibold tracking-wider text-neutral-500 uppercase">
 							What happens
 						</p>
 						<p class="text-sm leading-relaxed text-neutral-700">{ex.outcome}</p>
