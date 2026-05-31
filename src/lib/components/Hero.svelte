@@ -24,9 +24,9 @@
 		</p>
 
 		<p class="mx-auto mt-7 max-w-2xl text-lg leading-relaxed text-neutral-700 md:text-xl">
-			You describe the edit in plain words. The AI plans the steps. Your own copy of Photoshop
-			carries them out, using its standard adjustment layers, masks, selections, and filters. The AI
-			directs; Photoshop edits.
+			You describe the edit. The AI plans the steps. Your own copy of Photoshop carries them out,
+			using its standard adjustment layers, masks, selections, and filters. The AI directs;
+			Photoshop edits.
 		</p>
 
 		<div class="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">

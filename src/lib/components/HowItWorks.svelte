@@ -12,14 +12,13 @@
 			<p class="mt-3 text-base leading-relaxed text-neutral-700">
 				For years, getting the look in your head meant nudging sliders and hunting for a tutorial
 				that matched your exact shot. Editmamei plugs your AI chat assistant straight into the
-				desktop Photoshop you already have. You describe what you want in plain words, like you'd
-				tell a friend, and it builds the layers, makes the adjustments, and hands back the finished
-				photo.
+				desktop Photoshop you already have. You describe what you want, the way you'd tell a friend,
+				and it builds the layers, makes the adjustments, and hands back the finished photo.
 			</p>
 		</header>
 
 		<ol class="mb-12 grid gap-4 md:grid-cols-4" aria-label="The four steps of an Editmamei edit">
-			{#each [{ n: '1', title: 'You describe the edit', body: 'In plain language: "warm up the golden hour, lift the shadows, clean up the horizon."' }, { n: '2', title: 'The AI plans the steps', body: 'Which adjustments, which selections, in what order.' }, { n: '3', title: 'Your Photoshop does the editing', body: 'On your machine, using its own standard tools: adjustment layers, masks, selections, filters.' }, { n: '4', title: 'You get a finished photo', body: 'Fully layered, maskable, and editable. Nothing baked in.' }] as step, i (i)}
+			{#each [{ n: '1', title: 'You describe the edit', body: '"Warm up the golden hour, lift the shadows, clean up the horizon."' }, { n: '2', title: 'The AI plans the steps', body: 'Which adjustments, which selections, in what order.' }, { n: '3', title: 'Your Photoshop does the editing', body: 'On your machine, using its own standard tools: adjustment layers, masks, selections, filters.' }, { n: '4', title: 'You get a finished photo', body: 'Fully layered, maskable, and editable. Nothing baked in.' }] as step, i (i)}
 				<li class="relative rounded-xl border border-neutral-200 bg-neutral-50/60 p-5">
 					<span
 						class="mb-3 inline-flex size-7 items-center justify-center rounded-full bg-neutral-900 text-xs font-bold text-white"
@@ -48,9 +47,7 @@
 					class="rounded-xl border border-emerald-200 bg-white p-4 text-center shadow-sm md:col-span-2"
 				>
 					<p class="text-[10px] font-semibold tracking-wider text-emerald-700 uppercase">You</p>
-					<p class="mt-1 text-sm font-semibold text-neutral-900">
-						describe the edit in plain words
-					</p>
+					<p class="mt-1 text-sm font-semibold text-neutral-900">describe the edit</p>
 				</div>
 
 				<!-- Arrow 1 -->
