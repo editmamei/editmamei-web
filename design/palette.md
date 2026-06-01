@@ -15,8 +15,16 @@ Intentionally restrained: neutral grays for surfaces and text, an emerald accent
 ### Brand accents
 
 - `emerald-50` through `emerald-700` — "You" actor + brand presence. Hero, How It Works actor pill, favicon mark.
-- `emerald-300` — InstallSection accent on dark
 - `sky-50` through `sky-800` — AI assistant / "in the cloud" framing. How It Works actor pill, "Check & refine" loop tint.
+
+### InstallSection (dark CTA surface, 2026-06-01)
+
+A custom dark-green palette derived from the Evergreen + Lime Cream reference pair. Replaced `bg-neutral-950 + emerald-300` so the dark CTA reads as brand-aligned rather than generic.
+
+- `#143731` — Evergreen, section background
+- `#0F2922` — darker evergreen, inner surfaces (terminal box, info cards, inline code badges)
+- `#1F4D44` — lighter evergreen, borders / dividers
+- `#CEFF8C` — Lime Cream, accent text (eyebrow, code keywords, link)
 
 ### Semantic chips
 
@@ -29,13 +37,13 @@ Intentionally restrained: neutral grays for surfaces and text, an emerald accent
 
 Five paired palettes from a 2026-06-01 reference set. None are committed; they're stashed here as starting points if we want to refresh a specific surface.
 
-| Pair                     | Hex                | Fit assessment                                                                                                                                                                                                       |
-| ------------------------ | ------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Evergreen + Lime Cream   | `#143731 #CEFF8C`  | **Strongest fit.** Aligns with the current emerald-led brand. Candidate to replace `bg-neutral-950 + emerald-300` in `InstallSection`, or as a bolder hero accent if we ever do a brand refresh.                     |
-| Celadon + Chocolate Plum | `#A8D3A8 #553832`  | **Photography aesthetic.** Earthy warm palette is what photo prints sit on. Candidate for a future "case studies" / "templates gallery" section background. Chocolate Plum is also a usable warm-dark alt to black.  |
-| Petal Frost + Coffee Bean | `#FFD1DC #1B1110` | Coffee Bean is a warm near-black — softer alt to `neutral-950` for a less clinical dark surface (Install, footer). Petal Frost itself is too pink for the current voice.                                             |
+| Pair                        | Hex               | Fit assessment                                                                                                                                                                                                      |
+| --------------------------- | ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ~~Evergreen + Lime Cream~~  | `#143731 #CEFF8C` | **Adopted 2026-06-01** for InstallSection. See "InstallSection" section above.                                                                                                                                      |
+| Celadon + Chocolate Plum    | `#A8D3A8 #553832` | **Photography aesthetic.** Earthy warm palette is what photo prints sit on. Candidate for a future "case studies" / "templates gallery" section background. Chocolate Plum is also a usable warm-dark alt to black. |
+| Petal Frost + Coffee Bean   | `#FFD1DC #1B1110` | Coffee Bean is a warm near-black — softer alt to `neutral-950` for a less clinical dark surface (Install, footer). Petal Frost itself is too pink for the current voice.                                            |
 | Crimson Violet + Periwinkle | `#470B24 #B5BEDD` | Editorial / fashion-print feel. Possible fit for a future testimonials or magazine-style section. Aspirational — doesn't have an obvious home in the current site.                                                  |
-| Hot Fuchsia + Antique White | `#F8395A #F7E6D2` | Antique White is a usable warm off-white (alt to `neutral-50`) for surfaces that should feel more paper than screen. Hot Fuchsia is too high-energy for the current restrained voice.                              |
+| Hot Fuchsia + Antique White | `#F8395A #F7E6D2` | Antique White is a usable warm off-white (alt to `neutral-50`) for surfaces that should feel more paper than screen. Hot Fuchsia is too high-energy for the current restrained voice.                               |
 
 ---
 
