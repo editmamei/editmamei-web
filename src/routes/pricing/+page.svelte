@@ -1,24 +1,5 @@
 <script lang="ts">
 	import EditionsTable from '$lib/components/EditionsTable.svelte';
-
-	const faqs = [
-		{
-			q: 'What does Pro cost?',
-			a: 'Pricing lands with the v1.0 release. Both a subscription and a one-time lifetime option are planned. Community is free, and will stay free.'
-		},
-		{
-			q: 'Can I switch from Community to Pro later?',
-			a: "Yes. Both editions ship from the same npm package. Enter a Pro license key and the Pro tool surface unlocks on your AI client's next restart. No reinstall."
-		},
-		{
-			q: 'Do I need an Adobe Creative Cloud subscription?',
-			a: 'You need a working Photoshop install (2022 or later; 2024+ recommended). Editmamei runs against the standard ExtendScript automation surface — no Creative Cloud features required beyond owning Photoshop itself. Generative Fill, UXP plugins, and Adobe cloud features are not used.'
-		},
-		{
-			q: 'What happens to my templates if I cancel Pro?',
-			a: "Existing templates stay on disk and remain applicable in Community. The authoring side — saving new templates, deleting templates — becomes read-only until Pro is re-enabled. You don't lose anything; you just can't author."
-		}
-	];
 </script>
 
 <svelte:head>
@@ -99,22 +80,5 @@
 			find yourself wanting to save a look and re-apply it, or you want the AI to self-judge at a finer
 			grain, that's Pro.
 		</p>
-	</div>
-</section>
-
-<section class="bg-neutral-50 py-16 md:py-20">
-	<div class="mx-auto max-w-3xl px-4">
-		<p class="mb-2 text-xs font-semibold tracking-wider text-neutral-500 uppercase">FAQ</p>
-		<h2 class="text-2xl font-bold tracking-tight text-neutral-950 md:text-3xl">
-			A few common questions.
-		</h2>
-		<dl class="mt-8 space-y-6">
-			{#each faqs as faq, i (i)}
-				<div class="rounded-xl border border-neutral-200 bg-white p-5">
-					<dt class="text-base font-semibold tracking-tight text-neutral-950">{faq.q}</dt>
-					<dd class="mt-2 text-base leading-relaxed text-neutral-700">{faq.a}</dd>
-				</div>
-			{/each}
-		</dl>
 	</div>
 </section>
