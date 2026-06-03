@@ -15,10 +15,10 @@ const config = {
 			strict: true
 		}),
 		prerender: {
-			// /pricing, /privacy, /security, /license are intentional placeholder
+			// /privacy, /security, /license are intentional placeholder
 			// links to routes that ship later. Anything else 404ing is a bug.
 			handleHttpError: ({ path, message }) => {
-				const pending = ['/pricing', '/privacy', '/security', '/license'];
+				const pending = ['/privacy', '/security', '/license'];
 				if (pending.includes(path)) return;
 				throw new Error(message);
 			}

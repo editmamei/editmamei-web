@@ -84,13 +84,5 @@
 				</tbody>
 			</table>
 		</div>
-
-		<p class="mt-6 text-sm text-neutral-600">
-			Detailed comparison and pricing at <a
-				href="/pricing"
-				class="font-semibold text-neutral-900 underline decoration-neutral-300 underline-offset-4 hover:decoration-neutral-700"
-				>editmamei.com/pricing</a
-			>.
-		</p>
 	</div>
 </section>
