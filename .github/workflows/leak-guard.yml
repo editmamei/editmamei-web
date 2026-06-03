@@ -1,0 +1,23 @@
+name: Leak Guard
+
+# Fails the build if any 'dev' or 'none'-tier tool name from Editmamei's
+# src/core/tool-tiers.ts leaks into this marketing-site source. The
+# blocklist is maintained in scripts/check-leak-guard.mjs alongside a
+# sync note pointing at the source-of-truth in Editmamei.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  leak-guard:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Run leak guard
+        run: node scripts/check-leak-guard.mjs
