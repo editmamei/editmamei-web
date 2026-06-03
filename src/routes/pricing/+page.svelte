@@ -13,14 +13,13 @@
 		<h1 class="text-3xl font-bold tracking-tight text-neutral-950 md:text-4xl">Pricing</h1>
 		<p class="mt-4 text-base leading-relaxed text-neutral-700">
 			Editmamei Community is free and open today. Pro pricing details land with the v1.0 release.
-			Until then, the editions split lives on the home page.
 		</p>
 		<div class="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
 			<a
-				href="/#editions"
+				href="/product"
 				class="inline-flex items-center justify-center rounded-md bg-neutral-900 px-5 py-3 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-neutral-800"
 			>
-				See the editions split
+				See the product
 			</a>
 			<a
 				href="/"

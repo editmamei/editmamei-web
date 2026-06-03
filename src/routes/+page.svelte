@@ -5,11 +5,6 @@
 	import PromptDisplay from '$lib/components/PromptDisplay.svelte';
 	import Hero from '$lib/components/Hero.svelte';
 	import HowItWorks from '$lib/components/HowItWorks.svelte';
-	import ThreePillars from '$lib/components/ThreePillars.svelte';
-	import CapabilitySurface from '$lib/components/CapabilitySurface.svelte';
-	import WorkflowExamples from '$lib/components/WorkflowExamples.svelte';
-	import EditionsTable from '$lib/components/EditionsTable.svelte';
-	import VerifiableSection from '$lib/components/VerifiableSection.svelte';
 	import InstallSection from '$lib/components/InstallSection.svelte';
 	import { demoExamples } from '$lib/demos/examples';
 
@@ -117,13 +112,18 @@
 				</p>
 			</aside>
 		</div>
+
+		<div class="mt-10 flex flex-col items-center gap-3 sm:flex-row sm:justify-between">
+			<p class="text-sm text-neutral-600">Want the full capability surface and trust receipts?</p>
+			<a
+				href="/product"
+				class="inline-flex items-center gap-1 text-sm font-semibold text-neutral-900 underline decoration-neutral-300 underline-offset-4 hover:decoration-neutral-700"
+			>
+				See the product page <span aria-hidden="true">→</span>
+			</a>
+		</div>
 	</div>
 </section>
 
 <HowItWorks />
-<ThreePillars />
-<CapabilitySurface />
-<WorkflowExamples />
-<EditionsTable />
-<VerifiableSection />
 <InstallSection />

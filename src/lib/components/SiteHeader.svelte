@@ -14,16 +14,9 @@
 			>
 		</a>
 
-		<nav class="hidden items-center gap-6 text-sm text-neutral-700 md:flex">
-			<a href="/#demo" class="hover:text-neutral-950">Demo</a>
-			<a href="/#capabilities" class="hover:text-neutral-950">Features</a>
+		<nav class="flex items-center gap-4 text-sm text-neutral-700 sm:gap-6">
+			<a href="/product" class="hover:text-neutral-950">Product</a>
 			<a href="/pricing" class="hover:text-neutral-950">Pricing</a>
-			<a href="https://github.com/editmamei/editmamei-ce" class="hover:text-neutral-950">Docs</a>
-			<a
-				href="https://github.com/editmamei"
-				class="hover:text-neutral-950"
-				aria-label="GitHub organization">GitHub</a
-			>
 		</nav>
 
 		<a
