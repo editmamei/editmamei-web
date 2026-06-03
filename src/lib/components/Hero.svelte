@@ -35,7 +35,7 @@
 			<a
 				href="#install"
 				onclick={() => track('hero-install-cta-clicked')}
-				class="inline-flex items-center justify-center rounded-md bg-neutral-900 px-5 py-3 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-neutral-800"
+				class="inline-flex items-center justify-center rounded-md bg-[#143731] px-5 py-3 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-[#1f4d44]"
 			>
 				Install Editmamei
 			</a>
