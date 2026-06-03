@@ -1,8 +1,28 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
 	import { editionRows } from '$lib/content/landing';
+	import { trackOnce } from '$lib/analytics/clarity';
+
+	// Scroll-depth engagement: made it to the feature-comparison section.
+	// Strong "evaluating purchase" signal vs visitors who bounced earlier.
+	let sectionEl: HTMLElement;
+	onMount(() => {
+		if (typeof IntersectionObserver === 'undefined' || !sectionEl) return;
+		const obs = new IntersectionObserver(
+			(entries) => {
+				if (entries.some((e) => e.isIntersecting)) {
+					trackOnce('scroll-editions-reached');
+					obs.disconnect();
+				}
+			},
+			{ threshold: 0.3 }
+		);
+		obs.observe(sectionEl);
+		return () => obs.disconnect();
+	});
 </script>
 
-<section id="editions" class="bg-neutral-50 py-16 md:py-20">
+<section bind:this={sectionEl} id="editions" class="bg-neutral-50 py-16 md:py-20">
 	<div class="mx-auto max-w-5xl px-4">
 		<div class="mb-10 max-w-2xl">
 			<p class="mb-2 text-xs font-semibold tracking-wider text-neutral-500 uppercase">Editions</p>

@@ -110,9 +110,30 @@
 			}
 		}
 	];
+
+	// Scroll-depth engagement signal: visitor reached the How It Works
+	// section (i.e. scrolled past the demo). Fires once via IntersectionObserver.
+	import { onMount } from 'svelte';
+	import { trackOnce } from '$lib/analytics/clarity';
+
+	let sectionEl: HTMLElement;
+	onMount(() => {
+		if (typeof IntersectionObserver === 'undefined' || !sectionEl) return;
+		const obs = new IntersectionObserver(
+			(entries) => {
+				if (entries.some((e) => e.isIntersecting)) {
+					trackOnce('scroll-howitworks-reached');
+					obs.disconnect();
+				}
+			},
+			{ threshold: 0.3 }
+		);
+		obs.observe(sectionEl);
+		return () => obs.disconnect();
+	});
 </script>
 
-<section id="how-it-works" class="bg-white py-16 md:py-20">
+<section bind:this={sectionEl} id="how-it-works" class="bg-white py-16 md:py-20">
 	<div class="mx-auto max-w-5xl px-4">
 		<header class="mb-10 max-w-2xl">
 			<p class="mb-2 text-xs font-semibold tracking-wider text-neutral-500 uppercase">

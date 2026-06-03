@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { DemoPrompt } from '$lib/types';
 	import { fly, fade } from 'svelte/transition';
+	import { track } from '$lib/analytics/clarity';
 
 	interface Props {
 		prompts: DemoPrompt[];
@@ -22,11 +23,17 @@
 		onNext
 	}: Props = $props();
 
+	// Manual switches only — `prev`, `next`, and `select` are the user-driven
+	// paths. The auto-rotate runs from the $effect block below and does NOT
+	// fire this event (it would otherwise spam the dashboard with one
+	// "prompt-switched" per page every 7s of idle time).
 	function prev() {
+		track('demo-prompt-switched');
 		if (onPrev) onPrev();
 		else currentIndex = (currentIndex - 1 + prompts.length) % prompts.length;
 	}
 	function next() {
+		track('demo-prompt-switched');
 		if (onNext) onNext();
 		else currentIndex = (currentIndex + 1) % prompts.length;
 	}
@@ -87,6 +94,7 @@
 
 	function select(i: number) {
 		if (i === currentIndex) return;
+		track('demo-prompt-switched');
 		currentIndex = i;
 	}
 </script>

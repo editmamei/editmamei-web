@@ -1,4 +1,6 @@
-<script lang="ts"></script>
+<script lang="ts">
+	import { track } from '$lib/analytics/clarity';
+</script>
 
 <section class="relative overflow-hidden bg-white">
 	<div
@@ -32,12 +34,14 @@
 		<div class="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
 			<a
 				href="#install"
+				onclick={() => track('hero-install-cta-clicked')}
 				class="inline-flex items-center justify-center rounded-md bg-neutral-900 px-5 py-3 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-neutral-800"
 			>
 				Install Editmamei
 			</a>
 			<a
 				href="#demo"
+				onclick={() => track('hero-demo-cta-clicked')}
 				class="inline-flex items-center justify-center rounded-md border border-neutral-300 bg-white px-5 py-3 text-sm font-semibold text-neutral-800 transition-colors hover:border-neutral-400 hover:bg-neutral-50"
 			>
 				See it work ↓

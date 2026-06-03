@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { trackOnce } from '$lib/analytics/clarity';
+
 	interface Props {
 		beforeSrc: string;
 		afterSrc: string;
@@ -37,6 +39,10 @@
 		dragging = true;
 		container.setPointerCapture(e.pointerId);
 		pickFromClientX(e.clientX);
+		// Engagement signal: visitor actually interacted with the demo slider
+		// instead of just scrolling past. One-shot — don't drown the dashboard
+		// with mid-drag noise.
+		trackOnce('demo-slider-used');
 		e.preventDefault();
 	}
 
@@ -58,19 +64,23 @@
 			case 'ArrowLeft':
 			case 'ArrowDown':
 				position = clamp(position - step);
+				trackOnce('demo-slider-used');
 				e.preventDefault();
 				break;
 			case 'ArrowRight':
 			case 'ArrowUp':
 				position = clamp(position + step);
+				trackOnce('demo-slider-used');
 				e.preventDefault();
 				break;
 			case 'Home':
 				position = 0;
+				trackOnce('demo-slider-used');
 				e.preventDefault();
 				break;
 			case 'End':
 				position = 100;
+				trackOnce('demo-slider-used');
 				e.preventDefault();
 				break;
 		}

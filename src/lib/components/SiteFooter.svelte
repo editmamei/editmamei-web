@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { track } from '$lib/analytics/clarity';
 	const year = new Date().getFullYear();
 </script>
 
@@ -37,24 +38,35 @@
 					<li>
 						<a
 							href="https://github.com/editmamei/editmamei-ce#readme"
+							onclick={() => track('footer-outbound-docs')}
 							class="hover:text-neutral-950">Docs</a
 						>
 					</li>
 					<li>
 						<a
 							href="https://github.com/editmamei/editmamei-ce/issues"
+							onclick={() => track('footer-outbound-issues')}
 							class="hover:text-neutral-950">Report a bug</a
 						>
 					</li>
 					<li>
-						<a href="https://www.npmjs.com/package/editmamei" class="hover:text-neutral-950">npm</a>
+						<a
+							href="https://www.npmjs.com/package/editmamei"
+							onclick={() => track('footer-outbound-npm')}
+							class="hover:text-neutral-950">npm</a
+						>
 					</li>
 					<li>
-						<a href="https://github.com/editmamei" class="hover:text-neutral-950">GitHub</a>
+						<a
+							href="https://github.com/editmamei"
+							onclick={() => track('footer-outbound-github')}
+							class="hover:text-neutral-950">GitHub</a
+						>
 					</li>
 					<li>
 						<a
 							href="https://www.instagram.com/editmamei/"
+							onclick={() => track('footer-outbound-instagram')}
 							rel="me noopener"
 							class="inline-flex items-center gap-1.5 hover:text-neutral-950"
 						>

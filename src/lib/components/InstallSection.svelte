@@ -1,4 +1,35 @@
-<script lang="ts"></script>
+<script lang="ts">
+	import { onMount } from 'svelte';
+	import { trackOnce, upgradeSession } from '$lib/analytics/clarity';
+
+	// Highest-intent pre-conversion signal: visitor highlighted the install
+	// snippet, almost certainly to copy it. Detected via the document's
+	// `selectionchange` event — if the active selection's range intersects
+	// the install code block, we fire the event once per page load and
+	// upgrade the session so Clarity prioritizes its replay.
+	let snippetEl: HTMLPreElement;
+
+	onMount(() => {
+		if (typeof document === 'undefined' || !snippetEl) return;
+
+		const handler = () => {
+			const sel = document.getSelection();
+			if (!sel || sel.isCollapsed || sel.rangeCount === 0) return;
+			const range = sel.getRangeAt(0);
+			// commonAncestorContainer is the lowest node that contains the
+			// whole selection. If it sits inside the install snippet (or IS
+			// the snippet), the visitor is selecting install text.
+			const anchor = range.commonAncestorContainer;
+			if (snippetEl.contains(anchor) || snippetEl === anchor) {
+				trackOnce('install-snippet-selected');
+				upgradeSession('selected-install-snippet');
+			}
+		};
+
+		document.addEventListener('selectionchange', handler);
+		return () => document.removeEventListener('selectionchange', handler);
+	});
+</script>
 
 <section id="install" class="bg-[#143731] py-16 text-neutral-100 md:py-20">
 	<div class="mx-auto max-w-5xl px-4">
@@ -20,7 +51,7 @@
 			<div class="border-b border-[#1F4D44] px-4 py-2 text-xs tracking-wide text-neutral-500">
 				terminal
 			</div>
-			<pre class="overflow-x-auto px-4 py-4 leading-relaxed"><code
+			<pre bind:this={snippetEl} class="overflow-x-auto px-4 py-4 leading-relaxed"><code
 					><span class="text-neutral-500">$</span> <span class="text-[#CEFF8C]">npm</span
 					> install -g editmamei
 <span class="text-neutral-500">$</span> <span class="text-[#CEFF8C]">editmamei</span> install</code
