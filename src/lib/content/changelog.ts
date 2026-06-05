@@ -15,6 +15,12 @@ export interface ChangelogEntry {
 
 export const changelogEntries: ChangelogEntry[] = [
 	{
+		label: "v0.4.2",
+		date: "2026-06",
+		title: "`photoshop_move_layer_to_group`",
+		body: "every call had been failing with a PS-side \"Expected: ;\" syntax error. The snippet's TypeScript-side // comment contained ${normNameHelper} as a literal text reference; template literals evaluate ${} regardless of comment context, so the helper's multi-line function body got injected into the middle of the comment, the helper's leading newline terminated the //, and the trailing comment text parsed as code. The comment is now plain prose; the snippet renders cleanly. (The same em-dash normalization that the snippet was *trying* to apply still works once the snippet actually executes.)"
+	},
+	{
 		label: "v0.4.1",
 		date: "2026-06",
 		title: "`photoshop_create_group` with a `layers` list",
@@ -43,12 +49,6 @@ export const changelogEntries: ChangelogEntry[] = [
 		date: "2026-06",
 		title: "`photoshop_add_adjustment_layer` `type=levels`",
 		body: "three silent-no-op drifts in the PS 27.x post-Mk setd workaround. Pre-audit emission used putEnumerated for the Chnl reference (PS wants putReference to the composite), separate Inpt+Wht keys (PS wants ONE Inpt key holding a 2-int list [black, white]), and putInteger(gamma * 100) for the gamma value (PS wants putDouble(gamma)). User-set black/white/gamma values were silently dropped or coerced wrong. Same class of silent-no-op as the Bundle Q hotfix 5 bugs. Verified against src/spec/ps27/adjustments/levels.ts."
-	},
-	{
-		label: "v0.4.0",
-		date: "2026-06",
-		title: "`photoshop_add_adjustment_layer` `type=invert`",
-		body: "Mk path now uses using.putClass(Type, Invr) with no inner type descriptor, matching the captured PS UI form. Pre-audit emission used putObject with a presetKindDefault inner descriptor — silently coerced PS into an unexpected creation path."
 	}
 ];
 
