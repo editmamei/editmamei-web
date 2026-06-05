@@ -15,40 +15,40 @@ export interface ChangelogEntry {
 
 export const changelogEntries: ChangelogEntry[] = [
 	{
-		label: "v0.3.0",
+		label: "v0.4.0",
 		date: "2026-06",
-		title: "photoshop_overview",
-		body: "orientation brief returning workflow contract, capabilities map, verification primitives, escape-hatch policy, known gaps. CE tier, read-only, no Photoshop call. Reference from photoshop_ping description hits at session boot."
+		title: "`photoshop_create_clipping_mask`",
+		body: "and photoshop_release_clipping_mask ('dev' tier) — standalone primitives for clipping the active layer to the layer below (or releasing the clip). The clipping behavior previously lived only inline inside photoshop_add_adjustment_layer's clip_to_below flag; standalone tools now cover the case where you want to clip any layer, not just an adjustment-layer being created. Dispatches the verified groupEvent / ungroupEvent stringIDs (aliased to GrpL / Ungr charIDs). Distinct from photoshop_ungroup which dissolves a LayerSet via the unrelated ungroupLayersEvent."
 	},
 	{
-		label: "v0.3.0",
+		label: "v0.4.0",
 		date: "2026-06",
-		title: "photoshop_get_layer_bounds_diff",
-		body: "verification primitive returning a one-word verdict (\"aligned\" / \"shifted right\" / \"layer too small\") plus numeric deltas for placement-accuracy checks."
+		title: "`photoshop_place_image`",
+		body: "gains optional width_percent and height_percent for non-uniform scale of the placed Smart Object. Omit to keep native size (matches PS UI default)."
 	},
 	{
-		label: "v0.3.0",
+		label: "v0.4.0",
 		date: "2026-06",
-		title: "photoshop_compare_regions",
-		body: "per-channel histogram stats for two rectangles. Single-pixel sampling via 1×1 rect."
+		title: "`photoshop_apply_shadows_highlights`",
+		body: "gains black_clip and white_clip parameters (PS dialog default 0.01 for both). Previously hardcoded; advanced users can now bias toward more contrast at the cost of detail in the extreme tones."
 	},
 	{
-		label: "v0.3.0",
+		label: "v0.4.0",
 		date: "2026-06",
-		title: "photoshop_get_histogram",
-		body: "(Pro) — full-image or per-channel histogram with bin counts + mean + stdev + median."
+		title: "`photoshop_add_adjustment_layer` `type=levels`",
+		body: "three silent-no-op drifts in the PS 27.x post-Mk setd workaround. Pre-audit emission used putEnumerated for the Chnl reference (PS wants putReference to the composite), separate Inpt+Wht keys (PS wants ONE Inpt key holding a 2-int list [black, white]), and putInteger(gamma * 100) for the gamma value (PS wants putDouble(gamma)). User-set black/white/gamma values were silently dropped or coerced wrong. Same class of silent-no-op as the Bundle Q hotfix 5 bugs. Verified against src/spec/ps27/adjustments/levels.ts."
 	},
 	{
-		label: "v0.3.0",
+		label: "v0.4.0",
 		date: "2026-06",
-		title: "Black & White, Color Balance, Photo Filter, Vibrance, Cha…",
-		body: "Black & White, Color Balance, Photo Filter, Vibrance, Channel Mixer, Selective Color, Gradient Map."
+		title: "`photoshop_add_adjustment_layer` `type=invert`",
+		body: "Mk path now uses using.putClass(Type, Invr) with no inner type descriptor, matching the captured PS UI form. Pre-audit emission used putObject with a presetKindDefault inner descriptor — silently coerced PS into an unexpected creation path."
 	},
 	{
-		label: "v0.3.0",
+		label: "v0.4.0",
 		date: "2026-06",
-		title: "Exposure, Color Lookup (3DLUT), Invert",
-		body: "Exposure, Color Lookup (3DLUT), Invert."
+		title: "`photoshop_apply_smart_sharpen`",
+		body: "five simultaneous fixes against the 2026-06-03 capture: (1) sub-object class is adaptCorrectTones (no \"ive\" infix; the typo silently dropped both Shadows and Highlights tab params); (2) root Amnt and noiseReduction are putUnitDouble percentUnit (not putInteger); (3) sub-object outer keys are charID sdwM/hglM (not stringIDs shadowMode/highlightMode); (4) inner Amnt/Wdth are putUnitDouble percentUnit, inner Rds stays putInteger; (5) blur key + GsnB/LnsB/MtnB enum values are charIDs. The shadows/highlights typo had been shipping completely broken since Bundle P."
 	}
 ];
 
