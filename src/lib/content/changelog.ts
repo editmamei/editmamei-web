@@ -15,6 +15,12 @@ export interface ChangelogEntry {
 
 export const changelogEntries: ChangelogEntry[] = [
 	{
+		label: "v0.4.1",
+		date: "2026-06",
+		title: "`photoshop_create_group` with a `layers` list",
+		body: "now matches layer names containing em-dash (U+2014), en-dash (U+2013), or other Unicode dash variants when the caller passes ASCII hyphen-minus (or vice versa), and folds case + collapses whitespace runs the same way photoshop_move_layer_to_group and photoshop_select_layer do. Names that previously fell into not_found silently now move into the group correctly."
+	},
+	{
 		label: "v0.4.0",
 		date: "2026-06",
 		title: "`photoshop_create_clipping_mask`",
@@ -43,12 +49,6 @@ export const changelogEntries: ChangelogEntry[] = [
 		date: "2026-06",
 		title: "`photoshop_add_adjustment_layer` `type=invert`",
 		body: "Mk path now uses using.putClass(Type, Invr) with no inner type descriptor, matching the captured PS UI form. Pre-audit emission used putObject with a presetKindDefault inner descriptor — silently coerced PS into an unexpected creation path."
-	},
-	{
-		label: "v0.4.0",
-		date: "2026-06",
-		title: "`photoshop_apply_smart_sharpen`",
-		body: "five simultaneous fixes against the 2026-06-03 capture: (1) sub-object class is adaptCorrectTones (no \"ive\" infix; the typo silently dropped both Shadows and Highlights tab params); (2) root Amnt and noiseReduction are putUnitDouble percentUnit (not putInteger); (3) sub-object outer keys are charID sdwM/hglM (not stringIDs shadowMode/highlightMode); (4) inner Amnt/Wdth are putUnitDouble percentUnit, inner Rds stays putInteger; (5) blur key + GsnB/LnsB/MtnB enum values are charIDs. The shadows/highlights typo had been shipping completely broken since Bundle P."
 	}
 ];
 
