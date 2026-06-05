@@ -17,38 +17,38 @@ export const changelogEntries: ChangelogEntry[] = [
 	{
 		label: "v0.4.2",
 		date: "2026-06",
-		title: "`photoshop_move_layer_to_group`",
-		body: "every call had been failing with a PS-side \"Expected: ;\" syntax error. The snippet's TypeScript-side // comment contained ${normNameHelper} as a literal text reference; template literals evaluate ${} regardless of comment context, so the helper's multi-line function body got injected into the middle of the comment, the helper's leading newline terminated the //, and the trailing comment text parsed as code. The comment is now plain prose; the snippet renders cleanly. (The same em-dash normalization that the snippet was *trying* to apply still works once the snippet actually executes.)"
+		title: "Layer-to-group moves no longer fail with a syntax error",
+		body: "Every move-into-group call had been failing with a Photoshop parse error; the fix lets em-dash normalization work as originally intended."
 	},
 	{
 		label: "v0.4.1",
 		date: "2026-06",
-		title: "`photoshop_create_group` with a `layers` list",
-		body: "now matches layer names containing em-dash (U+2014), en-dash (U+2013), or other Unicode dash variants when the caller passes ASCII hyphen-minus (or vice versa), and folds case + collapses whitespace runs the same way photoshop_move_layer_to_group and photoshop_select_layer do. Names that previously fell into not_found silently now move into the group correctly."
+		title: "Group memberships handle Unicode dash variants",
+		body: "Creating a group from a list of layer names now matches em-dash, en-dash, and ASCII hyphen-minus the same way move and select tools already did."
 	},
 	{
 		label: "v0.4.0",
 		date: "2026-06",
-		title: "`photoshop_create_clipping_mask`",
-		body: "and photoshop_release_clipping_mask ('dev' tier) — standalone primitives for clipping the active layer to the layer below (or releasing the clip). The clipping behavior previously lived only inline inside photoshop_add_adjustment_layer's clip_to_below flag; standalone tools now cover the case where you want to clip any layer, not just an adjustment-layer being created. Dispatches the verified groupEvent / ungroupEvent stringIDs (aliased to GrpL / Ungr charIDs). Distinct from photoshop_ungroup which dissolves a LayerSet via the unrelated ungroupLayersEvent."
+		title: "Place Image gets non-uniform scale",
+		body: "Optional width and height percent parameters let you stretch a placed Smart Object instead of being locked to its native size."
 	},
 	{
 		label: "v0.4.0",
 		date: "2026-06",
-		title: "`photoshop_place_image`",
-		body: "gains optional width_percent and height_percent for non-uniform scale of the placed Smart Object. Omit to keep native size (matches PS UI default)."
+		title: "Levels adjustment honors black/white/gamma on PS 27.x",
+		body: "Three silent-no-op drifts in the post-create descriptor were dropping user-set tonal values; the fix means setting input black / white / gamma actually takes effect."
 	},
 	{
 		label: "v0.4.0",
 		date: "2026-06",
-		title: "`photoshop_apply_shadows_highlights`",
-		body: "gains black_clip and white_clip parameters (PS dialog default 0.01 for both). Previously hardcoded; advanced users can now bias toward more contrast at the cost of detail in the extreme tones."
+		title: "Invert adjustment layer uses the captured PS UI form",
+		body: "Mk path now uses putClass(Type, Invr) with no inner descriptor; previously coerced PS into an unexpected creation path with putObject + presetKindDefault."
 	},
 	{
 		label: "v0.4.0",
 		date: "2026-06",
-		title: "`photoshop_add_adjustment_layer` `type=levels`",
-		body: "three silent-no-op drifts in the PS 27.x post-Mk setd workaround. Pre-audit emission used putEnumerated for the Chnl reference (PS wants putReference to the composite), separate Inpt+Wht keys (PS wants ONE Inpt key holding a 2-int list [black, white]), and putInteger(gamma * 100) for the gamma value (PS wants putDouble(gamma)). User-set black/white/gamma values were silently dropped or coerced wrong. Same class of silent-no-op as the Bundle Q hotfix 5 bugs. Verified against src/spec/ps27/adjustments/levels.ts."
+		title: "Outer Glow range slider type fix",
+		body: "The Range slider on Outer Glow layer styles was sending a putInteger where PS wants a unitDouble percentUnit, silently default-falling back to the wrong behavior."
 	}
 ];
 
