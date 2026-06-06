@@ -15,40 +15,41 @@ export interface ChangelogEntry {
 
 export const changelogEntries: ChangelogEntry[] = [
 	{
-		label: "v0.5.0",
-		date: "2026-06",
-		title: "Layer-mask creation is now a first-class tool",
-		body: "Previously hidden behind the dev-tier gate (and so excluded from CE + Pro bundles), the tool is now visible to the LLM by default."
+		label: 'v0.5.0',
+		date: '2026-06',
+		title: 'Layer-mask creation is now a first-class tool',
+		body: 'Previously hidden behind the dev-tier gate (and so excluded from CE + Pro bundles), the tool is now visible to the LLM by default.'
 	},
 	{
-		label: "v0.5.0",
-		date: "2026-06",
-		title: "Property-setter and filter tools no longer flood every response with a full context block",
-		body: "Tools that change a *property* of the already-active layer (rather than changing *what* is active) now return a slim 3-field context ({ document_name, activeLayer_name, hasDocument }) instead of the full 8-field shape (which carried bounds, opacity, blend mode, layer kind, lock state, isBackground, document dimensions, color mode, layer count, and selection state on every call)."
+		label: 'v0.5.0',
+		date: '2026-06',
+		title:
+			'Property-setter and filter tools no longer flood every response with a full context block',
+		body: 'Tools that change a *property* of the already-active layer (rather than changing *what* is active) now return a slim 3-field context ({ document_name, activeLayer_name, hasDocument }) instead of the full 8-field shape (which carried bounds, opacity, blend mode, layer kind, lock state, isBackground, document dimensions, color mode, layer count, and selection state on every call).'
 	},
 	{
-		label: "v0.5.0",
-		date: "2026-06",
-		title: "Preview defaults dropped to halve the base64 payload per call",
+		label: 'v0.5.0',
+		date: '2026-06',
+		title: 'Preview defaults dropped to halve the base64 payload per call',
 		body: "Verification-grade reads (tone, clipping, composition, mean shift) work fine at smaller dimensions and lower JPEG quality; the bigger defaults were paying token cost for detail the LLM wasn't using."
 	},
 	{
-		label: "v0.5.0",
-		date: "2026-06",
-		title: "Font-not-found errors now list installed font families",
-		body: "so the LLM can pick a near-miss instead of giving up on text styling."
+		label: 'v0.5.0',
+		date: '2026-06',
+		title: 'Font-not-found errors now list installed font families',
+		body: 'so the LLM can pick a near-miss instead of giving up on text styling.'
 	},
 	{
-		label: "v0.4.3",
-		date: "2026-06",
-		title: "Luminosity histograms now work",
+		label: 'v0.4.3',
+		date: '2026-06',
+		title: 'Luminosity histograms now work',
 		body: "The schema's channel: 'luminosity' enum value was advertised but every call failed with \"Channel not found: luminosity\" because the snippet did a name lookup in doc.channels (which on RGB documents only contains Red/Green/Blue)."
 	},
 	{
-		label: "v0.4.3",
-		date: "2026-06",
-		title: "Composite histograms no longer fail after an adjustment layer is added",
-		body: "doc.histogram returns \"The requested property does not exist\" in PS 27.x whenever the active layer is an adjustment, fill, or shape layer — meaning every composite read after add_adjustment_layer failed."
+		label: 'v0.4.3',
+		date: '2026-06',
+		title: 'Composite histograms no longer fail after an adjustment layer is added',
+		body: 'doc.histogram returns "The requested property does not exist" in PS 27.x whenever the active layer is an adjustment, fill, or shape layer — meaning every composite read after add_adjustment_layer failed.'
 	}
 ];
 

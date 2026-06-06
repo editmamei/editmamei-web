@@ -4,6 +4,8 @@ export type LayerKind =
 	| 'curves'
 	| 'levels'
 	| 'color-balance'
+	| 'selective-color'
+	| 'photo-filter'
 	| 'pixel'
 	| 'smart-object'
 	| 'group'

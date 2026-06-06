@@ -18,6 +18,8 @@
 		curves: 'Curves',
 		levels: 'Levels',
 		'color-balance': 'Color Balance',
+		'selective-color': 'Selective Color',
+		'photo-filter': 'Photo Filter',
 		pixel: 'Pixel',
 		'smart-object': 'Smart Object',
 		group: 'Group',
