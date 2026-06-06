@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { fade } from 'svelte/transition';
 	import BeforeAfterSlider from '$lib/components/BeforeAfterSlider.svelte';
 	import LayerAccordion from '$lib/components/LayerAccordion.svelte';
 	import PromptDisplay from '$lib/components/PromptDisplay.svelte';
@@ -10,7 +9,6 @@
 
 	let demoIndex = $state(0);
 	const prompts = demoExamples.map((e) => e.prompt);
-	const activeDemo = $derived(demoExamples[demoIndex].demo);
 
 	function nextDemo() {
 		demoIndex = (demoIndex + 1) % demoExamples.length;
@@ -51,22 +49,34 @@
 			ontouchstart={onTouchStart}
 			ontouchend={onTouchEnd}
 		>
-			<header class="mb-8 max-w-2xl">
-				{#key demoIndex}
-					<div in:fade={{ duration: 450 }}>
+			<!--
+				LAYOUT STABILITY: every cross-demo container below stacks all demo
+				variants in the same grid cell (col-start-1 row-start-1). The cell
+				auto-sizes to the tallest variant, so switching demos NEVER shifts
+				the page vertically. Inactive variants get opacity-0 + aria-hidden
+				+ inert. Do NOT replace this with hand-tuned min-h — see
+				feedback_layout_stability_grid_stack.md in memory.
+			-->
+			<header class="mb-8 grid max-w-2xl">
+				{#each demoExamples as { demo }, i (i)}
+					<div
+						class="col-start-1 row-start-1 transition-opacity duration-500"
+						class:opacity-0={i !== demoIndex}
+						class:opacity-100={i === demoIndex}
+						aria-hidden={i !== demoIndex}
+						inert={i !== demoIndex}
+					>
 						<p class="mb-2 text-xs font-semibold tracking-wider text-neutral-500 uppercase">
-							The demo · {activeDemo.title}
+							The demo · {demo.title}
 						</p>
 						<h2 class="text-2xl font-bold tracking-tight text-neutral-950 md:text-3xl">
-							{activeDemo.headline}
+							{demo.headline}
 						</h2>
-						<p
-							class="mt-3 min-h-[10rem] text-base leading-relaxed text-neutral-700 sm:min-h-[7rem] md:min-h-[5rem]"
-						>
-							{activeDemo.summary}
+						<p class="mt-3 text-base leading-relaxed text-neutral-700">
+							{demo.summary}
 						</p>
 					</div>
-				{/key}
+				{/each}
 			</header>
 
 			<div class="mb-8">
@@ -81,16 +91,24 @@
 
 		<div class="grid gap-8 md:grid-cols-[1fr_360px] md:items-start lg:grid-cols-[1fr_400px]">
 			<div>
-				{#key demoIndex}
-					<div in:fade={{ duration: 450 }}>
-						<BeforeAfterSlider
-							beforeSrc={activeDemo.before}
-							afterSrc={activeDemo.after}
-							beforeAlt={activeDemo.beforeAlt}
-							afterAlt={activeDemo.afterAlt}
-						/>
-					</div>
-				{/key}
+				<div class="grid">
+					{#each demoExamples as { demo }, i (i)}
+						<div
+							class="col-start-1 row-start-1 transition-opacity duration-500"
+							class:opacity-0={i !== demoIndex}
+							class:opacity-100={i === demoIndex}
+							aria-hidden={i !== demoIndex}
+							inert={i !== demoIndex}
+						>
+							<BeforeAfterSlider
+								beforeSrc={demo.before}
+								afterSrc={demo.after}
+								beforeAlt={demo.beforeAlt}
+								afterAlt={demo.afterAlt}
+							/>
+						</div>
+					{/each}
+				</div>
 				<p class="mt-3 text-xs text-neutral-500">
 					Drag the bar — or use ← → on the keyboard — to compare. Left of the line is the finished
 					edit; right is the original.
@@ -101,11 +119,19 @@
 				<p class="mb-2 text-xs font-semibold tracking-wider text-neutral-500 uppercase">
 					Layer stack — built non-destructively
 				</p>
-				{#key demoIndex}
-					<div in:fade={{ duration: 450 }}>
-						<LayerAccordion layers={activeDemo.layers} />
-					</div>
-				{/key}
+				<div class="grid">
+					{#each demoExamples as { demo }, i (i)}
+						<div
+							class="col-start-1 row-start-1 transition-opacity duration-500"
+							class:opacity-0={i !== demoIndex}
+							class:opacity-100={i === demoIndex}
+							aria-hidden={i !== demoIndex}
+							inert={i !== demoIndex}
+						>
+							<LayerAccordion layers={demo.layers} />
+						</div>
+					{/each}
+				</div>
 				<p class="mt-4 text-xs leading-relaxed text-neutral-500">
 					Every layer above is editable, maskable, removable. Saved as a template, the AI replays
 					the same recipe on a new photo and self-judges the result.
