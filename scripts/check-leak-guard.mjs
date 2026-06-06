@@ -34,12 +34,13 @@ const REPO_ROOT = resolve(__dirname, '..');
 const SELF_PATH = fileURLToPath(import.meta.url);
 
 // Keep in sync with Editmamei/src/core/tool-tiers.ts dev/none entries.
-// Last sync: 2026-06-03 (Editmamei commit b1a6828).
+// Last sync: 2026-06-06 (create_layer_mask promoted dev → community).
 const BLOCKED = [
 	'photoshop_apply_color_lookup',
 	'photoshop_apply_lens_blur',
 	'photoshop_select_color_range',
-	'photoshop_create_layer_mask',
+	// photoshop_create_layer_mask promoted 'dev' → 'community' 2026-06-06
+	// (audit-verified by src/spec/ps27/masks/create-reveal-*.ts).
 	'photoshop_apply_shadows_highlights',
 	'photoshop_apply_smart_sharpen',
 	'photoshop_apply_reduce_noise',

@@ -15,6 +15,30 @@ export interface ChangelogEntry {
 
 export const changelogEntries: ChangelogEntry[] = [
 	{
+		label: "v0.5.0",
+		date: "2026-06",
+		title: "Layer-mask creation is now a first-class tool",
+		body: "Previously hidden behind the dev-tier gate (and so excluded from CE + Pro bundles), the tool is now visible to the LLM by default."
+	},
+	{
+		label: "v0.5.0",
+		date: "2026-06",
+		title: "Property-setter and filter tools no longer flood every response with a full context block",
+		body: "Tools that change a *property* of the already-active layer (rather than changing *what* is active) now return a slim 3-field context ({ document_name, activeLayer_name, hasDocument }) instead of the full 8-field shape (which carried bounds, opacity, blend mode, layer kind, lock state, isBackground, document dimensions, color mode, layer count, and selection state on every call)."
+	},
+	{
+		label: "v0.5.0",
+		date: "2026-06",
+		title: "Preview defaults dropped to halve the base64 payload per call",
+		body: "Verification-grade reads (tone, clipping, composition, mean shift) work fine at smaller dimensions and lower JPEG quality; the bigger defaults were paying token cost for detail the LLM wasn't using."
+	},
+	{
+		label: "v0.5.0",
+		date: "2026-06",
+		title: "Font-not-found errors now list installed font families",
+		body: "so the LLM can pick a near-miss instead of giving up on text styling."
+	},
+	{
 		label: "v0.4.3",
 		date: "2026-06",
 		title: "Luminosity histograms now work",
@@ -25,30 +49,6 @@ export const changelogEntries: ChangelogEntry[] = [
 		date: "2026-06",
 		title: "Composite histograms no longer fail after an adjustment layer is added",
 		body: "doc.histogram returns \"The requested property does not exist\" in PS 27.x whenever the active layer is an adjustment, fill, or shape layer — meaning every composite read after add_adjustment_layer failed."
-	},
-	{
-		label: "v0.4.3",
-		date: "2026-06",
-		title: "Histogram tool description now matches reality",
-		body: "Spells out the per-mode luminosity dispatch, the Rec.709 approximation on RGB, and the adjustment-layer composite-recovery so the LLM can pick the right channel without guessing."
-	},
-	{
-		label: "v0.4.2",
-		date: "2026-06",
-		title: "Layer-to-group moves no longer fail with a syntax error",
-		body: "Every move-into-group call had been failing with a Photoshop parse error; the fix lets em-dash normalization work as originally intended."
-	},
-	{
-		label: "v0.4.1",
-		date: "2026-06",
-		title: "Group memberships handle Unicode dash variants",
-		body: "Creating a group from a list of layer names now matches em-dash, en-dash, and ASCII hyphen-minus the same way move and select tools already did."
-	},
-	{
-		label: "v0.4.0",
-		date: "2026-06",
-		title: "Place Image gets non-uniform scale",
-		body: "Optional width and height percent parameters let you stretch a placed Smart Object instead of being locked to its native size."
 	}
 ];
 
