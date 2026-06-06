@@ -32,34 +32,16 @@ export const hawaiiCoastWallArt: Demo = {
 				'Vibrance-weighted saturation push. Lifts blues and greens without pumping already-saturated tones — keeps rocks and skin from going neon.'
 		},
 		{
-			name: 'Selective Color — Ocean + Sky',
+			name: 'Selective Color Pass',
 			kind: 'selective-color',
 			summary:
-				'Cyans and Blues channels pushed cooler and deeper. Pulls the ocean to rich tropical turquoise and the sky toward deep sapphire blue.'
-		},
-		{
-			name: 'Selective Color — Coastal Greens',
-			kind: 'selective-color',
-			summary:
-				'Greens channel pulled toward cool emerald, away from yellow-green. Vegetation reads as lush coastal jungle instead of summer grass.'
-		},
-		{
-			name: 'Selective Color — Lava Rock Fix',
-			kind: 'selective-color',
-			summary:
-				'Cyan pulled aggressively out of Blacks and Neutrals. Keeps volcanic rock neutral-to-warm instead of blue-tinted — the fix for the common over-toned-shadows artifact.'
-		},
-		{
-			name: 'Sky Unify',
-			kind: 'photo-filter',
-			summary:
-				'Cooling photo filter at 12% density, luminosity preserved. A subtle atmospheric tie between the sky color and the ocean color.'
+				'Three Selective Color passes stacked. Cyans + Blues deepen the ocean to tropical turquoise and the sky to sapphire. Greens cool the vegetation toward lush emerald. Blacks + Neutrals pull cyan out so the volcanic rock reads warm-dark instead of blue-tinted — the fix for the over-toned-shadows artifact.'
 		},
 		{
 			name: 'Sky Blues',
 			kind: 'hue-saturation',
 			summary:
-				'Sky-only saturation lift with a small hue shift cooler. Maximum vertical color travel from a deep sky down to the rich sea.'
+				'Sky-only saturation lift with a small hue shift cooler. Maximum vertical color travel from a deep saturated sky down to the rich sea.'
 		},
 		{
 			name: 'Texture Finish',
@@ -75,29 +57,16 @@ export const hawaiiCoastWallArt: Demo = {
 			masked: true
 		},
 		{
-			name: 'Rock Texture',
-			kind: 'brightness-contrast',
-			summary:
-				'Masked contrast push and a small darken on the foreground lava. Extra surface texture without touching the sky above.',
-			masked: true
-		},
-		{
 			name: 'Vignette',
 			kind: 'pixel',
 			summary:
 				'Black pixel layer at Multiply 25%, with a feathered ellipse cleared from the center. Pulls the eye inward toward the wave — strong enough to guide, subtle enough not to feel like a filter.'
 		},
 		{
-			name: 'Shadow Warmth',
-			kind: 'color-balance',
-			summary:
-				'Shadows nudged warm at 35% opacity. Keeps rock shadows neutral-warm rather than cold blue; reserves cool tones for water and sky only.'
-		},
-		{
-			name: 'Horizon Stamp',
+			name: 'Stamp, De-rotate, 16:9 Crop',
 			kind: 'pixel',
 			summary:
-				'Visible stamped to a new pixel layer, then rotated -1.5° to level the waterline against a horizontal guide. The 16:9 crop after this lands a print-ready frame.'
+				'Visible stamped to a new pixel layer, rotated -1.5° to level the waterline against a horizontal guide, then cropped to 16:9 for print delivery. This is the step the white bands in the after preview show — the cropped portion of the original frame.'
 		}
 	]
 };
