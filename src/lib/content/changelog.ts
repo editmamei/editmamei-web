@@ -15,6 +15,24 @@ export interface ChangelogEntry {
 
 export const changelogEntries: ChangelogEntry[] = [
 	{
+		label: "v0.4.3",
+		date: "2026-06",
+		title: "Luminosity histograms now work",
+		body: "The schema's channel: 'luminosity' enum value was advertised but every call failed with \"Channel not found: luminosity\" because the snippet did a name lookup in doc.channels (which on RGB documents only contains Red/Green/Blue)."
+	},
+	{
+		label: "v0.4.3",
+		date: "2026-06",
+		title: "Composite histograms no longer fail after an adjustment layer is added",
+		body: "doc.histogram returns \"The requested property does not exist\" in PS 27.x whenever the active layer is an adjustment, fill, or shape layer — meaning every composite read after add_adjustment_layer failed."
+	},
+	{
+		label: "v0.4.3",
+		date: "2026-06",
+		title: "Histogram tool description now matches reality",
+		body: "Spells out the per-mode luminosity dispatch, the Rec.709 approximation on RGB, and the adjustment-layer composite-recovery so the LLM can pick the right channel without guessing."
+	},
+	{
 		label: "v0.4.2",
 		date: "2026-06",
 		title: "Layer-to-group moves no longer fail with a syntax error",
@@ -31,24 +49,6 @@ export const changelogEntries: ChangelogEntry[] = [
 		date: "2026-06",
 		title: "Place Image gets non-uniform scale",
 		body: "Optional width and height percent parameters let you stretch a placed Smart Object instead of being locked to its native size."
-	},
-	{
-		label: "v0.4.0",
-		date: "2026-06",
-		title: "Levels adjustment honors black/white/gamma on PS 27.x",
-		body: "Three silent-no-op drifts in the post-create descriptor were dropping user-set tonal values; the fix means setting input black / white / gamma actually takes effect."
-	},
-	{
-		label: "v0.4.0",
-		date: "2026-06",
-		title: "Invert adjustment layer uses the captured PS UI form",
-		body: "Mk path now uses putClass(Type, Invr) with no inner descriptor; previously coerced PS into an unexpected creation path with putObject + presetKindDefault."
-	},
-	{
-		label: "v0.4.0",
-		date: "2026-06",
-		title: "Outer Glow range slider type fix",
-		body: "The Range slider on Outer Glow layer styles was sending a putInteger where PS wants a unitDouble percentUnit, silently default-falling back to the wrong behavior."
 	}
 ];
 
