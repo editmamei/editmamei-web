@@ -15,6 +15,12 @@ export interface ChangelogEntry {
 
 export const changelogEntries: ChangelogEntry[] = [
 	{
+		label: "v0.5.2",
+		date: "2026-06",
+		title: "Mask creation now works after smart-selection and selection-preview steps",
+		body: "A canonical \"isolate the subject\" flow (smart selection → review the selection → feather it → make a mask) was failing on the final step with a generic Photoshop error."
+	},
+	{
 		label: "v0.5.1",
 		date: "2026-06",
 		title: "Server reports the actual package version over MCP",
@@ -43,12 +49,6 @@ export const changelogEntries: ChangelogEntry[] = [
 		date: "2026-06",
 		title: "Ping now reports which discovery signals degraded",
 		body: "The session-start liveness check previously mixed defaulted-zero values (action sets, open documents) with real reads, so a transient Photoshop hiccup mid-snippet produced an authoritative-looking \"0 action sets\" response with no signal to the caller."
-	},
-	{
-		label: "v0.5.1",
-		date: "2026-06",
-		title: "Document creation fails loudly when the colorMode map and schema enum drift apart",
-		body: "The handler previously fell back to RGB silently when the input-schema enum and the internal mapping disagreed; a future enum extension that forgot the map entry would produce RGB documents for, say, Lab."
 	}
 ];
 
