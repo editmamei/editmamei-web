@@ -15,41 +15,40 @@ export interface ChangelogEntry {
 
 export const changelogEntries: ChangelogEntry[] = [
 	{
-		label: 'v0.5.0',
-		date: '2026-06',
-		title: 'Layer-mask creation is now a first-class tool',
-		body: 'Previously hidden behind the dev-tier gate (and so excluded from CE + Pro bundles), the tool is now visible to the LLM by default.'
+		label: "v0.5.1",
+		date: "2026-06",
+		title: "Server reports the actual package version over MCP",
+		body: "The MCP server identified itself as 0.2.0 during initialize regardless of which release was running; clients logged the stale value in support bundles."
 	},
 	{
-		label: 'v0.5.0',
-		date: '2026-06',
-		title:
-			'Property-setter and filter tools no longer flood every response with a full context block',
-		body: 'Tools that change a *property* of the already-active layer (rather than changing *what* is active) now return a slim 3-field context ({ document_name, activeLayer_name, hasDocument }) instead of the full 8-field shape (which carried bounds, opacity, blend mode, layer kind, lock state, isBackground, document dimensions, color mode, layer count, and selection state on every call).'
+		label: "v0.5.1",
+		date: "2026-06",
+		title: "MCP-config writes are now atomic",
+		body: "editmamei install writes claude_desktop_config.json and ~/.cursor/mcp.json via a tmpfile + rename so a crash mid-write can no longer leave a zero-byte or partial config."
 	},
 	{
-		label: 'v0.5.0',
-		date: '2026-06',
-		title: 'Preview defaults dropped to halve the base64 payload per call',
-		body: "Verification-grade reads (tone, clipping, composition, mean shift) work fine at smaller dimensions and lower JPEG quality; the bigger defaults were paying token cost for detail the LLM wasn't using."
+		label: "v0.5.1",
+		date: "2026-06",
+		title: "`LOG_LEVEL` accepts symbolic names instead of silently swallowing every log",
+		body: "The previous parser called parseInt(env, 10) raw — LOG_LEVEL=debug returned NaN, every log dropped, and users assumed Editmamei was frozen."
 	},
 	{
-		label: 'v0.5.0',
-		date: '2026-06',
-		title: 'Font-not-found errors now list installed font families',
-		body: 'so the LLM can pick a near-miss instead of giving up on text styling.'
+		label: "v0.5.1",
+		date: "2026-06",
+		title: "`editmamei install` no longer fails on Linux before the router runs",
+		body: "Constructing a Session eagerly built a PhotoshopConnection, whose constructor throws on unsupported platforms."
 	},
 	{
-		label: 'v0.4.3',
-		date: '2026-06',
-		title: 'Luminosity histograms now work',
-		body: "The schema's channel: 'luminosity' enum value was advertised but every call failed with \"Channel not found: luminosity\" because the snippet did a name lookup in doc.channels (which on RGB documents only contains Red/Green/Blue)."
+		label: "v0.5.1",
+		date: "2026-06",
+		title: "Ping now reports which discovery signals degraded",
+		body: "The session-start liveness check previously mixed defaulted-zero values (action sets, open documents) with real reads, so a transient Photoshop hiccup mid-snippet produced an authoritative-looking \"0 action sets\" response with no signal to the caller."
 	},
 	{
-		label: 'v0.4.3',
-		date: '2026-06',
-		title: 'Composite histograms no longer fail after an adjustment layer is added',
-		body: 'doc.histogram returns "The requested property does not exist" in PS 27.x whenever the active layer is an adjustment, fill, or shape layer — meaning every composite read after add_adjustment_layer failed.'
+		label: "v0.5.1",
+		date: "2026-06",
+		title: "Document creation fails loudly when the colorMode map and schema enum drift apart",
+		body: "The handler previously fell back to RGB silently when the input-schema enum and the internal mapping disagreed; a future enum extension that forgot the map entry would produce RGB documents for, say, Lab."
 	}
 ];
 
