@@ -2,6 +2,7 @@
 	import ThreePillars from '$lib/components/ThreePillars.svelte';
 	import CapabilitySurface from '$lib/components/CapabilitySurface.svelte';
 	import WorkflowExamples from '$lib/components/WorkflowExamples.svelte';
+	import ClientChoiceCallout from '$lib/components/ClientChoiceCallout.svelte';
 	import VerifiableSection from '$lib/components/VerifiableSection.svelte';
 	import Changelog from '$lib/components/Changelog.svelte';
 </script>
@@ -35,5 +36,6 @@
 <ThreePillars />
 <CapabilitySurface />
 <WorkflowExamples />
+<ClientChoiceCallout />
 <VerifiableSection />
 <Changelog />
