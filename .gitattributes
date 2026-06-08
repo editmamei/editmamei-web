@@ -1,0 +1,21 @@
+# Normalize line endings to LF in the repo regardless of contributor OS.
+#
+# Without this, Windows checkouts with `core.autocrlf=true` (the default)
+# rewrite text files to CRLF on disk, and every `git status` flags
+# untouched files as modified. The 2026-06-07 audit caught .yml /
+# .json / .svelte showing as "modified" with zero content delta — pure
+# CRLF/LF noise from Windows checkouts. Pinning the canonical eol here
+# closes that off permanently: future checkouts on any OS see LF, and
+# `git status` only reports real edits.
+
+* text=auto eol=lf
+
+# Binary blobs that must NOT be eol-normalized.
+*.png       binary
+*.jpg       binary
+*.jpeg      binary
+*.gif       binary
+*.ico       binary
+*.psd       binary
+*.woff      binary
+*.woff2     binary
