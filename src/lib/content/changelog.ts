@@ -15,6 +15,12 @@ export interface ChangelogEntry {
 
 export const changelogEntries: ChangelogEntry[] = [
 	{
+		label: "v0.5.4",
+		date: "2026-06",
+		title: "Mask creation no longer fails after a chain of selection tools on macOS Photoshop 27.7",
+		body: "A fresh-install v0.5.3 Mac session reproduced the original v0.5.2 bug class: the first mask creation in a session worked, but a second attempt after multiple selection tool calls failed with the \"command Make not currently available\" error."
+	},
+	{
 		label: "v0.5.3",
 		date: "2026-06",
 		title: "Smart selection tools no longer leave the document on a non-composite channel when they fail",
@@ -43,12 +49,6 @@ export const changelogEntries: ChangelogEntry[] = [
 		date: "2026-06",
 		title: "Server reports the actual package version over MCP",
 		body: "The MCP server identified itself as 0.2.0 during initialize regardless of which release was running; clients logged the stale value in support bundles."
-	},
-	{
-		label: "v0.5.1",
-		date: "2026-06",
-		title: "MCP-config writes are now atomic",
-		body: "editmamei install writes claude_desktop_config.json and ~/.cursor/mcp.json via a tmpfile + rename so a crash mid-write can no longer leave a zero-byte or partial config."
 	}
 ];
 
