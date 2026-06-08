@@ -15,6 +15,18 @@ export interface ChangelogEntry {
 
 export const changelogEntries: ChangelogEntry[] = [
 	{
+		label: "v0.5.6",
+		date: "2026-06",
+		title: "Workflow guidance no longer references features the user can't reach",
+		body: "The orientation skill and the overview tool are now tier-agnostic — they describe the workflow and the inventory comes from tools/list."
+	},
+	{
+		label: "v0.5.6",
+		date: "2026-06",
+		title: "The orientation overview no longer leaks dev-tier filter names that aren't in any shipped bundle",
+		body: "Five filter operations sit at 'dev' tier (excluded from CE AND Pro shipped bundles per the dev-default-then-promote gate) but the overview's capability map and \"AM event verification status\" section listed them by name as if they were available."
+	},
+	{
 		label: "v0.5.5",
 		date: "2026-06",
 		title: "Previews are reliable on macOS again",
@@ -37,18 +49,6 @@ export const changelogEntries: ChangelogEntry[] = [
 		date: "2026-06",
 		title: "Stamp Visible — the Ctrl+Alt+Shift+E shortcut as a first-class tool",
 		body: "Merges all currently-visible layers into a NEW layer placed above the active layer, leaving the originals untouched."
-	},
-	{
-		label: "v0.5.3",
-		date: "2026-06",
-		title: "`restoreCompositeChannel` no longer adds a redundant \"Select RGB Channel\" undo entry on the common case",
-		body: "A QA finding on v0.5.2 noted that the channel-restore helper was firing the slct AM event unconditionally — adding a cosmetic history entry every time a selection tool finished, even when Photoshop had already fallen back to composite on its own."
-	},
-	{
-		label: "v0.5.2",
-		date: "2026-06",
-		title: "Mask creation now works after smart-selection and selection-preview steps",
-		body: "A canonical \"isolate the subject\" flow (smart selection → review the selection → feather it → make a mask) was failing on the final step with a generic Photoshop error."
 	}
 ];
 
