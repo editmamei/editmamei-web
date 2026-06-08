@@ -15,6 +15,24 @@ export interface ChangelogEntry {
 
 export const changelogEntries: ChangelogEntry[] = [
 	{
+		label: "v0.5.3",
+		date: "2026-06",
+		title: "Smart selection tools no longer leave the document on a non-composite channel when they fail",
+		body: "v0.5.2 fixed the normal-return path; an audit follow-up found the same bug class on every smart-selection tool's *failure* path."
+	},
+	{
+		label: "v0.5.3",
+		date: "2026-06",
+		title: "Stamp Visible — the Ctrl+Alt+Shift+E shortcut as a first-class tool",
+		body: "Merges all currently-visible layers into a NEW layer placed above the active layer, leaving the originals untouched."
+	},
+	{
+		label: "v0.5.3",
+		date: "2026-06",
+		title: "`restoreCompositeChannel` no longer adds a redundant \"Select RGB Channel\" undo entry on the common case",
+		body: "A QA finding on v0.5.2 noted that the channel-restore helper was firing the slct AM event unconditionally — adding a cosmetic history entry every time a selection tool finished, even when Photoshop had already fallen back to composite on its own."
+	},
+	{
 		label: "v0.5.2",
 		date: "2026-06",
 		title: "Mask creation now works after smart-selection and selection-preview steps",
@@ -31,24 +49,6 @@ export const changelogEntries: ChangelogEntry[] = [
 		date: "2026-06",
 		title: "MCP-config writes are now atomic",
 		body: "editmamei install writes claude_desktop_config.json and ~/.cursor/mcp.json via a tmpfile + rename so a crash mid-write can no longer leave a zero-byte or partial config."
-	},
-	{
-		label: "v0.5.1",
-		date: "2026-06",
-		title: "`LOG_LEVEL` accepts symbolic names instead of silently swallowing every log",
-		body: "The previous parser called parseInt(env, 10) raw — LOG_LEVEL=debug returned NaN, every log dropped, and users assumed Editmamei was frozen."
-	},
-	{
-		label: "v0.5.1",
-		date: "2026-06",
-		title: "`editmamei install` no longer fails on Linux before the router runs",
-		body: "Constructing a Session eagerly built a PhotoshopConnection, whose constructor throws on unsupported platforms."
-	},
-	{
-		label: "v0.5.1",
-		date: "2026-06",
-		title: "Ping now reports which discovery signals degraded",
-		body: "The session-start liveness check previously mixed defaulted-zero values (action sets, open documents) with real reads, so a transient Photoshop hiccup mid-snippet produced an authoritative-looking \"0 action sets\" response with no signal to the caller."
 	}
 ];
 

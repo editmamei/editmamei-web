@@ -34,7 +34,7 @@ const REPO_ROOT = resolve(__dirname, '..');
 const SELF_PATH = fileURLToPath(import.meta.url);
 
 // Keep in sync with Editmamei/src/core/tool-tiers.ts dev/none entries.
-// Last sync: 2026-06-06 (create_layer_mask promoted dev → community).
+// Last sync: 2026-06-07 (photoshop_stamp_visible added at 'dev' tier).
 const BLOCKED = [
 	'photoshop_apply_color_lookup',
 	'photoshop_apply_lens_blur',
@@ -45,7 +45,10 @@ const BLOCKED = [
 	'photoshop_apply_smart_sharpen',
 	'photoshop_apply_reduce_noise',
 	'photoshop_apply_high_pass',
-	'photoshop_apply_equalize'
+	'photoshop_apply_equalize',
+	// photoshop_stamp_visible landed 'dev' 2026-06-07 — well-documented
+	// MrgV + Dplc:true AM dispatch but not yet ScriptListener-pinned.
+	'photoshop_stamp_visible'
 ];
 
 const SCAN_ROOTS = ['src', 'static', 'README.md'];
