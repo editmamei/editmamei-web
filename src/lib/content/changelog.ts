@@ -15,6 +15,12 @@ export interface ChangelogEntry {
 
 export const changelogEntries: ChangelogEntry[] = [
 	{
+		label: "v0.5.5",
+		date: "2026-06",
+		title: "Previews are reliable on macOS again",
+		body: "Two preview calls in the same Mac session failed with an ENOENT error on the temp file under /tmp, while other previews in the same session worked."
+	},
+	{
 		label: "v0.5.4",
 		date: "2026-06",
 		title: "Mask creation no longer fails after a chain of selection tools on macOS Photoshop 27.7",
@@ -43,12 +49,6 @@ export const changelogEntries: ChangelogEntry[] = [
 		date: "2026-06",
 		title: "Mask creation now works after smart-selection and selection-preview steps",
 		body: "A canonical \"isolate the subject\" flow (smart selection → review the selection → feather it → make a mask) was failing on the final step with a generic Photoshop error."
-	},
-	{
-		label: "v0.5.1",
-		date: "2026-06",
-		title: "Server reports the actual package version over MCP",
-		body: "The MCP server identified itself as 0.2.0 during initialize regardless of which release was running; clients logged the stale value in support bundles."
 	}
 ];
 
