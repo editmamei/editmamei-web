@@ -15,6 +15,12 @@ export interface ChangelogEntry {
 
 export const changelogEntries: ChangelogEntry[] = [
 	{
+		label: "v0.5.8",
+		date: "2026-06",
+		title: "Mask creation actually works on macOS now",
+		body: "The previous fix (v0.5.7) corrected one of two structurally wrong slots in the AM descriptor; the other slot — the class-of-thing-to-create declaration — was still in the legacy null reference-to-class shape that macOS PS 27.7 strict-mode rejects."
+	},
+	{
 		label: "v0.5.7",
 		date: "2026-06",
 		title: "Mask creation works on macOS",
@@ -43,12 +49,6 @@ export const changelogEntries: ChangelogEntry[] = [
 		date: "2026-06",
 		title: "Mask creation no longer fails after a chain of selection tools on macOS Photoshop 27.7",
 		body: "A fresh-install v0.5.3 Mac session reproduced the original v0.5.2 bug class: the first mask creation in a session worked, but a second attempt after multiple selection tool calls failed with the \"command Make not currently available\" error."
-	},
-	{
-		label: "v0.5.3",
-		date: "2026-06",
-		title: "Smart selection tools no longer leave the document on a non-composite channel when they fail",
-		body: "v0.5.2 fixed the normal-return path; an audit follow-up found the same bug class on every smart-selection tool's *failure* path."
 	}
 ];
 
