@@ -15,6 +15,12 @@ export interface ChangelogEntry {
 
 export const changelogEntries: ChangelogEntry[] = [
 	{
+		label: "v0.7.0",
+		date: "2026-06",
+		title: "Nine dev-tier tools promoted to the shipped surface after live verification",
+		body: "Six land in the CE workhorse pipeline (a complete tone-recovery → sharpen → noise → stamp finishing chain) and three land in Pro (the Bundle V content-aware retouch trio)."
+	},
+	{
 		label: "v0.6.0",
 		date: "2026-06",
 		title: "Preview overlays gain compositional and coordinate guides",
@@ -43,12 +49,6 @@ export const changelogEntries: ChangelogEntry[] = [
 		date: "2026-06",
 		title: "The orientation overview no longer leaks dev-tier filter names that aren't in any shipped bundle",
 		body: "Five filter operations sit at 'dev' tier (excluded from CE AND Pro shipped bundles per the dev-default-then-promote gate) but the overview's capability map and \"AM event verification status\" section listed them by name as if they were available."
-	},
-	{
-		label: "v0.5.5",
-		date: "2026-06",
-		title: "Previews are reliable on macOS again",
-		body: "Two preview calls in the same Mac session failed with an ENOENT error on the temp file under /tmp, while other previews in the same session worked."
 	}
 ];
 

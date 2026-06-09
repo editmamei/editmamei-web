@@ -34,21 +34,20 @@ const REPO_ROOT = resolve(__dirname, '..');
 const SELF_PATH = fileURLToPath(import.meta.url);
 
 // Keep in sync with Editmamei/src/core/tool-tiers.ts dev/none entries.
-// Last sync: 2026-06-07 (photoshop_stamp_visible added at 'dev' tier).
+// Last sync: 2026-06-09 (v0.7.0 promotions). Six tools promoted dev →
+// community: shadows_highlights, smart_sharpen, reduce_noise, high_pass,
+// equalize, stamp_visible. Three tools promoted dev → pro: the Bundle V
+// content-aware retouch trio (fill / patch / content_aware_move). Pro
+// tools are NOT blocked here — they ship in the Pro bundle and can be
+// referenced on the public marketing site. This sync also caught and
+// fixed prior drift: the 2026-06-04 clipping-mask primitives (create /
+// release) had never been added to BLOCKED.
 const BLOCKED = [
 	'photoshop_apply_color_lookup',
 	'photoshop_apply_lens_blur',
 	'photoshop_select_color_range',
-	// photoshop_create_layer_mask promoted 'dev' → 'community' 2026-06-06
-	// (audit-verified by src/spec/ps27/masks/create-reveal-*.ts).
-	'photoshop_apply_shadows_highlights',
-	'photoshop_apply_smart_sharpen',
-	'photoshop_apply_reduce_noise',
-	'photoshop_apply_high_pass',
-	'photoshop_apply_equalize',
-	// photoshop_stamp_visible landed 'dev' 2026-06-07 — well-documented
-	// MrgV + Dplc:true AM dispatch but not yet ScriptListener-pinned.
-	'photoshop_stamp_visible'
+	'photoshop_create_clipping_mask',
+	'photoshop_release_clipping_mask'
 ];
 
 const SCAN_ROOTS = ['src', 'static', 'README.md'];
