@@ -15,6 +15,12 @@ export interface ChangelogEntry {
 
 export const changelogEntries: ChangelogEntry[] = [
 	{
+		label: "v0.6.0",
+		date: "2026-06",
+		title: "Preview overlays gain compositional and coordinate guides",
+		body: "Eight new annotation kinds make it easy for the LLM to translate visual judgments into precise pixel coordinates and to evaluate composition against canonical photographic frameworks like the rule of thirds and the golden spiral."
+	},
+	{
 		label: "v0.5.8",
 		date: "2026-06",
 		title: "Mask creation actually works on macOS now",
@@ -43,12 +49,6 @@ export const changelogEntries: ChangelogEntry[] = [
 		date: "2026-06",
 		title: "Previews are reliable on macOS again",
 		body: "Two preview calls in the same Mac session failed with an ENOENT error on the temp file under /tmp, while other previews in the same session worked."
-	},
-	{
-		label: "v0.5.4",
-		date: "2026-06",
-		title: "Mask creation no longer fails after a chain of selection tools on macOS Photoshop 27.7",
-		body: "A fresh-install v0.5.3 Mac session reproduced the original v0.5.2 bug class: the first mask creation in a session worked, but a second attempt after multiple selection tool calls failed with the \"command Make not currently available\" error."
 	}
 ];
 
