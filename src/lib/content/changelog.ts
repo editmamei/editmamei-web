@@ -15,6 +15,30 @@ export interface ChangelogEntry {
 
 export const changelogEntries: ChangelogEntry[] = [
 	{
+		label: "v0.7.2",
+		date: "2026-06",
+		title: "Setting a text font no longer surfaces as a UI failure even when it succeeds",
+		body: "The structured response from this tool was sending an empty object where a font-size number was expected; Claude Desktop validated the response against the declared schema, the empty object failed validation, and the call surfaced as a red \"Failed to call tool\" toast in the UI — even though Photoshop had applied the font correctly and the session log recorded success."
+	},
+	{
+		label: "v0.7.2",
+		date: "2026-06",
+		title: "Opening a document no longer surfaces as a UI failure even when it succeeds",
+		body: "Same shape of bug as the font fix above, different host object: the bits-per-channel field was a BitsPerChannelType enumeration host object (ONE / EIGHT / SIXTEEN / THIRTYTWO), not a plain integer."
+	},
+	{
+		label: "v0.7.2",
+		date: "2026-06",
+		title: "The verification-grade histogram primitive now ships in CE",
+		body: "It was always classified 'community' in the tier table but registered in the Pro-only preview-tools-pro.ts file, which gets build-stubbed for CE."
+	},
+	{
+		label: "v0.7.2",
+		date: "2026-06",
+		title: "Tool descriptions read by CE users no longer name Pro-tier tools or include tier markers",
+		body: "Three concrete leaks fixed this release, plus a new build-fail test guarding against any future drift."
+	},
+	{
 		label: "v0.7.0",
 		date: "2026-06",
 		title: "Nine dev-tier tools promoted to the shipped surface after live verification",
@@ -25,30 +49,6 @@ export const changelogEntries: ChangelogEntry[] = [
 		date: "2026-06",
 		title: "Preview overlays gain compositional and coordinate guides",
 		body: "Eight new annotation kinds make it easy for the LLM to translate visual judgments into precise pixel coordinates and to evaluate composition against canonical photographic frameworks like the rule of thirds and the golden spiral."
-	},
-	{
-		label: "v0.5.8",
-		date: "2026-06",
-		title: "Mask creation actually works on macOS now",
-		body: "The previous fix (v0.5.7) corrected one of two structurally wrong slots in the AM descriptor; the other slot — the class-of-thing-to-create declaration — was still in the legacy null reference-to-class shape that macOS PS 27.7 strict-mode rejects."
-	},
-	{
-		label: "v0.5.7",
-		date: "2026-06",
-		title: "Mask creation works on macOS",
-		body: "The mask-creation snippet was sending the AM descriptor's At slot as a bare enumerated value (putEnumerated directly on the descriptor) when the captured spec for Layer > Layer Mask requires it to be an ActionReference containing the enumerated chain."
-	},
-	{
-		label: "v0.5.6",
-		date: "2026-06",
-		title: "Workflow guidance no longer references features the user can't reach",
-		body: "The orientation skill and the overview tool are now tier-agnostic — they describe the workflow and the inventory comes from tools/list."
-	},
-	{
-		label: "v0.5.6",
-		date: "2026-06",
-		title: "The orientation overview no longer leaks dev-tier filter names that aren't in any shipped bundle",
-		body: "Five filter operations sit at 'dev' tier (excluded from CE AND Pro shipped bundles per the dev-default-then-promote gate) but the overview's capability map and \"AM event verification status\" section listed them by name as if they were available."
 	}
 ];
 
