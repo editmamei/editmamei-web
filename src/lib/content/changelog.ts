@@ -15,6 +15,12 @@ export interface ChangelogEntry {
 
 export const changelogEntries: ChangelogEntry[] = [
 	{
+		label: "v0.5.7",
+		date: "2026-06",
+		title: "Mask creation works on macOS",
+		body: "The mask-creation snippet was sending the AM descriptor's At slot as a bare enumerated value (putEnumerated directly on the descriptor) when the captured spec for Layer > Layer Mask requires it to be an ActionReference containing the enumerated chain."
+	},
+	{
 		label: "v0.5.6",
 		date: "2026-06",
 		title: "Workflow guidance no longer references features the user can't reach",
@@ -43,12 +49,6 @@ export const changelogEntries: ChangelogEntry[] = [
 		date: "2026-06",
 		title: "Smart selection tools no longer leave the document on a non-composite channel when they fail",
 		body: "v0.5.2 fixed the normal-return path; an audit follow-up found the same bug class on every smart-selection tool's *failure* path."
-	},
-	{
-		label: "v0.5.3",
-		date: "2026-06",
-		title: "Stamp Visible — the Ctrl+Alt+Shift+E shortcut as a first-class tool",
-		body: "Merges all currently-visible layers into a NEW layer placed above the active layer, leaving the originals untouched."
 	}
 ];
 
