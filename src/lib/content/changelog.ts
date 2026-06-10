@@ -15,6 +15,18 @@ export interface ChangelogEntry {
 
 export const changelogEntries: ChangelogEntry[] = [
 	{
+		label: "v0.8.2",
+		date: "2026-06",
+		title: "Cleaner argument handling in the macOS Photoshop-installation detector",
+		body: "The detector previously assembled shell-command strings with interpolated filesystem-derived paths (mdfind output, app names, plist paths)."
+	},
+	{
+		label: "v0.8.2",
+		date: "2026-06",
+		title: "Subject-selection error message no longer recommends a tool the registry can't reach",
+		body: "When the Sensei-backed subject and sky selectors fail or find nothing, the fallback recommendation in the error string now points at a community-tier alternative instead of a dev-tier tool that registers in no shipped edition."
+	},
+	{
 		label: "v0.8.0",
 		date: "2026-06",
 		title: "Preview rendering always uses JPEG; the `format` argument is gone",
@@ -37,18 +49,6 @@ export const changelogEntries: ChangelogEntry[] = [
 		date: "2026-06",
 		title: "The verification-grade histogram primitive now ships in CE",
 		body: "It was always classified 'community' in the tier table but registered in the Pro-only preview-tools-pro.ts file, which gets build-stubbed for CE."
-	},
-	{
-		label: "v0.7.2",
-		date: "2026-06",
-		title: "Tool descriptions read by CE users no longer name Pro-tier tools or include tier markers",
-		body: "Three concrete leaks fixed this release, plus a new build-fail test guarding against any future drift."
-	},
-	{
-		label: "v0.7.0",
-		date: "2026-06",
-		title: "Nine dev-tier tools promoted to the shipped surface after live verification",
-		body: "Six land in the CE workhorse pipeline (a complete tone-recovery → sharpen → noise → stamp finishing chain) and three land in Pro (the Bundle V content-aware retouch trio)."
 	}
 ];
 

@@ -33,27 +33,20 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = resolve(__dirname, '..');
 const SELF_PATH = fileURLToPath(import.meta.url);
 
-// Keep in sync with Editmamei/src/core/tool-tiers.ts dev/none entries.
-// Last sync: 2026-06-09 (v0.7.0 promotions). Six tools promoted dev →
-// community: shadows_highlights, smart_sharpen, reduce_noise, high_pass,
-// equalize, stamp_visible. Three tools promoted dev → pro: the Bundle V
-// content-aware retouch trio (fill / patch / content_aware_move). Pro
-// tools are NOT blocked here — they ship in the Pro bundle and can be
-// referenced on the public marketing site. This sync also caught and
-// fixed prior drift: the 2026-06-04 clipping-mask primitives (create /
-// release) had never been added to BLOCKED.
+// === BEGIN AUTO-GENERATED BLOCKED (sync-leak-guard.ts) ===
+// Auto-generated from Editmamei/src/core/tool-tiers.ts (entries
+// classified 'dev' or 'none'). Do NOT hand-edit — re-run
+// `npm run sync:leak-guard` from Editmamei to refresh.
+// Source: 6 dev/none tier names at sync time.
 const BLOCKED = [
+	'photoshop_apply_brush_stroke',
 	'photoshop_apply_color_lookup',
 	'photoshop_apply_lens_blur',
-	'photoshop_select_color_range',
 	'photoshop_create_clipping_mask',
 	'photoshop_release_clipping_mask',
-	// Added 2026-06-10 alongside Editmamei v0.8.0 — closes 2026-06-10 audit H1.
-	// Bundle W (2026-06-09 commit 6a6a143) added the brush-stroke tool at
-	// `'dev'` tier but the Bundle W commit missed the dual-list update this
-	// BLOCKED array exists to enforce.
-	'photoshop_apply_brush_stroke'
-];
+	'photoshop_select_color_range',
+]
+// === END AUTO-GENERATED BLOCKED ===
 
 const SCAN_ROOTS = ['src', 'static', 'README.md'];
 
