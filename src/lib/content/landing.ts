@@ -26,7 +26,7 @@ export const capabilities: Capability[] = [
 	},
 	{
 		title: 'Smart selections',
-		body: 'Color Range, Magic Wand, plus rectangle and feather. Every selection returns area, edge complexity, and pixel counts, so the AI can verify before committing to a mask or adjustment. Pro adds Sensei-backed Select Subject and Select Sky.'
+		body: 'Magic Wand, plus rectangle and feather. Every selection returns area, edge complexity, and pixel counts, so the AI can verify before committing to a mask or adjustment. Pro adds Sensei-backed Select Subject and Select Sky.'
 	},
 	{
 		title: 'Non-destructive adjustments',
@@ -96,7 +96,7 @@ export const editionRows: EditionRow[] = [
 		pro: true
 	},
 	{
-		feature: 'Smart selections (Color Range, Magic Wand, rectangle, feather, with rich feedback)',
+		feature: 'Smart selections (Magic Wand, rectangle, feather, with rich feedback)',
 		community: true,
 		pro: true
 	},

@@ -58,9 +58,9 @@
 				</h3>
 				<p class="mt-2 text-sm leading-relaxed text-neutral-700">
 					Select Subject and Select Sky — Photoshop's modern AI-assisted selection tools. Community
-					ships every other selection method (Color Range, Magic Wand, rectangle, feather); Pro adds
-					the Sensei pair, which mostly matters when the AI needs to isolate complex subjects
-					without you nudging the selection by hand.
+					ships every other selection method (Magic Wand, rectangle, feather); Pro adds the Sensei
+					pair, which mostly matters when the AI needs to isolate complex subjects without you
+					nudging the selection by hand.
 				</p>
 			</li>
 			<li class="rounded-xl border border-neutral-200 bg-neutral-50/60 p-5">
