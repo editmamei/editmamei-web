@@ -15,6 +15,12 @@ export interface ChangelogEntry {
 
 export const changelogEntries: ChangelogEntry[] = [
 	{
+		label: "v0.8.0",
+		date: "2026-06",
+		title: "Preview rendering always uses JPEG; the `format` argument is gone",
+		body: "Was an enum 'jpeg' | 'png' defaulting to 'jpeg'."
+	},
+	{
 		label: "v0.7.2",
 		date: "2026-06",
 		title: "Setting a text font no longer surfaces as a UI failure even when it succeeds",
@@ -43,12 +49,6 @@ export const changelogEntries: ChangelogEntry[] = [
 		date: "2026-06",
 		title: "Nine dev-tier tools promoted to the shipped surface after live verification",
 		body: "Six land in the CE workhorse pipeline (a complete tone-recovery → sharpen → noise → stamp finishing chain) and three land in Pro (the Bundle V content-aware retouch trio)."
-	},
-	{
-		label: "v0.6.0",
-		date: "2026-06",
-		title: "Preview overlays gain compositional and coordinate guides",
-		body: "Eight new annotation kinds make it easy for the LLM to translate visual judgments into precise pixel coordinates and to evaluate composition against canonical photographic frameworks like the rule of thirds and the golden spiral."
 	}
 ];
 
