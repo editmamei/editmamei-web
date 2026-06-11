@@ -15,6 +15,24 @@ export interface ChangelogEntry {
 
 export const changelogEntries: ChangelogEntry[] = [
 	{
+		label: "v0.8.5",
+		date: "2026-06",
+		title: "Saving a template now flags issues against the authoring doctrine",
+		body: "A template save is checked for missing structure and copied-in scripting or fixed geometry, and any problems come back as warnings — the save still succeeds, so you can fix and re-save in the same session."
+	},
+	{
+		label: "v0.8.5",
+		date: "2026-06",
+		title: "Templates are now authored and applied as goal-oriented recipes, not replay scripts",
+		body: "A template captures the *approach* to a look and adapts it to each new photo, instead of replaying one photo's exact numbers — so the same template produces a consistent result across different images."
+	},
+	{
+		label: "v0.8.4",
+		date: "2026-06",
+		title: "Captured tool results in the session log are now sanitized before writing",
+		body: "The opt-in full-result capture now applies the same privacy discipline as arguments: inline image payloads become size markers, home-directory paths are redacted, and long strings are truncated."
+	},
+	{
 		label: "v0.8.2",
 		date: "2026-06",
 		title: "Cleaner argument handling in the macOS Photoshop-installation detector",
@@ -31,24 +49,6 @@ export const changelogEntries: ChangelogEntry[] = [
 		date: "2026-06",
 		title: "Preview rendering always uses JPEG; the `format` argument is gone",
 		body: "Was an enum 'jpeg' | 'png' defaulting to 'jpeg'."
-	},
-	{
-		label: "v0.7.2",
-		date: "2026-06",
-		title: "Setting a text font no longer surfaces as a UI failure even when it succeeds",
-		body: "The structured response from this tool was sending an empty object where a font-size number was expected; Claude Desktop validated the response against the declared schema, the empty object failed validation, and the call surfaced as a red \"Failed to call tool\" toast in the UI — even though Photoshop had applied the font correctly and the session log recorded success."
-	},
-	{
-		label: "v0.7.2",
-		date: "2026-06",
-		title: "Opening a document no longer surfaces as a UI failure even when it succeeds",
-		body: "Same shape of bug as the font fix above, different host object: the bits-per-channel field was a BitsPerChannelType enumeration host object (ONE / EIGHT / SIXTEEN / THIRTYTWO), not a plain integer."
-	},
-	{
-		label: "v0.7.2",
-		date: "2026-06",
-		title: "The verification-grade histogram primitive now ships in CE",
-		body: "It was always classified 'community' in the tier table but registered in the Pro-only preview-tools-pro.ts file, which gets build-stubbed for CE."
 	}
 ];
 
