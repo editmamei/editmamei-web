@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { track } from '$lib/analytics/clarity';
+	import { cookieConsent } from '$lib/stores/cookieConsent';
 	const year = new Date().getFullYear();
 </script>
 
@@ -101,6 +102,12 @@
 			</p>
 			<p class="flex items-center gap-4">
 				<a href="/privacy" class="hover:text-neutral-800">Privacy</a>
+				<button
+					onclick={() => cookieConsent.reopen()}
+					class="cursor-pointer hover:text-neutral-800"
+				>
+					Cookie preferences
+				</button>
 				<a href="/security" class="hover:text-neutral-800">Security</a>
 				<a href="/license" class="hover:text-neutral-800">License</a>
 			</p>

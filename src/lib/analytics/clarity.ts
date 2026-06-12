@@ -94,3 +94,22 @@ export function trackOnce(name: string): void {
 	firedOnce.add(name);
 	track(name);
 }
+
+/**
+ * Grant or deny Clarity's cookie consent at runtime.
+ *
+ * Call with `true` when the user accepts cookies — Clarity will switch from
+ * its cookieless mode to full cookie-backed sessions. Deny is a no-op here
+ * because `clarity('consent', false)` is already set as the hard default in
+ * src/app.html; Clarity never upgrades to cookies without an explicit grant.
+ */
+export function setConsent(granted: boolean): void {
+	if (typeof window === 'undefined') return;
+	try {
+		if (granted) {
+			window.clarity?.('consent');
+		}
+	} catch {
+		// Clarity errors must never break the page.
+	}
+}

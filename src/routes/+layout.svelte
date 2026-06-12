@@ -2,6 +2,7 @@
 	import './layout.css';
 	import SiteHeader from '$lib/components/SiteHeader.svelte';
 	import SiteFooter from '$lib/components/SiteFooter.svelte';
+	import ConsentBanner from '$lib/components/ConsentBanner.svelte';
 
 	let { children } = $props();
 </script>
@@ -12,4 +13,5 @@
 		{@render children()}
 	</main>
 	<SiteFooter />
+	<ConsentBanner />
 </div>
