@@ -30,8 +30,10 @@
 				Community covers the everyday editing surface. Pro adds the production toolkit.
 			</h2>
 			<p class="mt-3 text-base leading-relaxed text-neutral-700">
-				Both editions ship from the same npm package. A Pro license unlocks the Pro tool surface on
-				the next AI-client restart.
+				Community installs free from npm. Pro is the same <code class="text-[0.85em]"
+					>editmamei</code
+				> package delivered as its own build with your license — install it over Community, restart your
+				AI client, and the Pro tools appear.
 			</p>
 		</div>
 

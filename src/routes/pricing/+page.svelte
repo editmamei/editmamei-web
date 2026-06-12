@@ -17,8 +17,9 @@
 		</h1>
 		<p class="mt-4 max-w-2xl text-base leading-relaxed text-neutral-700">
 			Editmamei Community is free. Pro adds the production toolkit for repeatable, professional
-			workflows. Both editions ship from the same npm package — a Pro license unlocks the Pro tool
-			surface on the next AI-client restart.
+			workflows. Community installs from the public npm registry; a Pro purchase delivers the Pro
+			build of the same package — install it over Community, restart your AI client, and the Pro
+			tools appear. Same CLI, same setup flow.
 		</p>
 	</div>
 </section>
