@@ -37,7 +37,7 @@ const SELF_PATH = fileURLToPath(import.meta.url);
 // Auto-generated from Editmamei/src/core/tool-tiers.ts (entries
 // classified 'dev' or 'none'). Do NOT hand-edit — re-run
 // `npm run sync:leak-guard` from Editmamei to refresh.
-// Source: 7 dev/none tier names at sync time.
+// Source: 6 dev/none tier names at sync time.
 const BLOCKED = [
 	'photoshop_apply_brush_stroke',
 	'photoshop_apply_color_lookup',
@@ -45,7 +45,6 @@ const BLOCKED = [
 	'photoshop_create_clipping_mask',
 	'photoshop_release_clipping_mask',
 	'photoshop_select_color_range',
-	'photoshop_template_verify',
 ]
 // === END AUTO-GENERATED BLOCKED ===
 
