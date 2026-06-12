@@ -67,3 +67,23 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+  ping-indexnow:
+    needs: deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Notify IndexNow
+        run: |
+          curl -sf -o /dev/null -w "IndexNow status: %{http_code}\n" \
+            -X POST "https://api.indexnow.org/IndexNow" \
+            -H "Content-Type: application/json; charset=utf-8" \
+            -d '{
+              "host": "editmamei.com",
+              "key": "a4f8aefcc57e44b2992e9ff9694f520f",
+              "keyLocation": "https://editmamei.com/a4f8aefcc57e44b2992e9ff9694f520f.txt",
+              "urlList": [
+                "https://editmamei.com/",
+                "https://editmamei.com/product",
+                "https://editmamei.com/pricing"
+              ]
+            }'
