@@ -27,7 +27,7 @@
 		<div class="mb-10 max-w-2xl">
 			<p class="mb-2 text-xs font-semibold tracking-wider text-neutral-500 uppercase">Editions</p>
 			<h2 class="text-2xl font-bold tracking-tight text-neutral-950 md:text-3xl">
-				Community covers the full editing surface. Pro adds three specific upgrades.
+				Community covers the everyday editing surface. Pro adds the production toolkit.
 			</h2>
 			<p class="mt-3 text-base leading-relaxed text-neutral-700">
 				Both editions ship from the same npm package. A Pro license unlocks the Pro tool surface on

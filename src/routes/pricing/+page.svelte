@@ -1,14 +1,13 @@
 <script lang="ts">
 	import EditionsTable from '$lib/components/EditionsTable.svelte';
+	import Seo from '$lib/components/Seo.svelte';
 </script>
 
-<svelte:head>
-	<title>Pricing — Editmamei</title>
-	<meta
-		name="description"
-		content="Editmamei pricing. Community is free and covers the full Photoshop editing surface; Pro adds template authoring, Sensei-backed selections, and per-channel histograms."
-	/>
-</svelte:head>
+<Seo
+	title="Pricing — Editmamei"
+	description="Editmamei pricing. Community is free and covers everyday editing; Pro adds template authoring, Sensei-backed selections, content-aware retouch, layer transforms, and Photoshop Actions + scripting."
+	path="/pricing"
+/>
 
 <section class="bg-white pt-12 pb-4 md:pt-16 md:pb-6">
 	<div class="mx-auto max-w-5xl px-4">
@@ -17,9 +16,9 @@
 			Free Community. Paid Pro for production work.
 		</h1>
 		<p class="mt-4 max-w-2xl text-base leading-relaxed text-neutral-700">
-			Editmamei Community is free and open. Pro adds three specific upgrades for repeatable,
-			production workflows. Both editions ship from the same npm package — a Pro license unlocks the
-			Pro tool surface on the next AI-client restart.
+			Editmamei Community is free. Pro adds the production toolkit for repeatable, professional
+			workflows. Both editions ship from the same npm package — a Pro license unlocks the Pro tool
+			surface on the next AI-client restart.
 		</p>
 	</div>
 </section>
@@ -35,12 +34,13 @@
 			When do you need Pro?
 		</h2>
 		<p class="mt-4 text-base leading-relaxed text-neutral-700">
-			Community Edition covers the full Photoshop editing surface — documents, layers, every
-			standard adjustment and filter, masks, selections, history. You can apply any built-in
-			template. For most one-off photo edits, that is the full kit.
+			Community Edition covers the everyday editing surface — documents, layers, the standard
+			adjustments and filters, masks, selections, history, and visual verification with per-channel
+			histograms. You can apply, verify, and recall any saved template. For most one-off photo
+			edits, that is the full kit.
 		</p>
 		<p class="mt-4 text-base leading-relaxed text-neutral-700">
-			Pro adds three specific upgrades that matter once you're doing repeatable, production work:
+			Pro adds the upgrades that matter once you're doing repeatable, production work:
 		</p>
 
 		<ul class="mt-6 space-y-5">
@@ -48,8 +48,8 @@
 				<h3 class="text-base font-semibold tracking-tight text-neutral-950">Template authoring</h3>
 				<p class="mt-2 text-sm leading-relaxed text-neutral-700">
 					Save the current edit as a reproducible recipe and apply it to new images later. Community
-					can <em>apply</em> templates; Pro adds the create / save / delete side. This is the feature
-					that turns a one-off look into a repeatable house style.
+					can <em>apply</em>, verify, and recall templates; Pro adds the create / save / delete
+					side. This is the feature that turns a one-off look into a repeatable house style.
 				</p>
 			</li>
 			<li class="rounded-xl border border-neutral-200 bg-neutral-50/60 p-5">
@@ -65,20 +65,30 @@
 			</li>
 			<li class="rounded-xl border border-neutral-200 bg-neutral-50/60 p-5">
 				<h3 class="text-base font-semibold tracking-tight text-neutral-950">
-					Per-channel histograms
+					Content-aware retouch
 				</h3>
 				<p class="mt-2 text-sm leading-relaxed text-neutral-700">
-					256-bin distributions with mean / stdev / median, returned to the AI. Lets the AI confirm
-					quantitatively that an operation actually changed pixels — not just that the call
-					succeeded. Useful when you want self-verifying edits, especially for batch work.
+					Content-Aware Fill, Patch, and Content-Aware Move — Photoshop's premium retouch moves,
+					driven against a selection the AI can verify first. Object removal and cleanup that goes
+					beyond what adjustment layers can do.
+				</p>
+			</li>
+			<li class="rounded-xl border border-neutral-200 bg-neutral-50/60 p-5">
+				<h3 class="text-base font-semibold tracking-tight text-neutral-950">
+					Actions, scripting & layer transforms
+				</h3>
+				<p class="mt-2 text-sm leading-relaxed text-neutral-700">
+					Play your recorded Photoshop Actions, run arbitrary ExtendScript through the escape hatch
+					when no specific tool fits, and transform layers freely — move, scale, rotate, fit to
+					document.
 				</p>
 			</li>
 		</ul>
 
 		<p class="mt-6 text-base leading-relaxed text-neutral-700">
 			Rule of thumb: if you mostly do <em>one-off</em> editing, Community is the full toolkit. If you
-			find yourself wanting to save a look and re-apply it, or you want the AI to self-judge at a finer
-			grain, that's Pro.
+			find yourself wanting to save a look and re-apply it, batch real client work, or reach for the retouch
+			and automation power tools, that's Pro.
 		</p>
 	</div>
 </section>

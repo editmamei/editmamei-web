@@ -1,42 +1,29 @@
-# sv
+# editmamei-web
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+The marketing site for [Editmamei](https://editmamei.com) — natural-language photo editing that drives your own Adobe Photoshop through an MCP server. This repo is the landing page only; the product source is private, and the public docs + changelog live at [editmamei/editmamei-ce](https://github.com/editmamei/editmamei-ce).
 
-## Creating a project
+SvelteKit 5 + Vite + Tailwind v4 + TypeScript, fully static (`@sveltejs/adapter-static`), deployed to GitHub Pages on push to `main`.
 
-If you're seeing this, you've probably already done this step. Congrats!
-
-```sh
-# create a new project
-npx sv create my-app
-```
-
-To recreate this project with the same configuration:
+## Develop
 
 ```sh
-# recreate this project
-npx sv@0.15.3 create --template minimal --types ts --no-install editmamei-web
+npm install
+npm run dev        # Vite dev server with HMR
 ```
 
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+## Verify
 
 ```sh
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
+npm run check      # svelte-check
+npm run lint       # prettier + eslint
+npm test           # node --test (leak guard + sitemap invariants)
+npm run build      # production build → build/
+npm run preview    # serve the production build locally
+node scripts/check-leak-guard.mjs   # policy gate, also runs in CI
 ```
 
-## Building
+## Notes for contributors
 
-To create a production version of your app:
-
-```sh
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+- The `BLOCKED` array in `scripts/check-leak-guard.mjs` is auto-generated from the private source repo's tool-tier table — don't hand-edit the fenced region.
+- `design/` holds editable brand sources (never deployed); `static/` is served at the deploy root. See `CLAUDE.md` for the full conventions.
+- Every indexable page renders the `<Seo>` component with a self-referencing canonical; the sitemap's `ROUTES` array and per-page `noindex` tags must stay complementary (enforced by `tests/sitemap-routes.test.mjs`).

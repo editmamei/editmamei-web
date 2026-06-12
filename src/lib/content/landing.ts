@@ -11,18 +11,18 @@ export const pillars: Pillar[] = [
 	},
 	{
 		title: 'Recipes that reproduce',
-		body: 'A template is a reproducible aesthetic recipe — apply it later to a different image and the AI reads the recipe’s reasoning to recreate the look on the new file. Editing decisions stop being one-shots. Editmamei ships with a small built-in starter set; creating and saving your own is a Pro feature.'
+		body: 'A template is a reproducible aesthetic recipe — apply it later to a different image and the AI reads the recipe’s reasoning to recreate the look on the new file. Editing decisions stop being one-shots. Applying, verifying, and recalling saved templates is free in every edition; authoring your own is a Pro feature.'
 	}
 ];
 
 export const capabilities: Capability[] = [
 	{
 		title: 'Documents',
-		body: 'Open, save, export, close — PSD, JPEG, PNG, TIFF, DNG, HEIC, and the standard raw formats. Camera metadata (make, model, lens, ISO, focal length, GPS) and ACR develop settings surface to the AI before it edits.'
+		body: 'Open PSD, JPEG, PNG, TIFF, DNG, HEIC, and the standard raw formats; save layered PSDs; export JPEG and PNG. Camera metadata (make, model, lens, ISO, focal length, GPS) and ACR develop settings surface to the AI before it edits.'
 	},
 	{
 		title: 'Layers',
-		body: 'Create, duplicate, delete, rename, reorder, group, merge, flatten. Set opacity, blend mode, visibility, locking. The complete layer tree returns as JSON, so the AI always knows the document structure.'
+		body: 'Create, duplicate, delete, rename, reorder, group, merge, flatten. Set opacity, blend mode, visibility, locking. The complete layer tree returns as JSON, so the AI always knows the document structure. Pro adds free layer transforms (move, scale, rotate, fit to document).'
 	},
 	{
 		title: 'Smart selections',
@@ -34,19 +34,19 @@ export const capabilities: Capability[] = [
 	},
 	{
 		title: 'Filters & styles',
-		body: 'Gaussian Blur, Motion Blur, Sharpen, Add Noise. Drop shadow, stroke, outer glow as full layer styles. Auto-rasterization handles text and Smart Object inputs cleanly.'
+		body: 'Gaussian Blur, Motion Blur, Sharpen, Smart Sharpen, Reduce Noise, High Pass, Shadows/Highlights, Add Noise. Drop shadow, stroke, outer glow as full layer styles. Auto-rasterization handles text and Smart Object inputs cleanly.'
 	},
 	{
 		title: 'Masks',
-		body: 'Layer masks and selection masks across the full lifecycle: create from selection, apply, invert, refine, delete. Discrete tools, predictable behavior.'
+		body: 'Layer masks across the lifecycle: create from the active selection (or reveal-all), apply, delete. Discrete tools, predictable behavior.'
 	},
 	{
 		title: 'Templates',
-		body: 'A reproducible aesthetic recipe. Every edition ships with a small built-in set to apply. Pro adds the authoring side — capture session evidence, render before/after previews, and save a Claude-authored description of intent and pipeline that survives between sessions.'
+		body: 'A reproducible aesthetic recipe. Every edition applies, verifies, and recalls saved templates. Pro adds the authoring side — capture session evidence, render before/after previews, and save a Claude-authored description of intent and pipeline that survives between sessions.'
 	},
 	{
 		title: 'Visual verification',
-		body: 'Downscaled JPEG previews return inline so the AI sees what the document actually looks like and confirms operations actually changed pixels instead of trusting a success message. Pro adds 256-bin per-channel histograms with mean / stdev / median.'
+		body: 'Downscaled JPEG previews return inline so the AI sees what the document actually looks like and confirms operations actually changed pixels instead of trusting a success message. 256-bin per-channel histograms with mean / stdev / median back that up quantitatively.'
 	}
 ];
 
@@ -59,11 +59,11 @@ export const workflowExamples: WorkflowExample[] = [
 			'Roughly ten distinct tool calls. Each verifiable, each undoable. The AI reasons about intent; Editmamei handles the Photoshop choreography.'
 	},
 	{
-		title: 'Portrait retouch with feedback',
+		title: 'Portrait retouch with feedback (Pro)',
 		prompt:
 			'Open this portrait. Use Select Subject to isolate the person, feather the selection 2 pixels, and add a Curves adjustment layer clipped to that selection that gently warms the skin tones. Show me the before and after.',
 		outcome:
-			'The AI can call photoshop_get_preview at any step to see what the document looks like and adjust. Selection feedback tells it whether Select Subject actually worked or needs refinement.'
+			'The AI can call photoshop_get_preview at any step to see what the document looks like and adjust. Selection feedback tells it whether Select Subject actually worked or needs refinement. Select Subject is a Pro tool; Community covers Magic Wand, rectangle, and feather selections.'
 	},
 	{
 		title: 'Batch processing with a template',
@@ -76,12 +76,12 @@ export const workflowExamples: WorkflowExample[] = [
 
 export const editionRows: EditionRow[] = [
 	{
-		feature: 'Documents (open, save, export; PSD, JPEG, PNG, TIFF, DNG, HEIC, raw)',
+		feature: 'Documents (open PSD, JPEG, PNG, TIFF, DNG, HEIC, raw; save PSD; export JPEG/PNG)',
 		community: true,
 		pro: true
 	},
 	{
-		feature: 'Layers (create, duplicate, group, merge, transform, reorder, properties)',
+		feature: 'Layers (create, duplicate, group, merge, reorder, properties)',
 		community: true,
 		pro: true
 	},
@@ -91,7 +91,8 @@ export const editionRows: EditionRow[] = [
 		pro: true
 	},
 	{
-		feature: 'Filters (Gaussian Blur, Motion Blur, Sharpen, Add Noise)',
+		feature:
+			'Filters (Gaussian Blur, Motion Blur, Sharpen, Smart Sharpen, Reduce Noise, High Pass)',
 		community: true,
 		pro: true
 	},
@@ -106,18 +107,28 @@ export const editionRows: EditionRow[] = [
 		community: true,
 		pro: true
 	},
+	{ feature: 'History (undo, redo, inspect history states)', community: true, pro: true },
 	{
-		feature: 'History + Actions (undo, redo, jump to state, play recorded Photoshop Actions)',
+		feature: 'Visual verification (inline previews + per-channel histograms)',
 		community: true,
 		pro: true
 	},
-	{
-		feature: 'Visual preview (inline JPEGs so the AI can see what just changed)',
-		community: true,
-		pro: true
-	},
-	{ feature: 'Apply built-in templates', community: true, pro: true },
+	{ feature: 'Apply, verify, and recall saved templates', community: true, pro: true },
 	{ feature: 'Create / save / delete custom templates', community: false, pro: true },
 	{ feature: 'Sensei-backed selections (Select Subject, Select Sky)', community: false, pro: true },
-	{ feature: 'Per-channel histograms', community: false, pro: true }
+	{
+		feature: 'Content-aware retouch (Content-Aware Fill, Patch, Content-Aware Move)',
+		community: false,
+		pro: true
+	},
+	{
+		feature: 'Layer transforms (move, scale, rotate, fit to document)',
+		community: false,
+		pro: true
+	},
+	{
+		feature: 'Photoshop Actions + scripting (play recorded Actions, ExtendScript escape hatch)',
+		community: false,
+		pro: true
+	}
 ];

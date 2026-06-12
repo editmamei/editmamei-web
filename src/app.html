@@ -3,43 +3,20 @@
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<meta name="text-scale" content="scale" />
 		<meta name="theme-color" content="#0d2818" />
-
-		<link rel="canonical" href="https://editmamei.com/" />
 
 		<link rel="icon" type="image/x-icon" href="/icons/favicon.ico" />
 		<link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16.png" />
 		<link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32.png" />
 		<link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png" />
 
-		<title>Editmamei — Unlock Photoshop with natural-language photo editing</title>
-		<meta
-			name="description"
-			content="Unlock Photoshop with natural-language photo editing. AI orchestration, not generation. Your AI plans the edit; your own Photoshop does it. Pronounced like edamame."
-		/>
-
-		<meta
-			property="og:title"
-			content="Editmamei — Unlock Photoshop with natural-language photo editing"
-		/>
-		<meta
-			property="og:description"
-			content="AI orchestration, not generation. Your AI assistant plans the edit; your own Photoshop carries it out with its own real, non-generative tools. Pronounced like edamame."
-		/>
-		<meta property="og:type" content="website" />
-		<meta property="og:url" content="https://editmamei.com/" />
-		<meta property="og:site_name" content="Editmamei" />
-
-		<meta name="twitter:card" content="summary_large_image" />
-		<meta
-			name="twitter:title"
-			content="Editmamei — Unlock Photoshop with natural-language photo editing"
-		/>
-		<meta
-			name="twitter:description"
-			content="AI orchestration, not generation. Your AI plans the edit; your own Photoshop does it. Pronounced like edamame."
-		/>
+		<!--
+			Title, description, canonical, and og:/twitter: tags deliberately do
+			NOT live in this shared shell — each page renders <Seo> with its own
+			self-referencing canonical instead. A shell-level canonical pointing
+			at "/" told Google that /product and /pricing were duplicates of the
+			home page. See src/lib/components/Seo.svelte.
+		-->
 
 		<!--
 			Structured data: tells engines "editmamei" is a real software product
@@ -88,7 +65,10 @@
 		<!--
 			Microsoft Clarity — cookieless analytics. Heatmaps + session replay
 			within a session, no persistent identifier. No consent banner needed
-			while Clarity stays in cookieless mode. Drop-in marketing infrastructure
+			while Clarity stays in cookieless mode. The clarity('consent', false)
+			call below PINS cookieless mode in code — Clarity's default otherwise
+			sets first-party cookies (_clck/_clsk) based on a dashboard-side
+			toggle this repo can't see or version. Drop-in marketing infrastructure
 			per editmamei-web/CLAUDE.md "Marketing infrastructure" section; not
 			reconciled into the product's privacy framing (Editmamei/docs/20260530-
 			BRAND_VOICE_GUIDE.md §12 is about the npm package, not the website).
@@ -106,6 +86,7 @@
 				y = l.getElementsByTagName(r)[0];
 				y.parentNode.insertBefore(t, y);
 			})(window, document, 'clarity', 'script', 'wzto9hvwmu');
+			window.clarity('consent', false);
 		</script>
 
 		%sveltekit.head%

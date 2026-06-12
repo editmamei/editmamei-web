@@ -5,6 +5,7 @@
 	import Hero from '$lib/components/Hero.svelte';
 	import HowItWorks from '$lib/components/HowItWorks.svelte';
 	import InstallSection from '$lib/components/InstallSection.svelte';
+	import Seo from '$lib/components/Seo.svelte';
 	import { demoExamples } from '$lib/demos/examples';
 
 	let demoIndex = $state(0);
@@ -37,6 +38,12 @@
 		else prevDemo();
 	}
 </script>
+
+<Seo
+	title="Editmamei — Unlock Photoshop with natural-language photo editing"
+	description="Unlock Photoshop with natural-language photo editing. AI orchestration, not generation. Your AI plans the edit; your own Photoshop does it. Pronounced like edamame."
+	path="/"
+/>
 
 <Hero />
 
@@ -133,8 +140,8 @@
 					{/each}
 				</div>
 				<p class="mt-4 text-xs leading-relaxed text-neutral-500">
-					Every layer above is editable, maskable, removable. Saved as a template, the AI replays
-					the same recipe on a new photo and self-judges the result.
+					Every layer above is editable, maskable, removable. Saved as a template (a Pro feature),
+					the AI recreates the same look on a new photo and self-judges the result.
 				</p>
 			</aside>
 		</div>

@@ -8,14 +8,15 @@
  * snippet, or API-name reference would tip a tool that is not actually
  * shipping in the CE / Pro bundles yet.
  *
- * The BLOCKED list below is HAND-MAINTAINED and must be kept in sync
- * with Editmamei/src/core/tool-tiers.ts (entries marked 'dev' or
- * 'none'). When you flip a tier in Editmamei, also update:
- *   - editmamei-web/scripts/check-leak-guard.mjs  (this file)
- *   - editmamei-ce/scripts/check-leak-guard.mjs
+ * The BLOCKED list below is AUTO-GENERATED from
+ * Editmamei/src/core/tool-tiers.ts by Editmamei/scripts/sync-leak-guard.ts.
+ * Do NOT hand-edit the fenced region — when a tier flips in Editmamei,
+ * run `npm run sync:leak-guard` there to regenerate this file's region
+ * and editmamei-ce's in one pass.
  *
  * Run locally: `node scripts/check-leak-guard.mjs`
  * Runs in CI via .github/workflows/leak-guard.yml on every push / PR.
+ * Unit tests: tests/leak-guard.test.mjs (`npm test`).
  *
  * Narrow-scope check by design: only matches the literal `photoshop_*`
  * tool identifiers. Marketing copy uses human-facing feature names
@@ -27,7 +28,7 @@
 
 import { readdirSync, readFileSync, statSync } from 'node:fs';
 import { dirname, extname, join, relative, resolve } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = resolve(__dirname, '..');
@@ -44,8 +45,8 @@ const BLOCKED = [
 	'photoshop_apply_lens_blur',
 	'photoshop_create_clipping_mask',
 	'photoshop_release_clipping_mask',
-	'photoshop_select_color_range',
-]
+	'photoshop_select_color_range'
+];
 // === END AUTO-GENERATED BLOCKED ===
 
 const SCAN_ROOTS = ['src', 'static', 'README.md'];
@@ -70,8 +71,8 @@ const EXCLUDED_EXTS = new Set([
 	'.map'
 ]);
 
-function* walk(start) {
-	const fullStart = resolve(REPO_ROOT, start);
+function* walk(repoRoot, start) {
+	const fullStart = resolve(repoRoot, start);
 	let s;
 	try {
 		s = statSync(fullStart);
@@ -85,46 +86,91 @@ function* walk(start) {
 	if (!s.isDirectory()) return;
 	for (const entry of readdirSync(fullStart)) {
 		if (EXCLUDED_DIRS.has(entry)) continue;
-		yield* walk(join(fullStart, entry));
+		yield* walk(repoRoot, join(fullStart, entry));
 	}
 }
 
-const leaks = [];
-for (const root of SCAN_ROOTS) {
-	for (const file of walk(root)) {
-		if (file === SELF_PATH) continue;
-		if (EXCLUDED_EXTS.has(extname(file).toLowerCase())) continue;
-		let content;
-		try {
-			content = readFileSync(file, 'utf8');
-		} catch {
-			continue;
-		}
-		const lines = content.split(/\r?\n/);
-		for (let i = 0; i < lines.length; i++) {
-			for (const blocked of BLOCKED) {
-				if (lines[i].includes(blocked)) {
-					leaks.push({ file: relative(REPO_ROOT, file), line: i + 1, tool: blocked });
+/**
+ * Scan `scanRoots` (relative to `repoRoot`) for lines containing any of the
+ * blocked names. Returns { leaks, scannedFiles, emptyRoots }:
+ *   - leaks: [{ file, line, tool }] with file relative to repoRoot
+ *   - scannedFiles: count of text files actually read
+ *   - emptyRoots: scan roots that yielded zero files (missing or unreadable
+ *     — a guard that scans nothing must not report success)
+ *
+ * Exported for tests; main() below drives it with the repo's real config.
+ */
+export function scan({ repoRoot, blocked, scanRoots, selfPath = SELF_PATH }) {
+	const leaks = [];
+	let scannedFiles = 0;
+	const emptyRoots = [];
+	for (const root of scanRoots) {
+		let rootFiles = 0;
+		for (const file of walk(repoRoot, root)) {
+			if (file === selfPath) continue;
+			if (EXCLUDED_EXTS.has(extname(file).toLowerCase())) continue;
+			let content;
+			try {
+				content = readFileSync(file, 'utf8');
+			} catch {
+				continue;
+			}
+			rootFiles++;
+			const lines = content.split(/\r?\n/);
+			for (let i = 0; i < lines.length; i++) {
+				for (const tool of blocked) {
+					if (lines[i].includes(tool)) {
+						leaks.push({ file: relative(repoRoot, file), line: i + 1, tool });
+					}
 				}
 			}
 		}
+		if (rootFiles === 0) emptyRoots.push(root);
+		scannedFiles += rootFiles;
 	}
+	return { leaks, scannedFiles, emptyRoots };
 }
 
-if (leaks.length > 0) {
-	console.error(`\nLEAK GUARD FAILED — ${leaks.length} reference(s) to dev/none-tier tools:\n`);
-	for (const l of leaks) {
-		console.error(`  ${l.file}:${l.line}  →  ${l.tool}`);
+function main() {
+	const { leaks, scannedFiles, emptyRoots } = scan({
+		repoRoot: REPO_ROOT,
+		blocked: BLOCKED,
+		scanRoots: SCAN_ROOTS
+	});
+
+	if (emptyRoots.length > 0) {
+		console.error(
+			`LEAK GUARD ERROR — scan root(s) yielded no readable files: ${emptyRoots.join(', ')}.\n` +
+				`A guard that scans nothing must not report success. Check SCAN_ROOTS ` +
+				`against the repo layout.`
+		);
+		process.exit(2);
 	}
-	console.error(
-		`\nThese tool names are at tier 'dev' or 'none' in ` +
-			`Editmamei/src/core/tool-tiers.ts and must NOT appear in this ` +
-			`marketing-site source. Either:\n` +
-			`  (a) promote the tool to 'community' / 'pro' in Editmamei (with ` +
-			`live-verification evidence per docs/20260603-tool-tier-process.md), or\n` +
-			`  (b) strip the mention from this repo until the tool is promoted.\n`
+
+	if (leaks.length > 0) {
+		console.error(`\nLEAK GUARD FAILED — ${leaks.length} reference(s) to dev/none-tier tools:\n`);
+		for (const l of leaks) {
+			console.error(`  ${l.file}:${l.line}  →  ${l.tool}`);
+		}
+		console.error(
+			`\nThese tool names are at tier 'dev' or 'none' in ` +
+				`Editmamei/src/core/tool-tiers.ts and must NOT appear in this ` +
+				`marketing-site source. Either:\n` +
+				`  (a) promote the tool to 'community' / 'pro' in Editmamei (with ` +
+				`live-verification evidence per docs/20260603-tool-tier-process.md), or\n` +
+				`  (b) strip the mention from this repo until the tool is promoted.\n`
+		);
+		process.exit(1);
+	}
+
+	console.log(
+		`Leak guard OK — none of ${BLOCKED.length} blocked names found in ` +
+			`${scannedFiles} scanned files.`
 	);
-	process.exit(1);
 }
 
-console.log(`Leak guard OK — none of ${BLOCKED.length} blocked names found in site source.`);
+const isDirect =
+	process.argv[1] !== undefined && import.meta.url === pathToFileURL(process.argv[1]).href;
+if (isDirect) {
+	main();
+}

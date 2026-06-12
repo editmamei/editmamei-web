@@ -23,7 +23,11 @@
 					<li><a href="/product" class="hover:text-neutral-950">Features</a></li>
 					<li><a href="/pricing" class="hover:text-neutral-950">Pricing</a></li>
 					<li>
-						<a href="/product#changelog" class="hover:text-neutral-950">Changelog</a>
+						<a
+							href="https://github.com/editmamei/editmamei-ce/blob/main/CHANGELOG.md"
+							onclick={() => track('footer-outbound-changelog')}
+							class="hover:text-neutral-950">Changelog</a
+						>
 					</li>
 					<li><a href="/#demo" class="hover:text-neutral-950">Demo</a></li>
 				</ul>

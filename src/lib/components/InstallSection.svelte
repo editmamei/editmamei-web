@@ -40,8 +40,8 @@
 			</h2>
 			<p class="mt-3 text-base leading-relaxed text-neutral-300">
 				The first installs the package globally. The second registers Editmamei as an MCP server in
-				your Claude Desktop / Cursor / Claude Code config, and drops the Claude skill files into
-				<code class="rounded bg-[#0F2922] px-1.5 py-0.5 text-xs">~/.claude/skills/</code>.
+				your Claude Desktop / Cursor / Claude Code config, and copies the Claude skill bundle to
+				your Downloads folder, ready to upload at claude.ai &rarr; Settings &rarr; Skills.
 			</p>
 		</div>
 
