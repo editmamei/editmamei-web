@@ -24,7 +24,9 @@ const ORIGIN = 'https://editmamei.com';
 const ROUTES: Array<{ path: string; priority: string; changefreq: string }> = [
 	{ path: '/', priority: '1.0', changefreq: 'weekly' },
 	{ path: '/product', priority: '0.8', changefreq: 'weekly' },
-	{ path: '/pricing', priority: '0.8', changefreq: 'monthly' }
+	{ path: '/pricing', priority: '0.8', changefreq: 'monthly' },
+	{ path: '/faq', priority: '0.7', changefreq: 'monthly' },
+	{ path: '/contact', priority: '0.5', changefreq: 'yearly' }
 ];
 
 export const GET: RequestHandler = () => {

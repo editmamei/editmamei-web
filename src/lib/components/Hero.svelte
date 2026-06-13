@@ -49,7 +49,8 @@
 		</div>
 
 		<p class="mt-5 text-xs text-neutral-500">
-			Runs on your machine with the Photoshop you already have installed.
+			Not a web app. Not a cloud editor. Runs on your computer with the Photoshop you already have
+			installed.
 		</p>
 	</div>
 </section>

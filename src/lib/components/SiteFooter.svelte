@@ -23,6 +23,8 @@
 				<ul class="mt-3 space-y-2 text-sm text-neutral-700">
 					<li><a href="/product" class="hover:text-neutral-950">Features</a></li>
 					<li><a href="/pricing" class="hover:text-neutral-950">Pricing</a></li>
+					<li><a href="/faq" class="hover:text-neutral-950">FAQ</a></li>
+					<li><a href="/contact" class="hover:text-neutral-950">Contact</a></li>
 					<li>
 						<a
 							href="https://github.com/editmamei/editmamei-ce/blob/main/CHANGELOG.md"

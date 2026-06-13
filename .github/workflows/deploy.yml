@@ -84,6 +84,8 @@ jobs:
               "urlList": [
                 "https://editmamei.com/",
                 "https://editmamei.com/product",
-                "https://editmamei.com/pricing"
+                "https://editmamei.com/pricing",
+                "https://editmamei.com/faq",
+                "https://editmamei.com/contact"
               ]
             }'
