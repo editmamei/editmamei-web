@@ -72,20 +72,28 @@ jobs:
     needs: deploy
     runs-on: ubuntu-latest
     steps:
-      - name: Notify IndexNow
+      - name: Notify IndexNow (URL list derived from the live sitemap)
         run: |
+          set -euo pipefail
+          KEY="a4f8aefcc57e44b2992e9ff9694f520f"
+          SITEMAP="https://editmamei.com/sitemap.xml"
+          # Single source of truth: pull the just-deployed sitemap and extract its
+          # <loc> URLs. A new indexable route is pinged automatically once it's in
+          # the sitemap ROUTES array — no hand-maintained URL list here to drift.
+          # Retry a few times in case the Pages CDN hasn't propagated yet.
+          URLS=""
+          for i in 1 2 3 4 5; do
+            URLS=$(curl -sf "$SITEMAP" | sed -n 's:.*<loc>\(.*\)</loc>.*:\1:p' || true)
+            [ -n "$URLS" ] && break
+            echo "sitemap not ready (attempt $i), retrying in 10s..."; sleep 10
+          done
+          if [ -z "$URLS" ]; then echo "Could not read sitemap URLs"; exit 1; fi
+          PAYLOAD=$(printf '%s\n' "$URLS" | jq -R . | jq -s \
+            --arg host "editmamei.com" --arg key "$KEY" \
+            --arg keyLoc "https://editmamei.com/$KEY.txt" \
+            '{host: $host, key: $key, keyLocation: $keyLoc, urlList: .}')
+          echo "Submitting these URLs to IndexNow:"; printf '%s\n' "$URLS"
           curl -sf -o /dev/null -w "IndexNow status: %{http_code}\n" \
             -X POST "https://api.indexnow.org/IndexNow" \
             -H "Content-Type: application/json; charset=utf-8" \
-            -d '{
-              "host": "editmamei.com",
-              "key": "a4f8aefcc57e44b2992e9ff9694f520f",
-              "keyLocation": "https://editmamei.com/a4f8aefcc57e44b2992e9ff9694f520f.txt",
-              "urlList": [
-                "https://editmamei.com/",
-                "https://editmamei.com/product",
-                "https://editmamei.com/pricing",
-                "https://editmamei.com/faq",
-                "https://editmamei.com/contact"
-              ]
-            }'
+            -d "$PAYLOAD"
