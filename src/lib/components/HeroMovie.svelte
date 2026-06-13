@@ -58,8 +58,7 @@
 	// the dark canvas background. `displayed` catches up on the wipe's introend.
 	let activeFrame = $state<MovieFrame>(M.original);
 	let displayed = $state<MovieFrame>(M.original);
-	let cropped = $state(false); // letterbox / settle for the 16:9 crop
-	let captionVisible = $state(false);
+	let cropped = $state(false); // inset the frame to 16:9 at the final crop
 	let finished = $state(false);
 
 	// ── Autoplay pause (WCAG 2.2.2) ─────────────────────────────────────────
@@ -132,7 +131,6 @@
 		activeFrame = M.original;
 		displayed = M.original;
 		cropped = false;
-		captionVisible = false;
 		finished = false;
 		manualMode = false;
 		sceneIndex = 0;
@@ -154,7 +152,6 @@
 		activeFrame = M.cropStep.frame;
 		displayed = M.cropStep.frame;
 		cropped = true;
-		captionVisible = true;
 		finished = true;
 		sceneIndex = scenes.length - 1;
 		beat = 'done';
@@ -236,20 +233,48 @@
 
 		// Done.
 		beat = 'done';
-		captionVisible = true;
 		finished = true;
 	}
 
-	// Autoplay on mount (browser only; $effect never runs during SSR). Under
-	// reduced motion: no autoplay — snap to the static finished state. Reading
-	// reduced.current makes this re-run if the OS setting flips mid-session.
+	// Element ref + a one-shot guard so autoplay starts when the movie scrolls
+	// into view — not at page load (otherwise it's half-finished by the time the
+	// viewer arrives).
+	let rootEl = $state<HTMLElement>();
+	let hasStarted = false;
+
+	// Browser only ($effect never runs during SSR). Under reduced motion: no
+	// autoplay — snap to the static finished state immediately (it doesn't move,
+	// so it's fine before scroll). Otherwise wait for the element to enter the
+	// viewport, then play once. Reading reduced.current makes this re-run if the
+	// OS setting flips mid-session.
 	$effect(() => {
 		if (reduced.current) {
 			setFinalStatic();
-		} else {
-			play();
+			return () => {
+				runToken++;
+			};
 		}
+		const el = rootEl;
+		if (!el || typeof IntersectionObserver === 'undefined') {
+			// No ref yet or no IO support → fall back to immediate autoplay.
+			play();
+			return () => {
+				runToken++;
+			};
+		}
+		const io = new IntersectionObserver(
+			(entries) => {
+				if (entries.some((e) => e.isIntersecting) && !hasStarted) {
+					hasStarted = true;
+					play();
+					io.disconnect();
+				}
+			},
+			{ threshold: 0.3 }
+		);
+		io.observe(el);
 		return () => {
+			io.disconnect();
 			runToken++; // cancel any in-flight run on teardown
 		};
 	});
@@ -326,7 +351,6 @@
 		view = 'canvas';
 		litCount = s.litCount;
 		cropped = s.cropped;
-		captionVisible = sceneIndex === scenes.length - 1;
 		activeFrame = s.frame; // triggers the wipe over `displayed`
 	}
 	function stepPrev() {
@@ -355,6 +379,7 @@
 </script>
 
 <div
+	bind:this={rootEl}
 	class="hero-movie group/movie relative mx-auto w-full max-w-5xl"
 	data-beat={beat}
 	role="group"
@@ -420,14 +445,6 @@
 								{/key}
 							</div>
 						</div>
-						{#if captionVisible}
-							<figcaption
-								class="mt-3 text-center text-sm font-medium text-neutral-700"
-								in:fade={{ duration: crossMs }}
-							>
-								{M.caption}
-							</figcaption>
-						{/if}
 					</figure>
 
 					<!-- Layer rail -->
@@ -579,49 +596,53 @@
 
 	<!-- Controls (real, reachable buttons; the animation above is aria-hidden) -->
 	<div class="mt-4 flex flex-col items-center gap-3">
-		{#if showStepNav}
-			<!-- Step scrubber: appears when paused / finished. Walk the layer build. -->
-			<div class="flex items-center gap-2">
-				<button
-					type="button"
-					class="grid size-9 place-items-center rounded-full border border-neutral-300 bg-white text-neutral-700 shadow-sm transition-colors hover:border-neutral-400 hover:bg-neutral-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand disabled:cursor-not-allowed disabled:opacity-40"
-					aria-label="Previous step"
-					disabled={navIndex <= 0}
-					onclick={stepPrev}
-				>
-					<svg viewBox="0 0 24 24" width="18" height="18" fill="none" aria-hidden="true">
-						<path
-							d="M15 6 L9 12 L15 18"
-							stroke="currentColor"
-							stroke-width="2"
-							stroke-linecap="round"
-							stroke-linejoin="round"
-						/>
-					</svg>
-				</button>
-				<div class="min-w-[11rem] text-center text-sm">
-					<span class="font-semibold text-neutral-900">{scenes[navIndex].label}</span>
-					<span class="ml-1 text-neutral-500">({navIndex + 1}/{scenes.length})</span>
-				</div>
-				<button
-					type="button"
-					class="grid size-9 place-items-center rounded-full border border-neutral-300 bg-white text-neutral-700 shadow-sm transition-colors hover:border-neutral-400 hover:bg-neutral-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand disabled:cursor-not-allowed disabled:opacity-40"
-					aria-label="Next step"
-					disabled={navIndex >= scenes.length - 1}
-					onclick={stepNext}
-				>
-					<svg viewBox="0 0 24 24" width="18" height="18" fill="none" aria-hidden="true">
-						<path
-							d="M9 6 L15 12 L9 18"
-							stroke="currentColor"
-							stroke-width="2"
-							stroke-linecap="round"
-							stroke-linejoin="round"
-						/>
-					</svg>
-				</button>
+		<!-- Step scrubber: visible when paused / finished, walks the layer build.
+		     Always rendered (reserves its row height) so appearing or hiding never
+		     shifts the page. -->
+		<div
+			class="flex min-h-9 items-center gap-2"
+			class:invisible={!showStepNav}
+			aria-hidden={!showStepNav}
+		>
+			<button
+				type="button"
+				class="grid size-9 place-items-center rounded-full border border-neutral-300 bg-white text-neutral-700 shadow-sm transition-colors hover:border-neutral-400 hover:bg-neutral-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand disabled:cursor-not-allowed disabled:opacity-40"
+				aria-label="Previous step"
+				disabled={navIndex <= 0}
+				onclick={stepPrev}
+			>
+				<svg viewBox="0 0 24 24" width="18" height="18" fill="none" aria-hidden="true">
+					<path
+						d="M15 6 L9 12 L15 18"
+						stroke="currentColor"
+						stroke-width="2"
+						stroke-linecap="round"
+						stroke-linejoin="round"
+					/>
+				</svg>
+			</button>
+			<div class="min-w-[11rem] text-center text-sm">
+				<span class="font-semibold text-neutral-900">{scenes[navIndex].label}</span>
+				<span class="ml-1 text-neutral-500">({navIndex + 1}/{scenes.length})</span>
 			</div>
-		{/if}
+			<button
+				type="button"
+				class="grid size-9 place-items-center rounded-full border border-neutral-300 bg-white text-neutral-700 shadow-sm transition-colors hover:border-neutral-400 hover:bg-neutral-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand disabled:cursor-not-allowed disabled:opacity-40"
+				aria-label="Next step"
+				disabled={navIndex >= scenes.length - 1}
+				onclick={stepNext}
+			>
+				<svg viewBox="0 0 24 24" width="18" height="18" fill="none" aria-hidden="true">
+					<path
+						d="M9 6 L15 12 L9 18"
+						stroke="currentColor"
+						stroke-width="2"
+						stroke-linecap="round"
+						stroke-linejoin="round"
+					/>
+				</svg>
+			</button>
+		</div>
 
 		<div class="flex items-center justify-center gap-2">
 			{#if showPauseControl}
