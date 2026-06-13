@@ -15,38 +15,69 @@ export const pillars: Pillar[] = [
 	}
 ];
 
+const CITY = '/product/city-street';
+
 export const capabilities: Capability[] = [
 	{
 		title: 'Documents',
-		body: 'Open PSD, JPEG, PNG, TIFF, DNG, HEIC, and the standard raw formats; save layered PSDs; export JPEG and PNG. Camera metadata (make, model, lens, ISO, focal length, GPS) and ACR develop settings surface to the AI before it edits.'
+		body: 'Open PSD, JPEG, PNG, TIFF, DNG, HEIC, and the standard raw formats; save layered PSDs; export JPEG and PNG. Camera metadata (make, model, lens, ISO, focal length, GPS) and ACR develop settings surface to the AI before it edits.',
+		demo: { kind: 'documents', image: `${CITY}/original.jpg` }
 	},
 	{
 		title: 'Layers',
-		body: 'Create, duplicate, delete, rename, reorder, group, merge, flatten. Set opacity, blend mode, visibility, locking. The complete layer tree returns as JSON, so the AI always knows the document structure. Pro adds free layer transforms (move, scale, rotate, fit to document).'
+		body: 'Create, duplicate, delete, rename, reorder, group, merge, flatten. Set opacity, blend mode, visibility, locking. The complete layer tree returns as JSON, so the AI always knows the document structure. Pro adds free layer transforms (move, scale, rotate, fit to document).',
+		demo: { kind: 'layers', image: `${CITY}/original.jpg` }
 	},
 	{
 		title: 'Smart selections',
-		body: 'Magic Wand, plus rectangle and feather. Every selection returns area, edge complexity, and pixel counts, so the AI can verify before committing to a mask or adjustment. Pro adds Sensei-backed Select Subject and Select Sky.'
+		body: 'Magic Wand, plus rectangle and feather. Every selection returns area, edge complexity, and pixel counts, so the AI can verify before committing to a mask or adjustment. Pro adds Sensei-backed Select Subject and Select Sky.',
+		demo: { kind: 'selection', image: `${CITY}/selection-subject.jpg`, tool: 'Select Subject' }
 	},
 	{
 		title: 'Non-destructive adjustments',
-		body: 'Curves, Levels, Hue/Saturation, Brightness/Contrast as adjustment layers — editable, maskable, removable. An active selection at call time becomes the new layer’s mask automatically.'
+		body: 'Curves, Levels, Hue/Saturation, Brightness/Contrast as adjustment layers — editable, maskable, removable. An active selection at call time becomes the new layer’s mask automatically.',
+		demo: {
+			kind: 'beforeAfter',
+			before: `${CITY}/original.jpg`,
+			after: `${CITY}/adjust-after.jpg`,
+			tool: 'Hue / Saturation'
+		}
 	},
 	{
 		title: 'Filters & styles',
-		body: 'Gaussian Blur, Motion Blur, Sharpen, Smart Sharpen, Reduce Noise, High Pass, Shadows/Highlights, Add Noise. Drop shadow, stroke, outer glow as full layer styles. Auto-rasterization handles text and Smart Object inputs cleanly.'
+		body: 'Gaussian Blur, Motion Blur, Sharpen, Smart Sharpen, Reduce Noise, High Pass, Shadows/Highlights, Add Noise. Drop shadow, stroke, outer glow as full layer styles. Auto-rasterization handles text and Smart Object inputs cleanly.',
+		demo: {
+			kind: 'beforeAfter',
+			before: `${CITY}/original.jpg`,
+			after: `${CITY}/filter-after.jpg`,
+			tool: 'Gaussian Blur'
+		}
 	},
 	{
 		title: 'Masks',
-		body: 'Layer masks across the lifecycle: create from the active selection (or reveal-all), apply, delete. Discrete tools, predictable behavior.'
+		body: 'Layer masks across the lifecycle: create from the active selection (or reveal-all), apply, delete. Discrete tools, predictable behavior.',
+		demo: {
+			kind: 'mask',
+			before: `${CITY}/original.jpg`,
+			after: `${CITY}/mask-effect.jpg`,
+			maskThumb: `${CITY}/mask-thumb.jpg`,
+			tool: 'Select Sky → mask'
+		}
 	},
 	{
 		title: 'Templates',
-		body: 'A reproducible aesthetic recipe. Every edition applies, verifies, and recalls saved templates. Pro adds the authoring side — capture session evidence, render before/after previews, and save a Claude-authored description of intent and pipeline that survives between sessions.'
+		body: 'A reproducible aesthetic recipe. Every edition applies, verifies, and recalls saved templates. Pro adds the authoring side — capture session evidence, render before/after previews, and save a Claude-authored description of intent and pipeline that survives between sessions.',
+		demo: {
+			kind: 'beforeAfter',
+			before: `${CITY}/original.jpg`,
+			after: `${CITY}/template-after.jpg`,
+			tool: 'Saved recipe'
+		}
 	},
 	{
 		title: 'Visual verification',
-		body: 'Downscaled JPEG previews return inline so the AI sees what the document actually looks like and confirms operations actually changed pixels instead of trusting a success message. 256-bin per-channel histograms with mean / stdev / median back that up quantitatively.'
+		body: 'Downscaled JPEG previews return inline so the AI sees what the document actually looks like and confirms operations actually changed pixels instead of trusting a success message. 256-bin per-channel histograms with mean / stdev / median back that up quantitatively.',
+		demo: { kind: 'histogram' }
 	}
 ];
 

@@ -46,9 +46,24 @@ export interface Pillar {
 	body: string;
 }
 
+/**
+ * Per-card mini-demo descriptor for the product-page capability cards. Each
+ * card shows ONE real Photoshop tool applied to the clean City-Street original
+ * (assets under `static/product/city-street/`). Utility tools show their own
+ * authentic output (selection wash, B/W mask, histogram) rather than a result.
+ */
+export type CapabilityDemo =
+	| { kind: 'documents'; image: string }
+	| { kind: 'layers'; image: string }
+	| { kind: 'selection'; image: string; tool: string }
+	| { kind: 'beforeAfter'; before: string; after: string; tool: string }
+	| { kind: 'mask'; before: string; after: string; maskThumb: string; tool: string }
+	| { kind: 'histogram' };
+
 export interface Capability {
 	title: string;
 	body: string;
+	demo: CapabilityDemo;
 }
 
 export interface WorkflowExample {
