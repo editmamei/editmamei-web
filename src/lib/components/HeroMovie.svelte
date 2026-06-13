@@ -192,12 +192,13 @@
 		activeFrame = M.original;
 		if (!(await hold(1300))) return;
 
-		// Beat 4 — build the layers one at a time (pre check-in).
+		// Beat 4 — build the layers one at a time (pre check-in). Each layer
+		// dwells ~1s longer than the wipe so the viewer can read the change.
 		beat = 'building';
 		for (const step of M.buildSteps) {
 			litCount += 1;
 			activeFrame = step.frame;
-			if (!(await hold(1300))) return;
+			if (!(await hold(2300))) return;
 		}
 
 		// Beat 5 — the co-work check-in: surface a preview, ask a decision.
@@ -216,14 +217,14 @@
 		view = 'canvas';
 		litCount += 1;
 		activeFrame = M.resumeStep.frame;
-		if (!(await hold(1700))) return;
+		if (!(await hold(2700))) return;
 
 		// Beat 8 — remaining layers land.
 		beat = 'finishing';
 		for (const step of M.finishSteps) {
 			litCount += 1;
 			activeFrame = step.frame;
-			if (!(await hold(1200))) return;
+			if (!(await hold(2200))) return;
 		}
 
 		// Beat 8 finish — the 16:9 crop animates in.
@@ -376,10 +377,12 @@
 		class="overflow-hidden rounded-3xl border border-neutral-200 bg-white shadow-xl shadow-neutral-900/5"
 		aria-hidden="true"
 	>
-		<!-- Stage: chat-view and canvas-view stacked in one grid cell so the
-		     cell auto-sizes to the taller beat and chat↔canvas swaps never
-		     shift the page (feedback_layout_stability_grid_stack). -->
-		<div class="grid bg-gradient-to-b from-sage/40 to-paper p-4 md:p-6">
+		<!-- Stage: the canvas view defines the height (in flow); the chat view is
+		     an absolute overlay so it never grows the panel — even on mobile where
+		     the short rolling rail makes the canvas view shorter than the chat.
+		     This keeps the stage height stable across chat↔canvas swaps on every
+		     breakpoint (feedback_layout_stability_grid_stack). -->
+		<div class="relative grid bg-gradient-to-b from-sage/40 to-paper p-4 md:p-6">
 			<!-- CANVAS VIEW -->
 			<div
 				class="col-start-1 row-start-1 transition-opacity duration-500 motion-reduce:transition-none"
@@ -390,33 +393,32 @@
 				<div class="grid gap-4 md:grid-cols-[minmax(0,1fr)_220px] md:items-start">
 					<!-- Canvas -->
 					<figure class="m-0">
-						<div
-							class="canvas-stack relative aspect-[16/10] overflow-hidden rounded-2xl bg-neutral-900 shadow-inner"
-							class:cropped
-						>
-							<!-- BASE: the last fully-revealed frame, painted underneath so the
+						<div class="relative aspect-[16/10]">
+							<div
+								class="canvas-frame absolute overflow-hidden rounded-2xl bg-neutral-900 shadow-inner"
+								class:cropped
+							>
+								<!-- BASE: the last fully-revealed frame, painted underneath so the
 							     sweep never flashes the dark canvas background. -->
-							<img
-								src={displayed.src}
-								alt=""
-								class="absolute inset-0 h-full w-full object-cover"
-								style:filter={displayed.filter ?? 'none'}
-							/>
-							<!-- WIPE: each new frame sweeps in left→right over the base, then
-							     becomes the base on introend. -->
-							{#key activeFrame}
 								<img
-									src={activeFrame.src}
+									src={displayed.src}
 									alt=""
 									class="absolute inset-0 h-full w-full object-cover"
-									style:filter={activeFrame.filter ?? 'none'}
-									in:wipe={{ duration: wipeMs }}
-									onintroend={() => (displayed = activeFrame)}
+									style:filter={displayed.filter ?? 'none'}
 								/>
-							{/key}
-							<!-- Letterbox bars that slide in to dramatize the 16:9 crop -->
-							<span class="crop-bar crop-bar-top"></span>
-							<span class="crop-bar crop-bar-bottom"></span>
+								<!-- WIPE: each new frame sweeps in left→right over the base, then
+							     becomes the base on introend. -->
+								{#key activeFrame}
+									<img
+										src={activeFrame.src}
+										alt=""
+										class="absolute inset-0 h-full w-full object-cover"
+										style:filter={activeFrame.filter ?? 'none'}
+										in:wipe={{ duration: wipeMs }}
+										onintroend={() => (displayed = activeFrame)}
+									/>
+								{/key}
+							</div>
 						</div>
 						{#if captionVisible}
 							<figcaption
@@ -509,14 +511,15 @@
 				</div>
 			</div>
 
-			<!-- CHAT VIEW -->
+			<!-- CHAT VIEW — absolute overlay (does not contribute to the cell height,
+			     so the canvas view alone drives the stable panel height). -->
 			<div
-				class="col-start-1 row-start-1 transition-opacity duration-500 motion-reduce:transition-none"
+				class="absolute inset-0 overflow-y-auto p-4 transition-opacity duration-500 motion-reduce:transition-none md:p-6"
 				class:opacity-0={view !== 'chat'}
 				class:opacity-100={view === 'chat'}
 				inert={view !== 'chat'}
 			>
-				<div class="mx-auto flex min-h-full max-w-2xl flex-col justify-center gap-3 py-6">
+				<div class="mx-auto flex h-full max-w-2xl flex-col justify-center gap-3">
 					{#each messages as m, i (i)}
 						<div class="flex" class:justify-end={m.role === 'user'}>
 							<div
@@ -704,32 +707,18 @@
 		animation: blink 1s steps(2, end) infinite;
 	}
 
-	/* Letterbox bars: hidden until the crop beat, then slide in. */
-	.crop-bar {
-		position: absolute;
-		left: 0;
-		right: 0;
-		height: 5%;
-		background: #0a0a0a;
-		transform: scaleY(0);
-		transition: transform 700ms ease;
+	/* The photo frame fills the 16:10 outer box during the movie, then insets
+	   top/bottom to 16:9 at the final crop — revealing the warm stage background
+	   above and below instead of black letterbox bars. */
+	.canvas-frame {
+		inset: 0;
+		transition:
+			top 700ms ease,
+			bottom 700ms ease;
 	}
-	.crop-bar-top {
-		top: 0;
-		transform-origin: top;
-	}
-	.crop-bar-bottom {
-		bottom: 0;
-		transform-origin: bottom;
-	}
-	.canvas-stack.cropped .crop-bar {
-		transform: scaleY(1);
-	}
-	.canvas-stack {
-		transition: transform 700ms ease;
-	}
-	.canvas-stack.cropped {
-		transform: scale(1.01);
+	.canvas-frame.cropped {
+		top: 5%;
+		bottom: 5%;
 	}
 
 	@keyframes blink {
@@ -748,8 +737,7 @@
 			animation: none;
 			opacity: 1;
 		}
-		.crop-bar,
-		.canvas-stack {
+		.canvas-frame {
 			transition: none;
 		}
 	}
