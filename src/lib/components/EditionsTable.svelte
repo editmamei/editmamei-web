@@ -69,7 +69,7 @@
 								{#if row.community}
 									<span aria-label="Included in Community" class="text-emerald-600">✓</span>
 								{:else}
-									<span aria-hidden="true" class="text-neutral-300">·</span>
+									<span aria-hidden="true" class="text-neutral-400">—</span>
 									<span class="sr-only">Not in Community</span>
 								{/if}
 							</td>
@@ -77,7 +77,7 @@
 								{#if row.pro}
 									<span aria-label="Included in Pro" class="text-emerald-600">✓</span>
 								{:else}
-									<span aria-hidden="true" class="text-neutral-300">·</span>
+									<span aria-hidden="true" class="text-neutral-400">—</span>
 									<span class="sr-only">Not in Pro</span>
 								{/if}
 							</td>

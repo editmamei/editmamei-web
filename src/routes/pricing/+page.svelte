@@ -93,3 +93,27 @@
 		</p>
 	</div>
 </section>
+
+<section class="bg-neutral-50 py-16 md:py-20">
+	<div class="mx-auto max-w-3xl px-4 text-center">
+		<h2 class="text-2xl font-bold tracking-tight text-neutral-950 md:text-3xl">
+			Start with Community — it's free.
+		</h2>
+		<p class="mx-auto mt-4 max-w-xl text-base leading-relaxed text-neutral-700">
+			Install from npm and start editing today. Pro pricing lands with the v1.0 launch — watch
+			<a
+				href="https://github.com/editmamei/editmamei-ce"
+				class="font-medium text-[#143731] underline underline-offset-2 hover:text-[#1f4d44]"
+				>the repo</a
+			> for the announcement.
+		</p>
+		<div class="mt-8">
+			<a
+				href="/#install"
+				class="inline-flex items-center justify-center rounded-md bg-[#143731] px-5 py-3 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-[#1f4d44]"
+			>
+				Get Community free
+			</a>
+		</div>
+	</div>
+</section>
