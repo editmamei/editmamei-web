@@ -183,10 +183,11 @@
 		messages = [...messages, { role: 'ai', text: M.aiAck }];
 		if (!(await hold(1900))) return;
 
-		// Beat 3 — transition to canvas, reveal the original.
+		// Beat 3 — transition to canvas, reveal the original (scene 1).
 		beat = 'reveal';
 		view = 'canvas';
 		activeFrame = M.original;
+		sceneIndex = 1;
 		if (!(await hold(1300))) return;
 
 		// Beat 4 — build the layers one at a time (pre check-in). Each layer
@@ -194,13 +195,15 @@
 		beat = 'building';
 		for (const step of M.buildSteps) {
 			litCount += 1;
+			sceneIndex = 1 + litCount; // scenes 2..5
 			activeFrame = step.frame;
 			if (!(await hold(2300))) return;
 		}
 
-		// Beat 5 — the co-work check-in: surface a preview, ask a decision.
+		// Beat 5 — the co-work check-in: surface a preview, ask a decision (scene 6).
 		beat = 'checkin';
 		view = 'chat';
+		sceneIndex = 6;
 		messages = [...messages, { role: 'ai', text: M.checkin.question, thumb: M.checkin.coolFrame }];
 		if (!(await hold(2600))) return;
 
@@ -209,10 +212,11 @@
 		messages = [...messages, { role: 'user', text: M.checkin.userReply }];
 		if (!(await hold(1700))) return;
 
-		// Beat 7 — resume: the rock warms in response to the decision.
+		// Beat 7 — resume: the headland warms in response to the decision (scene 7).
 		beat = 'resume';
 		view = 'canvas';
 		litCount += 1;
+		sceneIndex = 7;
 		activeFrame = M.resumeStep.frame;
 		if (!(await hold(2700))) return;
 
@@ -220,13 +224,15 @@
 		beat = 'finishing';
 		for (const step of M.finishSteps) {
 			litCount += 1;
+			sceneIndex = litCount + 2; // scenes 8..10
 			activeFrame = step.frame;
 			if (!(await hold(2200))) return;
 		}
 
-		// Beat 8 finish — the 16:9 crop animates in.
+		// Beat 8 finish — the 16:9 crop animates in (scene 11).
 		beat = 'crop';
 		litCount += 1;
+		sceneIndex = 11;
 		activeFrame = M.cropStep.frame;
 		cropped = true;
 		if (!(await hold(1800))) return;
@@ -301,34 +307,93 @@
 
 	const activeIndex = $derived(litCount - 1);
 
-	// ── Step navigation (canvas scenes) ─────────────────────────────────────
-	// When paused, the viewer can scrub the layer build with prev/next. Each
-	// "scene" is a canvas state: the original plus one per rail layer, in
-	// narrative order, so scene index === litCount at that step.
-	const scenes: { label: string; litCount: number; frame: MovieFrame; cropped: boolean }[] = [
-		{ label: 'Original', litCount: 0, frame: M.original, cropped: false },
+	// ── Step navigation (scenes) ────────────────────────────────────────────
+	// When paused/finished the viewer can scrub the whole story with prev/next:
+	// the opening chat, each layer, the mid-edit check-in chat, and the crop.
+	type Scene = {
+		label: string;
+		view: 'chat' | 'canvas';
+		messages: Bubble[];
+		litCount: number;
+		frame: MovieFrame;
+		cropped: boolean;
+	};
+	const introMessages: Bubble[] = [
+		{ role: 'user', text: M.prompt },
+		{ role: 'ai', text: M.aiAck }
+	];
+	const checkinMessages: Bubble[] = [
+		...introMessages,
+		{ role: 'ai', text: M.checkin.question, thumb: M.checkin.coolFrame },
+		{ role: 'user', text: M.checkin.userReply }
+	];
+	const scenes: Scene[] = [
+		// The opening request and the mid-edit check-in are first-class scenes so
+		// the scrubber never lands on a bare photo with no context.
+		{
+			label: 'The request',
+			view: 'chat',
+			messages: introMessages,
+			litCount: 0,
+			frame: M.original,
+			cropped: false
+		},
+		{
+			label: 'Original',
+			view: 'canvas',
+			messages: [],
+			litCount: 0,
+			frame: M.original,
+			cropped: false
+		},
 		...M.buildSteps.map((s, i) => ({
 			label: s.name,
+			view: 'canvas' as const,
+			messages: [] as Bubble[],
 			litCount: i + 1,
 			frame: s.frame,
 			cropped: false
 		})),
-		{ label: M.resumeStep.name, litCount: 5, frame: M.resumeStep.frame, cropped: false },
+		{
+			label: 'Your check-in',
+			view: 'chat',
+			messages: checkinMessages,
+			litCount: 4,
+			frame: M.checkin.coolFrame,
+			cropped: false
+		},
+		{
+			label: M.resumeStep.name,
+			view: 'canvas',
+			messages: [],
+			litCount: 5,
+			frame: M.resumeStep.frame,
+			cropped: false
+		},
 		...M.finishSteps.map((s, i) => ({
 			label: s.name,
+			view: 'canvas' as const,
+			messages: [] as Bubble[],
 			litCount: 6 + i,
 			frame: s.frame,
 			cropped: false
 		})),
-		{ label: M.cropStep.name, litCount: 9, frame: M.cropStep.frame, cropped: true }
+		{
+			label: M.cropStep.name,
+			view: 'canvas',
+			messages: [],
+			litCount: 9,
+			frame: M.cropStep.frame,
+			cropped: true
+		}
 	];
 	let sceneIndex = $state(0);
 	let manualMode = $state(false);
 
 	const clampScene = (i: number) => Math.min(Math.max(i, 0), scenes.length - 1);
-	// While auto-playing, the nav counter tracks the live position (litCount);
-	// once scrubbing, it follows sceneIndex.
-	const navIndex = $derived(manualMode ? sceneIndex : clampScene(litCount));
+	// sceneIndex tracks the live position during autoplay (set per beat in play)
+	// and the scrubbed position in manual mode, so the counter is always correct.
+	const navIndex = $derived(clampScene(sceneIndex));
 
 	// Pause/play toggles the autoplay clock; only meaningful while auto-playing.
 	const showPauseControl = $derived(!manualMode && !finished && !reduced.current);
@@ -342,24 +407,26 @@
 		manualMode = true;
 		manualPaused = true;
 		finished = false;
-		sceneIndex = navIndex;
 	}
 	function gotoScene(i: number) {
 		enterManual();
-		const s = scenes[clampScene(i)];
-		sceneIndex = clampScene(i);
-		view = 'canvas';
+		const idx = clampScene(i);
+		sceneIndex = idx;
+		const s = scenes[idx];
+		view = s.view;
+		messages = s.messages;
+		showInput = false; // scrubbed scenes are stills, not the live typewriter
 		litCount = s.litCount;
 		cropped = s.cropped;
-		activeFrame = s.frame; // triggers the wipe over `displayed`
+		activeFrame = s.frame; // triggers the wipe over `displayed` (canvas scenes)
 	}
 	function stepPrev() {
 		track('hero-movie-step');
-		gotoScene((manualMode ? sceneIndex : navIndex) - 1);
+		gotoScene(sceneIndex - 1);
 	}
 	function stepNext() {
 		track('hero-movie-step');
-		gotoScene((manualMode ? sceneIndex : navIndex) + 1);
+		gotoScene(sceneIndex + 1);
 	}
 
 	// Mobile rolling-ticker geometry (rem). Must match the .rail-window / .rail-row
