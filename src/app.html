@@ -10,6 +10,15 @@
 		<link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32.png" />
 		<link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png" />
 
+		<!-- Preload the primary (latin) brand-font subset to avoid a flash on the hero. -->
+		<link
+			rel="preload"
+			href="/fonts/bricolage-grotesque-latin.woff2"
+			as="font"
+			type="font/woff2"
+			crossorigin
+		/>
+
 		<!--
 			Title, description, canonical, and og:/twitter: tags deliberately do
 			NOT live in this shared shell — each page renders <Seo> with its own

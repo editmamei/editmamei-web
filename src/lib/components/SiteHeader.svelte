@@ -29,7 +29,7 @@
 	<div class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3">
 		<a
 			href="/"
-			class="flex items-center gap-2.5 font-semibold tracking-tight text-neutral-900"
+			class="flex items-center gap-2.5 font-bold tracking-tight text-neutral-900"
 			aria-label="Editmamei — home"
 		>
 			<img src="/icons/icon-64.png" alt="" width="32" height="32" class="size-8 shrink-0" />
