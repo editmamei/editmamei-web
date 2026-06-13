@@ -96,7 +96,7 @@
 			</div>
 		</div>
 
-		<div class="grid gap-8 md:grid-cols-[1fr_360px] md:items-start lg:grid-cols-[1fr_400px]">
+		<div class="grid gap-8 md:grid-cols-[1fr_420px] md:items-start lg:grid-cols-[1fr_480px]">
 			<div>
 				<div class="grid">
 					{#each demoExamples as { demo }, i (i)}
@@ -123,21 +123,23 @@
 			</div>
 
 			<aside>
-				<p class="mb-2 text-xs font-semibold tracking-wider text-neutral-500 uppercase">
-					Layer stack — built non-destructively
-				</p>
-				<div class="grid">
-					{#each demoExamples as { demo }, i (i)}
-						<div
-							class="col-start-1 row-start-1 transition-opacity duration-500 motion-reduce:transition-none"
-							class:opacity-0={i !== demoIndex}
-							class:opacity-100={i === demoIndex}
-							aria-hidden={i !== demoIndex}
-							inert={i !== demoIndex}
-						>
-							<LayerAccordion layers={demo.layers} />
-						</div>
-					{/each}
+				<div class="rounded-2xl border border-neutral-200 bg-white p-4 shadow-lg md:p-5">
+					<p class="mb-3 text-xs font-semibold tracking-wider text-terracotta-ink uppercase">
+						Layer stack — built non-destructively
+					</p>
+					<div class="grid">
+						{#each demoExamples as { demo }, i (i)}
+							<div
+								class="col-start-1 row-start-1 transition-opacity duration-500 motion-reduce:transition-none"
+								class:opacity-0={i !== demoIndex}
+								class:opacity-100={i === demoIndex}
+								aria-hidden={i !== demoIndex}
+								inert={i !== demoIndex}
+							>
+								<LayerAccordion layers={demo.layers} />
+							</div>
+						{/each}
+					</div>
 				</div>
 				<p class="mt-4 text-xs leading-relaxed text-neutral-500">
 					Every layer above is editable, maskable, removable. Saved as a template (a Pro feature),
