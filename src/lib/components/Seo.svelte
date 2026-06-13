@@ -9,16 +9,20 @@
 	let {
 		title,
 		description,
-		path
+		path,
+		image = '/og-image.png'
 	}: {
 		title: string;
 		description: string;
 		/** Route path starting with '/', e.g. '/pricing'. */
 		path: string;
+		/** Root-relative social-share image; defaults to the site-wide card. */
+		image?: string;
 	} = $props();
 
 	const ORIGIN = 'https://editmamei.com';
 	const url = $derived(path === '/' ? `${ORIGIN}/` : `${ORIGIN}${path}`);
+	const imageUrl = $derived(`${ORIGIN}${image}`);
 </script>
 
 <svelte:head>
@@ -31,8 +35,16 @@
 	<meta property="og:type" content="website" />
 	<meta property="og:url" content={url} />
 	<meta property="og:site_name" content="Editmamei" />
+	<meta property="og:image" content={imageUrl} />
+	<meta property="og:image:width" content="1200" />
+	<meta property="og:image:height" content="630" />
+	<meta
+		property="og:image:alt"
+		content="Editmamei — Unlock Photoshop with natural-language photo editing"
+	/>
 
 	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:title" content={title} />
 	<meta name="twitter:description" content={description} />
+	<meta name="twitter:image" content={imageUrl} />
 </svelte:head>
