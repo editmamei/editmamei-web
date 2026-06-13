@@ -26,6 +26,25 @@ Deep **evergreen** primary with a **warm neutral ladder** (white → paper → c
 
 **Applied rotation (2026-06-13):** home demo → paper; How-It-Works → cream; editions → sage; Install → evergreen; hero/key sections → white; footer → paper. Marketing section eyebrows → `terracotta-ink`. Secondary/sub-labels, table headers, and stub/utility pages stay neutral.
 
+### Usage rules
+
+- **Surfaces per section, not everywhere.** Alternate to create rhythm (white → paper → cream → sage → evergreen). White still anchors the hero and the most important/airy sections. Don't paint the whole page one color.
+- **One accent leads per section.** Terracotta on light sections; lime cream only on evergreen. Never stack multiple accents in one section.
+- **Lime cream (`accent`) is dark-only.** `#ceff8c` on white/paper/cream is illegible — reserve it for evergreen surfaces.
+- **Ochre is benched.** It's defined for future use (a luxe accent); don't introduce it without a clear, single purpose.
+- **Inner cards on a warm/sage section** lift to `paper` (or `white`), not `neutral-50` — a cool gray card on a warm field reads muddy.
+- **Tokens are the source of truth.** Edit colors in `layout.css` `@theme` and use the generated utilities (`bg-cream`, `text-terracotta-ink`, `outline-brand`, …) or `var(--color-*)` in component `<style>`. Never hardcode hexes in components (the centralization removed them all).
+
+### Accessibility
+
+- **Eyebrow / label TEXT uses `terracotta-ink` (`#a8512f`), not `terracotta` (`#cc785c`).** The brand terracotta is only ~3:1 on white/paper/cream — below WCAG AA for small text. The deeper clay clears AA (~5:1). Use `terracotta` only for fills, chips, and the AI spark (non-text).
+- Body text stays `neutral-700/800` on light surfaces and `neutral-200/300` on evergreen — both well above AA.
+- When adding a new colored surface, re-check text contrast on it before shipping.
+
+## Typography (locked 2026-06-13)
+
+**Bricolage Grotesque** is the single site-wide typeface — headings, body, and the "Editmamei" wordmark — set via `--font-sans` in `layout.css`. Self-hosted variable woff2 (weight 200–800, `font-optical-sizing: auto` so small text and display headings each get the right optical grade) in `static/fonts/` (latin + latin-ext subsets), preloaded in `app.html`. **No Google Fonts request** — the static GitHub Pages build stays self-contained. Chosen for playful-but-readable character; a custom layered icon + logotype (matching the engraved/extruded E mark) is a separate maintainer-owned Photoshop effort, not a font.
+
 ## Legacy notes (pre-2026-06-13, may be partially superseded)
 
 The pre-evergreen system used neutral grays, an emerald accent for "you"/brand presence, sky-blue for AI/cloud context, and two semantic chips for prompt voice. Some of these (emerald/sky actor pills in `HowItWorks`, amber/indigo prompt-voice chips) still exist and are not yet reconciled into the token table above.
@@ -73,6 +92,6 @@ Five paired palettes from a 2026-06-01 reference set. None are committed; they'r
 
 ## Decision rule
 
-Don't introduce a new accent color without a reason. Emerald + sky are doing real semantic work (you / AI · brand / cloud). Any new color from this list should either (a) replace one of those because the current choice isn't pulling its weight, or (b) earn its own semantic slot (e.g., a "Pro tier" accent distinct from CE).
+Don't introduce a new accent color without a reason. The canonical token set above (evergreen + warm neutral ladder + terracotta/celadon/lime/ochre) is intentionally small. Any proposed new color should either (a) replace an existing token that isn't pulling its weight, or (b) earn its own clear semantic slot (e.g., a "Pro tier" accent distinct from CE). Surface/cosmetic swaps within the existing ladder are low-risk; new hues are not.
 
-Cosmetic swaps (warmer dark, warmer off-white) are lower risk and can land without semantic rework.
+The candidate palettes below remain stashed for specific future surfaces (a templates gallery, a testimonials section, etc.) — pull from them rather than inventing new hues.
