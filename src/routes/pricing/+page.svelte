@@ -11,7 +11,7 @@
 
 <section class="bg-white pt-12 pb-4 md:pt-16 md:pb-6">
 	<div class="mx-auto max-w-5xl px-4">
-		<p class="mb-2 text-xs font-semibold tracking-wider text-neutral-500 uppercase">Pricing</p>
+		<p class="mb-2 text-xs font-semibold tracking-wider text-terracotta-ink uppercase">Pricing</p>
 		<h1 class="text-3xl font-bold tracking-tight text-neutral-950 md:text-4xl">
 			Free Community. Paid Pro for production work.
 		</h1>
@@ -26,9 +26,9 @@
 
 <EditionsTable />
 
-<section class="bg-white py-16 md:py-20">
+<section class="bg-cream py-16 md:py-20">
 	<div class="mx-auto max-w-3xl px-4">
-		<p class="mb-2 text-xs font-semibold tracking-wider text-neutral-500 uppercase">
+		<p class="mb-2 text-xs font-semibold tracking-wider text-terracotta-ink uppercase">
 			Community vs Pro
 		</p>
 		<h2 class="text-2xl font-bold tracking-tight text-neutral-950 md:text-3xl">
@@ -45,7 +45,7 @@
 		</p>
 
 		<ul class="mt-6 space-y-5">
-			<li class="rounded-xl border border-neutral-200 bg-neutral-50/60 p-5">
+			<li class="rounded-xl border border-neutral-200 bg-paper p-5">
 				<h3 class="text-base font-semibold tracking-tight text-neutral-950">Template authoring</h3>
 				<p class="mt-2 text-sm leading-relaxed text-neutral-700">
 					Save the current edit as a reproducible recipe and apply it to new images later. Community
@@ -53,7 +53,7 @@
 					side. This is the feature that turns a one-off look into a repeatable house style.
 				</p>
 			</li>
-			<li class="rounded-xl border border-neutral-200 bg-neutral-50/60 p-5">
+			<li class="rounded-xl border border-neutral-200 bg-paper p-5">
 				<h3 class="text-base font-semibold tracking-tight text-neutral-950">
 					Sensei-backed selections
 				</h3>
@@ -64,7 +64,7 @@
 					nudging the selection by hand.
 				</p>
 			</li>
-			<li class="rounded-xl border border-neutral-200 bg-neutral-50/60 p-5">
+			<li class="rounded-xl border border-neutral-200 bg-paper p-5">
 				<h3 class="text-base font-semibold tracking-tight text-neutral-950">
 					Content-aware retouch
 				</h3>
@@ -74,7 +74,7 @@
 					beyond what adjustment layers can do.
 				</p>
 			</li>
-			<li class="rounded-xl border border-neutral-200 bg-neutral-50/60 p-5">
+			<li class="rounded-xl border border-neutral-200 bg-paper p-5">
 				<h3 class="text-base font-semibold tracking-tight text-neutral-950">
 					Actions, scripting & layer transforms
 				</h3>
@@ -94,7 +94,7 @@
 	</div>
 </section>
 
-<section class="bg-neutral-50 py-16 md:py-20">
+<section class="bg-paper py-16 md:py-20">
 	<div class="mx-auto max-w-3xl px-4 text-center">
 		<h2 class="text-2xl font-bold tracking-tight text-neutral-950 md:text-3xl">
 			Start with Community — it's free.

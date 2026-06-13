@@ -5,7 +5,9 @@
 <section class="bg-white py-16 md:py-20">
 	<div class="mx-auto max-w-6xl px-4">
 		<div class="mb-10 max-w-2xl">
-			<p class="mb-2 text-xs font-semibold tracking-wider text-neutral-500 uppercase">What it is</p>
+			<p class="mb-2 text-xs font-semibold tracking-wider text-terracotta-ink uppercase">
+				What it is
+			</p>
 			<h2 class="text-2xl font-bold tracking-tight text-neutral-950 md:text-3xl">
 				Photoshop, but the AI does the menus.
 			</h2>

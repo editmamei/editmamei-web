@@ -133,10 +133,10 @@
 	});
 </script>
 
-<section bind:this={sectionEl} id="how-it-works" class="bg-white py-16 md:py-20">
+<section bind:this={sectionEl} id="how-it-works" class="bg-cream py-16 md:py-20">
 	<div class="mx-auto max-w-5xl px-4">
 		<header class="mb-10 max-w-2xl">
-			<p class="mb-2 text-xs font-semibold tracking-wider text-neutral-500 uppercase">
+			<p class="mb-2 text-xs font-semibold tracking-wider text-terracotta-ink uppercase">
 				How it works
 			</p>
 			<h2 class="text-2xl font-bold tracking-tight text-neutral-950 md:text-3xl">
@@ -290,7 +290,7 @@
 		</div>
 
 		<!-- "Your files, your machine" subsection — privacy folded in -->
-		<div class="rounded-2xl border border-neutral-200 bg-neutral-50/60 p-6 md:p-8">
+		<div class="rounded-2xl border border-neutral-200 bg-paper p-6 md:p-8">
 			<h3 class="text-base font-semibold tracking-tight text-neutral-950">
 				Your files, your machine.
 			</h3>

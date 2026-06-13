@@ -22,10 +22,12 @@
 	});
 </script>
 
-<section bind:this={sectionEl} id="editions" class="bg-neutral-50 py-16 md:py-20">
+<section bind:this={sectionEl} id="editions" class="bg-sage py-16 md:py-20">
 	<div class="mx-auto max-w-5xl px-4">
 		<div class="mb-10 max-w-2xl">
-			<p class="mb-2 text-xs font-semibold tracking-wider text-neutral-500 uppercase">Editions</p>
+			<p class="mb-2 text-xs font-semibold tracking-wider text-terracotta-ink uppercase">
+				Editions
+			</p>
 			<h2 class="text-2xl font-bold tracking-tight text-neutral-950 md:text-3xl">
 				Community covers the everyday editing surface. Pro adds the production toolkit.
 			</h2>

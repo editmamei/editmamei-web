@@ -48,4 +48,15 @@
 	--color-prompt: #faf9f5; /* warm prompt-card surface (the "Claude box") */
 	--color-prompt-border: #e8e3d4; /* warm prompt-card border */
 	--color-spark: #cc785c; /* terracotta — AI sparkle / thinking indicator */
+
+	/* Section surfaces — warm neutral ladder + tonal green (use per section, not everywhere) */
+	--color-paper: #faf8f3; /* barely off-white — quiet workhorse surface */
+	--color-cream: #f7f3ea; /* clearly warm — organic/editorial surface */
+	--color-sage: #e4eddd; /* light tonal green — comparison/editions surface */
+
+	/* Accents (sparing) */
+	--color-celadon: #a8d3a8; /* soft green — shapes/dividers/illustration */
+	--color-terracotta: #cc785c; /* warm accent — fills / chips (same as spark) */
+	--color-terracotta-ink: #a8512f; /* deeper clay — accessible terracotta TEXT (eyebrows) */
+	--color-ochre: #cda349; /* luxe gold accent — use sparingly */
 }

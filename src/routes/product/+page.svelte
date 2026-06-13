@@ -15,7 +15,7 @@
 
 <section class="bg-white pt-12 pb-4 md:pt-16 md:pb-6">
 	<div class="mx-auto max-w-6xl px-4">
-		<p class="mb-2 text-xs font-semibold tracking-wider text-neutral-500 uppercase">Product</p>
+		<p class="mb-2 text-xs font-semibold tracking-wider text-terracotta-ink uppercase">Product</p>
 		<h1 class="text-3xl font-bold tracking-tight text-neutral-950 md:text-4xl">
 			The full editing surface.
 		</h1>

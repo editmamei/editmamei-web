@@ -1,9 +1,9 @@
 <script lang="ts"></script>
 
-<section class="bg-neutral-50 py-16 md:py-20">
+<section class="bg-cream py-16 md:py-20">
 	<div class="mx-auto max-w-6xl px-4">
 		<div class="mb-10 max-w-2xl">
-			<p class="mb-2 text-xs font-semibold tracking-wider text-neutral-500 uppercase">
+			<p class="mb-2 text-xs font-semibold tracking-wider text-terracotta-ink uppercase">
 				One photo or a hundred?
 			</p>
 			<h2 class="text-2xl font-bold tracking-tight text-neutral-950 md:text-3xl">

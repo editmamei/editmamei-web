@@ -47,7 +47,7 @@
 
 <Hero />
 
-<section id="demo" class="border-y border-neutral-200 bg-neutral-50 py-16 md:py-20">
+<section id="demo" class="border-y border-neutral-200 bg-paper py-16 md:py-20">
 	<div class="mx-auto max-w-6xl px-4">
 		<div
 			role="group"
@@ -73,7 +73,7 @@
 						aria-hidden={i !== demoIndex}
 						inert={i !== demoIndex}
 					>
-						<p class="mb-2 text-xs font-semibold tracking-wider text-neutral-500 uppercase">
+						<p class="mb-2 text-xs font-semibold tracking-wider text-terracotta-ink uppercase">
 							The demo · {demo.title}
 						</p>
 						<h2 class="text-2xl font-bold tracking-tight text-neutral-950 md:text-3xl">

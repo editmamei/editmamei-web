@@ -1,10 +1,34 @@
 # Editmamei palette
 
-Reference for the colors currently in use on editmamei.com, plus saved candidate palettes that could fit specific surfaces if we ever refresh.
+Reference for the colors in use on editmamei.com, plus saved candidate palettes that could fit specific surfaces if we ever refresh.
 
-## Current palette (in production)
+## Canonical brand tokens (source of truth: `src/routes/layout.css` `@theme`, locked 2026-06-13)
 
-Intentionally restrained: neutral grays for surfaces and text, an emerald accent for "you" and brand presence, sky-blue for AI/cloud context, and two semantic chips for prompt voice.
+Deep **evergreen** primary with a **warm neutral ladder** (white → paper → cream → sage) and a small set of accents. The warmth is the differentiation lever — the competitor set (MATE, Topaz, Adobe, Luminar, ON1, Nik) is uniformly cold/corporate. Use surfaces **per section, not everywhere**; lead with **one** accent per section.
+
+| Token (utility)            | Hex                   | Role                                                                                     |
+| -------------------------- | --------------------- | ---------------------------------------------------------------------------------------- |
+| `brand`                    | `#143731`             | Evergreen — primary surface/text                                                         |
+| `brand-light`              | `#1f4d44`             | lighter evergreen — hover, borders/dividers                                              |
+| `brand-deep`               | `#0f2922`             | darker evergreen — inner dark surfaces                                                   |
+| `paper`                    | `#faf8f3`             | barely off-white — quiet workhorse section surface                                       |
+| `cream`                    | `#f7f3ea`             | clearly warm — organic/editorial section surface                                         |
+| `sage`                     | `#e4eddd`             | light tonal green — comparison/editions section surface                                  |
+| `accent`                   | `#ceff8c`             | Lime cream — pop on dark (evergreen) surfaces only                                       |
+| `celadon`                  | `#a8d3a8`             | soft green — shapes/dividers/illustration                                                |
+| `terracotta`               | `#cc785c`             | warm accent — fills/chips/the AI spark                                                   |
+| `terracotta-ink`           | `#a8512f`             | deeper clay — **accessible terracotta TEXT** (eyebrows); `#cc785c` is only ~3:1 on light |
+| `ochre`                    | `#cda349`             | luxe gold accent — token defined, **benched** until a clear spot                         |
+| `prompt` / `prompt-border` | `#faf9f5` / `#e8e3d4` | warm "Claude box" prompt card                                                            |
+| `spark`                    | `#cc785c`             | AI sparkle / thinking dot (= terracotta)                                                 |
+
+**Color theory:** `#143731` ≈ HSL(170°, 47%, 15%) — a deep teal-evergreen. Terracotta is its warm complement (opposite hue); cream/paper are warm neutrals that keep evergreen from reading clinical; sage/celadon/lime are analogous greens; ochre is the split-complement (green + gold = classic luxe).
+
+**Applied rotation (2026-06-13):** home demo → paper; How-It-Works → cream; editions → sage; Install → evergreen; hero/key sections → white; footer → paper. Marketing section eyebrows → `terracotta-ink`. Secondary/sub-labels, table headers, and stub/utility pages stay neutral.
+
+## Legacy notes (pre-2026-06-13, may be partially superseded)
+
+The pre-evergreen system used neutral grays, an emerald accent for "you"/brand presence, sky-blue for AI/cloud context, and two semantic chips for prompt voice. Some of these (emerald/sky actor pills in `HowItWorks`, amber/indigo prompt-voice chips) still exist and are not yet reconciled into the token table above.
 
 ### Surfaces
 
