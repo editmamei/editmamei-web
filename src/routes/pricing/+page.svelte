@@ -103,14 +103,14 @@
 			Install from npm and start editing today. Pro pricing lands with the v1.0 launch — watch
 			<a
 				href="https://github.com/editmamei/editmamei-ce"
-				class="font-medium text-[#143731] underline underline-offset-2 hover:text-[#1f4d44]"
+				class="font-medium text-brand underline underline-offset-2 hover:text-brand-light"
 				>the repo</a
 			> for the announcement.
 		</p>
 		<div class="mt-8">
 			<a
 				href="/#install"
-				class="inline-flex items-center justify-center rounded-md bg-[#143731] px-5 py-3 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-[#1f4d44]"
+				class="inline-flex items-center justify-center rounded-md bg-brand px-5 py-3 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-brand-light"
 			>
 				Get Community free
 			</a>

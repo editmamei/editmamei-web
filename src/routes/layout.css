@@ -1,2 +1,19 @@
 @import 'tailwindcss';
 @plugin '@tailwindcss/typography';
+
+/*
+ * Brand color tokens — single source of truth (centralized 2026-06-13).
+ * Tailwind v4 turns each --color-* into utilities (bg-brand, text-accent,
+ * border-brand-light, outline-brand, …) AND exposes them as :root CSS vars
+ * for use in component <style> blocks via var(--color-*).
+ * Palette reference: design/palette.md.
+ */
+@theme {
+	--color-brand: #143731; /* Evergreen — primary brand surface / text */
+	--color-brand-light: #1f4d44; /* lighter evergreen — button hover, borders/dividers */
+	--color-brand-deep: #0f2922; /* darker evergreen — inner dark surfaces */
+	--color-accent: #ceff8c; /* Lime Cream — accent text on dark surfaces */
+	--color-prompt: #faf9f5; /* warm prompt-card surface (the "Claude box") */
+	--color-prompt-border: #e8e3d4; /* warm prompt-card border */
+	--color-spark: #cc785c; /* terracotta — AI sparkle / thinking indicator */
+}

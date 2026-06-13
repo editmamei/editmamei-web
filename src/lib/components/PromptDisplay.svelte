@@ -169,7 +169,7 @@
 					>
 						<div class="flex items-start gap-3">
 							<svg
-								class="mt-0.5 shrink-0"
+								class="mt-0.5 shrink-0 text-spark"
 								viewBox="0 0 24 24"
 								width="20"
 								height="20"
@@ -177,7 +177,7 @@
 							>
 								<path
 									d="M12 2 L13.6 9.8 L21.5 12 L13.6 14.2 L12 22 L10.4 14.2 L2.5 12 L10.4 9.8 Z"
-									fill="#cc785c"
+									fill="currentColor"
 								/>
 							</svg>
 							<p class="text-base leading-relaxed text-neutral-800">
@@ -201,7 +201,7 @@
 	<div class="mt-3 flex items-center justify-center gap-1">
 		<button
 			type="button"
-			class="grid size-11 place-items-center rounded-full border border-neutral-300 bg-white text-neutral-700 shadow-sm transition-colors hover:border-neutral-400 hover:bg-neutral-50 hover:text-neutral-900 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#143731]"
+			class="grid size-11 place-items-center rounded-full border border-neutral-300 bg-white text-neutral-700 shadow-sm transition-colors hover:border-neutral-400 hover:bg-neutral-50 hover:text-neutral-900 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
 			aria-label="Previous prompt"
 			onclick={prev}
 		>
@@ -219,7 +219,7 @@
 			{#each prompts as p, i (i)}
 				<button
 					type="button"
-					class="grid size-11 place-items-center rounded-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#143731]"
+					class="grid size-11 place-items-center rounded-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
 					aria-label="Show prompt {i + 1}: {p.label}"
 					aria-current={i === currentIndex ? 'true' : undefined}
 					onclick={() => select(i)}
@@ -234,7 +234,7 @@
 		</div>
 		<button
 			type="button"
-			class="grid size-11 place-items-center rounded-full border border-neutral-300 bg-white text-neutral-700 shadow-sm transition-colors hover:border-neutral-400 hover:bg-neutral-50 hover:text-neutral-900 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#143731]"
+			class="grid size-11 place-items-center rounded-full border border-neutral-300 bg-white text-neutral-700 shadow-sm transition-colors hover:border-neutral-400 hover:bg-neutral-50 hover:text-neutral-900 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
 			aria-label="Next prompt"
 			onclick={next}
 		>
@@ -253,8 +253,8 @@
 
 <style>
 	.claude-box {
-		background-color: #faf9f5;
-		border-color: #e8e3d4;
+		background-color: var(--color-prompt);
+		border-color: var(--color-prompt-border);
 	}
 
 	.caret {
@@ -272,7 +272,7 @@
 		width: 8px;
 		height: 8px;
 		border-radius: 50%;
-		background-color: #cc785c;
+		background-color: var(--color-spark);
 		box-shadow: 0 0 8px rgba(204, 120, 92, 0.5);
 		animation: thinking-pulse 1.4s ease-in-out infinite;
 	}

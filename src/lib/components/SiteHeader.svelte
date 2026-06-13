@@ -55,7 +55,7 @@
 
 			<a
 				href="/#install"
-				class="rounded-md bg-[#143731] px-3 py-1.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-[#1f4d44]"
+				class="rounded-md bg-brand px-3 py-1.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-brand-light"
 			>
 				Install
 			</a>
