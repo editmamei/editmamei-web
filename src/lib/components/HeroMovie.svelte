@@ -1,8 +1,25 @@
 <script lang="ts">
 	import { fade } from 'svelte/transition';
+	import { cubicInOut } from 'svelte/easing';
 	import { track } from '$lib/analytics/clarity';
 	import { prefersReducedMotion } from '$lib/a11y/reducedMotion.svelte';
 	import { hawaiiMovie as M, hawaiiMovieRail, type MovieFrame } from '$lib/demos/hawaii-movie';
+
+	// Soft-edged left→right sweep. Each new frame wipes in over the previously
+	// settled frame (the persistent base img underneath), so there's no black
+	// flash between layers — the gradient mask reveals the new frame across the
+	// canvas with a feathered leading edge.
+	function wipe(_node: Element, { duration }: { duration: number }) {
+		return {
+			duration,
+			easing: cubicInOut,
+			css: (t: number) => {
+				const p = t * 116; // push past 100% so the sweep fully clears the right edge
+				const g = `linear-gradient(to right, #000 ${p - 16}%, transparent ${p}%)`;
+				return `-webkit-mask-image:${g};mask-image:${g};-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;`;
+			}
+		};
+	}
 
 	// ── Beats (the LOCKED storyboard) ───────────────────────────────────────
 	// idle → typing → sent → ai-ack → reveal → building → checkin → decision
@@ -36,8 +53,11 @@
 	let typedText = $state('');
 	let showInput = $state(false);
 	let litCount = $state(0);
+	// `activeFrame` is the target frame; `displayed` is the last fully-revealed
+	// frame, painted as a persistent base underneath so the wipe never flashes
+	// the dark canvas background. `displayed` catches up on the wipe's introend.
 	let activeFrame = $state<MovieFrame>(M.original);
-	let showFinal = $state(false); // crossfade to the cropped after.jpg
+	let displayed = $state<MovieFrame>(M.original);
 	let cropped = $state(false); // letterbox / settle for the 16:9 crop
 	let captionVisible = $state(false);
 	let finished = $state(false);
@@ -52,7 +72,8 @@
 	const reduced = prefersReducedMotion();
 	const paused = $derived(hovering || focusWithin || manualPaused);
 
-	const crossMs = $derived(reduced.current ? 0 : 600);
+	const crossMs = $derived(reduced.current ? 0 : 600); // chat-bubble / caption fades
+	const wipeMs = $derived(reduced.current ? 0 : 700); // canvas frame-to-frame sweep
 
 	function onPointerEnter(e: PointerEvent) {
 		if (e.pointerType !== 'touch') hovering = true;
@@ -109,10 +130,12 @@
 		showInput = false;
 		litCount = 0;
 		activeFrame = M.original;
-		showFinal = false;
+		displayed = M.original;
 		cropped = false;
 		captionVisible = false;
 		finished = false;
+		manualMode = false;
+		sceneIndex = 0;
 	}
 
 	/** Reduced-motion static end state: no autoplay, full result + full rail. */
@@ -129,10 +152,11 @@
 		showInput = false;
 		litCount = hawaiiMovieRail.length;
 		activeFrame = M.cropStep.frame;
-		showFinal = true;
+		displayed = M.cropStep.frame;
 		cropped = true;
 		captionVisible = true;
 		finished = true;
+		sceneIndex = scenes.length - 1;
 		beat = 'done';
 	}
 
@@ -206,7 +230,6 @@
 		beat = 'crop';
 		litCount += 1;
 		activeFrame = M.cropStep.frame;
-		showFinal = true;
 		cropped = true;
 		if (!(await hold(1800))) return;
 
@@ -251,7 +274,68 @@
 	};
 
 	const activeIndex = $derived(litCount - 1);
-	const showPauseControl = $derived(!finished && !reduced.current);
+
+	// ── Step navigation (canvas scenes) ─────────────────────────────────────
+	// When paused, the viewer can scrub the layer build with prev/next. Each
+	// "scene" is a canvas state: the original plus one per rail layer, in
+	// narrative order, so scene index === litCount at that step.
+	const scenes: { label: string; litCount: number; frame: MovieFrame; cropped: boolean }[] = [
+		{ label: 'Original', litCount: 0, frame: M.original, cropped: false },
+		...M.buildSteps.map((s, i) => ({
+			label: s.name,
+			litCount: i + 1,
+			frame: s.frame,
+			cropped: false
+		})),
+		{ label: M.resumeStep.name, litCount: 5, frame: M.resumeStep.frame, cropped: false },
+		...M.finishSteps.map((s, i) => ({
+			label: s.name,
+			litCount: 6 + i,
+			frame: s.frame,
+			cropped: false
+		})),
+		{ label: M.cropStep.name, litCount: 9, frame: M.cropStep.frame, cropped: true }
+	];
+	let sceneIndex = $state(0);
+	let manualMode = $state(false);
+
+	const clampScene = (i: number) => Math.min(Math.max(i, 0), scenes.length - 1);
+	// While auto-playing, the nav counter tracks the live position (litCount);
+	// once scrubbing, it follows sceneIndex.
+	const navIndex = $derived(manualMode ? sceneIndex : clampScene(litCount));
+
+	// Pause/play toggles the autoplay clock; only meaningful while auto-playing.
+	const showPauseControl = $derived(!manualMode && !finished && !reduced.current);
+	// The step scrubber appears whenever playback is halted: explicitly paused,
+	// already scrubbing, or finished.
+	const showStepNav = $derived(manualMode || manualPaused || finished);
+
+	function enterManual() {
+		if (manualMode) return;
+		runToken++; // cancel the autoplay loop — we're taking manual control
+		manualMode = true;
+		manualPaused = true;
+		finished = false;
+		sceneIndex = navIndex;
+	}
+	function gotoScene(i: number) {
+		enterManual();
+		const s = scenes[clampScene(i)];
+		sceneIndex = clampScene(i);
+		view = 'canvas';
+		litCount = s.litCount;
+		cropped = s.cropped;
+		captionVisible = sceneIndex === scenes.length - 1;
+		activeFrame = s.frame; // triggers the wipe over `displayed`
+	}
+	function stepPrev() {
+		track('hero-movie-step');
+		gotoScene((manualMode ? sceneIndex : navIndex) - 1);
+	}
+	function stepNext() {
+		track('hero-movie-step');
+		gotoScene((manualMode ? sceneIndex : navIndex) + 1);
+	}
 
 	// Mobile rolling-ticker geometry (rem). Must match the .rail-window / .rail-row
 	// rules in the style block: M_ROW = row height, M_GAP = flex gap, M_VISIBLE =
@@ -310,23 +394,26 @@
 							class="canvas-stack relative aspect-[16/10] overflow-hidden rounded-2xl bg-neutral-900 shadow-inner"
 							class:cropped
 						>
+							<!-- BASE: the last fully-revealed frame, painted underneath so the
+							     sweep never flashes the dark canvas background. -->
+							<img
+								src={displayed.src}
+								alt=""
+								class="absolute inset-0 h-full w-full object-cover"
+								style:filter={displayed.filter ?? 'none'}
+							/>
+							<!-- WIPE: each new frame sweeps in left→right over the base, then
+							     becomes the base on introend. -->
 							{#key activeFrame}
 								<img
 									src={activeFrame.src}
 									alt=""
 									class="absolute inset-0 h-full w-full object-cover"
 									style:filter={activeFrame.filter ?? 'none'}
-									in:fade={{ duration: crossMs }}
+									in:wipe={{ duration: wipeMs }}
+									onintroend={() => (displayed = activeFrame)}
 								/>
 							{/key}
-							{#if showFinal}
-								<img
-									src={M.cropStep.frame.src}
-									alt=""
-									class="absolute inset-0 h-full w-full object-cover"
-									in:fade={{ duration: crossMs }}
-								/>
-							{/if}
 							<!-- Letterbox bars that slide in to dramatize the 16:9 crop -->
 							<span class="crop-bar crop-bar-top"></span>
 							<span class="crop-bar crop-bar-bottom"></span>
@@ -455,7 +542,11 @@
 										<span class="text-neutral-800">{m.text}</span>
 									</div>
 									{#if m.thumb}
-										<div class="mt-3 overflow-hidden rounded-lg border border-neutral-200">
+										<!-- Kept compact (≈half width) so the check-in chat view never grows
+										     taller than the canvas view — the stage height stays stable. -->
+										<div
+											class="mt-2.5 max-w-[210px] overflow-hidden rounded-lg border border-neutral-200"
+										>
 											<img
 												src={m.thumb.src}
 												alt=""
@@ -484,43 +575,89 @@
 	</div>
 
 	<!-- Controls (real, reachable buttons; the animation above is aria-hidden) -->
-	<div class="mt-4 flex items-center justify-center gap-2">
-		{#if showPauseControl}
+	<div class="mt-4 flex flex-col items-center gap-3">
+		{#if showStepNav}
+			<!-- Step scrubber: appears when paused / finished. Walk the layer build. -->
+			<div class="flex items-center gap-2">
+				<button
+					type="button"
+					class="grid size-9 place-items-center rounded-full border border-neutral-300 bg-white text-neutral-700 shadow-sm transition-colors hover:border-neutral-400 hover:bg-neutral-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand disabled:cursor-not-allowed disabled:opacity-40"
+					aria-label="Previous step"
+					disabled={navIndex <= 0}
+					onclick={stepPrev}
+				>
+					<svg viewBox="0 0 24 24" width="18" height="18" fill="none" aria-hidden="true">
+						<path
+							d="M15 6 L9 12 L15 18"
+							stroke="currentColor"
+							stroke-width="2"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+						/>
+					</svg>
+				</button>
+				<div class="min-w-[11rem] text-center text-sm">
+					<span class="font-semibold text-neutral-900">{scenes[navIndex].label}</span>
+					<span class="ml-1 text-neutral-500">({navIndex + 1}/{scenes.length})</span>
+				</div>
+				<button
+					type="button"
+					class="grid size-9 place-items-center rounded-full border border-neutral-300 bg-white text-neutral-700 shadow-sm transition-colors hover:border-neutral-400 hover:bg-neutral-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand disabled:cursor-not-allowed disabled:opacity-40"
+					aria-label="Next step"
+					disabled={navIndex >= scenes.length - 1}
+					onclick={stepNext}
+				>
+					<svg viewBox="0 0 24 24" width="18" height="18" fill="none" aria-hidden="true">
+						<path
+							d="M9 6 L15 12 L9 18"
+							stroke="currentColor"
+							stroke-width="2"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+						/>
+					</svg>
+				</button>
+			</div>
+		{/if}
+
+		<div class="flex items-center justify-center gap-2">
+			{#if showPauseControl}
+				<button
+					type="button"
+					class="inline-flex items-center gap-1.5 rounded-full border border-neutral-300 bg-white px-4 py-2 text-sm font-medium text-neutral-700 shadow-sm transition-colors hover:border-neutral-400 hover:bg-neutral-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
+					onclick={togglePause}
+					aria-pressed={manualPaused}
+				>
+					{#if manualPaused}
+						<svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true">
+							<path d="M8 5v14l11-7z" />
+						</svg>
+						Play
+					{:else}
+						<svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true">
+							<path d="M6 5h4v14H6zM14 5h4v14h-4z" />
+						</svg>
+						Pause
+					{/if}
+				</button>
+			{/if}
 			<button
 				type="button"
 				class="inline-flex items-center gap-1.5 rounded-full border border-neutral-300 bg-white px-4 py-2 text-sm font-medium text-neutral-700 shadow-sm transition-colors hover:border-neutral-400 hover:bg-neutral-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
-				onclick={togglePause}
-				aria-pressed={manualPaused}
+				onclick={replay}
 			>
-				{#if manualPaused}
-					<svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true">
-						<path d="M8 5v14l11-7z" />
-					</svg>
-					Play
-				{:else}
-					<svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true">
-						<path d="M6 5h4v14H6zM14 5h4v14h-4z" />
-					</svg>
-					Pause
-				{/if}
+				<svg viewBox="0 0 24 24" width="16" height="16" fill="none" aria-hidden="true">
+					<path
+						d="M4 12a8 8 0 1 1 2.34 5.66M4 12V7m0 5h5"
+						stroke="currentColor"
+						stroke-width="2"
+						stroke-linecap="round"
+						stroke-linejoin="round"
+					/>
+				</svg>
+				{reduced.current ? 'Play walkthrough' : 'Replay'}
 			</button>
-		{/if}
-		<button
-			type="button"
-			class="inline-flex items-center gap-1.5 rounded-full border border-neutral-300 bg-white px-4 py-2 text-sm font-medium text-neutral-700 shadow-sm transition-colors hover:border-neutral-400 hover:bg-neutral-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
-			onclick={replay}
-		>
-			<svg viewBox="0 0 24 24" width="16" height="16" fill="none" aria-hidden="true">
-				<path
-					d="M4 12a8 8 0 1 1 2.34 5.66M4 12V7m0 5h5"
-					stroke="currentColor"
-					stroke-width="2"
-					stroke-linecap="round"
-					stroke-linejoin="round"
-				/>
-			</svg>
-			{reduced.current ? 'Play walkthrough' : 'Replay'}
-		</button>
+		</div>
 	</div>
 </div>
 
