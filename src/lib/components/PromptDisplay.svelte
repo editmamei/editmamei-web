@@ -2,6 +2,7 @@
 	import type { DemoPrompt } from '$lib/types';
 	import { fly, fade } from 'svelte/transition';
 	import { track } from '$lib/analytics/clarity';
+	import { prefersReducedMotion } from '$lib/a11y/reducedMotion.svelte';
 
 	interface Props {
 		prompts: DemoPrompt[];
@@ -23,9 +24,31 @@
 		onNext
 	}: Props = $props();
 
+	// Reduced-motion, tracked reactively so both the auto-advance and the
+	// slide/fade transitions respond if the OS setting changes mid-session.
+	const reducedMotionPref = prefersReducedMotion();
+	const flyDuration = $derived(reducedMotionPref.current ? 0 : slideDurationMs);
+
+	// Autoplay pause (WCAG 2.2.2): stop auto-advancing while the visitor is
+	// hovering or keyboard-focused anywhere in the carousel. Two flags so a
+	// pointer leaving while focus remains doesn't wrongly resume. Hover is
+	// ignored for touch pointers — a tap fires pointerenter but often no
+	// pointerleave, which would otherwise leave autoplay stuck paused on
+	// mobile; touch visitors pause via focus and drive it with the controls.
+	let hovering = $state(false);
+	let focusWithin = $state(false);
+	const paused = $derived(hovering || focusWithin);
+
+	function onPointerEnter(e: PointerEvent) {
+		if (e.pointerType !== 'touch') hovering = true;
+	}
+	function onPointerLeave(e: PointerEvent) {
+		if (e.pointerType !== 'touch') hovering = false;
+	}
+
 	// Manual switches only — `prev`, `next`, and `select` are the user-driven
-	// paths. The auto-rotate runs from the $effect block below and does NOT
-	// fire this event (it would otherwise spam the dashboard with one
+	// paths. The auto-rotate (the auto-advance $effect below) does NOT fire
+	// this event (it would otherwise spam the dashboard with one
 	// "prompt-switched" per page every 7s of idle time).
 	function prev() {
 		track('demo-prompt-switched');
@@ -40,30 +63,31 @@
 
 	let displayedText = $state('');
 	let isTyping = $state(false);
+	let typingDone = $state(false);
 
 	const current = $derived(prompts[currentIndex]);
 
+	// Typewriter: types out the current prompt, then marks typingDone. Does NOT
+	// auto-advance — that's the separate effect below, so pausing autoplay never
+	// restarts the typewriter mid-stream.
 	$effect(() => {
 		const c = prompts[currentIndex];
 		if (!c) return;
 
 		displayedText = '';
 		isTyping = false;
+		typingDone = false;
 
-		const reducedMotion =
-			typeof window !== 'undefined' &&
-			window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+		// Read synchronously so this effect re-runs if the setting changes.
+		const reducedMotion = reducedMotionPref.current;
 
 		let typeInterval: ReturnType<typeof setInterval> | undefined;
-		let advance: ReturnType<typeof setTimeout> | undefined;
 		let startTimer: ReturnType<typeof setTimeout> | undefined;
 
 		const startTyping = () => {
 			if (reducedMotion) {
 				displayedText = c.text;
-				advance = setTimeout(() => {
-					currentIndex = (currentIndex + 1) % prompts.length;
-				}, pauseMs);
+				typingDone = true;
 				return;
 			}
 			isTyping = true;
@@ -72,9 +96,7 @@
 				if (i >= c.text.length) {
 					if (typeInterval) clearInterval(typeInterval);
 					isTyping = false;
-					advance = setTimeout(() => {
-						currentIndex = (currentIndex + 1) % prompts.length;
-					}, pauseMs);
+					typingDone = true;
 					return;
 				}
 				displayedText += c.text[i];
@@ -88,8 +110,18 @@
 		return () => {
 			if (startTimer) clearTimeout(startTimer);
 			if (typeInterval) clearInterval(typeInterval);
-			if (advance) clearTimeout(advance);
 		};
+	});
+
+	// Auto-advance: once the current prompt finishes typing, wait pauseMs then
+	// move on — unless paused (hover/focus) or reduced motion (no autoplay at
+	// all; the visitor drives it manually via the controls).
+	$effect(() => {
+		if (reducedMotionPref.current || paused || !typingDone) return;
+		const advance = setTimeout(() => {
+			currentIndex = (currentIndex + 1) % prompts.length;
+		}, pauseMs);
+		return () => clearTimeout(advance);
 	});
 
 	function select(i: number) {
@@ -99,7 +131,16 @@
 	}
 </script>
 
-<div class="mx-auto w-full max-w-3xl">
+<div
+	class="mx-auto w-full max-w-3xl"
+	role="group"
+	aria-roledescription="carousel"
+	aria-label="Example prompts"
+	onpointerenter={onPointerEnter}
+	onpointerleave={onPointerLeave}
+	onfocusin={() => (focusWithin = true)}
+	onfocusout={() => (focusWithin = false)}
+>
 	<p class="mb-2 text-xs font-semibold tracking-wider text-neutral-500 uppercase">
 		What they asked for
 	</p>
@@ -108,8 +149,8 @@
 		{#key currentIndex}
 			<div
 				class="absolute inset-0 flex flex-col"
-				in:fly={{ x: 80, duration: slideDurationMs }}
-				out:fly={{ x: -80, duration: slideDurationMs }}
+				in:fly={{ x: 80, duration: flyDuration }}
+				out:fly={{ x: -80, duration: flyDuration }}
 			>
 				{#if current}
 					<div class="mb-2">
@@ -147,7 +188,7 @@
 						{#if isTyping}
 							<span
 								class="thinking absolute right-3 bottom-3"
-								transition:fade={{ duration: 250 }}
+								transition:fade={{ duration: reducedMotionPref.current ? 0 : 250 }}
 								aria-hidden="true"
 							></span>
 						{/if}
@@ -160,7 +201,7 @@
 	<div class="mt-3 flex items-center justify-center gap-1">
 		<button
 			type="button"
-			class="grid size-10 place-items-center rounded-full text-neutral-500 transition-colors hover:bg-neutral-100 hover:text-neutral-900"
+			class="grid size-11 place-items-center rounded-full border border-neutral-300 bg-white text-neutral-700 shadow-sm transition-colors hover:border-neutral-400 hover:bg-neutral-50 hover:text-neutral-900 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#143731]"
 			aria-label="Previous prompt"
 			onclick={prev}
 		>
@@ -174,26 +215,26 @@
 				/>
 			</svg>
 		</button>
-		<div class="flex items-center gap-1">
+		<div class="flex items-center">
 			{#each prompts as p, i (i)}
 				<button
 					type="button"
-					class="grid size-8 place-items-center rounded-full"
+					class="grid size-11 place-items-center rounded-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#143731]"
 					aria-label="Show prompt {i + 1}: {p.label}"
 					aria-current={i === currentIndex ? 'true' : undefined}
 					onclick={() => select(i)}
 				>
 					<span
-						class="size-2 rounded-full transition-colors {i === currentIndex
-							? 'bg-neutral-800'
-							: 'bg-neutral-300 hover:bg-neutral-400'}"
+						class="rounded-full transition-all {i === currentIndex
+							? 'size-2.5 bg-neutral-900'
+							: 'size-2 bg-neutral-500 hover:bg-neutral-700'}"
 					></span>
 				</button>
 			{/each}
 		</div>
 		<button
 			type="button"
-			class="grid size-10 place-items-center rounded-full text-neutral-500 transition-colors hover:bg-neutral-100 hover:text-neutral-900"
+			class="grid size-11 place-items-center rounded-full border border-neutral-300 bg-white text-neutral-700 shadow-sm transition-colors hover:border-neutral-400 hover:bg-neutral-50 hover:text-neutral-900 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#143731]"
 			aria-label="Next prompt"
 			onclick={next}
 		>

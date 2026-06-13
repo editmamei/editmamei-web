@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { Layer, LayerKind } from '$lib/types';
 	import { slide } from 'svelte/transition';
+	import { prefersReducedMotion } from '$lib/a11y/reducedMotion.svelte';
 
 	interface Props {
 		layers: Layer[];
@@ -11,6 +12,9 @@
 
 	// svelte-ignore state_referenced_locally
 	let expandedIndex = $state(initialExpanded);
+
+	// Honor prefers-reduced-motion: zero the expand/collapse slide.
+	const reducedMotionPref = prefersReducedMotion();
 
 	const kindLabel: Record<LayerKind, string> = {
 		'brightness-contrast': 'Brightness/Contrast',
@@ -158,7 +162,7 @@
 				{#if open}
 					<p
 						class="mt-1.5 ml-[34px] text-xs leading-relaxed text-neutral-600"
-						transition:slide={{ duration: 200 }}
+						transition:slide={{ duration: reducedMotionPref.current ? 0 : 200 }}
 					>
 						{layer.summary}
 					</p>

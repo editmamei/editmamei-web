@@ -67,7 +67,7 @@
 			<header class="mb-8 grid max-w-2xl">
 				{#each demoExamples as { demo }, i (i)}
 					<div
-						class="col-start-1 row-start-1 transition-opacity duration-500"
+						class="col-start-1 row-start-1 transition-opacity duration-500 motion-reduce:transition-none"
 						class:opacity-0={i !== demoIndex}
 						class:opacity-100={i === demoIndex}
 						aria-hidden={i !== demoIndex}
@@ -101,7 +101,7 @@
 				<div class="grid">
 					{#each demoExamples as { demo }, i (i)}
 						<div
-							class="col-start-1 row-start-1 transition-opacity duration-500"
+							class="col-start-1 row-start-1 transition-opacity duration-500 motion-reduce:transition-none"
 							class:opacity-0={i !== demoIndex}
 							class:opacity-100={i === demoIndex}
 							aria-hidden={i !== demoIndex}
@@ -129,7 +129,7 @@
 				<div class="grid">
 					{#each demoExamples as { demo }, i (i)}
 						<div
-							class="col-start-1 row-start-1 transition-opacity duration-500"
+							class="col-start-1 row-start-1 transition-opacity duration-500 motion-reduce:transition-none"
 							class:opacity-0={i !== demoIndex}
 							class:opacity-100={i === demoIndex}
 							aria-hidden={i !== demoIndex}
