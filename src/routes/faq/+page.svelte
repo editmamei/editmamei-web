@@ -49,6 +49,15 @@
 			acceptedAnswer: { '@type': 'Answer', text: a }
 		}))
 	};
+
+	// JSON-LD has to be injected as a raw <script> tag ({@html} below). Two
+	// guards: '<' inside the JSON is escaped to < so no answer text can
+	// ever close the tag early, and the literal closing tag is split so the
+	// Svelte/ESLint parsers don't terminate this script block on it.
+	const jsonLd = `<script type="application/ld+json">${JSON.stringify(schema).replace(
+		/</g,
+		'\\u003c'
+	)}${'<'}/script>`;
 </script>
 
 <Seo
@@ -58,7 +67,8 @@
 />
 
 <svelte:head>
-	{@html `<script type="application/ld+json">${JSON.stringify(schema)}</script>`}
+	<!-- eslint-disable-next-line svelte/no-at-html-tags -- static local JSON-LD, '<' escaped above -->
+	{@html jsonLd}
 </svelte:head>
 
 <section class="bg-white py-20 md:py-28">
@@ -70,7 +80,7 @@
 		</p>
 
 		<dl class="mt-12 space-y-10">
-			{#each faqs as { q, a }}
+			{#each faqs as { q, a } (q)}
 				<div>
 					<dt class="text-base font-semibold text-neutral-950">{q}</dt>
 					<dd class="mt-2 text-sm leading-relaxed text-neutral-700">{a}</dd>
