@@ -93,6 +93,17 @@ inspect the real layers, the product cards prove each tool is authentic PS.
 
 ## CATEGORY 1 — Hero "movie" demo (Hawaii) — the centerpiece
 
+> **SHIPPED 2026-06-13.** Built as `HeroMovie.svelte` + `src/lib/demos/hawaii-movie.ts`,
+> mounted as the `#demo` centerpiece on the home page. Motion prototype was signed
+> off, then the real cumulative frame sequence was produced in Photoshop 27.2 from
+> **IMG_1057** (a Hanauma-style bay vista — note: no foreground lava rock, so the
+> "warm the rock" beat became **"Warm the Headland"**; chat copy updated to match).
+> 10 cumulative WebP frames (1400px) live in `static/demos/hawaii-movie/`; layered
+> master is `Hawaii-Movie-IMG_1057.psd` in PhotosInbox. Mobile uses a rolling-ticker
+> rail (newest layer pinned bottom, older rows dissolve under a gradient mask). The
+> old multi-demo carousel was retired; `PromptDisplay.svelte` deleted. Category 2
+> (below) shipped alongside as the set-sail "inspect the layers" section.
+
 An autoplaying, scripted **cinematic playback** that dramatizes the real Editmamei
 co-work loop. Replaces the current carousel as the home hero demo. **Highest
 impact, most complex — build with a motion prototype checkpoint before replacing
@@ -190,6 +201,11 @@ prototype** before it replaces the current hero.
 ---
 
 ## CATEGORY 2 — Slider demo (set-sail) — restructure of the current demo
+
+> **SHIPPED 2026-06-13** alongside Category 1. The carousel was removed; this is now
+> a single static set-sail before/after slider + `LayerAccordion` in the `#inspect`
+> section (bg-sage) directly below the hero movie. Layer stack stays accordion
+> (first open). `PromptDisplay.svelte` was deleted, not repurposed.
 
 The current home `#demo` section is a **carousel** (`PromptDisplay` typewriter +
 auto-advance) cycling Hawaii + set-sail, with a before/after slider
