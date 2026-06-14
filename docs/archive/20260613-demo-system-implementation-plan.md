@@ -1,5 +1,7 @@
 # Demo system implementation plan — 3 new demo categories (2026-06-13)
 
+> **🗄️ ARCHIVED 2026-06-14 — DONE.** All 3 demo categories shipped: Hero movie + slider restructure (commit `a56a5be`), product-page per-card mini-demos (commit `46101ef`). Kept for history.
+
 Authoritative spec for the editmamei.com demo overhaul agreed in the 2026-06-13
 design session. Written so a **fresh session can pick up any one of the three
 categories and build it without re-deriving context.** Each category has its own
