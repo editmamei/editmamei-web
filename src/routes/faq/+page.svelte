@@ -20,7 +20,7 @@
 		},
 		{
 			q: 'What data does Editmamei collect?',
-			a: 'Your photos, documents, file paths, and metadata never leave your machine. Editmamei does send content-free, anonymous usage data — which tools ran, whether they succeeded, how long they took — so a small team can see what works and what breaks. It is on by default, documented field by field, and you can switch it off in your settings. See the privacy page for the full breakdown.'
+			a: "Nothing about the content of your edits goes to us — no images, documents, or file paths. Editmamei does send anonymous, content-free usage data — which tools ran, whether they succeeded, how long they took — so a small team can see what works and what breaks. It's on by default, documented field by field, and you can switch it off in your settings. (Separately, when your AI assistant needs to see an edit, a downscaled preview goes to that assistant — see the question above.) Full breakdown on the privacy page."
 		},
 		{
 			q: 'Which AI clients work with Editmamei?',

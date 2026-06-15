@@ -34,8 +34,8 @@
 		</div>
 
 		<p class="text-sm text-neutral-600">
-			Everything Editmamei sends is content-free: anonymous usage data you can audit and switch off.
-			Never a document, image, file path, or template. Full details in our
+			The only thing Editmamei sends to us is content-free: anonymous usage you can audit and switch
+			off, never your documents, images, or file paths. Full details in our
 			<a href="/privacy" class="underline underline-offset-2 hover:text-neutral-900"
 				>privacy policy</a
 			>; disclosure path at

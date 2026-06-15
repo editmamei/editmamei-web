@@ -295,16 +295,11 @@
 				Your files, your machine.
 			</h3>
 			<p class="mt-3 text-sm leading-relaxed text-neutral-700">
-				Editmamei runs on your own computer, and the editing happens inside your own Photoshop. Your
-				photo files are never uploaded to Editmamei's servers — the only data Editmamei sends is
-				content-free, anonymous usage you can see, audit, and switch off.
-			</p>
-			<p class="mt-3 text-sm leading-relaxed text-neutral-700">
-				Worth being clear about: your AI assistant is a cloud service. When you ask it to analyze an
-				image (for example, the visual-verification preview), a downscaled JPEG is sent to
-				<em>that AI provider</em>, exactly as if you'd dropped the file into a chat with it. That's
-				a property of using a cloud AI, and a function of which assistant you choose. Not a hop
-				Editmamei adds.
+				The editing runs in your own Photoshop, on your own computer — there's no Editmamei cloud
+				your library gets uploaded to. When your AI assistant needs to see the result, a downscaled
+				preview is sent to it (the cloud assistant you chose), the same as sharing a photo in a
+				chat. Editmamei's own telemetry is content-free: anonymous usage you can audit and switch
+				off.
 			</p>
 		</div>
 	</div>

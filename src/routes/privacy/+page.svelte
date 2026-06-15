@@ -6,7 +6,7 @@
 	<title>Privacy — Editmamei</title>
 	<meta
 		name="description"
-		content="What Editmamei does with your data: your photos, documents, and file paths never leave your machine; the only data sent is content-free, anonymous usage you can audit and switch off."
+		content="What Editmamei does with your data: your photos aren't uploaded to us — the only thing sent to our servers is content-free, anonymous usage you can audit and switch off. A downscaled preview goes to the AI assistant you chose when it needs to see an edit."
 	/>
 	<meta name="robots" content="noindex" />
 </svelte:head>
@@ -19,13 +19,14 @@
 		</h1>
 		<p class="mt-4 text-base leading-relaxed text-neutral-700">
 			Editmamei runs on your own computer and edits inside the Photoshop you already have. The
-			honest version is short: your photos stay with you, and the only thing the software sends is
-			content-free usage data you can audit and turn off. The detail is below. A formal legal policy
-			lands with the v1.0 launch; this page describes how the product behaves today.
+			honest version is short: your photos aren't uploaded to us, and the only thing Editmamei sends
+			to its own servers is content-free usage you can audit and turn off. When your AI assistant
+			needs to see an edit, a downscaled preview goes to that assistant — covered below. A formal
+			legal policy lands with the v1.0 launch; this page describes how the product behaves today.
 		</p>
 
 		<h2 class="mt-12 text-xl font-bold tracking-tight text-neutral-950">
-			What never leaves your machine
+			What Editmamei never sends to us
 		</h2>
 		<p class="mt-3 text-sm leading-relaxed text-neutral-700">
 			There is one line we don't cross, on any setting:
