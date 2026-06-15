@@ -6,7 +6,7 @@
 	<title>Privacy — Editmamei</title>
 	<meta
 		name="description"
-		content="What Editmamei does with your data: your photos aren't uploaded to us — the only thing sent to our servers is content-free, anonymous usage you can audit and switch off. A downscaled preview goes to the AI assistant you chose when it needs to see an edit."
+		content="What Editmamei does with your data: your photos aren't uploaded to us — only content-free usage you can audit and switch off. Previews go to your chosen AI."
 	/>
 	<meta name="robots" content="noindex" />
 </svelte:head>

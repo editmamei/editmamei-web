@@ -16,7 +16,7 @@
 
 <Seo
 	title="Editmamei — Unlock Photoshop with natural-language photo editing"
-	description="Unlock Photoshop with natural-language photo editing. AI orchestration, not generation. Your AI plans the edit; your own Photoshop does it. Pronounced like edamame."
+	description="Unlock Photoshop with natural-language photo editing. AI orchestration, not generation. The AI plans the edit; Photoshop runs it. Pronounced like edamame."
 	path="/"
 />
 

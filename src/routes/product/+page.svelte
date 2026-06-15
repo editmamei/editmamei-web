@@ -9,7 +9,7 @@
 
 <Seo
 	title="Product — Editmamei"
-	description="The full Editmamei capability surface — adjustment layers, smart selections, filters, masks, templates — plus the verifiable build receipts behind the trust claims."
+	description="The full Editmamei capability surface — adjustment layers, smart selections, filters, masks, templates — plus the verifiable receipts behind the trust claims."
 	path="/product"
 />
 

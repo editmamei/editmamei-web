@@ -66,7 +66,7 @@
 
 <Seo
 	title="FAQ — Editmamei"
-	description="Common questions about Editmamei: what it is, what it isn't, whether it uploads photos, which AI clients work with it, and how the free and Pro editions differ."
+	description="Common questions about Editmamei: what it is, what it isn't, whether it uploads photos, which AI clients work with it, and how free and Pro editions differ."
 	path="/faq"
 />
 

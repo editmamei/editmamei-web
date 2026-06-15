@@ -5,7 +5,7 @@
 
 <Seo
 	title="Pricing — Editmamei"
-	description="Editmamei pricing. Community is free and covers everyday editing; Pro adds template authoring, Sensei-backed selections, content-aware retouch, layer transforms, and Photoshop Actions + scripting."
+	description="Editmamei pricing: Community is free for everyday photo editing. Pro adds the production toolkit for repeatable, professional work. Pro pricing coming soon."
 	path="/pricing"
 />
 
