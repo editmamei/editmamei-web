@@ -72,7 +72,7 @@
 			<p class="text-sm font-semibold text-neutral-950">About Editmamei</p>
 			<p class="mt-2 text-sm leading-relaxed text-neutral-600">
 				Editmamei is a command-line package that drives Adobe Photoshop with natural-language
-				instructions from an AI client. It runs entirely on your computer — your files never leave
+				instructions from an AI client. It runs on your own computer, and your photo files stay on
 				your machine. It is not a web app, not a cloud editor, and not affiliated with Adobe.
 			</p>
 		</div>

@@ -295,9 +295,9 @@
 				Your files, your machine.
 			</h3>
 			<p class="mt-3 text-sm leading-relaxed text-neutral-700">
-				Editmamei runs on your own computer, and the editing happens inside your own Photoshop.
-				Editmamei itself ships no analytics, crash reports, or telemetry, and your photo files
-				aren't uploaded to Editmamei's servers.
+				Editmamei runs on your own computer, and the editing happens inside your own Photoshop. Your
+				photo files are never uploaded to Editmamei's servers — the only data Editmamei sends is
+				content-free, anonymous usage you can see, audit, and switch off.
 			</p>
 			<p class="mt-3 text-sm leading-relaxed text-neutral-700">
 				Worth being clear about: your AI assistant is a cloud service. When you ask it to analyze an

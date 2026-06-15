@@ -19,6 +19,10 @@
 			a: "Your photo files stay on your machine. The editing happens inside your own Photoshop. When you ask your AI assistant to look at a preview, a small downscaled version goes to that AI provider — the same as if you'd dropped the file into a chat with it. That's a property of which AI assistant you choose, not something Editmamei adds."
 		},
 		{
+			q: 'What data does Editmamei collect?',
+			a: 'Your photos, documents, file paths, and metadata never leave your machine. Editmamei does send content-free, anonymous usage data — which tools ran, whether they succeeded, how long they took — so a small team can see what works and what breaks. It is on by default, documented field by field, and you can switch it off in your settings. See the privacy page for the full breakdown.'
+		},
+		{
 			q: 'Which AI clients work with Editmamei?',
 			a: 'Any AI client that supports the Model Context Protocol (MCP). The most common starting points today are Claude Desktop and Cursor. Claude Desktop is the easiest setup if you are not sure where to begin.'
 		},

@@ -34,8 +34,9 @@
 		</div>
 
 		<p class="text-sm text-neutral-600">
-			The only data Editmamei itself transmits is Pro license validation — license key, version, OS
-			— roughly once a week. No document, image, file path, or template data. Full details in our
+			Everything Editmamei sends is content-free: anonymous usage data you can audit and switch off,
+			plus a license check on Pro. Never a document, image, file path, or template. Full details in
+			our
 			<a href="/privacy" class="underline underline-offset-2 hover:text-neutral-900"
 				>privacy policy</a
 			>; disclosure path at
