@@ -72,16 +72,6 @@
 				be traced without you mailing a log by hand. File paths are reduced to bare names; still no image
 				content.
 			</li>
-			<li>
-				<strong class="font-semibold text-neutral-900">Bug reports (only when you send one).</strong
-				>
-				A report you assemble yourself, preview, and send explicitly. Nothing goes out until you choose
-				to send it.
-			</li>
-			<li>
-				<strong class="font-semibold text-neutral-900">Pro license checks.</strong>
-				If you run Pro, Editmamei validates your license online. Content-free, like everything else here.
-			</li>
 		</ul>
 		<p class="mt-4 text-sm leading-relaxed text-neutral-700">
 			This data goes to our own infrastructure, not a third-party analytics company. You can see the
