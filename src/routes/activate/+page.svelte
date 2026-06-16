@@ -1,5 +1,6 @@
 <script lang="ts">
 	import Seo from '$lib/components/Seo.svelte';
+	import { CUSTOMER_PORTAL_URL } from '$lib/links';
 </script>
 
 <Seo
@@ -20,6 +21,20 @@
 			Thanks for going Pro. Activation takes about a minute — find your key, enter it the way that
 			matches how you run Editmamei, and restart. Your Pro tools then appear in your AI client.
 		</p>
+
+		<div
+			class="mt-6 rounded-xl border border-neutral-200 bg-cream px-5 py-4 text-sm text-neutral-700"
+		>
+			Already subscribed and just need to manage it?
+			<a
+				href={CUSTOMER_PORTAL_URL}
+				rel="noopener"
+				class="font-semibold text-brand underline underline-offset-2 hover:text-brand-light"
+				>Open your account portal →</a
+			>
+			to update payment, cancel, view invoices, or remove a device. Sign in with the email you purchased
+			with — no password needed.
+		</div>
 	</div>
 </section>
 
@@ -35,8 +50,13 @@
 				<h2 class="text-xl font-semibold tracking-tight text-neutral-950">Find your license key</h2>
 				<p class="mt-2 text-base leading-relaxed text-neutral-700">
 					Your key is in your <strong>purchase confirmation email</strong>, and any time in your
-					<strong>customer portal</strong> (the “Manage subscription” link in that email). It looks
-					like
+					<a
+						href={CUSTOMER_PORTAL_URL}
+						rel="noopener"
+						class="font-medium text-brand underline underline-offset-2 hover:text-brand-light"
+						>account portal</a
+					>
+					(sign in with your purchase email). It looks like
 					<code class="rounded bg-neutral-100 px-1.5 py-0.5 font-mono text-sm">XXXX-XXXX-…</code>.
 				</p>
 			</div>
@@ -126,7 +146,14 @@
 					switch a device free with
 					<code class="rounded bg-neutral-100 px-1.5 py-0.5 font-mono text-sm"
 						>editmamei deactivate</code
-					> on the old one.</span
+					>
+					on the old one — or remove it from your
+					<a
+						href={CUSTOMER_PORTAL_URL}
+						rel="noopener"
+						class="font-medium text-brand underline underline-offset-2 hover:text-brand-light"
+						>account portal</a
+					> if you no longer have it.</span
 				>
 			</li>
 			<li class="flex gap-3">
