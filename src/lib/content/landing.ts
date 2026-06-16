@@ -144,19 +144,22 @@ export const editionRows: EditionRow[] = [
 		community: true,
 		pro: true
 	},
-	{ feature: 'Apply, verify, and recall saved templates', community: true, pro: true },
-	{ feature: 'Create / save / delete custom templates', community: false, pro: true },
-	{ feature: 'Sensei-backed selections (Select Subject, Select Sky)', community: false, pro: true },
+	{
+		feature: 'Layer transforms + straightening (move, scale, rotate, fit to document)',
+		community: true,
+		pro: true
+	},
 	{
 		feature: 'Content-aware retouch (Content-Aware Fill, Patch, Content-Aware Move)',
-		community: false,
+		community: true,
 		pro: true
 	},
 	{
-		feature: 'Layer transforms (move, scale, rotate, fit to document)',
+		feature: 'Templates (create, save, apply, verify, recall reproducible recipes)',
 		community: false,
 		pro: true
 	},
+	{ feature: 'Sensei-backed selections (Select Subject, Select Sky)', community: false, pro: true },
 	{
 		feature: 'Photoshop Actions + scripting (play recorded Actions, ExtendScript escape hatch)',
 		community: false,

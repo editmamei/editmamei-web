@@ -144,8 +144,9 @@
 		<p class="mt-4 text-base leading-relaxed text-neutral-700">
 			Community Edition covers the everyday editing surface — documents, layers, the standard
 			adjustments and filters, masks, selections, history, and visual verification with per-channel
-			histograms. You can apply, verify, and recall any saved template. For most one-off photo
-			edits, that is the full kit.
+			histograms. It also includes straightening and layer transforms, and content-aware retouch
+			(Content-Aware Fill, Patch, Content-Aware Move). For most one-off photo edits, that is the
+			full kit.
 		</p>
 		<p class="mt-4 text-base leading-relaxed text-neutral-700">
 			Pro adds the upgrades that matter once you're doing repeatable, production work:
@@ -153,11 +154,12 @@
 
 		<ul class="mt-6 space-y-5">
 			<li class="rounded-xl border border-neutral-200 bg-paper p-5">
-				<h3 class="text-base font-semibold tracking-tight text-neutral-950">Template authoring</h3>
+				<h3 class="text-base font-semibold tracking-tight text-neutral-950">Templates</h3>
 				<p class="mt-2 text-sm leading-relaxed text-neutral-700">
-					Save the current edit as a reproducible recipe and apply it to new images later. Community
-					can <em>apply</em>, verify, and recall templates; Pro adds the create / save / delete
-					side. This is the feature that turns a one-off look into a repeatable house style.
+					Save the current edit as a reproducible recipe, then apply it to new images later — the AI
+					re-derives each value for the new photo and self-judges against the recipe's exit
+					criteria. The whole template system (create, save, apply, verify, recall) is Pro — the
+					feature that turns a one-off look into a repeatable house style.
 				</p>
 			</li>
 			<li class="rounded-xl border border-neutral-200 bg-paper p-5">
@@ -173,22 +175,20 @@
 			</li>
 			<li class="rounded-xl border border-neutral-200 bg-paper p-5">
 				<h3 class="text-base font-semibold tracking-tight text-neutral-950">
-					Content-aware retouch
+					Objective template verification
 				</h3>
 				<p class="mt-2 text-sm leading-relaxed text-neutral-700">
-					Content-Aware Fill, Patch, and Content-Aware Move — Photoshop's premium retouch moves,
-					driven against a selection the AI can verify first. Object removal and cleanup that goes
-					beyond what adjustment layers can do.
+					Save a machine-checkable style signature with any template, then have the AI measure a new
+					edit against it — per-predicate pass/fail with a corrective steer per miss. "Looks right"
+					becomes a measurement.
 				</p>
 			</li>
 			<li class="rounded-xl border border-neutral-200 bg-paper p-5">
-				<h3 class="text-base font-semibold tracking-tight text-neutral-950">
-					Actions, scripting & layer transforms
-				</h3>
+				<h3 class="text-base font-semibold tracking-tight text-neutral-950">Actions & scripting</h3>
 				<p class="mt-2 text-sm leading-relaxed text-neutral-700">
 					Play your recorded Photoshop Actions, run arbitrary ExtendScript through the escape hatch
-					when no specific tool fits, and transform layers freely — move, scale, rotate, fit to
-					document.
+					when no specific tool fits. Your recorded Actions become AI-callable steps for repeatable
+					production work.
 				</p>
 			</li>
 		</ul>

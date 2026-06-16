@@ -28,7 +28,7 @@
 		},
 		{
 			q: 'Is Editmamei free?',
-			a: 'The Community Edition is free. Install it from npm and use the full core toolkit at no cost. The Pro Edition adds tools for production workflows — template authoring, AI-backed subject selections, content-aware retouching, and scripting — and requires a paid license.'
+			a: 'The Community Edition is free. Install it from npm and use the full core toolkit at no cost. The Pro Edition adds tools for production workflows — the reproducible-template system, AI-backed subject selections, and Photoshop Actions + scripting — and requires a paid license.'
 		},
 		{
 			q: 'Does Editmamei use generative AI to create or alter pixels?',
