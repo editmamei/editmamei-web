@@ -1,11 +1,57 @@
 <script lang="ts">
 	import EditionsTable from '$lib/components/EditionsTable.svelte';
 	import Seo from '$lib/components/Seo.svelte';
+
+	// ──────────────────────────────────────────────────────────────────────
+	// SANDBOX checkout links (Polar test mode). Feature-branch preview only —
+	// this page is not deployed. At Pro launch, swap these three URLs for the
+	// PRODUCTION Polar checkout links and remove the test-mode notice below.
+	// Generated via POST /v1/checkout-links/ against the Etta-Test sandbox org.
+	// ──────────────────────────────────────────────────────────────────────
+	const SANDBOX = true;
+	const CHECKOUT = {
+		monthly:
+			'https://sandbox-api.polar.sh/v1/checkout-links/polar_cl_AYF74XTrnr2lpbhejzCUTb4rlmKvGBhk2gsiQ4QzxdB/redirect',
+		annual:
+			'https://sandbox-api.polar.sh/v1/checkout-links/polar_cl_3hnWx83Tiy6vzizFlJuegqIbM7QF25l3XY5rX1dBQJi/redirect',
+		perpetual:
+			'https://sandbox-api.polar.sh/v1/checkout-links/polar_cl_EnhiWWlhOfwqe6AvOKqzthoCzbQCAm0riCVGO2lNYHa/redirect'
+	};
+
+	const plans = [
+		{
+			id: 'monthly',
+			name: 'Monthly',
+			price: '$12',
+			cadence: '/month',
+			note: 'Billed monthly. Cancel anytime.',
+			href: CHECKOUT.monthly,
+			featured: false
+		},
+		{
+			id: 'annual',
+			name: 'Annual',
+			price: '$99',
+			cadence: '/year',
+			note: 'Best value — under $9/mo, billed yearly.',
+			href: CHECKOUT.annual,
+			featured: true
+		},
+		{
+			id: 'perpetual',
+			name: 'Perpetual',
+			price: '$299',
+			cadence: 'one-time',
+			note: 'Pay once. Yours forever, no subscription.',
+			href: CHECKOUT.perpetual,
+			featured: false
+		}
+	] as const;
 </script>
 
 <Seo
 	title="Pricing — Editmamei"
-	description="Editmamei pricing: Community is free for everyday photo editing. Pro adds the production toolkit for repeatable, professional work. Pro pricing coming soon."
+	description="Editmamei pricing: Community is free for everyday photo editing. Pro is $12/mo, $99/yr, or $299 once — the production toolkit for repeatable, professional work."
 	path="/pricing"
 />
 
@@ -13,14 +59,75 @@
 	<div class="mx-auto max-w-5xl px-4">
 		<p class="mb-2 text-xs font-semibold tracking-wider text-terracotta-ink uppercase">Pricing</p>
 		<h1 class="text-3xl font-bold tracking-tight text-neutral-950 md:text-4xl">
-			Free Community. Paid Pro for production work.
+			Free Community. One Pro tier for production work.
 		</h1>
 		<p class="mt-4 max-w-2xl text-base leading-relaxed text-neutral-700">
-			Editmamei Community is free. Pro adds the production toolkit for repeatable, professional
-			workflows. Community installs from the public npm registry; a Pro purchase delivers the Pro
-			build of the same package — install it over Community, restart your AI client, and the Pro
-			tools appear. Same CLI, same setup flow.
+			Editmamei Community is free, forever. Pro adds the production toolkit — pick monthly, annual,
+			or a one-time perpetual licence. One licence covers two of your devices, and Pro works offline
+			between check-ins. If a subscription lapses, Editmamei keeps running as Community — it never
+			locks you out of your work.
 		</p>
+	</div>
+</section>
+
+<!-- Early-adopter launch offer -->
+<section class="bg-white">
+	<div class="mx-auto max-w-5xl px-4">
+		<div
+			class="rounded-xl border border-terracotta/30 bg-terracotta/10 px-5 py-4 text-sm text-terracotta-ink"
+		>
+			<span class="font-semibold">Early-adopter launch offer.</span> First-wave supporters get a
+			standing discount — apply your code at checkout (try
+			<code class="font-mono font-semibold">EARLY25</code> in this preview).
+		</div>
+	</div>
+</section>
+
+<!-- Pro plan cards -->
+<section class="bg-white pt-8 pb-12 md:pt-10 md:pb-16">
+	<div class="mx-auto max-w-5xl px-4">
+		<div class="grid gap-6 md:grid-cols-3">
+			{#each plans as plan (plan.id)}
+				<div
+					class="flex flex-col rounded-2xl border bg-paper p-6 shadow-sm {plan.featured
+						? 'border-brand ring-1 ring-brand'
+						: 'border-neutral-200'}"
+				>
+					<div class="flex items-center justify-between">
+						<h2 class="text-lg font-semibold tracking-tight text-neutral-950">{plan.name}</h2>
+						{#if plan.featured}
+							<span class="rounded-full bg-brand px-2.5 py-0.5 text-xs font-semibold text-white"
+								>Best value</span
+							>
+						{/if}
+					</div>
+					<div class="mt-4 flex items-baseline gap-1">
+						<span class="text-4xl font-bold tracking-tight text-neutral-950">{plan.price}</span>
+						<span class="text-sm font-medium text-neutral-500">{plan.cadence}</span>
+					</div>
+					<p class="mt-2 min-h-10 text-sm leading-relaxed text-neutral-600">{plan.note}</p>
+					<a
+						href={plan.href}
+						class="mt-6 inline-flex items-center justify-center rounded-md px-5 py-3 text-sm font-semibold shadow-sm transition-colors {plan.featured
+							? 'bg-brand text-white hover:bg-brand-light'
+							: 'bg-neutral-900 text-white hover:bg-neutral-700'}"
+					>
+						Get Pro — {plan.name}
+					</a>
+				</div>
+			{/each}
+		</div>
+
+		{#if SANDBOX}
+			<p class="mt-6 text-center text-xs text-neutral-500">
+				Checkout runs in <span class="font-semibold">Polar test mode</span> on this preview — use a
+				<a
+					href="https://docs.stripe.com/testing#cards"
+					class="underline underline-offset-2 hover:text-brand"
+					rel="noopener">Stripe test card</a
+				> (e.g. 4242 4242 4242 4242). No real charge.
+			</p>
+		{/if}
 	</div>
 </section>
 
@@ -97,15 +204,11 @@
 <section class="bg-paper py-16 md:py-20">
 	<div class="mx-auto max-w-3xl px-4 text-center">
 		<h2 class="text-2xl font-bold tracking-tight text-neutral-950 md:text-3xl">
-			Start with Community — it's free.
+			Not sure yet? Start with Community — it's free.
 		</h2>
 		<p class="mx-auto mt-4 max-w-xl text-base leading-relaxed text-neutral-700">
-			Install from npm and start editing today. Pro pricing lands with the v1.0 launch — watch
-			<a
-				href="https://github.com/editmamei/editmamei-ce"
-				class="font-medium text-brand underline underline-offset-2 hover:text-brand-light"
-				>the repo</a
-			> for the announcement.
+			Install from npm and start editing today. Upgrade to Pro whenever you're ready — the Pro tools
+			unlock in the same package once your licence is active.
 		</p>
 		<div class="mt-8">
 			<a
