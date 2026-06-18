@@ -3,46 +3,45 @@
 	import Seo from '$lib/components/Seo.svelte';
 
 	// ──────────────────────────────────────────────────────────────────────
-	// SANDBOX checkout links (Polar test mode). Feature-branch preview only —
-	// this page is not deployed. At Pro launch, swap these three URLs for the
-	// PRODUCTION Polar checkout links and remove the test-mode notice below.
-	// Generated via POST /v1/checkout-links/ against the Etta-Test sandbox org.
+	// PRODUCTION Polar checkout links (org `editmamei`). Each link has the
+	// early-adopter discount pre-applied — checkout shows $9 / $79 / $199
+	// directly, no code needed. Regular list prices: $12 / $99 / $299.
+	// Created via POST /v1/checkout-links/.
 	// ──────────────────────────────────────────────────────────────────────
-	const SANDBOX = true;
 	const CHECKOUT = {
-		monthly:
-			'https://sandbox-api.polar.sh/v1/checkout-links/polar_cl_AYF74XTrnr2lpbhejzCUTb4rlmKvGBhk2gsiQ4QzxdB/redirect',
-		annual:
-			'https://sandbox-api.polar.sh/v1/checkout-links/polar_cl_3hnWx83Tiy6vzizFlJuegqIbM7QF25l3XY5rX1dBQJi/redirect',
-		perpetual:
-			'https://sandbox-api.polar.sh/v1/checkout-links/polar_cl_EnhiWWlhOfwqe6AvOKqzthoCzbQCAm0riCVGO2lNYHa/redirect'
+		monthly: 'https://buy.polar.sh/polar_cl_pgvSZTf2YwHmfTkRJl7ubotud3O59hKmEykhn1L3qZh',
+		annual: 'https://buy.polar.sh/polar_cl_ci0ZpYCKh1KNht5eS6xnvHYkRV7TcX1LDh13L1HGBZb',
+		perpetual: 'https://buy.polar.sh/polar_cl_Q7TCkUeGqGBmO5qfq2qaLMbtCiMXXKJtL9A014TEJw3'
 	};
 
 	const plans = [
 		{
 			id: 'monthly',
 			name: 'Monthly',
-			price: '$12',
+			price: '$9',
+			list: '$12',
 			cadence: '/month',
-			note: 'Billed monthly. Cancel anytime.',
+			note: 'Early-adopter rate, locked in for the life of your subscription.',
 			href: CHECKOUT.monthly,
 			featured: false
 		},
 		{
 			id: 'annual',
 			name: 'Annual',
-			price: '$99',
+			price: '$79',
+			list: '$99',
 			cadence: '/year',
-			note: 'Best value — under $9/mo, billed yearly.',
+			note: 'Best value — early-adopter rate, locked in for life.',
 			href: CHECKOUT.annual,
 			featured: true
 		},
 		{
 			id: 'perpetual',
 			name: 'Perpetual',
-			price: '$299',
+			price: '$199',
+			list: '$299',
 			cadence: 'one-time',
-			note: 'Pay once. Yours forever, no subscription.',
+			note: 'Pay once. Yours forever — early-adopter price.',
 			href: CHECKOUT.perpetual,
 			featured: false
 		}
@@ -76,9 +75,8 @@
 		<div
 			class="rounded-xl border border-terracotta/30 bg-terracotta/10 px-5 py-4 text-sm text-terracotta-ink"
 		>
-			<span class="font-semibold">Early-adopter launch offer.</span> First-wave supporters get a
-			standing discount — apply your code at checkout (try
-			<code class="font-mono font-semibold">EARLY25</code> in this preview).
+			<span class="font-semibold">Early-adopter launch pricing.</span> First-wave supporters lock in a
+			reduced rate for the life of their subscription — already applied below, no code needed.
 		</div>
 	</div>
 </section>
@@ -101,9 +99,10 @@
 							>
 						{/if}
 					</div>
-					<div class="mt-4 flex items-baseline gap-1">
+					<div class="mt-4 flex items-baseline gap-2">
 						<span class="text-4xl font-bold tracking-tight text-neutral-950">{plan.price}</span>
 						<span class="text-sm font-medium text-neutral-500">{plan.cadence}</span>
+						<span class="text-sm text-neutral-400 line-through">{plan.list}</span>
 					</div>
 					<p class="mt-2 min-h-10 text-sm leading-relaxed text-neutral-600">{plan.note}</p>
 					<a
@@ -117,17 +116,6 @@
 				</div>
 			{/each}
 		</div>
-
-		{#if SANDBOX}
-			<p class="mt-6 text-center text-xs text-neutral-500">
-				Checkout runs in <span class="font-semibold">Polar test mode</span> on this preview — use a
-				<a
-					href="https://docs.stripe.com/testing#cards"
-					class="underline underline-offset-2 hover:text-brand"
-					rel="noopener">Stripe test card</a
-				> (e.g. 4242 4242 4242 4242). No real charge.
-			</p>
-		{/if}
 	</div>
 </section>
 
