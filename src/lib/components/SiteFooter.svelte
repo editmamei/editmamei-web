@@ -23,7 +23,7 @@
 				<p class="text-xs font-semibold tracking-wider text-neutral-500 uppercase">Product</p>
 				<ul class="mt-3 space-y-2 text-sm text-neutral-700">
 					<li><a href="/product" class="hover:text-neutral-950">Product</a></li>
-					<li><a href="/pricing" class="hover:text-neutral-950">Pricing</a></li>
+					<li><a href="/pricing" class="hover:text-neutral-950">Plans</a></li>
 					<li><a href="/activate" class="hover:text-neutral-950">Activate Pro</a></li>
 					<li>
 						<a

@@ -56,7 +56,7 @@
 
 <section class="bg-white pt-12 pb-4 md:pt-16 md:pb-6">
 	<div class="mx-auto max-w-5xl px-4">
-		<p class="mb-2 text-xs font-semibold tracking-wider text-terracotta-ink uppercase">Pricing</p>
+		<p class="mb-2 text-xs font-semibold tracking-wider text-terracotta-ink uppercase">Plans</p>
 		<h1 class="text-3xl font-bold tracking-tight text-neutral-950 md:text-4xl">
 			Free Community. One Pro tier for production work.
 		</h1>
