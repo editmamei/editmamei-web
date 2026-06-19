@@ -22,7 +22,7 @@
 				<dt class="text-base font-semibold text-neutral-950">Support</dt>
 				<dd class="mt-2 text-sm leading-relaxed text-neutral-700">
 					For installation help, bug reports, and general questions, open a public issue on GitHub
-					first — the answer will help others too. For private matters, email
+					first, since the answer will help others too. For private matters, email
 					<a href="mailto:support@editmamei.com" class="underline hover:text-neutral-950"
 						>support@editmamei.com</a
 					>.

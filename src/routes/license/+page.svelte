@@ -2,7 +2,7 @@
 	<title>License — Editmamei</title>
 	<meta
 		name="description"
-		content="Editmamei license — proprietary. Free to install and use; redistribution, modification, and reverse engineering are reserved."
+		content="Editmamei is proprietary but free to install and use. Redistribution, modification, and reverse engineering are reserved."
 	/>
 	<meta name="robots" content="noindex" />
 </svelte:head>

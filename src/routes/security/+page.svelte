@@ -2,7 +2,7 @@
 	<title>Security — Editmamei</title>
 	<meta
 		name="description"
-		content="Editmamei security disclosures — coming soon. Email security@editmamei.com for responsible disclosure."
+		content="Editmamei security disclosures are coming soon. Email security@editmamei.com for responsible disclosure."
 	/>
 	<meta name="robots" content="noindex" />
 </svelte:head>

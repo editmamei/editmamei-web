@@ -6,7 +6,7 @@
 	<title>Privacy — Editmamei</title>
 	<meta
 		name="description"
-		content="What Editmamei does with your data: your photos aren't uploaded to us — only content-free usage you can audit and switch off. Previews go to your chosen AI."
+		content="What Editmamei does with your data: your photos aren't uploaded to us, only content-free usage you can audit and switch off. Previews go to your chosen AI."
 	/>
 	<meta name="robots" content="noindex" />
 </svelte:head>
@@ -21,7 +21,7 @@
 			Editmamei runs on your own computer and edits inside the Photoshop you already have. The
 			honest version is short: your photos aren't uploaded to us, and the only thing Editmamei sends
 			to its own servers is content-free usage you can audit and turn off. When your AI assistant
-			needs to see an edit, a downscaled preview goes to that assistant — covered below. A formal
+			needs to see an edit, a downscaled preview goes to that assistant, covered below. A formal
 			legal policy lands with the v1.0 launch; this page describes how the product behaves today.
 		</p>
 
@@ -92,7 +92,7 @@
 			The AI assistant you drive Editmamei with is a cloud service. When you ask it to look at an
 			image (for example, the visual-verification preview), a downscaled JPEG goes to
 			<em>that AI provider</em>, exactly as if you'd dropped the file into a chat with it. That's a
-			property of using a cloud AI, and a function of which assistant you choose. Not a hop
+			property of using a cloud AI, and a function of which assistant you choose, not a hop
 			Editmamei adds.
 		</p>
 
