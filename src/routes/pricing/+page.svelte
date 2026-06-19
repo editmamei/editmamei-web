@@ -50,7 +50,7 @@
 
 <Seo
 	title="Pricing — Editmamei"
-	description="Editmamei pricing: Community is free for everyday photo editing. Pro is $12/mo, $99/yr, or $299 once, the production toolkit for repeatable, professional work."
+	description="Editmamei pricing: Community is free for everyday photo editing. Pro is the production toolkit for repeatable, professional work, available monthly, annually, or as a one-time perpetual license."
 	path="/pricing"
 />
 

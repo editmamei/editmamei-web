@@ -11,7 +11,7 @@ export const pillars: Pillar[] = [
 	},
 	{
 		title: 'Recipes that reproduce',
-		body: 'A template is a reproducible aesthetic recipe. Apply it later to a different image and the AI reads the recipe’s reasoning to recreate the look on the new file. Editing decisions stop being one-shots. Applying, verifying, and recalling saved templates is free in every edition; authoring your own is a Pro feature.'
+		body: 'A template is a reproducible aesthetic recipe. Apply it later to a different image and the AI reads the recipe’s reasoning to recreate the look on the new file. Editing decisions stop being one-shots. The whole template system, authoring and applying alike, is a Pro feature.'
 	}
 ];
 
@@ -66,7 +66,7 @@ export const capabilities: Capability[] = [
 	},
 	{
 		title: 'Templates',
-		body: 'A reproducible aesthetic recipe. Every edition applies, verifies, and recalls saved templates. Pro adds the authoring side: capture session evidence, render before/after previews, and save a Claude-authored description of intent and pipeline that survives between sessions.',
+		body: "A reproducible aesthetic recipe: capture a finished edit, then apply it to new images later, where the AI re-derives each value for the new photo and self-judges against the recipe's exit criteria. The whole template system (create, save, apply, verify, recall) is a Pro feature.",
 		demo: {
 			kind: 'beforeAfter',
 			before: `${CITY}/original.jpg`,
@@ -97,11 +97,11 @@ export const workflowExamples: WorkflowExample[] = [
 			'The AI can call photoshop_get_preview at any step to see what the document looks like and adjust. Selection feedback tells it whether Select Subject actually worked or needs refinement. Select Subject is a Pro tool; Community covers Magic Wand, rectangle, and feather selections.'
 	},
 	{
-		title: 'Batch processing with a template',
+		title: 'Batch processing with a template (Pro)',
 		prompt:
 			"Apply my 'warm coastal' template to every image in E:\\Photos\\shells-raw\\, exporting flattened JPEGs to E:\\Photos\\shells-web\\ at 2000px square.",
 		outcome:
-			'The template captures a complete editing recipe; the AI applies it across an arbitrary set of files. Templates are how editing decisions become repeatable instead of one-shots.'
+			'Templates are a Pro feature. The recipe captures a complete editing approach, and the AI works through the folder image by image, re-deriving each value for the photo in front of it. Templates are how editing decisions become repeatable instead of one-shots.'
 	}
 ];
 
