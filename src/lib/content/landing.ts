@@ -3,15 +3,15 @@ import type { Capability, EditionRow, Pillar, WorkflowExample } from '$lib/types
 export const pillars: Pillar[] = [
 	{
 		title: 'The Photoshop you have, driven by language',
-		body: 'Editmamei drives the real Adobe Photoshop you already installed — the full program, not a hosted web app or a cloud copy. Your AI talks to the desktop, and your project files live there.'
+		body: 'Editmamei drives the real Adobe Photoshop you already installed: the full program, not a hosted web app or a cloud copy. Your AI talks to the desktop, and your project files live there.'
 	},
 	{
 		title: 'Non-destructive by default',
-		body: 'Adjustment layers, masks, groups — Editmamei builds the kind of layer stack a working editor builds. Everything stays editable, maskable, removable. Nothing bakes into pixels unless you ask.'
+		body: 'Adjustment layers, masks, groups. Editmamei builds the kind of layer stack a working editor builds. Everything stays editable, maskable, removable. Nothing bakes into pixels unless you ask.'
 	},
 	{
 		title: 'Recipes that reproduce',
-		body: 'A template is a reproducible aesthetic recipe — apply it later to a different image and the AI reads the recipe’s reasoning to recreate the look on the new file. Editing decisions stop being one-shots. Applying, verifying, and recalling saved templates is free in every edition; authoring your own is a Pro feature.'
+		body: 'A template is a reproducible aesthetic recipe. Apply it later to a different image and the AI reads the recipe’s reasoning to recreate the look on the new file. Editing decisions stop being one-shots. Applying, verifying, and recalling saved templates is free in every edition; authoring your own is a Pro feature.'
 	}
 ];
 
@@ -25,7 +25,7 @@ export const capabilities: Capability[] = [
 	},
 	{
 		title: 'Layers',
-		body: 'Create, duplicate, delete, rename, reorder, group, merge, flatten. Set opacity, blend mode, visibility, locking. The complete layer tree returns as JSON, so the AI always knows the document structure. Pro adds free layer transforms (move, scale, rotate, fit to document).',
+		body: 'Create, duplicate, delete, rename, reorder, group, merge, flatten. Set opacity, blend mode, visibility, locking. The complete layer tree returns as JSON, so the AI always knows the document structure. Move, scale, rotate, and fit-to-document transforms are included too.',
 		demo: { kind: 'layers', image: `${CITY}/original.jpg` }
 	},
 	{
@@ -35,7 +35,7 @@ export const capabilities: Capability[] = [
 	},
 	{
 		title: 'Non-destructive adjustments',
-		body: 'Curves, Levels, Hue/Saturation, Brightness/Contrast as adjustment layers — editable, maskable, removable. An active selection at call time becomes the new layer’s mask automatically.',
+		body: 'Curves, Levels, Hue/Saturation, Brightness/Contrast as adjustment layers: editable, maskable, removable. An active selection at call time becomes the new layer’s mask automatically.',
 		demo: {
 			kind: 'beforeAfter',
 			before: `${CITY}/original.jpg`,
@@ -66,7 +66,7 @@ export const capabilities: Capability[] = [
 	},
 	{
 		title: 'Templates',
-		body: 'A reproducible aesthetic recipe. Every edition applies, verifies, and recalls saved templates. Pro adds the authoring side — capture session evidence, render before/after previews, and save a Claude-authored description of intent and pipeline that survives between sessions.',
+		body: 'A reproducible aesthetic recipe. Every edition applies, verifies, and recalls saved templates. Pro adds the authoring side: capture session evidence, render before/after previews, and save a Claude-authored description of intent and pipeline that survives between sessions.',
 		demo: {
 			kind: 'beforeAfter',
 			before: `${CITY}/original.jpg`,

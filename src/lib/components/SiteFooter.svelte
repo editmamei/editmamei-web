@@ -7,8 +7,9 @@
 
 <footer class="border-t border-neutral-200 bg-paper">
 	<div class="mx-auto max-w-6xl px-4 py-12 md:py-16">
-		<div class="grid gap-8 md:grid-cols-4">
-			<div class="md:col-span-2">
+		<div class="grid gap-8 sm:grid-cols-2 md:grid-cols-5">
+			<!-- Brand + where to find us -->
+			<div class="sm:col-span-2">
 				<p class="text-base font-semibold tracking-tight text-neutral-900">Editmamei</p>
 				<p class="mt-2 max-w-md text-sm leading-relaxed text-neutral-600">
 					Unlock Photoshop with natural-language photo editing. AI orchestration, not generation.
@@ -17,50 +18,12 @@
 				<p class="mt-4 text-sm text-neutral-500 italic">
 					Pairs well with: a layered PSD, a willing AI, and a small bowl of edamame.
 				</p>
-			</div>
-
-			<div>
-				<p class="text-xs font-semibold tracking-wider text-neutral-500 uppercase">Product</p>
-				<ul class="mt-3 space-y-2 text-sm text-neutral-700">
-					<li><a href="/product" class="hover:text-neutral-950">Product</a></li>
-					<li><a href="/pricing" class="hover:text-neutral-950">Plans</a></li>
-					<li><a href="/activate" class="hover:text-neutral-950">Activate Pro</a></li>
+				<ul class="mt-5 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-neutral-600">
 					<li>
 						<a
-							href={CUSTOMER_PORTAL_URL}
-							onclick={() => track('footer-outbound-portal')}
-							rel="noopener"
-							class="hover:text-neutral-950">Manage subscription</a
-						>
-					</li>
-					<li><a href="/faq" class="hover:text-neutral-950">FAQ</a></li>
-					<li><a href="/contact" class="hover:text-neutral-950">Contact</a></li>
-					<li>
-						<a
-							href="https://github.com/editmamei/editmamei-wiki/blob/main/CHANGELOG.md"
-							onclick={() => track('footer-outbound-changelog')}
-							class="hover:text-neutral-950">Changelog</a
-						>
-					</li>
-					<li><a href="/#demo" class="hover:text-neutral-950">Demo</a></li>
-				</ul>
-			</div>
-
-			<div>
-				<p class="text-xs font-semibold tracking-wider text-neutral-500 uppercase">Resources</p>
-				<ul class="mt-3 space-y-2 text-sm text-neutral-700">
-					<li>
-						<a
-							href="https://github.com/editmamei/editmamei-wiki#readme"
-							onclick={() => track('footer-outbound-docs')}
-							class="hover:text-neutral-950">Docs</a
-						>
-					</li>
-					<li>
-						<a
-							href="https://github.com/editmamei/editmamei-wiki/issues"
-							onclick={() => track('footer-outbound-issues')}
-							class="hover:text-neutral-950">Report a bug</a
+							href="https://github.com/editmamei"
+							onclick={() => track('footer-outbound-github')}
+							class="hover:text-neutral-950">GitHub</a
 						>
 					</li>
 					<li>
@@ -68,13 +31,6 @@
 							href="https://www.npmjs.com/package/editmamei"
 							onclick={() => track('footer-outbound-npm')}
 							class="hover:text-neutral-950">npm</a
-						>
-					</li>
-					<li>
-						<a
-							href="https://github.com/editmamei"
-							onclick={() => track('footer-outbound-github')}
-							class="hover:text-neutral-950">GitHub</a
 						>
 					</li>
 					<li>
@@ -101,6 +57,64 @@
 							Instagram
 						</a>
 					</li>
+				</ul>
+			</div>
+
+			<!-- Explore: the marketing pages -->
+			<div>
+				<p class="text-xs font-semibold tracking-wider text-neutral-500 uppercase">Explore</p>
+				<ul class="mt-3 space-y-2 text-sm text-neutral-700">
+					<li><a href="/product" class="hover:text-neutral-950">Product</a></li>
+					<li><a href="/pricing" class="hover:text-neutral-950">Plans</a></li>
+					<li><a href="/#demo" class="hover:text-neutral-950">Demo</a></li>
+				</ul>
+			</div>
+
+			<!-- Resources: read and learn -->
+			<div>
+				<p class="text-xs font-semibold tracking-wider text-neutral-500 uppercase">Resources</p>
+				<ul class="mt-3 space-y-2 text-sm text-neutral-700">
+					<li>
+						<a
+							href="https://github.com/editmamei/editmamei-wiki#readme"
+							onclick={() => track('footer-outbound-docs')}
+							class="hover:text-neutral-950">Docs</a
+						>
+					</li>
+					<li><a href="/faq" class="hover:text-neutral-950">FAQ</a></li>
+					<li>
+						<a
+							href="https://github.com/editmamei/editmamei-wiki/blob/main/CHANGELOG.md"
+							onclick={() => track('footer-outbound-changelog')}
+							class="hover:text-neutral-950">Changelog</a
+						>
+					</li>
+				</ul>
+			</div>
+
+			<!-- Account & support: licenses and help -->
+			<div>
+				<p class="text-xs font-semibold tracking-wider text-neutral-500 uppercase">
+					Account &amp; support
+				</p>
+				<ul class="mt-3 space-y-2 text-sm text-neutral-700">
+					<li><a href="/activate" class="hover:text-neutral-950">Activate Pro</a></li>
+					<li>
+						<a
+							href={CUSTOMER_PORTAL_URL}
+							onclick={() => track('footer-outbound-portal')}
+							rel="noopener"
+							class="hover:text-neutral-950">Manage subscription</a
+						>
+					</li>
+					<li>
+						<a
+							href="https://github.com/editmamei/editmamei-wiki/issues"
+							onclick={() => track('footer-outbound-issues')}
+							class="hover:text-neutral-950">Report a bug</a
+						>
+					</li>
+					<li><a href="/contact" class="hover:text-neutral-950">Contact</a></li>
 				</ul>
 			</div>
 		</div>

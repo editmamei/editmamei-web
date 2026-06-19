@@ -13,7 +13,7 @@
 				The full editing surface, exposed as tools.
 			</h2>
 			<p class="mt-3 text-base leading-relaxed text-neutral-700">
-				Eight categories, each shown as one real Photoshop tool run on the same photo — so the AI
+				Eight categories, each shown as one real Photoshop tool run on the same photo, so the AI
 				plans accurately and you can audit what it ran. Hover or tap a result to see the original.
 			</p>
 		</div>

@@ -62,7 +62,7 @@
 	// like a Photoshop panel — not a literal export).
 	const layerRows = [
 		{ name: 'Saturation +42', swatch: 'linear-gradient(135deg,#d98b3a,#7bb86a)' },
-		{ name: 'Sky — deepen', swatch: 'linear-gradient(180deg,#fff,#1c4a8a)' },
+		{ name: 'Deepen sky', swatch: 'linear-gradient(180deg,#fff,#1c4a8a)' },
 		{ name: 'Background blur', swatch: 'linear-gradient(135deg,#9aa0a6,#cfd4d9)' },
 		{ name: 'Background', swatch: 'linear-gradient(135deg,#6b7a52,#b6a98a)' }
 	];

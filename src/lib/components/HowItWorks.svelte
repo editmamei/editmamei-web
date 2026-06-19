@@ -76,7 +76,7 @@
 			msg: {
 				from: 'editmamei',
 				to: 'ai',
-				label: "structured result — what changed, what's now in the document"
+				label: "structured result: what changed, what's now in the document"
 			}
 		},
 		{
@@ -96,7 +96,7 @@
 				{
 					from: 'editmamei',
 					to: 'ai',
-					label: 'preview — the AI looks at the actual pixels'
+					label: 'preview: the AI looks at the actual pixels'
 				}
 			]
 		},
@@ -105,7 +105,7 @@
 			msg: {
 				from: 'ai',
 				to: 'you',
-				label: "done — your photo's ready, fully layered and editable",
+				label: "done: your photo's ready, fully layered and editable",
 				quote: true
 			}
 		}
@@ -295,7 +295,7 @@
 				Your files, your machine.
 			</h3>
 			<p class="mt-3 text-sm leading-relaxed text-neutral-700">
-				The editing runs in your own Photoshop, on your own computer — there's no Editmamei cloud
+				The editing runs in your own Photoshop, on your own computer. There's no Editmamei cloud
 				your library gets uploaded to. When your AI assistant needs to see the result, a downscaled
 				preview is sent to it (the cloud assistant you chose), the same as sharing a photo in a
 				chat. Editmamei's own telemetry is content-free: anonymous usage you can audit and switch

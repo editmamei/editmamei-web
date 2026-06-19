@@ -68,8 +68,8 @@ export interface HeroMovieScript {
 
 export const hawaiiMovie: HeroMovieScript = {
 	prompt:
-		'Make this Hawaii bay shot print-ready wall art — deepen the sky, richer water, warm the headland, 16:9 crop.',
-	aiAck: 'On it — opening it in your Photoshop and starting the layers.',
+		'Make this Hawaii bay shot print-ready wall art: deepen the sky, richer water, warm the headland, 16:9 crop.',
+	aiAck: 'On it. Opening it in your Photoshop and starting the layers.',
 	original: { src: `${DIR}/frame-00-original.webp` },
 	buildSteps: [
 		{ name: 'Tonal Base', kind: 'levels', frame: { src: `${DIR}/frame-01.webp` } },
@@ -78,7 +78,7 @@ export const hawaiiMovie: HeroMovieScript = {
 		{ name: 'Sky Blues', kind: 'hue-saturation', frame: { src: `${DIR}/frame-04.webp` } }
 	],
 	checkin: {
-		question: 'Quick check on the headland — too cool, or just right?',
+		question: 'Quick check on the headland: too cool, or just right?',
 		// frame-04 is the pre-warm state — deliberately cool, motivating "a touch warmer".
 		coolFrame: { src: `${DIR}/frame-04.webp` },
 		userReply: 'A touch warmer.'
@@ -102,7 +102,7 @@ export const hawaiiMovie: HeroMovieScript = {
 		kind: 'pixel',
 		frame: { src: `${DIR}/frame-09-final.webp` }
 	},
-	caption: 'Done — fully layered, every step yours to adjust.'
+	caption: 'Done. Fully layered, every step yours to adjust.'
 };
 
 /**

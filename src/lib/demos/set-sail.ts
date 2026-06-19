@@ -29,7 +29,7 @@ export const setSail: Demo = {
 			name: 'Vibrancy Boost',
 			kind: 'hue-saturation',
 			summary:
-				'Master saturation lift, plus a targeted push on Blues and Cyans — the sky deepens toward cobalt, the ocean reads as richer teal. Warm tones are left alone so skin and rigging stay natural.'
+				'Master saturation lift, plus a targeted push on Blues and Cyans. The sky deepens toward cobalt, the ocean reads as richer teal. Warm tones are left alone so skin and rigging stay natural.'
 		},
 		{
 			name: 'Golden Hour Warmth',
@@ -60,7 +60,7 @@ export const setSail: Demo = {
 			name: 'High-Pass Sharpening',
 			kind: 'pixel',
 			summary:
-				'Capture sharpening done the editorial way — a duplicate of the original run through High Pass at 1.2px radius, blended on Overlay at 65%. Crisp rigging, no halos.'
+				'Capture sharpening done the editorial way: a duplicate of the original run through High Pass at 1.2px radius, blended on Overlay at 65%. Crisp rigging, no halos.'
 		},
 		{
 			name: 'Focus Vignette',

@@ -30,11 +30,11 @@
 				The demo · Hawaii bay wall art
 			</p>
 			<h2 class="text-2xl font-bold tracking-tight text-neutral-950 md:text-3xl">
-				Watch it build the edit — layer by layer, checking in with you.
+				Watch it build the edit, layer by layer, checking in with you.
 			</h2>
 			<p class="mt-3 text-base leading-relaxed text-neutral-700">
 				You describe the look. The AI opens your Photoshop, builds the adjustment layers one at a
-				time, pauses to confirm a judgment call, then finishes — every step a real, editable layer.
+				time, pauses to confirm a judgment call, then finishes. Every step a real, editable layer.
 			</p>
 		</div>
 
@@ -66,7 +66,7 @@
 					afterAlt={demo.afterAlt}
 				/>
 				<p class="mt-3 text-xs text-neutral-600">
-					Drag the bar — or use ← → on the keyboard — to compare. Left of the line is the finished
+					Drag the bar (or use ← → on the keyboard) to compare. Left of the line is the finished
 					edit; right is the original.
 				</p>
 			</div>
@@ -74,7 +74,7 @@
 			<aside>
 				<div class="rounded-2xl border border-neutral-200 bg-white p-4 shadow-lg md:p-5">
 					<p class="mb-3 text-xs font-semibold tracking-wider text-terracotta-ink uppercase">
-						Layer stack — built non-destructively
+						Layer stack, built non-destructively
 					</p>
 					<LayerAccordion layers={demo.layers} />
 				</div>

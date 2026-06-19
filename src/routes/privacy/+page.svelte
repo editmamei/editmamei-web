@@ -119,7 +119,7 @@
 				href="https://clarity.microsoft.com"
 				rel="noopener noreferrer"
 				class="underline hover:text-neutral-950">Microsoft Clarity</a
-			> for analytics — session recordings and heatmaps that help us understand how visitors use the site.
+			> for analytics: session recordings and heatmaps that help us understand how visitors use the site.
 			Clarity operates in two modes depending on your consent:
 		</p>
 		<ul class="mt-4 space-y-2 text-sm leading-relaxed text-neutral-700">

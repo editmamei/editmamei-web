@@ -12,7 +12,7 @@
 				Photoshop, but the AI does the menus.
 			</h2>
 			<p class="mt-3 text-base leading-relaxed text-neutral-700">
-				Editmamei gives your AI assistant a working photographer's toolkit inside Photoshop —
+				Editmamei gives your AI assistant a working photographer's toolkit inside Photoshop:
 				documents, layers, selections, adjustments, filters. Your AI calls them as building blocks
 				in service of what you actually want done, instead of you hunting through menus.
 			</p>

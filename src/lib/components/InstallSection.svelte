@@ -53,7 +53,7 @@
 				</p>
 				<h3 class="mt-2 text-lg font-bold tracking-tight text-white">One-click install</h3>
 				<p class="mt-2 text-sm leading-relaxed text-neutral-300">
-					No terminal, nothing to configure — Claude Desktop ships its own runtime. Download the
+					No terminal, nothing to configure. Claude Desktop ships its own runtime. Download the
 					extension and add it from Settings.
 				</p>
 				<a
@@ -103,21 +103,19 @@
 			<div class="rounded-xl border border-brand-light bg-brand-deep/60 p-5">
 				<h3 class="text-sm font-semibold tracking-tight text-white">Requirements</h3>
 				<ul class="mt-3 space-y-1.5 text-sm text-neutral-300">
-					<li>Adobe Photoshop 2026 (v27.x) &mdash; earlier versions unverified</li>
+					<li>Adobe Photoshop 2026, internal version 27.x (earlier versions unverified)</li>
 					<li>Windows 10/11 or macOS 12+ (Apple Silicon or Intel)</li>
-					<li>
-						Node.js 20+ &mdash; only for the npm path (Claude Desktop bundles its own runtime)
-					</li>
+					<li>Node.js 20+, only for the npm path (Claude Desktop bundles its own runtime)</li>
 					<li>An MCP-compatible AI client</li>
 				</ul>
 			</div>
 			<div class="rounded-xl border border-brand-light bg-brand-deep/60 p-5">
 				<h3 class="text-sm font-semibold tracking-tight text-white">Supported clients</h3>
 				<ul class="mt-3 space-y-1.5 text-sm text-neutral-300">
-					<li>Claude Desktop &mdash; one-click <span class="text-neutral-500">(.mcpb)</span></li>
-					<li>Claude Code &mdash; npm</li>
-					<li>Cursor &mdash; npm</li>
-					<li>Any other MCP host &mdash; npm</li>
+					<li>Claude Desktop: one-click <span class="text-neutral-500">(.mcpb)</span></li>
+					<li>Claude Code: npm</li>
+					<li>Cursor: npm</li>
+					<li>Any other MCP host: npm</li>
 				</ul>
 			</div>
 		</div>
