@@ -5,7 +5,7 @@
 	// Stable "latest release" asset URL — always resolves to the newest published
 	// release, so a new version never needs a site edit.
 	const MCPB_URL =
-		'https://github.com/editmamei/editmamei-ce/releases/latest/download/editmamei.mcpb';
+		'https://github.com/editmamei/editmamei-wiki/releases/latest/download/editmamei.mcpb';
 
 	// Highest-intent pre-conversion signal for the npm path: the visitor
 	// highlighted the command snippet, almost certainly to copy it. (Download
@@ -125,7 +125,7 @@
 		<p class="mt-8 text-sm text-neutral-400">
 			Full setup walkthrough in the
 			<a
-				href="https://github.com/editmamei/editmamei-ce/blob/main/docs/getting-started.md"
+				href="https://github.com/editmamei/editmamei-wiki/blob/main/docs/getting-started.md"
 				class="font-semibold text-accent underline decoration-accent/40 underline-offset-4 hover:decoration-accent"
 				>Getting Started guide</a
 			>.

@@ -1,6 +1,6 @@
 # editmamei-web
 
-The marketing site for [Editmamei](https://editmamei.com) — natural-language photo editing that drives your own Adobe Photoshop through an MCP server. This repo is the landing page only; the product source is private, and the public docs + changelog live at [editmamei/editmamei-ce](https://github.com/editmamei/editmamei-ce).
+The marketing site for [Editmamei](https://editmamei.com) — natural-language photo editing that drives your own Adobe Photoshop through an MCP server. This repo is the landing page only; the product source is private, and the public docs + changelog live at [editmamei/editmamei-wiki](https://github.com/editmamei/editmamei-wiki).
 
 SvelteKit 5 + Vite + Tailwind v4 + TypeScript, fully static (`@sveltejs/adapter-static`), deployed to GitHub Pages on push to `main`.
 

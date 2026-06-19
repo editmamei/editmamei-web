@@ -51,13 +51,13 @@
 			Not sure? Start in Desktop. The first time you feel a session getting slow, switch to Code.
 			The
 			<a
-				href="https://github.com/editmamei/editmamei-ce/blob/main/docs/faq.md#which-ai-client-should-i-use"
+				href="https://github.com/editmamei/editmamei-wiki/blob/main/docs/faq.md#which-ai-client-should-i-use"
 				class="font-semibold text-neutral-900 underline decoration-neutral-300 underline-offset-4 hover:decoration-neutral-700"
 				>FAQ</a
 			>
 			and the
 			<a
-				href="https://github.com/editmamei/editmamei-ce/blob/main/docs/installation.md#claude-code"
+				href="https://github.com/editmamei/editmamei-wiki/blob/main/docs/installation.md#claude-code"
 				class="font-semibold text-neutral-900 underline decoration-neutral-300 underline-offset-4 hover:decoration-neutral-700"
 				>installation guide</a
 			>

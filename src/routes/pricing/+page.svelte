@@ -102,7 +102,7 @@
 		<p class="mx-auto mt-4 max-w-xl text-base leading-relaxed text-neutral-700">
 			Install from npm and start editing today. Pro pricing lands with the v1.0 launch — watch
 			<a
-				href="https://github.com/editmamei/editmamei-ce"
+				href="https://github.com/editmamei/editmamei-wiki"
 				class="font-medium text-brand underline underline-offset-2 hover:text-brand-light"
 				>the repo</a
 			> for the announcement.

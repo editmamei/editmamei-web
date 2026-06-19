@@ -29,7 +29,7 @@
 				</dd>
 				<dd class="mt-3">
 					<a
-						href="https://github.com/editmamei/editmamei-ce/issues"
+						href="https://github.com/editmamei/editmamei-wiki/issues"
 						class="inline-flex items-center gap-1.5 rounded-md border border-neutral-300 bg-white px-4 py-2 text-sm font-semibold text-neutral-800 transition-colors hover:border-neutral-400 hover:bg-neutral-50"
 					>
 						Open an issue on GitHub ↗
@@ -59,7 +59,7 @@
 				<dd class="mt-2 text-sm leading-relaxed text-neutral-700">
 					The
 					<a
-						href="https://github.com/editmamei/editmamei-ce#readme"
+						href="https://github.com/editmamei/editmamei-wiki#readme"
 						class="underline hover:text-neutral-950">README on GitHub</a
 					>
 					covers installation, configuration, and all available tools. Common setup questions are also

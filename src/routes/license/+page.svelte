@@ -2,7 +2,7 @@
 	<title>License — Editmamei</title>
 	<meta
 		name="description"
-		content="Editmamei license — coming soon. Proprietary today with a 24-month abandonment-to-MIT clause."
+		content="Editmamei license — proprietary. Free to install and use; redistribution, modification, and reverse engineering are reserved."
 	/>
 	<meta name="robots" content="noindex" />
 </svelte:head>
@@ -17,13 +17,14 @@
 			web version lands with v1.0.
 		</p>
 		<p class="mt-3 text-base leading-relaxed text-neutral-700">
-			Short version: Editmamei is proprietary today. If it goes unmaintained for 24 months, the
-			license automatically converts to MIT. Third-party attribution lives in
+			Short version: Editmamei is proprietary. You're free to install and use it at no charge, for
+			personal or commercial work; redistribution, modification, and reverse engineering are
+			reserved, and Pro features need a paid license. Third-party attribution lives in
 			<code class="rounded bg-neutral-100 px-1.5 py-0.5 font-mono text-sm">NOTICES.md</code>.
 		</p>
 		<div class="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
 			<a
-				href="https://github.com/editmamei/editmamei-ce#readme"
+				href="https://github.com/editmamei/editmamei-wiki#readme"
 				class="inline-flex items-center justify-center rounded-md bg-neutral-900 px-5 py-3 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-neutral-800"
 			>
 				Read the docs

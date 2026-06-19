@@ -95,7 +95,7 @@
 		<div class="mt-16 border-t border-neutral-200 pt-8">
 			<p class="text-sm text-neutral-600">
 				Still have questions? See the full <a
-					href="https://github.com/editmamei/editmamei-ce/blob/main/docs/faq.md"
+					href="https://github.com/editmamei/editmamei-wiki/blob/main/docs/faq.md"
 					class="underline hover:text-neutral-950">documentation on GitHub</a
 				>
 				or <a href="/contact" class="underline hover:text-neutral-950">get in touch</a>.

@@ -27,7 +27,7 @@
 					<li><a href="/contact" class="hover:text-neutral-950">Contact</a></li>
 					<li>
 						<a
-							href="https://github.com/editmamei/editmamei-ce/blob/main/CHANGELOG.md"
+							href="https://github.com/editmamei/editmamei-wiki/blob/main/CHANGELOG.md"
 							onclick={() => track('footer-outbound-changelog')}
 							class="hover:text-neutral-950">Changelog</a
 						>
@@ -41,14 +41,14 @@
 				<ul class="mt-3 space-y-2 text-sm text-neutral-700">
 					<li>
 						<a
-							href="https://github.com/editmamei/editmamei-ce#readme"
+							href="https://github.com/editmamei/editmamei-wiki#readme"
 							onclick={() => track('footer-outbound-docs')}
 							class="hover:text-neutral-950">Docs</a
 						>
 					</li>
 					<li>
 						<a
-							href="https://github.com/editmamei/editmamei-ce/issues"
+							href="https://github.com/editmamei/editmamei-wiki/issues"
 							onclick={() => track('footer-outbound-issues')}
 							class="hover:text-neutral-950">Report a bug</a
 						>
