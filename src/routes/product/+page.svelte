@@ -19,8 +19,8 @@
 			The full editing surface.
 		</h1>
 		<p class="mt-4 max-w-2xl text-base leading-relaxed text-neutral-700">
-			What Editmamei does, broken out: the pillars of the toolkit, every capability category,
-			and prompts that work today. For the elevator pitch, see <a
+			What Editmamei does, broken out: the pillars of the toolkit, every capability category, and
+			prompts that work today. For the elevator pitch, see <a
 				href="/"
 				class="font-semibold text-neutral-900 underline decoration-neutral-300 underline-offset-4 hover:decoration-neutral-700"
 				>the home page</a

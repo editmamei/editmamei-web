@@ -18,7 +18,7 @@
 			Activate your Pro license
 		</h1>
 		<p class="mt-4 max-w-2xl text-base leading-relaxed text-neutral-700">
-			Thanks for going Pro. Activation takes about a minute — find your key, enter it the way that
+			Thanks for going Pro. Activation takes about a minute. Find your key, enter it the way that
 			matches how you run Editmamei, and restart. Your Pro tools then appear in your AI client.
 		</p>
 
@@ -33,7 +33,7 @@
 				>Open your account portal →</a
 			>
 			to update payment, cancel, view invoices, or remove a device. Sign in with the email you purchased
-			with — no password needed.
+			with, no password needed.
 		</div>
 	</div>
 </section>
@@ -126,9 +126,9 @@
 			<div>
 				<h2 class="text-xl font-semibold tracking-tight text-neutral-950">Confirm Pro is on</h2>
 				<p class="mt-2 text-base leading-relaxed text-neutral-700">
-					After the restart, the Pro tools appear in your AI client — the reproducible-template
-					system, the Sensei-backed selections, and Photoshop Actions &amp; scripting. If they're
-					not there yet, double-check the key and that you fully restarted the client.
+					After the restart, the Pro tools appear in your AI client: the reproducible-template
+					system, the Sensei-backed selections, and Photoshop Actions and scripting. If they're not
+					there yet, double-check the key and that you fully restarted the client.
 				</p>
 			</div>
 		</div>
@@ -147,7 +147,7 @@
 					<code class="rounded bg-neutral-100 px-1.5 py-0.5 font-mono text-sm"
 						>editmamei deactivate</code
 					>
-					on the old one — or remove it from your
+					on the old one, or remove it from your
 					<a
 						href={CUSTOMER_PORTAL_URL}
 						rel="noopener"
@@ -165,7 +165,7 @@
 			<li class="flex gap-3">
 				<span class="text-brand">•</span><span
 					><strong>It never locks you out.</strong> If a subscription lapses, Editmamei keeps running
-					as free Community — your work and settings are untouched. Renew and Pro switches back on.</span
+					as free Community, and your work and settings are untouched. Renew and Pro switches back on.</span
 				>
 			</li>
 		</ul>
