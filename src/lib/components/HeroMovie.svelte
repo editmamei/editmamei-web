@@ -260,11 +260,36 @@
 				runToken++;
 			};
 		}
+		let disposed = false;
+
+		// Begin only once the thread is calm: fonts loaded (so the swap can't
+		// relayout mid-type) and the browser reports idle time. Started eagerly on
+		// load, the rAF-driven typewriter competes with hydration / font / image
+		// work and stutters ("slow and intermittent at first"). timeout caps the
+		// wait so a never-idle thread still starts the movie.
+		const whenIdle = (cb: () => void) =>
+			typeof window.requestIdleCallback === 'function'
+				? window.requestIdleCallback(cb, { timeout: 600 })
+				: window.setTimeout(cb, 1);
+		const startWhenCalm = () => {
+			const begin = () => {
+				if (!disposed) play();
+			};
+			if (document.fonts?.ready) {
+				document.fonts.ready.then(() => {
+					if (!disposed) whenIdle(begin);
+				});
+			} else {
+				whenIdle(begin);
+			}
+		};
+
 		const el = rootEl;
 		if (!el || typeof IntersectionObserver === 'undefined') {
 			// No ref yet or no IO support → fall back to immediate autoplay.
-			play();
+			startWhenCalm();
 			return () => {
+				disposed = true;
 				runToken++;
 			};
 		}
@@ -272,7 +297,7 @@
 			(entries) => {
 				if (entries.some((e) => e.isIntersecting) && !hasStarted) {
 					hasStarted = true;
-					play();
+					startWhenCalm();
 					io.disconnect();
 				}
 			},
@@ -280,6 +305,7 @@
 		);
 		io.observe(el);
 		return () => {
+			disposed = true;
 			io.disconnect();
 			runToken++; // cancel any in-flight run on teardown
 		};

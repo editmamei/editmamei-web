@@ -83,19 +83,34 @@
 			BRAND_VOICE_GUIDE.md §12 is about the npm package, not the website).
 		-->
 		<script type="text/javascript">
-			(function (c, l, a, r, i, t, y) {
+			(function (c, l, a, r, i) {
+				// Install the stub + queue synchronously so track()/setConsent()
+				// calls buffer until the real script evaluates, and pin cookieless
+				// mode immediately (EU-safe default).
 				c[a] =
 					c[a] ||
 					function () {
 						(c[a].q = c[a].q || []).push(arguments);
 					};
-				t = l.createElement(r);
-				t.async = 1;
-				t.src = 'https://www.clarity.ms/tag/' + i;
-				y = l.getElementsByTagName(r)[0];
-				y.parentNode.insertBefore(t, y);
+				c[a]('consent', false);
+				// Defer the heavy session-replay script OFF the critical path. Loaded
+				// eagerly it contends with hydration + the hero animation on first
+				// paint, stuttering the opening typewriter (rAF-driven, so it's
+				// starved when the main thread is busy). Inject when the thread is
+				// idle (or after 3s at the latest); queued calls replay on load.
+				var inject = function () {
+					var t = l.createElement(r);
+					t.async = 1;
+					t.src = 'https://www.clarity.ms/tag/' + i;
+					var y = l.getElementsByTagName(r)[0];
+					y.parentNode.insertBefore(t, y);
+				};
+				if (c.requestIdleCallback) {
+					c.requestIdleCallback(inject, { timeout: 3000 });
+				} else {
+					c.setTimeout(inject, 2000);
+				}
 			})(window, document, 'clarity', 'script', 'wzto9hvwmu');
-			window.clarity('consent', false);
 		</script>
 
 		%sveltekit.head%
