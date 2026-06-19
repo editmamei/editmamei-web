@@ -30,7 +30,7 @@
 		<a
 			href="/"
 			class="flex items-center gap-2.5 font-bold tracking-tight text-neutral-900"
-			aria-label="Editmamei — home"
+			aria-label="Editmamei home"
 		>
 			<img src="/icons/icon-64.png" alt="" width="32" height="32" class="size-8 shrink-0" />
 			<span class="text-lg">Editmamei</span>

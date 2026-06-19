@@ -34,7 +34,7 @@
 			<p class="mt-3 text-base leading-relaxed text-neutral-700">
 				Community installs free from npm. Pro is the same <code class="text-[0.85em]"
 					>editmamei</code
-				> package delivered as its own build with your license — install it over Community, restart your
+				> package delivered as its own build with your license: install it over Community, restart your
 				AI client, and the Pro tools appear.
 			</p>
 		</div>

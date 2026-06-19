@@ -12,15 +12,15 @@
 		},
 		{
 			q: 'Do I need Photoshop to use Editmamei?',
-			a: 'Yes. Editmamei drives your own copy of Adobe Photoshop — it is not a replacement for it. You need an active Photoshop license and an installation on the same computer.'
+			a: 'Yes. Editmamei drives your own copy of Adobe Photoshop. It is not a replacement for it. You need an active Photoshop license and an installation on the same computer.'
 		},
 		{
 			q: 'Does Editmamei upload my photos?',
-			a: "Your photo files stay on your machine. The editing happens inside your own Photoshop. When you ask your AI assistant to look at a preview, a small downscaled version goes to that AI provider — the same as if you'd dropped the file into a chat with it. That's a property of which AI assistant you choose, not something Editmamei adds."
+			a: "Your photo files stay on your machine. The editing happens inside your own Photoshop. When you ask your AI assistant to look at a preview, a small downscaled version goes to that AI provider, the same as if you'd dropped the file into a chat with it. That's a property of which AI assistant you choose, not something Editmamei adds."
 		},
 		{
 			q: 'What data does Editmamei collect?',
-			a: "Nothing about the content of your edits goes to us — no images, documents, or file paths. Editmamei does send anonymous, content-free usage data — which tools ran, whether they succeeded, how long they took — so a small team can see what works and what breaks. It's on by default, documented field by field, and you can switch it off in your settings. (Separately, when your AI assistant needs to see an edit, a downscaled preview goes to that assistant — see the question above.) Full breakdown on the privacy page."
+			a: "Nothing about the content of your edits goes to us: no images, documents, or file paths. Editmamei does send anonymous, content-free usage data (which tools ran, whether they succeeded, how long they took) so a small team can see what works and what breaks. It's on by default, documented field by field, and you can switch it off in your settings. (Separately, when your AI assistant needs to see an edit, a downscaled preview goes to that assistant. See the question above.) Full breakdown on the privacy page."
 		},
 		{
 			q: 'Which AI clients work with Editmamei?',
@@ -28,7 +28,7 @@
 		},
 		{
 			q: 'Is Editmamei free?',
-			a: 'The Community Edition is free. Install it from npm and use the full core toolkit at no cost. The Pro Edition adds tools for production workflows — the reproducible-template system, AI-backed subject selections, and Photoshop Actions + scripting — and requires a paid license.'
+			a: 'The Community Edition is free. Install it from npm and use the full core toolkit at no cost. The Pro Edition adds tools for production workflows (the reproducible-template system, AI-backed subject selections, and Photoshop Actions and scripting) and requires a paid license.'
 		},
 		{
 			q: 'Does Editmamei use generative AI to create or alter pixels?',
