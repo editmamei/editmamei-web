@@ -26,7 +26,8 @@ const ROUTES: Array<{ path: string; priority: string; changefreq: string }> = [
 	{ path: '/product', priority: '0.8', changefreq: 'weekly' },
 	{ path: '/pricing', priority: '0.8', changefreq: 'monthly' },
 	{ path: '/faq', priority: '0.7', changefreq: 'monthly' },
-	{ path: '/contact', priority: '0.5', changefreq: 'yearly' }
+	{ path: '/contact', priority: '0.5', changefreq: 'yearly' },
+	{ path: '/activate', priority: '0.5', changefreq: 'monthly' }
 ];
 
 export const GET: RequestHandler = () => {

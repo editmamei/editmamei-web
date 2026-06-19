@@ -49,7 +49,7 @@
 				<a
 					href="/pricing"
 					class="rounded-md px-3 py-1.5 text-sm font-medium text-neutral-700 transition-colors hover:bg-neutral-100 hover:text-neutral-950"
-					>Pricing</a
+					>Plans</a
 				>
 			</nav>
 
@@ -111,7 +111,7 @@
 									href="/pricing"
 									onclick={closeMenu}
 									class="block px-4 py-2.5 text-sm text-neutral-800 hover:bg-neutral-50 hover:text-neutral-950"
-									>Pricing</a
+									>Plans</a
 								>
 							</li>
 						</ul>
