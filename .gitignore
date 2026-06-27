@@ -4,6 +4,8 @@ CLAUDE.md
 AGENTS.md
 .cursorrules
 .cursor/
+# Codegraph local symbol index — per-machine, rebuilt by the file watcher
+.codegraph/
 
 node_modules
 
