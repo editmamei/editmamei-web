@@ -38,8 +38,15 @@ const SELF_PATH = fileURLToPath(import.meta.url);
 // Auto-generated from Editmamei/src/core/tool-tiers.ts (entries
 // classified 'dev' or 'none'). Do NOT hand-edit — re-run
 // `npm run sync:leak-guard` from Editmamei to refresh.
-// Source: 2 dev/none tier names at sync time.
-const BLOCKED = ['photoshop_apply_brush_stroke', 'photoshop_release_clipping_mask'];
+// Source: 6 dev/none tier names at sync time.
+const BLOCKED = [
+	'photoshop_apply_brush_stroke',
+	'photoshop_object',
+	'photoshop_portrait_touchup',
+	'photoshop_release_clipping_mask',
+	'photoshop_stroke_face_contour',
+	'photoshop_text_on_object'
+];
 // === END AUTO-GENERATED BLOCKED ===
 
 const SCAN_ROOTS = ['src', 'static', 'README.md'];
