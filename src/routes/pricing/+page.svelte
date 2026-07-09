@@ -131,12 +131,15 @@
 		</h2>
 		<p class="mt-4 text-base leading-relaxed text-neutral-700">
 			Community covers the everyday editing surface: documents, layers, the standard adjustments and
-			filters, masks, selections, history, and visual verification with per-channel histograms. It
-			also includes straightening and layer transforms, and content-aware retouch (Content-Aware
-			Fill, Patch, Content-Aware Move). For most one-off photo edits, that is the full kit.
+			filters, masks, selections (including Photoshop's AI Select Subject and Select Sky), shape
+			layers and pen paths, on-device scene awareness, history, and visual verification with
+			per-channel histograms. It also includes straightening and layer transforms, and content-aware
+			retouch (Content-Aware Fill, Patch, Content-Aware Move). For most one-off photo edits, that is
+			the full kit.
 		</p>
 		<p class="mt-4 text-base leading-relaxed text-neutral-700">
-			Pro adds the upgrades that matter once you're doing repeatable, production work:
+			Pro adds the develop-grade and precision toolkit, the upgrades that matter once you're doing
+			detailed or repeatable work:
 		</p>
 
 		<ul class="mt-6 space-y-5">
@@ -151,13 +154,32 @@
 			</li>
 			<li class="rounded-xl border border-neutral-200 bg-paper p-5">
 				<h3 class="text-base font-semibold tracking-tight text-neutral-950">
-					Sensei-backed selections
+					Camera Raw develop, re-editable
 				</h3>
 				<p class="mt-2 text-sm leading-relaxed text-neutral-700">
-					Select Subject and Select Sky, Photoshop's AI-assisted selection tools. Community ships
-					every other selection method (Magic Wand, rectangle, feather). Pro adds the Sensei pair,
-					which matters most when the AI needs to isolate a complex subject without you nudging the
-					selection by hand.
+					The Camera Raw panel as a re-editable Smart Filter: white balance, tone, clarity, dehaze,
+					HSL, color grading, optics, grain. The part that matters is the re-edit. Ask for "a touch
+					less dehaze" a day later and the AI reads the applied settings, changes that one value,
+					and reapplies. Nothing else moves, and nothing bakes into pixels.
+				</p>
+			</li>
+			<li class="rounded-xl border border-neutral-200 bg-paper p-5">
+				<h3 class="text-base font-semibold tracking-tight text-neutral-950">
+					Precision that lands where you say
+				</h3>
+				<p class="mt-2 text-sm leading-relaxed text-neutral-700">
+					The AI names a location the way you would (under the left eye, along the roofline, halfway
+					between two boats). Local computer vision finds the anchors, a deterministic resolver
+					computes the exact pixels, and an objective check runs before anything is applied, then
+					drives the warps from it. Placements are measured, not eyeballed.
+				</p>
+			</li>
+			<li class="rounded-xl border border-neutral-200 bg-paper p-5">
+				<h3 class="text-base font-semibold tracking-tight text-neutral-950">Deep local vision</h3>
+				<p class="mt-2 text-sm leading-relaxed text-neutral-700">
+					A 468-point face mesh with feature-precise selections (eyes, teeth, skin, lips), and
+					named-object masks that turn "select the surfboard" into a real, organic selection via
+					local segmentation. All of it runs on your machine.
 				</p>
 			</li>
 			<li class="rounded-xl border border-neutral-200 bg-paper p-5">
@@ -183,9 +205,8 @@
 		</ul>
 
 		<p class="mt-6 text-base leading-relaxed text-neutral-700">
-			Rule of thumb: if you mostly do <em>one-off</em> editing, Community is the full toolkit. If you
-			want to save a look and re-apply it across a shoot, batch real client work, or reach for Sensei
-			selections, Actions, and scripting, that's Pro.
+			Rule of thumb: Community edits photos. Pro develops them, places things precisely, and turns a
+			look into a repeatable recipe.
 		</p>
 	</div>
 </section>
@@ -196,8 +217,8 @@
 			Not sure yet? Start with Community. It's free.
 		</h2>
 		<p class="mx-auto mt-4 max-w-xl text-base leading-relaxed text-neutral-700">
-			Install from npm and start editing today. Upgrade to Pro whenever you're ready. The Pro tools
-			unlock in the same package once your license is active.
+			Install from npm and start editing today. Upgrade to Pro whenever you're ready. Activating
+			your license downloads the signed Pro module and loads it alongside Community after a restart.
 		</p>
 		<div class="mt-8">
 			<a

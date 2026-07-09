@@ -126,9 +126,10 @@
 			<div>
 				<h2 class="text-xl font-semibold tracking-tight text-neutral-950">Confirm Pro is on</h2>
 				<p class="mt-2 text-base leading-relaxed text-neutral-700">
-					After the restart, the Pro tools appear in your AI client: the reproducible-template
-					system, the Sensei-backed selections, and Photoshop Actions and scripting. If they're not
-					there yet, double-check the key and that you fully restarted the client.
+					After the restart, the Pro tools appear in your AI client: Camera Raw develop, precision
+					placement, named-object masks and face-feature selections, warp, the reproducible-template
+					system, and Photoshop Actions and scripting. If they're not there yet, double-check the
+					key and that you fully restarted the client.
 				</p>
 			</div>
 		</div>

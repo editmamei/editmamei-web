@@ -21,8 +21,8 @@
 		</p>
 
 		<p class="mt-4 text-sm text-neutral-500 italic md:text-base">
-			(Pronounced like <span class="font-medium text-neutral-700 not-italic">edamame</span>. Yes,
-			the snack.)
+			(It's <span class="font-medium text-neutral-700 not-italic">edit</span> plus the tail of
+			<span class="font-medium text-neutral-700 not-italic">edamame</span>. Yes, the snack.)
 		</p>
 
 		<p class="mx-auto mt-7 max-w-2xl text-lg leading-relaxed text-neutral-700 md:text-xl">

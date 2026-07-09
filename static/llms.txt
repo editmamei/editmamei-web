@@ -23,8 +23,8 @@ Editmamei installs as an npm package and runs locally on macOS or Windows alongs
 
 ## Editions
 
-- **Community Edition (CE)**: Free, open-source. Core Photoshop tools available via npm as `editmamei`.
-- **Pro Edition**: Paid. Adds advanced tooling. License distributed separately.
+- **Community Edition (CE)**: Free (compiled binary; source is proprietary), available via npm as `editmamei`. Covers the everyday editing surface: documents, layers, non-destructive adjustments, filters, masks, selections (including Photoshop's AI Select Subject and Select Sky), shape layers and pen paths, channel compositing, content-aware retouch, on-device scene awareness (object/face detection, selecting things by name), history, and visual verification.
+- **Pro Edition**: Paid license, activated over the same package. Adds the develop-grade and precision toolkit: Camera Raw develop as a re-editable Smart Filter, precision placement (name a location, get verified geometry), named-object masks, a 468-point face mesh with feature selections, subject-instance targeting, warp, the reproducible-template system, and Photoshop Actions plus ExtendScript scripting.
 
 ## Links
 

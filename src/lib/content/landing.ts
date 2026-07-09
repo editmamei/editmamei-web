@@ -30,7 +30,7 @@ export const capabilities: Capability[] = [
 	},
 	{
 		title: 'Smart selections',
-		body: 'Magic Wand, plus rectangle and feather. Every selection returns area, edge complexity, and pixel counts, so the AI can verify before committing to a mask or adjustment. Pro adds Sensei-backed Select Subject and Select Sky.',
+		body: 'Magic Wand, rectangle, color and luminance range, feather, refine edge, plus Select Subject and Select Sky. Every selection returns area, edge complexity, and pixel counts, so the AI verifies before committing to a mask or adjustment. Pro adds named-object masks and face-feature selections.',
 		demo: { kind: 'selection', image: `${CITY}/selection-subject.jpg`, tool: 'Select Subject' }
 	},
 	{
@@ -90,11 +90,25 @@ export const workflowExamples: WorkflowExample[] = [
 			'Roughly ten distinct tool calls. Each verifiable, each undoable. The AI reasons about intent; Editmamei handles the Photoshop choreography.'
 	},
 	{
-		title: 'Portrait retouch with feedback (Pro)',
+		title: 'Portrait retouch with feedback',
 		prompt:
 			'Open this portrait. Use Select Subject to isolate the person, feather the selection 2 pixels, and add a Curves adjustment layer clipped to that selection that gently warms the skin tones. Show me the before and after.',
 		outcome:
-			'The AI can call photoshop_get_preview at any step to see what the document looks like and adjust. Selection feedback tells it whether Select Subject actually worked or needs refinement. Select Subject is a Pro tool; Community covers Magic Wand, rectangle, and feather selections.'
+			'The AI can look at a preview at any step to see what the document looks like and adjust. Selection feedback tells it whether Select Subject actually grabbed the person or needs refinement. Select Subject and Select Sky are free in Community; Pro adds face-feature selections and named-object masks for finer work.'
+	},
+	{
+		title: 'Develop in Camera Raw, then change your mind (Pro)',
+		prompt:
+			'Open this beach shot and develop it in Camera Raw: warm the white balance slightly, lift the shadows, add a touch of dehaze and fine grain. Actually, bring the dehaze down a notch.',
+		outcome:
+			'The Camera Raw Filter lands as a re-editable Smart Filter. For the follow-up, the AI reads the applied settings, changes one value, and reapplies. The other sliders never move.'
+	},
+	{
+		title: 'Placement you can trust (Pro)',
+		prompt:
+			'Place the logo halfway between the two surfboards, and bend the banner to follow the shoreline.',
+		outcome:
+			'The AI names the locations; local vision finds the boards and the shoreline edge; a deterministic resolver computes exact pixels and an objective check verifies the geometry before anything is applied. The AI reviews a zoomed crop, not the full frame.'
 	},
 	{
 		title: 'Batch processing with a template (Pro)',
@@ -106,6 +120,51 @@ export const workflowExamples: WorkflowExample[] = [
 ];
 
 export const editionRows: EditionRow[] = [
+	{
+		feature:
+			'Scene awareness (on-device object + face detection, scene reading, select named things)',
+		community: true,
+		pro: true
+	},
+	{
+		feature:
+			'Face-mesh perception (468-point facial geometry, feature-precise selections of eyes, teeth, skin)',
+		community: false,
+		pro: true
+	},
+	{
+		feature: 'Named-object masks (local segmentation: name an object, get an organic selection)',
+		community: false,
+		pro: true
+	},
+	{
+		feature:
+			'Precision placement (name a location; placements computed from real geometry and checked before applying)',
+		community: false,
+		pro: true
+	},
+	{
+		feature:
+			'Selections (Magic Wand, rectangle, color + luminance range, feather, refine edge, rich feedback)',
+		community: true,
+		pro: true
+	},
+	{
+		feature: "Select Subject + Select Sky (Photoshop's AI selections)",
+		community: true,
+		pro: true
+	},
+	{
+		feature: 'Subject instance targeting (aim Select Subject at one named subject among several)',
+		community: false,
+		pro: true
+	},
+	{ feature: 'Masks (layer masks, vector masks, clipping masks)', community: true, pro: true },
+	{
+		feature: 'Channel tools (save/load selections, Apply Image, Calculations)',
+		community: true,
+		pro: true
+	},
 	{
 		feature: 'Documents (open PSD, JPEG, PNG, TIFF, DNG, HEIC, raw; save PSD; export JPEG/PNG)',
 		community: true,
@@ -128,24 +187,18 @@ export const editionRows: EditionRow[] = [
 		pro: true
 	},
 	{
-		feature: 'Smart selections (Magic Wand, rectangle, feather, with rich feedback)',
-		community: true,
-		pro: true
-	},
-	{ feature: 'Masks (create from selection, apply, delete)', community: true, pro: true },
-	{
 		feature: 'Layer styles + text (drop shadow, stroke, glow; font, color, alignment)',
 		community: true,
 		pro: true
 	},
-	{ feature: 'History (undo, redo, inspect history states)', community: true, pro: true },
 	{
-		feature: 'Visual verification (inline previews + per-channel histograms)',
+		feature:
+			'Layer transforms + straightening (move, scale, rotate, skew, fit; canvas rotate + flip; guides)',
 		community: true,
 		pro: true
 	},
 	{
-		feature: 'Layer transforms + straightening (move, scale, rotate, fit to document)',
+		feature: 'Vector shapes + pen paths (shape layers, editable paths, path-to-selection)',
 		community: true,
 		pro: true
 	},
@@ -155,11 +208,27 @@ export const editionRows: EditionRow[] = [
 		pro: true
 	},
 	{
+		feature: 'Camera Raw develop (the Camera Raw panel as a re-editable Smart Filter)',
+		community: false,
+		pro: true
+	},
+	{
+		feature:
+			'Warp (mesh warp with a pinned edge, bend along a named edge, radial reshape, warp to a target)',
+		community: false,
+		pro: true
+	},
+	{
+		feature: 'Visual verification (inline previews, zoomed review crops, per-channel histograms)',
+		community: true,
+		pro: true
+	},
+	{ feature: 'History (undo, redo, inspect history states)', community: true, pro: true },
+	{
 		feature: 'Templates (create, save, apply, verify, recall reproducible recipes)',
 		community: false,
 		pro: true
 	},
-	{ feature: 'Sensei-backed selections (Select Subject, Select Sky)', community: false, pro: true },
 	{
 		feature: 'Photoshop Actions + scripting (play recorded Actions, ExtendScript escape hatch)',
 		community: false,
