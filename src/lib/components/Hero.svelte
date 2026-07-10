@@ -20,11 +20,6 @@
 			AI orchestration, not generation.
 		</p>
 
-		<p class="mt-4 text-sm text-neutral-500 italic md:text-base">
-			(It's <span class="font-medium text-neutral-700 not-italic">edit</span> plus the tail of
-			<span class="font-medium text-neutral-700 not-italic">edamame</span>. Yes, the snack.)
-		</p>
-
 		<p class="mx-auto mt-7 max-w-2xl text-lg leading-relaxed text-neutral-700 md:text-xl">
 			You describe the edit. The AI plans the steps. Your own copy of Photoshop carries them out,
 			using its standard adjustment layers, masks, selections, and filters. The AI directs;
