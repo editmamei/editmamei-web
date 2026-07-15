@@ -1,5 +1,5 @@
 <svelte:head>
-	<title>Security — Editmamei</title>
+	<title>Security: how to report a vulnerability — Editmamei</title>
 	<meta
 		name="description"
 		content="How to report a security issue in Editmamei. Software vulnerabilities go through the GitHub security policy; website issues by email."

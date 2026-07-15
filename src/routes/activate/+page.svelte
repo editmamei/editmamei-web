@@ -4,7 +4,7 @@
 </script>
 
 <Seo
-	title="Activate Pro — Editmamei"
+	title="Activate Pro: enter your license key and restart — Editmamei"
 	description="Activate your Editmamei Pro license: run editmamei activate <key> (Claude Code / npm) or paste your key into the Claude Desktop extension settings. Then restart and your Pro tools appear."
 	path="/activate"
 />

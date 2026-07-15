@@ -7,7 +7,7 @@
 </script>
 
 <Seo
-	title="Product — Editmamei"
+	title="Product: AI photo editing tools for Photoshop — Editmamei"
 	description="The full Editmamei capability surface: adjustment layers, smart selections, filters, masks, and templates, with prompts that work today."
 	path="/product"
 />

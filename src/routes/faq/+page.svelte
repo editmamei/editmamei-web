@@ -65,7 +65,7 @@
 </script>
 
 <Seo
-	title="FAQ — Editmamei"
+	title="FAQ: photo privacy, AI clients, and editions — Editmamei"
 	description="Common questions about Editmamei: what it is, what it isn't, whether it uploads photos, which AI clients work with it, and how free and Pro editions differ."
 	path="/faq"
 />

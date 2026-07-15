@@ -88,7 +88,7 @@ support@editmamei.com`;
 </script>
 
 <svelte:head>
-	<title>License — Editmamei</title>
+	<title>The Editmamei License Agreement, full text</title>
 	<meta
 		name="description"
 		content="The Editmamei License Agreement. Editmamei is proprietary and free to install and use for personal or commercial work; Pro features require a paid license."

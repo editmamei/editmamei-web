@@ -49,7 +49,7 @@
 </script>
 
 <Seo
-	title="Pricing — Editmamei"
+	title="Pricing: free Community edition and Pro plans — Editmamei"
 	description="Editmamei pricing: Community is free for everyday photo editing. Pro is the production toolkit for repeatable, professional work, available monthly, annually, or as a one-time perpetual license."
 	path="/pricing"
 />

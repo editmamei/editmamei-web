@@ -3,7 +3,7 @@
 </script>
 
 <Seo
-	title="Contact — Editmamei"
+	title="Contact support or report a security issue — Editmamei"
 	description="Get support for Editmamei or report a security issue. Reach the team by email or open a public issue on GitHub."
 	path="/contact"
 />
