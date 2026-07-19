@@ -18,7 +18,7 @@
  * Runs in CI via .github/workflows/leak-guard.yml on every push / PR.
  * Unit tests: tests/leak-guard.test.mjs (`npm test`).
  *
- * Narrow-scope check by design: only matches the literal `photoshop_*`
+ * Narrow-scope check by design: only matches the literal `ps_*`
  * tool identifiers. Marketing copy uses human-facing feature names
  * (e.g. "Color Range", "High Pass") that overlap with legitimate PS UI
  * concepts the site can reasonably discuss. Marketing-copy leakage is
