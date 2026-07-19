@@ -16,13 +16,13 @@
 
 The evidence says the near-term buyer is the AI-power-user who shoots, not the working photographer. Post where they are first:
 
-| Priority | Sub | Why | Approach |
-|---|---|---|---|
-| 1 | r/mcp | Exact audience, server showcases are the sub's bread and butter | Draft A |
-| 2 | r/ClaudeAI | Large, demo-hungry, MCP-native | Draft B |
-| 3 | r/SideProject (or r/indiehackers) | Launch-story friendly | Draft C |
-| Later, carefully | r/photoshop, r/postprocessing | The aspirational audience, but self-promo rules are typically strict | Comment-first strategy below; only post Draft D after confirming rules/modmail |
-| Do not post promo | r/photography | Long-standing hard ban on self-promotion | Participate only |
+| Priority          | Sub                               | Why                                                                  | Approach                                                                       |
+| ----------------- | --------------------------------- | -------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
+| 1                 | r/mcp                             | Exact audience, server showcases are the sub's bread and butter      | Draft A                                                                        |
+| 2                 | r/ClaudeAI                        | Large, demo-hungry, MCP-native                                       | Draft B                                                                        |
+| 3                 | r/SideProject (or r/indiehackers) | Launch-story friendly                                                | Draft C                                                                        |
+| Later, carefully  | r/photoshop, r/postprocessing     | The aspirational audience, but self-promo rules are typically strict | Comment-first strategy below; only post Draft D after confirming rules/modmail |
+| Do not post promo | r/photography                     | Long-standing hard ban on self-promotion                             | Participate only                                                               |
 
 ---
 
