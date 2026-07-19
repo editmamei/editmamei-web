@@ -62,8 +62,11 @@
 					>Usage and reliability (on by default).</strong
 				>
 				Per edit: which tool ran, whether it succeeded, an error category if it didn't, and how long it
-				took. Per session: the Editmamei version, your Photoshop version, your operating system, and a
-				random install ID that counts installs without identifying you. No prompts, no arguments, no content.
+				took. Per session: the Editmamei version, your Photoshop version, your operating system, which
+					install route you used (npm or the one-click Claude Desktop extension), and a
+				random install ID that counts installs without identifying you. On Pro installs, one extra startup
+					signal records whether your Pro add-on actually loaded, so a purchase that failed to install is
+					distinguishable from one that's working. No prompts, no arguments, no content.
 			</li>
 			<li>
 				<strong class="font-semibold text-neutral-900"
