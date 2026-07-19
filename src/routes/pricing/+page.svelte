@@ -21,9 +21,11 @@
 			price: '$9',
 			list: '$12',
 			cadence: '/month',
-			note: 'Early-adopter rate, locked in for the life of your subscription.',
+			note: 'Try Pro free for 7 days. Early-adopter rate, locked in for the life of your subscription.',
+			cta: 'Start free trial',
 			href: CHECKOUT.monthly,
-			featured: false
+			featured: false,
+			trial: true
 		},
 		{
 			id: 'annual',
@@ -32,8 +34,10 @@
 			list: '$99',
 			cadence: '/year',
 			note: 'Best value. Early-adopter rate, locked in for life.',
+			cta: 'Get Pro',
 			href: CHECKOUT.annual,
-			featured: true
+			featured: true,
+			trial: false
 		},
 		{
 			id: 'perpetual',
@@ -42,8 +46,10 @@
 			list: '$299',
 			cadence: 'one-time',
 			note: 'Pay once, yours forever, at the early-adopter price.',
+			cta: 'Get Pro',
 			href: CHECKOUT.perpetual,
-			featured: false
+			featured: false,
+			trial: false
 		}
 	] as const;
 </script>
@@ -97,6 +103,11 @@
 							<span class="rounded-full bg-brand px-2.5 py-0.5 text-xs font-semibold text-white"
 								>Best value</span
 							>
+						{:else if plan.trial}
+							<span
+								class="rounded-full bg-terracotta-ink px-2.5 py-0.5 text-xs font-semibold text-white"
+								>7-day free trial</span
+							>
 						{/if}
 					</div>
 					<div class="mt-4 flex items-baseline gap-2">
@@ -111,7 +122,7 @@
 							? 'bg-brand text-white hover:bg-brand-light'
 							: 'bg-neutral-900 text-white hover:bg-neutral-700'}"
 					>
-						Get Pro
+						{plan.cta}
 					</a>
 				</div>
 			{/each}
