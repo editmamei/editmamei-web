@@ -17,11 +17,14 @@ Build-in-public mold, never an announcement or hard sell:
 
 1. First-person story → 2. real lessons/numbers → 3. **one** soft link to editmamei.com mid-narrative → 4. close with a question to spark replies.
 
-Truth guardrail: pre-launch, so **no fabricated traction** (user counts, revenue). Use only details verifiable in the repo. Fabricated numbers get discounted on IH anyway.
+Truth guardrail (updated 2026-07-02, post-launch): **no fabricated traction** (user counts, revenue). Launched 2026-06-19, so real numbers exist — use them, with honest caveats (npm downloads are bot-inflated; say so). Don't quote revenue until there's revenue worth quoting. CE is free but **closed-source** — never call it open-source.
 
 ## Files
 
-- [posts/20260616-ih-orchestration-not-generation.md](posts/20260616-ih-orchestration-not-generation.md) — first IndieHackers post draft (orchestration-not-generation angle).
+- [posts/20260702-ih-adobe-shipped-my-category.md](posts/20260702-ih-adobe-shipped-my-category.md) — flagship IH post (Adobe shipped the category; honest gap analysis). Post first.
+- [posts/20260702-ih-three-lessons-postlaunch.md](posts/20260702-ih-three-lessons-postlaunch.md) — three-lessons post, post-launch rewrite. Supersedes the 20260616 draft (which wrongly said "open-source" and "pre-launch" — do not post it).
+- [posts/20260702-reddit-playbook.md](posts/20260702-reddit-playbook.md) — subreddit strategy, voice cheat sheet, and per-sub drafts (r/mcp, r/ClaudeAI, r/SideProject, cautious r/photoshop).
+- [posts/20260616-ih-orchestration-not-generation.md](posts/20260616-ih-orchestration-not-generation.md) — SUPERSEDED first draft; kept for history.
 
 ## Related (cross-repo)
 
