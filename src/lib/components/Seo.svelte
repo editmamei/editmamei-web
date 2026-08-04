@@ -40,7 +40,7 @@
 	<meta property="og:image:height" content="630" />
 	<meta
 		property="og:image:alt"
-		content="Editmamei — Unlock Photoshop with natural-language photo editing"
+		content="Editmamei — natural-language photo editing in your own Photoshop"
 	/>
 
 	<meta name="twitter:card" content="summary_large_image" />

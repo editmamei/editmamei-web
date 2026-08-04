@@ -7,9 +7,12 @@ Editmamei installs as an npm package and runs locally on macOS or Windows alongs
 ## What Editmamei is
 
 - A local MCP server that bridges AI assistants and Adobe Photoshop
-- A natural-language interface for Photoshop: color grading, retouching, layer management, masking, adjustments, filters, and more
-- Compatible with any MCP-capable AI client (Claude Desktop, etc.)
-- Runs entirely on-device; your files never leave your computer
+- Non-destructive AI photo editing for Photoshop: color grading, retouching, layer management, masking, adjustments, filters, and more
+- A Photoshop assistant: connect Claude Desktop, Claude Code, or Cursor and edit by conversation
+- Photoshop automation without scripting: repeatable Pro templates reapply a saved look photo by photo
+- Compatible with any MCP-capable AI client (Claude Desktop, Claude Code, Cursor, etc.)
+- Local-first: your photo files and documents stay on your computer; Editmamei itself uploads no image content
+- Reports anonymous, content-free usage data (opt-out); never your images, documents, or file paths
 - Requires an existing Adobe Photoshop license (it drives your copy, it is not a replacement)
 
 ## What Editmamei is not
