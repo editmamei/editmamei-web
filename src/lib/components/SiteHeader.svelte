@@ -34,9 +34,6 @@
 		>
 			<img src="/icons/icon-64.png" alt="" width="32" height="32" class="size-8 shrink-0" />
 			<span class="text-lg">Editmamei</span>
-			<span class="hidden text-xs font-normal text-neutral-500 italic sm:inline"
-				>· pronounced like edamame</span
-			>
 		</a>
 
 		<div class="flex items-center gap-2">

@@ -16,7 +16,7 @@
 
 <Seo
 	title="Editmamei — Photoshop MCP server for AI photo editing"
-	description="A Photoshop MCP server that turns Claude Desktop or Cursor into your AI photo editing assistant. Your own Photoshop makes every edit. Pronounced like edamame."
+	description="A Photoshop MCP server that turns Claude Desktop or Cursor into your AI photo editing assistant. Your own Photoshop makes every edit."
 	path="/"
 />
 

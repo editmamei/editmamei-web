@@ -15,9 +15,6 @@
 					Unlock Photoshop with natural-language photo editing. AI orchestration, not generation.
 					Your AI plans the edit; your Photoshop carries it out.
 				</p>
-				<p class="mt-4 text-sm text-neutral-500 italic">
-					Pairs well with: a layered PSD, a willing AI, and a small bowl of edamame.
-				</p>
 				<ul class="mt-5 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-neutral-600">
 					<li>
 						<a
