@@ -35,13 +35,6 @@
 					</li>
 					<li>
 						<a
-							href="https://peerpush.com/p/editmamei"
-							onclick={() => track('footer-outbound-peerpush')}
-							class="hover:text-neutral-950">Featured on PeerPush</a
-						>
-					</li>
-					<li>
-						<a
 							href="https://www.instagram.com/editmamei/"
 							onclick={() => track('footer-outbound-instagram')}
 							rel="me noopener"
@@ -63,6 +56,13 @@
 							</svg>
 							Instagram
 						</a>
+					</li>
+					<li>
+						<a
+							href="https://peerpush.com/p/editmamei"
+							onclick={() => track('footer-outbound-peerpush')}
+							class="hover:text-neutral-950">PeerPush</a
+						>
 					</li>
 				</ul>
 			</div>
