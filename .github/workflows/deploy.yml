@@ -3,6 +3,9 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [main]
+  # web-release.yml dispatches this on main after fast-forwarding it (its
+  # GITHUB_TOKEN push can't fire the push trigger above; the release
+  # fan-out pushes with a PAT and still can).
   workflow_dispatch:
 
 permissions:

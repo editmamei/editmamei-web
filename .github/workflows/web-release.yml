@@ -1,0 +1,102 @@
+name: Web release (publish dev to the live site)
+
+# Independent content publish, per the 2026-08-05 release-train amendment:
+# the release fan-out is the freshness floor, not an exclusive lock. This
+# workflow is the one consistent way to publish between releases — it runs
+# the full verify gate on dev, fast-forwards main, then dispatches the
+# Pages deploy on main.
+#
+# Why dispatch instead of workflow_call: the github-pages environment
+# restricts deployments to main, and a workflow_call'd deploy would run at
+# this workflow's ref (dev) and be rejected. A GITHUB_TOKEN push to main
+# can't fire deploy.yml's push trigger either (GitHub suppresses recursive
+# workflow triggers). Explicitly dispatching deploy.yml on main runs it
+# identically to the release fan-out's PAT-push path. The dispatch is
+# fire-and-forget: watch the "Deploy to GitHub Pages" run for the result.
+#
+# Rules that still apply:
+#   - User-triggered only (gh workflow run web-release.yml --ref dev).
+#   - Everything on dev must be publishable NOW — no staged copy about
+#     unshipped features. The public surface reflects what's shipped.
+#   - Never run during an RC freeze (between RC cut and release publish);
+#     the release fan-out owns that promotion.
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: web-release
+  cancel-in-progress: false
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Refuse to run from any ref but dev
+        if: github.ref_name != 'dev'
+        env:
+          REF: ${{ github.ref_name }}
+        run: |
+          echo "web-release publishes dev; dispatch it with --ref dev (got: $REF)"
+          exit 1
+
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Typecheck (svelte-check)
+        run: npm run check
+
+      - name: Lint
+        run: npm run lint
+
+      # Build BEFORE test: tests/blog-build-artifacts.test.mjs inspects the
+      # build output (draft-leak and published-post checks) and skips when
+      # build/ is absent — this order makes it bite on the publish path.
+      - name: Build
+        run: npm run build
+
+      - name: Test
+        run: npm test
+
+      - name: Leak guard
+        run: node scripts/check-leak-guard.mjs
+
+  promote:
+    needs: verify
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout dev
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Fast-forward main to dev
+        # A plain (non-force) push is fast-forward-only: if main has somehow
+        # diverged from dev this fails instead of rewriting history.
+        run: git push origin HEAD:main
+
+  deploy:
+    needs: promote
+    runs-on: ubuntu-latest
+    permissions:
+      actions: write
+    steps:
+      - name: Dispatch the Pages deploy on main
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+        run: gh workflow run deploy.yml --ref main -R "$REPO"
