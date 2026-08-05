@@ -77,7 +77,7 @@ test('the blog index page is prerendered', { skip }, () => {
 });
 
 test('generated XML contains no unescaped ampersands', { skip }, () => {
-	for (const name of ['sitemap.xml', join('blog', 'rss.xml')]) {
+	for (const name of ['sitemap.xml']) {
 		const xml = readFileSync(join(BUILD_DIR, name), 'utf8');
 		const bad = xml.match(/&(?!(amp|lt|gt|quot|apos|#\d+|#x[0-9a-fA-F]+);)/);
 		assert.equal(bad, null, `${name}: raw & not part of an entity`);

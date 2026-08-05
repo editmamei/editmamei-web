@@ -10,7 +10,6 @@ import assert from 'node:assert/strict';
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { escapeXml } from '../src/lib/escape-xml.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = resolve(__dirname, '..');
@@ -104,11 +103,6 @@ test('the [slug] route declares prerender entries from the posts loader', () => 
 	assert.match(source, /from '\$lib\/blog'/, 'entries must derive from the posts loader');
 });
 
-test('the RSS endpoint exists and is prerendered', () => {
-	const source = readFileSync(join(BLOG_ROUTE, 'rss.xml', '+server.ts'), 'utf8');
-	assert.match(source, /export const prerender = true/);
-});
-
 test('the sitemap appends blog post URLs from the posts loader', () => {
 	const source = readFileSync(
 		join(REPO_ROOT, 'src', 'routes', 'sitemap.xml', '+server.ts'),
@@ -126,13 +120,4 @@ test('the unseen-routes carve-out exempts exactly /blog/[slug] and nothing else'
 		['/blog/[slug]'],
 		'handleUnseenRoutes must exempt only /blog/[slug]; other unseen routes must stay hard failures'
 	);
-});
-
-test('escapeXml escapes all five XML metacharacters, ampersand first', () => {
-	assert.equal(
-		escapeXml(`Tone & "curves" <should> stay 'text'`),
-		'Tone &amp; &quot;curves&quot; &lt;should&gt; stay &apos;text&apos;'
-	);
-	assert.equal(escapeXml('&amp;'), '&amp;amp;', 'pre-escaped input must not be double-unescaped');
-	assert.equal(escapeXml(''), '');
 });

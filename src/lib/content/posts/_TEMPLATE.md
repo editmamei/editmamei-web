@@ -1,6 +1,6 @@
 ---
 title: Post title
-description: One or two plain sentences. Used on the blog index, in the RSS feed, and as the meta description.
+description: One or two plain sentences. Used on the blog index and as the meta description.
 date: 2026-08-05
 ---
 
@@ -11,7 +11,7 @@ starting with `_` are never picked up.
 The folder is the publish state, and it is a hard boundary: anything in
 `posts/` is compiled into the public site, while `drafts/` renders only on
 the `npm run dev` server and is excluded from production builds entirely
-(pages, RSS, sitemap, and the JS bundle). **Publishing = moving the file
+(pages, sitemap, and the JS bundle). **Publishing = moving the file
 from `drafts/` up into `posts/`.** There is no draft frontmatter flag.
 
 Body is Markdown (mdsvex). Frontmatter fields: `title`, `description`, and

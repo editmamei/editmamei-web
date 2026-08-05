@@ -11,21 +11,10 @@
 	description="Feature announcements, tutorials, and example edits from Editmamei, the MCP server that puts your AI assistant inside your own Photoshop."
 />
 
-<svelte:head>
-	<link rel="alternate" type="application/rss+xml" title="Editmamei blog" href="/blog/rss.xml" />
-</svelte:head>
-
 <main class="mx-auto max-w-3xl px-4 py-12">
 	<header class="mb-10">
 		<h1 class="text-3xl font-bold tracking-tight text-neutral-900">Blog</h1>
-		<p class="mt-2 text-neutral-600">
-			Feature announcements, tutorials, and example edits. Also available as an
-			<a
-				href="/blog/rss.xml"
-				class="underline decoration-neutral-300 underline-offset-2 hover:text-neutral-950"
-				>RSS feed</a
-			>.
-		</p>
+		<p class="mt-2 text-neutral-600">Feature announcements, tutorials, and example edits.</p>
 	</header>
 
 	{#if data.posts.length === 0}

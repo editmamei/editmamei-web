@@ -14,7 +14,6 @@
 />
 
 <svelte:head>
-	<link rel="alternate" type="application/rss+xml" title="Editmamei blog" href="/blog/rss.xml" />
 	{#if post.draft}
 		<!-- Drafts never reach production builds; this is belt and braces for dev previews. -->
 		<meta name="robots" content="noindex" />

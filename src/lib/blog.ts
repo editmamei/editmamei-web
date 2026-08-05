@@ -44,7 +44,7 @@ type LazyModules = Record<string, () => Promise<PostModule>>;
 const DATE_RE = /^\d{4}-\d{2}-\d{2}$/;
 const SLUG_RE = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 
-// Published posts: frontmatter eagerly (index/RSS/sitemap need it at
+// Published posts: frontmatter eagerly (index/sitemap need it at
 // build time), components lazily (each post becomes its own chunk, loaded
 // only on its own page).
 const publishedMeta = import.meta.glob('/src/lib/content/posts/[!_]*.md', {
