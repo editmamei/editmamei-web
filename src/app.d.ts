@@ -10,4 +10,12 @@ declare global {
 	}
 }
 
+declare module '*.md' {
+	import type { Component } from 'svelte';
+
+	export const metadata: Record<string, unknown>;
+	const content: Component;
+	export default content;
+}
+
 export {};

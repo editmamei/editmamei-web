@@ -1,4 +1,5 @@
 import type { RequestHandler } from './$types';
+import { posts } from '$lib/blog';
 
 /**
  * Dynamic sitemap. Replaces the previous static/sitemap.xml which drifted
@@ -27,7 +28,8 @@ const ROUTES: Array<{ path: string; priority: string; changefreq: string }> = [
 	{ path: '/pricing', priority: '0.8', changefreq: 'monthly' },
 	{ path: '/faq', priority: '0.7', changefreq: 'monthly' },
 	{ path: '/contact', priority: '0.5', changefreq: 'yearly' },
-	{ path: '/activate', priority: '0.5', changefreq: 'monthly' }
+	{ path: '/activate', priority: '0.5', changefreq: 'monthly' },
+	{ path: '/blog', priority: '0.6', changefreq: 'weekly' }
 ];
 
 export const GET: RequestHandler = () => {
@@ -43,9 +45,23 @@ export const GET: RequestHandler = () => {
 	</url>`
 	).join('\n');
 
+	// Blog post URLs come from the posts loader, which contains published
+	// posts only (drafts live in a dev-only folder). lastmod is the post's
+	// own date rather than the build date, so unchanged posts don't churn.
+	const postUrls = posts
+		.map(
+			(post) => `	<url>
+		<loc>${ORIGIN}/blog/${post.slug}</loc>
+		<lastmod>${post.updated ?? post.date}</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.6</priority>
+	</url>`
+		)
+		.join('\n');
+
 	const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${urls}
+${[urls, postUrls].filter(Boolean).join('\n')}
 </urlset>
 `;
 

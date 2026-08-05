@@ -48,6 +48,11 @@
 					class="rounded-md px-3 py-1.5 text-sm font-medium text-neutral-700 transition-colors hover:bg-neutral-100 hover:text-neutral-950"
 					>Plans</a
 				>
+				<a
+					href="/blog"
+					class="rounded-md px-3 py-1.5 text-sm font-medium text-neutral-700 transition-colors hover:bg-neutral-100 hover:text-neutral-950"
+					>Blog</a
+				>
 			</nav>
 
 			<a
@@ -109,6 +114,14 @@
 									onclick={closeMenu}
 									class="block px-4 py-2.5 text-sm text-neutral-800 hover:bg-neutral-50 hover:text-neutral-950"
 									>Plans</a
+								>
+							</li>
+							<li>
+								<a
+									href="/blog"
+									onclick={closeMenu}
+									class="block px-4 py-2.5 text-sm text-neutral-800 hover:bg-neutral-50 hover:text-neutral-950"
+									>Blog</a
 								>
 							</li>
 						</ul>
