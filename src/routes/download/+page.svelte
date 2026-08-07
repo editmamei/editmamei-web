@@ -30,9 +30,10 @@
 		<h2 class="mt-12 text-xl font-bold tracking-tight text-neutral-950">Claude Desktop</h2>
 		<p class="mt-3 text-sm leading-relaxed text-neutral-700">
 			If you installed Editmamei as a one-click extension, download the current
-			<code class="rounded bg-neutral-200 px-1 py-0.5 font-mono text-xs">.mcpb</code> and install it the
-			same way you installed the first one. Claude Desktop replaces the existing extension, so there is
-			nothing to uninstall first. Your licence key and settings are kept.
+			<code class="rounded bg-neutral-200 px-1 py-0.5 font-mono text-xs">.mcpb</code> and reinstall
+			it under <strong class="font-semibold text-neutral-950">Settings → Extensions</strong>, then
+			restart Claude Desktop. Your licence key and settings are stored in your home folder rather
+			than inside the extension, so updating keeps them.
 		</p>
 		<p class="mt-5">
 			<a
@@ -43,7 +44,7 @@
 			</a>
 		</p>
 		<p class="mt-3 text-xs leading-relaxed text-neutral-500">
-			Always the newest release. Restart Claude Desktop after installing.
+			This link always resolves to the newest release.
 		</p>
 
 		<h2 class="mt-12 text-xl font-bold tracking-tight text-neutral-950">
