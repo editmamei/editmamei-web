@@ -1,10 +1,7 @@
 <script lang="ts">
-	// Stable "latest release" asset URL, same constant InstallSection uses: it
-	// always resolves to the newest published release, so a new version never
-	// needs a site edit.
-	const MCPB_URL =
-		'https://github.com/editmamei/editmamei-wiki/releases/latest/download/editmamei.mcpb';
-	const RELEASES_URL = 'https://github.com/editmamei/editmamei-wiki/releases/latest';
+	// Shared with InstallSection so the two cannot drift, and so the repository
+	// move at the split is one edit rather than a hunt. See $lib/links.
+	import { MCPB_DOWNLOAD_URL, RELEASES_URL } from '$lib/links';
 </script>
 
 <svelte:head>
@@ -37,7 +34,7 @@
 		</p>
 		<p class="mt-5">
 			<a
-				href={MCPB_URL}
+				href={MCPB_DOWNLOAD_URL}
 				class="inline-flex items-center gap-2 rounded-lg bg-neutral-950 px-5 py-3 text-sm font-semibold text-white transition hover:bg-neutral-800"
 			>
 				Download editmamei.mcpb

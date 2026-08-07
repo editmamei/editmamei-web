@@ -3,9 +3,9 @@
 	import { track, trackOnce, upgradeSession } from '$lib/analytics/clarity';
 
 	// Stable "latest release" asset URL — always resolves to the newest published
-	// release, so a new version never needs a site edit.
-	const MCPB_URL =
-		'https://github.com/editmamei/editmamei-wiki/releases/latest/download/editmamei.mcpb';
+	// release, so a new version never needs a site edit. Shared with /download,
+	// and the one place the repository move at the split has to be made.
+	import { MCPB_DOWNLOAD_URL as MCPB_URL } from '$lib/links';
 
 	// Highest-intent pre-conversion signal for the npm path: the visitor
 	// highlighted the command snippet, almost certainly to copy it. (Download
