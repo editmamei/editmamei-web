@@ -9,10 +9,12 @@ import { posts } from '$lib/blog';
  * indexed" with a blank google-selected canonical, a textbook quality-
  * classifier rejection.
  *
- * Indexable routes only. Stub routes (/privacy, /security, /license) carry
+ * Indexable routes only. Stub routes (/privacy, /security) carry
  * <meta name="robots" content="noindex"> at the page level and are
  * deliberately excluded here — including them would either signal noise
- * to Google or, worse, contradict the page-level directive.
+ * to Google or, worse, contradict the page-level directive. /license lost
+ * its noindex at the FSL-1.1-MIT split (2026-08-08) — the license terms are
+ * real public-facing content now, not a stub — so it's listed below.
  *
  * Prerendered at build time so it ships as a real static file at
  * build/sitemap.xml on GitHub Pages.
@@ -28,6 +30,7 @@ const ROUTES: Array<{ path: string; priority: string; changefreq: string }> = [
 	{ path: '/pricing', priority: '0.8', changefreq: 'monthly' },
 	{ path: '/faq', priority: '0.7', changefreq: 'monthly' },
 	{ path: '/contact', priority: '0.5', changefreq: 'yearly' },
+	{ path: '/license', priority: '0.4', changefreq: 'yearly' },
 	{ path: '/activate', priority: '0.5', changefreq: 'monthly' },
 	{ path: '/blog', priority: '0.6', changefreq: 'weekly' }
 ];

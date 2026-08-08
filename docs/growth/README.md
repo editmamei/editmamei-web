@@ -17,7 +17,7 @@ Build-in-public mold, never an announcement or hard sell:
 
 1. First-person story → 2. real lessons/numbers → 3. **one** soft link to editmamei.com mid-narrative → 4. close with a question to spark replies.
 
-Truth guardrail (updated 2026-07-02, post-launch): **no fabricated traction** (user counts, revenue). Launched 2026-06-19, so real numbers exist — use them, with honest caveats (npm downloads are bot-inflated; say so). Don't quote revenue until there's revenue worth quoting. CE is free but **closed-source** — never call it open-source.
+Truth guardrail (updated 2026-07-02, post-launch): **no fabricated traction** (user counts, revenue). Launched 2026-06-19, so real numbers exist — use them, with honest caveats (npm downloads are bot-inflated; say so). Don't quote revenue until there's revenue worth quoting. CE is free and **source-available** under FSL-1.1-MIT (fair source; each version converts to plain MIT two years after it ships) — still never call it open-source, and link any license claim to https://github.com/editmamei/editmamei.
 
 ## Files
 

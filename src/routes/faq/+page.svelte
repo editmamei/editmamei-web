@@ -1,5 +1,6 @@
 <script lang="ts">
 	import Seo from '$lib/components/Seo.svelte';
+	import { GITHUB_FAQ_DOCS_URL } from '$lib/links';
 
 	const faqs = [
 		{
@@ -37,6 +38,18 @@
 		{
 			q: 'Is Editmamei free?',
 			a: 'The Community Edition is free. Install it from npm and use the full core toolkit at no cost. The Pro Edition adds tools for production workflows (the reproducible-template system, Camera Raw develop, subject-instance targeting, and Photoshop Actions and scripting) and requires a paid license.'
+		},
+		{
+			q: 'Is Editmamei open source?',
+			a: "No, and we're careful with that word. Editmamei CE's source is public on GitHub under the Functional Source License (FSL-1.1-MIT), a fair-source license, not an OSI-approved open-source license. You can read, run, modify, and redistribute the code for almost anything, including commercial photo-editing work. The one thing the license holds back, for two years per release, is offering the code to others in a commercial product or service that competes with Editmamei CE or Pro."
+		},
+		{
+			q: "Can I use or modify Editmamei CE's source code?",
+			a: "Yes, for almost anything. FSL-1.1-MIT covers commercial photo editing (studio, agency, client work), forking or modifying CE for internal tooling even at a company that competes with us elsewhere, paid consulting or training for Editmamei users, and teaching, researching, or auditing the code. What it doesn't cover, for two years per release, is turning CE into a competing product: selling or hosting CE (or a derivative) as a Photoshop-automation product or service, or building a commercial substitute for Editmamei Pro out of CE code."
+		},
+		{
+			q: "Does Editmamei CE's license change over time?",
+			a: 'Yes. Two years after each version of CE ships, that version automatically converts to the plain MIT license, with no restrictions. Until then it is licensed under FSL-1.1-MIT. Editmamei Pro is a separate, commercially licensed module, and its source is not published, so this conversion is CE-only.'
 		},
 		{
 			q: 'Can AI automate Photoshop, like applying one look to a whole shoot?',
@@ -111,7 +124,7 @@
 		<div class="mt-16 border-t border-neutral-200 pt-8">
 			<p class="text-sm text-neutral-600">
 				Still have questions? See the full <a
-					href="https://github.com/editmamei/editmamei-wiki/blob/main/docs/faq.md"
+					href={GITHUB_FAQ_DOCS_URL}
 					class="underline hover:text-neutral-950">documentation on GitHub</a
 				>
 				or <a href="/contact" class="underline hover:text-neutral-950">get in touch</a>.

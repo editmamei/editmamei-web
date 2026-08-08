@@ -26,7 +26,7 @@ Editmamei installs as an npm package and runs locally on macOS or Windows alongs
 
 ## Editions
 
-- **Community Edition (CE)**: Free (compiled binary; source is proprietary), available via npm as `editmamei`. Covers the everyday editing surface: documents, layers, non-destructive adjustments, filters, masks, selections (including Photoshop's AI Select Subject and Select Sky), shape layers and pen paths, channel compositing, content-aware retouch, on-device scene awareness (object/face detection, selecting things by name), history, and visual verification.
+- **Community Edition (CE)**: Free and source-available under the Functional Source License (FSL-1.1-MIT), available via npm as `editmamei`. Source: https://github.com/editmamei/editmamei. Covers the everyday editing surface: documents, layers, non-destructive adjustments, filters, masks, selections (including Photoshop's AI Select Subject and Select Sky), shape layers and pen paths, channel compositing, content-aware retouch, on-device scene awareness (object/face detection, selecting things by name), history, and visual verification.
 - **Pro Edition**: Paid license, activated over the same package. Adds the develop-grade and precision toolkit: Camera Raw develop as a re-editable Smart Filter, precision placement (name a location, get verified geometry), named-object masks, a 468-point face mesh with feature selections, subject-instance targeting, warp, the reproducible-template system, and Photoshop Actions plus ExtendScript scripting.
 
 ## Links
@@ -37,5 +37,5 @@ Editmamei installs as an npm package and runs locally on macOS or Windows alongs
 - [FAQ](https://editmamei.com/faq)
 - [Contact](https://editmamei.com/contact)
 - [npm package](https://www.npmjs.com/package/editmamei)
-- [GitHub](https://github.com/editmamei/editmamei-wiki): CE docs and issues
-- [Install guide](https://github.com/editmamei/editmamei-wiki#readme)
+- [Source (GitHub)](https://github.com/editmamei/editmamei): CE source (FSL-1.1-MIT), docs, and issues
+- [Install guide](https://github.com/editmamei/editmamei/blob/dev/docs/getting-started.md)
