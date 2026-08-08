@@ -2,17 +2,18 @@
 /**
  * Leak guard for editmamei-web (marketing site).
  *
- * Fails if any 'dev' or 'none'-tier tool name from Editmamei (the
- * private source repo's src/core/tool-tiers.ts) appears in this site's
- * source. Catches the case where a code example, configuration
+ * Fails if any 'dev' or 'none'-tier tool name from Editmamei's public
+ * source repo (editmamei/editmamei's src/core/tool-tiers.ts) appears in
+ * this site's source. Catches the case where a code example, configuration
  * snippet, or API-name reference would tip a tool that is not actually
  * shipping in the CE / Pro bundles yet.
  *
  * The BLOCKED list below is AUTO-GENERATED from
- * Editmamei/src/core/tool-tiers.ts by Editmamei/scripts/sync-leak-guard.ts.
- * Do NOT hand-edit the fenced region — when a tier flips in Editmamei,
- * run `npm run sync:leak-guard` there to regenerate this file's region
- * and editmamei-ce's in one pass.
+ * editmamei/editmamei's src/core/tool-tiers.ts by the private
+ * editmamei-pro repo's scripts/sync-leak-guard.ts.
+ * Do NOT hand-edit the fenced region — when a tier flips, run
+ * `npm run sync:leak-guard` from editmamei-pro to regenerate this
+ * file's region.
  *
  * Run locally: `node scripts/check-leak-guard.mjs`
  * Runs in CI via .github/workflows/leak-guard.yml on every push / PR.
