@@ -1,3 +1,7 @@
+<script lang="ts">
+	import { GITHUB_SECURITY_ADVISORY_URL, GITHUB_SECURITY_POLICY_URL } from '$lib/links';
+</script>
+
 <svelte:head>
 	<title>Security: how to report a vulnerability — Editmamei</title>
 	<meta
@@ -30,7 +34,7 @@
 		<ul class="mt-4 space-y-2 text-sm leading-relaxed text-neutral-700">
 			<li>
 				<a
-					href="https://github.com/editmamei/editmamei-wiki/security/advisories/new"
+					href={GITHUB_SECURITY_ADVISORY_URL}
 					rel="noopener noreferrer"
 					class="font-semibold text-neutral-900 underline decoration-neutral-300 underline-offset-4 hover:decoration-neutral-700"
 					>Report a vulnerability privately</a
@@ -40,7 +44,7 @@
 			<li>
 				Read the
 				<a
-					href="https://github.com/editmamei/editmamei-wiki/blob/main/SECURITY.md"
+					href={GITHUB_SECURITY_POLICY_URL}
 					rel="noopener noreferrer"
 					class="font-semibold text-neutral-900 underline decoration-neutral-300 underline-offset-4 hover:decoration-neutral-700"
 					>security policy</a

@@ -1,7 +1,13 @@
 <script lang="ts">
 	import { track } from '$lib/analytics/clarity';
 	import { cookieConsent } from '$lib/stores/cookieConsent';
-	import { CUSTOMER_PORTAL_URL } from '$lib/links';
+	import {
+		CUSTOMER_PORTAL_URL,
+		GITHUB_CHANGELOG_URL,
+		GITHUB_ISSUES_URL,
+		GITHUB_README_URL,
+		GITHUB_REPO_URL
+	} from '$lib/links';
 	const year = new Date().getFullYear();
 </script>
 
@@ -84,7 +90,7 @@
 				<ul class="mt-3 space-y-2 text-sm text-neutral-700">
 					<li>
 						<a
-							href="https://github.com/editmamei/editmamei-wiki#readme"
+							href={GITHUB_README_URL}
 							onclick={() => track('footer-outbound-docs')}
 							class="hover:text-neutral-950">Docs</a
 						>
@@ -92,9 +98,16 @@
 					<li><a href="/faq" class="hover:text-neutral-950">FAQ</a></li>
 					<li>
 						<a
-							href="https://github.com/editmamei/editmamei-wiki/blob/main/CHANGELOG.md"
+							href={GITHUB_CHANGELOG_URL}
 							onclick={() => track('footer-outbound-changelog')}
 							class="hover:text-neutral-950">Changelog</a
+						>
+					</li>
+					<li>
+						<a
+							href={GITHUB_REPO_URL}
+							onclick={() => track('footer-outbound-source')}
+							class="hover:text-neutral-950">Source</a
 						>
 					</li>
 				</ul>
@@ -117,7 +130,7 @@
 					</li>
 					<li>
 						<a
-							href="https://github.com/editmamei/editmamei-wiki/issues"
+							href={GITHUB_ISSUES_URL}
 							onclick={() => track('footer-outbound-issues')}
 							class="hover:text-neutral-950">Report a bug</a
 						>

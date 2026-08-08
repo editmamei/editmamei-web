@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { GITHUB_REPO_URL } from '$lib/links';
+
 	let menuOpen = $state(false);
 	let navEl = $state<HTMLElement>();
 	let firstMenuLink = $state<HTMLAnchorElement>();
@@ -52,6 +54,12 @@
 					href="/blog"
 					class="rounded-md px-3 py-1.5 text-sm font-medium text-neutral-700 transition-colors hover:bg-neutral-100 hover:text-neutral-950"
 					>Blog</a
+				>
+				<a
+					href={GITHUB_REPO_URL}
+					rel="noopener noreferrer"
+					class="rounded-md px-3 py-1.5 text-sm font-medium text-neutral-700 transition-colors hover:bg-neutral-100 hover:text-neutral-950"
+					>GitHub</a
 				>
 			</nav>
 
@@ -122,6 +130,15 @@
 									onclick={closeMenu}
 									class="block px-4 py-2.5 text-sm text-neutral-800 hover:bg-neutral-50 hover:text-neutral-950"
 									>Blog</a
+								>
+							</li>
+							<li>
+								<a
+									href={GITHUB_REPO_URL}
+									rel="noopener noreferrer"
+									onclick={closeMenu}
+									class="block px-4 py-2.5 text-sm text-neutral-800 hover:bg-neutral-50 hover:text-neutral-950"
+									>GitHub</a
 								>
 							</li>
 						</ul>

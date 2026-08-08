@@ -1,5 +1,6 @@
 <script lang="ts">
 	import Seo from '$lib/components/Seo.svelte';
+	import { GITHUB_ISSUES_URL, GITHUB_README_URL } from '$lib/links';
 </script>
 
 <Seo
@@ -29,7 +30,7 @@
 				</dd>
 				<dd class="mt-3">
 					<a
-						href="https://github.com/editmamei/editmamei-wiki/issues"
+						href={GITHUB_ISSUES_URL}
 						class="inline-flex items-center gap-1.5 rounded-md border border-neutral-300 bg-white px-4 py-2 text-sm font-semibold text-neutral-800 transition-colors hover:border-neutral-400 hover:bg-neutral-50"
 					>
 						Open an issue on GitHub ↗
@@ -58,9 +59,7 @@
 				<dt class="text-base font-semibold text-neutral-950">Documentation and community</dt>
 				<dd class="mt-2 text-sm leading-relaxed text-neutral-700">
 					The
-					<a
-						href="https://github.com/editmamei/editmamei-wiki#readme"
-						class="underline hover:text-neutral-950">README on GitHub</a
+					<a href={GITHUB_README_URL} class="underline hover:text-neutral-950">README on GitHub</a
 					>
 					covers installation, configuration, and all available tools. Common setup questions are also
 					answered in the <a href="/faq" class="underline hover:text-neutral-950">FAQ</a>.

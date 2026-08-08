@@ -24,6 +24,6 @@ There's a second group I care about: people who never put ten years into learnin
 
 Editmamei is an MCP server that runs on your desktop next to Photoshop. Connect it to an AI assistant like Claude and the assistant can drive Photoshop directly. Everything happens on your machine, in your copy of Photoshop. When the assistant needs to check its work, it looks at a downscaled preview, the same as if you'd dropped the photo into the chat yourself.
 
-The Community Edition is free. The [install guide](https://github.com/editmamei/editmamei-wiki#readme) takes you from zero to your first described edit in a few minutes.
+The Community Edition is free. The [install guide](https://github.com/editmamei/editmamei#readme) takes you from zero to your first described edit in a few minutes.
 
 — Alex

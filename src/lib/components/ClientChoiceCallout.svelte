@@ -1,4 +1,6 @@
-<script lang="ts"></script>
+<script lang="ts">
+	import { GITHUB_AI_CLIENT_FAQ_URL, GITHUB_CLAUDE_CODE_INSTALL_URL } from '$lib/links';
+</script>
 
 <section class="bg-cream py-16 md:py-20">
 	<div class="mx-auto max-w-6xl px-4">
@@ -51,13 +53,13 @@
 			Not sure? Start in Desktop. The first time you feel a session getting slow, switch to Code.
 			The
 			<a
-				href="https://github.com/editmamei/editmamei-wiki/blob/main/docs/faq.md#which-ai-client-should-i-use"
+				href={GITHUB_AI_CLIENT_FAQ_URL}
 				class="font-semibold text-neutral-900 underline decoration-neutral-300 underline-offset-4 hover:decoration-neutral-700"
 				>FAQ</a
 			>
 			and the
 			<a
-				href="https://github.com/editmamei/editmamei-wiki/blob/main/docs/installation.md#claude-code"
+				href={GITHUB_CLAUDE_CODE_INSTALL_URL}
 				class="font-semibold text-neutral-900 underline decoration-neutral-300 underline-offset-4 hover:decoration-neutral-700"
 				>installation guide</a
 			>
