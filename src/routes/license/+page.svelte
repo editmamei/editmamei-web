@@ -225,8 +225,8 @@ support@editmamei.com`;
 		<p class="mb-3 text-xs font-semibold tracking-wider text-neutral-500 uppercase">License</p>
 		<h1 class="text-3xl font-bold tracking-tight text-neutral-950 md:text-4xl">License</h1>
 		<p class="mt-4 text-base leading-relaxed text-neutral-700">
-			Two licenses cover Editmamei. Community Edition's source is public and source-available;
-			Pro is a separate, paid add-on with its own commercial terms.
+			Two licenses cover Editmamei. Community Edition's source is public and source-available; Pro
+			is a separate, paid add-on with its own commercial terms.
 		</p>
 
 		<h2 class="mt-14 text-xl font-bold tracking-tight text-neutral-950">
@@ -239,21 +239,24 @@ support@editmamei.com`;
 				class="underline hover:text-neutral-950">Fair Source</a
 			>
 			software under the
-			<a href={GITHUB_LICENSE_URL} rel="noopener noreferrer" class="underline hover:text-neutral-950"
+			<a
+				href={GITHUB_LICENSE_URL}
+				rel="noopener noreferrer"
+				class="underline hover:text-neutral-950"
 				>Functional Source License, v1.1, MIT Future License</a
 			> (FSL-1.1-MIT).
 		</p>
 		<p class="mt-3 text-sm leading-relaxed text-neutral-700">
 			You can read, run, modify, and redistribute the code for almost anything: commercial photo
-			editing, internal tools, education, research, security review. The one thing the license
-			holds back, for two years per release, is offering the code to others in a commercial
-			product or service that competes with Editmamei CE or Pro. If you redistribute the code,
-			keep the license and copyright notices with it. Two years after each version ships, that
-			version automatically becomes available under plain MIT.
+			editing, internal tools, education, research, security review. The one thing the license holds
+			back, for two years per release, is offering the code to others in a commercial product or
+			service that competes with Editmamei CE or Pro. If you redistribute the code, keep the license
+			and copyright notices with it. Two years after each version ships, that version automatically
+			becomes available under plain MIT.
 		</p>
 		<p class="mt-3 text-sm leading-relaxed text-neutral-700">
-			This summary is plain English. The text below is the license; where they differ, the
-			license text controls.
+			This summary is plain English. The text below is the license; where they differ, the license
+			text controls.
 		</p>
 		<p class="mt-3 text-sm leading-relaxed text-neutral-700">
 			Editmamei is not open source under the OSI definition, and we don't call it that. It is
@@ -273,9 +276,9 @@ support@editmamei.com`;
 			Editmamei Pro — commercial license
 		</h2>
 		<p class="mt-4 text-sm leading-relaxed text-neutral-700">
-			Editmamei Pro is a paid module and subscription, activated over Community Edition. It is
-			not covered by the FSL-1.1-MIT license above; its source is not published, and it is
-			licensed under the separate commercial agreement below.
+			Editmamei Pro is a paid module and subscription, activated over Community Edition. It is not
+			covered by the FSL-1.1-MIT license above; its source is not published, and it is licensed
+			under the separate commercial agreement below.
 		</p>
 
 		<div class="mt-8 rounded-2xl border border-neutral-200 bg-neutral-50/60 p-6 md:p-8">

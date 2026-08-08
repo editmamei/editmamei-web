@@ -59,8 +59,7 @@
 				<dt class="text-base font-semibold text-neutral-950">Documentation and community</dt>
 				<dd class="mt-2 text-sm leading-relaxed text-neutral-700">
 					The
-					<a href={GITHUB_README_URL} class="underline hover:text-neutral-950">README on GitHub</a
-					>
+					<a href={GITHUB_README_URL} class="underline hover:text-neutral-950">README on GitHub</a>
 					covers installation, configuration, and all available tools. Common setup questions are also
 					answered in the <a href="/faq" class="underline hover:text-neutral-950">FAQ</a>.
 				</dd>
