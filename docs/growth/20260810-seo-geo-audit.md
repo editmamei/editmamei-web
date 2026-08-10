@@ -60,6 +60,8 @@ content surface and the natural citation target for AI answers ("what is
 Editmamei?" → the introduction post). Add a Blog link (and optionally the
 flagship post) to the `## Links` section.
 
+**Status: done (2026-08-10)** — Blog link added to `## Links`.
+
 ### F2 — blog posts lack article metadata (structured data + OG)
 
 Post pages emit `og:type="website"` and no `BlogPosting` JSON-LD. For date
@@ -74,6 +76,10 @@ Mechanically small: extend `<Seo>` with an optional `article` prop (dates), and
 add the JSON-LD in `blog/[slug]/+page.svelte` — all fields already exist on
 `PostSummary`.
 
+**Status: done (2026-08-10)** — `<Seo>` gained an optional `article` prop
+(og:type=article + article:\*\_time tags); the post page emits `BlogPosting`
+JSON-LD using the same `{@html}`/escape pattern as the FAQPage schema.
+
 ### F3 — sitemap `lastmod` churns on every deploy (minor)
 
 Static routes stamp `lastmod` with the build date, so every deploy bumps every
@@ -82,6 +88,13 @@ When `lastmod` is demonstrably unreliable, Google ignores it sitewide — which
 also devalues the accurate post dates. Options: hand-maintain per-route dates
 in the `ROUTES` array, or drop `lastmod` for the static routes entirely
 (omitting it is valid).
+
+**Status: done (2026-08-10)** — owner chose hand-maintained. Each `ROUTES`
+entry now carries its own `lastmod` (seeded from the last content-changing
+commit per route); `/blog`'s is derived from the newest post so it bumps
+automatically when a post ships. **Maintenance rule: bump a route's
+`lastmod` when its content meaningfully changes** (the comment above the
+array says the same).
 
 ### F4 — no RSS/Atom feed (owner decision, flagging only)
 
