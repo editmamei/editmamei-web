@@ -35,6 +35,7 @@ Editmamei installs as an npm package and runs locally on macOS or Windows alongs
 - [Product](https://editmamei.com/product): capabilities and how it works
 - [Pricing](https://editmamei.com/pricing): Community vs Pro editions
 - [FAQ](https://editmamei.com/faq)
+- [Blog](https://editmamei.com/blog): feature announcements, tutorials, and example edits
 - [Contact](https://editmamei.com/contact)
 - [npm package](https://www.npmjs.com/package/editmamei)
 - [Source (GitHub)](https://github.com/editmamei/editmamei): CE source (FSL-1.1-MIT), docs, and issues

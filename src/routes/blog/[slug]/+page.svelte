@@ -5,12 +5,41 @@
 	let { data } = $props();
 	const post = $derived(data.post);
 	const Content = $derived(data.content);
+
+	const ORIGIN = 'https://editmamei.com';
+
+	// BlogPosting schema so engines get the post's dates and authorship
+	// (dates in SERPs, AI-citation grounding). Injected as a raw <script>
+	// tag via {@html} with the same two guards as the FAQPage schema on
+	// /faq: '<' in the JSON is escaped so frontmatter text can never close
+	// the tag early, and the literal closing tag is split for the parsers.
+	const jsonLd = $derived.by(() => {
+		const org = { '@type': 'Organization', name: 'Editmamei', url: `${ORIGIN}/` };
+		const schema = {
+			'@context': 'https://schema.org',
+			'@type': 'BlogPosting',
+			headline: post.title,
+			description: post.description,
+			url: `${ORIGIN}/blog/${post.slug}`,
+			mainEntityOfPage: `${ORIGIN}/blog/${post.slug}`,
+			datePublished: post.date,
+			dateModified: post.updated ?? post.date,
+			image: `${ORIGIN}/og-image.png`,
+			author: org,
+			publisher: org
+		};
+		return `<script type="application/ld+json">${JSON.stringify(schema).replace(
+			/</g,
+			'\\u003c'
+		)}${'<'}/script>`;
+	});
 </script>
 
 <Seo
 	path={`/blog/${post.slug}`}
 	title={`${post.title} — Editmamei`}
 	description={post.description}
+	article={{ published: post.date, modified: post.updated }}
 />
 
 <svelte:head>
@@ -18,6 +47,8 @@
 		<!-- Drafts never reach production builds; this is belt and braces for dev previews. -->
 		<meta name="robots" content="noindex" />
 	{/if}
+	<!-- eslint-disable-next-line svelte/no-at-html-tags -- local frontmatter-built JSON-LD, '<' escaped above -->
+	{@html jsonLd}
 </svelte:head>
 
 <main class="mx-auto max-w-3xl px-4 py-12">

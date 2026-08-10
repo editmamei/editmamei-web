@@ -24,25 +24,35 @@ export const prerender = true;
 
 const ORIGIN = 'https://editmamei.com';
 
-const ROUTES: Array<{ path: string; priority: string; changefreq: string }> = [
-	{ path: '/', priority: '1.0', changefreq: 'weekly' },
-	{ path: '/product', priority: '0.8', changefreq: 'weekly' },
-	{ path: '/pricing', priority: '0.8', changefreq: 'monthly' },
-	{ path: '/faq', priority: '0.7', changefreq: 'monthly' },
-	{ path: '/contact', priority: '0.5', changefreq: 'yearly' },
-	{ path: '/license', priority: '0.4', changefreq: 'yearly' },
-	{ path: '/activate', priority: '0.5', changefreq: 'monthly' },
-	{ path: '/blog', priority: '0.6', changefreq: 'weekly' }
+// lastmod is hand-maintained (YYYY-MM-DD): bump it when a page's CONTENT
+// meaningfully changes, not on refactors or restyles. Stamping the build
+// date here instead ("everything changed today", every deploy) teaches
+// crawlers the field is unreliable, which also devalues the accurate
+// per-post dates below. /blog has no entry of its own — its lastmod is
+// derived in GET from the newest post, since the index changes exactly
+// when the post list does.
+const ROUTES: Array<{ path: string; lastmod: string; priority: string; changefreq: string }> = [
+	{ path: '/', lastmod: '2026-08-08', priority: '1.0', changefreq: 'weekly' },
+	{ path: '/product', lastmod: '2026-08-04', priority: '0.8', changefreq: 'weekly' },
+	{ path: '/pricing', lastmod: '2026-08-04', priority: '0.8', changefreq: 'monthly' },
+	{ path: '/faq', lastmod: '2026-08-08', priority: '0.7', changefreq: 'monthly' },
+	{ path: '/contact', lastmod: '2026-08-08', priority: '0.5', changefreq: 'yearly' },
+	{ path: '/license', lastmod: '2026-08-08', priority: '0.4', changefreq: 'yearly' },
+	{ path: '/activate', lastmod: '2026-07-15', priority: '0.5', changefreq: 'monthly' },
+	{ path: '/blog', lastmod: 'NEWEST_POST', priority: '0.6', changefreq: 'weekly' }
 ];
 
 export const GET: RequestHandler = () => {
-	// ISO date (YYYY-MM-DD), the format Google's sitemap docs recommend.
-	const today = new Date().toISOString().slice(0, 10);
+	// The blog index's real modification date: the newest post date on it.
+	// Falls back to the site launch date only while there are zero posts.
+	const newestPost = posts
+		.flatMap((p) => [p.date, p.updated ?? p.date])
+		.reduce((a, b) => (a > b ? a : b), '2026-06-19');
 
 	const urls = ROUTES.map(
-		({ path, priority, changefreq }) => `	<url>
+		({ path, lastmod, priority, changefreq }) => `	<url>
 		<loc>${ORIGIN}${path}</loc>
-		<lastmod>${today}</lastmod>
+		<lastmod>${lastmod === 'NEWEST_POST' ? newestPost : lastmod}</lastmod>
 		<changefreq>${changefreq}</changefreq>
 		<priority>${priority}</priority>
 	</url>`

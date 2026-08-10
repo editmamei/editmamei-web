@@ -10,7 +10,8 @@
 		title,
 		description,
 		path,
-		image = '/og-image.png'
+		image = '/og-image.png',
+		article
 	}: {
 		title: string;
 		description: string;
@@ -18,6 +19,11 @@
 		path: string;
 		/** Root-relative social-share image; defaults to the site-wide card. */
 		image?: string;
+		/**
+		 * Blog posts only: switches og:type to "article" and emits the
+		 * article:*_time tags. Dates are YYYY-MM-DD (valid ISO 8601).
+		 */
+		article?: { published: string; modified?: string };
 	} = $props();
 
 	const ORIGIN = 'https://editmamei.com';
@@ -32,7 +38,13 @@
 
 	<meta property="og:title" content={title} />
 	<meta property="og:description" content={description} />
-	<meta property="og:type" content="website" />
+	<meta property="og:type" content={article ? 'article' : 'website'} />
+	{#if article}
+		<meta property="article:published_time" content={article.published} />
+		{#if article.modified}
+			<meta property="article:modified_time" content={article.modified} />
+		{/if}
+	{/if}
 	<meta property="og:url" content={url} />
 	<meta property="og:site_name" content="Editmamei" />
 	<meta property="og:image" content={imageUrl} />
