@@ -21,6 +21,7 @@ Truth guardrail (updated 2026-07-02, post-launch): **no fabricated traction** (u
 
 ## Files
 
+- [20260810-seo-geo-audit.md](20260810-seo-geo-audit.md) — full-site SEO/GEO audit after the blog launch: blog indexing verified healthy; ranked findings (llms.txt blog link, BlogPosting schema, sitemap lastmod churn).
 - [posts/20260702-ih-adobe-shipped-my-category.md](posts/20260702-ih-adobe-shipped-my-category.md) — flagship IH post (Adobe shipped the category; honest gap analysis). Post first.
 - [posts/20260702-ih-three-lessons-postlaunch.md](posts/20260702-ih-three-lessons-postlaunch.md) — three-lessons post, post-launch rewrite. Supersedes the 20260616 draft (which wrongly said "open-source" and "pre-launch" — do not post it).
 - [posts/20260702-reddit-playbook.md](posts/20260702-reddit-playbook.md) — subreddit strategy, voice cheat sheet, and per-sub drafts (r/mcp, r/ClaudeAI, r/SideProject, cautious r/photoshop).
