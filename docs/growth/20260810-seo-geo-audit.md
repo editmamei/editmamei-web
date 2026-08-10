@@ -90,7 +90,30 @@ for the record: a feed is a low-cost discovery surface for aggregators and
 some AI crawlers, and the removed implementation could be restored nearly
 verbatim if the decision is ever revisited. No action unless the owner says so.
 
-### F5 — cosmetic / defer
+### F5 — Bing "title tag too short" alert (2026-08-10) — stale, already fixed
+
+Bing Webmaster Tools flagged `/faq`, `/pricing`, and `/contact` for short
+title tags. The alert describes the site as it was before 2026-07-15:
+
+| Page     | Old title (flagged)           | Current title (deployed)                                            |
+| -------- | ----------------------------- | ------------------------------------------------------------------- |
+| /faq     | `FAQ — Editmamei` (15 ch)     | `FAQ: privacy, data use, AI clients, editions — Editmamei` (56 ch)  |
+| /pricing | `Pricing — Editmamei` (19 ch) | `Pricing: free Community edition and Pro plans — Editmamei` (57 ch) |
+| /contact | `Contact — Editmamei` (19 ch) | `Contact support or report a security issue — Editmamei` (54 ch)    |
+
+The short titles were replaced in `3542cc2` (2026-07-15, commit message
+literally cites this Bing alert) and refined in `6331e51` (2026-08-04).
+Deploys are automatic on every push to `main` (`.github/workflows/deploy.yml`)
+and the workflow pings IndexNow after each deploy, so the fixes are live.
+Current titles sit inside Bing's recommended 50–60-character band on every
+route (verified in the built HTML; the sandbox's egress policy blocked
+fetching the live pages, so confirm with view-source if in doubt).
+
+**Action (Bing dashboard, not code):** Bing's Site Scan reports the state at
+its last crawl — re-run the scan (Site Scan → Start new scan) and the alert
+should clear. No repo change needed.
+
+### F6 — cosmetic / defer
 
 - Post title pattern yields "Introducing Editmamei — Editmamei" (brand
   duplicated). Only affects posts whose titles contain the brand; not worth
@@ -103,7 +126,8 @@ verbatim if the decision is ever revisited. No action unless the owner says so.
 
 ## 4. Suggested order
 
-1. F1 (one-line edit to `static/llms.txt`)
-2. F2 (Seo component + post page)
-3. F3 (sitemap route dates)
-4. F5 breadcrumbs, only alongside F2
+1. F5 needs no code — re-run the Bing Site Scan from the dashboard
+2. F1 (one-line edit to `static/llms.txt`)
+3. F2 (Seo component + post page)
+4. F3 (sitemap route dates)
+5. F6 breadcrumbs, only alongside F2
