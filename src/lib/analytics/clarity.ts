@@ -21,7 +21,10 @@
  * product's privacy framing.
  */
 
-type ClarityFn = (cmd: 'event' | 'set' | 'upgrade' | 'consent', ...args: unknown[]) => void;
+type ClarityFn = (
+	cmd: 'event' | 'set' | 'upgrade' | 'consent' | 'identify',
+	...args: unknown[]
+) => void;
 
 declare global {
 	interface Window {
@@ -85,14 +88,73 @@ export function upgradeSession(reason: string): void {
  * want to know "did this visitor engage at all" not "how many micro-drags
  * did they do" (which would drown the dashboard in noise).
  *
- * Resets on full page reload, not on SPA navigation — fine because the
- * site is mostly single-page anyway.
+ * The Set is module-scoped, so it survives client-side navigation. The root
+ * layout clears it per navigation via `resetOnceGuards()` — without that, a
+ * visitor who moves between pages would silently stop reporting these events
+ * everywhere after the first page.
  */
 const firedOnce = new Set<string>();
 export function trackOnce(name: string): void {
 	if (firedOnce.has(name)) return;
 	firedOnce.add(name);
 	track(name);
+}
+
+/** Clear the `trackOnce` guards. Called on every navigation by the root layout. */
+export function resetOnceGuards(): void {
+	firedOnce.clear();
+}
+
+/**
+ * Stable per-tab ID used to stitch page views into a single Clarity session.
+ *
+ * Clarity's cookieless mode (pinned in src/app.html) cannot set `_clsk`, the
+ * cookie that ties page views together, so every navigation was arriving in the
+ * dashboard as a fresh session belonging to a fresh user. Multi-page journeys
+ * were invisible: a home → /pricing visit on 2026-08-13 recorded as two
+ * separate one-page sessions a minute apart, under two different user IDs.
+ *
+ * `sessionStorage`, not `localStorage`, deliberately: the ID dies with the tab,
+ * so this is not a persistent identifier and it matches what /privacy already
+ * describes ("session storage to correlate page views within a single tab").
+ */
+const TAB_ID_KEY = 'editmamei-clarity-tab';
+
+function tabSessionId(): string | null {
+	if (typeof window === 'undefined') return null;
+	try {
+		let id = sessionStorage.getItem(TAB_ID_KEY);
+		if (!id) {
+			id =
+				typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function'
+					? crypto.randomUUID()
+					: `t${Date.now().toString(36)}${Math.random().toString(36).slice(2, 10)}`;
+			sessionStorage.setItem(TAB_ID_KEY, id);
+		}
+		return id;
+	} catch {
+		// Storage blocked (private mode, hardened settings). Stitching is a
+		// nice-to-have; never let it break the page.
+		return null;
+	}
+}
+
+/**
+ * Tell Clarity which session and page this view belongs to, so consecutive
+ * views stitch into one journey. Safe to call on every navigation.
+ *
+ * @param path - Pathname of the page being viewed, used as the custom page ID.
+ */
+export function identifyPage(path: string): void {
+	if (typeof window === 'undefined') return;
+	const id = tabSessionId();
+	if (!id) return;
+	try {
+		// (custom-id, custom-session-id, custom-page-id)
+		window.clarity?.('identify', id, id, path);
+	} catch {
+		// see track()
+	}
 }
 
 /**
