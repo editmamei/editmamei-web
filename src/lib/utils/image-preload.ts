@@ -27,12 +27,16 @@ const decoding = new Map<string, Promise<void>>();
  * Never rejects: a decode failure resolves like a success, because a frame we
  * could not load should still let the caller's sequence continue.
  */
-export function preloadImage(src: string): Promise<void> {
+export function preloadImage(
+	src: string,
+	priority: 'high' | 'low' | 'auto' = 'auto'
+): Promise<void> {
 	if (typeof window === 'undefined') return Promise.resolve();
 	let pending = decoding.get(src);
 	if (!pending) {
 		pending = new Promise<void>((resolve) => {
 			const img = new Image();
+			img.fetchPriority = priority;
 			img.src = src;
 			// decode() rejects on a load failure, and on some browsers for images
 			// that are already complete. Resolve either way.
@@ -44,6 +48,20 @@ export function preloadImage(src: string): Promise<void> {
 		decoding.set(src, pending);
 	}
 	return pending;
+}
+
+/**
+ * Warm a set where the first image is on the critical path and the rest are not.
+ *
+ * Firing them all at once makes the one the caller is about to wait on compete
+ * with every other request for bandwidth, which is slower than useless: it
+ * delays the only frame that matters. The head is fetched at high priority and
+ * awaited; the tail starts behind it at low priority.
+ */
+export async function preloadImagesHeadFirst(srcs: readonly string[]): Promise<void> {
+	if (typeof window === 'undefined' || srcs.length === 0) return;
+	await preloadImage(srcs[0], 'high');
+	srcs.slice(1).forEach((src) => void preloadImage(src, 'low'));
 }
 
 /** Warm a whole set without waiting on any of them. */

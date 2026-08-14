@@ -9,7 +9,7 @@
 		hawaiiMovieRail,
 		type MovieFrame
 	} from '$lib/demos/hawaii-movie';
-	import { imageReady, preloadImages } from '$lib/utils/image-preload';
+	import { imageReady, preloadImagesHeadFirst } from '$lib/utils/image-preload';
 
 	// Soft-edged left→right sweep. Each new frame wipes in over the previously
 	// settled frame (the persistent base img underneath), so there's no black
@@ -34,7 +34,11 @@
 	// frozen for the wipe's duration, and the frame pops in un-animated once it
 	// lands. `preloadAll` warms them a screen-height early and `frameReady` gates
 	// each paint on that frame being decoded.
-	const preloadAll = () => preloadImages(hawaiiMovieFrames);
+	//
+	// Head-first, not all at once: the opening frame is the only one on the
+	// critical path (the rest are not needed for several seconds), so firing all
+	// ten together just made the first one queue behind nine others.
+	const preloadAll = () => preloadImagesHeadFirst(hawaiiMovieFrames);
 	const frameReady = (src: string) => imageReady(src);
 
 	// ── Beats (the LOCKED storyboard) ───────────────────────────────────────
@@ -200,11 +204,12 @@
 		await frameReady(M.original.src);
 		if (token !== runToken) return;
 
-		// Beat 1 — type the request, then send it.
+		// Beat 1 — type the request, then send it. The opening pause is short on
+		// purpose: it reads as "the cursor landed", not as the movie being slow.
 		beat = 'typing';
 		view = 'chat';
 		showInput = true;
-		if (!(await hold(500))) return;
+		if (!(await hold(180))) return;
 		if (!(await typeOut(M.prompt, token, fast ? 0 : 32))) return;
 		if (!(await hold(550))) return;
 		showInput = false;
@@ -295,25 +300,29 @@
 		}
 		let disposed = false;
 
-		// Begin only once the thread is calm: fonts loaded (so the swap can't
-		// relayout mid-type) and the browser reports idle time. Started eagerly on
-		// load, the rAF-driven typewriter competes with hydration / font / image
-		// work and stutters ("slow and intermittent at first"). timeout caps the
-		// wait so a never-idle thread still starts the movie.
-		const whenIdle = (cb: () => void) =>
-			typeof window.requestIdleCallback === 'function'
-				? window.requestIdleCallback(cb, { timeout: 600 })
-				: window.setTimeout(cb, 1);
+		// Wait for fonts so the swap can't relayout mid-type, but cap the wait: a
+		// slow font must not hold the movie hostage.
+		//
+		// There used to be a requestIdleCallback(timeout: 600) here as well, added
+		// because the rAF typewriter stuttered against hydration and image work on
+		// first paint. That contention was the unpreloaded-frame bug, now fixed, so
+		// the idle wait was costing up to 600ms of dead air to solve a problem that
+		// no longer exists. Measured 2026-08-14: 1101ms from scroll-into-view to the
+		// first typed character, of which ~600ms was this and 500ms the opening hold.
+		const FONT_WAIT_CAP_MS = 400;
 		const startWhenCalm = () => {
 			const begin = () => {
 				if (!disposed) play();
 			};
 			if (document.fonts?.ready) {
-				document.fonts.ready.then(() => {
-					if (!disposed) whenIdle(begin);
+				Promise.race([
+					document.fonts.ready,
+					new Promise((r) => setTimeout(r, FONT_WAIT_CAP_MS))
+				]).then(() => {
+					if (!disposed) begin();
 				});
 			} else {
-				whenIdle(begin);
+				begin();
 			}
 		};
 
