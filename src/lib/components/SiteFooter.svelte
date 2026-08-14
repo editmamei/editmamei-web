@@ -79,7 +79,7 @@
 				<ul class="mt-3 space-y-2 text-sm text-neutral-700">
 					<li><a href="/product" class="hover:text-neutral-950">Product</a></li>
 					<li><a href="/pricing" class="hover:text-neutral-950">Plans</a></li>
-					<li><a href="/#demo" class="hover:text-neutral-950">Demo</a></li>
+					<li><a href="/#process" class="hover:text-neutral-950">Demo</a></li>
 					<li><a href="/blog" class="hover:text-neutral-950">Blog</a></li>
 				</ul>
 			</div>

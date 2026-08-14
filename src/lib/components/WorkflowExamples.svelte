@@ -8,8 +8,10 @@
 			<p class="mb-2 text-xs font-semibold tracking-wider text-terracotta-ink uppercase">
 				What you say to it
 			</p>
+			<!-- Deliberately count-free: this said "Three prompts" while five rendered,
+			     because the list grew at v0.22.0 and the heading did not follow. -->
 			<h2 class="text-2xl font-bold tracking-tight text-neutral-950 md:text-3xl">
-				Three prompts that work today.
+				Prompts that work today.
 			</h2>
 			<p class="mt-3 text-base leading-relaxed text-neutral-700">
 				The AI reasons about intent. Editmamei handles the choreography.

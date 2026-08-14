@@ -3,6 +3,7 @@
 	import CapabilitySurface from '$lib/components/CapabilitySurface.svelte';
 	import WorkflowExamples from '$lib/components/WorkflowExamples.svelte';
 	import ClientChoiceCallout from '$lib/components/ClientChoiceCallout.svelte';
+	import EditFlowDiagram from '$lib/components/EditFlowDiagram.svelte';
 	import Seo from '$lib/components/Seo.svelte';
 </script>
 
@@ -31,5 +32,26 @@
 
 <ThreePillars />
 <CapabilitySurface />
+
+<!-- The full round-trip. Moved off the home page 2026-08-14: it is a reference
+     asset for a reader who is already sold, and the home page linked here. -->
+<section id="edit-flow" class="scroll-mt-20 bg-white py-16 md:py-20">
+	<div class="mx-auto max-w-5xl px-4">
+		<div class="mb-8 max-w-2xl">
+			<p class="mb-2 text-xs font-semibold tracking-wider text-terracotta-ink uppercase">
+				The round-trip
+			</p>
+			<h2 class="text-2xl font-bold tracking-tight text-neutral-950 md:text-3xl">
+				What one adjustment actually does.
+			</h2>
+			<p class="mt-3 text-base leading-relaxed text-neutral-700">
+				Four participants, one instruction, and a check-and-refine loop that runs until the result
+				matches what you asked for.
+			</p>
+		</div>
+		<EditFlowDiagram />
+	</div>
+</section>
+
 <WorkflowExamples />
 <ClientChoiceCallout />

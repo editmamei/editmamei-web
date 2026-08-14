@@ -3,23 +3,35 @@
 	import { track, trackOnce, upgradeSession } from '$lib/analytics/clarity';
 
 	// Stable "latest release" asset URL — always resolves to the newest published
-	// release, so a new version never needs a site edit. Shared with /download,
-	// and the one place the repository move at the split has to be made.
+	// release, so a new version never needs a site edit. Shared with /download.
 	import { GITHUB_GETTING_STARTED_DOCS_URL, MCPB_DOWNLOAD_URL as MCPB_URL } from '$lib/links';
 
+	// Two routes, two buttons, steps revealed in place (2026-08-14). The download
+	// link points at a GitHub release asset, which is served as an attachment: the
+	// file downloads and the visitor stays put with no feedback at all. The reveal
+	// IS the feedback, and it keeps the section compact until it is relevant.
+	// The anchor stays a real href so the download still works without JS, on a
+	// middle-click, and from "copy link address".
+	let openRoute = $state<'mcpb' | 'npm' | null>(null);
+
+	function toggle(route: 'mcpb' | 'npm') {
+		openRoute = openRoute === route ? null : route;
+	}
+
 	// Highest-intent pre-conversion signal for the npm path: the visitor
-	// highlighted the command snippet, almost certainly to copy it. (Download
-	// clicks are tracked directly via `track`.) Detected via `selectionchange`.
-	let snippetEl: HTMLPreElement;
+	// highlighted the command snippet, almost certainly to copy it. Detected via
+	// `selectionchange`. The snippet now lives behind the reveal, so this only
+	// fires once the panel is open — which is a truer signal than before.
+	let snippetEl = $state<HTMLPreElement>();
 
 	onMount(() => {
-		if (typeof document === 'undefined' || !snippetEl) return;
+		if (typeof document === 'undefined') return;
 
 		const handler = () => {
+			if (!snippetEl) return;
 			const sel = document.getSelection();
 			if (!sel || sel.isCollapsed || sel.rangeCount === 0) return;
-			const range = sel.getRangeAt(0);
-			const anchor = range.commonAncestorContainer;
+			const anchor = sel.getRangeAt(0).commonAncestorContainer;
 			if (snippetEl.contains(anchor) || snippetEl === anchor) {
 				trackOnce('install-snippet-selected');
 				upgradeSession('selected-install-snippet');
@@ -33,71 +45,89 @@
 
 <section id="install" class="bg-brand py-16 text-neutral-100 md:py-20">
 	<div class="mx-auto max-w-5xl px-4">
-		<div class="mb-8 max-w-2xl">
+		<div class="max-w-2xl">
 			<p class="mb-2 text-xs font-semibold tracking-wider text-accent uppercase">Install</p>
 			<h2 class="text-2xl font-bold tracking-tight text-white md:text-3xl">
-				Two ways in. Pick your client.
+				Install in about a minute.
 			</h2>
 			<p class="mt-3 text-base leading-relaxed text-neutral-300">
-				Editmamei runs on your own machine with the Photoshop you already have. One-click for Claude
-				Desktop, or a one-line install for everything else. Then restart your client and ask
-				<span class="text-neutral-200 italic">"Is Photoshop connected?"</span>
+				One click for Claude Desktop, one line for everything else.
 			</p>
 		</div>
 
-		<div class="grid gap-6 md:grid-cols-2">
-			<!-- Claude Desktop — one-click .mcpb (ships its own Node) -->
-			<div class="flex flex-col rounded-xl border border-brand-light bg-brand-deep/60 p-6">
-				<p class="text-xs font-semibold tracking-wider text-accent uppercase">
-					Easiest · Claude Desktop
+		<div class="mt-7 flex flex-wrap items-center gap-3">
+			<a
+				href={MCPB_URL}
+				onclick={() => {
+					track('download-mcpb-clicked');
+					openRoute = 'mcpb';
+				}}
+				aria-expanded={openRoute === 'mcpb'}
+				aria-controls="install-mcpb"
+				class="inline-flex items-center justify-center gap-2 rounded-md bg-accent px-5 py-3 text-sm font-semibold text-brand-deep shadow-sm transition-colors hover:bg-accent/90"
+			>
+				<span aria-hidden="true">↓</span> Download for Claude Desktop
+			</a>
+			<button
+				type="button"
+				onclick={() => {
+					track('install-npm-clicked');
+					toggle('npm');
+				}}
+				aria-expanded={openRoute === 'npm'}
+				aria-controls="install-npm"
+				class="inline-flex cursor-pointer items-center justify-center rounded-md border border-accent/40 px-5 py-3 text-sm font-semibold text-accent transition-colors hover:border-accent/70 hover:bg-accent/10"
+			>
+				Install with npm
+			</button>
+		</div>
+
+		{#if openRoute === 'mcpb'}
+			<div
+				id="install-mcpb"
+				class="mt-4 rounded-xl border border-accent/20 bg-brand-deep/60 p-5 md:p-6"
+			>
+				<p class="text-sm font-semibold text-neutral-100">
+					Downloading <code class="rounded bg-brand-deep px-1 py-0.5 text-xs text-accent"
+						>editmamei.mcpb</code
+					>. Three steps left:
 				</p>
-				<h3 class="mt-2 text-lg font-bold tracking-tight text-white">One-click install</h3>
-				<p class="mt-2 text-sm leading-relaxed text-neutral-300">
-					No terminal, nothing to configure. Claude Desktop ships its own runtime. Download the
-					extension and add it from Settings.
-				</p>
-				<a
-					href={MCPB_URL}
-					onclick={() => track('download-mcpb-clicked')}
-					class="mt-5 inline-flex items-center justify-center gap-2 rounded-md bg-accent px-5 py-3 text-sm font-semibold text-brand-deep shadow-sm transition-colors hover:bg-accent/90"
-				>
-					<span aria-hidden="true">↓</span> Download for Claude Desktop
-					<span class="opacity-70">(.mcpb)</span>
-				</a>
-				<p class="mt-3 text-xs text-neutral-400">Free · Windows &amp; macOS · ~8&nbsp;MB</p>
-				<ol class="mt-4 list-inside list-decimal space-y-1.5 text-sm text-neutral-300">
-					<li>Open Claude Desktop → Settings → Extensions.</li>
+				<ol class="mt-3 list-inside list-decimal space-y-1.5 text-sm text-neutral-300">
+					<li>In Claude Desktop, open Settings, then Extensions.</li>
 					<li>
 						Install the downloaded
-						<code class="rounded bg-brand-deep px-1 py-0.5 text-xs">editmamei.mcpb</code>.
+						<code class="rounded bg-brand-deep px-1 py-0.5 text-xs text-accent">editmamei.mcpb</code
+						>.
 					</li>
-					<li>Restart Claude Desktop.</li>
+					<li>Restart Claude Desktop, then ask it “Is Photoshop connected?”</li>
 				</ol>
+				<p class="mt-3 text-xs text-neutral-400">Free · Windows &amp; macOS · ~8&nbsp;MB</p>
 			</div>
+		{/if}
 
-			<!-- Claude Code / Cursor / any MCP host — npm install -->
-			<div class="flex flex-col rounded-xl border border-brand-light bg-brand-deep/60 p-6">
-				<p class="text-xs font-semibold tracking-wider text-accent uppercase">
-					Claude Code · Cursor · any MCP host
-				</p>
-				<h3 class="mt-2 text-lg font-bold tracking-tight text-white">Install from npm</h3>
-				<p class="mt-2 text-sm leading-relaxed text-neutral-300">
-					For clients that already have Node. The first command installs the package; the second
-					registers Editmamei with every MCP client it detects.
-				</p>
+		{#if openRoute === 'npm'}
+			<div
+				id="install-npm"
+				class="mt-4 rounded-xl border border-accent/20 bg-brand-deep/60 p-5 md:p-6"
+			>
+				<p class="text-sm font-semibold text-neutral-100">Run these two commands:</p>
 				<pre
 					bind:this={snippetEl}
-					class="mt-5 overflow-x-auto rounded-lg border border-brand-light bg-brand-deep px-4 py-3 font-mono text-xs leading-relaxed"><code
+					class="mt-3 overflow-x-auto rounded-lg border border-brand-light bg-brand-deep px-4 py-3 font-mono text-xs leading-relaxed"><code
 						><span class="text-neutral-500">$</span> <span class="text-accent">npm</span
 						> install -g editmamei
 <span class="text-neutral-500">$</span> <span class="text-accent">editmamei</span> install</code
 					></pre>
-				<p class="mt-3 text-xs text-neutral-400">
-					The setup command also copies the Claude skill to your Downloads folder, ready to upload
-					at claude.ai → Settings → Skills.
+				<p class="mt-3 text-sm leading-relaxed text-neutral-300">
+					The second command registers Editmamei with every MCP client it finds. Then restart the
+					client and ask “Is Photoshop connected?”
+				</p>
+				<p class="mt-2 text-xs text-neutral-400">
+					It also copies the Claude skill to your Downloads folder, ready to upload at claude.ai →
+					Settings → Skills.
 				</p>
 			</div>
-		</div>
+		{/if}
 
 		<div class="mt-10 grid gap-6 md:grid-cols-2">
 			<div class="rounded-xl border border-brand-light bg-brand-deep/60 p-5">
