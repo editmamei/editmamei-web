@@ -106,6 +106,22 @@ export const hawaiiMovie: HeroMovieScript = {
 };
 
 /**
+ * Every frame the movie paints, in play order, for preloading. The check-in
+ * thumbnail reuses frame-04, so it needs no entry of its own.
+ *
+ * These are ~330 KB each and nothing else on the page requests them, so
+ * `HeroMovie.svelte` warms them before playback rather than letting each one be
+ * fetched at the instant its wipe starts.
+ */
+export const hawaiiMovieFrames: string[] = [
+	hawaiiMovie.original.src,
+	...hawaiiMovie.buildSteps.map((s) => s.frame.src),
+	hawaiiMovie.resumeStep.frame.src,
+	...hawaiiMovie.finishSteps.map((s) => s.frame.src),
+	hawaiiMovie.cropStep.frame.src
+];
+
+/**
  * Flattened rail order (narrative order, lights top-to-bottom as the movie
  * plays). The "Warm the Headland" step sits between the pre-check-in build and the
  * finish so the decision payoff reads as the rail's turning point.

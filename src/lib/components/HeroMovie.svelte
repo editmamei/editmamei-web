@@ -3,7 +3,13 @@
 	import { cubicInOut } from 'svelte/easing';
 	import { track } from '$lib/analytics/clarity';
 	import { prefersReducedMotion } from '$lib/a11y/reducedMotion.svelte';
-	import { hawaiiMovie as M, hawaiiMovieRail, type MovieFrame } from '$lib/demos/hawaii-movie';
+	import {
+		hawaiiMovie as M,
+		hawaiiMovieFrames,
+		hawaiiMovieRail,
+		type MovieFrame
+	} from '$lib/demos/hawaii-movie';
+	import { imageReady, preloadImages } from '$lib/utils/image-preload';
 
 	// Soft-edged left→right sweep. Each new frame wipes in over the previously
 	// settled frame (the persistent base img underneath), so there's no black
@@ -20,6 +26,16 @@
 			}
 		};
 	}
+
+	// ── Frame preloading ────────────────────────────────────────────────────
+	// The ten frames are ~330 KB WebP each and nothing else on the page requests
+	// them, so without this each one is fetched at the exact moment its wipe
+	// begins: the mask sweeps over an image with no pixels, the canvas looks
+	// frozen for the wipe's duration, and the frame pops in un-animated once it
+	// lands. `preloadAll` warms them a screen-height early and `frameReady` gates
+	// each paint on that frame being decoded.
+	const preloadAll = () => preloadImages(hawaiiMovieFrames);
+	const frameReady = (src: string) => imageReady(src);
 
 	// ── Beats (the LOCKED storyboard) ───────────────────────────────────────
 	// idle → typing → sent → ai-ack → reveal → building → checkin → decision
@@ -157,6 +173,18 @@
 		beat = 'done';
 	}
 
+	/**
+	 * Paint a frame, but not before its pixels exist. Awaiting the decode is what
+	 * makes the sweep visible on a cold cache (see the preloading block above).
+	 * Re-checks the run token afterwards, since the await is a cancellation point.
+	 */
+	async function showFrame(frame: MovieFrame, token: number): Promise<boolean> {
+		await frameReady(frame.src);
+		if (token !== runToken) return false;
+		activeFrame = frame;
+		return true;
+	}
+
 	async function play() {
 		runToken++;
 		const token = runToken;
@@ -165,6 +193,12 @@
 
 		resetState();
 		manualPaused = false;
+
+		// Never open on a blank canvas: the first frame has to exist before the
+		// storyboard starts moving. The rest stream in behind the opening chat beats.
+		preloadAll();
+		await frameReady(M.original.src);
+		if (token !== runToken) return;
 
 		// Beat 1 — type the request, then send it.
 		beat = 'typing';
@@ -186,7 +220,7 @@
 		// Beat 3 — transition to canvas, reveal the original (scene 1).
 		beat = 'reveal';
 		view = 'canvas';
-		activeFrame = M.original;
+		if (!(await showFrame(M.original, token))) return;
 		sceneIndex = 1;
 		if (!(await hold(1300))) return;
 
@@ -196,7 +230,7 @@
 		for (const step of M.buildSteps) {
 			litCount += 1;
 			sceneIndex = 1 + litCount; // scenes 2..5
-			activeFrame = step.frame;
+			if (!(await showFrame(step.frame, token))) return;
 			if (!(await hold(2300))) return;
 		}
 
@@ -217,7 +251,7 @@
 		view = 'canvas';
 		litCount += 1;
 		sceneIndex = 7;
-		activeFrame = M.resumeStep.frame;
+		if (!(await showFrame(M.resumeStep.frame, token))) return;
 		if (!(await hold(2700))) return;
 
 		// Beat 8 — remaining layers land.
@@ -225,7 +259,7 @@
 		for (const step of M.finishSteps) {
 			litCount += 1;
 			sceneIndex = litCount + 2; // scenes 8..10
-			activeFrame = step.frame;
+			if (!(await showFrame(step.frame, token))) return;
 			if (!(await hold(2200))) return;
 		}
 
@@ -233,7 +267,7 @@
 		beat = 'crop';
 		litCount += 1;
 		sceneIndex = 11;
-		activeFrame = M.cropStep.frame;
+		if (!(await showFrame(M.cropStep.frame, token))) return;
 		cropped = true;
 		if (!(await hold(1800))) return;
 
@@ -246,7 +280,6 @@
 	// into view — not at page load (otherwise it's half-finished by the time the
 	// viewer arrives).
 	let rootEl = $state<HTMLElement>();
-	let hasStarted = false;
 
 	// Browser only ($effect never runs during SSR). Under reduced motion: no
 	// autoplay — snap to the static finished state immediately (it doesn't move,
@@ -287,16 +320,36 @@
 		const el = rootEl;
 		if (!el || typeof IntersectionObserver === 'undefined') {
 			// No ref yet or no IO support → fall back to immediate autoplay.
+			preloadAll();
 			startWhenCalm();
 			return () => {
 				disposed = true;
 				runToken++;
 			};
 		}
+
+		// Warm the frames a screen-height before the movie is on camera, so the
+		// bytes are decoded by the time the playback threshold is crossed.
+		const preloadIo = new IntersectionObserver(
+			(entries) => {
+				if (entries.some((e) => e.isIntersecting)) {
+					preloadAll();
+					preloadIo.disconnect();
+				}
+			},
+			{ rootMargin: '600px 0px' }
+		);
+		preloadIo.observe(el);
+
+		// `started` is per-effect-run, not component-scoped: this effect re-runs
+		// when rootEl binds or the reduced-motion setting flips, and its cleanup
+		// cancels the in-flight run. A component-scoped guard would then refuse to
+		// start again and leave the movie frozen with no recovery but Replay.
+		let started = false;
 		const io = new IntersectionObserver(
 			(entries) => {
-				if (entries.some((e) => e.isIntersecting) && !hasStarted) {
-					hasStarted = true;
+				if (entries.some((e) => e.isIntersecting) && !started) {
+					started = true;
 					startWhenCalm();
 					io.disconnect();
 				}
@@ -306,6 +359,7 @@
 		io.observe(el);
 		return () => {
 			disposed = true;
+			preloadIo.disconnect();
 			io.disconnect();
 			runToken++; // cancel any in-flight run on teardown
 		};
