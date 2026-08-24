@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { track } from '$lib/analytics/clarity';
+	import SubscribeForm from '$lib/components/SubscribeForm.svelte';
 	import { cookieConsent } from '$lib/stores/cookieConsent';
 	import {
 		CUSTOMER_PORTAL_URL,
@@ -71,6 +72,10 @@
 						>
 					</li>
 				</ul>
+
+				<div class="mt-6 max-w-md">
+					<SubscribeForm compact />
+				</div>
 			</div>
 
 			<!-- Explore: the marketing pages -->

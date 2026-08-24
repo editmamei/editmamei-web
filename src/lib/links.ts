@@ -26,6 +26,18 @@ export const MCPB_DOWNLOAD_URL =
 	'https://github.com/editmamei/editmamei/releases/latest/download/editmamei.mcpb';
 export const RELEASES_URL = 'https://github.com/editmamei/editmamei/releases/latest';
 
+// Signup capture (the `editmamei-subscribe` Worker).
+//
+// A workers.dev hostname rather than a custom domain because editmamei.com's
+// zone is on Google Cloud DNS via Squarespace, not Cloudflare, so Worker custom
+// domains are unavailable — the same blocker the telemetry Worker has.
+//
+// This URL is only ever called by our own JavaScript and never shown to anyone:
+// the link in the confirmation email points at /confirm on this site, which
+// calls the endpoint below. If the zone moves and this becomes a real
+// subdomain, links already sitting in inboxes keep working.
+export const SUBSCRIBE_API_URL = 'https://editmamei-subscribe.editmamei.workers.dev';
+
 // Public source repository (Editmamei CE, source-available under FSL-1.1-MIT).
 // Default branch is `dev`, so deep links into docs/ or a specific file use
 // /blob/dev/. The wiki repo (editmamei/editmamei-wiki) is frozen post-split;

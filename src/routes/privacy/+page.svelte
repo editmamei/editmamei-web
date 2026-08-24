@@ -160,3 +160,29 @@
 		</p>
 	</div>
 </section>
+
+<section id="email" class="border-t border-neutral-200 py-16 md:py-20">
+	<div class="mx-auto max-w-2xl px-4">
+		<h2 class="text-xl font-bold tracking-tight text-neutral-950">The email list</h2>
+		<p class="mt-4 text-sm leading-relaxed text-neutral-700">
+			If you sign up for updates, we store the address you gave us and nothing else. No name, no
+			company, and nothing about how you use Editmamei.
+		</p>
+		<p class="mt-4 text-sm leading-relaxed text-neutral-700">
+			Signing up sends you a confirmation link, and you are not added until you click it. That link
+			expires after 48 hours. Addresses are held by
+			<a
+				href="https://resend.com"
+				rel="noopener noreferrer"
+				class="underline hover:text-neutral-950">Resend</a
+			>, who send the mail on our behalf. Every message has an unsubscribe link, and using it takes
+			you off the list immediately.
+		</p>
+		<p class="mt-4 text-sm leading-relaxed text-neutral-700">
+			The list is never joined to product telemetry. Telemetry carries an anonymous install
+			identifier and no personal information, so there is nothing to connect an address to, and we
+			do not try. They are separate systems with separate consent, and we intend to keep it that
+			way.
+		</p>
+	</div>
+</section>

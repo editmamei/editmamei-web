@@ -1,5 +1,6 @@
 <script lang="ts">
 	import Seo from '$lib/components/Seo.svelte';
+	import SubscribeForm from '$lib/components/SubscribeForm.svelte';
 	import { formatDate } from '$lib/blog';
 
 	let { data } = $props();
@@ -42,4 +43,8 @@
 			{/each}
 		</ul>
 	{/if}
+
+	<div class="mt-14">
+		<SubscribeForm />
+	</div>
 </main>
