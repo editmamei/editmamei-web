@@ -169,8 +169,9 @@
 			company, and nothing about how you use Editmamei.
 		</p>
 		<p class="mt-4 text-sm leading-relaxed text-neutral-700">
-			Signing up sends you a confirmation link, and you are not added until you click it. That link
-			expires after 48 hours. Addresses are held by
+			Signing up stores your address right away, marked unconfirmed, and sends you a confirmation
+			link that expires after 48 hours. Until you click it, nothing is ever sent to that address
+			again. Addresses are held by
 			<a
 				href="https://resend.com"
 				rel="noopener noreferrer"
