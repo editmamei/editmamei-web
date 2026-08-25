@@ -1,10 +1,23 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
 	import { track } from '$lib/analytics/clarity';
 	import { SUBSCRIBE_API_URL } from '$lib/links';
 
 	// `compact` is the footer treatment: one line, no heading. The blog index
 	// uses the fuller one, where someone has just finished reading a post.
 	let { compact = false }: { compact?: boolean } = $props();
+
+	// Which surface sent this signup. Defaults to the placement; a link that
+	// arrives with ?src= (the CLI and the update notice both do) wins, so a
+	// person who lands from the terminal and scrolls to the footer is still
+	// counted as coming from the terminal. The Worker only accepts values it
+	// knows, so an edited URL cannot invent a label.
+	let urlSrc = $state<string | null>(null);
+	const src = $derived(urlSrc ?? (compact ? 'footer' : 'blog'));
+
+	onMount(() => {
+		urlSrc = new URLSearchParams(window.location.search).get('src');
+	});
 
 	let email = $state('');
 	let website = $state(''); // honeypot — see the hidden field below
@@ -25,7 +38,7 @@
 			const response = await fetch(`${SUBSCRIBE_API_URL}/v1/subscribe`, {
 				method: 'POST',
 				headers: { 'Content-Type': 'application/json' },
-				body: JSON.stringify({ email, website })
+				body: JSON.stringify({ email, website, src })
 			});
 			if (response.ok) {
 				status = 'sent';
@@ -81,6 +94,10 @@
 			{status === 'sending' ? 'Sending' : 'Subscribe'}
 		</button>
 	</div>
+
+	<!-- Carries the source on a native (no-JavaScript) post, where the fetch
+	     body above never runs. -->
+	<input type="hidden" name="src" value={src} />
 
 	<!--
 		Honeypot. Hidden from people and from screen readers, left in the DOM for
