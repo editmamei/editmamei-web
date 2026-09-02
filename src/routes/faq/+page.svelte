@@ -65,7 +65,7 @@
 		},
 		{
 			q: 'Does Editmamei work on Mac and Windows?',
-			a: 'Yes. Editmamei runs on macOS 12 and later and Windows 10 and 11.'
+			a: 'Yes. Editmamei runs on macOS 13 and later and Windows 10 and 11.'
 		},
 		{
 			q: 'Is Editmamei made by Adobe?',

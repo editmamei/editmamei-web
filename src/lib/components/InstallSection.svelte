@@ -134,7 +134,7 @@
 				<h3 class="text-sm font-semibold tracking-tight text-white">Requirements</h3>
 				<ul class="mt-3 space-y-1.5 text-sm text-neutral-300">
 					<li>Adobe Photoshop 2026, internal version 27.x (earlier versions unverified)</li>
-					<li>Windows 10/11 or macOS 12+ (Apple Silicon or Intel)</li>
+					<li>Windows 10/11 or macOS 13+ (Apple Silicon or Intel)</li>
 					<li>Node.js 20+, only for the npm path (Claude Desktop bundles its own runtime)</li>
 					<li>An MCP-compatible AI client</li>
 				</ul>
