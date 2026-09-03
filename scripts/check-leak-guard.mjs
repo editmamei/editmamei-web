@@ -43,7 +43,7 @@ const SELF_PATH = fileURLToPath(import.meta.url);
 const BLOCKED = [
 	'ps_apply_brush_stroke',
 	'ps_portrait_touchup',
-	'ps_select_focus_area',
+	'ps_sequence',
 	'ps_stroke_face_contour'
 ];
 // === END AUTO-GENERATED BLOCKED ===
