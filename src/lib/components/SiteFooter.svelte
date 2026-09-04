@@ -71,6 +71,14 @@
 							class="hover:text-neutral-950">PeerPush</a
 						>
 					</li>
+					<li>
+						<a
+							href="https://launchstreak.dev/design/editmamei"
+							onclick={() => track('footer-outbound-launchstreak')}
+							rel="noopener"
+							class="hover:text-neutral-950">Launch Streak</a
+						>
+					</li>
 				</ul>
 
 				<div class="mt-6 max-w-md">
