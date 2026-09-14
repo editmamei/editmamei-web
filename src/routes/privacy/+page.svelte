@@ -53,7 +53,7 @@
 			Editmamei is built by a small team, so it sends a thin stream of content-free signals that
 			show what's working and what's breaking. The earlier "no telemetry at all" promise is retired:
 			a licensed product that phones home should say so plainly rather than claim a purity it can't
-			keep. Everything below is anonymous, modelled on how editors like VS Code handle telemetry,
+			keep. Everything below is content-free, modelled on how editors like VS Code handle telemetry,
 			and documented field by field.
 		</p>
 		<ul class="mt-4 space-y-3 text-sm leading-relaxed text-neutral-700">
@@ -64,7 +64,7 @@
 				Per edit: which tool ran, whether it succeeded, an error category if it didn't, and how long it
 				took. Per session: the Editmamei version, your Photoshop version, your operating system, which
 				install route you used (npm or the one-click Claude Desktop extension), and a random install ID
-				that counts installs without identifying you. On Pro installs, one extra startup signal records
+				that is not derived from anything about you. On Pro installs, one extra startup signal records
 				whether your Pro add-on actually loaded, so a purchase that failed to install is distinguishable
 				from one that's working. No prompts, no arguments, no content.
 			</li>
@@ -107,6 +107,85 @@
 				See how this fits together in How It Works →
 			</a>
 		</div>
+	</div>
+</section>
+
+<section id="legal" class="border-t border-neutral-200 py-16 md:py-20">
+	<div class="mx-auto max-w-3xl px-6">
+		<h2 class="text-xl font-bold tracking-tight text-neutral-950">
+			Your rights, and the legal basis
+		</h2>
+		<p class="mt-3 text-sm leading-relaxed text-neutral-700">
+			Who is responsible for this data, the basis for collecting each kind, how long it is kept, and
+			what you can require us to do. This applies to everyone, not only to people in the EU or UK.
+		</p>
+		<dl class="mt-6 space-y-4 text-sm leading-relaxed text-neutral-700">
+			<div>
+				<dt class="font-semibold text-neutral-900">Controller</dt>
+				<dd class="mt-1">
+					Editmamei. Contact us at
+					<a href="/contact" class="underline hover:text-neutral-950">editmamei.com/contact</a>.
+				</dd>
+			</div>
+			<div>
+				<dt class="font-semibold text-neutral-900">The install ID</dt>
+				<dd class="mt-1">
+					A random value generated on your machine. It is not derived from your name, account,
+					email, hardware, or anything else about you, and on its own it identifies nobody. It is
+					stable across sessions, and stable identifiers can be correlated with other information,
+					so data protection law classifies it as <em>pseudonymous</em> rather than anonymous: personal
+					data, and subject to the rights below.
+				</dd>
+			</div>
+			<div>
+				<dt class="font-semibold text-neutral-900">Lawful basis</dt>
+				<dd class="mt-1">
+					Usage and reliability data (on by default) rests on legitimate interests: identifying
+					defects, and establishing which features are used and on which Photoshop versions. You
+					have the right to object, and the setting is the mechanism. Diagnostic detail (off by
+					default) rests on consent, given by enabling it and withdrawn by disabling it. The two
+					settings are independent — switching usage off does not switch diagnostics off.
+				</dd>
+			</div>
+			<div>
+				<dt class="font-semibold text-neutral-900">Retention</dt>
+				<dd class="mt-1">
+					Per-install records: 24 months, deleted automatically. Opt-in diagnostic records: 90 days,
+					deleted automatically. Aggregate daily totals carry no install ID and are not subject to
+					these windows.
+				</dd>
+			</div>
+			<div>
+				<dt class="font-semibold text-neutral-900">Your rights</dt>
+				<dd class="mt-1">
+					Access, rectification, erasure, and objection. Your install ID is the reference for all of
+					them; print it with
+					<code class="rounded bg-neutral-200 px-1 py-0.5 font-mono text-xs"
+						>editmamei config get telemetry.install_id</code
+					>
+					and send it to us with your request. Two limits apply: erasure removes the stored records but
+					does not stop collection, because the same ID remains in your settings file — disable telemetry
+					first if you want both; and aggregate daily totals were summed on arrival with no ID attached,
+					so they cannot be recalculated to exclude a single install. Without an install ID we cannot
+					locate your records, because no email address, account, or IP address is stored alongside it.
+				</dd>
+			</div>
+			<div>
+				<dt class="font-semibold text-neutral-900">Processing</dt>
+				<dd class="mt-1">
+					Editmamei's own Cloudflare infrastructure. No third-party analytics processor. Telemetry
+					is not sold, shared, or used for advertising.
+				</dd>
+			</div>
+		</dl>
+		<p class="mt-6 text-sm leading-relaxed text-neutral-700">
+			Every field Editmamei sends is documented one by one in the
+			<a
+				href="https://github.com/editmamei/editmamei/blob/main/docs/privacy.md"
+				rel="noopener noreferrer"
+				class="underline hover:text-neutral-950">privacy reference</a
+			>.
+		</p>
 	</div>
 </section>
 
@@ -180,10 +259,9 @@
 			you off the list immediately.
 		</p>
 		<p class="mt-4 text-sm leading-relaxed text-neutral-700">
-			The list is never joined to product telemetry. Telemetry carries an anonymous install
-			identifier and no personal information, so there is nothing to connect an address to, and we
-			do not try. They are separate systems with separate consent, and we intend to keep it that
-			way.
+			The list is never joined to product telemetry. Telemetry carries a random install identifier
+			and never an email address or a name, so there is nothing to connect an address to, and we do
+			not try. They are separate systems with separate consent, and we intend to keep it that way.
 		</p>
 	</div>
 </section>
