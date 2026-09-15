@@ -123,7 +123,7 @@
 			<div>
 				<dt class="font-semibold text-neutral-900">Controller</dt>
 				<dd class="mt-1">
-					Editmamei. Contact us at
+					EMBD Artifacts LLC, doing business as Editmamei. Contact us at
 					<a href="/contact" class="underline hover:text-neutral-950">editmamei.com/contact</a>.
 				</dd>
 			</div>
