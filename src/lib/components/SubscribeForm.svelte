@@ -5,7 +5,31 @@
 
 	// `compact` is the footer treatment: one line, no heading. The blog index
 	// uses the fuller one, where someone has just finished reading a post.
-	let { compact = false }: { compact?: boolean } = $props();
+	//
+	// `tone` exists because this form is no longer only on cream: the install
+	// reveal is a dark panel, and the light treatment is unreadable on it.
+	//
+	// `placement` names the surface explicitly. It used to be inferred from
+	// `compact`, which stopped working the moment a third surface existed --
+	// and it also keys the DOM ids below, so two instances on one page cannot
+	// collide.
+	// `showIntro` exists because the download dialog supplies its own heading (it
+	// needs one anyway, to label the dialog for assistive tech). Without this the
+	// heading and blurb render twice, once from the dialog and once from here.
+	let {
+		compact = false,
+		tone = 'light',
+		placement,
+		showIntro = true
+	}: {
+		compact?: boolean;
+		tone?: 'light' | 'dark';
+		placement?: string;
+		showIntro?: boolean;
+	} = $props();
+
+	const uid = $derived(placement ?? (compact ? 'footer' : 'blog'));
+	const dark = $derived(tone === 'dark');
 
 	// Which surface sent this signup. Defaults to the placement; a link that
 	// arrives with ?src= (the CLI and the update notice both do) wins, so a
@@ -13,7 +37,7 @@
 	// counted as coming from the terminal. The Worker only accepts values it
 	// knows, so an edited URL cannot invent a label.
 	let urlSrc = $state<string | null>(null);
-	const src = $derived(urlSrc ?? (compact ? 'footer' : 'blog'));
+	const src = $derived(urlSrc ?? uid);
 
 	onMount(() => {
 		urlSrc = new URLSearchParams(window.location.search).get('src');
@@ -62,7 +86,14 @@
 	onsubmit={submit}
 	class={compact ? '' : 'rounded-xl border border-neutral-200 bg-cream p-6'}
 >
-	{#if !compact}
+	{#if !showIntro}
+		<!-- The container supplies the heading. -->
+	{:else if dark}
+		<p class="text-sm font-semibold text-neutral-100">Want to hear about new releases?</p>
+		<p class="mt-1.5 text-sm leading-relaxed text-neutral-300">
+			New releases and new posts. Nothing else, and you can leave whenever you want.
+		</p>
+	{:else if !compact}
 		<p class="text-base font-semibold tracking-tight text-neutral-900">Get the updates</p>
 		<p class="mt-2 text-sm leading-relaxed text-neutral-600">
 			New releases and new posts. Nothing else, and you can leave whenever you want.
@@ -73,23 +104,25 @@
 	{/if}
 
 	<div class="mt-3 flex flex-wrap gap-2">
-		<label class="sr-only" for={compact ? 'subscribe-email-footer' : 'subscribe-email'}>
-			Email address
-		</label>
+		<label class="sr-only" for={`subscribe-email-${uid}`}>Email address</label>
 		<input
-			id={compact ? 'subscribe-email-footer' : 'subscribe-email'}
+			id={`subscribe-email-${uid}`}
 			type="email"
 			name="email"
 			bind:value={email}
 			required
 			autocomplete="email"
 			placeholder="you@example.com"
-			class="min-w-0 flex-1 rounded-lg border border-neutral-300 bg-white px-3 py-2 text-sm text-neutral-900 placeholder:text-neutral-400 focus:border-neutral-500 focus:outline-none"
+			class={dark
+				? 'min-w-0 flex-1 rounded-lg border border-accent/30 bg-brand-deep px-3 py-2 text-sm text-neutral-100 placeholder:text-neutral-500 focus:border-accent focus:outline-none'
+				: 'min-w-0 flex-1 rounded-lg border border-neutral-300 bg-white px-3 py-2 text-sm text-neutral-900 placeholder:text-neutral-400 focus:border-neutral-500 focus:outline-none'}
 		/>
 		<button
 			type="submit"
 			disabled={status === 'sending'}
-			class="cursor-pointer rounded-lg bg-neutral-900 px-4 py-2 text-sm font-medium text-white hover:bg-neutral-700 disabled:cursor-default disabled:opacity-60"
+			class={dark
+				? 'cursor-pointer rounded-lg bg-accent px-4 py-2 text-sm font-semibold text-brand-deep hover:bg-accent/90 disabled:cursor-default disabled:opacity-60'
+				: 'cursor-pointer rounded-lg bg-neutral-900 px-4 py-2 text-sm font-medium text-white hover:bg-neutral-700 disabled:cursor-default disabled:opacity-60'}
 		>
 			{status === 'sending' ? 'Sending' : 'Subscribe'}
 		</button>
@@ -105,11 +138,9 @@
 		keyboard order, so a keyboard user never lands in it by accident.
 	-->
 	<div class="hidden" aria-hidden="true">
-		<label for={compact ? 'subscribe-website-footer' : 'subscribe-website'}>
-			Leave this empty
-		</label>
+		<label for={`subscribe-website-${uid}`}>Leave this empty</label>
 		<input
-			id={compact ? 'subscribe-website-footer' : 'subscribe-website'}
+			id={`subscribe-website-${uid}`}
 			type="text"
 			name="website"
 			bind:value={website}
@@ -118,7 +149,11 @@
 		/>
 	</div>
 
-	<p class="mt-3 text-xs text-neutral-500" role="status" aria-live="polite">
+	<p
+		class={dark ? 'mt-3 text-xs text-neutral-400' : 'mt-3 text-xs text-neutral-500'}
+		role="status"
+		aria-live="polite"
+	>
 		{#if status === 'sent'}
 			Check your inbox and click the link to confirm. It works for 48 hours.
 		{:else if status === 'error'}

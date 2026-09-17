@@ -5,6 +5,38 @@
 	// Stable "latest release" asset URL — always resolves to the newest published
 	// release, so a new version never needs a site edit. Shared with /download.
 	import { GITHUB_GETTING_STARTED_DOCS_URL, MCPB_DOWNLOAD_URL as MCPB_URL } from '$lib/links';
+	import SubscribeForm from '$lib/components/SubscribeForm.svelte';
+	import DownloadSignupDialog from '$lib/components/DownloadSignupDialog.svelte';
+
+	// The signup dialog opens after the download fires, and only once per
+	// browsing session: someone who downloads twice (a retry, a second machine)
+	// has already answered, and asking again reads as nagging. sessionStorage is
+	// a functional UI preference, not tracking, and is wrapped because a private
+	// window can throw on access rather than simply returning null.
+	const SEEN_KEY = 'editmamei:download-signup-seen';
+	let signupOpen = $state(false);
+
+	function seenThisSession(): boolean {
+		try {
+			return sessionStorage.getItem(SEEN_KEY) === '1';
+		} catch {
+			return false;
+		}
+	}
+
+	function markSeen() {
+		try {
+			sessionStorage.setItem(SEEN_KEY, '1');
+		} catch {
+			/* private mode; showing it again next click is an acceptable fallback */
+		}
+	}
+
+	function offerSignup() {
+		if (seenThisSession()) return;
+		markSeen();
+		signupOpen = true;
+	}
 
 	// Two routes, two buttons, steps revealed in place (2026-08-14). The download
 	// link points at a GitHub release asset, which is served as an attachment: the
@@ -60,7 +92,9 @@
 				href={MCPB_URL}
 				onclick={() => {
 					track('download-mcpb-clicked');
+					// Reveal the steps FIRST, so dismissing the dialog lands on them.
 					openRoute = 'mcpb';
+					offerSignup();
 				}}
 				aria-expanded={openRoute === 'mcpb'}
 				aria-controls="install-mcpb"
@@ -126,6 +160,10 @@
 					It also copies the Claude skill to your Downloads folder, ready to upload at claude.ai →
 					Settings → Skills.
 				</p>
+
+				<div class="mt-5 border-t border-accent/15 pt-4">
+					<SubscribeForm compact tone="dark" placement="install_npm" />
+				</div>
 			</div>
 		{/if}
 
@@ -160,3 +198,5 @@
 		</p>
 	</div>
 </section>
+
+<DownloadSignupDialog bind:open={signupOpen} />
