@@ -135,7 +135,11 @@
 					</li>
 					<li>Restart Claude Desktop, then ask it “Is Photoshop connected?”</li>
 				</ol>
-				<p class="mt-3 text-xs text-neutral-400">Free · Windows &amp; macOS · ~8&nbsp;MB</p>
+				<!-- Size is the .mcpb release asset, checked against the GitHub API on
+				     2026-09-17 (v1.4.0 = 36,359,161 bytes). Windows reports 34.7 and
+				     macOS 36.4 for the same file, so ~35 covers both. It said ~8 for a
+				     month after the Go core grew, so re-check this at a release. -->
+				<p class="mt-3 text-xs text-neutral-400">Free · Windows &amp; macOS · ~35&nbsp;MB</p>
 			</div>
 		{/if}
 
