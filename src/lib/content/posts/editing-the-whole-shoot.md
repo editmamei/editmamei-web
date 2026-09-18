@@ -2,6 +2,7 @@
 title: Editing the whole shoot
 description: Templates and batch processing bring one considered edit to an entire shoot, holding the look consistent across every frame while cutting the time and the tokens it takes to get there.
 date: 2026-08-28
+updated: 2026-09-18
 ---
 
 A shoot is not one photo. It is a few dozen frames of the same dog on the same
@@ -53,8 +54,9 @@ and closing each file in turn.
 
 ## What that saves
 
-Editmamei works through your AI subscription, so every edit draws on your plan.
-Both features exist to keep that draw down, and I wanted to know by how much.
+Editmamei works through whatever AI client you connect it to, so every edit spends
+that client's tokens. Both features exist to keep that spend down, and I wanted to
+know by how much.
 
 Editing one photo from a plain description, with nothing prepared in advance,
 took a little over twenty minutes. Claude looks at the picture, settles on a

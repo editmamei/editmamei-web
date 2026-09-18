@@ -18,11 +18,11 @@
 			What Editmamei does with your data.
 		</h1>
 		<p class="mt-4 text-base leading-relaxed text-neutral-700">
-			Editmamei runs on your own computer and edits inside the Photoshop you already have. The
-			honest version is short: your photos aren't uploaded to us, and the only thing Editmamei sends
-			to its own servers is content-free usage you can audit and turn off. When your AI assistant
-			needs to see an edit, a downscaled preview goes to that assistant, covered below. A fuller,
-			formal privacy policy is in progress; this page describes how the product behaves today.
+			Editmamei runs on your own computer and edits inside desktop Photoshop. The honest version is
+			short: your photos aren't uploaded to us, and the only thing Editmamei sends to its own
+			servers is content-free usage you can audit and turn off. When your AI assistant needs to see
+			an edit, a downscaled preview goes to that assistant, covered below. A fuller, formal privacy
+			policy is in progress; this page describes how the product behaves today.
 		</p>
 
 		<h2 class="mt-12 text-xl font-bold tracking-tight text-neutral-950">

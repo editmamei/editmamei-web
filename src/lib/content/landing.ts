@@ -2,8 +2,8 @@ import type { Capability, EditionRow, Pillar, WorkflowExample } from '$lib/types
 
 export const pillars: Pillar[] = [
 	{
-		title: 'The Photoshop you have, driven by language',
-		body: 'Editmamei drives the real Adobe Photoshop you already installed: the full program, not a hosted web app or a cloud copy. Your AI talks to the desktop, and your project files live there.'
+		title: 'Desktop Photoshop, driven by language',
+		body: 'Editmamei drives desktop Adobe Photoshop: the full program, not a hosted web app or a cloud copy. Your AI talks to the desktop, and your project files live there.'
 	},
 	{
 		title: 'Non-destructive by default',

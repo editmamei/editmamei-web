@@ -9,7 +9,7 @@
 <Seo
 	path="/blog"
 	title="Blog — Editmamei"
-	description="Feature announcements, tutorials, and example edits from Editmamei, the MCP server that puts your AI assistant inside your own Photoshop."
+	description="Feature announcements, tutorials, and example edits from Editmamei, the MCP server that puts your AI assistant inside desktop Photoshop."
 />
 
 <main class="mx-auto max-w-3xl px-4 py-12">

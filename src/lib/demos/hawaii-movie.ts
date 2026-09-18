@@ -69,7 +69,7 @@ export interface HeroMovieScript {
 export const hawaiiMovie: HeroMovieScript = {
 	prompt:
 		'Make this Hawaii bay shot print-ready wall art: deepen the sky, richer water, warm the headland, 16:9 crop.',
-	aiAck: 'On it. Opening it in your Photoshop and starting the layers.',
+	aiAck: 'On it. Opening it in Photoshop and starting the layers.',
 	original: { src: `${DIR}/frame-00-original.webp` },
 	buildSteps: [
 		{ name: 'Tonal Base', kind: 'levels', frame: { src: `${DIR}/frame-01.webp` } },

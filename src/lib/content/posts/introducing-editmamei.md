@@ -12,7 +12,7 @@ I built Editmamei because I didn't think those should be the only two options.
 
 ## Assist the craft, not replace it
 
-Editmamei connects your AI assistant to your own Photoshop. You describe what you're after the way you'd brief another editor: warm up the skin tones a touch, lift the shadows in the trees, straighten that horizon. The AI plans the edit; Photoshop performs it with its real, non-generative tools. AI orchestration, not generation.
+Editmamei connects your AI assistant to desktop Photoshop. You describe what you're after the way you'd brief another editor: warm up the skin tones a touch, lift the shadows in the trees, straighten that horizon. The AI plans the edit; Photoshop performs it with its real, non-generative tools. AI orchestration, not generation.
 
 What comes out isn't an export from a model. It's your PSD, on your machine, and it's an ordinary working file, the kind you could hand off to a retoucher: adjustments on their own layers, masks you can repaint, nothing flattened, nothing baked in. Every layer is still yours to tune.
 
@@ -22,7 +22,7 @@ There's a second group I care about: people who never put ten years into learnin
 
 ## What Editmamei is, concretely
 
-Editmamei is an MCP server that runs on your desktop next to Photoshop. Connect it to an AI assistant like Claude and the assistant can drive Photoshop directly. Everything happens on your machine, in your copy of Photoshop. When the assistant needs to check its work, it looks at a downscaled preview, the same as if you'd dropped the photo into the chat yourself.
+Editmamei is an MCP server that runs on your desktop next to Photoshop. Connect it to an AI assistant like Claude and the assistant can drive Photoshop directly. Everything happens on your machine, in Photoshop itself. When the assistant needs to check its work, it looks at a downscaled preview, the same as if you'd dropped the photo into the chat yourself.
 
 The Community Edition is free. The [install guide](https://github.com/editmamei/editmamei#readme) takes you from zero to your first described edit in a few minutes.
 

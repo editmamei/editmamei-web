@@ -5,11 +5,11 @@
 	const faqs = [
 		{
 			q: 'Is there an MCP server for Photoshop?',
-			a: 'Editmamei is one: a Model Context Protocol (MCP) server for Adobe Photoshop. Your AI client connects to it, and it drives the Photoshop already installed on your computer. You describe the edit, the AI plans the steps, and Photoshop carries them out.'
+			a: 'Editmamei is one: a Model Context Protocol (MCP) server for Adobe Photoshop. Your AI client connects to it, and it drives desktop Photoshop on your computer. You describe the edit, the AI plans the steps, and Photoshop carries them out.'
 		},
 		{
 			q: 'Is Editmamei a web app?',
-			a: 'No. Editmamei installs on your computer as a command-line package and drives the Adobe Photoshop you already have. Nothing runs in a browser; there is no hosted editor.'
+			a: 'No. Editmamei installs on your computer as a command-line package and drives desktop Adobe Photoshop. Nothing runs in a browser; there is no hosted editor.'
 		},
 		{
 			q: 'Is Editmamei a Photoshop plugin?',
@@ -17,11 +17,11 @@
 		},
 		{
 			q: 'Do I need Photoshop to use Editmamei?',
-			a: 'Yes. Editmamei drives your own copy of Adobe Photoshop. It is not a replacement for it. You need an active Photoshop license and an installation on the same computer.'
+			a: 'Yes. Editmamei drives desktop Adobe Photoshop. It is not a replacement for it. You need an active Photoshop license and an installation on the same computer.'
 		},
 		{
 			q: 'Does Editmamei upload my photos?',
-			a: "Your photo files stay on your machine. The editing happens inside your own Photoshop. When you ask your AI assistant to look at a preview, a small downscaled version goes to that AI provider, the same as if you'd dropped the file into a chat with it. That's a property of which AI assistant you choose, not something Editmamei adds."
+			a: "Your photo files stay on your machine. The editing happens inside Photoshop on your machine. When you ask your AI assistant to look at a preview, a small downscaled version goes to that AI provider, the same as if you'd dropped the file into a chat with it. That's a property of which AI assistant you choose, not something Editmamei adds."
 		},
 		{
 			q: 'What data does Editmamei collect, and how is it used?',
@@ -30,6 +30,10 @@
 		{
 			q: 'Which AI clients work with Editmamei?',
 			a: 'Any AI client that supports the Model Context Protocol (MCP). The most common starting points today are Claude Desktop, Claude Code, and Cursor. Claude Desktop is the easiest setup if you are not sure where to begin.'
+		},
+		{
+			q: 'Does Editmamei use my AI credits or tokens?',
+			a: 'Tokens, yes. Editmamei has no credit system of its own and never charges per image, but it runs on whatever AI client you connect it to, and every edit spends that client\'s tokens. That client might be a subscription, an API key, or a model you run yourself. A first edit is a long session, because the AI is working out the look as it goes; once a look is saved as a template and carried across a shoot, the cost per photo drops sharply. The blog post "What an edit costs" has the measurements.'
 		},
 		{
 			q: 'Can an AI assistant edit photos in Photoshop for me?',

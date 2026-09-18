@@ -9,7 +9,7 @@
 
 <Seo
 	title="AI photo editing tools for Photoshop — Editmamei"
-	description="Non-destructive AI photo editing in your own Photoshop: adjustment layers, smart selections, masks, filters, and repeatable Pro templates for automation."
+	description="Non-destructive AI photo editing in desktop Photoshop: adjustment layers, smart selections, masks, filters, and repeatable Pro templates for automation."
 	path="/product"
 />
 

@@ -32,10 +32,10 @@ const ORIGIN = 'https://editmamei.com';
 // derived in GET from the newest post, since the index changes exactly
 // when the post list does.
 const ROUTES: Array<{ path: string; lastmod: string; priority: string; changefreq: string }> = [
-	{ path: '/', lastmod: '2026-08-14', priority: '1.0', changefreq: 'weekly' },
+	{ path: '/', lastmod: '2026-09-18', priority: '1.0', changefreq: 'weekly' },
 	{ path: '/product', lastmod: '2026-08-14', priority: '0.8', changefreq: 'weekly' },
 	{ path: '/pricing', lastmod: '2026-08-04', priority: '0.8', changefreq: 'monthly' },
-	{ path: '/faq', lastmod: '2026-08-08', priority: '0.7', changefreq: 'monthly' },
+	{ path: '/faq', lastmod: '2026-09-18', priority: '0.7', changefreq: 'monthly' },
 	{ path: '/contact', lastmod: '2026-08-08', priority: '0.5', changefreq: 'yearly' },
 	{ path: '/license', lastmod: '2026-08-08', priority: '0.4', changefreq: 'yearly' },
 	{ path: '/activate', lastmod: '2026-07-15', priority: '0.5', changefreq: 'monthly' },

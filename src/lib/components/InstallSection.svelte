@@ -178,7 +178,9 @@
 					<li>Adobe Photoshop 2026, internal version 27.x (earlier versions unverified)</li>
 					<li>Windows 10/11 or macOS 13+ (Apple Silicon or Intel)</li>
 					<li>Node.js 20+, only for the npm path (Claude Desktop bundles its own runtime)</li>
-					<li>An MCP-compatible AI client</li>
+					<li>
+						An MCP-compatible AI client. Editmamei runs on its usage, and every edit spends tokens
+					</li>
 				</ul>
 			</div>
 			<div class="rounded-xl border border-brand-light bg-brand-deep/60 p-5">
