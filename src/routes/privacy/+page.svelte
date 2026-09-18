@@ -63,10 +63,11 @@
 				>
 				Per edit: which tool ran, whether it succeeded, an error category if it didn't, and how long it
 				took. Per session: the Editmamei version, your Photoshop version, your operating system, which
-				install route you used (npm or the one-click Claude Desktop extension), and a random install ID
-				that is not derived from anything about you. On Pro installs, one extra startup signal records
-				whether your Pro add-on actually loaded, so a purchase that failed to install is distinguishable
-				from one that's working. No prompts, no arguments, no content.
+				install route you used (npx, a global or project-local npm install, the one-click Claude Desktop
+				extension, or a source checkout), and a random install ID that is not derived from anything about
+				you. On Pro installs, one extra startup signal records whether your Pro add-on actually loaded,
+				so a purchase that failed to install is distinguishable from one that's working. No prompts, no
+				arguments, no content.
 			</li>
 			<li>
 				<strong class="font-semibold text-neutral-900"
@@ -150,9 +151,10 @@
 			<div>
 				<dt class="font-semibold text-neutral-900">Retention</dt>
 				<dd class="mt-1">
-					Per-install records: 24 months, deleted automatically. Opt-in diagnostic records: 90 days,
-					deleted automatically. Aggregate daily totals carry no install ID and are not subject to
-					these windows.
+					Per-install daily counts: 24 months from the day they cover. The install record: 24 months
+					after the install was last seen. Opt-in diagnostic records: 90 days. All deleted
+					automatically. Aggregate daily totals carry no install ID and are not subject to these
+					windows.
 				</dd>
 			</div>
 			<div>
@@ -173,8 +175,12 @@
 			<div>
 				<dt class="font-semibold text-neutral-900">Processing</dt>
 				<dd class="mt-1">
-					Editmamei's own Cloudflare infrastructure. No third-party analytics processor. Telemetry
-					is not sold, shared, or used for advertising.
+					Editmamei's own infrastructure, on Cloudflare and on equipment we operate. No third-party
+					analytics processor. Telemetry is not sold, shared, or used for advertising. Your IP
+					address reaches that infrastructure with the request, as it does with any web request. It
+					is used to rate-limit abuse and is not written to the telemetry store. Three values the
+					network edge derives from the connection are recorded with your install ID: country, time
+					zone, and the datacenter that served the request.
 				</dd>
 			</div>
 		</dl>
