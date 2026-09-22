@@ -1,7 +1,7 @@
 <script lang="ts">
 	// Shared with InstallSection so the two cannot drift, and so the repository
 	// move at the split is one edit rather than a hunt. See $lib/links.
-	import { MCPB_DOWNLOAD_URL, RELEASES_URL } from '$lib/links';
+	import { MCPB_DOWNLOAD_URL, RELEASES_URL, GITHUB_TROUBLESHOOTING_DOCS_URL } from '$lib/links';
 </script>
 
 <svelte:head>
@@ -48,7 +48,13 @@
 			Claude Code, Cursor, and other MCP clients
 		</h2>
 		<p class="mt-3 text-sm leading-relaxed text-neutral-700">
-			If you installed from npm, you do not need a download. Update in place:
+			If your MCP client runs <code class="rounded bg-neutral-100 px-1.5 py-0.5 font-mono text-xs"
+				>npx -y editmamei</code
+			>, there is nothing to download or update: it fetches the latest version each time it starts,
+			so restarting the client is enough.
+		</p>
+		<p class="mt-3 text-sm leading-relaxed text-neutral-700">
+			If you installed globally with npm instead, you stay on that version until you update it:
 		</p>
 		<pre
 			class="mt-4 overflow-x-auto rounded-lg border border-neutral-200 bg-neutral-950 px-4 py-3 font-mono text-xs leading-relaxed text-neutral-100"><code
@@ -65,7 +71,12 @@
 				>releases page</a
 			>. New here? The
 			<a href="/" class="font-semibold text-neutral-950 underline underline-offset-2">home page</a>
-			walks through a first install.
+			walks through a first install. Something not working after an update? The
+			<a
+				href={GITHUB_TROUBLESHOOTING_DOCS_URL}
+				rel="noopener"
+				class="font-semibold text-neutral-950 underline underline-offset-2">troubleshooting guide</a
+			> covers the common cases.
 		</p>
 	</div>
 </section>

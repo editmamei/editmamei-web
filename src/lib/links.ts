@@ -54,4 +54,6 @@ export const GITHUB_FAQ_DOCS_URL = `${GITHUB_REPO_URL}/blob/dev/docs/faq.md`;
 export const GITHUB_AI_CLIENT_FAQ_URL = `${GITHUB_FAQ_DOCS_URL}#which-ai-client-should-i-use`;
 export const GITHUB_GETTING_STARTED_DOCS_URL = `${GITHUB_REPO_URL}/blob/dev/docs/getting-started.md`;
 export const GITHUB_INSTALLATION_DOCS_URL = `${GITHUB_REPO_URL}/blob/dev/docs/installation.md`;
+export const GITHUB_TROUBLESHOOTING_DOCS_URL = `${GITHUB_REPO_URL}/blob/dev/docs/troubleshooting.md`;
+export const GITHUB_PRO_TROUBLESHOOTING_URL = `${GITHUB_TROUBLESHOOTING_DOCS_URL}#pro-tools-are-missing-or-pro-shows-as-community`;
 export const GITHUB_CLAUDE_CODE_INSTALL_URL = `${GITHUB_INSTALLATION_DOCS_URL}#claude-code`;

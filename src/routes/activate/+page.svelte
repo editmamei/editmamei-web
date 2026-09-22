@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Seo from '$lib/components/Seo.svelte';
-	import { CUSTOMER_PORTAL_URL } from '$lib/links';
+	import { CUSTOMER_PORTAL_URL, GITHUB_PRO_TROUBLESHOOTING_URL } from '$lib/links';
 </script>
 
 <Seo
@@ -166,12 +166,21 @@
 			<li class="flex gap-3">
 				<span class="text-brand">•</span><span
 					><strong>It never locks you out.</strong> If a subscription lapses, Editmamei keeps running
-					as free Community, and your work and settings are untouched. Renew and Pro switches back on.</span
+					as free Community, and your work and settings are untouched. Renew, restart your AI client,
+					and Pro switches back on.</span
 				>
 			</li>
 		</ul>
 		<p class="mt-8 text-base leading-relaxed text-neutral-700">
-			Stuck? <a
+			Stuck? If Pro isn't unlocking, the
+			<a
+				href={GITHUB_PRO_TROUBLESHOOTING_URL}
+				rel="noopener"
+				class="font-medium text-brand underline underline-offset-2 hover:text-brand-light"
+				>troubleshooting guide</a
+			>
+			walks through it step by step. Still stuck?
+			<a
 				href="/contact"
 				class="font-medium text-brand underline underline-offset-2 hover:text-brand-light"
 				>Get in touch</a

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Seo from '$lib/components/Seo.svelte';
-	import { GITHUB_FAQ_DOCS_URL } from '$lib/links';
+	import { GITHUB_FAQ_DOCS_URL, GITHUB_TROUBLESHOOTING_DOCS_URL } from '$lib/links';
 
 	const faqs = [
 		{
@@ -132,6 +132,12 @@
 					class="underline hover:text-neutral-950">documentation on GitHub</a
 				>
 				or <a href="/contact" class="underline hover:text-neutral-950">get in touch</a>.
+			</p>
+			<p class="mt-3 text-sm text-neutral-600">
+				Something not working? The <a
+					href={GITHUB_TROUBLESHOOTING_DOCS_URL}
+					class="underline hover:text-neutral-950">troubleshooting guide</a
+				> covers Pro not unlocking, Photoshop not responding, and checking an update applied.
 			</p>
 		</div>
 	</div>
