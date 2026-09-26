@@ -4,6 +4,7 @@
 	import WorkflowExamples from '$lib/components/WorkflowExamples.svelte';
 	import ClientChoiceCallout from '$lib/components/ClientChoiceCallout.svelte';
 	import EditFlowDiagram from '$lib/components/EditFlowDiagram.svelte';
+	import HeroMovie from '$lib/components/HeroMovie.svelte';
 	import Seo from '$lib/components/Seo.svelte';
 </script>
 
@@ -27,10 +28,43 @@
 				>the home page</a
 			>.
 		</p>
+		<p class="mt-3 max-w-2xl text-sm leading-relaxed text-neutral-600">
+			<span class="font-semibold text-neutral-800">GIMP support is in beta.</span> Editmamei can
+			also run GIMP 3.2 in the background for tone and colour work; everything else on this page is
+			about Photoshop.
+			<a
+				href="https://github.com/editmamei/editmamei/blob/main/docs/gimp.md"
+				class="font-semibold text-neutral-900 underline decoration-neutral-300 underline-offset-4 hover:decoration-neutral-700"
+				>Read the GIMP guide</a
+			>.
+		</p>
 	</div>
 </section>
 
 <ThreePillars />
+
+<!-- The scripted co-work movie. Moved off the home page 2026-09-26 when the batch-flip
+     video became the hero: it walks the layers in detail, which suits a reader who is
+     already weighing the product. -->
+<section id="process" class="scroll-mt-20 border-y border-neutral-200 bg-paper py-16 md:py-20">
+	<div class="mx-auto max-w-6xl px-4">
+		<div class="mx-auto mb-10 max-w-2xl text-center">
+			<p class="mb-2 text-xs font-semibold tracking-wider text-terracotta-ink uppercase">
+				The process · Hawaii bay wall art
+			</p>
+			<h2 class="text-2xl font-bold tracking-tight text-neutral-950 md:text-3xl">
+				One conversation, start to finish.
+			</h2>
+			<p class="mt-3 text-base leading-relaxed text-neutral-700">
+				The AI plans each step and Photoshop runs it. Halfway through it pauses on a judgment call,
+				gets an answer, and carries on.
+			</p>
+		</div>
+
+		<HeroMovie />
+	</div>
+</section>
+
 <CapabilitySurface />
 
 <!-- The full round-trip. Moved off the home page 2026-08-14: it is a reference

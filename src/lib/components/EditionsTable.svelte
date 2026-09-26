@@ -37,6 +37,10 @@
 				> package delivered as its own build with your license: install it over Community, restart your
 				AI client, and the Pro tools appear.
 			</p>
+			<p class="mt-3 text-base leading-relaxed text-neutral-700">
+				Every row except the last is for Photoshop. Pro's features are Photoshop-only, so GIMP
+				support is the same in both editions.
+			</p>
 		</div>
 
 		<div class="overflow-hidden rounded-xl border border-neutral-200 bg-white shadow-sm">

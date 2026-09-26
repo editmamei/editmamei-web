@@ -2,7 +2,6 @@
 	import { onMount } from 'svelte';
 	import BeforeAfterSlider from '$lib/components/BeforeAfterSlider.svelte';
 	import LayerAccordion from '$lib/components/LayerAccordion.svelte';
-	import HeroMovie from '$lib/components/HeroMovie.svelte';
 	import Hero from '$lib/components/Hero.svelte';
 	import HowItWorks from '$lib/components/HowItWorks.svelte';
 	import InstallSection from '$lib/components/InstallSection.svelte';
@@ -10,11 +9,10 @@
 	import { trackOnce } from '$lib/analytics/clarity';
 	import { setSail } from '$lib/demos/set-sail';
 
-	// Section order reversed 2026-08-14: the before/after + layer stack now comes
-	// BEFORE the scripted movie. Scroll data put a 42% drop-off between 15% and
-	// 20% of the page, which was the top of the movie section — a one-second
-	// payoff belongs at the cliff, and a 33-second one is something a convinced
-	// reader opts into. See docs/20260814-home-page-restructure.md.
+	// Section order reversed 2026-08-14: the before/after + layer stack comes first,
+	// because a one-second payoff belongs at the scroll cliff (see
+	// docs/20260814-home-page-restructure.md). The scripted movie moved to /product on
+	// 2026-09-26, when the batch-flip video became the hero.
 	const demo = setSail;
 
 	// Arrival denominator for `demo-slider-used`: without it we can measure that
@@ -108,27 +106,6 @@
 				back is a standard Photoshop-edited PSD file, ready for fine-tuning by hand.
 			</p>
 		</div>
-	</div>
-</section>
-
-<!-- FEEL IT — the hero "movie": a scripted playback of the real co-work loop.
-     Now earned rather than a toll gate. The hero's "See it work" anchors here. -->
-<section id="process" class="border-y border-neutral-200 bg-paper py-16 md:py-20">
-	<div class="mx-auto max-w-6xl px-4">
-		<div class="mx-auto mb-10 max-w-2xl text-center">
-			<p class="mb-2 text-xs font-semibold tracking-wider text-terracotta-ink uppercase">
-				The process · Hawaii bay wall art
-			</p>
-			<h2 class="text-2xl font-bold tracking-tight text-neutral-950 md:text-3xl">
-				One conversation, start to finish.
-			</h2>
-			<p class="mt-3 text-base leading-relaxed text-neutral-700">
-				The AI plans each step and Photoshop runs it. Halfway through it pauses on a judgment call,
-				gets an answer, and carries on.
-			</p>
-		</div>
-
-		<HeroMovie />
 	</div>
 </section>
 

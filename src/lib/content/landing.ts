@@ -233,5 +233,11 @@ export const editionRows: EditionRow[] = [
 		feature: 'Photoshop Actions + scripting (play recorded Actions, ExtendScript escape hatch)',
 		community: false,
 		pro: true
+	},
+	{
+		feature:
+			'GIMP 3.2, in beta (adjustments, masks, crop, resize, rotate, .xcf save, export, previews)',
+		community: true,
+		pro: true
 	}
 ];

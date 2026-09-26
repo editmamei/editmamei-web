@@ -219,6 +219,10 @@
 			Rule of thumb: Community edits photos. Pro develops them, places things precisely, and turns a
 			look into a repeatable recipe.
 		</p>
+		<p class="mt-4 text-base leading-relaxed text-neutral-700">
+			Everything Pro adds is for Photoshop. If you edit in GIMP, Community already includes all of
+			Editmamei's GIMP support.
+		</p>
 	</div>
 </section>
 

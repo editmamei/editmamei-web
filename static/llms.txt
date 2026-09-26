@@ -11,9 +11,10 @@ Editmamei installs as an npm package and runs locally on macOS or Windows alongs
 - A Photoshop assistant: connect Claude Desktop, Claude Code, or Cursor and edit by conversation
 - Photoshop automation without scripting: repeatable Pro templates reapply a saved look photo by photo
 - Compatible with any MCP-capable AI client (Claude Desktop, Claude Code, Cursor, etc.)
+- GIMP support, in beta: Editmamei can also drive GIMP 3.2, which it runs in the background with nothing installed into GIMP. The beta covers non-destructive adjustments (kept as live filters in the saved .xcf), masks, crop, resize, rotate and flip, .xcf saving, metadata-stripped export, and previews. It works on Windows, macOS and Linux (including the Flathub Flatpak).
 - Local-first: your photo files and documents stay on your computer; Editmamei itself uploads no image content
 - Reports anonymous, content-free usage data (opt-out); never your images, documents, or file paths
-- Requires an existing Adobe Photoshop license (it drives your copy, it is not a replacement)
+- For Photoshop editing, requires an existing Adobe Photoshop license (it drives your copy, it is not a replacement). GIMP editing needs only GIMP 3.2.
 
 ## What Editmamei is not
 
@@ -27,7 +28,7 @@ Editmamei installs as an npm package and runs locally on macOS or Windows alongs
 ## Editions
 
 - **Community Edition (CE)**: Free and source-available under the Functional Source License (FSL-1.1-MIT), available via npm as `editmamei`. Source: https://github.com/editmamei/editmamei. Covers the everyday editing surface: documents, layers, non-destructive adjustments, filters, masks, selections (including Photoshop's AI Select Subject and Select Sky), shape layers and pen paths, channel compositing, content-aware retouch, on-device scene awareness (object/face detection, selecting things by name), history, and visual verification.
-- **Pro Edition**: Paid license, activated over the same package. Adds the develop-grade and precision toolkit: Camera Raw develop as a re-editable Smart Filter, precision placement (name a location, get verified geometry), named-object masks, a 468-point face mesh with feature selections, subject-instance targeting, warp, the reproducible-template system, and Photoshop Actions plus ExtendScript scripting.
+- **Pro Edition**: Paid license, activated over the same package. Adds the develop-grade and precision toolkit: Camera Raw develop as a re-editable Smart Filter, precision placement (name a location, get verified geometry), named-object masks, a 468-point face mesh with feature selections, subject-instance targeting, warp, the reproducible-template system, and Photoshop Actions plus ExtendScript scripting. Pro's features are Photoshop-only; GIMP support is the same in both editions.
 
 ## Links
 
