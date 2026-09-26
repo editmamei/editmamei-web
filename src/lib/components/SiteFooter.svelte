@@ -66,6 +66,43 @@
 					</li>
 					<li>
 						<a
+							href="https://x.com/editmamei"
+							onclick={() => track('footer-outbound-x')}
+							rel="me noopener"
+							class="inline-flex items-center gap-1.5 hover:text-neutral-950"
+						>
+							<svg viewBox="0 0 24 24" class="size-4" fill="currentColor" aria-hidden="true">
+								<path
+									d="M17.8 3h3l-6.6 7.6L22 21h-6.1l-4.8-6.2L5.6 21h-3l7.1-8.1L2.2 3h6.2l4.3 5.7L17.8 3Zm-1 16.2h1.7L7.3 4.7H5.5l11.3 14.5Z"
+								/>
+							</svg>
+							X
+						</a>
+					</li>
+					<li>
+						<a
+							href="https://www.youtube.com/@editmamei"
+							onclick={() => track('footer-outbound-youtube')}
+							rel="me noopener"
+							class="inline-flex items-center gap-1.5 hover:text-neutral-950"
+						>
+							<svg
+								viewBox="0 0 24 24"
+								class="size-4"
+								fill="none"
+								stroke="currentColor"
+								stroke-width="1.8"
+								stroke-linejoin="round"
+								aria-hidden="true"
+							>
+								<rect x="2.5" y="5.5" width="19" height="13" rx="4" />
+								<path d="M10 9.5v5l4.5-2.5-4.5-2.5Z" fill="currentColor" stroke="none" />
+							</svg>
+							YouTube
+						</a>
+					</li>
+					<li>
+						<a
 							href="https://peerpush.com/p/editmamei"
 							onclick={() => track('footer-outbound-peerpush')}
 							class="hover:text-neutral-950">PeerPush</a
