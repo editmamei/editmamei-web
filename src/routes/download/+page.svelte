@@ -5,7 +5,7 @@
 </script>
 
 <svelte:head>
-	<title>Download Editmamei</title>
+	<title>Download: the latest release · Editmamei</title>
 	<meta
 		name="description"
 		content="Download the latest Editmamei release: the one-click Claude Desktop extension, or the npm package for Claude Code, Cursor and other MCP clients."
@@ -23,13 +23,19 @@
 			If Editmamei told you a new version is available, this is where to get it. Pick the one that
 			matches how you installed it.
 		</p>
+		<p class="mt-3 text-base leading-relaxed text-neutral-700">
+			Installing for the first time? Start with the
+			<a href="/#install" class="font-semibold text-neutral-950 underline underline-offset-2"
+				>install steps</a
+			>.
+		</p>
 
 		<h2 class="mt-12 text-xl font-bold tracking-tight text-neutral-950">Claude Desktop</h2>
 		<p class="mt-3 text-sm leading-relaxed text-neutral-700">
 			If you installed Editmamei as a one-click extension, download the current
 			<code class="rounded bg-neutral-200 px-1 py-0.5 font-mono text-xs">.mcpb</code> and reinstall
 			it under <strong class="font-semibold text-neutral-950">Settings → Extensions</strong>, then
-			restart Claude Desktop. Your licence key and settings are stored in your home folder rather
+			restart Claude Desktop. Your license key and settings are stored in your home folder rather
 			than inside the extension, so updating keeps them.
 		</p>
 		<p class="mt-5">
@@ -69,9 +75,7 @@
 			Release notes and previous versions are on the
 			<a href={RELEASES_URL} class="font-semibold text-neutral-950 underline underline-offset-2"
 				>releases page</a
-			>. New here? The
-			<a href="/" class="font-semibold text-neutral-950 underline underline-offset-2">home page</a>
-			walks through a first install. Something not working after an update? The
+			>. Something not working after an update? The
 			<a
 				href={GITHUB_TROUBLESHOOTING_DOCS_URL}
 				rel="noopener"
