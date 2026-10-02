@@ -215,7 +215,7 @@ support@editmamei.com`;
 </script>
 
 <Seo
-	title="License: Community Edition (FSL-1.1-MIT) and Pro — Editmamei"
+	title="License: Community Edition (FSL-1.1-MIT) and Pro · Editmamei"
 	description="Editmamei Community Edition is source-available under the Functional Source License (FSL-1.1-MIT); Editmamei Pro is a separate commercial add-on."
 	path="/license"
 />
@@ -230,7 +230,7 @@ support@editmamei.com`;
 		</p>
 
 		<h2 class="mt-14 text-xl font-bold tracking-tight text-neutral-950">
-			Editmamei Community Edition — FSL-1.1-MIT
+			Editmamei Community Edition: FSL-1.1-MIT
 		</h2>
 		<p class="mt-4 text-sm leading-relaxed text-neutral-700">
 			Editmamei CE is <a
@@ -273,7 +273,7 @@ support@editmamei.com`;
 		</div>
 
 		<h2 class="mt-16 text-xl font-bold tracking-tight text-neutral-950">
-			Editmamei Pro — commercial license
+			Editmamei Pro: commercial license
 		</h2>
 		<p class="mt-4 text-sm leading-relaxed text-neutral-700">
 			Editmamei Pro is a paid module and subscription, activated over Community Edition. It is not
