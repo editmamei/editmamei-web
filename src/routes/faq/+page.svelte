@@ -76,7 +76,7 @@
 		},
 		{
 			q: 'Is there a free trial?',
-			a: 'Yes. Pro has a 7-day free trial on the monthly plan. Community is free with no time limit, and if a Pro subscription lapses, Editmamei keeps running as Community rather than locking you out.'
+			a: 'Yes. Pro has a 7-day free trial on the monthly plan. It needs a card, and unless you cancel during the trial it turns into the monthly plan automatically. Community is free with no time limit, and if a Pro subscription lapses, Editmamei keeps running as Community rather than locking you out.'
 		},
 		{
 			q: 'Is Editmamei open source?',

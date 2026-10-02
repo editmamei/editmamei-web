@@ -50,7 +50,7 @@
 	const billingFaqs = [
 		{
 			q: 'Does the free trial need a card?',
-			a: 'Yes. The 7-day free trial is on the monthly plan, and checkout asks for a card to start it.'
+			a: 'Yes. The 7-day free trial is on the monthly plan, and checkout asks for a card to start it. Unless you cancel during the trial, it turns into the monthly plan automatically.'
 		},
 		{
 			q: 'What does the perpetual license include?',
