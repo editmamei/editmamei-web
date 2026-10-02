@@ -1,11 +1,9 @@
 <script lang="ts">
 	import BeforeAfterSlider from '$lib/components/BeforeAfterSlider.svelte';
 	import Seo from '$lib/components/Seo.svelte';
+	import { GITHUB_GIMP_DOCS_URL as GIMP_GUIDE_URL } from '$lib/links';
 	import { gimpHeroMedia as media } from './media';
 
-	// The GIMP guide is linked at blob/main so readers see the docs for the
-	// released version rather than unreleased changes on dev.
-	const GIMP_GUIDE_URL = 'https://github.com/editmamei/editmamei/blob/main/docs/gimp.md';
 	const GIMP_GUIDE_CUSTOM_PATH_URL = `${GIMP_GUIDE_URL}#pointing-at-a-custom-install`;
 	const GIMP_GUIDE_PIN_EDITOR_URL = `${GIMP_GUIDE_URL}#pinning-the-editor`;
 	const GIMP_DOWNLOAD_URL = 'https://www.gimp.org/downloads/';

@@ -39,21 +39,20 @@ export const RELEASES_URL = 'https://github.com/editmamei/editmamei/releases/lat
 export const SUBSCRIBE_API_URL = 'https://editmamei-subscribe.editmamei.workers.dev';
 
 // Public source repository (Editmamei CE, source-available under FSL-1.1-MIT).
-// Default branch is `dev`, so deep links into docs/ or a specific file use
-// /blob/dev/. The wiki repo (editmamei/editmamei-wiki) is frozen post-split;
-// its docs are migrating here, so new links should point at this repo, not
-// the wiki.
+// Deep links into docs/ or a specific file use /blob/main/, so readers see the
+// docs for the released version rather than unreleased changes on `dev`.
 export const GITHUB_REPO_URL = 'https://github.com/editmamei/editmamei';
 export const GITHUB_README_URL = `${GITHUB_REPO_URL}#readme`;
 export const GITHUB_ISSUES_URL = `${GITHUB_REPO_URL}/issues`;
-export const GITHUB_LICENSE_URL = `${GITHUB_REPO_URL}/blob/dev/LICENSE.md`;
-export const GITHUB_CHANGELOG_URL = `${GITHUB_REPO_URL}/blob/dev/CHANGELOG.md`;
-export const GITHUB_SECURITY_POLICY_URL = `${GITHUB_REPO_URL}/blob/dev/SECURITY.md`;
+export const GITHUB_LICENSE_URL = `${GITHUB_REPO_URL}/blob/main/LICENSE.md`;
+export const GITHUB_CHANGELOG_URL = `${GITHUB_REPO_URL}/blob/main/CHANGELOG.md`;
+export const GITHUB_SECURITY_POLICY_URL = `${GITHUB_REPO_URL}/blob/main/SECURITY.md`;
 export const GITHUB_SECURITY_ADVISORY_URL = `${GITHUB_REPO_URL}/security/advisories/new`;
-export const GITHUB_FAQ_DOCS_URL = `${GITHUB_REPO_URL}/blob/dev/docs/faq.md`;
+export const GITHUB_FAQ_DOCS_URL = `${GITHUB_REPO_URL}/blob/main/docs/faq.md`;
 export const GITHUB_AI_CLIENT_FAQ_URL = `${GITHUB_FAQ_DOCS_URL}#which-ai-client-should-i-use`;
-export const GITHUB_GETTING_STARTED_DOCS_URL = `${GITHUB_REPO_URL}/blob/dev/docs/getting-started.md`;
-export const GITHUB_INSTALLATION_DOCS_URL = `${GITHUB_REPO_URL}/blob/dev/docs/installation.md`;
-export const GITHUB_TROUBLESHOOTING_DOCS_URL = `${GITHUB_REPO_URL}/blob/dev/docs/troubleshooting.md`;
+export const GITHUB_GIMP_DOCS_URL = `${GITHUB_REPO_URL}/blob/main/docs/gimp.md`;
+export const GITHUB_GETTING_STARTED_DOCS_URL = `${GITHUB_REPO_URL}/blob/main/docs/getting-started.md`;
+export const GITHUB_INSTALLATION_DOCS_URL = `${GITHUB_REPO_URL}/blob/main/docs/installation.md`;
+export const GITHUB_TROUBLESHOOTING_DOCS_URL = `${GITHUB_REPO_URL}/blob/main/docs/troubleshooting.md`;
 export const GITHUB_PRO_TROUBLESHOOTING_URL = `${GITHUB_TROUBLESHOOTING_DOCS_URL}#pro-tools-are-missing-or-pro-shows-as-community`;
 export const GITHUB_CLAUDE_CODE_INSTALL_URL = `${GITHUB_INSTALLATION_DOCS_URL}#claude-code`;

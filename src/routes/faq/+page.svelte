@@ -3,11 +3,9 @@
 	import { PRO_FEATURES_SENTENCE } from '$lib/content/pro-features';
 	import {
 		GITHUB_FAQ_DOCS_URL,
-		GITHUB_REPO_URL,
+		GITHUB_GIMP_DOCS_URL,
 		GITHUB_TROUBLESHOOTING_DOCS_URL
 	} from '$lib/links';
-
-	const GITHUB_GIMP_DOCS_URL = `${GITHUB_REPO_URL}/blob/dev/docs/gimp.md`;
 
 	// Each entry renders once on the page and once in the FAQPage JSON-LD.
 	// `a` is the plain-text answer used in both places; the optional `link`
@@ -91,7 +89,7 @@
 		},
 		{
 			q: 'Can Editmamei develop raw files?',
-			a: 'In Photoshop, Pro can, two ways. It develops the raw file before it opens, with Upright levelling, perspective and lens correction, crop with straighten and your saved Camera Raw presets, and can open the result at 16 bit. It also applies Camera Raw to an open photo as a re-editable filter. In GIMP, opening a raw file needs a raw-develop plug-in installed in GIMP (darktable, RawTherapee or ART).'
+			a: 'In Photoshop, Pro can, two ways. It develops the raw file before it opens, with Upright leveling, perspective and lens correction, crop with straighten and your saved Camera Raw presets, and can open the result at 16 bit. It also applies Camera Raw to an open photo as a re-editable filter. In GIMP, opening a raw file needs a raw-develop plug-in installed in GIMP (darktable, RawTherapee or ART).'
 		},
 		{
 			q: 'Does Editmamei use generative AI to create or alter pixels?',
