@@ -1,5 +1,6 @@
 import type { RequestHandler } from './$types';
 import { posts } from '$lib/blog';
+import { snapshot as toolsSnapshot } from '$lib/content/tools';
 
 /**
  * Dynamic sitemap. Replaces the previous static/sitemap.xml which drifted
@@ -29,7 +30,8 @@ const ORIGIN = 'https://editmamei.com';
 // crawlers the field is unreliable, which also devalues the accurate
 // per-post dates below. /blog has no entry of its own — its lastmod is
 // derived in GET from the newest post, since the index changes exactly
-// when the post list does.
+// when the post list does. /tools uses the TOOLS_SNAPSHOT sentinel: its
+// lastmod is the date of the generated tool snapshot it renders.
 const ROUTES: Array<{ path: string; lastmod: string; priority: string; changefreq: string }> = [
 	{ path: '/', lastmod: '2026-10-02', priority: '1.0', changefreq: 'weekly' },
 	{ path: '/product', lastmod: '2026-10-02', priority: '0.8', changefreq: 'weekly' },
@@ -42,7 +44,8 @@ const ROUTES: Array<{ path: string; lastmod: string; priority: string; changefre
 	{ path: '/privacy', lastmod: '2026-10-02', priority: '0.4', changefreq: 'yearly' },
 	{ path: '/security', lastmod: '2026-10-02', priority: '0.3', changefreq: 'yearly' },
 	{ path: '/activate', lastmod: '2026-07-15', priority: '0.5', changefreq: 'monthly' },
-	{ path: '/blog', lastmod: 'NEWEST_POST', priority: '0.6', changefreq: 'weekly' }
+	{ path: '/blog', lastmod: 'NEWEST_POST', priority: '0.6', changefreq: 'weekly' },
+	{ path: '/tools', lastmod: 'TOOLS_SNAPSHOT', priority: '0.7', changefreq: 'monthly' }
 ];
 
 export const GET: RequestHandler = () => {
@@ -52,10 +55,17 @@ export const GET: RequestHandler = () => {
 		.flatMap((p) => [p.date, p.updated ?? p.date])
 		.reduce((a, b) => (a > b ? a : b), '2026-06-19');
 
+	const resolveLastmod = (lastmod: string) =>
+		lastmod === 'NEWEST_POST'
+			? newestPost
+			: lastmod === 'TOOLS_SNAPSHOT'
+				? toolsSnapshot.date
+				: lastmod;
+
 	const urls = ROUTES.map(
 		({ path, lastmod, priority, changefreq }) => `	<url>
 		<loc>${ORIGIN}${path}</loc>
-		<lastmod>${lastmod === 'NEWEST_POST' ? newestPost : lastmod}</lastmod>
+		<lastmod>${resolveLastmod(lastmod)}</lastmod>
 		<changefreq>${changefreq}</changefreq>
 		<priority>${priority}</priority>
 	</url>`

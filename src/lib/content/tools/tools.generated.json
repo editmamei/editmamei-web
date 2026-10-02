@@ -1,0 +1,652 @@
+{
+	"_generated": "Do not edit. Regenerate with `node scripts/sync-tools.mjs --source <editmamei>`.",
+	"source": {
+		"package": "editmamei",
+		"version": "1.7.0"
+	},
+	"snapshotDate": "2026-10-02",
+	"tools": [
+		{
+			"id": "gimp_add_adjustment",
+			"editor": "gimp",
+			"edition": "community",
+			"group": "adjust"
+		},
+		{
+			"id": "gimp_add_effect",
+			"editor": "gimp",
+			"edition": "community",
+			"group": "filter"
+		},
+		{
+			"id": "gimp_bake",
+			"editor": "gimp",
+			"edition": "community",
+			"group": "layers"
+		},
+		{
+			"id": "gimp_canvas",
+			"editor": "gimp",
+			"edition": "community",
+			"group": "document"
+		},
+		{
+			"id": "gimp_checkpoint",
+			"editor": "gimp",
+			"edition": "community",
+			"group": "document"
+		},
+		{
+			"id": "gimp_close_document",
+			"editor": "gimp",
+			"edition": "community",
+			"group": "document"
+		},
+		{
+			"id": "gimp_compare",
+			"editor": "gimp",
+			"edition": "community",
+			"group": "verify"
+		},
+		{
+			"id": "gimp_convert_image_mode",
+			"editor": "gimp",
+			"edition": "community",
+			"group": "document"
+		},
+		{
+			"id": "gimp_create_document",
+			"editor": "gimp",
+			"edition": "community",
+			"group": "document"
+		},
+		{
+			"id": "gimp_create_mask",
+			"editor": "gimp",
+			"edition": "community",
+			"group": "masks"
+		},
+		{
+			"id": "gimp_crop_document",
+			"editor": "gimp",
+			"edition": "community",
+			"group": "document"
+		},
+		{
+			"id": "gimp_export",
+			"editor": "gimp",
+			"edition": "community",
+			"group": "document"
+		},
+		{
+			"id": "gimp_filter",
+			"editor": "gimp",
+			"edition": "community",
+			"group": "filter"
+		},
+		{
+			"id": "gimp_get_histogram",
+			"editor": "gimp",
+			"edition": "community",
+			"group": "verify"
+		},
+		{
+			"id": "gimp_get_preview",
+			"editor": "gimp",
+			"edition": "community",
+			"group": "verify"
+		},
+		{
+			"id": "gimp_inspect",
+			"editor": "gimp",
+			"edition": "community",
+			"group": "inspect"
+		},
+		{
+			"id": "gimp_layer",
+			"editor": "gimp",
+			"edition": "community",
+			"group": "layers"
+		},
+		{
+			"id": "gimp_open_document",
+			"editor": "gimp",
+			"edition": "community",
+			"group": "document"
+		},
+		{
+			"id": "gimp_overview",
+			"editor": "gimp",
+			"edition": "community",
+			"group": "core"
+		},
+		{
+			"id": "gimp_ping",
+			"editor": "gimp",
+			"edition": "community",
+			"group": "core"
+		},
+		{
+			"id": "gimp_place_image",
+			"editor": "gimp",
+			"edition": "community",
+			"group": "layers"
+		},
+		{
+			"id": "gimp_resize_image",
+			"editor": "gimp",
+			"edition": "community",
+			"group": "document"
+		},
+		{
+			"id": "gimp_save_xcf",
+			"editor": "gimp",
+			"edition": "community",
+			"group": "document"
+		},
+		{
+			"id": "gimp_transform_canvas",
+			"editor": "gimp",
+			"edition": "community",
+			"group": "document"
+		},
+		{
+			"id": "ps_add_adjustment_layer",
+			"editor": "photoshop",
+			"edition": "community",
+			"group": "adjust"
+		},
+		{
+			"id": "ps_add_fill_layer",
+			"editor": "photoshop",
+			"edition": "community",
+			"group": "layers"
+		},
+		{
+			"id": "ps_add_layer_style",
+			"editor": "photoshop",
+			"edition": "community",
+			"group": "layers"
+		},
+		{
+			"id": "ps_add_text_to_object",
+			"editor": "photoshop",
+			"edition": "pro",
+			"group": "perception"
+		},
+		{
+			"id": "ps_apply_adjustment",
+			"editor": "photoshop",
+			"edition": "community",
+			"group": "adjust"
+		},
+		{
+			"id": "ps_apply_camera_raw",
+			"editor": "photoshop",
+			"edition": "pro",
+			"group": "filter"
+		},
+		{
+			"id": "ps_apply_image",
+			"editor": "photoshop",
+			"edition": "community",
+			"group": "masks"
+		},
+		{
+			"id": "ps_bake_layer",
+			"editor": "photoshop",
+			"edition": "community",
+			"group": "layers"
+		},
+		{
+			"id": "ps_batch",
+			"editor": "photoshop",
+			"edition": "pro",
+			"group": "automation"
+		},
+		{
+			"id": "ps_calculations",
+			"editor": "photoshop",
+			"edition": "community",
+			"group": "masks"
+		},
+		{
+			"id": "ps_clipping_mask",
+			"editor": "photoshop",
+			"edition": "community",
+			"group": "masks"
+		},
+		{
+			"id": "ps_close_document",
+			"editor": "photoshop",
+			"edition": "community",
+			"group": "document"
+		},
+		{
+			"id": "ps_compare_regions",
+			"editor": "photoshop",
+			"edition": "community",
+			"group": "verify"
+		},
+		{
+			"id": "ps_convert_image_mode",
+			"editor": "photoshop",
+			"edition": "community",
+			"group": "document"
+		},
+		{
+			"id": "ps_convert_to_smart_object",
+			"editor": "photoshop",
+			"edition": "community",
+			"group": "layers"
+		},
+		{
+			"id": "ps_copy_to_new_layer",
+			"editor": "photoshop",
+			"edition": "community",
+			"group": "layers"
+		},
+		{
+			"id": "ps_create_document",
+			"editor": "photoshop",
+			"edition": "community",
+			"group": "document"
+		},
+		{
+			"id": "ps_create_layer",
+			"editor": "photoshop",
+			"edition": "community",
+			"group": "layers"
+		},
+		{
+			"id": "ps_crop_document",
+			"editor": "photoshop",
+			"edition": "community",
+			"group": "document"
+		},
+		{
+			"id": "ps_delete_layer",
+			"editor": "photoshop",
+			"edition": "community",
+			"group": "layers"
+		},
+		{
+			"id": "ps_detect",
+			"editor": "photoshop",
+			"edition": "community",
+			"group": "perception"
+		},
+		{
+			"id": "ps_detect_landmarks",
+			"editor": "photoshop",
+			"edition": "pro",
+			"group": "face"
+		},
+		{
+			"id": "ps_develop_raw",
+			"editor": "photoshop",
+			"edition": "pro",
+			"group": "filter"
+		},
+		{
+			"id": "ps_document",
+			"editor": "photoshop",
+			"edition": "community",
+			"group": "document"
+		},
+		{
+			"id": "ps_duplicate_layer",
+			"editor": "photoshop",
+			"edition": "community",
+			"group": "layers"
+		},
+		{
+			"id": "ps_edit_object",
+			"editor": "photoshop",
+			"edition": "pro",
+			"group": "perception"
+		},
+		{
+			"id": "ps_execute_script",
+			"editor": "photoshop",
+			"edition": "pro",
+			"group": "automation"
+		},
+		{
+			"id": "ps_export",
+			"editor": "photoshop",
+			"edition": "community",
+			"group": "document"
+		},
+		{
+			"id": "ps_fill_layer",
+			"editor": "photoshop",
+			"edition": "community",
+			"group": "layers"
+		},
+		{
+			"id": "ps_filter",
+			"editor": "photoshop",
+			"edition": "community",
+			"group": "filter"
+		},
+		{
+			"id": "ps_get_histogram",
+			"editor": "photoshop",
+			"edition": "community",
+			"group": "verify"
+		},
+		{
+			"id": "ps_get_layer_bounds_diff",
+			"editor": "photoshop",
+			"edition": "community",
+			"group": "verify"
+		},
+		{
+			"id": "ps_get_preview",
+			"editor": "photoshop",
+			"edition": "community",
+			"group": "inspect"
+		},
+		{
+			"id": "ps_get_selection_preview",
+			"editor": "photoshop",
+			"edition": "community",
+			"group": "verify"
+		},
+		{
+			"id": "ps_group",
+			"editor": "photoshop",
+			"edition": "community",
+			"group": "layers"
+		},
+		{
+			"id": "ps_guides",
+			"editor": "photoshop",
+			"edition": "community",
+			"group": "document"
+		},
+		{
+			"id": "ps_inspect",
+			"editor": "photoshop",
+			"edition": "community",
+			"group": "inspect"
+		},
+		{
+			"id": "ps_layer_mask",
+			"editor": "photoshop",
+			"edition": "community",
+			"group": "masks"
+		},
+		{
+			"id": "ps_list_actions",
+			"editor": "photoshop",
+			"edition": "pro",
+			"group": "automation"
+		},
+		{
+			"id": "ps_list_capabilities",
+			"editor": "photoshop",
+			"edition": "community",
+			"group": "core"
+		},
+		{
+			"id": "ps_merge",
+			"editor": "photoshop",
+			"edition": "community",
+			"group": "layers"
+		},
+		{
+			"id": "ps_modify_selection",
+			"editor": "photoshop",
+			"edition": "community",
+			"group": "select"
+		},
+		{
+			"id": "ps_move_layer_to_position",
+			"editor": "photoshop",
+			"edition": "community",
+			"group": "layers"
+		},
+		{
+			"id": "ps_open_document",
+			"editor": "photoshop",
+			"edition": "community",
+			"group": "document"
+		},
+		{
+			"id": "ps_overview",
+			"editor": "photoshop",
+			"edition": "community",
+			"group": "core"
+		},
+		{
+			"id": "ps_path",
+			"editor": "photoshop",
+			"edition": "community",
+			"group": "masks"
+		},
+		{
+			"id": "ps_ping",
+			"editor": "photoshop",
+			"edition": "community",
+			"group": "core"
+		},
+		{
+			"id": "ps_place_image",
+			"editor": "photoshop",
+			"edition": "community",
+			"group": "document"
+		},
+		{
+			"id": "ps_play_action",
+			"editor": "photoshop",
+			"edition": "pro",
+			"group": "automation"
+		},
+		{
+			"id": "ps_rasterize_layer",
+			"editor": "photoshop",
+			"edition": "community",
+			"group": "layers"
+		},
+		{
+			"id": "ps_read_scene",
+			"editor": "photoshop",
+			"edition": "community",
+			"group": "perception"
+		},
+		{
+			"id": "ps_redo",
+			"editor": "photoshop",
+			"edition": "community",
+			"group": "core"
+		},
+		{
+			"id": "ps_replace_sky",
+			"editor": "photoshop",
+			"edition": "community",
+			"group": "select_ai"
+		},
+		{
+			"id": "ps_report_problem",
+			"editor": "photoshop",
+			"edition": "community",
+			"group": "core"
+		},
+		{
+			"id": "ps_resize_image",
+			"editor": "photoshop",
+			"edition": "community",
+			"group": "document"
+		},
+		{
+			"id": "ps_resolve_placement",
+			"editor": "photoshop",
+			"edition": "pro",
+			"group": "perception"
+		},
+		{
+			"id": "ps_retouch",
+			"editor": "photoshop",
+			"edition": "community",
+			"group": "retouch"
+		},
+		{
+			"id": "ps_save_psd",
+			"editor": "photoshop",
+			"edition": "community",
+			"group": "document"
+		},
+		{
+			"id": "ps_select",
+			"editor": "photoshop",
+			"edition": "community",
+			"group": "select"
+		},
+		{
+			"id": "ps_select_by_reference",
+			"editor": "photoshop",
+			"edition": "community",
+			"group": "perception"
+		},
+		{
+			"id": "ps_select_face_feature",
+			"editor": "photoshop",
+			"edition": "pro",
+			"group": "face"
+		},
+		{
+			"id": "ps_select_layer",
+			"editor": "photoshop",
+			"edition": "community",
+			"group": "layers"
+		},
+		{
+			"id": "ps_select_object",
+			"editor": "photoshop",
+			"edition": "pro",
+			"group": "select_ai"
+		},
+		{
+			"id": "ps_select_sky",
+			"editor": "photoshop",
+			"edition": "community",
+			"group": "select_ai"
+		},
+		{
+			"id": "ps_select_subject",
+			"editor": "photoshop",
+			"edition": "community",
+			"group": "select_ai"
+		},
+		{
+			"id": "ps_select_subject_instance",
+			"editor": "photoshop",
+			"edition": "pro",
+			"group": "select_ai"
+		},
+		{
+			"id": "ps_selection_channel",
+			"editor": "photoshop",
+			"edition": "community",
+			"group": "select"
+		},
+		{
+			"id": "ps_sequence",
+			"editor": "photoshop",
+			"edition": "community",
+			"group": "automation"
+		},
+		{
+			"id": "ps_set_layer",
+			"editor": "photoshop",
+			"edition": "community",
+			"group": "layers"
+		},
+		{
+			"id": "ps_shape",
+			"editor": "photoshop",
+			"edition": "community",
+			"group": "layers"
+		},
+		{
+			"id": "ps_template_apply",
+			"editor": "photoshop",
+			"edition": "pro",
+			"group": "templates"
+		},
+		{
+			"id": "ps_template_create_evidence",
+			"editor": "photoshop",
+			"edition": "pro",
+			"group": "templates"
+		},
+		{
+			"id": "ps_template_delete",
+			"editor": "photoshop",
+			"edition": "pro",
+			"group": "templates"
+		},
+		{
+			"id": "ps_template_list",
+			"editor": "photoshop",
+			"edition": "pro",
+			"group": "templates"
+		},
+		{
+			"id": "ps_template_recall",
+			"editor": "photoshop",
+			"edition": "pro",
+			"group": "templates"
+		},
+		{
+			"id": "ps_template_save",
+			"editor": "photoshop",
+			"edition": "pro",
+			"group": "templates"
+		},
+		{
+			"id": "ps_template_verify",
+			"editor": "photoshop",
+			"edition": "pro",
+			"group": "templates"
+		},
+		{
+			"id": "ps_text",
+			"editor": "photoshop",
+			"edition": "community",
+			"group": "type"
+		},
+		{
+			"id": "ps_transform_canvas",
+			"editor": "photoshop",
+			"edition": "community",
+			"group": "document"
+		},
+		{
+			"id": "ps_transform_layer",
+			"editor": "photoshop",
+			"edition": "community",
+			"group": "layers"
+		},
+		{
+			"id": "ps_undo",
+			"editor": "photoshop",
+			"edition": "community",
+			"group": "core"
+		},
+		{
+			"id": "ps_vector_mask",
+			"editor": "photoshop",
+			"edition": "community",
+			"group": "masks"
+		},
+		{
+			"id": "ps_warp_layer",
+			"editor": "photoshop",
+			"edition": "pro",
+			"group": "layers"
+		}
+	]
+}
