@@ -4,9 +4,15 @@
 
 	// Stable "latest release" asset URL — always resolves to the newest published
 	// release, so a new version never needs a site edit. Shared with /download.
-	import { GITHUB_GETTING_STARTED_DOCS_URL, MCPB_DOWNLOAD_URL as MCPB_URL } from '$lib/links';
+	import {
+		GITHUB_GETTING_STARTED_DOCS_URL,
+		GITHUB_INSTALLATION_DOCS_URL,
+		MCPB_DOWNLOAD_URL as MCPB_URL
+	} from '$lib/links';
 	import SubscribeForm from '$lib/components/SubscribeForm.svelte';
 	import DownloadSignupDialog from '$lib/components/DownloadSignupDialog.svelte';
+
+	const GITHUB_MANUAL_CONFIG_DOCS_URL = `${GITHUB_INSTALLATION_DOCS_URL}#manual-configuration`;
 
 	// The signup dialog opens after the download fires, and only once per
 	// browsing session: someone who downloads twice (a retry, a second machine)
@@ -83,7 +89,7 @@
 				Install in about a minute.
 			</h2>
 			<p class="mt-3 text-base leading-relaxed text-neutral-300">
-				One click for Claude Desktop, one line for everything else.
+				One click for Claude Desktop, two commands for everything else.
 			</p>
 		</div>
 
@@ -161,8 +167,10 @@
 					client and ask “Is Photoshop connected?”
 				</p>
 				<p class="mt-2 text-xs text-neutral-400">
-					It also copies the Claude skill to your Downloads folder, ready to upload at claude.ai →
-					Settings → Skills.
+					That command also saves a skill file,
+					<code class="rounded bg-brand-deep px-1 py-0.5 text-accent">editmamei-skill.zip</code>, to
+					your Downloads folder. Upload the file at claude.ai under Settings, then Skills, and
+					Claude gets Editmamei's editing workflow.
 				</p>
 
 				<div class="mt-5 border-t border-accent/15 pt-4">
@@ -175,11 +183,22 @@
 			<div class="rounded-xl border border-brand-light bg-brand-deep/60 p-5">
 				<h3 class="text-sm font-semibold tracking-tight text-white">Requirements</h3>
 				<ul class="mt-3 space-y-1.5 text-sm text-neutral-300">
-					<li>Adobe Photoshop 2026, internal version 27.x (earlier versions unverified)</li>
-					<li>Windows 10/11 or macOS 13+ (Apple Silicon or Intel)</li>
+					<li>
+						Adobe Photoshop 2026, internal version 27.x (earlier versions unverified), or GIMP 3.2
+						for the GIMP beta
+					</li>
+					<li>
+						Windows 10/11 or macOS 13+ (Apple Silicon or Intel). The GIMP beta also runs on Linux,
+						through npm.
+					</li>
 					<li>Node.js 22+, only for the npm path (Claude Desktop bundles its own runtime)</li>
 					<li>
-						An MCP-compatible AI client. Editmamei runs on its usage, and every edit spends tokens
+						An MCP-compatible AI client. Editmamei has no AI model, so every edit spends that
+						client's tokens (see <a
+							href="/blog/what-an-edit-costs"
+							class="text-accent underline decoration-accent/40 underline-offset-4 hover:decoration-accent"
+							>what an edit costs</a
+						>)
 					</li>
 				</ul>
 			</div>
@@ -189,8 +208,16 @@
 					<li>Claude Desktop: one-click <span class="text-neutral-500">(.mcpb)</span></li>
 					<li>Claude Code: npm</li>
 					<li>Cursor: npm</li>
-					<li>Any other MCP host: npm</li>
 				</ul>
+				<p class="mt-3 text-sm text-neutral-300">
+					Other MCP clients use the same config; the
+					<a
+						href={GITHUB_MANUAL_CONFIG_DOCS_URL}
+						class="text-accent underline decoration-accent/40 underline-offset-4 hover:decoration-accent"
+						>install guide</a
+					>
+					has it.
+				</p>
 			</div>
 		</div>
 

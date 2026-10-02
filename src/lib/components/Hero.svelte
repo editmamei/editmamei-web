@@ -37,8 +37,9 @@
 			</p>
 
 			<p class="mx-auto mt-7 max-w-2xl text-lg leading-relaxed text-neutral-700 md:text-xl lg:mx-0">
-				Open a chat. Direct the changes, or describe a look. Photoshop does the work, hands-free,
-				one layer at a time. Real photo editing, with the power of Photoshop, automated with AI.
+				Ask for an edit in a chat the way you'd brief another editor, whether that's a look you have
+				in mind or the exact changes you want, and Photoshop does the work one layer at a time while
+				you do something else.
 			</p>
 
 			<!-- The demo is the primary ask, not install. A top-of-page install CTA drew
@@ -63,7 +64,10 @@
 				</a>
 			</div>
 
-			<p class="mt-5 text-xs text-neutral-500">Installs on your desktop, runs next to Photoshop.</p>
+			<p class="mt-5 text-sm text-neutral-600">
+				Works with Claude Desktop, Claude Code, Cursor and other MCP clients.
+			</p>
+			<p class="mt-1 text-xs text-neutral-500">Installs on your desktop, runs next to Photoshop.</p>
 			<p class="mt-1 text-xs text-neutral-500">
 				GIMP support is in beta.
 				<a
