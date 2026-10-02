@@ -25,7 +25,7 @@
 			datePublished: post.date,
 			dateModified: post.updated ?? post.date,
 			image: `${ORIGIN}/og-image.png`,
-			author: org,
+			author: { '@type': 'Person', name: 'Alex' },
 			publisher: org
 		};
 		return `<script type="application/ld+json">${JSON.stringify(schema).replace(
