@@ -1,4 +1,4 @@
-import type { Capability, EditionRow, Pillar, WorkflowExample } from '$lib/types';
+import type { Capability, EditionGroup, EditionRow, Pillar, WorkflowExample } from '$lib/types';
 
 export const pillars: Pillar[] = [
 	{
@@ -119,125 +119,83 @@ export const workflowExamples: WorkflowExample[] = [
 	}
 ];
 
-export const editionRows: EditionRow[] = [
+const both = (feature: string, detail?: string): EditionRow => ({
+	feature,
+	detail,
+	community: true,
+	pro: true
+});
+
+const proOnly = (feature: string, detail?: string): EditionRow => ({
+	feature,
+	detail,
+	community: false,
+	pro: true
+});
+
+export const editionGroups: EditionGroup[] = [
 	{
-		feature:
-			'Scene awareness (on-device object + face detection, scene reading, select named things)',
-		community: true,
-		pro: true
+		title: 'Both editions',
+		rows: [
+			both(
+				'Documents',
+				'Open PSD, JPEG, PNG, TIFF, DNG, HEIC and raw; save PSD; export JPEG and PNG'
+			),
+			both('Layers and groups', 'Create, duplicate, group, merge, reorder, set properties'),
+			both('Adjustment layers', 'Curves, Levels, Hue/Saturation, Brightness/Contrast'),
+			both('Filters', 'Blur, sharpen, noise reduction, High Pass and more'),
+			both('Selections', 'Magic Wand, rectangle, color and luminance range, feather, refine edge'),
+			both('Select Subject and Select Sky', "Photoshop's own AI selections"),
+			both('Sky replacement', 'From a Photoshop preset or your own file'),
+			both('Masks', 'Layer, vector and clipping masks'),
+			both('Channel tools', 'Saved selections, Apply Image, Calculations'),
+			both('Content-aware retouch', 'Content-Aware Fill, Patch, Content-Aware Move'),
+			both('Text and layer styles', 'Font, color, alignment; drop shadow, stroke, glow'),
+			both(
+				'Transforms and straightening',
+				'Move, scale, rotate, skew; rotate and flip the canvas; guides'
+			),
+			both('Shapes and pen paths', 'Shape layers, editable paths, path to selection'),
+			both('Scene awareness', 'Finds faces and objects on your computer and selects named things'),
+			both('Visual checks', 'Previews, region comparison, per-channel histograms'),
+			both('History', 'Undo, redo, inspect history states'),
+			both(
+				'Multi-step runs in one call, with rollback',
+				'If a step fails, the earlier steps can be undone'
+			)
+		]
 	},
 	{
-		feature:
-			'Face-mesh perception (468-point facial geometry, feature-precise selections of eyes, teeth, skin)',
-		community: false,
-		pro: true
+		title: 'Pro adds',
+		rows: [
+			proOnly(
+				'Camera Raw, re-editable',
+				'The Camera Raw Filter as a Smart Filter you can change later'
+			),
+			proOnly(
+				'Raw develop before opening',
+				'Upright, perspective and lens correction, your saved presets, 16-bit'
+			),
+			proOnly('Folder batch', 'Crop, resize, rotate and export a whole folder in one pass'),
+			proOnly('Templates', 'Save a finished look and apply it to new photos'),
+			proOnly('Precise placement', 'Name a spot and Editmamei measures it before placing'),
+			proOnly('Warp', 'Warp styles, pinned-edge mesh, bend along a curve, bulge or pinch'),
+			proOnly('Named-object selections', '"The surfboard", from 80 object categories'),
+			proOnly('Face features', 'A face mesh with eye, lip, skin and teeth selections'),
+			proOnly('One subject among several', 'Aim Select Subject at the subject you name'),
+			proOnly('Actions and scripting', 'Play recorded Actions; run a script when no tool fits')
+		]
 	},
 	{
-		feature: 'Named-object masks (local segmentation: name an object, get an organic selection)',
-		community: false,
-		pro: true
-	},
-	{
-		feature:
-			'Precision placement (name a location; placements computed from real geometry and checked before applying)',
-		community: false,
-		pro: true
-	},
-	{
-		feature:
-			'Selections (Magic Wand, rectangle, color + luminance range, feather, refine edge, rich feedback)',
-		community: true,
-		pro: true
-	},
-	{
-		feature: "Select Subject + Select Sky (Photoshop's AI selections)",
-		community: true,
-		pro: true
-	},
-	{
-		feature: 'Subject instance targeting (aim Select Subject at one named subject among several)',
-		community: false,
-		pro: true
-	},
-	{ feature: 'Masks (layer masks, vector masks, clipping masks)', community: true, pro: true },
-	{
-		feature: 'Channel tools (save/load selections, Apply Image, Calculations)',
-		community: true,
-		pro: true
-	},
-	{
-		feature: 'Documents (open PSD, JPEG, PNG, TIFF, DNG, HEIC, raw; save PSD; export JPEG/PNG)',
-		community: true,
-		pro: true
-	},
-	{
-		feature: 'Layers (create, duplicate, group, merge, reorder, properties)',
-		community: true,
-		pro: true
-	},
-	{
-		feature: 'Non-destructive adjustments (Curves, Levels, Hue/Saturation, Brightness/Contrast)',
-		community: true,
-		pro: true
-	},
-	{
-		feature:
-			'Filters (Gaussian Blur, Motion Blur, Sharpen, Smart Sharpen, Reduce Noise, High Pass)',
-		community: true,
-		pro: true
-	},
-	{
-		feature: 'Layer styles + text (drop shadow, stroke, glow; font, color, alignment)',
-		community: true,
-		pro: true
-	},
-	{
-		feature:
-			'Layer transforms + straightening (move, scale, rotate, skew, fit; canvas rotate + flip; guides)',
-		community: true,
-		pro: true
-	},
-	{
-		feature: 'Vector shapes + pen paths (shape layers, editable paths, path-to-selection)',
-		community: true,
-		pro: true
-	},
-	{
-		feature: 'Content-aware retouch (Content-Aware Fill, Patch, Content-Aware Move)',
-		community: true,
-		pro: true
-	},
-	{
-		feature: 'Camera Raw develop (the Camera Raw panel as a re-editable Smart Filter)',
-		community: false,
-		pro: true
-	},
-	{
-		feature:
-			'Warp (mesh warp with a pinned edge, bend along a named edge, radial reshape, warp to a target)',
-		community: false,
-		pro: true
-	},
-	{
-		feature: 'Visual verification (inline previews, zoomed review crops, per-channel histograms)',
-		community: true,
-		pro: true
-	},
-	{ feature: 'History (undo, redo, inspect history states)', community: true, pro: true },
-	{
-		feature: 'Templates (create, save, apply, verify, recall reproducible recipes)',
-		community: false,
-		pro: true
-	},
-	{
-		feature: 'Photoshop Actions + scripting (play recorded Actions, ExtendScript escape hatch)',
-		community: false,
-		pro: true
-	},
-	{
-		feature:
-			'GIMP 3.2, in beta (adjustments, masks, crop, resize, rotate, .xcf save, export, previews)',
-		community: true,
-		pro: true
+		title: 'GIMP (beta)',
+		rows: [
+			both('Adjustments and effects'),
+			both('Layers and composites'),
+			both('Masks'),
+			both('Crop, resize and rotate'),
+			both('Checkpoints', 'Save and restore points in place of undo'),
+			both('Previews and histograms'),
+			both('.xcf save and export')
+		]
 	}
 ];

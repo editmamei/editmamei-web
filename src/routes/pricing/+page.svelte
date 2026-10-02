@@ -1,6 +1,7 @@
 <script lang="ts">
 	import EditionsTable from '$lib/components/EditionsTable.svelte';
 	import Seo from '$lib/components/Seo.svelte';
+	import { PRO_FEATURES } from '$lib/content/pro-features';
 
 	// ──────────────────────────────────────────────────────────────────────
 	// PRODUCTION Polar checkout links (org `editmamei`). Each link has the
@@ -21,11 +22,10 @@
 			price: '$9',
 			list: '$12',
 			cadence: '/month',
-			note: 'Try Pro free for 7 days. Early-adopter rate, locked in for the life of your subscription.',
+			note: '7-day free trial.',
 			cta: 'Start free trial',
 			href: CHECKOUT.monthly,
-			featured: false,
-			trial: true
+			featured: false
 		},
 		{
 			id: 'annual',
@@ -33,11 +33,10 @@
 			price: '$79',
 			list: '$99',
 			cadence: '/year',
-			note: 'Best value. Early-adopter rate, locked in for life.',
+			note: '$29 a year less than paying monthly.',
 			cta: 'Get Pro',
 			href: CHECKOUT.annual,
-			featured: true,
-			trial: false
+			featured: true
 		},
 		{
 			id: 'perpetual',
@@ -45,18 +44,17 @@
 			price: '$199',
 			list: '$299',
 			cadence: 'one-time',
-			note: 'Pay once, yours forever, at the early-adopter price.',
+			note: 'Pay once, keep using it.',
 			cta: 'Get Pro',
 			href: CHECKOUT.perpetual,
-			featured: false,
-			trial: false
+			featured: false
 		}
 	] as const;
 </script>
 
 <Seo
-	title="Pricing: free Community edition and Pro plans — Editmamei"
-	description="The Community edition of the Photoshop MCP server is free for everyday photo editing. Pro is the production toolkit: monthly, annual, or one-time perpetual license."
+	title="Pricing: free Community edition and Pro plans · Editmamei"
+	description="Editmamei Community is free. Pro is $9/month, $79/year or $199 one-time, with a 7-day trial on monthly, and adds raw develop, folder batch, templates and precise placement to the Photoshop MCP server."
 	path="/pricing"
 />
 
@@ -81,8 +79,8 @@
 		<div
 			class="rounded-xl border border-terracotta/30 bg-terracotta/10 px-5 py-4 text-sm text-terracotta-ink"
 		>
-			<span class="font-semibold">Early-adopter launch pricing.</span> First-wave supporters lock in a
-			reduced rate for the life of their subscription, already applied below, no code needed.
+			<span class="font-semibold">Early-adopter launch pricing.</span> The reduced prices below are already
+			applied, with no code needed. A subscription keeps its rate for as long as it stays active.
 		</div>
 	</div>
 </section>
@@ -102,11 +100,6 @@
 						{#if plan.featured}
 							<span class="rounded-full bg-brand px-2.5 py-0.5 text-xs font-semibold text-white"
 								>Best value</span
-							>
-						{:else if plan.trial}
-							<span
-								class="rounded-full bg-terracotta-ink px-2.5 py-0.5 text-xs font-semibold text-white"
-								>7-day free trial</span
 							>
 						{/if}
 					</div>
@@ -141,87 +134,67 @@
 			When do you need Pro?
 		</h2>
 		<p class="mt-4 text-base leading-relaxed text-neutral-700">
-			Community covers the everyday editing surface: documents, layers, the standard adjustments and
-			filters, masks, selections (including Photoshop's AI Select Subject and Select Sky), shape
-			layers and pen paths, on-device scene awareness, history, and visual verification with
-			per-channel histograms. It also includes straightening and layer transforms, and content-aware
-			retouch (Content-Aware Fill, Patch, Content-Aware Move). For most one-off photo edits, that is
-			the full kit.
+			Community covers a complete edit: documents, layers, adjustment layers and filters, masks,
+			selections (including Photoshop's Select Subject and Select Sky), sky replacement,
+			content-aware retouch, straightening and layer transforms, shape layers and pen paths, scene
+			awareness that runs on your computer, history, and visual checks with previews and histograms.
+			It can also run several steps in one call and roll them back if one fails. For most one-off
+			photo edits, that is the full kit.
 		</p>
 		<p class="mt-4 text-base leading-relaxed text-neutral-700">
-			Pro adds the develop-grade and precision toolkit, the upgrades that matter once you're doing
-			detailed or repeatable work:
+			Pro is for detailed or repeatable work. It adds:
 		</p>
 
 		<ul class="mt-6 space-y-5">
-			<li class="rounded-xl border border-neutral-200 bg-paper p-5">
-				<h3 class="text-base font-semibold tracking-tight text-neutral-950">Templates</h3>
-				<p class="mt-2 text-sm leading-relaxed text-neutral-700">
-					Save the current edit as a reproducible recipe, then apply it to new images later, where
-					the AI re-derives each value for the new photo and self-judges against the recipe's exit
-					criteria. The whole template system (create, save, apply, verify, recall) is Pro, the
-					feature that turns a one-off look into a repeatable house style.
-				</p>
-			</li>
-			<li class="rounded-xl border border-neutral-200 bg-paper p-5">
-				<h3 class="text-base font-semibold tracking-tight text-neutral-950">
-					Camera Raw develop, re-editable
-				</h3>
-				<p class="mt-2 text-sm leading-relaxed text-neutral-700">
-					The Camera Raw panel as a re-editable Smart Filter: white balance, tone, clarity, dehaze,
-					HSL, color grading, optics, grain. The part that matters is the re-edit. Ask for "a touch
-					less dehaze" a day later and the AI reads the applied settings, changes that one value,
-					and reapplies. Nothing else moves, and nothing bakes into pixels.
-				</p>
-			</li>
-			<li class="rounded-xl border border-neutral-200 bg-paper p-5">
-				<h3 class="text-base font-semibold tracking-tight text-neutral-950">
-					Precision that lands where you say
-				</h3>
-				<p class="mt-2 text-sm leading-relaxed text-neutral-700">
-					The AI names a location the way you would (under the left eye, along the roofline, halfway
-					between two boats). Local computer vision finds the anchors, a deterministic resolver
-					computes the exact pixels, and an objective check runs before anything is applied, then
-					drives the warps from it. Placements are measured, not eyeballed.
-				</p>
-			</li>
-			<li class="rounded-xl border border-neutral-200 bg-paper p-5">
-				<h3 class="text-base font-semibold tracking-tight text-neutral-950">Deep local vision</h3>
-				<p class="mt-2 text-sm leading-relaxed text-neutral-700">
-					A 468-point face mesh with feature-precise selections (eyes, teeth, skin, lips), and
-					named-object masks that turn "select the surfboard" into a real, organic selection via
-					local segmentation. All of it runs on your machine.
-				</p>
-			</li>
-			<li class="rounded-xl border border-neutral-200 bg-paper p-5">
-				<h3 class="text-base font-semibold tracking-tight text-neutral-950">
-					Objective template verification
-				</h3>
-				<p class="mt-2 text-sm leading-relaxed text-neutral-700">
-					Save a machine-checkable style signature with any template, then have the AI measure a new
-					edit against it, with per-predicate pass/fail and a corrective steer for each miss. "Looks
-					right" becomes a measurement.
-				</p>
-			</li>
-			<li class="rounded-xl border border-neutral-200 bg-paper p-5">
-				<h3 class="text-base font-semibold tracking-tight text-neutral-950">
-					Actions and scripting
-				</h3>
-				<p class="mt-2 text-sm leading-relaxed text-neutral-700">
-					Play your recorded Photoshop Actions, and run custom ExtendScript through the escape hatch
-					when no specific tool fits. Your recorded Actions become AI-callable steps for repeatable
-					production work.
-				</p>
-			</li>
+			{#each PRO_FEATURES as feature (feature.title)}
+				<li class="rounded-xl border border-neutral-200 bg-paper p-5">
+					<h3 class="text-base font-semibold tracking-tight text-neutral-950">{feature.title}</h3>
+					<p class="mt-2 text-sm leading-relaxed text-neutral-700">{feature.detail}</p>
+				</li>
+			{/each}
 		</ul>
 
 		<p class="mt-6 text-base leading-relaxed text-neutral-700">
-			Rule of thumb: Community edits photos. Pro develops them, places things precisely, and turns a
-			look into a repeatable recipe.
+			Rule of thumb: Community covers a complete edit of one photo. Pro earns its place when you
+			start from raw files or want the same look across a whole shoot.
 		</p>
 		<p class="mt-4 text-base leading-relaxed text-neutral-700">
 			Everything Pro adds is for Photoshop. If you edit in GIMP, Community already includes all of
 			Editmamei's GIMP support.
+		</p>
+	</div>
+</section>
+
+<section id="templates" class="bg-white py-16 md:py-20">
+	<div class="mx-auto max-w-3xl px-4">
+		<p class="mb-2 text-xs font-semibold tracking-wider text-terracotta-ink uppercase">Templates</p>
+		<h2 class="text-2xl font-bold tracking-tight text-neutral-950 md:text-3xl">
+			How templates work
+		</h2>
+		<p class="mt-4 text-base leading-relaxed text-neutral-700">
+			A template is a saved look. When an edit comes out the way you want it, ask the AI to save it
+			as a template. It writes down what the look is meant to achieve, which choices stay the same
+			on every photo, which settings get tuned for each one, and how to tell when the edit is done.
+			The template keeps before and after previews of the original edit too.
+		</p>
+		<p class="mt-4 text-base leading-relaxed text-neutral-700">
+			When you apply it to a new photo, the AI looks at that photo first and works out each value
+			for it, because the numbers in the template came from a different picture. It skips steps the
+			new photo doesn't need, then checks the result against the template's description of done.
+		</p>
+		<p class="mt-4 text-base leading-relaxed text-neutral-700">
+			A template can also carry checks Editmamei can measure, such as the subject staying brighter
+			than the background or the highlights not clipping. After an edit, Editmamei measures it
+			against them and says what to fix wherever it falls short.
+		</p>
+		<p class="mt-4 text-base leading-relaxed text-neutral-700">
+			For a whole shoot, templates and folder batch do different jobs. The template carries the
+			look, applied photo by photo so each image gets its own values. Folder batch handles the
+			mechanical steps (crop, resize, rotate and export) across the folder in one Photoshop pass.
+		</p>
+		<p class="mt-4 text-base leading-relaxed text-neutral-700">
+			Templates are saved as files on your computer. Saving, applying and checking them are all part
+			of Pro.
 		</p>
 	</div>
 </section>
@@ -232,8 +205,8 @@
 			Not sure yet? Start with Community. It's free.
 		</h2>
 		<p class="mx-auto mt-4 max-w-xl text-base leading-relaxed text-neutral-700">
-			Install from npm and start editing today. Upgrade to Pro whenever you're ready. Activating
-			your license downloads the signed Pro module and loads it alongside Community after a restart.
+			Install it for Claude Desktop in one click, or with npm for other AI clients. Upgrade to Pro
+			whenever you're ready, with nothing to reinstall.
 		</p>
 		<div class="mt-8">
 			<a

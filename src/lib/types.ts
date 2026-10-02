@@ -73,9 +73,17 @@ export interface WorkflowExample {
 }
 
 export interface EditionRow {
+	/** Short label, kept to a few words so the row stays readable on a phone. */
 	feature: string;
+	/** Optional second line in smaller type. */
+	detail?: string;
 	community: boolean;
 	pro: boolean;
+}
+
+export interface EditionGroup {
+	title: string;
+	rows: EditionRow[];
 }
 
 export interface DemoExample {
