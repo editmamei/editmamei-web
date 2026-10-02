@@ -1,15 +1,13 @@
 <script lang="ts">
+	import Seo from '$lib/components/Seo.svelte';
 	import { cookieConsent } from '$lib/stores/cookieConsent';
 </script>
 
-<svelte:head>
-	<title>Privacy: your photos, telemetry, and cookies — Editmamei</title>
-	<meta
-		name="description"
-		content="What Editmamei does with your data: your photos aren't uploaded to us, only content-free usage you can audit and switch off. Previews go to your chosen AI."
-	/>
-	<meta name="robots" content="noindex" />
-</svelte:head>
+<Seo
+	title="Privacy: your photos, telemetry and cookies · Editmamei"
+	description="What Editmamei does with your data: no image content is sent to Editmamei, only content-free usage you can audit and switch off. Previews go to your chosen AI."
+	path="/privacy"
+/>
 
 <section class="bg-white py-20 md:py-28">
 	<div class="mx-auto max-w-2xl px-4">
@@ -18,11 +16,12 @@
 			What Editmamei does with your data.
 		</h1>
 		<p class="mt-4 text-base leading-relaxed text-neutral-700">
-			Editmamei runs on your own computer and edits inside desktop Photoshop. The honest version is
-			short: your photos aren't uploaded to us, and the only thing Editmamei sends to its own
-			servers is content-free usage you can audit and turn off. When your AI assistant needs to see
-			an edit, a downscaled preview goes to that assistant, covered below. A fuller, formal privacy
-			policy is in progress; this page describes how the product behaves today.
+			Editmamei runs on your own computer and drives desktop Photoshop, or GIMP in beta. Your photos
+			aren't uploaded to us. The only usage data Editmamei sends us is content-free, and you can
+			audit it and turn it off. The few other requests it makes, listed below, check for updates and
+			handle a Pro license, and none of them carries your images. When your AI assistant needs to
+			see an edit, a downscaled preview goes to that assistant, covered below. The legal basis,
+			retention periods and your rights are further down this page.
 		</p>
 
 		<h2 class="mt-12 text-xl font-bold tracking-tight text-neutral-950">
@@ -34,7 +33,7 @@
 		<ul class="mt-3 space-y-2 text-sm leading-relaxed text-neutral-700">
 			<li>
 				<strong class="font-semibold text-neutral-900">Your image and document content.</strong>
-				No photos, previews, thumbnails, layer renders, or Photoshop document data are ever sent to Editmamei.
+				No photos, previews, thumbnails, layer renders, or document data are ever sent to Editmamei.
 			</li>
 			<li>
 				<strong class="font-semibold text-neutral-900">Your file paths.</strong>
@@ -42,7 +41,9 @@
 			</li>
 			<li>
 				<strong class="font-semibold text-neutral-900">Your metadata.</strong>
-				Camera info, GPS, and author fields are never part of what the product transmits.
+				Camera info, GPS, and author fields are never sent to Editmamei. When your AI assistant inspects
+				a document, the camera details it reads, GPS included, go to that assistant with the rest of the
+				conversation.
 			</li>
 		</ul>
 
@@ -51,23 +52,22 @@
 		</h2>
 		<p class="mt-3 text-sm leading-relaxed text-neutral-700">
 			Editmamei is built by a small team, so it sends a thin stream of content-free signals that
-			show what's working and what's breaking. The earlier "no telemetry at all" promise is retired:
-			a licensed product that phones home should say so plainly rather than claim a purity it can't
-			keep. Everything below is content-free, modelled on how editors like VS Code handle telemetry,
-			and documented field by field.
+			show what's working and what's breaking. It follows the way editors like VS Code handle
+			telemetry, and every field is documented one by one.
 		</p>
 		<ul class="mt-4 space-y-3 text-sm leading-relaxed text-neutral-700">
 			<li>
 				<strong class="font-semibold text-neutral-900"
 					>Usage and reliability (on by default).</strong
 				>
-				Per edit: which tool ran, whether it succeeded, an error category if it didn't, and how long it
-				took. Per session: the Editmamei version, your Photoshop version, your operating system, which
-				install route you used (npx, a global or project-local npm install, the one-click Claude Desktop
-				extension, or a source checkout), and a random install ID that is not derived from anything about
-				you. On Pro installs, one extra startup signal records whether your Pro add-on actually loaded,
-				so a purchase that failed to install is distinguishable from one that's working. No prompts, no
-				arguments, no content.
+				Per edit: which tool ran (a Photoshop or a GIMP tool), whether it succeeded, an error category
+				if it didn't, and how long it took. Per session: the Editmamei version, your Photoshop version
+				(no GIMP version is recorded), your operating system, which AI client connected, which install
+				route you used (npx, a global or project-local npm install, the one-click Claude Desktop extension,
+				or a source checkout), and a random install ID that is not derived from anything about you. On
+				Pro installs, one extra startup signal records whether your Pro add-on actually loaded, so a purchase
+				that failed to install is distinguishable from one that's working. No prompts, no arguments, no
+				content.
 			</li>
 			<li>
 				<strong class="font-semibold text-neutral-900"
@@ -88,6 +88,35 @@
 			<code class="rounded bg-neutral-200 px-1 py-0.5 font-mono text-xs">editmamei config</code>.
 			The file is plain text and yours to inspect at any time.
 		</p>
+
+		<h2 class="mt-12 text-xl font-bold tracking-tight text-neutral-950">
+			Other requests Editmamei makes
+		</h2>
+		<p class="mt-3 text-sm leading-relaxed text-neutral-700">
+			Besides usage data, Editmamei makes three other kinds of request. None of them carries images,
+			documents or file paths.
+		</p>
+		<ul class="mt-4 space-y-3 text-sm leading-relaxed text-neutral-700">
+			<li>
+				<strong class="font-semibold text-neutral-900">Update check (on by default).</strong>
+				At startup, Editmamei asks the public npm registry for the latest version number. The request
+				carries no identifiers and no usage data, and it is skipped when you're offline. Switch it off
+				with
+				<code class="rounded bg-neutral-200 px-1 py-0.5 font-mono text-xs"
+					>editmamei config set update_check false</code
+				>, or with the Check for updates toggle in the Claude Desktop extension settings.
+			</li>
+			<li>
+				<strong class="font-semibold text-neutral-900">Pro license check.</strong>
+				On a Pro install, Editmamei confirms the license about once a day by sending your license key
+				and a device identifier to the licensing service.
+			</li>
+			<li>
+				<strong class="font-semibold text-neutral-900">Pro module download.</strong>
+				Activating Pro downloads the signed Pro module from Editmamei's delivery service. The request
+				carries your license key, so the service can confirm what the license covers.
+			</li>
+		</ul>
 
 		<h2 class="mt-12 text-xl font-bold tracking-tight text-neutral-950">
 			Your AI assistant is a cloud service
@@ -145,7 +174,7 @@
 					defects, and establishing which features are used and on which Photoshop versions. You
 					have the right to object, and the setting is the mechanism. Diagnostic detail (off by
 					default) rests on consent, given by enabling it and withdrawn by disabling it. The two
-					settings are independent — switching usage off does not switch diagnostics off.
+					settings are independent: switching usage off does not switch diagnostics off.
 				</dd>
 			</div>
 			<div>
@@ -166,7 +195,7 @@
 						>editmamei config get telemetry.install_id</code
 					>
 					and send it to us with your request. Two limits apply: erasure removes the stored records but
-					does not stop collection, because the same ID remains in your settings file — disable telemetry
+					does not stop collection, because the same ID remains in your settings file, so disable telemetry
 					first if you want both; and aggregate daily totals were summed on arrival with no ID attached,
 					so they cannot be recalculated to exclude a single install. Without an install ID we cannot
 					locate your records, because no email address, account, or IP address is stored alongside it.

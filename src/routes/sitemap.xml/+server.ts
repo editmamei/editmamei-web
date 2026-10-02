@@ -37,6 +37,8 @@ const ROUTES: Array<{ path: string; lastmod: string; priority: string; changefre
 	{ path: '/faq', lastmod: '2026-09-18', priority: '0.7', changefreq: 'monthly' },
 	{ path: '/contact', lastmod: '2026-08-08', priority: '0.5', changefreq: 'yearly' },
 	{ path: '/license', lastmod: '2026-08-08', priority: '0.4', changefreq: 'yearly' },
+	{ path: '/privacy', lastmod: '2026-10-02', priority: '0.4', changefreq: 'yearly' },
+	{ path: '/security', lastmod: '2026-10-02', priority: '0.3', changefreq: 'yearly' },
 	{ path: '/activate', lastmod: '2026-07-15', priority: '0.5', changefreq: 'monthly' },
 	{ path: '/blog', lastmod: 'NEWEST_POST', priority: '0.6', changefreq: 'weekly' }
 ];

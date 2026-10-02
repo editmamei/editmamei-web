@@ -1,15 +1,13 @@
 <script lang="ts">
+	import Seo from '$lib/components/Seo.svelte';
 	import { GITHUB_SECURITY_ADVISORY_URL, GITHUB_SECURITY_POLICY_URL } from '$lib/links';
 </script>
 
-<svelte:head>
-	<title>Security: how to report a vulnerability — Editmamei</title>
-	<meta
-		name="description"
-		content="How to report a security issue in Editmamei. Software vulnerabilities go through the GitHub security policy; website issues by email."
-	/>
-	<meta name="robots" content="noindex" />
-</svelte:head>
+<Seo
+	title="Security: how to report a vulnerability · Editmamei"
+	description="How to report a security issue in Editmamei. Software vulnerabilities go through the GitHub security policy; website issues by email."
+	path="/security"
+/>
 
 <section class="bg-white py-20 md:py-28">
 	<div class="mx-auto max-w-2xl px-4">
@@ -18,8 +16,7 @@
 			Reporting a security issue
 		</h1>
 		<p class="mt-4 text-base leading-relaxed text-neutral-700">
-			We take security reports seriously and want them easy to send. Where a report goes depends on
-			what it's about.
+			Where a security report goes depends on what it's about.
 		</p>
 
 		<h2 class="mt-12 text-xl font-bold tracking-tight text-neutral-950">The Editmamei software</h2>
@@ -29,7 +26,8 @@
 			>
 			npm package (the CLI and the MCP server you install), the full policy lives on GitHub: scope, what
 			to include, and our response timelines. The preferred channel is a private security advisory, which
-			keeps your report confidential while we work on a fix.
+			keeps your report confidential while we work on a fix. You'll get an acknowledgement within a few
+			business days.
 		</p>
 		<ul class="mt-4 space-y-2 text-sm leading-relaxed text-neutral-700">
 			<li>
