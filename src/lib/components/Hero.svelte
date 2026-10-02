@@ -37,8 +37,9 @@
 			</p>
 
 			<p class="mx-auto mt-7 max-w-2xl text-lg leading-relaxed text-neutral-700 md:text-xl lg:mx-0">
-				Describe the look you want in a chat, or direct each change the way you'd brief another
-				editor, and Photoshop does the work one layer at a time while you do something else.
+				Ask for an edit in a chat the way you'd brief another editor, whether that's a look you have
+				in mind or the exact changes you want, and Photoshop does the work one layer at a time while
+				you do something else.
 			</p>
 
 			<!-- The demo is the primary ask, not install. A top-of-page install CTA drew
