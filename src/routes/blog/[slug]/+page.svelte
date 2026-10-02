@@ -37,7 +37,7 @@
 
 <Seo
 	path={`/blog/${post.slug}`}
-	title={`${post.title} — Editmamei`}
+	title={`${post.title} · Editmamei`}
 	description={post.description}
 	article={{ published: post.date, modified: post.updated }}
 />
@@ -51,7 +51,7 @@
 	{@html jsonLd}
 </svelte:head>
 
-<main class="mx-auto max-w-3xl px-4 py-12">
+<div class="mx-auto max-w-3xl px-4 py-12">
 	<a href="/blog" class="text-sm text-neutral-500 hover:text-neutral-800">&larr; All posts</a>
 
 	<article class="mt-6">
@@ -78,4 +78,4 @@
 			<Content />
 		</div>
 	</article>
-</main>
+</div>

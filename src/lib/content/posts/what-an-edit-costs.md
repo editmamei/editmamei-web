@@ -85,8 +85,8 @@ right, save it as a template, and then carry it across the rest. That is the
 order that makes the numbers above work in your favour, and it is the order that
 produces a consistent set across a shoot, which is the better reason to do it.
 
-Templates and batch are [Pro features](/pricing). The cold edit — describe what
-you want, get layers back — is the free edition.
+Templates and batch are [Pro features](/pricing). The cold edit, where you
+describe what you want and get layers back, is the free edition.
 
 ## The caveat
 
@@ -96,7 +96,7 @@ because these runs vary. Treat the shapes as real and the exact numbers as a
 first reading. I will run repeats before I put any of this on a pricing page.
 
 If you have edited a photo with Editmamei, I want to know what your first one
-cost you — whether 229,000 is normal or whether I picked an unlucky frame.
+cost you, whether 229,000 is normal or whether I picked an unlucky frame.
 [Tell me](/contact).
 
 — Alex
