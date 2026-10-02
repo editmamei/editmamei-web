@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { GITHUB_AI_CLIENT_FAQ_URL, GITHUB_CLAUDE_CODE_INSTALL_URL } from '$lib/links';
+	import { GITHUB_AI_CLIENT_FAQ_URL, GITHUB_INSTALLATION_DOCS_URL } from '$lib/links';
 </script>
 
 <section class="bg-cream py-16 md:py-20">
@@ -39,9 +39,9 @@
 				</p>
 				<h3 class="text-lg font-bold tracking-tight text-neutral-950">Claude Code</h3>
 				<p class="mt-3 text-sm leading-relaxed text-neutral-700">
-					A larger working memory for the conversation keeps it fast across hundreds of edits in one
-					sitting. Real-estate batches, wedding selects, multi-image template authoring. A one-time
-					terminal install gets it going; after that it works the same way Desktop does.
+					Claude Code suits a sitting that runs to hundreds of edits, like a whole wedding set or a
+					long run of template work. A one-time terminal install gets it going; after that it works
+					the same way Desktop does.
 				</p>
 				<p class="mt-3 text-xs text-neutral-500">
 					If you find a Desktop session getting sluggish in the middle of a batch, this is the fix.
@@ -51,7 +51,7 @@
 
 		<p class="mt-8 max-w-2xl text-sm leading-relaxed text-neutral-600">
 			Not sure? Start in Desktop. The first time you feel a session getting slow, switch to Code.
-			The
+			Other MCP clients work the same way. The
 			<a
 				href={GITHUB_AI_CLIENT_FAQ_URL}
 				class="font-semibold text-neutral-900 underline decoration-neutral-300 underline-offset-4 hover:decoration-neutral-700"
@@ -59,11 +59,11 @@
 			>
 			and the
 			<a
-				href={GITHUB_CLAUDE_CODE_INSTALL_URL}
+				href={GITHUB_INSTALLATION_DOCS_URL}
 				class="font-semibold text-neutral-900 underline decoration-neutral-300 underline-offset-4 hover:decoration-neutral-700"
 				>installation guide</a
 			>
-			cover both clients in detail.
+			have the details for each client.
 		</p>
 	</div>
 </section>
