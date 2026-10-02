@@ -1,11 +1,12 @@
 <script lang="ts">
 	import Seo from '$lib/components/Seo.svelte';
+	import { PRO_FEATURES } from '$lib/content/pro-features';
 	import { CUSTOMER_PORTAL_URL, GITHUB_PRO_TROUBLESHOOTING_URL } from '$lib/links';
 </script>
 
 <Seo
-	title="Activate Pro: enter your license key and restart — Editmamei"
-	description="Activate your Editmamei Pro license: run editmamei activate <key> (Claude Code / npm) or paste your key into the Claude Desktop extension settings. Then restart and your Pro tools appear."
+	title="Activate Pro: enter your license key and restart · Editmamei"
+	description="Activate your Editmamei Pro license: run editmamei activate with your key (Claude Code / npm) or paste your key into the Claude Desktop extension settings. Then restart and your Pro tools appear."
 	path="/activate"
 />
 
@@ -126,10 +127,17 @@
 			<div>
 				<h2 class="text-xl font-semibold tracking-tight text-neutral-950">Confirm Pro is on</h2>
 				<p class="mt-2 text-base leading-relaxed text-neutral-700">
-					After the restart, the Pro tools appear in your AI client: Camera Raw develop, precision
-					placement, named-object masks and face-feature selections, warp, the reproducible-template
-					system, and Photoshop Actions and scripting. If they're not there yet, double-check the
-					key and that you fully restarted the client.
+					After the restart, the Pro tools appear in your AI client:
+				</p>
+				<ul class="mt-3 space-y-1.5 text-base leading-relaxed text-neutral-700">
+					{#each PRO_FEATURES as feature (feature.title)}
+						<li class="flex gap-3">
+							<span class="text-brand" aria-hidden="true">•</span><span>{feature.title}</span>
+						</li>
+					{/each}
+				</ul>
+				<p class="mt-3 text-base leading-relaxed text-neutral-700">
+					If they're not there yet, double-check the key and that you fully restarted the client.
 				</p>
 			</div>
 		</div>
@@ -159,8 +167,8 @@
 			</li>
 			<li class="flex gap-3">
 				<span class="text-brand">•</span><span
-					><strong>Works offline.</strong> Pro keeps running between check-ins; it only needs to reach
-					the internet briefly every so often.</span
+					><strong>Works offline.</strong> Pro checks its license about once a day and keeps working for
+					seven days without a connection.</span
 				>
 			</li>
 			<li class="flex gap-3">
