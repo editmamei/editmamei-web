@@ -129,8 +129,8 @@
 			Editmamei adds.
 		</p>
 		<p class="mt-3 text-sm leading-relaxed text-neutral-700">
-			Turning off previews in Editmamei's settings stops preview images going to the AI provider,
-			in both Photoshop and GIMP:
+			Turning off previews in Editmamei's settings stops preview images going to the AI provider, in
+			both Photoshop and GIMP:
 			<code class="rounded bg-neutral-200 px-1 py-0.5 font-mono text-xs"
 				>editmamei config set privacy.send_previews_to_llm false</code
 			>.

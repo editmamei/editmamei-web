@@ -91,10 +91,10 @@
 				Your files, your machine.
 			</h3>
 			<p class="mt-3 text-sm leading-relaxed text-neutral-700">
-				Editing happens on your desktop, in Photoshop or GIMP. There's no Editmamei cloud your library
-				uploads to. When your AI assistant needs to see a result, a downscaled preview goes to it,
-				the same as sharing a photo in a chat. Editmamei's own telemetry is content-free, and you
-				can audit it or switch it off.
+				Editing happens on your desktop, in Photoshop or GIMP. There's no Editmamei cloud your
+				library uploads to. When your AI assistant needs to see a result, a downscaled preview goes
+				to it, the same as sharing a photo in a chat. Editmamei's own telemetry is content-free, and
+				you can audit it or switch it off.
 			</p>
 		</div>
 	</div>

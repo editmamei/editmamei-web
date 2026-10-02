@@ -212,7 +212,9 @@
 <section id="billing" class="border-t border-neutral-200 bg-white py-16 md:py-20">
 	<div class="mx-auto max-w-3xl px-4">
 		<p class="mb-2 text-xs font-semibold tracking-wider text-terracotta-ink uppercase">Billing</p>
-		<h2 class="text-2xl font-bold tracking-tight text-neutral-950 md:text-3xl">Billing questions</h2>
+		<h2 class="text-2xl font-bold tracking-tight text-neutral-950 md:text-3xl">
+			Billing questions
+		</h2>
 		<dl class="mt-8 space-y-8">
 			{#each billingFaqs as { q, a } (q)}
 				<div>
