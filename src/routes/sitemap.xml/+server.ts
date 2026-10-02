@@ -33,8 +33,9 @@ const ORIGIN = 'https://editmamei.com';
 const ROUTES: Array<{ path: string; lastmod: string; priority: string; changefreq: string }> = [
 	{ path: '/', lastmod: '2026-10-02', priority: '1.0', changefreq: 'weekly' },
 	{ path: '/product', lastmod: '2026-10-02', priority: '0.8', changefreq: 'weekly' },
+	{ path: '/gimp', lastmod: '2026-10-02', priority: '0.8', changefreq: 'monthly' },
 	{ path: '/pricing', lastmod: '2026-10-02', priority: '0.8', changefreq: 'monthly' },
-	{ path: '/faq', lastmod: '2026-09-18', priority: '0.7', changefreq: 'monthly' },
+	{ path: '/faq', lastmod: '2026-10-02', priority: '0.7', changefreq: 'monthly' },
 	{ path: '/contact', lastmod: '2026-08-08', priority: '0.5', changefreq: 'yearly' },
 	{ path: '/license', lastmod: '2026-08-08', priority: '0.4', changefreq: 'yearly' },
 	{ path: '/privacy', lastmod: '2026-10-02', priority: '0.4', changefreq: 'yearly' },
