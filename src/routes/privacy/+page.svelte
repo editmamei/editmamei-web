@@ -128,6 +128,13 @@
 			property of using a cloud AI, and a function of which assistant you choose, not a hop
 			Editmamei adds.
 		</p>
+		<p class="mt-3 text-sm leading-relaxed text-neutral-700">
+			Turning off previews in Editmamei's settings stops preview images going to the AI provider,
+			in both Photoshop and GIMP:
+			<code class="rounded bg-neutral-200 px-1 py-0.5 font-mono text-xs"
+				>editmamei config set privacy.send_previews_to_llm false</code
+			>.
+		</p>
 
 		<div class="mt-12 border-t border-neutral-200 pt-6">
 			<a
