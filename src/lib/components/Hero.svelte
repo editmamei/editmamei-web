@@ -26,8 +26,8 @@
 			<h1
 				class="text-4xl font-bold tracking-tight text-neutral-950 md:text-6xl md:leading-[1.05] lg:text-[3.4rem]"
 			>
-				Unlock Photoshop with<br class="hidden md:inline" />
-				natural-language photo editing.
+				The photo editing assistant<br class="hidden md:inline" />
+				you always needed.
 			</h1>
 
 			<p
@@ -37,9 +37,8 @@
 			</p>
 
 			<p class="mx-auto mt-7 max-w-2xl text-lg leading-relaxed text-neutral-700 md:text-xl lg:mx-0">
-				Ask for an edit in a chat the way you'd brief another editor, whether that's a look you have
-				in mind or the exact changes you want, and Photoshop does the work one layer at a time while
-				you do something else.
+				Your AI assistant plans the edit from one sentence, and Photoshop carries it out layer by
+				layer, so what comes back is a layered file you can keep working on by hand.
 			</p>
 
 			<!-- The demo is the primary ask, not install. A top-of-page install CTA drew

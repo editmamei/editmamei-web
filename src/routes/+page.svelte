@@ -35,8 +35,8 @@
 </script>
 
 <Seo
-	title="Editmamei · Photo Editor MCP Server"
-	description="The photo editing assistant you always needed. Ask your AI client for an edit, and Editmamei makes it. Works in desktop Photoshop and GIMP (beta) today."
+	title="Editmamei · Photo Editor MCP Server for Photoshop"
+	description="Edit photos in desktop Photoshop by asking your AI client. Editmamei is the MCP server that makes each edit, layer by layer. Also works with GIMP (beta)."
 	path="/"
 />
 
