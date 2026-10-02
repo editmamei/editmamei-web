@@ -1,11 +1,16 @@
 <script lang="ts">
 	import Seo from '$lib/components/Seo.svelte';
-	import { GITHUB_ISSUES_URL, GITHUB_README_URL } from '$lib/links';
+	import {
+		CUSTOMER_PORTAL_URL,
+		GITHUB_ISSUES_URL,
+		GITHUB_README_URL,
+		GITHUB_SECURITY_ADVISORY_URL
+	} from '$lib/links';
 </script>
 
 <Seo
-	title="Contact support or report a security issue — Editmamei"
-	description="Get support for Editmamei or report a security issue. Reach the team by email or open a public issue on GitHub."
+	title="Contact: support, billing and bug reports · Editmamei"
+	description="Get help with Editmamei: open a GitHub issue for bugs and setup questions, email support for billing and license questions, and report security issues privately."
 	path="/contact"
 />
 
@@ -14,8 +19,8 @@
 		<p class="mb-3 text-xs font-semibold tracking-wider text-neutral-500 uppercase">Contact</p>
 		<h1 class="text-3xl font-bold tracking-tight text-neutral-950 md:text-4xl">Get in touch</h1>
 		<p class="mt-4 text-base leading-relaxed text-neutral-600">
-			Editmamei is an independent product, not affiliated with Adobe. Use the channels below for
-			support questions and security disclosures.
+			Editmamei is an independent product, not affiliated with Adobe. The channels below cover
+			support, billing and security reports.
 		</p>
 
 		<dl class="mt-12 space-y-10">
@@ -23,7 +28,7 @@
 				<dt class="text-base font-semibold text-neutral-950">Support</dt>
 				<dd class="mt-2 text-sm leading-relaxed text-neutral-700">
 					For installation help, bug reports, and general questions, open a public issue on GitHub
-					first, since the answer will help others too. For private matters, email
+					first, since the answer will help others too. For anything private, email
 					<a href="mailto:support@editmamei.com" class="underline hover:text-neutral-950"
 						>support@editmamei.com</a
 					>.
@@ -39,18 +44,38 @@
 			</div>
 
 			<div>
+				<dt class="text-base font-semibold text-neutral-950">Billing and licenses</dt>
+				<dd class="mt-2 text-sm leading-relaxed text-neutral-700">
+					For billing, license or account questions, email
+					<a href="mailto:support@editmamei.com" class="underline hover:text-neutral-950"
+						>support@editmamei.com</a
+					>. Please don't raise them in the public GitHub tracker, where invoice details would be
+					visible to everyone. To update payment, cancel, view invoices or remove a device yourself,
+					use your
+					<a href={CUSTOMER_PORTAL_URL} rel="noopener" class="underline hover:text-neutral-950"
+						>account portal</a
+					>.
+				</dd>
+			</div>
+
+			<div>
 				<dt class="text-base font-semibold text-neutral-950">Security disclosures</dt>
 				<dd class="mt-2 text-sm leading-relaxed text-neutral-700">
-					If you have found a security vulnerability, please report it privately rather than opening
-					a public issue. Email
+					If you have found a vulnerability in the Editmamei software, report it privately rather
+					than opening a public issue: through a
+					<a
+						href={GITHUB_SECURITY_ADVISORY_URL}
+						rel="noopener noreferrer"
+						class="underline hover:text-neutral-950">GitHub security advisory</a
+					>
+					(preferred), or by email to
 					<a href="mailto:security@editmamei.com" class="underline hover:text-neutral-950"
 						>security@editmamei.com</a
-					>
-					with a description of the issue and steps to reproduce. We will respond within 72 hours.
+					>. You'll get an acknowledgement within a few business days.
 				</dd>
 				<dd class="mt-3">
 					<a href="/security" class="text-sm text-neutral-600 underline hover:text-neutral-950">
-						Security policy ↗
+						Security policy
 					</a>
 				</dd>
 			</div>
@@ -65,14 +90,5 @@
 				</dd>
 			</div>
 		</dl>
-
-		<div class="mt-16 rounded-lg border border-neutral-200 bg-neutral-50 p-6">
-			<p class="text-sm font-semibold text-neutral-950">About Editmamei</p>
-			<p class="mt-2 text-sm leading-relaxed text-neutral-600">
-				Editmamei is a command-line package that drives Adobe Photoshop with natural-language
-				instructions from an AI client. It runs on your own computer, and your photo files stay on
-				your machine. It is not a web app, not a cloud editor, and not affiliated with Adobe.
-			</p>
-		</div>
 	</div>
 </section>
