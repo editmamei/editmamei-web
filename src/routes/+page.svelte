@@ -35,8 +35,8 @@
 </script>
 
 <Seo
-	title="Editmamei — Photoshop MCP server for AI photo editing"
-	description="A Photoshop MCP server that turns Claude Desktop or Cursor into your AI photo editing assistant. Every edit runs in Photoshop, on your desktop."
+	title="Editmamei · Photoshop and GIMP MCP server for AI photo editing"
+	description="An MCP server that lets Claude Desktop, Claude Code, Cursor and other MCP clients edit your photos. Every edit runs on your desktop, in Photoshop or, in beta, GIMP."
 	path="/"
 />
 
@@ -81,8 +81,9 @@
 					<LayerAccordion layers={demo.layers} />
 				</div>
 				<p class="mt-4 text-xs leading-relaxed text-neutral-600">
-					Repaint any mask, re-tune any curve, delete any layer. Nothing is baked in. Save the stack
-					as a template and reapply the look to a new photo (Pro).
+					Every adjustment can be re-tuned and every mask repainted, and the original photo
+					underneath stays untouched. Save the stack as a template and reapply the look to a new
+					photo.
 				</p>
 			</aside>
 		</div>
@@ -103,7 +104,7 @@
 			<p class="mt-4 text-lg leading-relaxed text-neutral-700">
 				Generative AI tools hand back a new picture that resembles your shot. Editmamei works the
 				frame you captured, using Photoshop's own adjustment layers, masks, and filters. What comes
-				back is a standard Photoshop-edited PSD file, ready for fine-tuning by hand.
+				back is an ordinary layered PSD, ready for fine-tuning by hand.
 			</p>
 		</div>
 	</div>

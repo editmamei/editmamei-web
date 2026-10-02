@@ -9,9 +9,9 @@ export const setSail: Demo = {
 	before: '/demos/set-sail/before.jpg',
 	after: '/demos/set-sail/after.jpg',
 	beforeAlt:
-		'Original iPhone photo of a sailboat on open water — flat contrast, slightly hazy sky, muted blues',
+		'Original iPhone photo of a sailboat on open water: flat contrast, slightly hazy sky, muted blues',
 	afterAlt:
-		'The same sailing photo after the Set Sail template — deep cobalt sky and ocean, warm golden glow at the horizon, crisp rigging, gentle focus vignette',
+		'The same sailing photo after the edit: deep cobalt sky and ocean, warm golden glow at the horizon, crisp rigging, gentle focus vignette',
 	layers: [
 		{
 			name: 'Tone Foundation',
