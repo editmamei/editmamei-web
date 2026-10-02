@@ -2,7 +2,7 @@
 	import { onMount } from 'svelte';
 	import { track, trackOnce, upgradeSession } from '$lib/analytics/clarity';
 
-	// Stable "latest release" asset URL — always resolves to the newest published
+	// Stable "latest release" asset URL: it always resolves to the newest published
 	// release, so a new version never needs a site edit. Shared with /download.
 	import {
 		GITHUB_GETTING_STARTED_DOCS_URL,
@@ -59,7 +59,7 @@
 	// Highest-intent pre-conversion signal for the npm path: the visitor
 	// highlighted the command snippet, almost certainly to copy it. Detected via
 	// `selectionchange`. The snippet now lives behind the reveal, so this only
-	// fires once the panel is open — which is a truer signal than before.
+	// fires once the panel is open.
 	let snippetEl = $state<HTMLPreElement>();
 
 	onMount(() => {
@@ -169,7 +169,7 @@
 				<p class="mt-2 text-xs text-neutral-400">
 					That command also saves a skill file,
 					<code class="rounded bg-brand-deep px-1 py-0.5 text-accent">editmamei-skill.zip</code>, to
-					your Downloads folder. Upload the file at claude.ai under Settings, then Skills, and
+					your Downloads folder. Upload the file at claude.ai under Settings, then Extensions, and
 					Claude gets Editmamei's editing workflow.
 				</p>
 
