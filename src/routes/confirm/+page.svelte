@@ -8,7 +8,7 @@
 	// to the Worker and forwards to the matching static result page.
 	//
 	// It is PRERENDERED, so nothing here may read the query string during
-	// render — the token is only touched inside onMount, in the browser. The
+	// render: the token is only touched inside onMount, in the browser. The
 	// prerendered HTML is the "confirming" state plus a noscript block: with
 	// scripts off this page cannot relay anything, and the honest fallback is
 	// the email's direct link, which completes at the Worker with no script.
@@ -36,11 +36,11 @@
 </script>
 
 <svelte:head>
-	<title>Confirming your email — Editmamei</title>
+	<title>Confirming your email · Editmamei</title>
 	<meta name="robots" content="noindex" />
 </svelte:head>
 
-<main class="mx-auto max-w-xl px-4 py-20 text-center">
+<div class="mx-auto max-w-xl px-4 py-20 text-center">
 	{#if failed}
 		<h1 class="text-2xl font-bold tracking-tight text-neutral-900">That didn't go through</h1>
 		<p class="mt-3 text-neutral-600">
@@ -58,4 +58,4 @@
 			link in the email, the one that says it confirms directly. It works without scripts.
 		</p>
 	</noscript>
-</main>
+</div>
