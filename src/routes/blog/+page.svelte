@@ -8,14 +8,14 @@
 
 <Seo
 	path="/blog"
-	title="Blog — Editmamei"
-	description="Feature announcements, tutorials, and example edits from Editmamei, the MCP server that puts your AI assistant inside desktop Photoshop."
+	title="Blog: release notes and write-ups · Editmamei"
+	description="Release notes and longer write-ups from Editmamei, the MCP server that connects your AI assistant to desktop Photoshop and GIMP."
 />
 
-<main class="mx-auto max-w-3xl px-4 py-12">
+<div class="mx-auto max-w-3xl px-4 py-12">
 	<header class="mb-10">
 		<h1 class="text-3xl font-bold tracking-tight text-neutral-900">Blog</h1>
-		<p class="mt-2 text-neutral-600">Feature announcements, tutorials, and example edits.</p>
+		<p class="mt-2 text-neutral-600">Release notes and longer write-ups on how Editmamei works.</p>
 	</header>
 
 	{#if data.posts.length === 0}
@@ -47,4 +47,4 @@
 	<div class="mt-14">
 		<SubscribeForm />
 	</div>
-</main>
+</div>
