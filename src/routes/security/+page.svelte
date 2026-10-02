@@ -26,7 +26,7 @@
 			>
 			npm package (the CLI and the MCP server you install), the full policy lives on GitHub: scope, what
 			to include, and our response timelines. The preferred channel is a private security advisory, which
-			keeps your report confidential while we work on a fix. You'll get an acknowledgement within a few
+			keeps your report confidential while we work on a fix. You'll get an acknowledgment within a few
 			business days.
 		</p>
 		<ul class="mt-4 space-y-2 text-sm leading-relaxed text-neutral-700">

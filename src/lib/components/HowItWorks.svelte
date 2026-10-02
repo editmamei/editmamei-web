@@ -1,6 +1,6 @@
 <script lang="ts">
 	// Compressed 2026-08-14. The full actor-lane sequence diagram that used to
-	// sit here now lives on /product as EditFlowDiagram — it is a reference
+	// sit here now lives on /product as EditFlowDiagram; it is a reference
 	// asset for someone already sold, and only ~23-31% of home-page visitors
 	// ever scrolled far enough to see it. What stays is the shortest honest
 	// answer to "how does this work", because the claim is counterintuitive to a
@@ -91,7 +91,7 @@
 				Your files, your machine.
 			</h3>
 			<p class="mt-3 text-sm leading-relaxed text-neutral-700">
-				Editing happens on your desktop, inside Photoshop. There's no Editmamei cloud your library
+				Editing happens on your desktop, in Photoshop or GIMP. There's no Editmamei cloud your library
 				uploads to. When your AI assistant needs to see a result, a downscaled preview goes to it,
 				the same as sharing a photo in a chat. Editmamei's own telemetry is content-free, and you
 				can audit it or switch it off.

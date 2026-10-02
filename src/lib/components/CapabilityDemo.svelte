@@ -78,7 +78,7 @@
 	<div
 		class={frameClass}
 		role="group"
-		aria-label={`${title} — ${demo.tool}, before and after`}
+		aria-label={`${title}: ${demo.tool}, before and after`}
 		onpointerenter={onEnter}
 		onpointerleave={onLeave}
 	>
@@ -86,7 +86,7 @@
 			<img
 				class="col-start-1 row-start-1 h-full w-full object-cover"
 				src={demo.before}
-				alt={`${title} — original photo`}
+				alt={`${title}: original photo`}
 				loading="lazy"
 				decoding="async"
 			/>
@@ -94,7 +94,7 @@
 				class={`col-start-1 row-start-1 h-full w-full object-cover ${rm.current ? '' : 'transition-opacity duration-500'}`}
 				style:opacity={showBefore ? 0 : 1}
 				src={demo.after}
-				alt={`${title} — ${demo.tool} applied`}
+				alt={`${title}: ${demo.tool} applied`}
 				loading="lazy"
 				decoding="async"
 			/>
@@ -106,7 +106,7 @@
 			<figure
 				class="pointer-events-none absolute top-2 right-2 w-[28%] max-w-[120px] overflow-hidden rounded border border-white/70 shadow-md"
 			>
-				<img src={demo.maskThumb} alt={`${title} — black and white layer mask`} loading="lazy" />
+				<img src={demo.maskThumb} alt={`${title}: black and white layer mask`} loading="lazy" />
 				<figcaption class="bg-neutral-900/80 px-1 py-0.5 text-center text-[8px] text-white/90">
 					Layer mask
 				</figcaption>
@@ -127,7 +127,7 @@
 		<img
 			class="h-full w-full object-cover"
 			src={demo.image}
-			alt={`${title} — ${demo.tool} marquee on the subject`}
+			alt={`${title}: ${demo.tool} marquee on the subject`}
 			loading="lazy"
 			decoding="async"
 		/>
@@ -142,7 +142,7 @@
 		<img
 			class="h-full w-full object-cover"
 			src={demo.image}
-			alt={`${title} — source photo opened in Photoshop`}
+			alt={`${title}: source photo opened in Photoshop`}
 			loading="lazy"
 			decoding="async"
 		/>
@@ -173,7 +173,7 @@
 		<img
 			class="h-full w-full object-cover"
 			src={demo.image}
-			alt={`${title} — document with a layer stack`}
+			alt={`${title}: document with a layer stack`}
 			loading="lazy"
 			decoding="async"
 		/>

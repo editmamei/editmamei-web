@@ -71,7 +71,7 @@
 					(preferred), or by email to
 					<a href="mailto:security@editmamei.com" class="underline hover:text-neutral-950"
 						>security@editmamei.com</a
-					>. You'll get an acknowledgement within a few business days.
+					>. You'll get an acknowledgment within a few business days.
 				</dd>
 				<dd class="mt-3">
 					<a href="/security" class="text-sm text-neutral-600 underline hover:text-neutral-950">

@@ -93,7 +93,7 @@ much sky in it, all of which came out looking like the air was full of smoke.
 
 The reason is specific. On a blue sky, the warmth in that recipe is held in check
 by the work it does on the blue channel. An overcast sky has no blue in it, so
-nothing balances the warmth and it lands on a flat grey field. Different light
+nothing balances the warmth and it lands on a flat gray field. Different light
 needs its own template rather than a nudge to one slider.
 
 A template that knows what it is for can tell you when you are about to use it

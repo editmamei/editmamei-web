@@ -82,7 +82,7 @@ because the model is deciding. Every edit after that, on the same look, is cheap
 
 So do not start by pointing it at forty photos. Edit one frame until it is
 right, save it as a template, and then carry it across the rest. That is the
-order that makes the numbers above work in your favour, and it is the order that
+order that makes the numbers above work in your favor, and it is the order that
 produces a consistent set across a shoot, which is the better reason to do it.
 
 Templates and batch are [Pro features](/pricing). The cold edit, where you

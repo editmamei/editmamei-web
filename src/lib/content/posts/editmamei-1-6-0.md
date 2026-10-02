@@ -18,9 +18,9 @@ nothing installed into it, so you don't watch a GIMP window change while it work
 follow along through the previews in chat, and a copy of the latest one is written to a
 file you can keep open beside the conversation. Every adjustment goes on as one of GIMP 3's
 non-destructive filters, so when you open the saved `.xcf` in GIMP afterwards, each curve,
-level and colour balance is still there to change by hand.
+level and color balance is still there to change by hand.
 
-The beta is tone and colour work: thirteen adjustments, masks for them, crop, resize,
+The beta is tone and color work: thirteen adjustments, masks for them, crop, resize,
 rotate and flip, and export with the metadata removed. It can't heal, clone, select a
 subject or set text yet, and there is no undo, so crop and resize are permanent within the
 session and it's worth saving the `.xcf` first.
