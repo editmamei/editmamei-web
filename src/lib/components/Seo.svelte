@@ -1,11 +1,9 @@
 <script lang="ts">
 	// Per-page SEO head. Every indexable page renders this exactly once so
 	// each route declares its own self-referencing canonical, title, and
-	// social metadata. Site-wide tags must NOT live in app.html — a shared
-	// canonical pointing at "/" marked /product and /pricing as duplicates
-	// of the home page, the same sitemap-contradiction class that caused
-	// the "Crawled — currently not indexed" suppression (see
-	// src/routes/sitemap.xml/+server.ts).
+	// social metadata. Site-wide tags must NOT live in app.html: a shared
+	// canonical pointing at "/" would mark every other page as a duplicate
+	// of the home page.
 	let {
 		title,
 		description,
@@ -52,10 +50,11 @@
 	<meta property="og:image:height" content="630" />
 	<meta
 		property="og:image:alt"
-		content="Editmamei — natural-language photo editing, inside Photoshop"
+		content="Editmamei: natural-language photo editing in desktop Photoshop"
 	/>
 
 	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:site" content="@editmamei" />
 	<meta name="twitter:title" content={title} />
 	<meta name="twitter:description" content={description} />
 	<meta name="twitter:image" content={imageUrl} />
