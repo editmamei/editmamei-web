@@ -20,8 +20,13 @@
 </script>
 
 <div class="flex min-h-screen flex-col bg-white text-neutral-900 antialiased">
+	<a
+		href="#main"
+		class="sr-only rounded-md bg-white px-4 py-2 text-sm font-semibold text-neutral-950 shadow-lg ring-2 ring-brand focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50"
+		>Skip to content</a
+	>
 	<SiteHeader />
-	<main class="flex-1">
+	<main id="main" tabindex="-1" class="flex-1 focus:outline-none">
 		{@render children()}
 	</main>
 	<SiteFooter />

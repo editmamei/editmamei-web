@@ -2,14 +2,13 @@
 	import { workflowExamples } from '$lib/content/landing';
 </script>
 
-<section class="bg-white py-16 md:py-20">
+<section id="workflows" class="scroll-mt-20 bg-white py-16 md:py-20">
 	<div class="mx-auto max-w-6xl px-4">
 		<div class="mb-10 max-w-2xl">
 			<p class="mb-2 text-xs font-semibold tracking-wider text-terracotta-ink uppercase">
 				What you say to it
 			</p>
-			<!-- Deliberately count-free: this said "Three prompts" while five rendered,
-			     because the list grew at v0.22.0 and the heading did not follow. -->
+			<!-- Count-free on purpose, so the heading never drifts from the list length. -->
 			<h2 class="text-2xl font-bold tracking-tight text-neutral-950 md:text-3xl">
 				Prompts that work today.
 			</h2>

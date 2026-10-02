@@ -1,10 +1,5 @@
 <script lang="ts">
 	// The full round-trip behind one adjustment, as an actor-lane sequence.
-	//
-	// Lived on the home page until 2026-08-14. Moved here because it is a
-	// reference asset for someone already sold, not a persuasion asset: scroll
-	// data showed only ~23-31% of home-page visitors ever reached it, and the
-	// real drop-off was far earlier. See docs/20260814-home-page-restructure.md.
 	type Actor = 'you' | 'ai' | 'editmamei' | 'photoshop';
 	type Message = { from: Actor; to: Actor; label: string; quote?: boolean };
 	type Segment =
@@ -94,15 +89,19 @@
 				{
 					from: 'ai',
 					to: 'editmamei',
-					label: 'let me see what it looks like now',
+					label: 'check the result: a histogram, a region compare, or a preview',
 					quote: true
 				},
-				{ from: 'editmamei', to: 'photoshop', label: 'render a downscaled JPEG' },
-				{ from: 'photoshop', to: 'editmamei', label: 'preview JPEG' },
+				{
+					from: 'editmamei',
+					to: 'photoshop',
+					label: 'measure the pixels, or render a downscaled JPEG'
+				},
+				{ from: 'photoshop', to: 'editmamei', label: 'the numbers, or the preview' },
 				{
 					from: 'editmamei',
 					to: 'ai',
-					label: 'preview: the AI looks at the actual pixels'
+					label: 'what the photo looks like now, measured or seen'
 				}
 			]
 		},
@@ -121,11 +120,7 @@
 <div
 	class="rounded-2xl border border-neutral-200 bg-gradient-to-br from-emerald-50/40 via-white to-white p-4 md:p-8"
 >
-	<p class="mb-5 max-w-2xl text-sm leading-relaxed text-neutral-700 md:text-base">
-		Step by step, here's the round-trip behind a single adjustment.
-	</p>
-
-	<!-- Actor legend — orients the reader before the sequence -->
+	<!-- Actor legend: orients the reader before the sequence -->
 	<div
 		class="mb-6 grid grid-cols-2 gap-2 sm:grid-cols-4"
 		aria-label="The four participants in an edit"

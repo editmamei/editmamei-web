@@ -1,20 +1,17 @@
 import type { LayerKind } from '$lib/types';
 
 /**
- * Script data for the Hero "movie" demo (Category 1 of the 2026-06-13 demo
- * system plan). A scripted, cinematic playback of the real Editmamei co-work
- * loop on a Hawaii bay photo (Hanauma-style vista, IMG_1057): prompt → AI works
- * → checks in with you → finishes. Consumed by `HeroMovie.svelte`.
+ * Script data for the scripted "movie" demo on /photoshop: a condensed replay
+ * of the Editmamei co-work loop on a Hawaii bay photo (prompt, the AI works,
+ * it checks in with you, it finishes). Consumed by `HeroMovie.svelte`.
  *
- * FRAMES ARE REAL PHOTOSHOP EXPORTS (2026-06-13).
- * Each `frame-NN` is one cumulative export from a genuine non-destructive layer
- * stack built in Photoshop 27.2 (Brightness/Contrast → Vibrance → sky-masked
- * Hue/Sat → headland-masked warming Photo Filter → micro-contrast →
- * surf-masked lift → multiply vignette → 16:9 crop). Exported at 1400px WebP.
- * The layered master is `Hawaii-Movie-IMG_1057.psd` in PhotosInbox. The check-in
+ * Each `frame-NN` is one cumulative Photoshop export from a non-destructive
+ * layer stack built in Photoshop 27.2 (Brightness/Contrast, Vibrance, sky-masked
+ * Hue/Sat, headland-masked warming Photo Filter, micro-contrast, surf-masked
+ * lift, multiply vignette, 16:9 crop), stored as 1100px WebP. The check-in
  * "cool" thumbnail reuses frame-04 (the pre-warm state); the decision warms the
- * headland (frame-05). No CSS `filter` stand-ins remain — `MovieFrame.filter`
- * stays optional only because the component reads it defensively.
+ * headland (frame-05). `MovieFrame.filter` is optional and unused by the
+ * current frames; the component reads it defensively.
  */
 
 const DIR = '/demos/hawaii-movie';
@@ -109,7 +106,7 @@ export const hawaiiMovie: HeroMovieScript = {
  * Every frame the movie paints, in play order, for preloading. The check-in
  * thumbnail reuses frame-04, so it needs no entry of its own.
  *
- * These are ~330 KB each and nothing else on the page requests them, so
+ * These are ~140 KB each and nothing else on the page requests them, so
  * `HeroMovie.svelte` warms them before playback rather than letting each one be
  * fetched at the instant its wipe starts.
  */

@@ -2,6 +2,7 @@
 	import { track } from '$lib/analytics/clarity';
 	import SubscribeForm from '$lib/components/SubscribeForm.svelte';
 	import { cookieConsent } from '$lib/stores/cookieConsent';
+	import { productExtras, productOverview, surfaces } from '$lib/content/surfaces';
 	import {
 		CUSTOMER_PORTAL_URL,
 		GITHUB_CHANGELOG_URL,
@@ -20,7 +21,6 @@
 				<p class="text-base font-semibold tracking-tight text-neutral-900">Editmamei</p>
 				<p class="mt-2 max-w-md text-sm leading-relaxed text-neutral-600">
 					Unlock Photoshop with natural-language photo editing. AI orchestration, not generation.
-					Your AI plans the edit; Photoshop carries it out.
 				</p>
 				<p class="mt-4 text-sm text-neutral-500 italic">
 					Pairs well with: a layered PSD, a willing AI, and a small bowl of edamame.
@@ -101,21 +101,6 @@
 							YouTube
 						</a>
 					</li>
-					<li>
-						<a
-							href="https://peerpush.com/p/editmamei"
-							onclick={() => track('footer-outbound-peerpush')}
-							class="hover:text-neutral-950">PeerPush</a
-						>
-					</li>
-					<li>
-						<a
-							href="https://launchstreak.dev/design/editmamei"
-							onclick={() => track('footer-outbound-launchstreak')}
-							rel="noopener"
-							class="hover:text-neutral-950">Launch Streak</a
-						>
-					</li>
 				</ul>
 
 				<div class="mt-6 max-w-md">
@@ -123,14 +108,26 @@
 				</div>
 			</div>
 
-			<!-- Explore: the marketing pages -->
+			<!-- Product: the overview, each editor, then pricing and the demo -->
 			<div>
-				<p class="text-xs font-semibold tracking-wider text-neutral-500 uppercase">Explore</p>
+				<p class="text-xs font-semibold tracking-wider text-neutral-500 uppercase">Product</p>
 				<ul class="mt-3 space-y-2 text-sm text-neutral-700">
-					<li><a href="/product" class="hover:text-neutral-950">Product</a></li>
-					<li><a href="/pricing" class="hover:text-neutral-950">Plans</a></li>
-					<li><a href="/product#process" class="hover:text-neutral-950">Demo</a></li>
-					<li><a href="/blog" class="hover:text-neutral-950">Blog</a></li>
+					<li>
+						<a href={productOverview.href} class="hover:text-neutral-950">{productOverview.label}</a
+						>
+					</li>
+					{#each surfaces as s (s.id)}
+						<li>
+							<a href={s.href} class="hover:text-neutral-950"
+								>{s.name}{#if s.beta}&nbsp;(beta){/if}</a
+							>
+						</li>
+					{/each}
+					{#each productExtras as link (link.href)}
+						<li><a href={link.href} class="hover:text-neutral-950">{link.label}</a></li>
+					{/each}
+					<li><a href="/pricing" class="hover:text-neutral-950">Pricing</a></li>
+					<li><a href="/photoshop#process" class="hover:text-neutral-950">Demo</a></li>
 				</ul>
 			</div>
 
@@ -146,6 +143,8 @@
 						>
 					</li>
 					<li><a href="/faq" class="hover:text-neutral-950">FAQ</a></li>
+					<li><a href="/blog" class="hover:text-neutral-950">Blog</a></li>
+					<li><a href="/download" class="hover:text-neutral-950">Download</a></li>
 					<li>
 						<a
 							href={GITHUB_CHANGELOG_URL}
@@ -195,7 +194,7 @@
 		>
 			<p class="flex items-center gap-2">
 				<img src="/icons/favicon-32.png" alt="" width="20" height="20" class="size-5 rounded-md" />
-				<span>© {year} Editmamei</span>
+				<span>© {year} EMBD Artifacts LLC, doing business as Editmamei</span>
 			</p>
 			<p class="flex items-center gap-4">
 				<a href="/privacy" class="hover:text-neutral-800">Privacy</a>
