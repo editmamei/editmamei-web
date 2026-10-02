@@ -9,12 +9,11 @@ import { posts } from '$lib/blog';
  * indexed" with a blank google-selected canonical, a textbook quality-
  * classifier rejection.
  *
- * Indexable routes only. Stub routes (/privacy, /security) carry
- * <meta name="robots" content="noindex"> at the page level and are
- * deliberately excluded here — including them would either signal noise
- * to Google or, worse, contradict the page-level directive. /license lost
- * its noindex at the FSL-1.1-MIT split (2026-08-08) — the license terms are
- * real public-facing content now, not a stub — so it's listed below.
+ * Indexable routes only. Pages that carry <meta name="robots" content="noindex">
+ * at the page level (for example /download and /docs) are deliberately
+ * excluded here: including them would either signal noise to Google or,
+ * worse, contradict the page-level directive. A route with real public
+ * content, such as /license, is listed below.
  *
  * Prerendered at build time so it ships as a real static file at
  * build/sitemap.xml on GitHub Pages.
@@ -32,9 +31,9 @@ const ORIGIN = 'https://editmamei.com';
 // derived in GET from the newest post, since the index changes exactly
 // when the post list does.
 const ROUTES: Array<{ path: string; lastmod: string; priority: string; changefreq: string }> = [
-	{ path: '/', lastmod: '2026-09-18', priority: '1.0', changefreq: 'weekly' },
-	{ path: '/product', lastmod: '2026-08-14', priority: '0.8', changefreq: 'weekly' },
-	{ path: '/pricing', lastmod: '2026-08-04', priority: '0.8', changefreq: 'monthly' },
+	{ path: '/', lastmod: '2026-10-02', priority: '1.0', changefreq: 'weekly' },
+	{ path: '/product', lastmod: '2026-10-02', priority: '0.8', changefreq: 'weekly' },
+	{ path: '/pricing', lastmod: '2026-10-02', priority: '0.8', changefreq: 'monthly' },
 	{ path: '/faq', lastmod: '2026-09-18', priority: '0.7', changefreq: 'monthly' },
 	{ path: '/contact', lastmod: '2026-08-08', priority: '0.5', changefreq: 'yearly' },
 	{ path: '/license', lastmod: '2026-08-08', priority: '0.4', changefreq: 'yearly' },

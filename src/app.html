@@ -19,21 +19,6 @@
 			crossorigin
 		/>
 
-		<!--
-			Title, description, canonical, and og:/twitter: tags deliberately do
-			NOT live in this shared shell — each page renders <Seo> with its own
-			self-referencing canonical instead. A shell-level canonical pointing
-			at "/" told Google that /product and /pricing were duplicates of the
-			home page. See src/lib/components/Seo.svelte.
-		-->
-
-		<!--
-			Structured data: tells engines "editmamei" is a real software product
-			made by a real org, not a misspelling of edamame. Three @types:
-			Organization (the brand), SoftwareApplication (the product), WebSite
-			(the site itself). Each as a separate JSON-LD block so engines that
-			parse only one type still get it.
-		-->
 		<script type="application/ld+json">
 			{
 				"@context": "https://schema.org",
@@ -55,17 +40,58 @@
 				"@context": "https://schema.org",
 				"@type": "SoftwareApplication",
 				"name": "Editmamei",
-				"description": "Editmamei is a Photoshop MCP (Model Context Protocol) server for natural-language AI photo editing. AI orchestration, not generation: your AI assistant plans the edit and desktop Photoshop carries it out with its standard non-generative tools (adjustment layers, masks, selections, filters).",
+				"description": "Editmamei is a Photoshop MCP (Model Context Protocol) server for natural-language AI photo editing, with GIMP 3.2 support in beta. AI orchestration, not generation: your AI assistant plans the edit and desktop Photoshop or GIMP carries it out with standard non-generative tools (adjustment layers, masks, selections, filters).",
 				"url": "https://editmamei.com/",
 				"image": "https://editmamei.com/icons/icon-512.png",
 				"applicationCategory": "DesignApplication",
-				"operatingSystem": "Windows 10/11, macOS 13+",
-				"softwareRequirements": "Node.js 22+, Adobe Photoshop 2026 (v27.x; earlier versions unverified), MCP-compatible AI client",
-				"offers": {
-					"@type": "Offer",
-					"price": "0",
-					"priceCurrency": "USD"
-				}
+				"operatingSystem": "Windows 10/11, macOS 13+, Linux (GIMP beta)",
+				"softwareRequirements": "Adobe Photoshop 2026 (v27.x) or GIMP 3.2 (beta); an MCP-compatible AI client; Node.js 22+ for the npm install",
+				"offers": [
+					{
+						"@type": "Offer",
+						"name": "Community",
+						"price": "0",
+						"priceCurrency": "USD",
+						"url": "https://editmamei.com/pricing",
+						"availability": "https://schema.org/InStock"
+					},
+					{
+						"@type": "Offer",
+						"name": "Pro monthly",
+						"price": "9",
+						"priceCurrency": "USD",
+						"url": "https://editmamei.com/pricing",
+						"availability": "https://schema.org/InStock",
+						"priceSpecification": {
+							"@type": "UnitPriceSpecification",
+							"price": "9",
+							"priceCurrency": "USD",
+							"billingDuration": "P1M"
+						}
+					},
+					{
+						"@type": "Offer",
+						"name": "Pro yearly",
+						"price": "79",
+						"priceCurrency": "USD",
+						"url": "https://editmamei.com/pricing",
+						"availability": "https://schema.org/InStock",
+						"priceSpecification": {
+							"@type": "UnitPriceSpecification",
+							"price": "79",
+							"priceCurrency": "USD",
+							"billingDuration": "P1Y"
+						}
+					},
+					{
+						"@type": "Offer",
+						"name": "Pro one-time",
+						"price": "199",
+						"priceCurrency": "USD",
+						"url": "https://editmamei.com/pricing",
+						"availability": "https://schema.org/InStock"
+					}
+				]
 			}
 		</script>
 		<script type="application/ld+json">
@@ -77,17 +103,6 @@
 			}
 		</script>
 
-		<!--
-			Microsoft Clarity — cookieless analytics. Heatmaps + session replay
-			within a session, no persistent identifier. No consent banner needed
-			while Clarity stays in cookieless mode. The clarity('consent', false)
-			call below PINS cookieless mode in code — Clarity's default otherwise
-			sets first-party cookies (_clck/_clsk) based on a dashboard-side
-			toggle this repo can't see or version. Drop-in marketing infrastructure
-			per editmamei-web/CLAUDE.md "Marketing infrastructure" section; not
-			reconciled into the product's privacy framing (Editmamei/docs/20260530-
-			BRAND_VOICE_GUIDE.md §12 is about the npm package, not the website).
-		-->
 		<script type="text/javascript">
 			(function (c, l, a, r, i) {
 				// Install the stub + queue synchronously so track()/setConsent()
