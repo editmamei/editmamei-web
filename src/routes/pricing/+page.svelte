@@ -4,9 +4,8 @@
 	import { PRO_FEATURES } from '$lib/content/pro-features';
 
 	// ──────────────────────────────────────────────────────────────────────
-	// PRODUCTION Polar checkout links (org `editmamei`). Each link has the
-	// early-adopter discount pre-applied, so checkout shows $9 / $79 / $199
-	// directly, no code needed. Regular list prices: $12 / $99 / $299.
+	// PRODUCTION Polar checkout links (org `editmamei`). Checkout shows
+	// $9 / $79 / $199 directly, with no code needed.
 	// Created via POST /v1/checkout-links/.
 	// ──────────────────────────────────────────────────────────────────────
 	const CHECKOUT = {
@@ -20,7 +19,6 @@
 			id: 'monthly',
 			name: 'Monthly',
 			price: '$9',
-			list: '$12',
 			cadence: '/month',
 			note: '7-day free trial.',
 			cta: 'Start free trial',
@@ -31,7 +29,6 @@
 			id: 'annual',
 			name: 'Annual',
 			price: '$79',
-			list: '$99',
 			cadence: '/year',
 			note: '$29 a year less than paying monthly.',
 			cta: 'Get Pro',
@@ -42,12 +39,26 @@
 			id: 'perpetual',
 			name: 'Perpetual',
 			price: '$199',
-			list: '$299',
 			cadence: 'one-time',
-			note: 'Pay once, keep using it.',
+			note: 'Pay once, with every future update included.',
 			cta: 'Get Pro',
 			href: CHECKOUT.perpetual,
 			featured: false
+		}
+	] as const;
+
+	const billingFaqs = [
+		{
+			q: 'Does the free trial need a card?',
+			a: 'Yes. The 7-day free trial is on the monthly plan, and checkout asks for a card to start it.'
+		},
+		{
+			q: 'What does the perpetual license include?',
+			a: 'Every future update. You pay once, and the license is not revoked.'
+		},
+		{
+			q: 'What happens if Pro stops validating?',
+			a: 'Pro checks its license about once a day. If a subscription lapses, or the check keeps failing for more than seven days, the Pro tools stop and the free Community edition keeps working. Templates you saved stay on your computer and come back when the license is valid again.'
 		}
 	] as const;
 </script>
@@ -79,8 +90,8 @@
 		<div
 			class="rounded-xl border border-terracotta/30 bg-terracotta/10 px-5 py-4 text-sm text-terracotta-ink"
 		>
-			<span class="font-semibold">Early-adopter launch pricing.</span> The reduced prices below are already
-			applied, with no code needed. A subscription keeps its rate for as long as it stays active.
+			<span class="font-semibold">Early-adopter pricing.</span> A monthly or annual subscription keeps
+			the rate it started at for as long as it stays active.
 		</div>
 	</div>
 </section>
@@ -106,7 +117,6 @@
 					<div class="mt-4 flex items-baseline gap-2">
 						<span class="text-4xl font-bold tracking-tight text-neutral-950">{plan.price}</span>
 						<span class="text-sm font-medium text-neutral-500">{plan.cadence}</span>
-						<span class="text-sm text-neutral-400 line-through">{plan.list}</span>
 					</div>
 					<p class="mt-2 min-h-10 text-sm leading-relaxed text-neutral-600">{plan.note}</p>
 					<a
@@ -196,6 +206,21 @@
 			Templates are saved as files on your computer. Saving, applying and checking them are all part
 			of Pro.
 		</p>
+	</div>
+</section>
+
+<section id="billing" class="border-t border-neutral-200 bg-white py-16 md:py-20">
+	<div class="mx-auto max-w-3xl px-4">
+		<p class="mb-2 text-xs font-semibold tracking-wider text-terracotta-ink uppercase">Billing</p>
+		<h2 class="text-2xl font-bold tracking-tight text-neutral-950 md:text-3xl">Billing questions</h2>
+		<dl class="mt-8 space-y-8">
+			{#each billingFaqs as { q, a } (q)}
+				<div>
+					<dt class="text-base font-semibold text-neutral-950">{q}</dt>
+					<dd class="mt-2 text-sm leading-relaxed text-neutral-700">{a}</dd>
+				</div>
+			{/each}
+		</dl>
 	</div>
 </section>
 
