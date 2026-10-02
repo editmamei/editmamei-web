@@ -50,7 +50,7 @@
 	<meta property="og:image:height" content="630" />
 	<meta
 		property="og:image:alt"
-		content="Editmamei: natural-language photo editing in desktop Photoshop"
+		content="Editmamei, the photo editor MCP server: natural-language photo editing. AI orchestration, not generation."
 	/>
 
 	<meta name="twitter:card" content="summary_large_image" />
