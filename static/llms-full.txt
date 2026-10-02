@@ -296,7 +296,7 @@ This is a property of the AI client, not of Editmamei or Photoshop. Two things h
 
 ### What's the difference between Community and Pro?
 
-See the full breakdown in [pro-features.md](https://github.com/editmamei/editmamei/blob/main/docs/pro-features.md). Short version: Community covers the full working-photographer editing surface: documents, layers, layer transforms and straightening, non-destructive adjustment layers, filters, content-aware retouch, layer styles, masks, selections (including Photoshop's Select Subject and Select Sky), shape layers and pen paths, channel compositing, on-device scene awareness, per-channel histograms and visual verification, history, text, and image placement. Pro adds the develop-grade and precision toolkit: **Camera Raw develop** as a re-editable Smart Filter, **raw files developed before they open**, **folder batch**, **precision placement** (name a location, get verified geometry), **named-object masks**, **face-mesh perception**, **subject-instance targeting**, **warp**, the **whole reproducible-template system**, and **Photoshop Actions + ExtendScript scripting**. The [main README](https://github.com/editmamei/editmamei/blob/main/README.md#editions) carries the same split at a glance; [pro-features.md](https://github.com/editmamei/editmamei/blob/main/docs/pro-features.md) is the canonical version.
+See the full breakdown in [pro-features.md](https://github.com/editmamei/editmamei/blob/main/docs/pro-features.md). Short version: Community covers the full working-photographer editing surface: documents, layers, layer transforms and straightening, non-destructive adjustment layers, filters, content-aware retouch, layer styles, masks, selections (including Photoshop's Select Subject and Select Sky), shape layers and pen paths, channel compositing, on-device scene awareness, per-channel histograms and visual verification, history, text, and image placement. Pro adds the develop-grade and precision toolkit: **Camera Raw develop** as a re-editable Smart Filter, **raw files developed before they open**, **folder batch**, **precision placement** (name a location, get verified geometry), **named-object masks**, **face-mesh perception**, **subject-instance targeting**, **object-aimed edits and text**, **warp**, the **whole reproducible-template system**, and **Photoshop Actions + ExtendScript scripting**. The [main README](https://github.com/editmamei/editmamei/blob/main/README.md#editions) carries the same split at a glance; [pro-features.md](https://github.com/editmamei/editmamei/blob/main/docs/pro-features.md) is the canonical version.
 
 ### Can it drive Camera Raw?
 
@@ -320,7 +320,7 @@ The most common cause is `grace-expired` on a healthy subscription, which usuall
 
 ### Do you offer a free trial?
 
-Community is free forever, so you can use the full core toolkit at no cost before deciding on Pro. For current Pro plans and terms, see [editmamei.com/pricing](https://editmamei.com/pricing). If a paid subscription ever lapses, Editmamei keeps running as Community rather than locking you out.
+Yes. Pro has a 7-day free trial on the monthly plan, and checkout asks for a card to start it. Community is free with no time limit, so you can use the full core toolkit at no cost before deciding on Pro. For current Pro plans and terms, see [editmamei.com/pricing](https://editmamei.com/pricing). If a paid subscription ever lapses, Editmamei keeps running as Community rather than locking you out.
 
 ---
 
@@ -403,7 +403,7 @@ This is enough to drive a full landscape or product editing workflow in conversa
 
 ## What Pro adds to Editmamei
 
-Pro adds the develop-grade and precision toolkit: Camera Raw develop, precision placement, named-object masks, face-aware editing, warp, subject-instance targeting, and the reproducible-template system, plus Photoshop Actions and scripting.
+Pro adds the develop-grade and precision toolkit: Camera Raw develop, precision placement, named-object masks, face-aware editing, warp, subject-instance targeting, object-aimed edits and text, and the reproducible-template system, plus Photoshop Actions and scripting.
 
 ### Templates: the whole reproducible-recipe system
 
@@ -429,7 +429,7 @@ Scope note, honestly: this develops open documents, and Camera Raw's local masks
 
 ### Raw files, developed before they open
 
-`ps_develop_raw` develops the raw file rather than the opened pixels. That distinction buys three things nothing else in Photoshop can reach from a script: Upright levelling and perspective correction, crop with straighten, and lens profile correction. A filter cannot change a layer's dimensions, so Photoshop disables that whole panel for the Camera Raw Filter. Working on the file instead sidesteps it.
+`ps_develop_raw` develops the raw file rather than the opened pixels. That distinction buys three things nothing else in Photoshop can reach from a script: Upright leveling and perspective correction, crop with straighten, and lens profile correction. A filter cannot change a layer's dimensions, so Photoshop disables that whole panel for the Camera Raw Filter. Working on the file instead sidesteps it.
 
 You also get Camera Raw's own Auto, the full modern develop set, and the option to open straight to 16 bit, which has to be decided at open because converting later flattens the document.
 
@@ -468,6 +468,11 @@ It's the locator behind the precision workflow: name a place, get verified geome
 - `mode=region`: bulge or pinch around a named point or region.
 - `mode=to`: pin one edge and reach the far end to a named target.
 
+### Object-aimed edits and text
+
+- `ps_edit_object`: find a named object with on-device detection, then remove it with Content-Aware Fill, or keep it and blur or darken everything around it.
+- `ps_add_text_to_object`: fit editable text to a named object, flat or arced.
+
 ### Actions and scripting
 
 - `ps_list_actions` and `ps_play_action`: enumerate and play your recorded Photoshop Actions
@@ -489,7 +494,7 @@ The [roadmap](https://github.com/editmamei/editmamei/blob/main/docs/roadmap.md) 
 
 ## Pricing
 
-Pricing and purchase options are at [editmamei.com/pricing](https://editmamei.com/pricing): monthly, annual, or a one-time perpetual license, each covering two devices.
+Pricing and purchase options are at [editmamei.com/pricing](https://editmamei.com/pricing): monthly, annual, or a one-time perpetual license that includes every future update, each covering two devices.
 
 
 ================================================================================
@@ -614,7 +619,7 @@ metadata (including any GPS location); only `gimp_export` removes it.
 
 - **Documents:** open (most formats GIMP can load: JPEG, PNG, TIFF, WebP, HEIC/HEIF, XCF, and more),
   create a blank one, close, save as `.xcf` (live, re-editable), export flattened to
-  jpg/jpeg/png/webp/tif/tiff. Convert between colour and grayscale.
+  jpg/jpeg/png/webp/tif/tiff. Convert between color and grayscale.
 - **Layers:** create, delete, duplicate, group, reorder, move, rename, set opacity, blend mode and
   visibility, merge down, flatten (`gimp_layer`). Place another photo into the document as a new
   layer (`gimp_place_image`) to build a composite, and extend the canvas for borders and frames

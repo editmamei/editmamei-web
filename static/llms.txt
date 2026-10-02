@@ -33,7 +33,7 @@ Editmamei installs as an npm package or a one-click Claude Desktop extension and
 ## Prices
 
 - Community: free
-- Pro: $9 per month (7-day trial), $79 per year, or $199 one-time. One license covers two devices.
+- Pro: $9 per month (7-day trial), $79 per year, or $199 one-time with every future update included. One license covers two devices.
 
 ## Links
 
