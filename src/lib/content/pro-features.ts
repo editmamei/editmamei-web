@@ -14,7 +14,7 @@ export const PRO_FEATURES: ProFeature[] = [
 	{
 		title: 'Raw files, developed before they open',
 		detail:
-			'Upright levelling, perspective and lens correction, crop with straighten, and your saved Camera Raw presets, applied to the raw file, with the option to open at 16 bit.'
+			'Upright leveling, perspective and lens correction, crop with straighten, and your saved Camera Raw presets, applied to the raw file, with the option to open at 16 bit.'
 	},
 	{
 		title: 'A whole folder in one pass',
@@ -32,6 +32,11 @@ export const PRO_FEATURES: ProFeature[] = [
 			'Name a spot ("halfway between the two boats", "along the roofline") and Editmamei measures it before anything is placed. Warps bend a layer to follow a curve, reach a target, or bulge around a point.'
 	},
 	{
+		title: 'Edits and text aimed at an object',
+		detail:
+			'Name an object, such as "the dog" or "the car", and Editmamei finds it, then removes it with Content-Aware Fill, or keeps it and blurs or darkens everything around it. It can also fit editable text to the object, flat or arced.'
+	},
+	{
 		title: 'Named objects, faces and subjects',
 		detail:
 			'Select "the surfboard" from 80 object categories, a named feature of a face (eyes, lips, skin, teeth), or one subject among several. All of it runs on your computer.'
@@ -43,4 +48,4 @@ export const PRO_FEATURES: ProFeature[] = [
 ];
 
 export const PRO_FEATURES_SENTENCE =
-	'Pro adds Camera Raw as a re-editable filter, raw files developed before they open, folder batch, templates, precise placement and warp, named-object and face selections, and Photoshop Actions and scripting.';
+	'Pro adds Camera Raw as a re-editable filter, raw files developed before they open, folder batch, templates, precise placement and warp, edits and text aimed at a named object, selections of a named object, a face feature or one subject among several, and Photoshop Actions and scripting.';
