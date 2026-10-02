@@ -10,11 +10,11 @@
 				What it does
 			</p>
 			<h2 class="text-2xl font-bold tracking-tight text-neutral-950 md:text-3xl">
-				The full editing surface, exposed as tools.
+				What the AI can do in Photoshop.
 			</h2>
 			<p class="mt-3 text-base leading-relaxed text-neutral-700">
-				Eight categories, each shown as one real Photoshop tool run on the same photo, so the AI
-				plans accurately and you can audit what it ran. Hover or tap a result to see the original.
+				Eight of the categories, each shown as one Photoshop tool run on the same photo. Hover or
+				tap a result to see the original.
 			</p>
 		</div>
 

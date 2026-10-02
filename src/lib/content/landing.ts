@@ -3,15 +3,15 @@ import type { Capability, EditionRow, Pillar, WorkflowExample } from '$lib/types
 export const pillars: Pillar[] = [
 	{
 		title: 'Desktop Photoshop, driven by language',
-		body: 'Editmamei drives desktop Adobe Photoshop: the full program, not a hosted web app or a cloud copy. Your AI talks to the desktop, and your project files live there.'
+		body: 'Editmamei drives desktop Photoshop, where your files already are, using the same tools you would reach for.'
 	},
 	{
 		title: 'Non-destructive by default',
-		body: 'Adjustment layers, masks, groups. Editmamei builds the kind of layer stack a working editor builds. Everything stays editable, maskable, removable. Nothing bakes into pixels unless you ask.'
+		body: 'Editmamei builds the kind of layer stack a working editor builds: adjustment layers, masks and groups. Pixel work such as a filter lands on a duplicate layer, so the original is always there to go back to.'
 	},
 	{
-		title: 'Recipes that reproduce',
-		body: 'A template is a reproducible aesthetic recipe. Apply it later to a different image and the AI reads the recipe’s reasoning to recreate the look on the new file. Editing decisions stop being one-shots. The whole template system, authoring and applying alike, is a Pro feature.'
+		title: 'It checks its own work',
+		body: 'Each step gets checked with a preview, a histogram or a region compare, so the AI judges the result from the photo itself before it moves on.'
 	}
 ];
 
@@ -20,22 +20,22 @@ const CITY = '/product/city-street';
 export const capabilities: Capability[] = [
 	{
 		title: 'Documents',
-		body: 'Open PSD, JPEG, PNG, TIFF, DNG, HEIC, and the standard raw formats; save layered PSDs; export JPEG and PNG. Camera metadata (make, model, lens, ISO, focal length, GPS) and ACR develop settings surface to the AI before it edits.',
+		body: 'Open PSD, JPEG, PNG, TIFF, DNG, HEIC and the standard raw formats, with raw files able to open straight to 16 bit. Save layered PSDs and export JPEG or PNG. Camera details (make, model, lens, ISO, focal length, GPS) and Camera Raw settings reach the AI before it edits.',
 		demo: { kind: 'documents', image: `${CITY}/original.jpg` }
 	},
 	{
 		title: 'Layers',
-		body: 'Create, duplicate, delete, rename, reorder, group, merge, flatten. Set opacity, blend mode, visibility, locking. The complete layer tree returns as JSON, so the AI always knows the document structure. Move, scale, rotate, and fit-to-document transforms are included too.',
+		body: 'Create, duplicate, delete, rename, reorder, group, merge and flatten. Set opacity, blend mode, visibility and locking, and move, scale or rotate a layer. The AI can read the whole layer stack at any point, so it works from what is in the file.',
 		demo: { kind: 'layers', image: `${CITY}/original.jpg` }
 	},
 	{
 		title: 'Smart selections',
-		body: 'Magic Wand, rectangle, color and luminance range, feather, refine edge, plus Select Subject and Select Sky. Every selection returns area, edge complexity, and pixel counts, so the AI verifies before committing to a mask or adjustment. Pro adds named-object masks and face-feature selections.',
+		body: 'Magic Wand, rectangle, color and luminance range, feather and refine edge, plus Select Subject and Select Sky. A selection reports how much of the image it covers and how complex its edge is, so the AI can check it before building a mask or adjustment on it.',
 		demo: { kind: 'selection', image: `${CITY}/selection-subject.jpg`, tool: 'Select Subject' }
 	},
 	{
 		title: 'Non-destructive adjustments',
-		body: 'Curves, Levels, Hue/Saturation, Brightness/Contrast as adjustment layers: editable, maskable, removable. An active selection at call time becomes the new layer’s mask automatically.',
+		body: 'Curves, Levels, Hue/Saturation, Color Balance and more, each as its own adjustment layer. An active selection becomes the new layer’s mask.',
 		demo: {
 			kind: 'beforeAfter',
 			before: `${CITY}/original.jpg`,
@@ -44,8 +44,8 @@ export const capabilities: Capability[] = [
 		}
 	},
 	{
-		title: 'Filters & styles',
-		body: 'Gaussian Blur, Motion Blur, Sharpen, Smart Sharpen, Reduce Noise, High Pass, Shadows/Highlights, Add Noise. Drop shadow, stroke, outer glow as full layer styles. Auto-rasterization handles text and Smart Object inputs cleanly.',
+		title: 'Filters and styles',
+		body: 'Gaussian Blur, Motion Blur, Sharpen, Smart Sharpen, Reduce Noise, High Pass, Shadows/Highlights and Add Noise, plus drop shadow, stroke and outer glow as layer styles. Filters land on a duplicate of the layer by default, or as a re-editable Smart Filter on a Smart Object.',
 		demo: {
 			kind: 'beforeAfter',
 			before: `${CITY}/original.jpg`,
@@ -55,7 +55,7 @@ export const capabilities: Capability[] = [
 	},
 	{
 		title: 'Masks',
-		body: 'Layer masks across the lifecycle: create from the active selection (or reveal-all), apply, delete. Discrete tools, predictable behavior.',
+		body: 'Layer masks from the active selection or reveal-all, applied or deleted on request, plus vector masks and clipping masks.',
 		demo: {
 			kind: 'mask',
 			before: `${CITY}/original.jpg`,
@@ -66,7 +66,7 @@ export const capabilities: Capability[] = [
 	},
 	{
 		title: 'Templates',
-		body: "A reproducible aesthetic recipe: capture a finished edit, then apply it to new images later, where the AI re-derives each value for the new photo and self-judges against the recipe's exit criteria. The whole template system (create, save, apply, verify, recall) is a Pro feature.",
+		body: 'Save a finished edit as a recipe, then apply it to new photos. The AI fits each value to the photo in front of it and checks the result against what the recipe was meant to achieve.',
 		demo: {
 			kind: 'beforeAfter',
 			before: `${CITY}/original.jpg`,
@@ -76,7 +76,7 @@ export const capabilities: Capability[] = [
 	},
 	{
 		title: 'Visual verification',
-		body: 'Downscaled JPEG previews return inline so the AI sees what the document actually looks like and confirms operations actually changed pixels instead of trusting a success message. 256-bin per-channel histograms with mean / stdev / median back that up quantitatively.',
+		body: 'A downscaled preview when the AI asks for one, so it sees the document instead of trusting a success message. Per-channel histograms let it check with numbers that an edit changed what it meant to change.',
 		demo: { kind: 'histogram' }
 	}
 ];
@@ -86,36 +86,42 @@ export const workflowExamples: WorkflowExample[] = [
 		title: 'Landscape grade in one sentence',
 		prompt:
 			"Open E:\\Photos\\beach.jpg. Build a non-destructive editing stack with Curves and Hue/Saturation adjustment layers, group them as 'grade', and warm the midtones slightly. Save the layered PSD next to the original and export a 2400px sRGB JPEG.",
-		outcome:
-			'Roughly ten distinct tool calls. Each verifiable, each undoable. The AI reasons about intent; Editmamei handles the Photoshop choreography.'
+		outcome: 'Roughly ten tool calls, each one verifiable and each one undoable.'
 	},
 	{
-		title: 'Portrait retouch with feedback',
+		title: 'Portrait warm-up with feedback',
 		prompt:
-			'Open this portrait. Use Select Subject to isolate the person, feather the selection 2 pixels, and add a Curves adjustment layer clipped to that selection that gently warms the skin tones. Show me the before and after.',
+			'Open this portrait. Use Select Subject to isolate the person, feather the selection 2 pixels, and add a Curves adjustment layer masked to that selection that gently warms the skin tones. Show me the before and after.',
 		outcome:
-			'The AI can look at a preview at any step to see what the document looks like and adjust. Selection feedback tells it whether Select Subject actually grabbed the person or needs refinement. Select Subject and Select Sky are free in Community; Pro adds face-feature selections and named-object masks for finer work.'
+			'The AI can look at a preview at any step to see what the document looks like and adjust. Selection feedback tells it whether Select Subject took in the whole person or needs refining.'
 	},
 	{
-		title: 'Develop in Camera Raw, then change your mind (Pro)',
+		title: 'Fix the geometry before the photo opens',
+		prompt:
+			'Develop this raw file before opening it: level the horizon with Upright, correct the lens, and open it at 16-bit.',
+		outcome:
+			'Camera Raw’s settings file is written next to the photo and Photoshop opens the developed file, so the leveling and lens correction that a filter can’t reach are already applied.'
+	},
+	{
+		title: 'Develop in Camera Raw, then change your mind',
 		prompt:
 			'Open this beach shot and develop it in Camera Raw: warm the white balance slightly, lift the shadows, add a touch of dehaze and fine grain. Actually, bring the dehaze down a notch.',
 		outcome:
 			'The Camera Raw Filter lands as a re-editable Smart Filter. For the follow-up, the AI reads the applied settings, changes one value, and reapplies. The other sliders never move.'
 	},
 	{
-		title: 'Placement you can trust (Pro)',
+		title: 'Placement you can trust',
 		prompt:
 			'Place the logo halfway between the two surfboards, and bend the banner to follow the shoreline.',
 		outcome:
-			'The AI names the locations; local vision finds the boards and the shoreline edge; a deterministic resolver computes exact pixels and an objective check verifies the geometry before anything is applied. The AI reviews a zoomed crop, not the full frame.'
+			'The AI names the places. Local vision finds the boards and the shoreline, Editmamei works out the exact pixels and checks the geometry before anything is applied, then shows the AI a zoomed crop to review.'
 	},
 	{
-		title: 'Batch processing with a template (Pro)',
+		title: 'One look across a folder',
 		prompt:
 			"Apply my 'warm coastal' template to every image in E:\\Photos\\shells-raw\\, exporting flattened JPEGs to E:\\Photos\\shells-web\\ at 2000px square.",
 		outcome:
-			'Templates are a Pro feature. The recipe captures a complete editing approach, and the AI works through the folder image by image, re-deriving each value for the photo in front of it. Templates are how editing decisions become repeatable instead of one-shots.'
+			'The template carries the look: the AI applies it photo by photo, fitting each value to the frame in front of it. The square crop, resize and export then run as one batch, which Editmamei hands to Photoshop as an Action so Photoshop works through the folder itself.'
 	}
 ];
 

@@ -28,16 +28,15 @@
 	}
 
 	// ── Frame preloading ────────────────────────────────────────────────────
-	// The ten frames are ~330 KB WebP each and nothing else on the page requests
-	// them, so without this each one is fetched at the exact moment its wipe
-	// begins: the mask sweeps over an image with no pixels, the canvas looks
-	// frozen for the wipe's duration, and the frame pops in un-animated once it
-	// lands. `preloadAll` warms them a screen-height early and `frameReady` gates
-	// each paint on that frame being decoded.
+	// The ten frames are ~140 KB WebP each and nothing else on the page requests
+	// them, so without this each one would be fetched at the moment its wipe
+	// begins: the mask would sweep over an image with no pixels and the frame
+	// would pop in un-animated. `preloadAll` warms them a screen-height early and
+	// `frameReady` gates each paint on that frame being decoded.
 	//
 	// Head-first, not all at once: the opening frame is the only one on the
-	// critical path (the rest are not needed for several seconds), so firing all
-	// ten together just made the first one queue behind nine others.
+	// critical path (the rest are not needed for several seconds), so it loads
+	// ahead of the other nine.
 	const preloadAll = () => preloadImagesHeadFirst(hawaiiMovieFrames);
 	const frameReady = (src: string) => imageReady(src);
 
@@ -302,13 +301,6 @@
 
 		// Wait for fonts so the swap can't relayout mid-type, but cap the wait: a
 		// slow font must not hold the movie hostage.
-		//
-		// There used to be a requestIdleCallback(timeout: 600) here as well, added
-		// because the rAF typewriter stuttered against hydration and image work on
-		// first paint. That contention was the unpreloaded-frame bug, now fixed, so
-		// the idle wait was costing up to 600ms of dead air to solve a problem that
-		// no longer exists. Measured 2026-08-14: 1101ms from scroll-into-view to the
-		// first typed character, of which ~600ms was this and 500ms the opening hold.
 		const FONT_WAIT_CAP_MS = 400;
 		const startWhenCalm = () => {
 			const begin = () => {
@@ -548,10 +540,11 @@
 >
 	<!-- Accessible text alternative; the animated internals are aria-hidden. -->
 	<p class="sr-only">
-		A scripted demonstration: the user asks for a print-ready wall-art edit of a Hawaii coast photo.
-		The AI opens it in Photoshop and builds adjustment layers one at a time, pauses to ask whether
-		the rock looks too cool, the user replies “a touch warmer”, the AI warms the rock and finishes
-		with a 16:9 crop. Every step stays an editable Photoshop layer.
+		A replay built from the real Photoshop exports of this edit, with the conversation condensed:
+		the user asks for a print-ready wall-art edit of a Hawaii coast photo. The AI opens it in
+		Photoshop and builds adjustment layers one at a time, pauses to ask whether the headland looks
+		too cool, the user replies “a touch warmer”, the AI warms the headland and finishes with a 16:9
+		crop. Every step stays an editable Photoshop layer.
 	</p>
 
 	<div
@@ -838,6 +831,10 @@
 				{reduced.current ? 'Play walkthrough' : 'Replay'}
 			</button>
 		</div>
+
+		<p class="max-w-md text-center text-xs leading-relaxed text-neutral-500" aria-hidden="true">
+			A replay built from the real Photoshop exports of this edit, with the conversation condensed.
+		</p>
 	</div>
 </div>
 
