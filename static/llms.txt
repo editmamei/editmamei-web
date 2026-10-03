@@ -1,8 +1,8 @@
 # Editmamei
 
-> Editmamei is a photo editor MCP (Model Context Protocol) server for desktop Adobe Photoshop: the editing assistant you always needed. You ask your AI assistant for an edit in plain language, and Editmamei carries it out in Photoshop on your own computer, layer by layer. GIMP 3.2 is also supported, in beta. It is not a web app and not a cloud image editor, and Editmamei itself sends no image content to anyone.
+> Editmamei is a photo editor MCP (Model Context Protocol) server for desktop Adobe Photoshop: the editing assistant you always needed. You ask your AI assistant for an edit in plain language, and Editmamei carries it out in Photoshop on your own computer, layer by layer. GIMP 3.2 is also supported, in beta. It is not a web app and not a cloud image editor, and Editmamei's own servers never receive your images.
 
-Editmamei installs as an npm package or a one-click Claude Desktop extension and runs locally on macOS or Windows (and Linux for the GIMP beta), alongside the editor it drives. An AI client (such as Claude Desktop or any MCP-compatible client) sends instructions to Editmamei, which turns them into native operations in the editor: ExtendScript in Photoshop, GIMP's own filters in GIMP. Your files stay on your machine. Editmamei's own servers receive content-free usage data (opt-out) and, on Pro, a daily license check and the module download. No pixels leave your computer unless your AI client itself sends them (for example, a preview image to the assistant you are chatting with), and turning off previews in Editmamei's settings stops that for Photoshop and GIMP.
+Editmamei installs as an npm package or a one-click Claude Desktop extension and runs locally on macOS or Windows (and Linux for the GIMP beta), alongside the editor it drives. An AI client (such as Claude Desktop or any MCP-compatible client) sends instructions to Editmamei, which turns them into native operations in the editor: ExtendScript in Photoshop, GIMP's own filters in GIMP. Your files stay on your machine. Editmamei's own servers receive content-free usage data (opt-out) and, on Pro, a check for a newer Pro module at each startup, which carries the license key. Pro activation and a daily license check go to a third-party licensing service, with the license key (and, at activation, a hashed device ID). None of these carry images, documents or file paths. No pixels leave your computer unless your AI client itself sends them (for example, a preview image to the assistant you are chatting with), and turning off previews in Editmamei's settings stops that for Photoshop and GIMP.
 
 ## What Editmamei is
 
@@ -12,7 +12,7 @@ Editmamei installs as an npm package or a one-click Claude Desktop extension and
 - Photoshop automation without scripting: repeatable Pro templates reapply a saved look photo by photo
 - Compatible with any MCP-capable AI client (Claude Desktop, Claude Code, Cursor, etc.)
 - GIMP support, in beta: Editmamei can also drive GIMP 3.2, which it runs in the background with nothing installed into GIMP. As of 1.7.0 the beta covers documents, layers and composites (place another photo as a layer, extend the canvas), 13 non-destructive adjustment types and six effects (kept as live filters in the saved .xcf), geometric masks, crop, resize, rotate and flip, checkpoints (save and restore the image state), .xcf saving, metadata-stripped export, and previews and histograms. GIMP is free and needs no Photoshop. It works on Windows, macOS and Linux (including the Flathub Flatpak).
-- Local-first: your photo files and documents stay on your computer; Editmamei itself uploads no image content
+- Local-first: your photo files and documents stay on your computer; Editmamei's own servers never receive your images
 - Reports anonymous, content-free usage data (opt-out); never your images, documents, or file paths
 - For Photoshop editing, requires an existing Adobe Photoshop license (it drives your copy, it is not a replacement). GIMP editing needs only GIMP 3.2.
 
@@ -38,8 +38,10 @@ Editmamei installs as an npm package or a one-click Claude Desktop extension and
 ## Links
 
 - [Homepage](https://editmamei.com)
-- [Product](https://editmamei.com/product): capabilities and how it works
+- [Product](https://editmamei.com/product): overview of how it works, and which editor to use it with
+- [Photoshop](https://editmamei.com/photoshop): what the AI can do in desktop Photoshop, with a worked example
 - [GIMP](https://editmamei.com/gimp): the GIMP beta
+- [Tools](https://editmamei.com/tools): every tool for Photoshop and GIMP, with what each one does and its edition
 - [Pricing](https://editmamei.com/pricing): Community vs Pro editions
 - [Download](https://editmamei.com/download)
 - [Activate a Pro license](https://editmamei.com/activate)

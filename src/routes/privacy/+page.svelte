@@ -93,7 +93,7 @@
 			Other requests Editmamei makes
 		</h2>
 		<p class="mt-3 text-sm leading-relaxed text-neutral-700">
-			Besides usage data, Editmamei makes three other kinds of request. None of them carries images,
+			Besides usage data, Editmamei makes four other kinds of request. None of them carries images,
 			documents or file paths.
 		</p>
 		<ul class="mt-4 space-y-3 text-sm leading-relaxed text-neutral-700">
@@ -107,14 +107,22 @@
 				>, or with the Check for updates toggle in the Claude Desktop extension settings.
 			</li>
 			<li>
-				<strong class="font-semibold text-neutral-900">Pro license check.</strong>
-				On a Pro install, Editmamei confirms the license about once a day by sending your license key
-				and a device identifier to the licensing service.
+				<strong class="font-semibold text-neutral-900">Pro activation.</strong>
+				Activating Pro sends your license key and a hashed device identifier to the licensing service,
+				a third-party licensing provider. The identifier is a salted hash, with no raw hostname or username
+				in it.
 			</li>
 			<li>
-				<strong class="font-semibold text-neutral-900">Pro module download.</strong>
-				Activating Pro downloads the signed Pro module from Editmamei's delivery service. The request
-				carries your license key, so the service can confirm what the license covers.
+				<strong class="font-semibold text-neutral-900">Pro license check.</strong>
+				About once a day, a Pro install sends your license key to the licensing service to confirm the
+				license is still valid. This request carries no device identifier.
+			</li>
+			<li>
+				<strong class="font-semibold text-neutral-900">Pro module update.</strong>
+				Each time Pro starts, Editmamei asks its own delivery service whether a newer Pro module exists,
+				and downloads it if so. The request carries your license key and a fixed user-agent that is the
+				same for every install. It is separate from the update check above, and the update check setting
+				does not switch it off.
 			</li>
 		</ul>
 

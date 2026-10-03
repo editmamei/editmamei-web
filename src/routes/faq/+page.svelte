@@ -33,8 +33,8 @@
 		},
 		{
 			q: 'Does Editmamei work with GIMP?',
-			a: "Yes, as a free beta, with GIMP 3.2 on Windows, macOS or Linux. GIMP runs in the background with nothing installed into it, so there is no window to watch. You follow the work through previews in chat, and every adjustment stays a live filter in the .xcf you open afterwards. The beta covers adjustments and effects, layers and composites, crop and resize, and checkpoints you can restore. It can't heal, clone, select a subject or sky, or add text yet. The GIMP guide covers setup and detection.",
-			link: { href: GITHUB_GIMP_DOCS_URL, label: 'Read the GIMP guide' }
+			a: "Yes, as a free beta, with GIMP 3.2 on Windows, macOS or Linux. GIMP runs in the background with nothing installed into it, so there is no window to watch. You follow the work through previews in chat, and every adjustment stays a live filter in the .xcf you open afterwards. The beta covers adjustments and effects, layers and composites, crop and resize, and checkpoints you can restore. It can't heal, clone, select a subject or sky, or add text yet. The GIMP page covers what the beta does and how to set it up.",
+			link: { href: '/gimp', label: 'See the GIMP page' }
 		},
 		{
 			q: 'Which Photoshop versions does Editmamei support?',
@@ -54,12 +54,12 @@
 		},
 		{
 			q: 'What data does Editmamei collect, and how is it used?',
-			a: 'Nothing about the content of your edits goes to Editmamei: no images, documents or file paths. Editmamei sends content-free usage data (which tools ran, whether they succeeded, how long they took) tied to a random install ID, so it is pseudonymous rather than anonymous. It is on by default, documented field by field, and you can switch it off in your settings. Editmamei also asks the public npm registry for the latest version at startup, and Pro checks its license (the key and a device ID) about once a day. None of these carry images, documents or file paths. Separately, when your AI assistant needs to see an edit, a downscaled preview goes to that assistant, as described above. The privacy page has the full breakdown.',
+			a: 'Nothing about the content of your edits goes to Editmamei: no images, documents or file paths. Editmamei sends content-free usage data (which tools ran, whether they succeeded, how long they took) tied to a random install ID, so it is pseudonymous rather than anonymous. It is on by default, documented field by field, and you can switch it off in your settings. Editmamei also asks the public npm registry for the latest version at startup, with no identifiers, and you can switch that off. On Pro, activation sends the license key and a hashed device ID to a third-party licensing service, a daily check sends it the key, and each Pro startup asks the Editmamei delivery service, with the key, for a newer Pro module. None of these carry images, documents or file paths. Separately, when your AI assistant needs to see an edit, a downscaled preview goes to that assistant, as described above. The privacy page has the full breakdown.',
 			link: { href: '/privacy', label: 'Read the privacy page' }
 		},
 		{
 			q: 'Does Editmamei need an internet connection?',
-			a: "Editing doesn't. Editmamei drives the editor on your computer without a network call. Your AI assistant needs one, unless it is a model you run yourself. Editmamei's own requests (usage data, the update check and the Pro license check) are best-effort and never block an edit, and Pro keeps working offline for up to seven days after its last license check."
+			a: "Editing doesn't. Editmamei drives the editor on your computer without a network call. Your AI assistant needs one, unless it is a model you run yourself. Editmamei's own requests (usage data, the update check, and on Pro the license check and the module update) are best-effort and never block an edit, and Pro keeps working offline for up to seven days after its last license check."
 		},
 		{
 			q: 'Which AI clients work with Editmamei?',
@@ -85,11 +85,11 @@
 		},
 		{
 			q: 'Can AI automate Photoshop, like applying one look to a whole shoot?',
-			a: 'Yes, in two parts. A Pro template carries the look: the AI applies it photo by photo, fitting the settings to each frame and checking the result against the template. Pro batch carries the mechanical part, running the crop, resize and export across the whole folder as one Photoshop pass. You review the output rather than redo the work.'
+			a: 'Yes, in two parts. A template carries the look: the AI applies it photo by photo, fitting the settings to each frame and checking the result against the template. A batch carries the mechanical part, running the crop, resize and export across the whole folder as one Photoshop pass. You review the output rather than redo the work.'
 		},
 		{
 			q: 'Can Editmamei develop raw files?',
-			a: 'In Photoshop, Pro can, two ways. It develops the raw file before it opens, with Upright leveling, perspective and lens correction, crop with straighten and your saved Camera Raw presets, and can open the result at 16 bit. It also applies Camera Raw to an open photo as a re-editable filter. In GIMP, opening a raw file needs a raw-develop plug-in installed in GIMP (darktable, RawTherapee or ART).'
+			a: 'In Photoshop, yes, two ways. It develops the raw file before it opens, with Upright leveling, perspective and lens correction, crop with straighten and your saved Camera Raw presets, and can open the result at 16-bit. It also applies Camera Raw to an open photo as a re-editable filter. In GIMP, opening a raw file needs a raw-develop plug-in installed in GIMP (darktable, RawTherapee or ART).'
 		},
 		{
 			q: 'Does Editmamei use generative AI to create or alter pixels?',
