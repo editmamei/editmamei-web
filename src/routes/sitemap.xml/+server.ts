@@ -3,12 +3,8 @@ import { posts } from '$lib/blog';
 import { snapshot as toolsSnapshot } from '$lib/content/tools';
 
 /**
- * Dynamic sitemap. Replaces the previous static/sitemap.xml which drifted
- * out of sync with the actual route list (it only declared `/` while
- * /product and /pricing were live and indexable). That mismatch suppressed
- * indexing: Google's URL Inspection reported "Crawled — currently not
- * indexed" with a blank google-selected canonical, a textbook quality-
- * classifier rejection.
+ * Dynamic sitemap, built from the route list below so it stays in step with
+ * the pages that are live and indexable.
  *
  * Indexable routes only. Pages that carry <meta name="robots" content="noindex">
  * at the page level (for example /download and /docs) are deliberately
@@ -28,7 +24,7 @@ const ORIGIN = 'https://editmamei.com';
 // meaningfully changes, not on refactors or restyles. Stamping the build
 // date here instead ("everything changed today", every deploy) teaches
 // crawlers the field is unreliable, which also devalues the accurate
-// per-post dates below. /blog has no entry of its own — its lastmod is
+// per-post dates below. /blog has no fixed date of its own: its lastmod is
 // derived in GET from the newest post, since the index changes exactly
 // when the post list does. /tools uses the TOOLS_SNAPSHOT sentinel: its
 // lastmod is the date of the generated tool snapshot it renders.
@@ -39,11 +35,11 @@ const ROUTES: Array<{ path: string; lastmod: string; priority: string; changefre
 	{ path: '/gimp', lastmod: '2026-10-02', priority: '0.8', changefreq: 'monthly' },
 	{ path: '/pricing', lastmod: '2026-10-02', priority: '0.8', changefreq: 'monthly' },
 	{ path: '/faq', lastmod: '2026-10-02', priority: '0.7', changefreq: 'monthly' },
-	{ path: '/contact', lastmod: '2026-08-08', priority: '0.5', changefreq: 'yearly' },
-	{ path: '/license', lastmod: '2026-08-08', priority: '0.4', changefreq: 'yearly' },
+	{ path: '/contact', lastmod: '2026-10-02', priority: '0.5', changefreq: 'yearly' },
+	{ path: '/license', lastmod: '2026-10-02', priority: '0.4', changefreq: 'yearly' },
 	{ path: '/privacy', lastmod: '2026-10-02', priority: '0.4', changefreq: 'yearly' },
 	{ path: '/security', lastmod: '2026-10-02', priority: '0.3', changefreq: 'yearly' },
-	{ path: '/activate', lastmod: '2026-07-15', priority: '0.5', changefreq: 'monthly' },
+	{ path: '/activate', lastmod: '2026-10-02', priority: '0.5', changefreq: 'monthly' },
 	{ path: '/blog', lastmod: 'NEWEST_POST', priority: '0.6', changefreq: 'weekly' },
 	{ path: '/tools', lastmod: 'TOOLS_SNAPSHOT', priority: '0.7', changefreq: 'monthly' }
 ];
