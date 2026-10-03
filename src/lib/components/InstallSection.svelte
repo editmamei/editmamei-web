@@ -169,7 +169,7 @@
 				<p class="mt-2 text-xs text-neutral-400">
 					That command also saves a skill file,
 					<code class="rounded bg-brand-deep px-1 py-0.5 text-accent">editmamei-skill.zip</code>, to
-					your Downloads folder. Upload the file at claude.ai under Settings, then Extensions, and
+					your Downloads folder. Upload it at claude.ai under Settings, then Skills (Add, then Upload skill), and
 					Claude gets Editmamei's editing workflow.
 				</p>
 
