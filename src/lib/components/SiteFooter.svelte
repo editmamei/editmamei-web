@@ -7,7 +7,6 @@
 		CUSTOMER_PORTAL_URL,
 		GITHUB_CHANGELOG_URL,
 		GITHUB_ISSUES_URL,
-		GITHUB_README_URL,
 		GITHUB_REPO_URL
 	} from '$lib/links';
 	const year = new Date().getFullYear();
@@ -136,11 +135,7 @@
 				<p class="text-xs font-semibold tracking-wider text-neutral-500 uppercase">Resources</p>
 				<ul class="mt-3 space-y-2 text-sm text-neutral-700">
 					<li>
-						<a
-							href={GITHUB_README_URL}
-							onclick={() => track('footer-outbound-docs')}
-							class="hover:text-neutral-950">Docs</a
-						>
+						<a href="/docs" class="hover:text-neutral-950">Docs</a>
 					</li>
 					<li><a href="/faq" class="hover:text-neutral-950">FAQ</a></li>
 					<li><a href="/blog" class="hover:text-neutral-950">Blog</a></li>
@@ -194,7 +189,7 @@
 		>
 			<p class="flex items-center gap-2">
 				<img src="/icons/favicon-32.png" alt="" width="20" height="20" class="size-5 rounded-md" />
-				<span>© {year} EMBD Artifacts LLC, doing business as Editmamei</span>
+				<span>© {year} Editmamei</span>
 			</p>
 			<p class="flex items-center gap-4">
 				<a href="/privacy" class="hover:text-neutral-800">Privacy</a>

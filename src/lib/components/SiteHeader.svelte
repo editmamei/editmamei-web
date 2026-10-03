@@ -13,10 +13,13 @@
 
 	// Only surfaces with a page on this site appear in the menus.
 	const navSurfaces = surfaces.filter(isOnSite);
+	// The mobile sheet lists primaryNav right below, so extras that duplicate a
+	// primary link are left out of its Product group.
+	const primaryHrefs = new Set(primaryNav.map((l) => l.href));
 	const productLinks: { label: string; href: string; beta?: boolean }[] = [
 		productOverview,
 		...navSurfaces.map((s) => ({ label: s.name, href: s.href, beta: s.beta })),
-		...productExtras
+		...productExtras.filter((l) => !primaryHrefs.has(l.href))
 	];
 
 	// Desktop Product menu: a disclosure (button + panel), opened by click or

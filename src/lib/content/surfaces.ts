@@ -24,8 +24,6 @@ export interface Surface {
 	beta?: boolean;
 }
 
-export const GIMP_GUIDE_URL = 'https://github.com/editmamei/editmamei/blob/main/docs/gimp.md';
-
 export const surfaces: Surface[] = [
 	{
 		id: 'photoshop',
@@ -37,9 +35,9 @@ export const surfaces: Surface[] = [
 	{
 		id: 'gimp',
 		name: 'GIMP',
-		href: GIMP_GUIDE_URL,
+		href: '/gimp',
 		descriptor: 'GIMP 3.2, running in the background on Windows, macOS and Linux.',
-		cta: 'Read the GIMP guide',
+		cta: 'Explore GIMP',
 		beta: true
 	}
 ];
@@ -55,10 +53,12 @@ export const productOverview: NavLink = {
 };
 
 /** Product menu entries after the surfaces. */
-export const productExtras: NavLink[] = [];
+export const productExtras: NavLink[] = [{ label: 'All tools', href: '/tools' }];
 
 /** Top-level nav items after the Product menu, in order. */
 export const primaryNav: NavLink[] = [
+	{ label: 'Tools', href: '/tools' },
 	{ label: 'Pricing', href: '/pricing' },
+	{ label: 'Docs', href: '/docs' },
 	{ label: 'Blog', href: '/blog' }
 ];
