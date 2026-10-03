@@ -56,22 +56,46 @@ const EDITOR_PREFIXES = [
 	['gimp_', 'gimp']
 ];
 
+/** One table row: `key: 'value',` with optional quotes on either side and an optional trailing `// comment`. */
+const ROW = /^\s*(['"]?)([a-z][a-z0-9_]*)\1\s*:\s*(['"])([a-z_]+)\3\s*,?\s*(?:\/\/.*)?$/;
+
+/** Any line that starts with a property key, parseable or not. */
+const KEY_LINE = /^\s*(['"]?)[A-Za-z_$][\w$]*\1\s*:/;
+
 /**
  * Parses `export const <name> ... = { key: 'value', ... };` from TypeScript
- * source into a Map. Comment lines are skipped. A duplicate key throws.
+ * source into a Map. Comment lines are skipped. A duplicate key throws, and
+ * so does any key line in the table that the row pattern cannot read, so a
+ * new row shape fails the sync instead of silently dropping the tool.
  */
 export function parseTable(source, name) {
-	const start = source.search(new RegExp(`export const ${name}\\b[^=]*=\\s*\\{`));
-	if (start < 0) throw new Error(`${name} not found`);
-	const end = source.indexOf('\n};', start);
+	const header = new RegExp(`export const ${name}\\b[^=]*=\\s*\\{`).exec(source);
+	if (!header) throw new Error(`${name} not found`);
+	const bodyStart = header.index + header[0].length;
+	const end = source.indexOf('\n};', bodyStart);
 	if (end < 0) throw new Error(`${name}: closing "};" not found`);
-	const body = source.slice(start, end);
+	const body = source.slice(bodyStart, end).replace(/\/\*[\s\S]*?\*\//g, '');
 	const table = new Map();
-	for (const m of body.matchAll(/^\s*([a-z][a-z0-9_]*):\s*'([a-z_]+)',?\s*$/gm)) {
-		if (table.has(m[1])) throw new Error(`${name}: duplicate key ${m[1]}`);
-		table.set(m[1], m[2]);
+	const keyLines = [];
+	const unparsed = [];
+	for (const line of body.split('\n')) {
+		if (line.trimStart().startsWith('//') || !KEY_LINE.test(line)) continue;
+		keyLines.push(line);
+		const m = ROW.exec(line);
+		if (!m) {
+			unparsed.push(line.trim());
+			continue;
+		}
+		if (table.has(m[2])) throw new Error(`${name}: duplicate key ${m[2]}`);
+		table.set(m[2], m[4]);
 	}
 	if (table.size === 0) throw new Error(`${name}: no rows parsed`);
+	if (table.size !== keyLines.length) {
+		throw new Error(
+			`${name}: parsed ${table.size} rows but the table has ${keyLines.length} key lines` +
+				(unparsed.length ? ` (unparsed: ${unparsed.join(' | ')})` : '')
+		);
+	}
 	return table;
 }
 

@@ -209,3 +209,32 @@ test('generator fails loudly on drift', () => {
 		/duplicate/
 	);
 });
+
+test('parser reads trailing comments and double-quoted values', () => {
+	const src = `
+export const TOOL_TIERS: Record<string, Tier> = {
+  ps_a: 'pro', // shipped in 1.0
+  ps_b: "community",
+  "ps_c": 'community',  // quoted key
+  /* block: 'ignored' */
+};
+`;
+	assert.deepEqual(
+		[...parseTable(src, 'TOOL_TIERS')],
+		[
+			['ps_a', 'pro'],
+			['ps_b', 'community'],
+			['ps_c', 'community']
+		]
+	);
+});
+
+test('parser throws when a key line in the table cannot be read', () => {
+	const src = `
+export const TOOL_TIERS: Record<string, Tier> = {
+  ps_a: 'pro',
+  ps_b: TIER_COMMUNITY,
+};
+`;
+	assert.throws(() => parseTable(src, 'TOOL_TIERS'), /parsed 1 rows but the table has 2 key lines/);
+});

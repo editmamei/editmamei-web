@@ -13,7 +13,9 @@
 		"lint": "prettier --check . && eslint .",
 		"format": "prettier --write .",
 		"test": "node --test \"tests/*.test.mjs\"",
-		"build:favicons": "node scripts/build-favicons.mjs"
+		"build:favicons": "node scripts/build-favicons.mjs",
+		"sync:tools": "node scripts/sync-tools.mjs",
+		"check:tools": "node scripts/sync-tools.mjs --check"
 	},
 	"devDependencies": {
 		"@eslint/compat": "^2.0.4",
