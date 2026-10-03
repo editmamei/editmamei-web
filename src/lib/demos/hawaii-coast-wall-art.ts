@@ -9,15 +9,15 @@ export const hawaiiCoastWallArt: Demo = {
 	before: '/demos/hawaii-coast-wall-art/before.jpg',
 	after: '/demos/hawaii-coast-wall-art/after.jpg',
 	beforeAlt:
-		'Original iPhone photo of a Hawaiian coastline — slightly hazy sky, flat blues, dark volcanic rocks with a cool blue tinge',
+		'Original iPhone photo of a Hawaiian coastline: slightly hazy sky, flat blues, dark volcanic rocks with a cool blue tinge',
 	afterAlt:
-		'The same coastal scene after the Hawaii Coast Wall Art template — deep tropical sky, brilliant wave spray, rich turquoise water, warm dark lava rock, lush emerald vegetation, level horizon, 16:9 print framing',
+		'The same coastal scene after the Hawaii Coast Wall Art template: deep tropical sky, brilliant wave spray, rich turquoise water, warm dark lava rock, lush emerald vegetation, level horizon, 16:9 print framing',
 	layers: [
 		{
 			name: 'Tonal Base',
 			kind: 'levels',
 			summary:
-				'Slight midtone lift with compressed highlights. Sets the contrast bed every layer above sits on top of — protects cloud detail so the later sky-deepening pass doesn’t blow them out.'
+				'Slight midtone lift with compressed highlights. Sets the contrast bed every layer above sits on top of, and protects cloud detail so the later sky-deepening pass doesn’t blow them out.'
 		},
 		{
 			name: 'S-Punch',
@@ -29,13 +29,13 @@ export const hawaiiCoastWallArt: Demo = {
 			name: 'Vibrance Lift',
 			kind: 'hue-saturation',
 			summary:
-				'Vibrance-weighted saturation push. Lifts blues and greens without pumping already-saturated tones — keeps rocks and skin from going neon.'
+				'Vibrance-weighted saturation push. Lifts blues and greens without pumping already-saturated tones, which keeps rocks and skin from going neon.'
 		},
 		{
 			name: 'Selective Color Pass',
 			kind: 'selective-color',
 			summary:
-				'Three Selective Color passes stacked. Cyans + Blues deepen the ocean to tropical turquoise and the sky to sapphire. Greens cool the vegetation toward lush emerald. Blacks + Neutrals pull cyan out so the volcanic rock reads warm-dark instead of blue-tinted — the fix for the over-toned-shadows artifact.'
+				'Three Selective Color passes stacked. Cyans + Blues deepen the ocean to tropical turquoise and the sky to sapphire. Greens cool the vegetation toward lush emerald. Blacks + Neutrals pull cyan out so the volcanic rock reads warm-dark instead of blue-tinted. This fixes the over-toned shadows.'
 		},
 		{
 			name: 'Sky Blues',
@@ -53,20 +53,20 @@ export const hawaiiCoastWallArt: Demo = {
 			name: 'Wave Focal Lift',
 			kind: 'curves',
 			summary:
-				'Masked S-curve over the wave-impact zone with a generous feather. Lifts the spray and crash as the primary focal point — no visible mask edge.',
+				'Masked S-curve over the wave-impact zone with a generous feather. Lifts the spray and crash as the primary focal point, with no visible mask edge.',
 			masked: true
 		},
 		{
 			name: 'Vignette',
 			kind: 'pixel',
 			summary:
-				'Black pixel layer at Multiply 25%, with a feathered ellipse cleared from the center. Pulls the eye inward toward the wave — strong enough to guide, subtle enough not to feel like a filter.'
+				'Black pixel layer at Multiply 25%, with a feathered ellipse cleared from the center. Pulls the eye inward toward the wave: strong enough to guide, subtle enough not to feel like a filter.'
 		},
 		{
 			name: 'Stamp, De-rotate, 16:9 Crop',
 			kind: 'pixel',
 			summary:
-				'Visible stamped to a new pixel layer, rotated -1.5° to level the waterline against a horizontal guide, then cropped to 16:9 for print delivery. This is the step the white bands in the after preview show — the cropped portion of the original frame.'
+				'Visible stamped to a new pixel layer, rotated -1.5° to level the waterline against a horizontal guide, then cropped to 16:9 for print delivery. This is the step the white bands in the after preview show: the cropped portion of the original frame.'
 		}
 	]
 };

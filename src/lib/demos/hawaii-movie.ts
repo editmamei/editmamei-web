@@ -40,7 +40,7 @@ export interface ChatMessage {
 export interface HeroMovieScript {
 	/** Beat 1 — the request the user types into the prompt box. */
 	prompt: string;
-	/** Beat 2 — the AI's acknowledgement bubble. */
+	/** Beat 2 — the AI's acknowledgment bubble. */
 	aiAck: string;
 	/** Beat 3 — the untouched source revealed full-frame. */
 	original: MovieFrame;

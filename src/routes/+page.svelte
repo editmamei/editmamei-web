@@ -59,7 +59,9 @@
 			</p>
 		</header>
 
-		<div class="grid gap-8 md:grid-cols-[1fr_420px] md:items-start lg:grid-cols-[1fr_480px]">
+		<div
+			class="grid grid-cols-1 gap-8 md:grid-cols-[1fr_420px] md:items-start lg:grid-cols-[1fr_480px]"
+		>
 			<div>
 				<BeforeAfterSlider
 					beforeSrc={demo.before}
