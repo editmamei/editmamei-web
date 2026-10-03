@@ -15,7 +15,7 @@
 
 	// Before/after toggle (beforeAfter + mask kinds). A pointer (mouse/pen) hover
 	// peeks the original; the button pins it for touch + keyboard. Touch pointers
-	// never peek — a tap fires pointerenter but often no pointerleave.
+	// never peek: a tap fires pointerenter but often no pointerleave.
 	let pinnedBefore = $state(false);
 	let peeking = $state(false);
 	const showBefore = $derived(pinnedBefore || peeking);
@@ -31,7 +31,7 @@
 		trackOnce('capability-demo-toggled');
 	}
 
-	// Histogram geometry — real per-channel data derived from the City-Street
+	// Histogram geometry: real per-channel data derived from the City-Street
 	// original (see cityStreetHistogram.ts). Drawn as a Photoshop-style panel.
 	const HW = 100;
 	const HH = 44;
@@ -59,13 +59,17 @@
 	];
 
 	// Representative layer stack for the Layers card chrome (web-rendered to read
-	// like a Photoshop panel — not a literal export).
+	// like a Photoshop panel, not a literal export).
 	const layerRows = [
 		{ name: 'Saturation +42', swatch: 'linear-gradient(135deg,#d98b3a,#7bb86a)' },
 		{ name: 'Deepen sky', swatch: 'linear-gradient(180deg,#fff,#1c4a8a)' },
 		{ name: 'Background blur', swatch: 'linear-gradient(135deg,#9aa0a6,#cfd4d9)' },
 		{ name: 'Background', swatch: 'linear-gradient(135deg,#6b7a52,#b6a98a)' }
 	];
+
+	// Each card photo ships at 1100px wide plus a 640px copy named `<name>-640.jpg`.
+	const srcset = (src: string) => `${src.replace(/\.jpg$/, '-640.jpg')} 640w, ${src} 1100w`;
+	const sizes = '(min-width: 1024px) 280px, (min-width: 640px) 45vw, calc(100vw - 2rem)';
 
 	const frameClass =
 		'relative aspect-[4/3] w-full overflow-hidden border-b border-neutral-200 bg-neutral-100';
@@ -86,6 +90,8 @@
 			<img
 				class="col-start-1 row-start-1 h-full w-full object-cover"
 				src={demo.before}
+				srcset={srcset(demo.before)}
+				{sizes}
 				alt={`${title}: original photo`}
 				loading="lazy"
 				decoding="async"
@@ -94,6 +100,8 @@
 				class={`col-start-1 row-start-1 h-full w-full object-cover ${rm.current ? '' : 'transition-opacity duration-500'}`}
 				style:opacity={showBefore ? 0 : 1}
 				src={demo.after}
+				srcset={srcset(demo.after)}
+				{sizes}
 				alt={`${title}: ${demo.tool} applied`}
 				loading="lazy"
 				decoding="async"
@@ -127,6 +135,8 @@
 		<img
 			class="h-full w-full object-cover"
 			src={demo.image}
+			srcset={srcset(demo.image)}
+			{sizes}
 			alt={`${title}: ${demo.tool} marquee on the subject`}
 			loading="lazy"
 			decoding="async"
@@ -142,6 +152,8 @@
 		<img
 			class="h-full w-full object-cover"
 			src={demo.image}
+			srcset={srcset(demo.image)}
+			{sizes}
 			alt={`${title}: source photo opened in Photoshop`}
 			loading="lazy"
 			decoding="async"
@@ -173,6 +185,8 @@
 		<img
 			class="h-full w-full object-cover"
 			src={demo.image}
+			srcset={srcset(demo.image)}
+			{sizes}
 			alt={`${title}: document with a layer stack`}
 			loading="lazy"
 			decoding="async"
