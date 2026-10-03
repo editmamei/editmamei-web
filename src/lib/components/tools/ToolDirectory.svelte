@@ -98,7 +98,12 @@
 
 	onMount(async () => {
 		readQuery(new URLSearchParams(window.location.search));
-		const hashId = decodeURIComponent(window.location.hash.slice(1));
+		let hashId = '';
+		try {
+			hashId = decodeURIComponent(window.location.hash.slice(1));
+		} catch {
+			// A malformed hash names no tool; the filters still load and mirror to the URL.
+		}
 		const target = tools.find((t) => t.id === hashId);
 		if (target && !matches(target, filters)) clearFilters();
 		ready = true;

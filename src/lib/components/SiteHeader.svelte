@@ -23,7 +23,8 @@
 	];
 
 	// Desktop Product menu: a disclosure (button + panel), opened by click or
-	// Enter/Space, closed by Escape, an outside click, or following a link.
+	// Enter/Space, closed by Escape, an outside click, focus leaving it, or
+	// following a link.
 	let productOpen = $state(false);
 	let productWrap = $state<HTMLElement>();
 	let productButton = $state<HTMLButtonElement>();
@@ -58,6 +59,13 @@
 			menuOpen = false;
 			menuButton?.focus();
 		}
+	}
+	// Closes the panel when keyboard focus moves to an element outside it. A
+	// null relatedTarget (a click that focuses nothing, as Safari does for links)
+	// is left to the outside-click handler, so a click inside still lands.
+	function onProductFocusout(e: FocusEvent) {
+		const next = e.relatedTarget as Node | null;
+		if (productOpen && next && !productWrap?.contains(next)) productOpen = false;
 	}
 	function onPointerdown(e: PointerEvent) {
 		const target = e.target as Node;
@@ -97,7 +105,7 @@
 
 		<div class="flex items-center gap-2">
 			<nav class="relative hidden items-center gap-1 md:flex" aria-label="Primary">
-				<div bind:this={productWrap}>
+				<div bind:this={productWrap} onfocusout={onProductFocusout}>
 					<button
 						bind:this={productButton}
 						type="button"
@@ -218,7 +226,7 @@
 				class="grid size-10 place-items-center rounded-md text-neutral-700 transition-colors hover:bg-neutral-100 md:hidden"
 				aria-label={menuOpen ? 'Close menu' : 'Open menu'}
 				aria-expanded={menuOpen}
-				aria-controls="site-nav-menu"
+				aria-controls={menuOpen ? 'site-nav-menu' : undefined}
 				onclick={toggleMenu}
 			>
 				{#if menuOpen}
