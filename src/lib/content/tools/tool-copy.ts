@@ -647,7 +647,7 @@ export const TOOL_COPY: Record<string, ToolCopy> = {
 		keywords: ['history']
 	},
 	ps_report_problem: {
-		task: 'Write an anonymous bug report',
+		task: 'Write an anonymized bug report',
 		summary:
 			'Saves an anonymized diagnostic file to Downloads to attach to a bug report. It holds no image content.',
 		keywords: ['diagnostics', 'support', 'logs']

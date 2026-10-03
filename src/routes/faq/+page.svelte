@@ -59,7 +59,7 @@
 		},
 		{
 			q: 'Does Editmamei need an internet connection?',
-			a: "Editing doesn't. Editmamei drives the editor on your computer without a network call. Your AI assistant needs one, unless it is a model you run yourself. Editmamei's own requests (usage data, the update check, and on Pro the license check and the module update) are best-effort and never block an edit, and Pro keeps working offline for up to seven days after its last license check."
+			a: "Editing doesn't. Editmamei drives the editor on your computer without a network call. Your AI assistant needs one, unless it is a model you run yourself. The requests Editmamei makes (usage data, the update check, and on Pro the license check and the module update) are best-effort and never block an edit, and Pro keeps working offline for up to seven days after its last license check."
 		},
 		{
 			q: 'Which AI clients work with Editmamei?',

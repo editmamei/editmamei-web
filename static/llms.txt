@@ -13,7 +13,7 @@ Editmamei installs as an npm package or a one-click Claude Desktop extension and
 - Compatible with any MCP-capable AI client (Claude Desktop, Claude Code, Cursor, etc.)
 - GIMP support, in beta: Editmamei can also drive GIMP 3.2, which it runs in the background with nothing installed into GIMP. As of 1.7.0 the beta covers documents, layers and composites (place another photo as a layer, extend the canvas), 13 non-destructive adjustment types and six effects (kept as live filters in the saved .xcf), geometric masks, crop, resize, rotate and flip, checkpoints (save and restore the image state), .xcf saving, metadata-stripped export, and previews and histograms. GIMP is free and needs no Photoshop. It works on Windows, macOS and Linux (including the Flathub Flatpak).
 - Local-first: your photo files and documents stay on your computer; Editmamei's own servers never receive your images
-- Reports anonymous, content-free usage data (opt-out); never your images, documents, or file paths
+- Reports content-free usage data tied to a random install ID (pseudonymous; opt-out); never your images, documents, or file paths
 - For Photoshop editing, requires an existing Adobe Photoshop license (it drives your copy, it is not a replacement). GIMP editing needs only GIMP 3.2.
 
 ## What Editmamei is not

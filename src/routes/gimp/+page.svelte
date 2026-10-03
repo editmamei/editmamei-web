@@ -263,9 +263,9 @@
 				Fair source, under FSL-1.1-MIT.
 			</h2>
 			<p class="mt-6 text-sm leading-relaxed text-neutral-700">
-				GIMP support is free, and it is the same in both editions of Editmamei. Editmamei is fair
-				source: its code is public under the <a href="/license" class={linkClass}
-					>FSL-1.1-MIT license</a
+				GIMP support is free. Editmamei is fair source: its code is public under the <a
+					href="/license"
+					class={linkClass}>FSL-1.1-MIT license</a
 				>, and each version becomes MIT-licensed two years after its release.
 			</p>
 		</div>

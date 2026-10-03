@@ -1,6 +1,6 @@
 # Editmamei: full user documentation
 
-This file bundles Editmamei's user docs as plain text for AI assistants and crawlers. Each section is copied from the public repository (branch dev, 2026-10-02) at the path shown in its header, with relative links rewritten to GitHub URLs. The short overview is at https://editmamei.com/llms.txt.
+This file bundles Editmamei's user docs as plain text for AI assistants and crawlers. Each section is copied from the public repository's docs for the 1.7.0 release on main (2026-10-02), at the path shown in its header, with relative links rewritten to GitHub URLs. The short overview is at https://editmamei.com/llms.txt.
 
 Contents: Getting started, FAQ, Pro features, GIMP (beta), Privacy and data handling.
 
