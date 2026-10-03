@@ -9,10 +9,6 @@
 	import { trackOnce } from '$lib/analytics/clarity';
 	import { setSail } from '$lib/demos/set-sail';
 
-	// Section order reversed 2026-08-14: the before/after + layer stack comes first,
-	// because a one-second payoff belongs at the scroll cliff (see
-	// docs/20260814-home-page-restructure.md). The scripted movie moved to /product on
-	// 2026-09-26, when the batch-flip video became the hero.
 	const demo = setSail;
 
 	// Arrival denominator for `demo-slider-used`: without it we can measure that

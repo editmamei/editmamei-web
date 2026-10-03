@@ -13,8 +13,6 @@ export type Edition = 'community' | 'pro';
 export interface Tool {
 	/** Tool identifier, also the row's anchor (`/tools#ps_select_subject`). */
 	id: string;
-	/** Stable kebab-case slug, reserved for per-tool pages. */
-	slug: string;
 	editor: Editor;
 	edition: Edition;
 	/** Capability group from the code. */
@@ -69,7 +67,6 @@ function build(): Tool[] {
 		else if (!categoryIds.has(category)) problems.push(`${g.id}: unknown category ${category}`);
 		tools.push({
 			id: g.id,
-			slug: slugFor(g.id),
 			editor: g.editor as Editor,
 			edition: g.edition as Edition,
 			group: g.group,
@@ -112,9 +109,6 @@ export const toolCounts = {
 	total: tools.length,
 	photoshop: count((t) => t.editor === 'photoshop'),
 	gimp: count((t) => t.editor === 'gimp'),
-	community: count((t) => t.edition === 'community'),
-	pro: count((t) => t.edition === 'pro'),
-	photoshopCommunity: count((t) => t.editor === 'photoshop' && t.edition === 'community'),
 	photoshopPro: count((t) => t.editor === 'photoshop' && t.edition === 'pro')
 };
 
