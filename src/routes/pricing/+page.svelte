@@ -2,6 +2,7 @@
 	import EditionsTable from '$lib/components/EditionsTable.svelte';
 	import Seo from '$lib/components/Seo.svelte';
 	import { PRO_FEATURES } from '$lib/content/pro-features';
+	import { toolCounts } from '$lib/content/tools';
 
 	// ──────────────────────────────────────────────────────────────────────
 	// PRODUCTION Polar checkout links (org `editmamei`). Checkout shows
@@ -163,6 +164,14 @@
 				</li>
 			{/each}
 		</ul>
+		<p class="mt-4 text-sm">
+			<a
+				href="/tools?edition=pro"
+				class="font-semibold text-neutral-900 underline decoration-neutral-300 underline-offset-4 hover:decoration-neutral-700"
+			>
+				See all {toolCounts.photoshopPro} Pro tools <span aria-hidden="true">→</span>
+			</a>
+		</p>
 
 		<p class="mt-6 text-base leading-relaxed text-neutral-700">
 			Rule of thumb: Community covers a complete edit of one photo. Pro earns its place when you

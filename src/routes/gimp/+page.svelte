@@ -1,6 +1,7 @@
 <script lang="ts">
 	import BeforeAfterSlider from '$lib/components/BeforeAfterSlider.svelte';
 	import Seo from '$lib/components/Seo.svelte';
+	import { toolCounts } from '$lib/content/tools';
 	import { GITHUB_GIMP_DOCS_URL as GIMP_GUIDE_URL } from '$lib/links';
 	import { gimpHeroMedia as media } from './media';
 
@@ -83,6 +84,13 @@
 			: ''}"
 	>
 		<div class="max-w-3xl">
+			<nav aria-label="Breadcrumb" class="mb-3 hidden text-xs text-neutral-500 sm:block">
+				<ol class="flex items-center gap-1.5">
+					<li><a href="/product" class="hover:text-neutral-900">Product</a></li>
+					<li aria-hidden="true">/</li>
+					<li aria-current="page" class="text-neutral-700">GIMP</li>
+				</ol>
+			</nav>
 			<p
 				class="mb-2 flex items-center gap-2 text-xs font-semibold tracking-wider text-terracotta-ink uppercase"
 			>
@@ -180,6 +188,11 @@
 				</li>
 			{/each}
 		</ul>
+		<p class="mt-6 text-sm">
+			<a href="/tools?editor=gimp" class={linkClass}>
+				See all {toolCounts.gimp} GIMP tools <span aria-hidden="true">→</span>
+			</a>
+		</p>
 	</div>
 </section>
 

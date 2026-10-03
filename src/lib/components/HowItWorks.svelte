@@ -1,11 +1,6 @@
 <script lang="ts">
-	// Compressed 2026-08-14. The full actor-lane sequence diagram that used to
-	// sit here now lives on /product as EditFlowDiagram; it is a reference
-	// asset for someone already sold, and only ~23-31% of home-page visitors
-	// ever scrolled far enough to see it. What stays is the shortest honest
-	// answer to "how does this work", because the claim is counterintuitive to a
-	// cold reader and cannot be dropped entirely.
-	// See docs/20260814-home-page-restructure.md.
+	// The short answer to "how does this work". The full round-trip diagram
+	// lives on /photoshop#edit-flow, and the link below points there.
 	import { onMount } from 'svelte';
 	import { trackOnce } from '$lib/analytics/clarity';
 
@@ -75,17 +70,15 @@
 
 		<p class="mt-6 text-sm">
 			<a
-				href="/product#edit-flow"
+				href="/photoshop#edit-flow"
 				class="font-semibold text-neutral-900 underline decoration-neutral-300 underline-offset-4 hover:decoration-neutral-700"
 			>
 				See the full round-trip, step by step →
 			</a>
 		</p>
 
-		<!-- Privacy, folded in as a sub-point rather than run as a cornerstone
-		     (brand-voice guide §12). All three rules still apply: every "never
-		     sent" claim stays scoped to us, the preview-to-AI hop is stated as a
-		     plain fact, and the mechanism is not re-explained a third time. -->
+		<!-- Privacy note: claims stay scoped to what reaches Editmamei, and the
+		     preview that goes to the AI provider is stated plainly. -->
 		<div class="mt-10 rounded-2xl border border-neutral-200 bg-paper p-6 md:p-8">
 			<h3 class="text-base font-semibold tracking-tight text-neutral-950">
 				Your files, your machine.

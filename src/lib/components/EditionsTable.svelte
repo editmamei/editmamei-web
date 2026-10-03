@@ -36,7 +36,11 @@
 				signed Pro module and loads it next to Community after a restart, with nothing to reinstall.
 			</p>
 			<p class="mt-3 text-base leading-relaxed text-neutral-700">
-				Pro's features are for Photoshop, so GIMP support is the same in both editions.
+				Pro's features are for Photoshop, so <a
+					href="/gimp"
+					class="font-semibold text-neutral-900 underline decoration-neutral-300 underline-offset-4 hover:decoration-neutral-700"
+					>GIMP support</a
+				> is the same in both editions.
 			</p>
 		</div>
 
@@ -109,5 +113,13 @@
 				{/each}
 			</table>
 		</div>
+		<p class="mt-6 text-sm">
+			<a
+				href="/tools"
+				class="font-semibold text-neutral-900 underline decoration-neutral-300 underline-offset-4 hover:decoration-neutral-700"
+			>
+				See every tool and the edition it is in <span aria-hidden="true">→</span>
+			</a>
+		</p>
 	</div>
 </section>

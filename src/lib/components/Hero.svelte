@@ -41,9 +41,7 @@
 				layer, so what comes back is a layered file you can keep working on by hand.
 			</p>
 
-			<!-- The demo is the primary ask, not install. A top-of-page install CTA drew
-			     one click in 28 sessions (2026-08-14) — it asks for commitment before any
-			     proof has landed. See docs/20260814-home-page-restructure.md. -->
+			<!-- The demo is the primary call to action; install is the secondary link. -->
 			<div
 				class="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row lg:justify-start"
 			>
@@ -70,9 +68,9 @@
 			<p class="mt-1 text-xs text-neutral-500">
 				GIMP support is in beta.
 				<a
-					href="https://github.com/editmamei/editmamei/blob/main/docs/gimp.md"
+					href="/gimp"
 					class="underline decoration-neutral-300 underline-offset-4 hover:text-neutral-900 hover:decoration-neutral-500"
-					>Read the GIMP guide</a
+					>See GIMP support</a
 				>
 			</p>
 		</div>

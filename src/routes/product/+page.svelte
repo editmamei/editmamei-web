@@ -4,10 +4,10 @@
 	import { tag, track } from '$lib/analytics/clarity';
 	import ClientChoiceCallout from '$lib/components/ClientChoiceCallout.svelte';
 	import Seo from '$lib/components/Seo.svelte';
-	import { GIMP_GUIDE_URL, surfaces } from '$lib/content/surfaces';
+	import { surfaces } from '$lib/content/surfaces';
 
-	// Sections that now live on /photoshop. A link to /product#process (and the
-	// other two) is forwarded there, since a URL fragment never reaches the server.
+	// Sections that live on /photoshop. An external link to /product#process (or
+	// the other two) is forwarded there, since a URL fragment never reaches the server.
 	const MOVED_ANCHORS = new Set(['#process', '#capabilities', '#edit-flow']);
 
 	onMount(() => {
@@ -46,14 +46,6 @@
 	description="Editmamei lets your AI assistant edit photos with the tools in desktop Photoshop, or GIMP 3.2 in beta. Choose an editor and see how the edit stays in layers you can change."
 	path="/product"
 />
-
-<!-- Landing points for the moved anchors, so the links still resolve while the
-     script above forwards them to /photoshop. -->
-<div class="sr-only">
-	{#each MOVED_ANCHORS as hash (hash)}
-		<span id={hash.slice(1)}></span>
-	{/each}
-</div>
 
 <section class="bg-white pt-12 pb-10 md:pt-16 md:pb-14">
 	<div class="mx-auto max-w-6xl px-4">
@@ -107,6 +99,14 @@
 				</li>
 			{/each}
 		</ul>
+		<p class="mt-6 text-center text-sm">
+			<a
+				href="/tools"
+				class="font-semibold text-neutral-900 underline decoration-neutral-300 underline-offset-4 hover:decoration-neutral-700"
+			>
+				Browse every tool, by task and editor <span aria-hidden="true">→</span>
+			</a>
+		</p>
 	</div>
 </section>
 
@@ -170,9 +170,9 @@
 			Editmamei works with whichever editor it finds on your computer: Photoshop, GIMP, or both. The
 			install section has the setup for each AI client, and the
 			<a
-				href={GIMP_GUIDE_URL}
+				href="/gimp#setup"
 				class="font-semibold text-neutral-900 underline decoration-neutral-300 underline-offset-4 hover:decoration-neutral-700"
-				>GIMP guide</a
+				>GIMP setup</a
 			> covers what GIMP needs.
 		</p>
 		<a

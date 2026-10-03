@@ -7,6 +7,7 @@
 	import HeroMovie from '$lib/components/HeroMovie.svelte';
 	import InstallSection from '$lib/components/InstallSection.svelte';
 	import Seo from '$lib/components/Seo.svelte';
+	import { toolCounts } from '$lib/content/tools';
 
 	// Honest limits. Each line is checked against the public docs (faq.md,
 	// pro-features.md) or the shipped tool list.
@@ -96,6 +97,17 @@
 </section>
 
 <CapabilitySurface />
+
+<div class="-mt-6 bg-paper pb-16 md:-mt-8 md:pb-20">
+	<p class="mx-auto max-w-6xl px-4 text-sm">
+		<a
+			href="/tools?editor=photoshop"
+			class="font-semibold text-neutral-900 underline decoration-neutral-300 underline-offset-4 hover:decoration-neutral-700"
+		>
+			Browse all {toolCounts.photoshop} Photoshop tools <span aria-hidden="true">→</span>
+		</a>
+	</p>
+</div>
 
 <section id="edit-flow" class="scroll-mt-20 bg-white py-16 md:py-20">
 	<div class="mx-auto max-w-5xl px-4">
