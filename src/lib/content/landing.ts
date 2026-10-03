@@ -186,6 +186,10 @@ export const editionGroups: EditionGroup[] = [
 			proOnly('Templates', 'Save a finished look and apply it to new photos'),
 			proOnly('Precise placement', 'Name a spot and Editmamei measures it before placing'),
 			proOnly('Warp', 'Warp styles, pinned-edge mesh, bend along a curve, bulge or pinch'),
+			proOnly(
+				'Edits and text aimed at an object',
+				'Remove a named object, blur or darken around it, or fit text to it'
+			),
 			proOnly('Named-object selections', '"The surfboard", from 80 object categories'),
 			proOnly('Face features', 'A face mesh with eye, lip, skin and teeth selections'),
 			proOnly('One subject among several', 'Aim Select Subject at the subject you name'),

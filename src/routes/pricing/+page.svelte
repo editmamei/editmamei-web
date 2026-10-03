@@ -23,6 +23,7 @@
 			cadence: '/month',
 			note: '7-day free trial.',
 			cta: 'Start free trial',
+			fine: 'Card required. Converts to monthly unless you cancel within 7 days.',
 			href: CHECKOUT.monthly,
 			featured: false
 		},
@@ -33,6 +34,7 @@
 			cadence: '/year',
 			note: '$29 a year less than paying monthly.',
 			cta: 'Get Pro',
+			fine: '',
 			href: CHECKOUT.annual,
 			featured: true
 		},
@@ -43,6 +45,7 @@
 			cadence: 'one-time',
 			note: 'Pay once, with every future update included.',
 			cta: 'Get Pro',
+			fine: '',
 			href: CHECKOUT.perpetual,
 			featured: false
 		}
@@ -128,6 +131,9 @@
 					>
 						{plan.cta}
 					</a>
+					{#if plan.fine}
+						<p class="mt-2 text-center text-xs leading-relaxed text-neutral-600">{plan.fine}</p>
+					{/if}
 				</div>
 			{/each}
 		</div>
