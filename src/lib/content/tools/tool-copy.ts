@@ -249,8 +249,13 @@ export const TOOL_COPY: Record<string, ToolCopy> = {
 	gimp_layer: {
 		task: 'Manage layers and groups',
 		summary:
-			'Creates, duplicates, moves, reorders, merges and deletes layers and groups, and sets their properties.',
+			'Creates, duplicates, reorders, merges and deletes layers and groups, and sets their properties.',
 		keywords: ['opacity', 'blend mode', 'flatten', 'merge down']
+	},
+	gimp_transform_layer: {
+		task: 'Move, scale, rotate or flip a layer',
+		summary: 'Moves, scales, rotates, flips or skews one layer, or fits it to the canvas.',
+		keywords: ['free transform', 'position', 'resize layer']
 	},
 	gimp_place_image: {
 		task: 'Place another photo as a layer',
@@ -355,11 +360,16 @@ export const TOOL_COPY: Record<string, ToolCopy> = {
 			"Photoshop's Calculations: combines two channels into a new one to build a precise mask.",
 		keywords: ['channel', 'luminosity mask']
 	},
-	gimp_create_mask: {
-		task: 'Limit an adjustment to a shape or gradient',
+	gimp_select: {
+		task: 'Select by shape, color or region',
 		summary:
-			'Builds a rectangle, ellipse or gradient mask that a new adjustment can be confined to.',
-		keywords: ['selection', 'graduated', 'radial']
+			'A saved selection from a rectangle, ellipse, polygon, color range, Magic Wand region, layer transparency or gradient.',
+		keywords: ['marquee', 'magic wand', 'graduated', 'radial']
+	},
+	gimp_layer_mask: {
+		task: 'Add, apply or remove a layer mask',
+		summary: 'Masks a layer from a saved selection, then inverts, applies or removes the mask.',
+		keywords: ['fade', 'hide', 'reveal']
 	},
 
 	// Tone and color
@@ -451,6 +461,11 @@ export const TOOL_COPY: Record<string, ToolCopy> = {
 		summary: 'Creates a text layer and sets its words, font, size, color and alignment.',
 		keywords: ['type', 'caption', 'title']
 	},
+	gimp_text: {
+		task: 'Add and style text',
+		summary: 'Creates a live text layer and sets its words, font, size, color and alignment.',
+		keywords: ['type', 'caption', 'title', 'fonts']
+	},
 	ps_add_text_to_object: {
 		task: 'Fit text onto an object',
 		summary: 'Places editable text sized to a detected object, flat or arced.',
@@ -526,6 +541,11 @@ export const TOOL_COPY: Record<string, ToolCopy> = {
 		task: 'Preview the active selection',
 		summary:
 			'Shows what is selected as a red overlay or a black-and-white mask, before an edit is committed.',
+		keywords: ['quick mask']
+	},
+	gimp_get_selection_preview: {
+		task: 'Preview a saved selection',
+		summary: 'Shows what a saved selection covers as a red overlay or a black-and-white mask.',
 		keywords: ['quick mask']
 	},
 	gimp_inspect: {

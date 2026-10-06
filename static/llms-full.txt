@@ -620,8 +620,9 @@ metadata (including any GPS location); only `gimp_export` removes it.
 - **Documents:** open (most formats GIMP can load: JPEG, PNG, TIFF, WebP, HEIC/HEIF, XCF, and more),
   create a blank one, close, save as `.xcf` (live, re-editable), export flattened to
   jpg/jpeg/png/webp/tif/tiff. Convert between color and grayscale.
-- **Layers:** create, delete, duplicate, group, reorder, move, rename, set opacity, blend mode and
-  visibility, merge down, flatten (`gimp_layer`). Place another photo into the document as a new
+- **Layers:** create, delete, duplicate, group, reorder, rename, set opacity, blend mode and
+  visibility, merge down, flatten (`gimp_layer`). Move, scale, rotate, flip, skew or fit one layer
+  (`gimp_transform_layer`). Place another photo into the document as a new
   layer (`gimp_place_image`) to build a composite, and extend the canvas for borders and frames
   (`gimp_canvas`).
 - **Non-destructive adjustments** (`gimp_add_adjustment`), 13 types: curves, levels, exposure,
@@ -631,8 +632,11 @@ metadata (including any GPS location); only `gimp_export` removes it.
 - **Effects** (`gimp_add_effect`): vignette, black and white, motion blur, lens blur, noise, and
   drop shadow, live and re-editable the same way. `gimp_bake` merges a layer's live filters into its
   pixels when you want them fixed.
-- **Masks:** `gimp_create_mask` builds a geometric mask (rectangle, ellipse, linear or radial
-  gradient) that a new adjustment can be confined to.
+- **Selections and masks:** `gimp_select` saves a selection from a rectangle, ellipse, polygon,
+  color range, Magic Wand region, layer transparency or linear/radial gradient; an adjustment can be
+  confined to it, `gimp_layer_mask` turns it into a layer mask, and `gimp_get_selection_preview`
+  shows what it covers.
+- **Text** (`gimp_text`): live text layers with font, size, color and alignment.
 - **Geometry:** crop, resize, rotate (arbitrary angle, for straightening), flip.
 - **Verification:** preview render, per-channel histogram (mean, median, percentiles, full 256-bin
   histogram), before/after and region comparison.

@@ -2,9 +2,9 @@
 	"_generated": "Do not edit. Regenerate with `node scripts/sync-tools.mjs --source <editmamei>`.",
 	"source": {
 		"package": "editmamei",
-		"version": "1.7.0"
+		"version": "1.8.0"
 	},
-	"snapshotDate": "2026-10-02",
+	"snapshotDate": "2026-10-06",
 	"tools": [
 		{
 			"id": "gimp_add_adjustment",
@@ -61,12 +61,6 @@
 			"group": "document"
 		},
 		{
-			"id": "gimp_create_mask",
-			"editor": "gimp",
-			"edition": "community",
-			"group": "masks"
-		},
-		{
 			"id": "gimp_crop_document",
 			"editor": "gimp",
 			"edition": "community",
@@ -97,6 +91,12 @@
 			"group": "verify"
 		},
 		{
+			"id": "gimp_get_selection_preview",
+			"editor": "gimp",
+			"edition": "community",
+			"group": "verify"
+		},
+		{
 			"id": "gimp_inspect",
 			"editor": "gimp",
 			"edition": "community",
@@ -107,6 +107,12 @@
 			"editor": "gimp",
 			"edition": "community",
 			"group": "layers"
+		},
+		{
+			"id": "gimp_layer_mask",
+			"editor": "gimp",
+			"edition": "community",
+			"group": "masks"
 		},
 		{
 			"id": "gimp_open_document",
@@ -145,10 +151,28 @@
 			"group": "document"
 		},
 		{
+			"id": "gimp_select",
+			"editor": "gimp",
+			"edition": "community",
+			"group": "select"
+		},
+		{
+			"id": "gimp_text",
+			"editor": "gimp",
+			"edition": "community",
+			"group": "layers"
+		},
+		{
 			"id": "gimp_transform_canvas",
 			"editor": "gimp",
 			"edition": "community",
 			"group": "document"
+		},
+		{
+			"id": "gimp_transform_layer",
+			"editor": "gimp",
+			"edition": "community",
+			"group": "layers"
 		},
 		{
 			"id": "ps_add_adjustment_layer",
