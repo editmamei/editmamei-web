@@ -1,0 +1,86 @@
+name: Staging preview (dev)
+
+# Every push to dev uploads a new version of the editmamei-web Worker under the
+# `staging` preview alias, without deploying it to editmamei.com. The alias URL
+# (staging-editmamei-web.<subdomain>.workers.dev) is behind Cloudflare Access,
+# so dev can carry unpublished copy. Production still moves only through main
+# (deploy.yml).
+
+on:
+  push:
+    branches: [dev]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: staging
+  cancel-in-progress: true
+
+jobs:
+  preview:
+    runs-on: ubuntu-latest
+    # The staging environment allows the dev branch only and holds the
+    # Cloudflare secrets, so no other ref can reach them.
+    environment: staging
+    env:
+      STAGING_URL: https://staging-editmamei-web.editmamei.workers.dev/
+    steps:
+      - name: Refuse to run from any ref but dev
+        if: github.ref != 'refs/heads/dev'
+        env:
+          REF: ${{ github.ref }}
+        run: |
+          echo "staging previews dev only (got: $REF)"
+          exit 1
+
+      # Staging must never be public: refuse to upload unless an anonymous
+      # request is stopped by Cloudflare Access.
+      - name: Require Cloudflare Access on the staging URL
+        run: |
+          CODE=$(curl -s -o /dev/null -w "%{http_code}" "$STAGING_URL")
+          case "$CODE" in
+            302|401|403) echo "staging is behind Access ($CODE)" ;;
+            *) echo "::error::staging answered $CODE to an anonymous request; turn on Cloudflare Access for preview URLs"; exit 1 ;;
+          esac
+
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Typecheck (svelte-check)
+        run: npm run check
+
+      - name: Lint
+        run: npm run lint
+
+      # Build before test so tests/blog-build-artifacts.test.mjs inspects the
+      # artifact that gets uploaded.
+      - name: Build
+        run: npm run build
+
+      - name: Test
+        run: npm test
+
+      - name: Leak guard
+        run: node scripts/check-leak-guard.mjs
+
+      - name: Upload staging version
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          SHA: ${{ github.sha }}
+        run: |
+          SHORT="${SHA:0:12}"
+          npx wrangler versions upload --preview-alias staging --tag "$SHORT" --message "dev $SHORT"
