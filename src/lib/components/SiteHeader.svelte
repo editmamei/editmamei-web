@@ -4,6 +4,8 @@
 	import { track } from '$lib/analytics/clarity';
 	import { GITHUB_REPO_URL } from '$lib/links';
 	import {
+		connectLink,
+		desktopGroupLabel,
 		isOnSite,
 		primaryNav,
 		productExtras,
@@ -16,9 +18,16 @@
 	// The mobile sheet lists primaryNav right below, so extras that duplicate a
 	// primary link are left out of its Product group.
 	const primaryHrefs = new Set(primaryNav.map((l) => l.href));
-	const productLinks: { label: string; href: string; beta?: boolean }[] = [
+	// `group` puts a heading over the links that share it (the desktop editors).
+	const productLinks: { label: string; href: string; beta?: boolean; group?: string }[] = [
 		productOverview,
-		...navSurfaces.map((s) => ({ label: s.name, href: s.href, beta: s.beta })),
+		...navSurfaces.map((s) => ({
+			label: s.name,
+			href: s.href,
+			beta: s.beta,
+			group: desktopGroupLabel
+		})),
+		connectLink,
 		...productExtras.filter((l) => !primaryHrefs.has(l.href))
 	];
 
@@ -150,10 +159,16 @@
 								{productOverview.description}
 							</span>
 						</a>
-						<!-- Editors sit in a three-column row; fewer than three center in it. -->
-						<ul class="mt-1 flex flex-wrap justify-center border-t border-neutral-100 pt-1">
+						<!-- The desktop product's editors, under a group heading. -->
+						<p
+							id="nav-product-desktop"
+							class="mt-1 border-t border-neutral-100 px-3 pt-3 pb-0.5 text-[11px] font-semibold tracking-wider text-neutral-500 uppercase"
+						>
+							{desktopGroupLabel}
+						</p>
+						<ul aria-labelledby="nav-product-desktop" class="flex flex-wrap">
 							{#each navSurfaces as s (s.id)}
-								<li class="w-1/3 min-w-40 grow-0">
+								<li class="w-1/2 min-w-40 grow-0">
 									<a
 										href={s.href}
 										onclick={closeAll}
@@ -174,6 +189,18 @@
 								</li>
 							{/each}
 						</ul>
+						<!-- Connect is hosted, not an editor you install: a product of its own. -->
+						<a
+							href={connectLink.href}
+							onclick={closeAll}
+							aria-current={isCurrent(connectLink.href) ? 'page' : undefined}
+							class="mt-1 block rounded-lg border-t border-neutral-100 px-3 py-2.5 hover:bg-neutral-50"
+						>
+							<span class="block text-sm font-semibold text-neutral-950">
+								{connectLink.label}
+							</span>
+							<span class="mt-0.5 block text-xs text-neutral-600">{connectLink.description}</span>
+						</a>
 						{#if productExtras.length}
 							<ul class="mt-1 flex justify-end gap-1 border-t border-neutral-100 pt-1">
 								{#each productExtras as link (link.href)}
@@ -267,7 +294,14 @@
 			</p>
 			<ul aria-labelledby="site-nav-product">
 				{#each productLinks as link, i (link.href)}
-					<li>
+					{#if link.group && link.group !== productLinks[i - 1]?.group}
+						<li
+							class="px-4 pt-3 pb-1 text-[11px] font-semibold tracking-wider text-neutral-500 uppercase"
+						>
+							{link.group}
+						</li>
+					{/if}
+					<li class={link.group ? 'pl-3' : undefined}>
 						{#if i === 0}
 							<a
 								bind:this={firstSheetLink}

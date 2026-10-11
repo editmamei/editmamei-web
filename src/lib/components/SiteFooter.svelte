@@ -2,7 +2,13 @@
 	import { track } from '$lib/analytics/clarity';
 	import SubscribeForm from '$lib/components/SubscribeForm.svelte';
 	import { cookieConsent } from '$lib/stores/cookieConsent';
-	import { productExtras, productOverview, surfaces } from '$lib/content/surfaces';
+	import {
+		connectLink,
+		desktopGroupLabel,
+		productExtras,
+		productOverview,
+		surfaces
+	} from '$lib/content/surfaces';
 	import {
 		CUSTOMER_PORTAL_URL,
 		GITHUB_CHANGELOG_URL,
@@ -115,13 +121,15 @@
 						<a href={productOverview.href} class="hover:text-neutral-950">{productOverview.label}</a
 						>
 					</li>
+					<li class="pt-1 text-xs text-neutral-500">{desktopGroupLabel}</li>
 					{#each surfaces as s (s.id)}
-						<li>
+						<li class="pl-3">
 							<a href={s.href} class="hover:text-neutral-950"
 								>{s.name}{#if s.beta}&nbsp;(beta){/if}</a
 							>
 						</li>
 					{/each}
+					<li><a href={connectLink.href} class="hover:text-neutral-950">{connectLink.label}</a></li>
 					{#each productExtras as link (link.href)}
 						<li><a href={link.href} class="hover:text-neutral-950">{link.label}</a></li>
 					{/each}

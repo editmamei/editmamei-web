@@ -3,6 +3,7 @@
 	// lives on /photoshop#edit-flow, and the link below points there.
 	import { onMount } from 'svelte';
 	import { trackOnce } from '$lib/analytics/clarity';
+	import { CONNECT_PRIVACY_URL } from '$lib/links';
 
 	const steps = [
 		{
@@ -78,16 +79,24 @@
 		</p>
 
 		<!-- Privacy note: claims stay scoped to what reaches Editmamei, and the
-		     preview that goes to the AI provider is stated plainly. -->
+		     preview that goes to the AI provider is stated plainly. Every claim here
+		     is about the desktop app; Connect edits uploaded photos on a server and
+		     has its own policy, so it gets one sentence and a link, never these claims. -->
 		<div class="mt-10 rounded-2xl border border-neutral-200 bg-paper p-6 md:p-8">
 			<h3 class="text-base font-semibold tracking-tight text-neutral-950">
-				Your files, your machine.
+				On the desktop, your files stay on your machine.
 			</h3>
 			<p class="mt-3 text-sm leading-relaxed text-neutral-700">
-				Editing happens on your desktop, in Photoshop or GIMP. There's no Editmamei cloud your
-				library uploads to. When your AI assistant needs to see a result, a downscaled preview goes
-				to it, the same as sharing a photo in a chat. Editmamei's own telemetry is content-free, and
-				you can audit it or switch it off.
+				Editmamei Desktop edits in Photoshop or GIMP on your computer, and your library isn't
+				uploaded to Editmamei. When your AI assistant needs to see a result, a downscaled preview
+				goes to it, the same as sharing a photo in a chat. Editmamei's own telemetry is
+				content-free, and you can audit it or switch it off. Editmamei Connect, the cloud option,
+				edits the photos you upload on Editmamei's server and has its
+				<a
+					href={CONNECT_PRIVACY_URL}
+					class="font-semibold text-neutral-900 underline decoration-neutral-300 underline-offset-4 hover:decoration-neutral-700"
+					>own privacy policy</a
+				>.
 			</p>
 		</div>
 	</div>

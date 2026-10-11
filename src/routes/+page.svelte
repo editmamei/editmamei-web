@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import BeforeAfterSlider from '$lib/components/BeforeAfterSlider.svelte';
+	import ConnectCallout from '$lib/components/ConnectCallout.svelte';
 	import LayerAccordion from '$lib/components/LayerAccordion.svelte';
 	import Hero from '$lib/components/Hero.svelte';
 	import HowItWorks from '$lib/components/HowItWorks.svelte';
@@ -109,4 +110,5 @@
 </section>
 
 <HowItWorks />
+<ConnectCallout />
 <InstallSection />

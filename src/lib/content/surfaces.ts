@@ -52,6 +52,24 @@ export const productOverview: NavLink = {
 	description: 'How Editmamei works, and which editor to use it with.'
 };
 
+/**
+ * The heading the menus put over the editor surfaces. "Editmamei Desktop" is a
+ * label for grouping, set against Connect; the product itself is still called
+ * Editmamei, so this name stays out of install steps, READMEs and listings.
+ */
+export const desktopGroupLabel = 'Editmamei Desktop';
+
+/**
+ * Editmamei Connect, the hosted product. It isn't an editor you install, so it
+ * gets its own row in the Product menu rather than a slot among the surfaces,
+ * and its page here hands off to connect.editmamei.com.
+ */
+export const connectLink: NavLink = {
+	label: 'Editmamei Connect',
+	href: '/connect',
+	description: 'Edit photos from Claude on any device, with nothing to install.'
+};
+
 /** Product menu entries after the surfaces. */
 export const productExtras: NavLink[] = [{ label: 'All tools', href: '/tools' }];
 

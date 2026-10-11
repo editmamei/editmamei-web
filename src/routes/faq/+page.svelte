@@ -50,7 +50,7 @@
 		},
 		{
 			q: 'Does Editmamei upload my photos?',
-			a: "Your photo files stay on your machine, and the editing happens in Photoshop (or GIMP) on your machine. When you ask your AI assistant to look at a preview, a small downscaled version goes to that AI provider, the same as if you'd dropped the file into a chat with it. That's a property of which AI assistant you choose, not something Editmamei adds."
+			a: "Not on the desktop. With Editmamei Desktop your photo files stay on your machine, and the editing happens in Photoshop (or GIMP) on your machine. When you ask your AI assistant to look at a preview, a small downscaled version goes to that AI provider, the same as if you'd dropped the file into a chat with it. That's a property of which AI assistant you choose, not something Editmamei adds. Editmamei Connect, the cloud option, is different by design: you upload the photos you want edited, they're edited on Editmamei's server, and Connect's own privacy policy covers what happens to them."
 		},
 		{
 			q: 'What data does Editmamei collect, and how is it used?',

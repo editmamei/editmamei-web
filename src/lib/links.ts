@@ -38,6 +38,14 @@ export const RELEASES_URL = 'https://github.com/editmamei/editmamei/releases/lat
 // subdomain, links already sitting in inboxes keep working.
 export const SUBSCRIBE_API_URL = 'https://editmamei-subscribe.editmamei.workers.dev';
 
+// Editmamei Connect, the hosted product, is a separate site with its own sign-in,
+// Terms and Privacy Policy. This site describes it and links out; it never
+// restates Connect's policies (they are separate products with separate data).
+export const CONNECT_URL = 'https://connect.editmamei.com';
+export const CONNECT_TOOLS_URL = `${CONNECT_URL}/tools`;
+export const CONNECT_PRIVACY_URL = `${CONNECT_URL}/privacy`;
+export const CONNECT_TERMS_URL = `${CONNECT_URL}/terms`;
+
 // Public source repository (Editmamei CE, source-available under FSL-1.1-MIT).
 // Deep links into docs/ or a specific file use /blob/main/, so readers see the
 // docs for the released version rather than unreleased changes on `dev`.
