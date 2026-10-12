@@ -74,15 +74,17 @@ jobs:
           SHORT="${SHA:0:12}"
           npx wrangler deploy --tag "$SHORT" --message "main $SHORT"
 
-      # The route hands editmamei.com to the Worker; GitHub Pages answers with
-      # `Via: 1.1 varnish`. Fail the run if the live home page is missing or
-      # still coming from Pages, so a deploy that didn't take is visible.
+      # The route hands editmamei.com to the Worker. GitHub Pages answers with
+      # `Via: 1.1 varnish` and no HSTS header; the Worker sends HSTS from
+      # static/_headers. Fail the run if the live home page is missing or still
+      # coming from Pages, so a deploy that didn't take is visible.
       - name: Check the live site is served by the Worker
         run: |
           for i in 1 2 3 4 5 6; do
             HEADERS=$(curl -s -o /dev/null -D - --max-time 15 https://editmamei.com/ | tr -d '\r')
             CODE=$(printf '%s\n' "$HEADERS" | awk 'NR == 1 { print $2 }')
-            if [ "$CODE" = 200 ] && ! printf '%s\n' "$HEADERS" | grep -iq '^via: .*varnish'; then
+            if [ "$CODE" = 200 ] && ! printf '%s\n' "$HEADERS" | grep -iq '^via: .*varnish' \
+              && printf '%s\n' "$HEADERS" | grep -iq '^strict-transport-security:'; then
               echo "editmamei.com is served by the Worker"
               exit 0
             fi

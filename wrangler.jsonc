@@ -13,9 +13,12 @@
 	"workers_dev": false,
 	"preview_urls": true,
 	// editmamei.com is served through a route over its existing proxied DNS
-	// record (GitHub Pages behind it), so no DNS change is needed and deleting
-	// the route hands the site back to Pages at once. `wrangler deploy`
-	// (deploy.yml) creates it; staging's `versions upload` never applies routes.
-	// www.editmamei.com is left to Pages' own redirect to the apex.
+	// record (GitHub Pages behind it), so no DNS change is needed. `wrangler
+	// deploy` (deploy.yml) creates the route; staging's `versions upload` never
+	// applies routes. www.editmamei.com is left to Pages' own redirect.
+	// Rollback: delete the route (traffic falls back to Pages at once) AND
+	// remove this entry on main before the next main push, or the next deploy
+	// recreates it. Pages then serves its last pre-cutover build, so its site
+	// and custom domain must stay enabled until the fallback window closes.
 	"routes": [{ "pattern": "editmamei.com/*", "zone_name": "editmamei.com" }]
 }
