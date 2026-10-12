@@ -252,8 +252,8 @@
 				Set up Connect at connect.editmamei.com.
 			</h2>
 			<p class="mt-3 text-base leading-relaxed text-neutral-300">
-				Sign up with your email address, then follow the setup steps to add Connect to Claude. You
-				get an email when your account is approved.
+				Sign up with your email address, then follow the setup steps to add Connect to Claude. Your
+				account works as soon as you confirm your email.
 			</p>
 			<div class="mt-7">
 				<a

@@ -2,6 +2,7 @@
 title: Introducing Editmamei Connect
 description: Editmamei now has a cloud option alongside the desktop app. Add Editmamei Connect to Claude and edit photos in the browser or on your phone, with nothing to install.
 date: 2026-10-11
+updated: 2026-10-12
 ---
 
 Editmamei now has a cloud option alongside the desktop app. Editmamei Connect is a remote MCP server that does the editing in the cloud, so you add it to Claude as a connector and edit photos from claude.ai, the Claude desktop app, the Claude app on your phone, or Claude Code, with no editor to install and nothing to set up on your computer.
@@ -20,7 +21,7 @@ And for posting: crops for each platform, a wide photo split into carousel slide
 
 ## Getting started
 
-Sign up at [connect.editmamei.com](https://connect.editmamei.com) with your email address. Accounts are approved one at a time while Connect is new, and every account starts with 150 free credits, which pay for editing time on the server, plus up to 50 more each month. When you need more, there are credit packs from $7 and monthly plans from $10. The setup page walks you through adding Connect to Claude, and the [tools page](https://connect.editmamei.com/tools) has prompts to try on your first photo.
+Sign up at [connect.editmamei.com](https://connect.editmamei.com) with your email address. Your account works as soon as you confirm your email, and every account starts with 150 free credits, which pay for editing time on the server, plus up to 50 more each month. When you need more, there are credit packs from $7 and monthly plans from $10. The setup page walks you through adding Connect to Claude, and the [tools page](https://connect.editmamei.com/tools) has prompts to try on your first photo.
 
 If you'd rather have the edit in Photoshop as layers you can keep working on, the desktop app is still the one for that, and nothing about it changes.
 
