@@ -2,9 +2,10 @@ name: Staging preview (dev)
 
 # Every push to dev uploads a new version of the editmamei-web Worker under the
 # `staging` preview alias, without deploying it to editmamei.com. The alias URL
-# (staging-editmamei-web.<subdomain>.workers.dev) is behind Cloudflare Access,
-# so dev can carry unpublished copy. Production still moves only through main
-# (deploy.yml).
+# (staging-editmamei-web.<subdomain>.workers.dev) is behind Cloudflare Access so
+# a build can be checked before it is published. dev must still be publishable
+# at any time: web-release.yml fast-forwards it to main. Production still moves
+# only through main (deploy.yml).
 
 on:
   push:
@@ -26,6 +27,9 @@ jobs:
     environment: staging
     env:
       STAGING_URL: https://staging-editmamei-web.editmamei.workers.dev/
+      # The Worker's own workers.dev URL. versions upload never applies
+      # wrangler.jsonc's workers_dev: false, so this is checked, not assumed.
+      WORKERS_DEV_URL: https://editmamei-web.editmamei.workers.dev/
     steps:
       - name: Refuse to run from any ref but dev
         if: github.ref != 'refs/heads/dev'
@@ -36,13 +40,33 @@ jobs:
           exit 1
 
       # Staging must never be public: refuse to upload unless an anonymous
-      # request is stopped by Cloudflare Access.
+      # request is stopped by Cloudflare Access itself. A bare 302/403 is not
+      # enough (a bot challenge or an error page answers 403 too), so the
+      # answer must be a redirect to the Access login or carry Access headers.
       - name: Require Cloudflare Access on the staging URL
         run: |
-          CODE=$(curl -s -o /dev/null -w "%{http_code}" "$STAGING_URL")
-          case "$CODE" in
-            302|401|403) echo "staging is behind Access ($CODE)" ;;
-            *) echo "::error::staging answered $CODE to an anonymous request; turn on Cloudflare Access for preview URLs"; exit 1 ;;
+          HEADERS=$(curl -s -o /dev/null -D - --max-time 15 "$STAGING_URL" | tr -d '\r')
+          CODE=$(printf '%s\n' "$HEADERS" | awk 'NR == 1 { print $2 }')
+          LOCATION=$(printf '%s\n' "$HEADERS" | awk 'tolower($1) == "location:" { print $2 }')
+          if [ "$CODE" = 302 ] && printf '%s' "$LOCATION" | grep -Eq '^https://[^/]+\.cloudflareaccess\.com/'; then
+            echo "staging redirects to the Access login"
+          elif { [ "$CODE" = 401 ] || [ "$CODE" = 403 ]; } && printf '%s\n' "$HEADERS" | grep -iq '^cf-access-'; then
+            echo "staging is refused by Access ($CODE)"
+          else
+            echo "::error::staging answered $CODE to an anonymous request without Cloudflare Access; turn on Access for this Worker's preview URLs"
+            exit 1
+          fi
+
+      # The Worker's workers.dev URL must stay off: Access covers preview URLs
+      # only, so an enabled workers.dev URL would serve the deployed version to
+      # anyone. Off, it answers Cloudflare's plain-text 404, never the site's
+      # HTML 404 page.
+      - name: Require the workers.dev URL to be off
+        run: |
+          RESULT=$(curl -s -o /dev/null -w "%{http_code} %{content_type}" --max-time 15 "$WORKERS_DEV_URL")
+          case "$RESULT" in
+            "404 text/plain"*) echo "workers.dev is off" ;;
+            *) echo "::error::$WORKERS_DEV_URL answered '$RESULT'; turn off the workers.dev route (wrangler triggers deploy applies workers_dev: false)"; exit 1 ;;
           esac
 
       - name: Checkout
