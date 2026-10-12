@@ -1,6 +1,7 @@
 <script lang="ts">
 	import Seo from '$lib/components/Seo.svelte';
 	import { track } from '$lib/analytics/clarity';
+	import { mediaUrl } from '$lib/media';
 	import {
 		CONNECT_PRIVACY_URL,
 		CONNECT_TERMS_URL,
@@ -131,8 +132,12 @@
 				onplay={() => track('connect-video-play')}
 				aria-label="The Editmamei Connect launch film: adding Connect to Claude, sending a photo from a phone, the edit steps, and the download link."
 			>
-				<source src="/connect/connect-launch-720.mp4" type="video/mp4" media="(max-width: 640px)" />
-				<source src="/connect/connect-launch-1080.mp4" type="video/mp4" />
+				<source
+					src={mediaUrl('connect/connect-launch-720.mp4')}
+					type="video/mp4"
+					media="(max-width: 640px)"
+				/>
+				<source src={mediaUrl('connect/connect-launch-1080.mp4')} type="video/mp4" />
 			</video>
 			<figcaption class="mt-3 text-xs text-neutral-500">
 				Edits from a real Connect session, from adding the connector to the download link. 70

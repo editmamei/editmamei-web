@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { track } from '$lib/analytics/clarity';
+	import { mediaUrl } from '$lib/media';
 
 	// The batch-flip video plays muted on a loop, started from script rather than the
 	// autoplay attribute so a reader who asked for reduced motion gets the poster and
@@ -89,8 +90,12 @@
 				height="1080"
 				aria-label="Seventy-three travel photos graded in Photoshop from a single sentence: the prompt, the grading calls three photos at a time, and the finished set."
 			>
-				<source src="/hero/batch-flip-720.mp4" type="video/mp4" media="(max-width: 640px)" />
-				<source src="/hero/batch-flip-1080.mp4" type="video/mp4" />
+				<source
+					src={mediaUrl('hero/batch-flip-720.mp4')}
+					type="video/mp4"
+					media="(max-width: 640px)"
+				/>
+				<source src={mediaUrl('hero/batch-flip-1080.mp4')} type="video/mp4" />
 			</video>
 			<figcaption class="mt-3 text-xs text-neutral-500">
 				A real run: 73 travel photos, one sentence, graded in Photoshop.

@@ -26,4 +26,5 @@ node scripts/check-leak-guard.mjs   # policy gate, also runs in CI
 
 - The `BLOCKED` array in `scripts/check-leak-guard.mjs` is auto-generated from the private source repo's tool-tier table — don't hand-edit the fenced region.
 - `design/` holds editable brand sources (never deployed); `static/` is served at the deploy root. See `CLAUDE.md` for the full conventions.
+- Videos go in `media/`, not `static/`: `npm run upload:media` puts them on `media.editmamei.com` (which answers the byte-range requests Safari needs to play them) and updates `src/lib/content/media.generated.json`; pages use `mediaUrl()` from `$lib/media`.
 - Every indexable page renders the `<Seo>` component with a self-referencing canonical; the sitemap's `ROUTES` array and per-page `noindex` tags must stay complementary (enforced by `tests/sitemap-routes.test.mjs`).
