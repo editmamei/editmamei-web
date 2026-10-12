@@ -18,6 +18,8 @@ Editmamei installs as an npm package or a one-click Claude Desktop extension and
 
 ## What Editmamei is not
 
+These describe Editmamei itself, the local product. Editmamei Connect, the hosted version further down, works differently.
+
 - Not a web app or browser-based editor
 - Not a cloud image editor (Editmamei does no cloud processing of your images)
 - Not a generative AI model or image generator
@@ -30,10 +32,25 @@ Editmamei installs as an npm package or a one-click Claude Desktop extension and
 - **Community Edition (CE)**: Free and source-available under the Functional Source License (FSL-1.1-MIT), available via npm as `editmamei`. Source: https://github.com/editmamei/editmamei. Covers the everyday editing surface: documents, layers, non-destructive adjustments, filters, masks, selections (including Photoshop's AI Select Subject and Select Sky), shape layers and pen paths, channel compositing, content-aware retouch, on-device scene awareness (object/face detection, selecting things by name), history, and visual verification.
 - **Pro Edition**: Paid license, activated over the same package. Pro adds Camera Raw as a re-editable filter, raw files developed before they open, folder batch, templates, precise placement and warp, edits and text aimed at a named object, selections of a named object, a face feature or one subject among several, and Photoshop Actions and scripting. Pro's features are Photoshop-only; GIMP support is the same in both editions.
 
+## Editmamei Connect (hosted)
+
+Editmamei Connect is a separate product: Editmamei running on Editmamei's server instead of your computer, as a remote MCP server. You add it to Claude as a connector, sign up with your email address, then send a photo from your phone or laptop, describe the edit in plain words, and download the finished photo from a link that lasts 24 hours. Nothing is installed and no photo editor is needed on your side.
+
+- Photo editing on the photos you send: remove an object by naming it, heal dust spots and blemishes, fix brightness and color, portrait-mode background blur, light skin smoothing, a new sky, one-step looks you can save and reuse
+- Product photos: white or studio backgrounds, transparent cutouts, the same item in other colors, and a check against Amazon, Etsy, Shopify and eBay image guidelines
+- Social posts: crops for each platform, carousel slides, story frames, photo grids, memes and stickers
+- Batches of up to ten photos with the same edit
+- Unlike the local product, Connect receives the photos you send: they are uploaded to Editmamei's server for editing and deleted on the schedule in Connect's own Privacy Policy
+- New accounts are approved one at a time and start with free credits; editing time is paid for in credits
+- Connect has its own Terms of Service and Privacy Policy, separate from Editmamei's
+
+More: https://connect.editmamei.com/llms.txt
+
 ## Prices
 
 - Community: free
 - Pro: $9 per month (7-day trial), $79 per year, or $199 one-time with every future update included. One license covers two devices.
+- Connect: 150 free credits to start plus up to 50 more each month; credit packs from $7 and monthly plans from $10
 
 ## Links
 
@@ -41,6 +58,8 @@ Editmamei installs as an npm package or a one-click Claude Desktop extension and
 - [Product](https://editmamei.com/product): overview of how it works, and which editor to use it with
 - [Photoshop](https://editmamei.com/photoshop): what the AI can do in desktop Photoshop, with a worked example
 - [GIMP](https://editmamei.com/gimp): the GIMP beta
+- [Connect](https://editmamei.com/connect): Editmamei Connect, the hosted version for Claude
+- [Connect app](https://connect.editmamei.com): sign-up, setup steps, every Connect tool, and Connect's Terms and Privacy Policy
 - [Tools](https://editmamei.com/tools): every tool for Photoshop and GIMP, with what each one does and its edition
 - [Pricing](https://editmamei.com/pricing): Community vs Pro editions
 - [Download](https://editmamei.com/download)
