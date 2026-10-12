@@ -4,15 +4,15 @@ name: Web release (publish dev to the live site)
 # the release fan-out is the freshness floor, not an exclusive lock. This
 # workflow is the one consistent way to publish between releases — it runs
 # the full verify gate on dev, fast-forwards main, then dispatches the
-# Pages deploy on main.
+# production deploy on main.
 #
-# Why dispatch instead of workflow_call: the github-pages environment
-# restricts deployments to main, and a workflow_call'd deploy would run at
-# this workflow's ref (dev) and be rejected. A GITHUB_TOKEN push to main
-# can't fire deploy.yml's push trigger either (GitHub suppresses recursive
-# workflow triggers). Explicitly dispatching deploy.yml on main runs it
-# identically to the release fan-out's PAT-push path. The dispatch is
-# fire-and-forget: watch the "Deploy to GitHub Pages" run for the result.
+# Why dispatch instead of workflow_call: deploy.yml refuses any ref but main,
+# and a workflow_call'd deploy would run at this workflow's ref (dev). A
+# GITHUB_TOKEN push to main can't fire deploy.yml's push trigger either
+# (GitHub suppresses recursive workflow triggers). Explicitly dispatching
+# deploy.yml on main runs it identically to the release fan-out's PAT-push
+# path. The dispatch is fire-and-forget: watch the "Deploy to Cloudflare" run
+# for the result.
 #
 # Rules that still apply:
 #   - User-triggered only (gh workflow run web-release.yml --ref dev).
@@ -95,7 +95,7 @@ jobs:
     permissions:
       actions: write
     steps:
-      - name: Dispatch the Pages deploy on main
+      - name: Dispatch the production deploy on main
         env:
           GH_TOKEN: ${{ github.token }}
           REPO: ${{ github.repository }}

@@ -13,7 +13,7 @@ import { snapshot as toolsSnapshot } from '$lib/content/tools';
  * content, such as /license, is listed below.
  *
  * Prerendered at build time so it ships as a real static file at
- * build/sitemap.xml on GitHub Pages.
+ * build/sitemap.xml.
  */
 
 export const prerender = true;
