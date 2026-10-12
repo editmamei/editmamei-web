@@ -68,13 +68,29 @@ export function hashedKey(path, bytes) {
 	return `${path.slice(0, -ext.length)}.${hash}${ext}`;
 }
 
+/** Path characters that go into a URL unencoded. */
+const SAFE_PATH = /^[A-Za-z0-9._/-]+$/;
+
 /** The URL map for the given files, keys sorted. */
 export function buildManifest(files, dir = MEDIA_DIR) {
 	const manifest = {};
 	for (const path of files) {
+		if (!SAFE_PATH.test(path)) {
+			throw new Error(`media/${path}: use only letters, digits, '.', '_', '-' and '/' in names`);
+		}
 		manifest[path] = `${BASE_URL}/${hashedKey(path, readFileSync(join(dir, path)))}`;
 	}
 	return manifest;
+}
+
+export function parseArgs(argv) {
+	const args = { check: false, verify: true };
+	for (const a of argv) {
+		if (a === '--check') args.check = true;
+		else if (a === '--no-verify') args.verify = false;
+		else throw new Error(`unknown argument: ${a}`);
+	}
+	return args;
 }
 
 export function serialize(manifest) {
@@ -107,12 +123,13 @@ async function rangeWorks(url) {
 	return res.status === 206 && /^bytes 0-1023\//.test(res.headers.get('content-range') ?? '');
 }
 
-async function main(args) {
+async function main(argv) {
+	const args = parseArgs(argv);
 	const files = listMedia();
 	const manifest = buildManifest(files);
 	const committed = existsSync(OUTPUT_PATH) ? readFileSync(OUTPUT_PATH, 'utf8') : '';
 
-	if (args.includes('--check')) {
+	if (args.check) {
 		if (committed === serialize(manifest)) {
 			console.log(`media map up to date (${files.length} files)`);
 			return 0;
@@ -158,10 +175,9 @@ async function main(args) {
 		console.log(`uploaded          ${path} -> ${key}`);
 	}
 
-	writeFileSync(OUTPUT_PATH, serialize(manifest));
-	console.log(`wrote ${relative(REPO_ROOT, OUTPUT_PATH)}`);
-
-	if (!args.includes('--no-verify')) {
+	// Check before writing the map, so a map is never committed with URLs that
+	// don't play on iPhone.
+	if (args.verify) {
 		for (const path of files) {
 			if (!(await rangeWorks(manifest[path]))) {
 				console.error(`range request did not return 206: ${manifest[path]}`);
@@ -170,14 +186,17 @@ async function main(args) {
 		}
 		console.log('range requests answer 206');
 	}
+
+	writeFileSync(OUTPUT_PATH, serialize(manifest));
+	console.log(`wrote ${relative(REPO_ROOT, OUTPUT_PATH)}`);
 	return 0;
 }
 
-if (import.meta.url === pathToFileURL(process.argv[1]).href) {
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
 	main(process.argv.slice(2)).then(
 		(code) => process.exit(code),
 		(err) => {
-			console.error(err.message);
+			console.error(`upload-media: ${err.message}`);
 			process.exit(1);
 		}
 	);

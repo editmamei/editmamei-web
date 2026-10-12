@@ -19,3 +19,5 @@
 *.psd       binary
 *.woff      binary
 *.woff2     binary
+*.mp4       binary
+*.webm      binary

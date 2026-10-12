@@ -5,7 +5,7 @@
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdtempSync, readFileSync, readdirSync, mkdirSync, writeFileSync } from 'node:fs';
+import { mkdtempSync, readFileSync, readdirSync, mkdirSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { dirname, extname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -16,12 +16,15 @@ import {
 	buildManifest,
 	hashedKey,
 	listMedia,
+	parseArgs,
 	serialize
 } from '../scripts/upload-media.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const STATIC_DIR = resolve(__dirname, '..', 'static');
 const VIDEO_EXTENSIONS = new Set([...Object.keys(MEDIA_TYPES), '.mov', '.m4v']);
+
+const escapeRegExp = (text) => text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
 function filesUnder(dir) {
 	return readdirSync(dir, { withFileTypes: true, recursive: true })
@@ -49,8 +52,12 @@ test('the committed media map matches the files under media/', () => {
 test('every URL is on the media domain with a content hash in its name', () => {
 	const manifest = JSON.parse(readFileSync(OUTPUT_PATH, 'utf8'));
 	for (const [path, url] of Object.entries(manifest)) {
-		const stem = path.slice(0, -extname(path).length);
-		assert.match(url, new RegExp(`^${BASE_URL}/${stem}\\.[0-9a-f]{12}\\${extname(path)}$`));
+		const ext = extname(path);
+		const stem = path.slice(0, -ext.length);
+		assert.match(
+			url,
+			new RegExp(`^${escapeRegExp(`${BASE_URL}/${stem}.`)}[0-9a-f]{12}${escapeRegExp(ext)}$`)
+		);
 	}
 });
 
@@ -60,11 +67,25 @@ test('hashedKey puts the first 12 hex digits of the SHA-256 before the extension
 	assert.equal(hashedKey('a.b/c.d.webm', Buffer.from('abc')), 'a.b/c.d.ba7816bf8f01.webm');
 });
 
-test('listMedia finds media files only, sorted, as posix paths', () => {
+test('listMedia finds media files only, sorted, as posix paths', (t) => {
 	const dir = mkdtempSync(join(tmpdir(), 'media-'));
+	t.after(() => rmSync(dir, { recursive: true, force: true }));
 	mkdirSync(join(dir, 'b'));
 	writeFileSync(join(dir, 'b', 'two.MP4'), 'x');
 	writeFileSync(join(dir, 'one.webm'), 'x');
 	writeFileSync(join(dir, 'notes.txt'), 'x');
 	assert.deepEqual(listMedia(dir), ['b/two.MP4', 'one.webm']);
+});
+
+test('buildManifest refuses a name that is not safe in a URL', (t) => {
+	const dir = mkdtempSync(join(tmpdir(), 'media-'));
+	t.after(() => rmSync(dir, { recursive: true, force: true }));
+	writeFileSync(join(dir, 'my clip#1.mp4'), 'x');
+	assert.throws(() => buildManifest(listMedia(dir), dir), /my clip#1\.mp4: use only/);
+});
+
+test('parseArgs reads --check and --no-verify and refuses anything else', () => {
+	assert.deepEqual(parseArgs([]), { check: false, verify: true });
+	assert.deepEqual(parseArgs(['--check', '--no-verify']), { check: true, verify: false });
+	assert.throws(() => parseArgs(['--chek']), /unknown argument: --chek/);
 });
