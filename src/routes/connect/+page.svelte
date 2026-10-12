@@ -113,9 +113,8 @@
 				</a>
 			</div>
 			<p class="mt-4 text-sm text-neutral-600">
-				Works in Claude, including on your phone. New accounts are approved one at a time and start
-				with 150 free credits, plus up to 50 more each month. After that, credits come in packs from
-				$7 or monthly plans from $10.
+				Works in Claude, including on your phone. New accounts start with 150 free credits, plus up to
+				50 more each month. After that, credits come in packs from $7 or monthly plans from $10.
 			</p>
 		</div>
 	</div>
