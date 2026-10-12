@@ -113,10 +113,32 @@
 				</a>
 			</div>
 			<p class="mt-4 text-sm text-neutral-600">
-				Works in Claude, including on your phone. New accounts start with 150 free credits, plus up to
-				50 more each month. After that, credits come in packs from $7 or monthly plans from $10.
+				Works in Claude, including on your phone. New accounts start with 150 free credits, plus up
+				to 50 more each month. After that, credits come in packs from $7 or monthly plans from $10.
 			</p>
 		</div>
+
+		<!-- The launch film has a soundtrack, so it waits for a click instead of autoplaying. -->
+		<figure class="mt-10 md:mt-12">
+			<video
+				class="aspect-video w-full rounded-2xl border border-neutral-200 bg-neutral-950 shadow-xl"
+				controls
+				playsinline
+				preload="none"
+				poster="/connect/connect-launch-poster.webp"
+				width="1920"
+				height="1080"
+				onplay={() => track('connect-video-play')}
+				aria-label="The Editmamei Connect launch film: adding Connect to Claude, sending a photo from a phone, the edit steps, and the download link."
+			>
+				<source src="/connect/connect-launch-720.mp4" type="video/mp4" media="(max-width: 640px)" />
+				<source src="/connect/connect-launch-1080.mp4" type="video/mp4" />
+			</video>
+			<figcaption class="mt-3 text-xs text-neutral-500">
+				Edits from a real Connect session, from adding the connector to the download link. 70
+				seconds, with sound.
+			</figcaption>
+		</figure>
 	</div>
 </section>
 
