@@ -33,6 +33,7 @@
 		"eslint-plugin-svelte": "^3.17.0",
 		"globals": "^17.4.0",
 		"mdsvex": "^0.12.8",
+		"mp4-muxer": "5.2.2",
 		"prettier": "^3.8.1",
 		"prettier-plugin-svelte": "^3.5.1",
 		"prettier-plugin-tailwindcss": "^0.7.2",
