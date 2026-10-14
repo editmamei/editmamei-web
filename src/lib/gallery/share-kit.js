@@ -40,7 +40,9 @@ const BODY_FONT = '"Geist", "Bricolage Grotesque", ui-sans-serif, system-ui, san
  */
 export function timeline(share) {
   const beats = [];
-  const frameOf = (i) => (i === null || i === undefined || !share.frames[i] ? share.after : share.frames[i]);
+  // A chapter with no frame (a removal or a crop is not a filter) holds the picture before it, so the after is not given away early.
+  let shown = share.before || share.after;
+  const frameOf = (i) => (shown = i === null || i === undefined || !share.frames[i] ? shown : share.frames[i]);
   const chapters = share.chapters && share.chapters.length
     ? share.chapters.map((c) => ({ image: frameOf(c.frame), title: c.title, text: c.text || '' }))
     : share.frames.map((f, i) => {
@@ -49,7 +51,8 @@ export function timeline(share) {
       });
   if (share.before) beats.push({ kind: 'still', image: share.before, title: 'Before', text: share.title, duration: BEAT });
   chapters.forEach((c, i) => beats.push({ kind: 'still', image: c.image, counter: `${i + 1}/${chapters.length}`, title: c.title, text: c.text, duration: BEAT }));
-  if (share.before) beats.push({ kind: 'reveal', from: share.before, image: share.after, title: 'After', text: share.title, duration: WIPE + REVEAL_HOLD });
+  // Pictures of different shapes cannot be wiped one into the other: they cross-fade.
+  if (share.before) beats.push({ kind: 'reveal', from: share.before, image: share.after, aligned: share.aligned !== false, title: 'After', text: share.title, duration: WIPE + REVEAL_HOLD });
   else beats.push({ kind: 'still', image: share.after, title: 'After', text: share.title, duration: BEAT });
   beats.push({ kind: 'end', duration: END });
   return beats;
@@ -293,8 +296,9 @@ export function drawReel(ctx, w, h, beats, pictures, t) {
     box = photoBox(to, band.x, band.y, band.w, band.h);
     const p = ease(clamp01(local / WIPE));
     paintPhoto(ctx, from, photoBox(from, band.x, band.y, band.w, band.h), 1, 1, 1, radius);
-    paintPhoto(ctx, to, box, 1, 1, p, radius);
-    if (p > 0 && p < 1) {
+    if (!beat.aligned) paintPhoto(ctx, to, box, 1, p, 1, radius);
+    else paintPhoto(ctx, to, box, 1, 1, p, radius);
+    if (beat.aligned && p > 0 && p < 1) {
       ctx.fillStyle = '#ffffff';
       ctx.fillRect(box.x + box.w * p - 3 * k, box.y, 6 * k, box.h);
     }
@@ -304,18 +308,40 @@ export function drawReel(ctx, w, h, beats, pictures, t) {
   if (box) caption(ctx, beat, box, k, beat.kind === 'reveal' ? ease(clamp01((local - WIPE * 0.6) / 0.4)) : fadeIn);
 }
 
-/** Play the video on a canvas, looping, until the returned function is called. */
+/**
+ * Play the video on a canvas, looping. A tap or click pauses and resumes it. With reduced motion asked for, it starts paused
+ * on the finished edit. Returns a function that stops it for good.
+ */
 export function play(canvas, beats, pictures) {
   const ctx = canvas.getContext('2d');
   const total = durationOf(beats);
-  const start = performance.now();
+  const still = Math.max(0, total - END - 0.05);
+  const reduced = typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches;
   let raf = 0;
+  let offset = reduced ? still : 0;
+  let started = 0;
   const tick = (now) => {
-    drawReel(ctx, canvas.width, canvas.height, beats, pictures, ((now - start) / 1000) % total);
+    drawReel(ctx, canvas.width, canvas.height, beats, pictures, (offset + (now - started) / 1000) % total);
     raf = requestAnimationFrame(tick);
   };
-  raf = requestAnimationFrame(tick);
-  return () => cancelAnimationFrame(raf);
+  const start = () => {
+    started = performance.now();
+    raf = requestAnimationFrame(tick);
+  };
+  const pause = () => {
+    cancelAnimationFrame(raf);
+    raf = 0;
+    offset = (offset + (performance.now() - started) / 1000) % total;
+  };
+  const toggle = () => (raf ? pause() : start());
+  canvas.style.cursor = 'pointer';
+  canvas.addEventListener('click', toggle);
+  if (reduced) drawReel(ctx, canvas.width, canvas.height, beats, pictures, still);
+  else start();
+  return () => {
+    cancelAnimationFrame(raf);
+    canvas.removeEventListener('click', toggle);
+  };
 }
 
 export const canEncodeVideo = () => typeof VideoEncoder !== 'undefined' && typeof VideoFrame !== 'undefined';
@@ -338,28 +364,40 @@ export async function encodeReel(beats, pictures, mp4, onProgress = () => undefi
   const target = new ArrayBufferTarget();
   const muxer = new Muxer({ target, video: { codec: 'avc', width: REEL_W, height: REEL_H }, fastStart: 'in-memory' });
   let failure;
-  const encoder = new VideoEncoder({ output: (chunk, meta) => muxer.addVideoChunk(chunk, meta), error: (e) => (failure = e) });
-  encoder.configure(config);
-  const canvas = document.createElement('canvas');
-  canvas.width = REEL_W;
-  canvas.height = REEL_H;
-  const ctx = canvas.getContext('2d');
-  const total = Math.ceil(durationOf(beats) * FPS);
-  for (let i = 0; i < total; i++) {
-    if (failure) throw failure;
-    drawReel(ctx, REEL_W, REEL_H, beats, pictures, i / FPS);
-    const frame = new VideoFrame(canvas, { timestamp: Math.round((i * 1_000_000) / FPS), duration: Math.round(1_000_000 / FPS) });
-    encoder.encode(frame, { keyFrame: i % (FPS * 2) === 0 });
-    frame.close();
-    while (encoder.encodeQueueSize > 8) await new Promise((r) => setTimeout(r, 0));
-    if (i % 6 === 0) {
-      onProgress(i / total);
-      await new Promise((r) => setTimeout(r, 0));
+  const encoder = new VideoEncoder({
+    output: (chunk, meta) => {
+      try {
+        muxer.addVideoChunk(chunk, meta);
+      } catch (e) {
+        failure = failure || e;
+      }
+    },
+    error: (e) => (failure = failure || e),
+  });
+  try {
+    encoder.configure(config);
+    const canvas = document.createElement('canvas');
+    canvas.width = REEL_W;
+    canvas.height = REEL_H;
+    const ctx = canvas.getContext('2d');
+    const total = Math.ceil(durationOf(beats) * FPS);
+    for (let i = 0; i < total; i++) {
+      if (failure) throw failure;
+      drawReel(ctx, REEL_W, REEL_H, beats, pictures, i / FPS);
+      const frame = new VideoFrame(canvas, { timestamp: Math.round((i * 1_000_000) / FPS), duration: Math.round(1_000_000 / FPS) });
+      encoder.encode(frame, { keyFrame: i % (FPS * 2) === 0 });
+      frame.close();
+      while (encoder.encodeQueueSize > 8) await new Promise((r) => setTimeout(r, 0));
+      if (i % 6 === 0) {
+        onProgress(i / total);
+        await new Promise((r) => setTimeout(r, 0));
+      }
     }
+    await encoder.flush();
+    if (failure) throw failure;
+  } finally {
+    if (encoder.state !== 'closed') encoder.close();
   }
-  await encoder.flush();
-  encoder.close();
-  if (failure) throw failure;
   muxer.finalize();
   onProgress(1);
   return new Blob([target.buffer], { type: 'video/mp4' });

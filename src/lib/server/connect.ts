@@ -34,6 +34,8 @@ async function connectJson(path: string, platform: Platform): Promise<unknown | 
 			throw new Error(`Connect answered ${fresh.status}`);
 		const body = await fresh.text();
 		if (body.length > MAX_BYTES) throw new Error('Connect sent too much');
+		// Only an answer that reads is kept: a broken one must not be served for the next minute.
+		if (fresh.status === 200) JSON.parse(body);
 		res = new Response(body, {
 			status: fresh.status,
 			headers: {

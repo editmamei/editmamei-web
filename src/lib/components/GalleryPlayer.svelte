@@ -37,7 +37,7 @@
 		class="block aspect-[9/16] w-full max-w-[270px] rounded-2xl bg-brand-deep"
 		aria-label={`${share.title}: the edit as a short video`}
 	></canvas>
-	{#if failed}
-		<figcaption class="mt-2 text-sm text-neutral-600">The video could not be loaded.</figcaption>
-	{/if}
+	<figcaption class="mt-2 text-sm text-neutral-600">
+		{failed ? 'The video could not be loaded.' : 'Tap the video to pause or play it.'}
+	</figcaption>
 </figure>
