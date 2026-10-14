@@ -14,7 +14,9 @@ export const load: PageServerLoad = async ({ params, platform, setHeaders }) => 
 		error(503, 'The gallery cannot be reached just now. Try again in a minute.');
 	}
 	if (!share) error(404, 'There is no shared edit at this address.');
-	setHeaders({ 'cache-control': 'public, max-age=60' });
+	// private: kept a minute by the viewer's browser only. A public page would be held by the zone's 4-hour browser cache rule,
+	// and a share that is taken down must go within the minute (Connect's data is cached for the minute in connect.ts instead).
+	setHeaders({ 'cache-control': 'private, max-age=60' });
 	if (!share.listed) setHeaders({ 'x-robots-tag': 'noindex' });
 	// Three from the wall to go on to (never this one).
 	const more = (await loadWall(platform))
