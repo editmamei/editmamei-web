@@ -7,6 +7,11 @@ on:
   # GITHUB_TOKEN push can't fire the push trigger above; the release
   # fan-out pushes with a PAT and still can).
   workflow_dispatch:
+  # Hourly rebuild so shared edits reach the gallery without a code change.
+  # Scheduled runs use the default branch (main); the ref guard below still
+  # refuses anything else.
+  schedule:
+    - cron: '17 * * * *'
 
 permissions:
   contents: read
@@ -95,6 +100,8 @@ jobs:
 
   ping-indexnow:
     needs: deploy
+    # The hourly rebuild would otherwise re-submit every URL to IndexNow 24 times a day.
+    if: github.event_name != 'schedule'
     runs-on: ubuntu-latest
     steps:
       - name: Notify IndexNow (URL list derived from the live sitemap)
