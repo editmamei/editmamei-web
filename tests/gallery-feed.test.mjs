@@ -1,26 +1,23 @@
 // Gallery feed parsing and validation (src/lib/gallery/feed.js). The feed is
 // user-submitted, so these pin what is dropped, what is kept verbatim as text,
-// and that a dead or hostile feed degrades to "seed only" instead of failing.
+// and that a dead or hostile feed degrades to an empty gallery instead of failing.
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { existsSync, readFileSync, readdirSync, statSync } from 'node:fs';
+import { readFileSync, readdirSync, statSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import {
 	fetchFeed,
-	mergeEntries,
 	parseFeed,
 	pickFeatured,
-	replayPlan,
 	tileSpan,
-	validateEntry
+	validateChapters,
+	validateEntry,
+	validateShare
 } from '../src/lib/gallery/feed.js';
 
 const REPO_ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
-const seed = JSON.parse(
-	readFileSync(join(REPO_ROOT, 'src', 'lib', 'content', 'gallery-seed.json'), 'utf8')
-);
 
 const IMG = 'https://connect.editmamei.com/g/abc/after.jpg';
 const good = (over = {}) => ({
@@ -74,7 +71,8 @@ test('images from foreign hosts or odd paths are dropped', () => {
 		assert.equal(validateEntry(good({ before: u })), null, `before ${u}`);
 		assert.equal(validateEntry(good({ frames: [u] })), null, `frame ${u}`);
 	}
-	assert.ok(validateEntry(good({ after: '/gallery/seed/car-after.jpg' })));
+	// The demo seed is gone: a picture on this site is not a gallery picture either.
+	assert.equal(validateEntry(good({ after: '/gallery/seed/car-after.jpg' })), null);
 });
 
 test('links must be https; others drop the entry', () => {
@@ -172,22 +170,6 @@ test('fetchFeed: failures, non-200 and oversize all give an empty list and never
 	assert.equal(ok.length, 1);
 });
 
-test('seed-only: an empty feed leaves exactly the committed seed', () => {
-	const seeded = parseFeed(JSON.stringify({ v: 1, entries: seed }), quiet);
-	assert.equal(seeded.length, seed.length, 'every committed seed entry must validate');
-	assert.equal(mergeEntries([], seeded).length, 5);
-});
-
-test('merge: seed wins an id clash, newest first', () => {
-	const seeded = parseFeed(JSON.stringify({ v: 1, entries: seed }), quiet);
-	const impostor = validateEntry(good({ id: seeded[0].id, title: 'Replaced' }));
-	const newer = validateEntry(good({ id: 'brand-new', date: '2030-01-01' }));
-	const merged = mergeEntries([impostor, newer], seeded);
-	assert.equal(merged[0].id, 'brand-new');
-	assert.ok(!merged.some((e) => e.title === 'Replaced'));
-	assert.equal(merged.length, seeded.length + 1);
-});
-
 test('pickFeatured: flagged first, topped up to 3, capped at 5', () => {
 	const mk = (id, featured) => ({ id, featured });
 	const ids = (list) => pickFeatured(list).map((e) => e.id);
@@ -214,14 +196,6 @@ test('tileSpan follows aspect ratio', () => {
 	assert.equal(tileSpan(1000, 1000, true), 'b');
 });
 
-test('every seed image exists under static/', () => {
-	for (const e of seed) {
-		for (const u of [e.before, e.after]) {
-			assert.ok(existsSync(join(REPO_ROOT, 'static', u)), `${u} is missing`);
-		}
-	}
-});
-
 test('gallery sources never render with {@html}', () => {
 	const files = [];
 	const walk = (dir) => {
@@ -246,7 +220,9 @@ test('links render with rel="ugc nofollow noopener"', () => {
 		join(REPO_ROOT, 'src', 'routes', 'gallery', '[id]', '+page.svelte'),
 		'utf8'
 	);
-	assert.match(page, /href=\{entry\.link\}\s+rel="ugc nofollow noopener"/);
+	const links = page.match(/href=\{share\.link\}\s+rel="ugc nofollow noopener"/g) ?? [];
+	assert.equal(links.length, 2);
+	assert.ok(!/href=\{share\.link\}(?!\s+rel="ugc nofollow noopener")/.test(page));
 });
 
 test('a max-size entry as Connect writes it is accepted whole', () => {
@@ -258,53 +234,16 @@ test('a max-size entry as Connect writes it is accepted whole', () => {
 	const e = validateEntry(fixture);
 	assert.ok(e, 'validateEntry must accept the Connect fixture');
 	assert.deepEqual(e.steps, fixture.steps);
+	assert.deepEqual(e.chapters, fixture.chapters);
 	assert.deepEqual(e.frames, fixture.frames);
 	assert.equal(e.before, fixture.before);
 	assert.equal(e.link, fixture.link);
-});
-
-test('replay order is before, each frame, after, with the last mapped step as the label', () => {
-	const fixture = JSON.parse(
-		readFileSync(join(REPO_ROOT, 'tests', 'fixtures', 'connect-feed-entry-max.json'), 'utf8')
-	);
-	const plan = replayPlan(validateEntry(fixture));
-	assert.deepEqual(plan.urls, [fixture.before, ...fixture.frames, fixture.after]);
-	assert.equal(plan.labels.length, plan.urls.length);
-	assert.equal(plan.labels[0], 'Before');
-	assert.equal(plan.labels.at(-1), 'After');
-	fixture.frames.forEach((_, i) => {
-		const mapped = fixture.steps.filter((s) => s.frame === i);
-		assert.equal(plan.labels[i + 1], mapped.at(-1).title, `frame ${i}`);
-	});
-	assert.equal(plan.mode, 'fade');
-
-	const small = validateEntry(
-		good({
-			frames: [IMG, IMG],
-			steps: [
-				{ title: 'Cropped', detail: '', frame: null },
-				{ title: 'Warmer', detail: '', frame: 0 },
-				{ title: 'Glow', detail: '', frame: 0 }
-			]
-		})
-	);
-	assert.deepEqual(replayPlan(small).labels, ['Before', 'Glow', 'Step 2', 'After']);
-});
-
-test('replay without frames is before then after, wiping when aligned', () => {
-	const e = validateEntry(good({ frames: [], steps: [] }));
-	const plan = replayPlan(e);
-	assert.deepEqual(plan.urls, [e.before, e.after]);
-	assert.deepEqual(plan.labels, ['Before', 'After']);
-	assert.equal(plan.mode, 'wipe');
-	assert.equal(replayPlan(validateEntry(good({ frames: [], aligned: false }))).mode, 'fade');
 });
 
 test('an entry with no before picture is kept, unaligned and without frames', () => {
 	const e = validateEntry(good({ before: null, frames: [], aligned: true, steps: [] }));
 	assert.equal(e?.before, null);
 	assert.equal(e?.aligned, false);
-	assert.deepEqual(replayPlan(e).urls, [e.after]);
 	assert.equal(validateEntry(good({ before: null })), null, 'frames need a before');
 	assert.equal(validateEntry(good({ before: 'https://evil.example/a.jpg' })), null);
 });
@@ -337,4 +276,58 @@ test('GALLERY_FEED_REQUIRED: a failed, non-200, oversized or malformed feed thro
 	assert.equal(mixed.length, 1);
 	// Not required: the same failures stay a warning.
 	assert.deepEqual(await fetchFeed('https://x', { fetch: res(404), warn: quiet }), []);
+});
+
+test('a share from Connect is an entry plus whether it is listed in the gallery', () => {
+	const share = validateShare({ ...good(), v: 1, listed: false });
+	assert.equal(share?.listed, false);
+	assert.equal(share?.featured, false);
+	assert.equal(validateShare({ ...good(), v: 1, listed: true })?.listed, true);
+	for (const bad of [
+		{ ...good(), listed: false },
+		{ ...good(), v: 1 },
+		{ ...good(), v: 2, listed: true },
+		null,
+		'x',
+		[]
+	]) {
+		assert.equal(validateShare(bad), null, JSON.stringify(bad));
+	}
+	// A share with no recorded date still shows.
+	assert.ok(validateShare({ ...good(), v: 1, listed: false, date: null }));
+});
+
+test('chapters must cover every step once, in order; anything else is no chapters, never a dropped entry', () => {
+	const steps = [
+		{ title: 'A', detail: '', frame: null, call: 'select_with_ai · target sky' },
+		{ title: 'B', detail: '', frame: 0, call: '' },
+		{ title: 'C', detail: '', frame: null }
+	];
+	const ok = [
+		{ title: 'Sky', text: 'Selected the sky.', from: 0, to: 1, frame: 0 },
+		{ title: 'Finish', text: '', from: 2, to: 2, frame: null }
+	];
+	const e = validateEntry(good({ frames: [IMG], steps, chapters: ok }));
+	assert.deepEqual(e?.chapters, ok);
+	assert.equal(e?.steps[2].call, '');
+	for (const chapters of [
+		[ok[0]],
+		[ok[1], ok[0]],
+		[{ ...ok[0], title: '' }, ok[1]],
+		[{ ...ok[0], title: 'x'.repeat(61) }, ok[1]],
+		[{ ...ok[0], text: 'y'.repeat(201) }, ok[1]],
+		[{ ...ok[0], title: 'a\u202eb' }, ok[1]],
+		'nope'
+	]) {
+		const kept = validateEntry(good({ frames: [IMG], steps, chapters }));
+		assert.ok(kept, 'the entry stays');
+		assert.deepEqual(kept.chapters, [], JSON.stringify(chapters));
+	}
+	// A frame that is not one of the entry's is no frame.
+	assert.equal(validateChapters([{ ...ok[0], to: 2, frame: 9 }], 3, 1)[0].frame, null);
+	// A step's call is plain text of at most 160 characters, or the entry goes.
+	assert.equal(
+		validateEntry(good({ frames: [IMG], steps: [{ ...steps[0], call: 'z'.repeat(161) }] })),
+		null
+	);
 });

@@ -7,3 +7,6 @@ bun.lockb
 
 # Miscellaneous
 /static/
+
+# The share kit is a verbatim copy of editmamei-remote assets/kit/share-kit.js: keep the two identical.
+src/lib/gallery/share-kit.js

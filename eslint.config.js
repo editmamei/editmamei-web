@@ -12,6 +12,8 @@ const gitignorePath = path.resolve(import.meta.dirname, '.gitignore');
 
 export default defineConfig(
 	includeIgnoreFile(gitignorePath),
+	// A verbatim copy of editmamei-remote assets/kit/share-kit.js (plain browser JS, linted and tested there).
+	{ ignores: ['src/lib/gallery/share-kit.js'] },
 	js.configs.recommended,
 	ts.configs.recommended,
 	svelte.configs.recommended,

@@ -6,7 +6,11 @@ declare global {
 		// interface Locals {}
 		// interface PageData {}
 		// interface PageState {}
-		// interface Platform {}
+		/** What the Cloudflare Worker passes to the gallery's server routes (src/lib/server/connect.ts). Absent while prerendering. */
+		interface Platform {
+			context?: { waitUntil(promise: Promise<unknown>): void };
+			caches?: { default: Cache };
+		}
 	}
 }
 

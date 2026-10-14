@@ -1,10 +1,10 @@
-// Behavioral pins on the signup surfaces in the built site (build/). The
+// Behavioral pins on the signup surfaces in the built site (.svelte-kit/cloudflare). The
 // invariant these protect: a NO-JAVASCRIPT visitor must land on real content
 // at every step of the signup flow. A previous revision used ssr=false pages
 // that read the query string client-side — the prerendered HTML was an empty
 // shell, and the whole advertised no-JS path dead-ended on blank pages
 // (QA finding D2). These tests read the artifact, so like the blog artifact
-// tests they SKIP when build/ is absent; web-release.yml and the local verify
+// tests they SKIP when the build is absent; web-release.yml and the local verify
 // checklist run build before test to arm them.
 
 import { test } from 'node:test';
@@ -15,10 +15,12 @@ import { fileURLToPath } from 'node:url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = resolve(__dirname, '..');
-const BUILD_DIR = join(REPO_ROOT, 'build');
+const BUILD_DIR = join(REPO_ROOT, '.svelte-kit', 'cloudflare');
 
 const built = existsSync(BUILD_DIR);
-const skip = built ? false : 'build/ absent — run npm run build first to enable artifact checks';
+const skip = built
+	? false
+	: 'the build is absent — run npm run build first to enable artifact checks';
 
 function page(relPath) {
 	return readFileSync(join(BUILD_DIR, relPath), 'utf8');

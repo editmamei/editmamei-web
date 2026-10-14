@@ -1,7 +1,7 @@
-// Behavioral pins on the built site (build/): drafts must never reach
+// Behavioral pins on the built site (.svelte-kit/cloudflare): drafts must never reach
 // production output, every published post must actually be in it, and the
 // generated XML must be well-escaped. These run against the artifact, so
-// they SKIP when build/ is absent (plain `npm test` before a build).
+// they SKIP when the build is absent (plain `npm test` before a build).
 // deploy.yml runs test before build, so there they skip; web-release.yml
 // deliberately runs build before test so the publish path enforces them,
 // and the local verify checklist (build, then test) does too.
@@ -14,12 +14,14 @@ import { fileURLToPath } from 'node:url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = resolve(__dirname, '..');
-const BUILD_DIR = join(REPO_ROOT, 'build');
+const BUILD_DIR = join(REPO_ROOT, '.svelte-kit', 'cloudflare');
 const POSTS_DIR = join(REPO_ROOT, 'src', 'lib', 'content', 'posts');
 const DRAFTS_DIR = join(POSTS_DIR, 'drafts');
 
 const built = existsSync(BUILD_DIR);
-const skip = built ? false : 'build/ absent — run npm run build first to enable artifact checks';
+const skip = built
+	? false
+	: 'the build is absent — run npm run build first to enable artifact checks';
 
 function mdSlugs(dir) {
 	if (!existsSync(dir)) return [];
@@ -73,7 +75,7 @@ test('every published post is prerendered and in the sitemap', { skip }, () => {
 });
 
 test('the blog index page is prerendered', { skip }, () => {
-	assert.ok(existsSync(join(BUILD_DIR, 'blog.html')), 'build/blog.html missing');
+	assert.ok(existsSync(join(BUILD_DIR, 'blog.html')), 'blog.html missing from the build');
 });
 
 test('generated XML contains no unescaped ampersands', { skip }, () => {

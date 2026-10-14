@@ -1,4 +1,4 @@
-import adapter from '@sveltejs/adapter-static';
+import adapter from '@sveltejs/adapter-cloudflare';
 import { mdsvex } from 'mdsvex';
 
 /** @type {import('@sveltejs/kit').Config} */
@@ -12,21 +12,17 @@ const config = {
 		runes: ({ filename }) => (filename.split(/[/\\]/).includes('node_modules') ? undefined : true)
 	},
 	kit: {
-		adapter: adapter({
-			pages: 'build',
-			assets: 'build',
-			fallback: '404.html',
-			precompress: false,
-			strict: true
-		}),
+		// Cloudflare Workers with static assets (wrangler.jsonc): every page is prerendered and served as a
+		// file, except the gallery's two routes, which the Worker renders on request from Connect's share
+		// data so an approved, edited or removed share shows at once (src/routes/gallery).
+		adapter: adapter(),
 		prerender: {
 			// A blog with zero published posts leaves /blog/[slug] with no
-			// pages to generate, which is valid (its entries() returned []);
-			// so does a gallery with no entries at all.
+			// pages to generate, which is valid (its entries() returned []).
 			// Every OTHER unseen route keeps the default hard failure —
 			// unreachable-route drift is the bug class the sitemap tests pin.
 			handleUnseenRoutes: ({ routes }) => {
-				const unexpected = routes.filter((id) => id !== '/blog/[slug]' && id !== '/gallery/[id]');
+				const unexpected = routes.filter((id) => id !== '/blog/[slug]');
 				if (unexpected.length > 0) {
 					throw new Error(
 						`The following routes were marked as prerenderable, but were not prerendered: ${unexpected.join(', ')}`

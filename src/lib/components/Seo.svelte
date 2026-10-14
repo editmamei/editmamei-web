@@ -9,14 +9,23 @@
 		description,
 		path,
 		image = '/og-image.png',
-		article
+		imageAlt,
+		article,
+		noindex = false
 	}: {
 		title: string;
 		description: string;
 		/** Route path starting with '/', e.g. '/pricing'. */
 		path: string;
-		/** Root-relative social-share image; defaults to the site-wide card. */
+		/**
+		 * Social-share image: root-relative (the site-wide card by default), or an
+		 * https address (a gallery entry's own picture, served by Connect).
+		 */
 		image?: string;
+		/** Alt text for a page's own image; the site-wide card has its own. */
+		imageAlt?: string;
+		/** A page that may be linked to but is not for search (an unlisted gallery share). */
+		noindex?: boolean;
 		/**
 		 * Blog posts only: switches og:type to "article" and emits the
 		 * article:*_time tags. Dates are YYYY-MM-DD (valid ISO 8601).
@@ -26,13 +35,17 @@
 
 	const ORIGIN = 'https://editmamei.com';
 	const url = $derived(path === '/' ? `${ORIGIN}/` : `${ORIGIN}${path}`);
-	const imageUrl = $derived(`${ORIGIN}${image}`);
+	const ownImage = $derived(image.startsWith('https://'));
+	const imageUrl = $derived(ownImage ? image : `${ORIGIN}${image}`);
 </script>
 
 <svelte:head>
 	<title>{title}</title>
 	<meta name="description" content={description} />
 	<link rel="canonical" href={url} />
+	{#if noindex}
+		<meta name="robots" content="noindex" />
+	{/if}
 
 	<meta property="og:title" content={title} />
 	<meta property="og:description" content={description} />
@@ -46,12 +59,16 @@
 	<meta property="og:url" content={url} />
 	<meta property="og:site_name" content="Editmamei" />
 	<meta property="og:image" content={imageUrl} />
-	<meta property="og:image:width" content="1200" />
-	<meta property="og:image:height" content="630" />
-	<meta
-		property="og:image:alt"
-		content="Editmamei, the photo editor MCP server: natural-language photo editing in desktop Photoshop. AI orchestration, not generation."
-	/>
+	{#if ownImage}
+		<meta property="og:image:alt" content={imageAlt ?? title} />
+	{:else}
+		<meta property="og:image:width" content="1200" />
+		<meta property="og:image:height" content="630" />
+		<meta
+			property="og:image:alt"
+			content="Editmamei, the photo editor MCP server: natural-language photo editing in desktop Photoshop. AI orchestration, not generation."
+		/>
+	{/if}
 
 	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:site" content="@editmamei" />

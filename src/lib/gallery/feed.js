@@ -8,13 +8,15 @@
 // never use {@html}.
 
 /**
- * @typedef {{ title: string, detail: string, frame: number | null }} GalleryStep
+ * @typedef {{ title: string, detail: string, frame: number | null, call: string }} GalleryStep
+ * @typedef {{ title: string, text: string, from: number, to: number, frame: number | null }} GalleryChapter
  * @typedef {{
  *   id: string, title: string, by: string, link: string | null, date: string,
  *   featured: boolean, width: number, height: number, aligned: boolean,
  *   before: string | null, after: string, frames: string[], steps: GalleryStep[],
- *   credit?: string
+ *   chapters: GalleryChapter[], credit?: string
  * }} GalleryEntry
+ * @typedef {GalleryEntry & { listed: boolean }} GalleryShare
  */
 
 export const DEFAULT_FEED_URL = 'https://connect.editmamei.com/gallery.json';
@@ -27,6 +29,10 @@ export const LIMITS = {
 	credit: 120,
 	stepTitle: 80,
 	stepDetail: 300,
+	stepCall: 160,
+	chapterTitle: 60,
+	chapterText: 200,
+	chapters: 8,
 	steps: 40,
 	frames: 24,
 	dimension: 20000,
@@ -35,10 +41,8 @@ export const LIMITS = {
 
 const ID_RE = /^[a-z0-9-]{1,40}$/;
 const DATE_RE = /^(\d{4})-(\d{2})-(\d{2})(?:T[\d:.]+(?:Z|[+-]\d{2}:\d{2})?)?$/;
-// Only these two image sources are allowed: Connect's public share bucket and
-// the seed images committed to this site. No query strings, no `..` segments.
+// Only Connect's share pictures are allowed. No query strings, no `..` segments.
 const REMOTE_IMAGE_RE = /^https:\/\/connect\.editmamei\.com\/g\/[A-Za-z0-9._~/-]{1,200}$/;
-const SEED_IMAGE_RE = /^\/gallery\/seed\/[A-Za-z0-9._-]{1,100}$/;
 // C0/C1 controls and the bidi override/isolate characters, which can reorder
 // displayed text.
 // eslint-disable-next-line no-control-regex
@@ -52,7 +56,6 @@ function text(v, min, max) {
 /** @param {unknown} v @returns {v is string} */
 export function isImageUrl(v) {
 	if (typeof v !== 'string') return false;
-	if (SEED_IMAGE_RE.test(v)) return !v.split('/').some((p) => p === '..' || p === '.');
 	return REMOTE_IMAGE_RE.test(v) && !v.split('/').some((p) => p === '..' || p === '.');
 }
 
@@ -140,7 +143,9 @@ export function validateEntry(raw) {
 			const at = frames.indexOf(st.frame);
 			if (at >= 0) frame = at;
 		}
-		steps.push({ title: st.title, detail, frame });
+		const call = st.call === undefined || st.call === null ? '' : st.call;
+		if (!text(call, 0, LIMITS.stepCall)) return null;
+		steps.push({ title: st.title, detail, frame, call });
 	}
 
 	/** @type {GalleryEntry} */
@@ -157,10 +162,59 @@ export function validateEntry(raw) {
 		before: hasBefore ? /** @type {string} */ (e.before) : null,
 		after: e.after,
 		frames,
-		steps
+		steps,
+		chapters: validateChapters(e.chapters, steps.length, frames.length)
 	};
 	if (credit !== undefined) entry.credit = credit;
 	return entry;
+}
+
+/**
+ * Chapters as Connect writes them: each with a title, together covering every
+ * step once and in order, each frame one of the entry's. Anything else is no
+ * chapters (the page then lists the steps alone); it never drops the entry.
+ * @param {unknown} raw
+ * @param {number} steps
+ * @param {number} frames
+ * @returns {GalleryChapter[]}
+ */
+export function validateChapters(raw, steps, frames) {
+	if (!Array.isArray(raw) || raw.length === 0 || raw.length > LIMITS.chapters) return [];
+	/** @type {GalleryChapter[]} */
+	const out = [];
+	let next = 0;
+	for (const c of raw) {
+		if (!c || typeof c !== 'object') return [];
+		const o = /** @type {Record<string, unknown>} */ (c);
+		const body = o.text === undefined || o.text === null ? '' : o.text;
+		if (!text(o.title, 1, LIMITS.chapterTitle) || !text(body, 0, LIMITS.chapterText)) return [];
+		if (o.from !== next || typeof o.to !== 'number' || !Number.isInteger(o.to)) return [];
+		if (o.to < next || o.to >= steps) return [];
+		const frame =
+			typeof o.frame === 'number' && Number.isInteger(o.frame) && o.frame >= 0 && o.frame < frames
+				? o.frame
+				: null;
+		out.push({ title: o.title, text: body, from: next, to: o.to, frame });
+		next = o.to + 1;
+	}
+	return next === steps ? out : [];
+}
+
+/**
+ * One share's page data from Connect (`/g/<id>.json`): an entry plus `listed`,
+ * true once the owner approved it into the gallery. Until then the page works
+ * for anyone with the link but stays off the wall and out of search. Null when
+ * it fails any check.
+ * @param {unknown} raw
+ * @returns {GalleryShare | null}
+ */
+export function validateShare(raw) {
+	if (!raw || typeof raw !== 'object' || Array.isArray(raw)) return null;
+	const o = /** @type {Record<string, unknown>} */ (raw);
+	if (o.v !== 1 || typeof o.listed !== 'boolean') return null;
+	// A share confirmed before Connect recorded the time has no date: show none rather than a wrong one.
+	const entry = validateEntry({ ...o, featured: false, date: o.date ?? '1970-01-01' });
+	return entry ? { ...entry, listed: o.listed } : null;
 }
 
 /**
@@ -253,42 +307,6 @@ export async function fetchFeed(url, opts = {}) {
 	} catch (err) {
 		return give(err instanceof Error ? err.message : String(err));
 	}
-}
-
-/**
- * What the replay plays: `[before, ...frames, after]` when the entry has
- * frames, `[before, after]` when it has none, `[after]` alone when the maker
- * left the before out. Each picture's label is "Before", the last step mapped
- * to that frame (else "Step N"), then "After".
- * @param {GalleryEntry} entry
- * @returns {{ urls: string[], labels: string[], mode: 'fade' | 'wipe' }}
- */
-export function replayPlan(entry) {
-	if (entry.before === null) return { urls: [entry.after], labels: ['After'], mode: 'fade' };
-	const labels = entry.frames.map((_, i) => {
-		let last = null;
-		for (const s of entry.steps) if (s.frame === i) last = s;
-		return last ? last.title : `Step ${i + 1}`;
-	});
-	return {
-		urls: [entry.before, ...entry.frames, entry.after],
-		labels: ['Before', ...labels, 'After'],
-		mode: entry.frames.length === 0 && entry.aligned ? 'wipe' : 'fade'
-	};
-}
-
-/**
- * Seed entries win an id clash, so the feed can never replace a committed
- * entry. Newest first, id as the tiebreaker.
- * @param {GalleryEntry[]} feed
- * @param {GalleryEntry[]} seed
- * @returns {GalleryEntry[]}
- */
-export function mergeEntries(feed, seed) {
-	const ids = new Set(seed.map((e) => e.id));
-	return [...seed, ...feed.filter((e) => !ids.has(e.id))].sort((a, b) =>
-		a.date === b.date ? a.id.localeCompare(b.id) : a.date < b.date ? 1 : -1
-	);
 }
 
 /**

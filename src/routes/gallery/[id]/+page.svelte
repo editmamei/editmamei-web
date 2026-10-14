@@ -1,22 +1,36 @@
 <script lang="ts">
 	import Seo from '$lib/components/Seo.svelte';
 	import BeforeAfterSlider from '$lib/components/BeforeAfterSlider.svelte';
-	import GalleryReplay from '$lib/components/GalleryReplay.svelte';
+	import GalleryPlayer from '$lib/components/GalleryPlayer.svelte';
 	import { formatDate } from '$lib/gallery/feed.js';
 	import { CONNECT_URL } from '$lib/links';
+	import { CONNECT_ORIGIN } from '$lib/gallery/connect-origin';
 
 	let { data } = $props();
-	const entry = $derived(data.entry);
-	const ratio = $derived(entry.width / entry.height);
-	const stepWord = $derived(entry.steps.length === 1 ? 'step' : 'steps');
+	const share = $derived(data.share);
+	const ratio = $derived(share.width / share.height);
+	const day = $derived(share.date.slice(0, 10));
+	// Credits from Connect link an Instagram profile; it reads as the handle.
+	const handle = $derived(
+		share.link
+			? (/^https:\/\/www\.instagram\.com\/([A-Za-z0-9._]{1,30})\/$/.exec(share.link)?.[1] ?? null)
+			: null
+	);
+	const steps = $derived(share.steps.length);
+	const stepWord = $derived(steps === 1 ? 'step' : 'steps');
+	const callWord = (n: number) => `${n} tool call${n === 1 ? '' : 's'}`;
+	const lead = $derived(share.chapters[0]?.text || share.chapters[0]?.title || '');
 </script>
 
 <Seo
-	path={`/gallery/${entry.id}`}
-	title={`${entry.title}: a real photo edit · Editmamei`}
-	description={`${entry.title}, by ${entry.by}. See the before and after${
-		entry.steps.length > 0 ? ` and the ${entry.steps.length} ${stepWord} it took` : ''
+	path={`/gallery/${share.id}`}
+	title={`${share.title}: a real photo edit · Editmamei`}
+	description={`${share.title}, by ${share.by}. ${lead ? `${lead} ` : ''}See the before and after${
+		steps > 0 ? ` and the ${steps} ${stepWord} it took` : ''
 	}, made in conversation with Claude.`}
+	image={share.after}
+	imageAlt={share.title}
+	noindex={!share.listed}
 />
 
 <div class="mx-auto max-w-6xl px-4 py-8 md:py-12">
@@ -24,50 +38,55 @@
 
 	<div class="mt-4 mb-5 flex flex-wrap items-end justify-between gap-x-6 gap-y-2">
 		<h1 class="text-3xl font-extrabold tracking-tight text-balance text-neutral-900 md:text-5xl">
-			{entry.title}
+			{share.title}
 		</h1>
 		<p class="text-sm text-neutral-600">
-			<span class="font-semibold text-neutral-900">
-				{#if entry.link}
-					<a href={entry.link} rel="ugc nofollow noopener" class="underline hover:no-underline"
-						>{entry.by}</a
-					>
-				{:else}
-					{entry.by}
-				{/if}
-			</span>
-			<span aria-hidden="true"> · </span>
-			<time datetime={entry.date}>{formatDate(entry.date)}</time>
-			{#if entry.credit}
-				<span aria-hidden="true"> · </span>{entry.credit}
+			{#if handle}
+				<span class="font-semibold text-neutral-900">{share.by}</span>
+				<span aria-hidden="true"> · </span>
+				<a href={share.link} rel="ugc nofollow noopener" class="underline hover:no-underline"
+					>@{handle}</a
+				>
+			{:else if share.link}
+				<a
+					href={share.link}
+					rel="ugc nofollow noopener"
+					class="font-semibold text-neutral-900 underline hover:no-underline">{share.by}</a
+				>
+			{:else}
+				<span class="font-semibold text-neutral-900">{share.by}</span>
+			{/if}
+			{#if day !== '1970-01-01'}
+				<span aria-hidden="true"> · </span>
+				<time datetime={day}>{formatDate(day)}</time>
 			{/if}
 		</p>
 	</div>
 
-	{#if entry.before === null}
+	{#if share.before === null}
 		<div class="mx-auto w-full" style="max-width: min(100%, calc(74vh * {ratio}))">
 			<img
-				src={entry.after}
-				alt={entry.title}
-				width={entry.width}
-				height={entry.height}
+				src={share.after}
+				alt={share.title}
+				width={share.width}
+				height={share.height}
 				class="block h-auto w-full rounded-xl"
 			/>
 		</div>
-	{:else if entry.aligned}
+	{:else if share.aligned}
 		<div class="mx-auto w-full" style="max-width: min(100%, calc(74vh * {ratio}))">
 			<BeforeAfterSlider
-				beforeSrc={entry.before}
-				afterSrc={entry.after}
+				beforeSrc={share.before}
+				afterSrc={share.after}
 				beforeAlt="Before"
-				afterAlt={entry.title}
+				afterAlt={share.title}
 			/>
 		</div>
 		<p class="mt-2 text-center text-sm text-neutral-500">Drag to compare</p>
 	{:else}
 		<!-- The edit changed the photo's shape, so the two sit side by side. -->
 		<div class="grid gap-3.5 sm:grid-cols-2">
-			{#each [{ src: entry.before, name: 'Before', alt: 'Before' }, { src: entry.after, name: 'After', alt: entry.title }] as p (p.name)}
+			{#each [{ src: share.before, name: 'Before', alt: 'Before' }, { src: share.after, name: 'After', alt: share.title }] as p (p.name)}
 				<figure
 					class="relative m-0 grid h-[min(70vh,620px)] place-items-center overflow-hidden rounded-xl border border-neutral-200 bg-cream max-sm:h-auto"
 				>
@@ -87,13 +106,55 @@
 	{/if}
 
 	<div
-		class="mt-11 mb-8 grid items-start gap-10 md:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] md:gap-11"
+		class="mt-11 mb-8 grid items-start gap-10 md:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)] md:gap-12"
 	>
 		<section>
-			<h2 class="mb-3 text-xl font-bold tracking-tight text-neutral-900">How it was made</h2>
-			{#if entry.steps.length > 0}
+			<h2 class="mb-4 text-xl font-bold tracking-tight text-neutral-900">How it was made</h2>
+			{#if share.chapters.length > 0}
+				<ol class="m-0 grid list-none gap-6 p-0">
+					{#each share.chapters as chapter, i (i)}
+						{@const calls = share.steps.slice(chapter.from, chapter.to + 1)}
+						<li class="grid grid-cols-[2.25rem_minmax(0,1fr)] gap-3">
+							<span
+								class="grid h-8 w-8 place-items-center rounded-full bg-brand-deep text-sm font-bold text-accent tabular-nums"
+								>{i + 1}</span
+							>
+							<div>
+								<p class="text-lg font-bold tracking-tight text-neutral-900">{chapter.title}</p>
+								{#if chapter.text}
+									<p class="mt-1 text-neutral-700">{chapter.text}</p>
+								{/if}
+								<details class="group mt-2">
+									<summary
+										class="cursor-pointer text-sm font-semibold text-neutral-500 hover:text-neutral-800"
+									>
+										{callWord(calls.length)}
+									</summary>
+									<ol class="mt-2 grid list-none gap-2 border-l-2 border-neutral-200 p-0 pl-4">
+										{#each calls as step, k (k)}
+											<li>
+												<p class="text-[15px] font-semibold text-neutral-800">
+													{step.title}{#if step.detail}<span class="font-normal text-neutral-600">
+															· {step.detail}</span
+														>{/if}
+												</p>
+												{#if step.call}
+													<code
+														class="mt-0.5 block text-[13px] break-words whitespace-normal text-neutral-500"
+														>{step.call}</code
+													>
+												{/if}
+											</li>
+										{/each}
+									</ol>
+								</details>
+							</div>
+						</li>
+					{/each}
+				</ol>
+			{:else if steps > 0}
 				<ol class="m-0 list-none border-t border-neutral-200 p-0">
-					{#each entry.steps as step, i (i)}
+					{#each share.steps as step, i (i)}
 						<li
 							class="grid grid-cols-[2rem_minmax(0,1fr)] gap-3 border-b border-neutral-200 py-3.5"
 						>
@@ -107,55 +168,81 @@
 						</li>
 					{/each}
 				</ol>
-				<p class="mt-3 text-sm text-neutral-600">
-					{entry.steps.length}
-					{stepWord} in one conversation with Claude.
-				</p>
 			{:else}
 				<p class="text-neutral-600">The steps for this edit weren't shared.</p>
 			{/if}
+			{#if steps > 0}
+				<p class="mt-5 text-sm text-neutral-600">
+					{steps}
+					{stepWord} in one conversation with Claude.
+				</p>
+			{/if}
 		</section>
 
-		<aside class="grid gap-7">
-			{#if entry.before !== null}
-				{#key entry.id}
-					<GalleryReplay {entry} />
+		<aside class="grid gap-6">
+			<section>
+				<h2 class="mb-3 text-xl font-bold tracking-tight text-neutral-900">Watch the edit</h2>
+				{#key share.id}
+					<GalleryPlayer {share} />
 				{/key}
-			{:else}
-				<a
-					href={CONNECT_URL}
-					class="inline-flex w-fit items-center rounded-full bg-accent px-5 py-3 text-sm font-semibold text-brand-deep transition-colors hover:brightness-95"
-				>
-					Try this on your photo
-				</a>
-			{/if}
+			</section>
+			<a
+				href={CONNECT_URL}
+				class="inline-flex w-fit items-center rounded-full bg-accent px-5 py-3 text-sm font-semibold text-brand-deep transition-colors hover:brightness-95"
+			>
+				Try this on your photo
+			</a>
 		</aside>
 	</div>
 
-	<section class="border-t border-neutral-200 pt-8 pb-6">
-		<h2 class="mb-4 text-xl font-bold tracking-tight text-neutral-900">More from the gallery</h2>
-		<ul class="m-0 grid list-none grid-cols-2 gap-3.5 p-0 sm:grid-cols-3">
-			{#each data.more as m, i (m.id)}
-				<li class={i === 2 ? 'max-sm:hidden' : undefined}>
-					<a
-						href="/gallery/{m.id}"
-						class="block overflow-hidden rounded-xl border border-neutral-200 bg-white hover:border-neutral-300"
-					>
-						<img
-							src={m.after}
-							alt=""
-							loading="lazy"
-							class="block aspect-[4/3] w-full object-cover"
-						/>
-						<span class="block px-3 py-2.5 text-[15px] font-semibold text-neutral-900"
-							>{m.title}</span
+	{#if data.more.length > 0}
+		<section class="border-t border-neutral-200 pt-8 pb-6">
+			<h2 class="mb-4 text-xl font-bold tracking-tight text-neutral-900">More from the gallery</h2>
+			<ul class="m-0 grid list-none grid-cols-2 gap-3.5 p-0 sm:grid-cols-3">
+				{#each data.more as m, i (m.id)}
+					<li class={i === 2 ? 'max-sm:hidden' : undefined}>
+						<a
+							href="/gallery/{m.id}"
+							class="block overflow-hidden rounded-xl border border-neutral-200 bg-white hover:border-neutral-300"
 						>
-					</a>
-				</li>
-			{/each}
-		</ul>
-		{#if data.more.length === 0}
-			<p class="text-neutral-600">This is the only edit so far.</p>
-		{/if}
-	</section>
+							<img
+								src={m.after}
+								alt=""
+								loading="lazy"
+								class="block aspect-[4/3] w-full object-cover"
+							/>
+							<span class="block px-3 py-2.5 text-[15px] font-semibold text-neutral-900"
+								>{m.title}</span
+							>
+						</a>
+					</li>
+				{/each}
+			</ul>
+		</section>
+	{/if}
+
+	<details class="mt-6 text-sm text-neutral-500">
+		<summary class="cursor-pointer hover:text-neutral-800">Report this page</summary>
+		<form
+			method="POST"
+			action={`${CONNECT_ORIGIN}/g/${share.id}/report`}
+			class="mt-3 grid max-w-md gap-2"
+		>
+			<label for="reason">What is wrong? (optional, at most 300 characters)</label>
+			<textarea
+				id="reason"
+				name="reason"
+				maxlength="300"
+				rows="3"
+				class="rounded-lg border border-neutral-300 p-2 text-neutral-800"
+			></textarea>
+			<button
+				type="submit"
+				class="w-fit rounded-full border border-neutral-300 px-4 py-2 font-semibold text-neutral-800 hover:border-neutral-500"
+			>
+				Report
+			</button>
+			<p>A reported page is hidden while we look at it.</p>
+		</form>
+	</details>
 </div>
