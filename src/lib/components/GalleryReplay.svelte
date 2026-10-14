@@ -3,7 +3,7 @@
 	import { prefersReducedMotion } from '$lib/a11y/reducedMotion.svelte';
 	import { track } from '$lib/analytics/clarity';
 	import { CONNECT_URL } from '$lib/links';
-	import type { GalleryEntry } from '$lib/gallery/feed.js';
+	import { replayPlan, type GalleryEntry } from '$lib/gallery/feed.js';
 	import {
 		HOLD,
 		beforeAfterPng,
@@ -20,16 +20,10 @@
 
 	const reduced = prefersReducedMotion();
 
-	// Replay frames, or before then after when the entry carries none.
-	const urls = $derived(entry.frames.length > 0 ? entry.frames : [entry.before, entry.after]);
-	const labels = $derived.by(() => {
-		if (entry.frames.length === 0) return ['Before', 'After'];
-		return entry.frames.map((_, i) => {
-			const mapped = entry.steps.find((s) => s.frame === i);
-			if (mapped) return mapped.title;
-			return entry.steps.length === entry.frames.length ? entry.steps[i].title : '';
-		});
-	});
+	// Before, then each frame, then after (before then after when there are no frames).
+	const plan = $derived(replayPlan(entry));
+	const urls = $derived(plan.urls);
+	const labels = $derived(plan.labels);
 
 	let canvas = $state<HTMLCanvasElement>();
 	let scene = $state<Scene | null>(null);
@@ -89,7 +83,7 @@
 				scene = {
 					images: loaded.images,
 					labels,
-					mode: entry.frames.length === 0 && entry.aligned ? 'wipe' : 'fade'
+					mode: plan.mode
 				};
 				playing = !reduced.current;
 			} catch {
@@ -128,11 +122,10 @@
 		busy = 'png';
 		problem = '';
 		try {
+			// The first and last pictures of the replay are the entry's own before and after.
 			const blob = await beforeAfterPng(
-				// `before` and `after` are the first and last of the fallback pair, but
-				// the PNG always wants the entry's own before and after photos.
-				(await loadImages([entry.before])).images[0],
-				(await loadImages([entry.after])).images[0],
+				scene.images[0],
+				scene.images[scene.images.length - 1],
 				icon
 			);
 			saveBlob(blob, `editmamei-${entry.id}-before-after.png`);

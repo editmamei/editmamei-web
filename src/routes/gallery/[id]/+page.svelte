@@ -3,6 +3,7 @@
 	import BeforeAfterSlider from '$lib/components/BeforeAfterSlider.svelte';
 	import GalleryReplay from '$lib/components/GalleryReplay.svelte';
 	import { formatDate } from '$lib/gallery/feed.js';
+	import { CONNECT_URL } from '$lib/links';
 
 	let { data } = $props();
 	const entry = $derived(data.entry);
@@ -43,7 +44,17 @@
 		</p>
 	</div>
 
-	{#if entry.aligned}
+	{#if entry.before === null}
+		<div class="mx-auto w-full" style="max-width: min(100%, calc(74vh * {ratio}))">
+			<img
+				src={entry.after}
+				alt={entry.title}
+				width={entry.width}
+				height={entry.height}
+				class="block h-auto w-full rounded-xl"
+			/>
+		</div>
+	{:else if entry.aligned}
 		<div class="mx-auto w-full" style="max-width: min(100%, calc(74vh * {ratio}))">
 			<BeforeAfterSlider
 				beforeSrc={entry.before}
@@ -106,9 +117,18 @@
 		</section>
 
 		<aside class="grid gap-7">
-			{#key entry.id}
-				<GalleryReplay {entry} />
-			{/key}
+			{#if entry.before !== null}
+				{#key entry.id}
+					<GalleryReplay {entry} />
+				{/key}
+			{:else}
+				<a
+					href={CONNECT_URL}
+					class="inline-flex w-fit items-center rounded-full bg-accent px-5 py-3 text-sm font-semibold text-brand-deep transition-colors hover:brightness-95"
+				>
+					Try this on your photo
+				</a>
+			{/if}
 		</aside>
 	</div>
 

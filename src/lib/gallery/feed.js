@@ -12,7 +12,7 @@
  * @typedef {{
  *   id: string, title: string, by: string, link: string | null, date: string,
  *   featured: boolean, width: number, height: number, aligned: boolean,
- *   before: string, after: string, frames: string[], steps: GalleryStep[],
+ *   before: string | null, after: string, frames: string[], steps: GalleryStep[],
  *   credit?: string
  * }} GalleryEntry
  */
@@ -27,7 +27,7 @@ export const LIMITS = {
 	credit: 120,
 	stepTitle: 80,
 	stepDetail: 300,
-	steps: 30,
+	steps: 40,
 	frames: 24,
 	dimension: 20000,
 	feedBytes: 2_000_000
@@ -97,7 +97,11 @@ export function validateEntry(raw) {
 	const date = normDate(e.date);
 	if (!date) return null;
 	if (!dim(e.width) || !dim(e.height)) return null;
-	if (!isImageUrl(e.before) || !isImageUrl(e.after)) return null;
+	if (!isImageUrl(e.after)) return null;
+	// A maker may leave the before picture out: then there is no before, no
+	// frames and nothing to align.
+	const hasBefore = e.before !== null && e.before !== undefined;
+	if (hasBefore && !isImageUrl(e.before)) return null;
 
 	let link = null;
 	if (e.link !== null && e.link !== undefined) {
@@ -114,6 +118,7 @@ export function validateEntry(raw) {
 	const framesRaw = e.frames === undefined ? [] : e.frames;
 	if (!Array.isArray(framesRaw) || framesRaw.length > LIMITS.frames) return null;
 	if (!framesRaw.every(isImageUrl)) return null;
+	if (!hasBefore && framesRaw.length > 0) return null;
 	const frames = /** @type {string[]} */ (framesRaw);
 
 	const stepsRaw = e.steps === undefined ? [] : e.steps;
@@ -148,8 +153,8 @@ export function validateEntry(raw) {
 		featured: e.featured === true,
 		width: e.width,
 		height: e.height,
-		aligned: e.aligned === true,
-		before: e.before,
+		aligned: hasBefore && e.aligned === true,
+		before: hasBefore ? /** @type {string} */ (e.before) : null,
 		after: e.after,
 		frames,
 		steps
@@ -185,56 +190,91 @@ export function validateEntries(raw, warn = () => {}) {
 }
 
 /**
- * Parse feed JSON text: `{v: 1, entries: [...]}`. Anything else is an empty list.
+ * Parse feed JSON text: `{v: 1, entries: [...]}`. Anything else is an empty
+ * list, or an error when `strict` (the build requires the feed).
  * @param {string} body
  * @param {(msg: string) => void} [warn]
+ * @param {{ strict?: boolean }} [opts]
  * @returns {GalleryEntry[]}
  */
-export function parseFeed(body, warn = () => {}) {
+export function parseFeed(body, warn = () => {}, opts = {}) {
+	const bad = (/** @type {string} */ msg) => {
+		if (opts.strict) throw new Error(msg);
+		warn(`gallery: ${msg}`);
+		return /** @type {GalleryEntry[]} */ ([]);
+	};
 	/** @type {unknown} */
 	let json;
 	try {
 		json = JSON.parse(body);
 	} catch {
-		warn('gallery: feed is not valid JSON');
-		return [];
+		return bad('feed is not valid JSON');
 	}
-	if (!json || typeof json !== 'object' || /** @type {{ v?: unknown }} */ (json).v !== 1) {
-		warn('gallery: feed has an unsupported shape or version');
-		return [];
-	}
-	return validateEntries(/** @type {{ entries?: unknown }} */ (json).entries, warn);
+	if (!json || typeof json !== 'object' || /** @type {{ v?: unknown }} */ (json).v !== 1)
+		return bad('feed has an unsupported shape or version');
+	const entries = /** @type {{ entries?: unknown }} */ (json).entries;
+	if (opts.strict && !Array.isArray(entries)) return bad('feed has no entries list');
+	return validateEntries(entries, warn);
 }
 
 /**
- * Fetch the feed. Never throws: any failure yields an empty list and a warning.
+ * Fetch the feed. By default it never throws: any failure yields an empty list
+ * and a warning. With `required`, a failed fetch, a non-200 answer, an
+ * oversized body or a body of the wrong shape throws instead, so a build never
+ * publishes an empty gallery over a feed that was only briefly unreachable.
  * @param {string} url
- * @param {{ fetch?: typeof fetch, warn?: (msg: string) => void, timeoutMs?: number }} [opts]
+ * @param {{ fetch?: typeof fetch, warn?: (msg: string) => void, timeoutMs?: number, required?: boolean }} [opts]
  * @returns {Promise<GalleryEntry[]>}
  */
 export async function fetchFeed(url, opts = {}) {
 	const { fetch: doFetch = globalThis.fetch, warn = () => {}, timeoutMs = 10000 } = opts;
+	const required = opts.required === true;
+	/** @param {string} why @returns {GalleryEntry[]} */
+	const give = (why) => {
+		if (required) throw new Error(`gallery: ${why} (GALLERY_FEED_REQUIRED is set)`);
+		warn(`gallery: ${why}, building without it`);
+		return [];
+	};
+	/** @type {string} */
+	let body;
 	try {
 		const res = await doFetch(url, {
 			headers: { accept: 'application/json' },
 			signal: AbortSignal.timeout(timeoutMs)
 		});
-		if (res.status !== 200) {
-			warn(`gallery: feed answered ${res.status}, building without it`);
-			return [];
-		}
-		const body = await res.text();
-		if (body.length > LIMITS.feedBytes) {
-			warn('gallery: feed is larger than the size cap, building without it');
-			return [];
-		}
-		return parseFeed(body, warn);
+		if (res.status !== 200) return give(`feed answered ${res.status}`);
+		body = await res.text();
 	} catch (err) {
-		warn(
-			`gallery: feed fetch failed (${err instanceof Error ? err.message : String(err)}), building without it`
-		);
-		return [];
+		return give(`feed fetch failed (${err instanceof Error ? err.message : String(err)})`);
 	}
+	if (body.length > LIMITS.feedBytes) return give('feed is larger than the size cap');
+	try {
+		return parseFeed(body, warn, { strict: required });
+	} catch (err) {
+		return give(err instanceof Error ? err.message : String(err));
+	}
+}
+
+/**
+ * What the replay plays: `[before, ...frames, after]` when the entry has
+ * frames, `[before, after]` when it has none, `[after]` alone when the maker
+ * left the before out. Each picture's label is "Before", the last step mapped
+ * to that frame (else "Step N"), then "After".
+ * @param {GalleryEntry} entry
+ * @returns {{ urls: string[], labels: string[], mode: 'fade' | 'wipe' }}
+ */
+export function replayPlan(entry) {
+	if (entry.before === null) return { urls: [entry.after], labels: ['After'], mode: 'fade' };
+	const labels = entry.frames.map((_, i) => {
+		let last = null;
+		for (const s of entry.steps) if (s.frame === i) last = s;
+		return last ? last.title : `Step ${i + 1}`;
+	});
+	return {
+		urls: [entry.before, ...entry.frames, entry.after],
+		labels: ['Before', ...labels, 'After'],
+		mode: entry.frames.length === 0 && entry.aligned ? 'wipe' : 'fade'
+	};
 }
 
 /**

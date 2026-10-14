@@ -12,6 +12,7 @@ import {
 	mergeEntries,
 	parseFeed,
 	pickFeatured,
+	replayPlan,
 	tileSpan,
 	validateEntry
 } from '../src/lib/gallery/feed.js';
@@ -97,7 +98,8 @@ test('oversize or control-character text drops the entry', () => {
 	assert.equal(validateEntry(good({ by: 'y'.repeat(41) })), null);
 	assert.equal(validateEntry(good({ credit: 'c'.repeat(121) })), null);
 	assert.equal(validateEntry(good({ steps: step('d'.repeat(301)) })), null);
-	assert.equal(validateEntry(good({ steps: Array(31).fill(step('')[0]) })), null);
+	assert.ok(validateEntry(good({ steps: Array(40).fill(step('')[0]) })));
+	assert.equal(validateEntry(good({ steps: Array(41).fill(step('')[0]) })), null);
 	assert.equal(validateEntry(good({ frames: Array(25).fill(IMG) })), null);
 	assert.equal(validateEntry(good({ title: 'a\u0000b' })), null);
 	assert.equal(validateEntry(good({ title: 'a‮b' })), null);
@@ -245,4 +247,94 @@ test('links render with rel="ugc nofollow noopener"', () => {
 		'utf8'
 	);
 	assert.match(page, /href=\{entry\.link\}\s+rel="ugc nofollow noopener"/);
+});
+
+test('a max-size entry as Connect writes it is accepted whole', () => {
+	const fixture = JSON.parse(
+		readFileSync(join(REPO_ROOT, 'tests', 'fixtures', 'connect-feed-entry-max.json'), 'utf8')
+	);
+	assert.equal(fixture.steps.length, 40);
+	assert.equal(fixture.frames.length, 12);
+	const e = validateEntry(fixture);
+	assert.ok(e, 'validateEntry must accept the Connect fixture');
+	assert.deepEqual(e.steps, fixture.steps);
+	assert.deepEqual(e.frames, fixture.frames);
+	assert.equal(e.before, fixture.before);
+	assert.equal(e.link, fixture.link);
+});
+
+test('replay order is before, each frame, after, with the last mapped step as the label', () => {
+	const fixture = JSON.parse(
+		readFileSync(join(REPO_ROOT, 'tests', 'fixtures', 'connect-feed-entry-max.json'), 'utf8')
+	);
+	const plan = replayPlan(validateEntry(fixture));
+	assert.deepEqual(plan.urls, [fixture.before, ...fixture.frames, fixture.after]);
+	assert.equal(plan.labels.length, plan.urls.length);
+	assert.equal(plan.labels[0], 'Before');
+	assert.equal(plan.labels.at(-1), 'After');
+	fixture.frames.forEach((_, i) => {
+		const mapped = fixture.steps.filter((s) => s.frame === i);
+		assert.equal(plan.labels[i + 1], mapped.at(-1).title, `frame ${i}`);
+	});
+	assert.equal(plan.mode, 'fade');
+
+	const small = validateEntry(
+		good({
+			frames: [IMG, IMG],
+			steps: [
+				{ title: 'Cropped', detail: '', frame: null },
+				{ title: 'Warmer', detail: '', frame: 0 },
+				{ title: 'Glow', detail: '', frame: 0 }
+			]
+		})
+	);
+	assert.deepEqual(replayPlan(small).labels, ['Before', 'Glow', 'Step 2', 'After']);
+});
+
+test('replay without frames is before then after, wiping when aligned', () => {
+	const e = validateEntry(good({ frames: [], steps: [] }));
+	const plan = replayPlan(e);
+	assert.deepEqual(plan.urls, [e.before, e.after]);
+	assert.deepEqual(plan.labels, ['Before', 'After']);
+	assert.equal(plan.mode, 'wipe');
+	assert.equal(replayPlan(validateEntry(good({ frames: [], aligned: false }))).mode, 'fade');
+});
+
+test('an entry with no before picture is kept, unaligned and without frames', () => {
+	const e = validateEntry(good({ before: null, frames: [], aligned: true, steps: [] }));
+	assert.equal(e?.before, null);
+	assert.equal(e?.aligned, false);
+	assert.deepEqual(replayPlan(e).urls, [e.after]);
+	assert.equal(validateEntry(good({ before: null })), null, 'frames need a before');
+	assert.equal(validateEntry(good({ before: 'https://evil.example/a.jpg' })), null);
+});
+
+test('GALLERY_FEED_REQUIRED: a failed, non-200, oversized or malformed feed throws', async () => {
+	const res =
+		(status, body = '') =>
+		async () =>
+			new Response(body, { status });
+	const down = async () => {
+		throw new TypeError('network down');
+	};
+	const required = { required: true, warn: quiet };
+	await assert.rejects(fetchFeed('https://x', { ...required, fetch: res(404) }), /answered 404/);
+	await assert.rejects(fetchFeed('https://x', { ...required, fetch: res(503) }), /answered 503/);
+	await assert.rejects(fetchFeed('https://x', { ...required, fetch: down }), /network down/);
+	await assert.rejects(
+		fetchFeed('https://x', { ...required, fetch: res(200, ' '.repeat(2_000_001)) }),
+		/size cap/
+	);
+	for (const body of ['nope', '{"v":2,"entries":[]}', '[]', '{"v":1,"entries":"x"}']) {
+		await assert.rejects(fetchFeed('https://x', { ...required, fetch: res(200, body) }), body);
+	}
+	// An empty but well-formed feed is fine, and so is one entry dropped for being invalid.
+	assert.deepEqual(await fetchFeed('https://x', { ...required, fetch: res(200, feed([])) }), []);
+	const mixed = await fetchFeed('https://x', {
+		...required,
+		fetch: res(200, feed([good(), good({ id: 'BAD' })]))
+	});
+	assert.equal(mixed.length, 1);
+	// Not required: the same failures stay a warning.
+	assert.deepEqual(await fetchFeed('https://x', { fetch: res(404), warn: quiet }), []);
 });

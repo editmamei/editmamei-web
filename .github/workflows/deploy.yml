@@ -62,6 +62,8 @@ jobs:
       # Build before test so tests/blog-build-artifacts.test.mjs inspects the
       # artifact that gets deployed.
       - name: Build
+        env:
+          GALLERY_FEED_REQUIRED: ${{ vars.GALLERY_FEED_REQUIRED }}
         run: npm run build
 
       - name: Test
