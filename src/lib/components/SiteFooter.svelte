@@ -146,6 +146,7 @@
 						<a href="/docs" class="hover:text-neutral-950">Docs</a>
 					</li>
 					<li><a href="/faq" class="hover:text-neutral-950">FAQ</a></li>
+					<li><a href="/gallery" class="hover:text-neutral-950">Gallery</a></li>
 					<li><a href="/blog" class="hover:text-neutral-950">Blog</a></li>
 					<li><a href="/download" class="hover:text-neutral-950">Download</a></li>
 					<li>

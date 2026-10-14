@@ -1,6 +1,7 @@
 import type { RequestHandler } from './$types';
 import { posts } from '$lib/blog';
 import { snapshot as toolsSnapshot } from '$lib/content/tools';
+import { loadGallery } from '$lib/server/gallery';
 
 /**
  * Dynamic sitemap, built from the route list below so it stays in step with
@@ -42,10 +43,15 @@ const ROUTES: Array<{ path: string; lastmod: string; priority: string; changefre
 	{ path: '/security', lastmod: '2026-10-02', priority: '0.3', changefreq: 'yearly' },
 	{ path: '/activate', lastmod: '2026-10-02', priority: '0.5', changefreq: 'monthly' },
 	{ path: '/blog', lastmod: 'NEWEST_POST', priority: '0.6', changefreq: 'weekly' },
-	{ path: '/tools', lastmod: 'TOOLS_SNAPSHOT', priority: '0.7', changefreq: 'monthly' }
+	{ path: '/tools', lastmod: 'TOOLS_SNAPSHOT', priority: '0.7', changefreq: 'monthly' },
+	{ path: '/gallery', lastmod: 'NEWEST_ENTRY', priority: '0.6', changefreq: 'daily' }
 ];
 
-export const GET: RequestHandler = () => {
+export const GET: RequestHandler = async () => {
+	const gallery = await loadGallery();
+	// The gallery index changes exactly when its newest entry does.
+	const newestEntry = gallery.reduce((a, e) => (e.date > a ? e.date : a), '2026-10-13');
+
 	// The blog index's real modification date: the newest post date on it.
 	// Falls back to the site launch date only while there are zero posts.
 	const newestPost = posts
@@ -55,9 +61,11 @@ export const GET: RequestHandler = () => {
 	const resolveLastmod = (lastmod: string) =>
 		lastmod === 'NEWEST_POST'
 			? newestPost
-			: lastmod === 'TOOLS_SNAPSHOT'
-				? toolsSnapshot.date
-				: lastmod;
+			: lastmod === 'NEWEST_ENTRY'
+				? newestEntry
+				: lastmod === 'TOOLS_SNAPSHOT'
+					? toolsSnapshot.date
+					: lastmod;
 
 	const urls = ROUTES.map(
 		({ path, lastmod, priority, changefreq }) => `	<url>
@@ -82,9 +90,22 @@ export const GET: RequestHandler = () => {
 		)
 		.join('\n');
 
+	// Gallery entries: ids are validated to [a-z0-9-] by the feed loader, so they
+	// are safe to place in the XML as-is.
+	const entryUrls = gallery
+		.map(
+			(e) => `	<url>
+		<loc>${ORIGIN}/gallery/${e.id}</loc>
+		<lastmod>${e.date}</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.5</priority>
+	</url>`
+		)
+		.join('\n');
+
 	const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${[urls, postUrls].filter(Boolean).join('\n')}
+${[urls, postUrls, entryUrls].filter(Boolean).join('\n')}
 </urlset>
 `;
 

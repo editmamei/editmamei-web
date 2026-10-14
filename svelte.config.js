@@ -21,11 +21,12 @@ const config = {
 		}),
 		prerender: {
 			// A blog with zero published posts leaves /blog/[slug] with no
-			// pages to generate, which is valid (its entries() returned []).
+			// pages to generate, which is valid (its entries() returned []);
+			// so does a gallery with no entries at all.
 			// Every OTHER unseen route keeps the default hard failure —
 			// unreachable-route drift is the bug class the sitemap tests pin.
 			handleUnseenRoutes: ({ routes }) => {
-				const unexpected = routes.filter((id) => id !== '/blog/[slug]');
+				const unexpected = routes.filter((id) => id !== '/blog/[slug]' && id !== '/gallery/[id]');
 				if (unexpected.length > 0) {
 					throw new Error(
 						`The following routes were marked as prerenderable, but were not prerendered: ${unexpected.join(', ')}`

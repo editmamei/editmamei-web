@@ -112,12 +112,12 @@ test('the sitemap appends blog post URLs from the posts loader', () => {
 	assert.match(source, /\$\{ORIGIN\}\/blog\/\$\{post\.slug\}/, 'sitemap must emit per-post URLs');
 });
 
-test('the unseen-routes carve-out exempts exactly /blog/[slug] and nothing else', () => {
+test('the unseen-routes carve-out exempts exactly /blog/[slug] and /gallery/[id] and nothing else', () => {
 	const source = readFileSync(join(REPO_ROOT, 'svelte.config.js'), 'utf8');
 	const exemptions = Array.from(source.matchAll(/id !== '([^']+)'/g), (m) => m[1]);
 	assert.deepEqual(
 		exemptions,
-		['/blog/[slug]'],
-		'handleUnseenRoutes must exempt only /blog/[slug]; other unseen routes must stay hard failures'
+		['/blog/[slug]', '/gallery/[id]'],
+		'handleUnseenRoutes must exempt only /blog/[slug] and /gallery/[id]; other unseen routes must stay hard failures'
 	);
 });

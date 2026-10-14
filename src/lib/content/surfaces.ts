@@ -77,6 +77,7 @@ export const productExtras: NavLink[] = [{ label: 'All tools', href: '/tools' }]
 export const primaryNav: NavLink[] = [
 	{ label: 'Tools', href: '/tools' },
 	{ label: 'Pricing', href: '/pricing' },
+	{ label: 'Gallery', href: '/gallery' },
 	{ label: 'Docs', href: '/docs' },
 	{ label: 'Blog', href: '/blog' }
 ];
