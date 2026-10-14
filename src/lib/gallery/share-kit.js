@@ -23,6 +23,8 @@ const FADE = 0.45;
 const WIPE = 1.3;
 const REVEAL_HOLD = 1.1;
 const END = 2.2;
+/** How far the photo is pushed in over the whole video (0.05 = 5%). */
+const PUSH = 0.05;
 /** Instagram takes at most this many slides. */
 export const MAX_SLIDES = 10;
 
@@ -59,6 +61,16 @@ export function timeline(share) {
 }
 
 export const durationOf = (beats) => beats.reduce((sum, b) => sum + b.duration, 0);
+
+/**
+ * The push-in at time `t`: one slow move from fitted to PUSH over every beat before the end card, then held. It
+ * follows the whole video, not the beat, so every picture on screen at a moment (both sides of a cross-fade, both
+ * halves of the wipe) has the same zoom and steps of one photo line up.
+ */
+export function zoomAt(beats, t) {
+  const moving = durationOf(beats.filter((b) => b.kind !== 'end'));
+  return moving > 0 ? 1 + PUSH * ease(clamp01(t / moving)) : 1;
+}
 
 /** Load the pictures a share names, by address. Same-origin or CORS-served pictures keep the canvas exportable. */
 export async function loadPictures(urls) {
@@ -248,7 +260,7 @@ function endCard(ctx, w, h, k) {
 }
 
 /**
- * The video at time `t` (seconds) on a canvas of w x h (9:16): the photo fills the safe band, pushed in slowly;
+ * The video at time `t` (seconds) on a canvas of w x h (9:16): the photo fills the safe band, pushed in slowly (zoomAt);
  * beats cross-fade; the reveal wipes the before into the after with a bright edge; the end card closes it.
  */
 export function drawReel(ctx, w, h, beats, pictures, t) {
@@ -262,18 +274,18 @@ export function drawReel(ctx, w, h, beats, pictures, t) {
   const local = t - at;
   const band = { x: SIDE * k, y: (SAFE_TOP + 70) * k, w: w - 2 * SIDE * k, h: (SAFE_BOTTOM - SAFE_TOP - 70) * k };
   const radius = 26 * k;
-  const zoomAt = (p) => 1 + 0.04 * ease(clamp01(p));
-  const still = (b, alpha, progress) => {
+  const zoom = zoomAt(beats, t);
+  const still = (b, alpha) => {
     const img = pictures[b.image];
     if (!img) return null;
     const box = photoBox(img, band.x, band.y, band.w, band.h);
-    paintPhoto(ctx, img, box, zoomAt(progress), alpha, 1, radius);
+    paintPhoto(ctx, img, box, zoom, alpha, 1, radius);
     return box;
   };
 
   if (beat.kind === 'end') {
     const prev = beats[i - 1];
-    if (prev && prev.image) still(prev, 1, 1);
+    if (prev && prev.image) still(prev, 1);
     ctx.save();
     ctx.globalAlpha = ease(clamp01(local / 0.4));
     endCard(ctx, w, h, k);
@@ -287,7 +299,7 @@ export function drawReel(ctx, w, h, beats, pictures, t) {
   paintBackdrop(ctx, pictures[beat.kind === 'reveal' ? beat.from : beat.image], w, h, prev && prev.image ? fadeIn : 1);
   if (beat.kind === 'reveal') paintBackdrop(ctx, pictures[beat.image], w, h, ease(clamp01(local / WIPE)));
   wordmark(ctx, w, k);
-  if (prev && fadeIn < 1) still(prev, 1, 1);
+  if (prev && fadeIn < 1) still(prev, 1);
   let box;
   if (beat.kind === 'reveal') {
     const from = pictures[beat.from];
@@ -295,15 +307,15 @@ export function drawReel(ctx, w, h, beats, pictures, t) {
     if (!from || !to) return;
     box = photoBox(to, band.x, band.y, band.w, band.h);
     const p = ease(clamp01(local / WIPE));
-    paintPhoto(ctx, from, photoBox(from, band.x, band.y, band.w, band.h), 1, 1, 1, radius);
-    if (!beat.aligned) paintPhoto(ctx, to, box, 1, p, 1, radius);
-    else paintPhoto(ctx, to, box, 1, 1, p, radius);
+    paintPhoto(ctx, from, photoBox(from, band.x, band.y, band.w, band.h), zoom, 1, 1, radius);
+    if (!beat.aligned) paintPhoto(ctx, to, box, zoom, p, 1, radius);
+    else paintPhoto(ctx, to, box, zoom, 1, p, radius);
     if (beat.aligned && p > 0 && p < 1) {
       ctx.fillStyle = '#ffffff';
       ctx.fillRect(box.x + box.w * p - 3 * k, box.y, 6 * k, box.h);
     }
   } else {
-    box = still(beat, fadeIn, local / beat.duration);
+    box = still(beat, fadeIn);
   }
   if (box) caption(ctx, beat, box, k, beat.kind === 'reveal' ? ease(clamp01((local - WIPE * 0.6) / 0.4)) : fadeIn);
 }
