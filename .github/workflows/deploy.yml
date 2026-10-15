@@ -7,11 +7,12 @@ on:
   # GITHUB_TOKEN push can't fire the push trigger above; the release
   # fan-out pushes with a PAT and still can).
   workflow_dispatch:
-  # Hourly rebuild so shared edits reach the gallery without a code change.
+  # Daily rebuild to refresh the sitemap with newly approved gallery entries.
+  # The gallery pages themselves render on request from Connect's feed.
   # Scheduled runs use the default branch (main); the ref guard below still
   # refuses anything else.
   schedule:
-    - cron: '17 * * * *'
+    - cron: '17 6 * * *'
 
 permissions:
   contents: read
