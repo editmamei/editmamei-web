@@ -14,6 +14,13 @@
 	// No public workers.dev URL. Preview URLs (the `staging` alias uploaded by
 	// staging.yml) stay on, behind Cloudflare Access.
 	"workers_dev": false,
+	// Workers Logs and traces, in the Worker's Observability tab. Only requests that reach the script are
+	// recorded (the gallery routes and the 404 page); static files are served without running it.
+	"observability": {
+		"enabled": true,
+		"logs": { "enabled": true, "head_sampling_rate": 1, "invocation_logs": true },
+		"traces": { "enabled": true, "head_sampling_rate": 1 }
+	},
 	"preview_urls": true,
 	// editmamei.com is served through a route over its existing proxied DNS
 	// record (GitHub Pages behind it), so no DNS change is needed. `wrangler
