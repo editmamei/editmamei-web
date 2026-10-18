@@ -371,6 +371,12 @@ export const TOOL_COPY: Record<string, ToolCopy> = {
 		summary: 'Masks a layer from a saved selection, then inverts, applies or removes the mask.',
 		keywords: ['fade', 'hide', 'reveal']
 	},
+	gimp_modify_selection: {
+		task: 'Feather or refine a saved selection',
+		summary:
+			'Expands, contracts, feathers, borders, inverts, hardens or smooths a saved selection.',
+		keywords: ['soften', 'grow', 'shrink']
+	},
 
 	// Tone and color
 	ps_add_adjustment_layer: {

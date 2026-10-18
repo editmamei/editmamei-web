@@ -2,9 +2,9 @@
 	"_generated": "Do not edit. Regenerate with `node scripts/sync-tools.mjs --source <editmamei>`.",
 	"source": {
 		"package": "editmamei",
-		"version": "1.8.0"
+		"version": "1.9.0"
 	},
-	"snapshotDate": "2026-10-06",
+	"snapshotDate": "2026-10-18",
 	"tools": [
 		{
 			"id": "gimp_add_adjustment",
@@ -113,6 +113,12 @@
 			"editor": "gimp",
 			"edition": "community",
 			"group": "masks"
+		},
+		{
+			"id": "gimp_modify_selection",
+			"editor": "gimp",
+			"edition": "community",
+			"group": "select"
 		},
 		{
 			"id": "gimp_open_document",
