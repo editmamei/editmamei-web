@@ -101,6 +101,15 @@ jobs:
           echo "::error::editmamei.com is not served by the Worker after deploy"
           exit 1
 
+      # After the deploy and live check, so a failed email never blocks the
+      # site, but a failure still shows as a failed step. Idempotent: posts
+      # already mailed are skipped, so the daily rebuild is safe. This job only
+      # runs on main (see the ref guard above).
+      - name: Email new blog posts to the Editmamei updates list
+        env:
+          RESEND_BROADCAST_KEY: ${{ secrets.RESEND_BROADCAST_KEY }}
+        run: node scripts/send-post-emails.mjs
+
   ping-indexnow:
     needs: deploy
     # The hourly rebuild would otherwise re-submit every URL to IndexNow 24 times a day.
