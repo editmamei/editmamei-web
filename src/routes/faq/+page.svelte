@@ -19,15 +19,15 @@
 	const general: Faq[] = [
 		{
 			q: 'What is Editmamei?',
-			a: "Editmamei lets an AI assistant edit your photos with real editing tools, from what you describe. It comes two ways. Editmamei Desktop is an MCP server that runs on your computer and edits in desktop Photoshop, or GIMP in beta. Editmamei Connect is a connector you add to Claude: you send a photo, it's edited on Editmamei's server, and there's nothing to install."
+			a: "Editmamei lets an AI assistant edit your photos with real editing tools, from what you describe. It comes two ways. Editmamei Desktop is an MCP server that runs on your computer and edits in desktop Photoshop, or GIMP in beta. Editmamei Connect is a connector you add to your AI assistant, such as Claude or ChatGPT: you send a photo, it's edited on Editmamei's server, and there's nothing to install."
 		},
 		{
 			q: 'Should I use Editmamei Desktop or Editmamei Connect?',
-			a: 'Desktop if you work in Photoshop and want each edit as layers in your own document, on your own computer. Connect if you want to edit from a Claude chat on any device, including your phone, without installing any editing software.'
+			a: 'Desktop if you work in Photoshop and want each edit as layers in your own document, on your own computer. Connect if you want to edit from a chat with your AI assistant on any device, including your phone, without installing any editing software.'
 		},
 		{
 			q: 'Is Editmamei a web app?',
-			a: "Editmamei Desktop isn't: it installs on your computer, as a one-click Claude Desktop extension or an npm package, and nothing runs in a browser. Editmamei Connect is the hosted option. You add it to Claude as a connector and your photos are edited on Editmamei's server, so it works from claude.ai or the Claude phone app with nothing installed."
+			a: "Editmamei Desktop isn't: it installs on your computer, as a one-click Claude Desktop extension or an npm package, and nothing runs in a browser. Editmamei Connect is the hosted option. You add it to your AI assistant as a connector and your photos are edited on Editmamei's server, so it works in a browser or a phone app with nothing installed."
 		},
 		{
 			q: 'Does Editmamei upload my photos?',
@@ -121,20 +121,20 @@
 	const connect: Faq[] = [
 		{
 			q: 'What is Editmamei Connect?',
-			a: "A remote MCP server you add to Claude as a connector. You send a photo, describe the edit, and Claude works through Connect's editing tools on Editmamei's server: it picks the tools, checks each result in a preview, and hands back a download link. There's no editing software to install, so it works from claude.ai and the Claude desktop and phone apps.",
+			a: "A remote MCP server you add to your AI assistant as a connector. You send a photo, describe the edit, and the assistant works through Connect's editing tools on Editmamei's server: it picks the tools, checks each result in a preview, and hands back a download link. There's no editing software to install, so it works on the web, on the desktop and on your phone.",
 			link: { href: '/connect', label: 'See Editmamei Connect' }
 		},
 		{
-			q: 'How do I add Editmamei Connect to Claude?',
-			a: 'On claude.ai, open Settings › Connectors and choose Add custom connector. Name it Editmamei Connect, paste https://connect.editmamei.com/mcp, then choose Connect and sign up with your email address. It then shows up in the Claude desktop and phone apps too. In Claude Code, run claude mcp add --transport http editmamei-connect https://connect.editmamei.com/mcp, then run /mcp and choose it to sign in.'
+			q: 'How do I add Editmamei Connect to my AI assistant?',
+			a: 'Add https://connect.editmamei.com/mcp as a remote MCP server, which some assistants call a custom connector, and sign up with your email address when it asks you to sign in. On claude.ai, that is Settings › Connectors › Add custom connector, and it then shows up in the Claude desktop and phone apps too. In Claude Code, run claude mcp add --transport http editmamei-connect https://connect.editmamei.com/mcp, then run /mcp and choose it to sign in.'
 		},
 		{
 			q: 'Do I need Photoshop to use Editmamei Connect?',
-			a: "No. Connect does the editing on Editmamei's server, so you don't need Photoshop or any other editing software on your device, only Claude."
+			a: "No. Connect does the editing on Editmamei's server, so you don't need Photoshop or any other editing software on your device, only an AI assistant to connect it to."
 		},
 		{
 			q: 'How do I get photos into Editmamei Connect?',
-			a: 'Ask Claude to edit a photo and it gives you an upload link. Open it and choose photos from your camera roll on a phone or from your files on a laptop, up to ten at once. Connect can also open a photo from an https:// link.'
+			a: 'Ask your assistant to edit a photo and it gives you an upload link. Open it and choose photos from your camera roll on a phone or from your files on a laptop, up to ten at once. Connect can also open a photo from an https:// link.'
 		},
 		{
 			q: 'What can Editmamei Connect do?',
@@ -147,11 +147,11 @@
 		},
 		{
 			q: 'How much does Editmamei Connect cost?',
-			a: "Connect uses credits. New accounts start with 150 free credits and get up to 50 free credits each month, and credit packs and monthly plans are available from your Connect account. Your conversation with Claude counts against your Claude plan as usual, separately from Connect's credits."
+			a: "Connect uses credits. New accounts start with 150 free credits and get up to 50 free credits each month, and credit packs and monthly plans are available from your Connect account. Your AI assistant's own usage counts against your plan with it as usual, separately from Connect's credits."
 		},
 		{
 			q: 'What happens to my photos on Editmamei Connect?',
-			a: "They're uploaded to Editmamei's server and edited there. An upload is deleted 24 hours after you upload it, and an edited file's download link stops working 24 hours after it is made. Connect never receives your conversation with Claude, only the tool requests Claude sends it. When Claude looks at a preview, a downscaled copy goes to Claude, the same as any photo you put in a chat. Connect has its own privacy policy, separate from Editmamei Desktop's.",
+			a: "They're uploaded to Editmamei's server and edited there. An upload is deleted 24 hours after you upload it, and an edited file's download link stops working 24 hours after it is made. Connect never receives your conversation with your assistant, only the tool requests the assistant sends it. When the assistant looks at a preview, a downscaled copy goes to it, the same as any photo you put in a chat. Connect has its own privacy policy, separate from Editmamei Desktop's.",
 			link: { href: CONNECT_PRIVACY_URL, label: "Read Connect's privacy policy" }
 		},
 		{
@@ -160,7 +160,7 @@
 		},
 		{
 			q: 'Which AI assistants work with Editmamei Connect?',
-			a: 'Connect is built and tested with Claude: claude.ai, the Claude desktop and phone apps, and Claude Code.'
+			a: 'Claude (claude.ai, the Claude desktop and phone apps, and Claude Code), ChatGPT, Cursor, VS Code with GitHub Copilot, Codex, Gemini CLI and Goose all add Connect as a remote MCP server and sign in to it.'
 		}
 	];
 
@@ -175,7 +175,8 @@
 		{
 			id: 'connect',
 			title: 'Editmamei Connect',
-			intro: "A connector for Claude that edits photos on Editmamei's server. Nothing to install.",
+			intro:
+				"A connector for your AI assistant that edits photos on Editmamei's server. Nothing to install.",
 			faqs: connect
 		}
 	];
@@ -204,7 +205,7 @@
 
 <Seo
 	title="FAQ: Desktop, Connect, privacy, editions · Editmamei"
-	description="Common questions about Editmamei Desktop, the Photoshop MCP server, and Editmamei Connect, the photo-editing connector for Claude: setup, GIMP support, your photos and data, credits and editions."
+	description="Common questions about Editmamei Desktop, the Photoshop MCP server, and Editmamei Connect, the photo-editing connector for AI assistants: setup, GIMP support, your photos and data, credits and editions."
 	path="/faq"
 />
 

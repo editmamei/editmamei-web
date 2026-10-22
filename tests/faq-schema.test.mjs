@@ -64,6 +64,12 @@ test('no answer denies that a hosted option exists', () => {
 	}
 });
 
+test('no answer qualifies support with what has been tested', () => {
+	for (const { q, a } of faqs()) {
+		assert.ok(!/\btested\b/i.test(a), `"${q}" carries a tested-with disclaimer`);
+	}
+});
+
 test('every Connect question names Connect, so it reads right outside its section', () => {
 	for (const { q } of section('connect')) {
 		assert.ok(q.includes('Connect'), `Connect question doesn't name Connect: ${q}`);
