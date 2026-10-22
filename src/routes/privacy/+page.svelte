@@ -146,10 +146,10 @@
 
 		<div class="mt-12 border-t border-neutral-200 pt-6">
 			<a
-				href="/#how-it-works"
+				href="/photoshop#edit-flow"
 				class="text-sm font-semibold text-neutral-900 underline underline-offset-2 hover:text-neutral-700"
 			>
-				See how this fits together in How It Works →
+				See how it fits together on the Photoshop page →
 			</a>
 		</div>
 	</div>

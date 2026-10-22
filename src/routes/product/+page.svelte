@@ -176,7 +176,7 @@
 			> covers what GIMP needs.
 		</p>
 		<a
-			href="/#install"
+			href="/photoshop#install"
 			class="mt-6 inline-flex items-center justify-center rounded-md bg-brand px-5 py-3 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-brand-light"
 		>
 			Install Editmamei

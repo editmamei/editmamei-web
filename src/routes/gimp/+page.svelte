@@ -295,8 +295,8 @@
 			<li class="rounded-xl border border-brand-light bg-brand-deep/60 p-5">
 				<h3 class="text-base font-semibold tracking-tight text-white">2. Install Editmamei.</h3>
 				<p class="mt-2 text-sm leading-relaxed text-neutral-300">
-					Use the <a href="/#install" class={darkLinkClass}>install section on the home page</a>:
-					one-click for Claude Desktop, or npm for every other client. On Linux, use npm.
+					Use the <a href="/photoshop#install" class={darkLinkClass}>install steps</a>: one-click
+					for Claude Desktop, or npm for every other client. On Linux, use npm.
 				</p>
 			</li>
 			<li class="rounded-xl border border-brand-light bg-brand-deep/60 p-5">

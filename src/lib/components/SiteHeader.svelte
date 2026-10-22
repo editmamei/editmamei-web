@@ -241,10 +241,10 @@
 			</nav>
 
 			<a
-				href="/#install"
+				href="/#fork"
 				class="rounded-md bg-brand px-3 py-1.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-brand-light"
 			>
-				Install
+				Get started
 			</a>
 
 			<button

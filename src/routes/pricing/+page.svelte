@@ -252,7 +252,7 @@
 		</p>
 		<div class="mt-8">
 			<a
-				href="/#install"
+				href="/photoshop#install"
 				class="inline-flex items-center justify-center rounded-md bg-brand px-5 py-3 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-brand-light"
 			>
 				Get Community free

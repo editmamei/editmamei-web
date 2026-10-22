@@ -25,8 +25,9 @@
 		</p>
 		<p class="mt-3 text-base leading-relaxed text-neutral-700">
 			Installing for the first time? Start with the
-			<a href="/#install" class="font-semibold text-neutral-950 underline underline-offset-2"
-				>install steps</a
+			<a
+				href="/photoshop#install"
+				class="font-semibold text-neutral-950 underline underline-offset-2">install steps</a
 			>.
 		</p>
 

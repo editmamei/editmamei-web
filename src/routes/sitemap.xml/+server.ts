@@ -30,7 +30,7 @@ const ORIGIN = 'https://editmamei.com';
 // when the post list does. /tools uses the TOOLS_SNAPSHOT sentinel: its
 // lastmod is the date of the generated tool snapshot it renders.
 const ROUTES: Array<{ path: string; lastmod: string; priority: string; changefreq: string }> = [
-	{ path: '/', lastmod: '2026-10-02', priority: '1.0', changefreq: 'weekly' },
+	{ path: '/', lastmod: '2026-10-22', priority: '1.0', changefreq: 'weekly' },
 	{ path: '/product', lastmod: '2026-10-02', priority: '0.8', changefreq: 'weekly' },
 	{ path: '/photoshop', lastmod: '2026-10-02', priority: '0.8', changefreq: 'monthly' },
 	{ path: '/gimp', lastmod: '2026-10-02', priority: '0.8', changefreq: 'monthly' },
