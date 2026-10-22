@@ -95,16 +95,16 @@
 
 	<div
 		bind:this={scroller}
-		class="mt-10 flex snap-x snap-mandatory [scrollbar-width:none] gap-5 overflow-x-auto scroll-smooth px-4 pb-6 md:mt-14 md:gap-7 md:px-[max(1rem,calc((100vw-72rem)/2+1rem))] [&::-webkit-scrollbar]:hidden"
+		class="mt-10 flex snap-x snap-mandatory [scrollbar-width:none] gap-5 overflow-x-auto scroll-smooth px-[12vw] pb-6 md:mt-14 md:scroll-px-[max(1rem,calc((100vw-72rem)/2+1rem))] md:gap-7 md:px-[max(1rem,calc((100vw-72rem)/2+1rem))] [&::-webkit-scrollbar]:hidden"
 	>
 		{#each cards as card, i (card.after)}
 			<figure
-				class="group relative m-0 flex-none snap-start"
+				class="group relative m-0 flex-none snap-center md:snap-start"
 				onpointerenter={(e) => e.pointerType === 'mouse' && (peek = i)}
 				onpointerleave={(e) => e.pointerType === 'mouse' && (peek = null)}
 			>
 				<div
-					class="relative aspect-[4/5] w-[84vw] max-w-[26rem] overflow-hidden rounded-[22px] bg-neutral-900 shadow-[0_30px_60px_-30px_rgba(20,55,49,0.55)] select-none md:aspect-(--ar) md:h-[540px] md:w-auto md:max-w-none"
+					class="relative aspect-[4/5] w-[76vw] max-w-[26rem] overflow-hidden rounded-[22px] bg-neutral-900 shadow-[0_30px_60px_-30px_rgba(20,55,49,0.55)] select-none md:aspect-(--ar) md:h-[540px] md:w-auto md:max-w-none"
 					style="--ar: {card.ar};"
 				>
 					<img
