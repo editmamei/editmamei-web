@@ -5,8 +5,10 @@
 	// multi-photo calls. 47 are drawn here; frames with people are left out.
 	const COUNT = 47;
 	const COLS = 8;
+	// The session's first message, typos fixed and condensed: a parenthetical
+	// "(about 90)" was cut (owner, 2026-10-22).
 	const prompt =
-		'I added a bunch of new Turkey photos (about 90) and I want us to edit them all to the best we can.';
+		'I added a bunch of new Turkey photos and I want us to edit them all to the best we can.';
 	const tiles = Array.from({ length: COUNT }, (_, i) => ({
 		a: `/landing/batch/${i}-a.webp`,
 		b: `/landing/batch/${i}-b.webp`,
