@@ -8,7 +8,7 @@
 		title,
 		description,
 		path,
-		image = '/og-image.png',
+		image = '/og-card.jpg',
 		imageAlt,
 		article,
 		noindex = false

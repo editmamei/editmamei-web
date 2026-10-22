@@ -24,7 +24,7 @@
 			mainEntityOfPage: `${ORIGIN}/blog/${post.slug}`,
 			datePublished: post.date,
 			dateModified: post.updated ?? post.date,
-			image: `${ORIGIN}/og-image.png`,
+			image: `${ORIGIN}/og-card.jpg`,
 			author: { '@type': 'Person', name: 'Alex' },
 			publisher: org
 		};
