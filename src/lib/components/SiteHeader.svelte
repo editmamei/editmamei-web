@@ -72,16 +72,16 @@
 	const topLinkClass =
 		'rounded-md px-3 py-1.5 text-sm font-medium text-neutral-700 transition-colors hover:bg-neutral-100 hover:text-neutral-950';
 	const sheetLinkClass =
-		'flex min-h-10 items-center gap-1.5 rounded-lg px-3 text-[15px] text-neutral-800 hover:bg-neutral-50 hover:text-neutral-950';
+		'flex min-h-9 items-center gap-1.5 rounded-lg px-3 text-[15px] text-neutral-800 hover:bg-neutral-50 hover:text-neutral-950';
 	const sheetHeadClass =
-		'flex items-center gap-3 rounded-xl bg-paper px-3 py-2.5 ring-1 ring-brand/10 hover:ring-brand/30';
+		'flex items-center gap-3 rounded-xl bg-paper px-3 py-2 ring-1 ring-brand/10 hover:ring-brand/30';
 </script>
 
 <svelte:window onkeydown={onKeydown} onpointerdown={onPointerdown} />
 
 {#snippet sheetHead(p: ProductNav)}
 	<span
-		class="grid size-9 flex-none place-items-center rounded-lg {p.id === 'desktop'
+		class="grid size-8 flex-none place-items-center rounded-lg {p.id === 'desktop'
 			? 'bg-accent text-brand-deep'
 			: 'bg-brand text-accent'}"
 		aria-hidden="true"
@@ -254,9 +254,9 @@
 			aria-label="Site"
 			class="absolute inset-x-0 top-full z-40 max-h-[calc(100vh-4rem)] overflow-y-auto border-b border-neutral-200 bg-white pb-3 shadow-lg md:hidden"
 		>
-			<!-- One card per product: its header opens the product page, its pages sit in two columns. -->
+			<!-- One card per product: its header opens the product page, its pages are listed under it. -->
 			{#each productNavs as p, gi (p.id)}
-				<div class="px-3 pt-3">
+				<div class="px-3 pt-2.5">
 					{#if gi === 0}
 						<a
 							bind:this={firstSheetLink}
@@ -273,7 +273,7 @@
 							class={sheetHeadClass}>{@render sheetHead(p)}</a
 						>
 					{/if}
-					<ul aria-label="{p.overview.label} pages" class="mt-1 grid grid-cols-2 gap-x-1">
+					<ul aria-label="{p.overview.label} pages" class="mt-0.5 ml-11 grid">
 						{#each p.links as link (link.href)}
 							<li>
 								<a
@@ -288,7 +288,7 @@
 					</ul>
 				</div>
 			{/each}
-			<ul class="mx-3 mt-3 grid grid-cols-2 gap-x-1 border-t border-neutral-100 pt-2">
+			<ul class="mx-3 mt-2 flex flex-wrap gap-x-1 border-t border-neutral-100 pt-1.5">
 				{#each primaryNav as link (link.href)}
 					<li>
 						<a
