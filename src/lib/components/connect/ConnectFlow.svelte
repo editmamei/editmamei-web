@@ -135,7 +135,9 @@
 		aria-label="Your phone sends your request to the AI model, which sends each editing step to Editmamei's server and gets a small preview back. Your photo goes straight from your phone to Editmamei's server by an upload link, and comes back as a download. Uploads are deleted 24 hours after upload."
 	>
 		<defs>
-			<filter id="glow-{L.id}" x="-20%" y="-20%" width="140%" height="140%">
+			<!-- userSpaceOnUse: a straight line's bounding box has no height (or width),
+			     so a box-relative filter region would draw nothing. -->
+			<filter id="glow-{L.id}" filterUnits="userSpaceOnUse" x="0" y="0" width={L.w} height={L.h}>
 				<feGaussianBlur stdDeviation="4" result="b" />
 				<feMerge><feMergeNode in="b" /><feMergeNode in="SourceGraphic" /></feMerge>
 			</filter>
