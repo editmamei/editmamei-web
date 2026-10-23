@@ -34,7 +34,7 @@
 				<span
 					class="rounded-full border border-neutral-300 px-2 py-0.5 text-xs whitespace-nowrap text-neutral-700"
 				>
-					{tool.editor === 'gimp' ? 'GIMP · beta' : 'Photoshop'}
+					{tool.editor === 'gimp' ? 'GIMP' : 'Photoshop'}
 				</span>
 			{/if}
 			<span

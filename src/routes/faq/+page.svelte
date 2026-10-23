@@ -1,4 +1,5 @@
 <script lang="ts">
+	import PageHero from '$lib/components/PageHero.svelte';
 	import Seo from '$lib/components/Seo.svelte';
 	import { PRO_FEATURES_SENTENCE } from '$lib/content/pro-features';
 	import {
@@ -19,11 +20,11 @@
 	const general: Faq[] = [
 		{
 			q: 'What is Editmamei?',
-			a: "Editmamei lets an AI assistant edit your photos with real editing tools, from what you describe. It comes two ways. Editmamei Desktop is an MCP server that runs on your computer and edits in desktop Photoshop, or GIMP in beta. Editmamei Connect is a connector you add to your AI assistant, such as Claude or ChatGPT: you send a photo, it's edited on Editmamei's server, and there's nothing to install."
+			a: "Editmamei lets an AI assistant edit your photos with real editing tools, from what you describe. It comes two ways. Editmamei Desktop is an MCP server that runs on your computer and edits in desktop Photoshop or GIMP. Editmamei Connect is a connector you add to your AI assistant, such as Claude or ChatGPT: you send a photo, it's edited on Editmamei's server, and there's nothing to install."
 		},
 		{
 			q: 'Should I use Editmamei Desktop or Editmamei Connect?',
-			a: 'Desktop if you work in Photoshop and want each edit as layers in your own document, on your own computer. Connect if you want to edit from a chat with your AI assistant on any device, including your phone, without installing any editing software.'
+			a: 'Desktop if you work in Photoshop or GIMP and want each edit as layers in your own document, on your own computer. Connect if you want to edit from a chat with your AI assistant on any device, including your phone, without installing any editing software.'
 		},
 		{
 			q: 'Is Editmamei a web app?',
@@ -67,12 +68,12 @@
 		},
 		{
 			q: 'Do I need Photoshop to use Editmamei Desktop?',
-			a: 'For Photoshop editing, yes. Editmamei Desktop drives desktop Adobe Photoshop and needs an active Photoshop license and an install on the same computer. Its GIMP 3.2 support (beta, free) works with no Photoshop installed. Editmamei Connect needs no editing software at all.'
+			a: 'For Photoshop editing, yes. Editmamei Desktop drives desktop Adobe Photoshop and needs an active Photoshop license and an install on the same computer. Its GIMP 3.2 support (free) works with no Photoshop installed. Editmamei Connect needs no editing software at all.'
 		},
 		{
 			q: 'Does Editmamei work with GIMP?',
-			a: "Yes, as a free beta, with GIMP 3.2 on Windows, macOS or Linux. GIMP runs in the background with nothing installed into it, so there is no window to watch. You follow the work through previews in chat, and every adjustment stays a live filter in the .xcf you open afterwards. The beta covers adjustments and effects, layers and composites, crop and resize, and checkpoints you can restore. It can't heal, clone, select a subject or sky, or add text yet. The GIMP page covers what the beta does and how to set it up.",
-			link: { href: '/gimp', label: 'See the GIMP page' }
+			a: "Yes, free, with GIMP 3.2 on Windows, macOS or Linux. GIMP runs in the background with nothing installed into it, so there is no window to watch. You follow the work through previews in chat, and every adjustment stays a live filter in the .xcf you open afterwards. It covers adjustments and effects, text, layers and composites, crop and resize, and checkpoints you can restore. It can't heal, clone, or select a subject or sky yet. The Desktop page has a GIMP section on what it does and how to set it up.",
+			link: { href: '/desktop#gimp', label: 'Using GIMP, on the Desktop page' }
 		},
 		{
 			q: 'Which Photoshop versions does Editmamei support?',
@@ -80,11 +81,11 @@
 		},
 		{
 			q: 'Does Editmamei Desktop work on Mac, Windows and Linux?',
-			a: 'Photoshop editing runs on macOS 13 and later and on Windows 10 and 11. The GIMP beta also runs on Linux, including GIMP installed from Flathub.'
+			a: 'Photoshop editing runs on macOS 13 and later and on Windows 10 and 11. With GIMP it also runs on Linux, including GIMP installed from Flathub.'
 		},
 		{
 			q: 'Does Editmamei work with Lightroom or Photoshop Elements?',
-			a: "No. Editmamei drives desktop Photoshop and, in beta, GIMP. Photoshop Elements doesn't expose the scripting interface that full Photoshop does, and Lightroom isn't supported either."
+			a: "No. Editmamei drives desktop Photoshop and GIMP. Photoshop Elements doesn't expose the scripting interface that full Photoshop does, and Lightroom isn't supported either."
 		},
 		{
 			q: 'What data does Editmamei Desktop collect, and how is it used?',
@@ -114,7 +115,7 @@
 		},
 		{
 			q: 'Does Editmamei Desktop use generative AI to create or alter pixels?',
-			a: "No. Editmamei Desktop uses only the editor's own tools (Photoshop's, or GIMP's in the beta): adjustments, masks, selections and filters. Color grading lands as adjustments you can reopen and retune at any time, and retouching uses Photoshop's content-aware tools on a duplicated layer, so the original stays intact. The AI plans the edit, and no generative model touches your pixels."
+			a: "No. Editmamei Desktop uses only the editor's own tools (Photoshop's or GIMP's): adjustments, masks, selections and filters. Color grading lands as adjustments you can reopen and retune at any time, and retouching uses Photoshop's content-aware tools on a duplicated layer, so the original stays intact. The AI plans the edit, and no generative model touches your pixels."
 		}
 	];
 
@@ -147,7 +148,8 @@
 		},
 		{
 			q: 'How much does Editmamei Connect cost?',
-			a: "Connect uses credits. New accounts start with 150 free credits and get up to 50 free credits each month, and credit packs and monthly plans are available from your Connect account. Your AI assistant's own usage counts against your plan with it as usual, separately from Connect's credits."
+			a: "Connect uses credits. New accounts start with 150 free credits and get up to 50 free credits each month, and credit packs and monthly plans are available from your Connect account. Your AI assistant's own usage counts against your plan with it as usual, separately from Connect's credits.",
+			link: { href: '/connect/pricing', label: 'See Connect pricing' }
 		},
 		{
 			q: 'What happens to my photos on Editmamei Connect?',
@@ -169,7 +171,7 @@
 		{
 			id: 'desktop',
 			title: 'Editmamei Desktop',
-			intro: 'Runs on your computer and edits in desktop Photoshop, or GIMP in beta.',
+			intro: 'Runs on your computer and edits in desktop Photoshop or GIMP.',
 			faqs: desktop
 		},
 		{
@@ -214,10 +216,10 @@
 	{@html jsonLd}
 </svelte:head>
 
-<section class="bg-white py-20 md:py-28">
+<PageHero eyebrow="FAQ" title="Common questions" />
+
+<section class="bg-paper py-14 md:py-20">
 	<div class="mx-auto max-w-2xl px-4">
-		<p class="mb-3 text-xs font-semibold tracking-wider text-neutral-500 uppercase">FAQ</p>
-		<h1 class="text-3xl font-bold tracking-tight text-neutral-950 md:text-4xl">Common questions</h1>
 		<p class="mt-4 text-base leading-relaxed text-neutral-600">
 			What Editmamei is, what it isn't, and how it works.
 		</p>
@@ -263,7 +265,7 @@
 			<p class="mt-3 text-sm text-neutral-600">
 				Using GIMP? The <a href={GITHUB_GIMP_DOCS_URL} class="underline hover:text-neutral-950"
 					>GIMP guide</a
-				> covers requirements, detection, and what the beta can and can't do yet.
+				> covers requirements, detection, and what it can and can't do yet.
 			</p>
 			<p class="mt-3 text-sm text-neutral-600">
 				Something not working? The <a

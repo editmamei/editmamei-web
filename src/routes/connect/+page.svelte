@@ -289,6 +289,9 @@
 		</div>
 		<p class="mt-6 text-[14px] text-neutral-600">
 			You can see your balance, and buy more, in your Connect account.
+			<a href="/connect/pricing" class="ml-1 font-semibold text-brand underline underline-offset-2"
+				>See Connect pricing <span aria-hidden="true">→</span></a
+			>
 		</p>
 	</div>
 </section>
@@ -309,7 +312,7 @@
 		</ul>
 
 		<a
-			href="/photoshop"
+			href="/desktop"
 			onclick={() => track('connect-xlink-desktop')}
 			class="group mt-14 flex items-center justify-between gap-4 rounded-[22px] bg-white p-6 ring-1 ring-brand/10 transition-shadow hover:shadow-lg"
 		>

@@ -1,4 +1,5 @@
 <script lang="ts">
+	import PageHero from '$lib/components/PageHero.svelte';
 	import Seo from '$lib/components/Seo.svelte';
 	import { GITHUB_LICENSE_URL, GITHUB_README_URL } from '$lib/links';
 
@@ -220,10 +221,10 @@ support@editmamei.com`;
 	path="/license"
 />
 
-<section class="bg-white py-20 md:py-28">
+<PageHero eyebrow="License" title="Two licenses, in plain words." />
+
+<section class="bg-paper py-14 md:py-20">
 	<div class="mx-auto max-w-2xl px-4">
-		<p class="mb-3 text-xs font-semibold tracking-wider text-neutral-500 uppercase">License</p>
-		<h1 class="text-3xl font-bold tracking-tight text-neutral-950 md:text-4xl">License</h1>
 		<p class="mt-4 text-base leading-relaxed text-neutral-700">
 			Two licenses cover Editmamei. Community Edition's source is public and source-available; Pro
 			is a separate, paid add-on with its own commercial terms.

@@ -2,7 +2,7 @@
 	import { track } from '$lib/analytics/clarity';
 	import SubscribeForm from '$lib/components/SubscribeForm.svelte';
 	import { cookieConsent } from '$lib/stores/cookieConsent';
-	import { connectLink, desktopLink, productExtras, productOverview } from '$lib/content/surfaces';
+	import { productNavs } from '$lib/content/surfaces';
 	import {
 		CUSTOMER_PORTAL_URL,
 		GITHUB_CHANGELOG_URL,
@@ -14,9 +14,9 @@
 
 <footer class="border-t border-neutral-200 bg-paper">
 	<div class="mx-auto max-w-6xl px-4 py-12 md:py-16">
-		<div class="grid gap-8 sm:grid-cols-2 md:grid-cols-5">
+		<div class="grid grid-cols-2 gap-8 md:grid-cols-4 lg:grid-cols-6">
 			<!-- Brand + where to find us -->
-			<div class="sm:col-span-2">
+			<div class="col-span-2 md:col-span-4 lg:col-span-2">
 				<p class="text-base font-semibold tracking-tight text-neutral-900">Editmamei</p>
 				<p class="mt-2 max-w-md text-sm leading-relaxed text-neutral-600">
 					Give your AI a real photo editor: Photoshop or GIMP on your computer, or Connect from any
@@ -108,36 +108,34 @@
 				</div>
 			</div>
 
-			<!-- Product: the overview, the two products, then pricing and the demo -->
-			<div>
-				<p class="text-xs font-semibold tracking-wider text-neutral-500 uppercase">Product</p>
-				<ul class="mt-3 space-y-2 text-sm text-neutral-700">
-					<li>
-						<a href={productOverview.href} class="hover:text-neutral-950">{productOverview.label}</a
-						>
-					</li>
-					{#each [desktopLink, connectLink] as p (p.href)}
-						<li><a href={p.href} class="hover:text-neutral-950">{p.label}</a></li>
-					{/each}
-					{#each productExtras as link (link.href)}
-						<li><a href={link.href} class="hover:text-neutral-950">{link.label}</a></li>
-					{/each}
-					<li><a href="/pricing" class="hover:text-neutral-950">Pricing</a></li>
-					<li><a href="/photoshop#process" class="hover:text-neutral-950">Demo</a></li>
-				</ul>
-			</div>
+			<!-- One column per product, then shared reading and the company. -->
+			{#each productNavs as p (p.id)}
+				<div>
+					<p class="text-xs font-semibold tracking-wider text-neutral-500 uppercase">{p.menu}</p>
+					<ul class="mt-3 space-y-2 text-sm text-neutral-700">
+						<li><a href={p.overview.href} class="hover:text-neutral-950">Overview</a></li>
+						{#each p.links as link (link.href)}
+							<li>
+								<a href={link.href} class="hover:text-neutral-950"
+									>{link.label}{#if link.external}&nbsp;<span aria-hidden="true">↗</span>{/if}</a
+								>
+							</li>
+						{/each}
+						{#if p.id === 'desktop'}
+							<li><a href="/desktop/activate" class="hover:text-neutral-950">Activate Pro</a></li>
+						{/if}
+					</ul>
+				</div>
+			{/each}
 
 			<!-- Resources: read and learn -->
 			<div>
 				<p class="text-xs font-semibold tracking-wider text-neutral-500 uppercase">Resources</p>
 				<ul class="mt-3 space-y-2 text-sm text-neutral-700">
-					<li>
-						<a href="/docs" class="hover:text-neutral-950">Docs</a>
-					</li>
-					<li><a href="/faq" class="hover:text-neutral-950">FAQ</a></li>
+					<li><a href="/pricing" class="hover:text-neutral-950">Pricing</a></li>
 					<li><a href="/gallery" class="hover:text-neutral-950">Gallery</a></li>
 					<li><a href="/blog" class="hover:text-neutral-950">Blog</a></li>
-					<li><a href="/download" class="hover:text-neutral-950">Download</a></li>
+					<li><a href="/faq" class="hover:text-neutral-950">FAQ</a></li>
 					<li>
 						<a
 							href={GITHUB_CHANGELOG_URL}
@@ -155,13 +153,18 @@
 				</ul>
 			</div>
 
-			<!-- Account & support: licenses and help -->
+			<!-- Company: help, accounts and the legal pages -->
 			<div>
-				<p class="text-xs font-semibold tracking-wider text-neutral-500 uppercase">
-					Account &amp; support
-				</p>
+				<p class="text-xs font-semibold tracking-wider text-neutral-500 uppercase">Company</p>
 				<ul class="mt-3 space-y-2 text-sm text-neutral-700">
-					<li><a href="/activate" class="hover:text-neutral-950">Activate Pro</a></li>
+					<li><a href="/contact" class="hover:text-neutral-950">Contact</a></li>
+					<li>
+						<a
+							href={GITHUB_ISSUES_URL}
+							onclick={() => track('footer-outbound-issues')}
+							class="hover:text-neutral-950">Report a bug</a
+						>
+					</li>
 					<li>
 						<a
 							href={CUSTOMER_PORTAL_URL}
@@ -170,14 +173,9 @@
 							class="hover:text-neutral-950">Manage subscription</a
 						>
 					</li>
-					<li>
-						<a
-							href={GITHUB_ISSUES_URL}
-							onclick={() => track('footer-outbound-issues')}
-							class="hover:text-neutral-950">Report a bug</a
-						>
-					</li>
-					<li><a href="/contact" class="hover:text-neutral-950">Contact</a></li>
+					<li><a href="/privacy" class="hover:text-neutral-950">Privacy</a></li>
+					<li><a href="/security" class="hover:text-neutral-950">Security</a></li>
+					<li><a href="/license" class="hover:text-neutral-950">License</a></li>
 				</ul>
 			</div>
 		</div>

@@ -27,7 +27,7 @@
 	const EDITOR_OPTIONS: { value: EditorFilter; label: string }[] = [
 		{ value: 'all', label: 'All' },
 		{ value: 'photoshop', label: 'Photoshop' },
-		{ value: 'gimp', label: 'GIMP (beta)' }
+		{ value: 'gimp', label: 'GIMP' }
 	];
 	const EDITION_OPTIONS: { value: EditionFilter; label: string }[] = [
 		{ value: 'all', label: 'All' },
@@ -266,8 +266,9 @@
 						class="mt-4 rounded-xl border border-neutral-200 bg-paper px-5 py-3 text-sm text-neutral-700"
 					>
 						Pro tools unlock with a license, and Pro is for Photoshop only.
-						<a href="/pricing" class="text-brand underline underline-offset-2 hover:no-underline"
-							>See pricing</a
+						<a
+							href="/desktop/pricing"
+							class="text-brand underline underline-offset-2 hover:no-underline">See pricing</a
 						>
 					</p>
 				{/if}

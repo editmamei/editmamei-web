@@ -3,31 +3,14 @@
 	import { page } from '$app/state';
 	import { track } from '$lib/analytics/clarity';
 	import { GITHUB_REPO_URL } from '$lib/links';
-	import {
-		connectLink,
-		desktopLink,
-		primaryNav,
-		productExtras,
-		productOverview
-	} from '$lib/content/surfaces';
+	import { primaryNav, productNavs, type ProductNav } from '$lib/content/surfaces';
 
-	// The two products, side by side in the desktop Product menu.
-	const products = [desktopLink, connectLink];
-	// The mobile sheet lists primaryNav right below, so extras that duplicate a
-	// primary link are left out of its Product group.
-	const primaryHrefs = new Set(primaryNav.map((l) => l.href));
-	const productLinks = [
-		productOverview,
-		...products,
-		...productExtras.filter((l) => !primaryHrefs.has(l.href))
-	];
-
-	// Desktop Product menu: a disclosure (button + panel), opened by click or
+	// Desktop: one disclosure per product (button + panel), opened by click or
 	// Enter/Space, closed by Escape, an outside click, focus leaving it, or
-	// following a link.
-	let productOpen = $state(false);
-	let productWrap = $state<HTMLElement>();
-	let productButton = $state<HTMLButtonElement>();
+	// following a link. Only one is open at a time.
+	let open = $state<ProductNav['id'] | null>(null);
+	const wraps: Record<string, HTMLElement | undefined> = $state({});
+	const buttons: Record<string, HTMLButtonElement | undefined> = $state({});
 
 	// Mobile menu: a full-width sheet under the bar.
 	let menuOpen = $state(false);
@@ -35,9 +18,9 @@
 	let sheetEl = $state<HTMLElement>();
 	let firstSheetLink = $state<HTMLAnchorElement>();
 
-	function toggleProduct() {
-		productOpen = !productOpen;
-		if (productOpen) track('nav-product-opened');
+	function toggle(id: ProductNav['id']) {
+		open = open === id ? null : id;
+		if (open) track(`nav-${id}-opened`);
 	}
 	function toggleMenu() {
 		menuOpen = !menuOpen;
@@ -45,31 +28,31 @@
 		if (menuOpen) queueMicrotask(() => firstSheetLink?.focus());
 	}
 	function closeAll() {
-		productOpen = false;
+		open = null;
 		menuOpen = false;
 	}
 
 	function onKeydown(e: KeyboardEvent) {
 		if (e.key !== 'Escape') return;
-		if (productOpen) {
-			productOpen = false;
-			productButton?.focus();
+		if (open) {
+			buttons[open]?.focus();
+			open = null;
 		}
 		if (menuOpen) {
 			menuOpen = false;
 			menuButton?.focus();
 		}
 	}
-	// Closes the panel when keyboard focus moves to an element outside it. A
-	// null relatedTarget (a click that focuses nothing, as Safari does for links)
-	// is left to the outside-click handler, so a click inside still lands.
-	function onProductFocusout(e: FocusEvent) {
+	// Closes a panel when keyboard focus moves outside it. A null relatedTarget
+	// (a click that focuses nothing, as Safari does for links) is left to the
+	// outside-click handler, so a click inside still lands.
+	function onFocusout(e: FocusEvent, id: string) {
 		const next = e.relatedTarget as Node | null;
-		if (productOpen && next && !productWrap?.contains(next)) productOpen = false;
+		if (open === id && next && !wraps[id]?.contains(next)) open = null;
 	}
 	function onPointerdown(e: PointerEvent) {
 		const target = e.target as Node;
-		if (productOpen && productWrap && !productWrap.contains(target)) productOpen = false;
+		if (open && !wraps[open]?.contains(target)) open = null;
 		if (
 			menuOpen &&
 			sheetEl &&
@@ -83,6 +66,8 @@
 	afterNavigate(closeAll);
 
 	const isCurrent = (href: string) => page.url.pathname === href;
+	const inSection = (p: ProductNav) =>
+		page.url.pathname === p.overview.href || page.url.pathname.startsWith(`${p.overview.href}/`);
 
 	const topLinkClass =
 		'rounded-md px-3 py-1.5 text-sm font-medium text-neutral-700 transition-colors hover:bg-neutral-100 hover:text-neutral-950';
@@ -91,6 +76,10 @@
 </script>
 
 <svelte:window onkeydown={onKeydown} onpointerdown={onPointerdown} />
+
+{#snippet arrow()}
+	<span aria-hidden="true" class="text-neutral-400">↗</span>
+{/snippet}
 
 <header class="sticky top-0 z-30 border-b border-neutral-200/80 bg-white/85 backdrop-blur">
 	<div class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3">
@@ -105,82 +94,66 @@
 
 		<div class="flex items-center gap-2">
 			<nav class="relative hidden items-center gap-1 md:flex" aria-label="Primary">
-				<div bind:this={productWrap} onfocusout={onProductFocusout}>
-					<button
-						bind:this={productButton}
-						type="button"
-						class="{topLinkClass} inline-flex items-center gap-1"
-						aria-expanded={productOpen}
-						aria-controls="nav-product-panel"
-						onclick={toggleProduct}
-					>
-						Product
-						<svg
-							class="size-3.5 transition-transform motion-reduce:transition-none"
-							class:rotate-180={productOpen}
-							viewBox="0 0 24 24"
-							fill="none"
-							aria-hidden="true"
+				{#each productNavs as p (p.id)}
+					<div bind:this={wraps[p.id]} onfocusout={(e) => onFocusout(e, p.id)} class="relative">
+						<button
+							bind:this={buttons[p.id]}
+							type="button"
+							class="{topLinkClass} inline-flex items-center gap-1 {inSection(p)
+								? 'text-neutral-950'
+								: ''}"
+							aria-expanded={open === p.id}
+							aria-controls="nav-{p.id}-panel"
+							onclick={() => toggle(p.id)}
 						>
-							<path
-								d="M6 9 L12 15 L18 9"
-								stroke="currentColor"
-								stroke-width="2"
-								stroke-linecap="round"
-								stroke-linejoin="round"
-							/>
-						</svg>
-					</button>
+							{p.menu}
+							<svg
+								class="size-3.5 transition-transform motion-reduce:transition-none"
+								class:rotate-180={open === p.id}
+								viewBox="0 0 24 24"
+								fill="none"
+								aria-hidden="true"
+							>
+								<path
+									d="M6 9 L12 15 L18 9"
+									stroke="currentColor"
+									stroke-width="2"
+									stroke-linecap="round"
+									stroke-linejoin="round"
+								/>
+							</svg>
+						</button>
 
-					<div
-						id="nav-product-panel"
-						class="absolute top-full right-0 z-40 mt-2 w-[34rem] max-w-[calc(100vw-2rem)] rounded-xl border border-neutral-200 bg-white p-2 shadow-lg"
-						hidden={!productOpen}
-					>
-						<a
-							href={productOverview.href}
-							onclick={closeAll}
-							aria-current={isCurrent(productOverview.href) ? 'page' : undefined}
-							class="block rounded-lg px-3 py-2.5 hover:bg-neutral-50"
+						<div
+							id="nav-{p.id}-panel"
+							class="absolute top-full left-0 z-40 mt-2 w-[19rem] rounded-xl border border-neutral-200 bg-white p-2 shadow-lg"
+							hidden={open !== p.id}
 						>
-							<span class="block text-sm font-semibold text-neutral-950">
-								{productOverview.label}
-							</span>
-							<span class="mt-0.5 block text-xs text-neutral-600">
-								{productOverview.description}
-							</span>
-						</a>
-						<ul class="mt-1 flex flex-wrap border-t border-neutral-100 pt-1">
-							{#each products as p (p.href)}
-								<li class="w-1/2 min-w-40 grow-0">
-									<a
-										href={p.href}
-										onclick={closeAll}
-										aria-current={isCurrent(p.href) ? 'page' : undefined}
-										class="block h-full rounded-lg px-3 py-2.5 hover:bg-neutral-50"
-									>
-										<span class="block text-sm font-semibold text-neutral-950">{p.label}</span>
-										<span class="mt-0.5 block text-xs text-neutral-600">{p.description}</span>
-									</a>
-								</li>
-							{/each}
-						</ul>
-						{#if productExtras.length}
-							<ul class="mt-1 flex justify-end gap-1 border-t border-neutral-100 pt-1">
-								{#each productExtras as link (link.href)}
+							<a
+								href={p.overview.href}
+								onclick={closeAll}
+								aria-current={isCurrent(p.overview.href) ? 'page' : undefined}
+								class="block rounded-lg px-3 py-2.5 hover:bg-neutral-50"
+							>
+								<span class="block text-sm font-semibold text-neutral-950">{p.overview.label}</span>
+								<span class="mt-0.5 block text-xs text-neutral-600">{p.overview.description}</span>
+							</a>
+							<ul class="mt-1 border-t border-neutral-100 pt-1">
+								{#each p.links as link (link.href)}
 									<li>
 										<a
 											href={link.href}
 											onclick={closeAll}
-											class="block rounded-lg px-3 py-2 text-sm font-medium text-neutral-800 hover:bg-neutral-50"
-											>{link.label} <span aria-hidden="true">→</span></a
+											aria-current={isCurrent(link.href) ? 'page' : undefined}
+											class="flex items-center justify-between rounded-lg px-3 py-2 text-sm font-medium text-neutral-800 hover:bg-neutral-50"
+											>{link.label}{#if link.external}{@render arrow()}{/if}</a
 										>
 									</li>
 								{/each}
 							</ul>
-						{/if}
+						</div>
 					</div>
-				</div>
+				{/each}
 
 				{#each primaryNav as link (link.href)}
 					<a
@@ -250,34 +223,45 @@
 			aria-label="Site"
 			class="absolute inset-x-0 top-full z-40 max-h-[calc(100vh-4rem)] overflow-y-auto border-b border-neutral-200 bg-white pb-2 shadow-lg md:hidden"
 		>
-			<p
-				id="site-nav-product"
-				class="px-4 pt-4 pb-1 text-xs font-semibold tracking-wider text-neutral-500 uppercase"
-			>
-				Product
-			</p>
-			<ul aria-labelledby="site-nav-product">
-				{#each productLinks as link, i (link.href)}
+			{#each productNavs as p, gi (p.id)}
+				<p
+					id="site-nav-{p.id}"
+					class="px-4 pt-4 pb-1 text-xs font-semibold tracking-wider text-neutral-500 uppercase"
+				>
+					{p.overview.label}
+				</p>
+				<ul aria-labelledby="site-nav-{p.id}">
 					<li>
-						{#if i === 0}
+						{#if gi === 0}
 							<a
 								bind:this={firstSheetLink}
-								href={link.href}
+								href={p.overview.href}
 								onclick={closeAll}
-								aria-current={isCurrent(link.href) ? 'page' : undefined}
-								class={sheetLinkClass}>{link.label}</a
+								aria-current={isCurrent(p.overview.href) ? 'page' : undefined}
+								class={sheetLinkClass}>Overview</a
 							>
 						{:else}
 							<a
-								href={link.href}
+								href={p.overview.href}
 								onclick={closeAll}
-								aria-current={isCurrent(link.href) ? 'page' : undefined}
-								class={sheetLinkClass}>{link.label}</a
+								aria-current={isCurrent(p.overview.href) ? 'page' : undefined}
+								class={sheetLinkClass}>Overview</a
 							>
 						{/if}
 					</li>
-				{/each}
-			</ul>
+					{#each p.links as link (link.href)}
+						<li>
+							<a
+								href={link.href}
+								onclick={closeAll}
+								aria-current={isCurrent(link.href) ? 'page' : undefined}
+								class={sheetLinkClass}
+								>{link.label}{#if link.external}{@render arrow()}{/if}</a
+							>
+						</li>
+					{/each}
+				</ul>
+			{/each}
 			<ul class="mt-2 border-t border-neutral-100 pt-2">
 				{#each primaryNav as link (link.href)}
 					<li>
@@ -289,8 +273,6 @@
 						>
 					</li>
 				{/each}
-			</ul>
-			<ul class="mt-2 border-t border-neutral-100 pt-2">
 				<li>
 					<a
 						href={GITHUB_REPO_URL}

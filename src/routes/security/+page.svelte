@@ -1,4 +1,5 @@
 <script lang="ts">
+	import PageHero from '$lib/components/PageHero.svelte';
 	import Seo from '$lib/components/Seo.svelte';
 	import { GITHUB_SECURITY_ADVISORY_URL, GITHUB_SECURITY_POLICY_URL } from '$lib/links';
 </script>
@@ -9,12 +10,10 @@
 	path="/security"
 />
 
-<section class="bg-white py-20 md:py-28">
+<PageHero eyebrow="Security" title="Reporting a security issue" />
+
+<section class="bg-paper py-14 md:py-20">
 	<div class="mx-auto max-w-2xl px-4">
-		<p class="mb-3 text-xs font-semibold tracking-wider text-neutral-500 uppercase">Security</p>
-		<h1 class="text-3xl font-bold tracking-tight text-neutral-950 md:text-4xl">
-			Reporting a security issue
-		</h1>
 		<p class="mt-4 text-base leading-relaxed text-neutral-700">
 			Where a security report goes depends on what it's about.
 		</p>

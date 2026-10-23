@@ -1,4 +1,5 @@
 <script lang="ts">
+	import PageHero from '$lib/components/PageHero.svelte';
 	import Seo from '$lib/components/Seo.svelte';
 	import SubscribeForm from '$lib/components/SubscribeForm.svelte';
 	import { formatDate } from '$lib/blog';
@@ -12,12 +13,13 @@
 	description="Release notes and longer write-ups from Editmamei, the MCP server that connects your AI assistant to desktop Photoshop and GIMP."
 />
 
-<div class="mx-auto max-w-3xl px-4 py-12">
-	<header class="mb-10">
-		<h1 class="text-3xl font-bold tracking-tight text-neutral-900">Blog</h1>
-		<p class="mt-2 text-neutral-600">Release notes and longer write-ups on how Editmamei works.</p>
-	</header>
+<PageHero
+	eyebrow="Blog"
+	title="Release notes and write-ups."
+	lede="What changed in each release, and longer pieces on how Editmamei works and what an edit costs."
+/>
 
+<div class="mx-auto max-w-3xl px-4 py-12">
 	{#if data.posts.length === 0}
 		<p class="text-neutral-600">No posts yet.</p>
 	{:else}

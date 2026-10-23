@@ -1,4 +1,5 @@
 <script lang="ts">
+	import PageHero from '$lib/components/PageHero.svelte';
 	import Seo from '$lib/components/Seo.svelte';
 	import { cookieConsent } from '$lib/stores/cookieConsent';
 </script>
@@ -9,19 +10,17 @@
 	path="/privacy"
 />
 
-<section class="bg-white py-20 md:py-28">
+<PageHero eyebrow="Privacy" title="What Editmamei does with your data." />
+
+<section class="bg-paper py-14 md:py-20">
 	<div class="mx-auto max-w-2xl px-4">
-		<p class="mb-3 text-xs font-semibold tracking-wider text-neutral-500 uppercase">Privacy</p>
-		<h1 class="text-3xl font-bold tracking-tight text-neutral-950 md:text-4xl">
-			What Editmamei does with your data.
-		</h1>
 		<p class="mt-4 text-base leading-relaxed text-neutral-700">
-			Editmamei runs on your own computer and drives desktop Photoshop, or GIMP in beta. Your photos
-			aren't uploaded to us. The only usage data Editmamei sends us is content-free, and you can
-			audit it and turn it off. The few other requests it makes, listed below, check for updates and
-			handle a Pro license, and none of them carries your images. When your AI assistant needs to
-			see an edit, a downscaled preview goes to that assistant, covered below. The legal basis,
-			retention periods and your rights are further down this page.
+			Editmamei runs on your own computer and drives desktop Photoshop or GIMP. Your photos aren't
+			uploaded to us. The only usage data Editmamei sends us is content-free, and you can audit it
+			and turn it off. The few other requests it makes, listed below, check for updates and handle a
+			Pro license, and none of them carries your images. When your AI assistant needs to see an
+			edit, a downscaled preview goes to that assistant, covered below. The legal basis, retention
+			periods and your rights are further down this page.
 		</p>
 
 		<h2 class="mt-12 text-xl font-bold tracking-tight text-neutral-950">
@@ -146,7 +145,7 @@
 
 		<div class="mt-12 border-t border-neutral-200 pt-6">
 			<a
-				href="/photoshop#edit-flow"
+				href="/desktop#how"
 				class="text-sm font-semibold text-neutral-900 underline underline-offset-2 hover:text-neutral-700"
 			>
 				See how it fits together on the Photoshop page →

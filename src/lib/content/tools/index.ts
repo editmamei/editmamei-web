@@ -11,7 +11,7 @@ export type Editor = 'photoshop' | 'gimp';
 export type Edition = 'community' | 'pro';
 
 export interface Tool {
-	/** Tool identifier, also the row's anchor (`/tools#ps_select_subject`). */
+	/** Tool identifier, also the row's anchor (`/desktop/tools#ps_select_subject`). */
 	id: string;
 	editor: Editor;
 	edition: Edition;

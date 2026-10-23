@@ -2,9 +2,9 @@
 	"_generated": "Do not edit. Regenerate with `node scripts/sync-tools.mjs --source <editmamei>`.",
 	"source": {
 		"package": "editmamei",
-		"version": "1.9.0"
+		"version": "1.9.1"
 	},
-	"snapshotDate": "2026-10-18",
+	"snapshotDate": "2026-10-23",
 	"tools": [
 		{
 			"id": "gimp_add_adjustment",

@@ -13,7 +13,7 @@
 
 	// Every fork click is counted by product and by where on the page it was made,
 	// so the split between Desktop and Connect interest can be read directly.
-	const DESKTOP_HREF = '/photoshop';
+	const DESKTOP_HREF = '/desktop';
 	const CONNECT_HREF = '/connect';
 	const fork = (product: 'desktop' | 'connect', where: string) => () =>
 		track(`fork-${product}-${where}`);

@@ -1,4 +1,5 @@
 <script lang="ts">
+	import PageHero from '$lib/components/PageHero.svelte';
 	import Seo from '$lib/components/Seo.svelte';
 	import {
 		CUSTOMER_PORTAL_URL,
@@ -14,10 +15,10 @@
 	path="/contact"
 />
 
-<section class="bg-white py-20 md:py-28">
+<PageHero eyebrow="Contact" title="Get in touch" />
+
+<section class="bg-paper py-14 md:py-20">
 	<div class="mx-auto max-w-2xl px-4">
-		<p class="mb-3 text-xs font-semibold tracking-wider text-neutral-500 uppercase">Contact</p>
-		<h1 class="text-3xl font-bold tracking-tight text-neutral-950 md:text-4xl">Get in touch</h1>
 		<p class="mt-4 text-base leading-relaxed text-neutral-600">
 			Editmamei is an independent product, not affiliated with Adobe. The channels below cover
 			support, billing and security reports.

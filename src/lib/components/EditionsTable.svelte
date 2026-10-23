@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { editionGroups } from '$lib/content/landing';
+	import { editionGroups } from '$lib/content/editions';
 	import { trackOnce } from '$lib/analytics/clarity';
 
 	// Scroll-depth engagement: made it to the feature-comparison section.
@@ -37,7 +37,7 @@
 			</p>
 			<p class="mt-3 text-base leading-relaxed text-neutral-700">
 				Pro's features are for Photoshop, so <a
-					href="/gimp"
+					href="/desktop#gimp"
 					class="font-semibold text-neutral-900 underline decoration-neutral-300 underline-offset-4 hover:decoration-neutral-700"
 					>GIMP support</a
 				> is the same in both editions.
@@ -115,7 +115,7 @@
 		</div>
 		<p class="mt-6 text-sm">
 			<a
-				href="/tools"
+				href="/desktop/tools"
 				class="font-semibold text-neutral-900 underline decoration-neutral-300 underline-offset-4 hover:decoration-neutral-700"
 			>
 				See every tool and the edition it is in <span aria-hidden="true">→</span>

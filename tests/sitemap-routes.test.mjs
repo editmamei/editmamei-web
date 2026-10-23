@@ -26,15 +26,24 @@ function sitemapPaths() {
 	return Array.from(block[0].matchAll(/path:\s*'([^']+)'/g), (m) => m[1]);
 }
 
-/** Top-level page routes on disk: '/' plus each child dir with +page.svelte. */
+/**
+ * Static page routes on disk, nested ones included: '/' plus every dir with a
+ * +page.svelte. Parameterised dirs ([slug], [id]) are skipped; their pages are
+ * listed from data, not from ROUTES.
+ */
 function diskRoutes() {
 	const routes = [];
 	if (existsSync(join(ROUTES_DIR, '+page.svelte'))) routes.push('/');
-	for (const entry of readdirSync(ROUTES_DIR)) {
-		const full = join(ROUTES_DIR, entry);
-		if (!statSync(full).isDirectory()) continue;
-		if (existsSync(join(full, '+page.svelte'))) routes.push(`/${entry}`);
-	}
+	const walk = (dir, prefix) => {
+		for (const entry of readdirSync(dir)) {
+			const full = join(dir, entry);
+			if (!statSync(full).isDirectory() || entry.startsWith('[')) continue;
+			const route = `${prefix}/${entry}`;
+			if (existsSync(join(full, '+page.svelte'))) routes.push(route);
+			walk(full, route);
+		}
+	};
+	walk(ROUTES_DIR, '');
 	return routes;
 }
 

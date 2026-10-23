@@ -1,81 +1,70 @@
-// Site navigation and the list of editor surfaces.
+// Site navigation. The header's two product menus, the mobile menu and the
+// footer render from these arrays, so adding a page to the menus is a data
+// change here, not a layout change.
 //
-// The header's Product menu, the mobile menu and the footer's Product column
-// render from the nav links here; the editor chooser on /product renders from
-// `surfaces`. Adding a nav item is a data change here, not a layout change.
+// The site has two products, each a section of its own: Desktop (Photoshop or
+// GIMP on your computer) under /desktop, and Connect (hosted) under /connect,
+// whose sign-up, setup, tool list and account live on connect.editmamei.com.
+// "Editmamei Desktop" is a site label set against Connect; the installed
+// product is still called Editmamei, so the name stays out of install steps,
+// READMEs and listings.
+
+import { CONNECT_TOOLS_URL, CONNECT_URL } from '$lib/links';
 
 export interface NavLink {
 	label: string;
 	href: string;
-	/** Short line under the label in the desktop Product menu. */
+	/** Short line under the label in a product menu. */
 	description?: string;
+	/** Opens connect.editmamei.com rather than a page on this site. */
+	external?: boolean;
 }
 
-export interface Surface {
-	id: string;
-	name: string;
-	/** Where the surface's page lives. A full URL marks it as off-site. */
-	href: string;
-	/** One line on what the surface is and where it runs. */
-	descriptor: string;
-	/** Label for the call to action on the /product chooser card. */
-	cta: string;
-	beta?: boolean;
+export interface ProductNav {
+	id: 'desktop' | 'connect';
+	/** The menu button's label. */
+	menu: string;
+	/** The product's page, shown first in its menu with a description. */
+	overview: NavLink;
+	links: NavLink[];
 }
 
-export const surfaces: Surface[] = [
-	{
-		id: 'photoshop',
-		name: 'Photoshop',
-		href: '/photoshop',
-		descriptor: 'Desktop Photoshop 2026, on Windows and macOS.',
-		cta: 'Explore Photoshop'
+export const desktopNav: ProductNav = {
+	id: 'desktop',
+	menu: 'Desktop',
+	overview: {
+		label: 'Editmamei Desktop',
+		href: '/desktop',
+		description: 'Edit in Photoshop or GIMP, on your computer.'
 	},
-	{
-		id: 'gimp',
-		name: 'GIMP',
-		href: '/gimp',
-		descriptor: 'GIMP 3.2, running in the background on Windows, macOS and Linux.',
-		cta: 'Explore GIMP',
-		beta: true
-	}
-];
-
-/** The Product menu's first entry. */
-export const productOverview: NavLink = {
-	label: 'Overview',
-	href: '/product',
-	description: 'How Editmamei works, and which editor to use it with.'
+	links: [
+		{ label: 'Tools', href: '/desktop/tools' },
+		{ label: 'Pricing', href: '/desktop/pricing' },
+		{ label: 'Download', href: '/desktop/download' },
+		{ label: 'Docs', href: '/desktop/docs' }
+	]
 };
 
-/**
- * The menus offer the two products, not the editors: Desktop (Photoshop or
- * GIMP on your computer; its page leads with Photoshop and links to /gimp) and
- * Connect, the hosted product, whose page hands off to connect.editmamei.com.
- * "Editmamei Desktop" is a site label set against Connect; the installed
- * product is still called Editmamei, so the name stays out of install steps,
- * READMEs and listings.
- */
-export const desktopLink: NavLink = {
-	label: 'Editmamei Desktop',
-	href: '/photoshop',
-	description: 'Edit in Photoshop or GIMP, on your computer.'
+export const connectNav: ProductNav = {
+	id: 'connect',
+	menu: 'Connect',
+	overview: {
+		label: 'Editmamei Connect',
+		href: '/connect',
+		description: 'Edit from any device, with nothing to install.'
+	},
+	links: [
+		{ label: 'Pricing', href: '/connect/pricing' },
+		{ label: 'Open Connect', href: CONNECT_URL, external: true },
+		{ label: 'All Connect tools', href: CONNECT_TOOLS_URL, external: true }
+	]
 };
 
-export const connectLink: NavLink = {
-	label: 'Editmamei Connect',
-	href: '/connect',
-	description: 'Edit from any device, with nothing to install.'
-};
+export const productNavs: ProductNav[] = [desktopNav, connectNav];
 
-/** Product menu entries after the surfaces. */
-export const productExtras: NavLink[] = [{ label: 'All tools', href: '/tools' }];
-
-/** Top-level nav items after the Product menu, in order. */
+/** Top-level nav items after the two product menus, in order. */
 export const primaryNav: NavLink[] = [
-	{ label: 'Tools', href: '/tools' },
 	{ label: 'Pricing', href: '/pricing' },
 	{ label: 'Gallery', href: '/gallery' },
-	{ label: 'Docs', href: '/docs' },
 	{ label: 'Blog', href: '/blog' }
 ];

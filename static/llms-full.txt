@@ -86,7 +86,7 @@ Once the basics work, try one of these:
 
 > "Save this current edit as a template called 'warm coastal'. Then later, apply 'warm coastal' to every image in `C:\Photos\new-shoot\`."
 
-More workflow examples are on the [product page](https://editmamei.com/product).
+More workflow examples are on the [Desktop page](https://editmamei.com/desktop).
 
 ---
 
@@ -308,7 +308,7 @@ It replaces coordinate guessing. The AI names a location in words, local vision 
 
 ### How do I activate a Pro license?
 
-Buy Pro at [editmamei.com/pricing](https://editmamei.com/pricing), then activate it. Pro is delivered as a downloaded module: activating your license makes Editmamei fetch and load the Pro module alongside your Community install, so nothing gets reinstalled. If you run Editmamei through Claude Code or another npm client, run `editmamei activate YOUR-KEY` in your terminal and restart the client (check status anytime with `editmamei license`). If you use the Claude Desktop extension, open **Settings → Extensions → Editmamei**, paste your key into the **Pro license key** field, save, and restart Claude Desktop. Full walkthrough at [editmamei.com/activate](https://editmamei.com/activate). See [pro-features.md](https://github.com/editmamei/editmamei/blob/main/docs/pro-features.md) for what Pro adds.
+Buy Pro at [editmamei.com/desktop/pricing](https://editmamei.com/desktop/pricing), then activate it. Pro is delivered as a downloaded module: activating your license makes Editmamei fetch and load the Pro module alongside your Community install, so nothing gets reinstalled. If you run Editmamei through Claude Code or another npm client, run `editmamei activate YOUR-KEY` in your terminal and restart the client (check status anytime with `editmamei license`). If you use the Claude Desktop extension, open **Settings → Extensions → Editmamei**, paste your key into the **Pro license key** field, save, and restart Claude Desktop. Full walkthrough at [editmamei.com/desktop/activate](https://editmamei.com/desktop/activate). See [pro-features.md](https://github.com/editmamei/editmamei/blob/main/docs/pro-features.md) for what Pro adds.
 
 ### Pro stopped unlocking. How do I fix it?
 
@@ -320,7 +320,7 @@ The most common cause is `grace-expired` on a healthy subscription, which usuall
 
 ### Do you offer a free trial?
 
-Yes. Pro has a 7-day free trial on the monthly plan. Checkout asks for a card to start it, and unless you cancel during the trial it turns into the monthly plan automatically. Community is free with no time limit, so you can use the full core toolkit at no cost before deciding on Pro. For current Pro plans and terms, see [editmamei.com/pricing](https://editmamei.com/pricing). If a paid subscription ever lapses, Editmamei keeps running as Community rather than locking you out.
+Yes. Pro has a 7-day free trial on the monthly plan. Checkout asks for a card to start it, and unless you cancel during the trial it turns into the monthly plan automatically. Community is free with no time limit, so you can use the full core toolkit at no cost before deciding on Pro. For current Pro plans and terms, see [editmamei.com/desktop/pricing](https://editmamei.com/desktop/pricing). If a paid subscription ever lapses, Editmamei keeps running as Community rather than locking you out.
 
 ---
 
@@ -354,7 +354,7 @@ Editmamei, the MCP server that drives Adobe Photoshop from your AI assistant, sh
 
 Both editions follow the same rule: AI orchestration, not generation. Photoshop edits with its own real tools; Pro just gives the AI a deeper toolkit to orchestrate.
 
-This page describes the line between Community and Pro as it stands today. The split may evolve; see [editmamei.com/pricing](https://editmamei.com/pricing) for the current state.
+This page describes the line between Community and Pro as it stands today. The split may evolve; see [editmamei.com/desktop/pricing](https://editmamei.com/desktop/pricing) for the current state.
 
 Everything on this page is Photoshop-only. Editmamei's GIMP support (see [docs/gimp.md](https://github.com/editmamei/editmamei/blob/main/docs/gimp.md)) is Community, beta, and has no Pro tier.
 
@@ -362,12 +362,12 @@ Everything on this page is Photoshop-only. Editmamei's GIMP support (see [docs/g
 
 ## Activating Pro
 
-Pro is available now. Community is free; Pro is a paid license you buy at [editmamei.com/pricing](https://editmamei.com/pricing) and activate. Activating downloads the Pro module and loads it alongside your Community install.
+Pro is available now. Community is free; Pro is a paid license you buy at [editmamei.com/desktop/pricing](https://editmamei.com/desktop/pricing) and activate. Activating downloads the Pro module and loads it alongside your Community install.
 
 - **Claude Code / npm clients:** run `editmamei activate YOUR-KEY` in your terminal, then restart your AI client. Check status anytime with `editmamei license`.
 - **Claude Desktop extension:** open **Settings → Extensions → Editmamei**, paste your key into the **Pro license key** field, save, and restart Claude Desktop.
 
-One license covers two devices; switch a device with `editmamei deactivate` or from your account portal. Pro works offline between periodic check-ins (roughly daily, with a seven-day grace window), and if a subscription lapses Editmamei keeps running as Community rather than locking you out. If Pro stops unlocking, run `editmamei license` to see whether the license is the problem before reaching for `editmamei repair`, which re-downloads the module and fixes a damaged download rather than a license that isn't checking in. Either way your templates, settings, and license stay untouched. Step-by-step: [troubleshooting.md](https://github.com/editmamei/editmamei/blob/main/docs/troubleshooting.md#pro-tools-are-missing-or-pro-shows-as-community). Full activation walkthrough: [editmamei.com/activate](https://editmamei.com/activate).
+One license covers two devices; switch a device with `editmamei deactivate` or from your account portal. Pro works offline between periodic check-ins (roughly daily, with a seven-day grace window), and if a subscription lapses Editmamei keeps running as Community rather than locking you out. If Pro stops unlocking, run `editmamei license` to see whether the license is the problem before reaching for `editmamei repair`, which re-downloads the module and fixes a damaged download rather than a license that isn't checking in. Either way your templates, settings, and license stay untouched. Step-by-step: [troubleshooting.md](https://github.com/editmamei/editmamei/blob/main/docs/troubleshooting.md#pro-tools-are-missing-or-pro-shows-as-community). Full activation walkthrough: [editmamei.com/desktop/activate](https://editmamei.com/desktop/activate).
 
 ---
 
@@ -494,7 +494,7 @@ The [roadmap](https://github.com/editmamei/editmamei/blob/main/docs/roadmap.md) 
 
 ## Pricing
 
-Pricing and purchase options are at [editmamei.com/pricing](https://editmamei.com/pricing): monthly, annual, or a one-time perpetual license that includes every future update, each covering two devices.
+Pricing and purchase options are at [editmamei.com/desktop/pricing](https://editmamei.com/desktop/pricing): monthly, annual, or a one-time perpetual license that includes every future update, each covering two devices.
 
 
 ================================================================================
