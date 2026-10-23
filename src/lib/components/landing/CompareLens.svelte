@@ -53,12 +53,39 @@
 		}
 	];
 
-	// Crops for "look closer", as fractions of the frame.
+	// "Look closer": full-resolution crops cut by prep-street-crops.cjs, which
+	// holds the crop rectangles. `ratio` is each crop's width / height.
 	const crops = [
-		{ name: 'Banner', x: 0.78, y: 0.34, w: 0.08, h: 0.22 },
-		{ name: 'Faces', x: 0.83, y: 0.82, w: 0.15, h: 0.13 },
-		{ name: 'Sky', x: 0.3, y: 0.08, w: 0.14, h: 0.24 }
-	];
+		{
+			id: 'banner',
+			name: 'Banner',
+			ratio: 0.545,
+			note: {
+				editmamei: 'Every word still reads: Brygge, Lybeck, Hamburg.',
+				default: 'The words are gone, replaced by made-up marks.'
+			}
+		},
+		{
+			id: 'faces',
+			name: 'Faces',
+			ratio: 1.728,
+			note: {
+				editmamei: 'The same two people, in warmer light.',
+				default: 'Both people have different faces.'
+			}
+		},
+		{
+			id: 'sky',
+			name: 'Sky',
+			ratio: 0.873,
+			note: {
+				editmamei: 'The same sky, warmed to golden hour.',
+				default: 'Clouds that were never in the photo.'
+			}
+		}
+	] as const;
+	const cropSrc = (id: string, key: 'before' | 'edited' | 'chatgpt') =>
+		`/landing/street/crop-${id}-${key}.webp`;
 
 	const chatPrompt = `Edit this exact photo. Do not generate a new image or recreate the scene. Treat it the way a professional retoucher would in Photoshop: only adjust light and color, as if using adjustment layers (Curves, Color Balance, Hue/Saturation) on top of the original pixels. Make it look like golden hour: warm, low sunlight raking across the building fronts; warmer highlights and midtones, gently lifted shadows; a soft warm glow in the sky. Keep everything else identical to the original: the same framing, crop and aspect ratio; every building, window, roof line and the church spire exactly where they are; every sign and its text, unchanged and readable; every person exactly as they are: same faces, clothes, poses and positions; do not add, remove, move or reshape anything. Return the edited photo at the same size as the original (3000 × 2004).`;
 
@@ -69,8 +96,10 @@
 	let box = $state<HTMLElement>();
 	let lens = $state<{ x: number; y: number; w: number; h: number } | null>(null);
 	let openPin = $state<number | null>(null);
+	let cropAt = $state(0);
 
 	const mode = $derived(modes[current]);
+	const crop = $derived(crops[cropAt]);
 
 	function choose(i: number) {
 		current = i;
@@ -100,10 +129,6 @@
 	const ZOOM = 2.6;
 	const R = 92;
 	const lensSrc = $derived(lens ? ((lens.x / lens.w) * 100 < pos ? BEFORE : mode.src) : null);
-
-	// background-size / position that show one crop of a full frame.
-	const cropStyle = (src: string, c: (typeof crops)[number]) =>
-		`background-image: url(${src}); background-size: ${100 / c.w}% ${100 / c.h}%; background-position: ${(c.x / (1 - c.w)) * 100}% ${(c.y / (1 - c.h)) * 100}%;`;
 </script>
 
 <section class="relative bg-paper px-4 py-20 md:py-28" aria-labelledby="compare-title">
@@ -309,32 +334,60 @@
 					/>
 				</div>
 
-				<!-- Look closer: the same three crops, original against the chosen result -->
-				<div class="mt-6">
-					<p class="text-sm font-semibold text-brand">Look closer</p>
-					<div class="mt-3 grid grid-cols-3 gap-3">
-						{#each crops as c (c.name)}
-							<figure class="m-0 min-w-0">
-								<div class="grid grid-cols-2 gap-1 overflow-hidden rounded-xl">
-									<div
-										class="bg-neutral-900"
-										style="aspect-ratio: {c.w * 1600} / {c.h * 1069}; {cropStyle(BEFORE, c)}"
-										role="img"
-										aria-label="{c.name}, original"
-									></div>
-									<div
-										class="bg-neutral-900"
-										style="aspect-ratio: {c.w * 1600} / {c.h * 1069}; {cropStyle(mode.src, c)}"
-										role="img"
-										aria-label="{c.name}, {mode.tab}"
-									></div>
-								</div>
-								<figcaption class="mt-1.5 text-[12px] text-neutral-600">
-									{c.name}: original, then {mode.tab}
-								</figcaption>
-							</figure>
-						{/each}
+				<!-- Look closer: one full-resolution crop at a time, original against the chosen result -->
+				<div class="mt-8">
+					<div class="flex flex-wrap items-center gap-2">
+						<p id="closer-pick" class="mr-1 text-sm font-semibold text-brand">Look closer</p>
+						<div class="flex gap-2" role="group" aria-labelledby="closer-pick">
+							{#each crops as c, i (c.id)}
+								<button
+									type="button"
+									aria-pressed={cropAt === i}
+									onclick={() => (cropAt = i)}
+									class="min-h-10 rounded-full border-2 px-4 text-sm font-semibold transition-colors {cropAt ===
+									i
+										? 'border-brand bg-brand text-white'
+										: 'border-brand/20 bg-white text-brand hover:border-brand/50'}">{c.name}</button
+								>
+							{/each}
+						</div>
 					</div>
+					<figure class="m-0 mt-3 {crop.ratio < 1 ? 'sm:max-w-[30rem]' : ''}">
+						<div
+							class="grid gap-1 overflow-hidden rounded-2xl {crop.ratio > 1
+								? 'grid-cols-1 sm:grid-cols-2'
+								: 'grid-cols-2'}"
+						>
+							{#each [{ label: 'Original', key: 'before' as const }, { label: mode.tab, key: mode.id === 'editmamei' ? ('edited' as const) : ('chatgpt' as const) }] as half (half.key)}
+								<div class="relative bg-neutral-900" style="aspect-ratio: {crop.ratio};">
+									<img
+										src={cropSrc(crop.id, half.key)}
+										alt="{crop.name}, {half.label}"
+										loading="lazy"
+										draggable="false"
+										class="pointer-events-none absolute inset-0 h-full w-full object-cover [-webkit-touch-callout:none]"
+									/>
+									<span
+										class="absolute top-2 left-2 rounded-full px-2.5 py-1 text-xs font-bold {half.key ===
+										'before'
+											? 'lp-glass text-white'
+											: mode.id === 'editmamei'
+												? 'bg-accent text-brand-deep'
+												: 'bg-[#3b2a24] text-white'}">{half.label}</span
+									>
+								</div>
+							{/each}
+						</div>
+						<figcaption class="mt-2.5 flex items-start gap-2 text-[15px] font-semibold text-brand">
+							<span
+								class="mt-1.5 size-2.5 flex-none rounded-full {mode.id === 'editmamei'
+									? 'bg-accent'
+									: 'bg-[#ff7a5c]'}"
+								aria-hidden="true"
+							></span>
+							{crop.note[mode.id]}
+						</figcaption>
+					</figure>
 				</div>
 
 				<div class="mt-6 grid gap-2 text-[13.5px] leading-relaxed text-neutral-700">
