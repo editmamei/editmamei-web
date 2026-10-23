@@ -62,6 +62,19 @@ test('every redirect target is a real page', () => {
 	}
 });
 
+test("a redirect target's #fragment exists on its page", () => {
+	for (const { from, to } of rules()) {
+		const [path, fragment] = to.split('#');
+		if (!fragment) continue;
+		const page = bare(path) === '/' ? '' : bare(path).slice(1);
+		const source = readFileSync(join(ROUTES_DIR, page, '+page.svelte'), 'utf8');
+		assert.ok(
+			source.includes(`id="${fragment}"`),
+			`${from} redirects to ${to}, but that page has no id="${fragment}"`
+		);
+	}
+});
+
 test('no redirect source is a real page it would shadow', () => {
 	const pages = diskRoutes();
 	for (const { from } of rules()) {
