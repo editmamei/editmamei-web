@@ -135,10 +135,16 @@
 		aria-label="Your phone sends your request to the AI model, which sends each editing step to Editmamei's server and gets a small preview back. Your photo goes straight from your phone to Editmamei's server by an upload link, and comes back as a download. Uploads are deleted 24 hours after upload."
 	>
 		<defs>
-			<!-- userSpaceOnUse: a straight line's bounding box has no height (or width),
-			     so a box-relative filter region would draw nothing. -->
+			<!-- The line's glow uses the whole canvas as its region: a straight line's
+			     bounding box has no height (or width), so a box-relative region would
+			     draw nothing. The icon's glow is box-relative, since it sits in a
+			     translated group where canvas coordinates would clip it. -->
 			<filter id="glow-{L.id}" filterUnits="userSpaceOnUse" x="0" y="0" width={L.w} height={L.h}>
 				<feGaussianBlur stdDeviation="4" result="b" />
+				<feMerge><feMergeNode in="b" /><feMergeNode in="SourceGraphic" /></feMerge>
+			</filter>
+			<filter id="glow-node-{L.id}" x="-40%" y="-40%" width="180%" height="180%">
+				<feGaussianBlur stdDeviation="6" result="b" />
 				<feMerge><feMergeNode in="b" /><feMergeNode in="SourceGraphic" /></feMerge>
 			</filter>
 			<clipPath id="chip-{L.id}"><rect x="-8" y="-11" width="16" height="22" rx="3" /></clipPath>
@@ -243,7 +249,7 @@
 						height="60"
 						rx="16"
 						fill="#ceff8c"
-						filter="url(#glow-{L.id})"
+						filter="url(#glow-node-{L.id})"
 					/>
 					<text y="10" text-anchor="middle" font-size="28" font-weight="900" fill="#0b1f1a">E</text>
 				{:else if key === 'ai'}
