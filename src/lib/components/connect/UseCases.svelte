@@ -106,7 +106,7 @@
 					type="button"
 					aria-pressed={at === i}
 					onclick={() => pick(i)}
-					class="min-h-11 flex-none rounded-full border-2 px-5 text-[15px] font-semibold transition-colors {at ===
+					class="min-h-11 flex-none rounded-full border-2 px-3.5 text-[14px] font-semibold transition-colors sm:px-5 sm:text-[15px] {at ===
 					i
 						? 'border-brand bg-brand text-white'
 						: 'border-brand/20 bg-white text-brand hover:border-brand/50'}">{item.tab}</button

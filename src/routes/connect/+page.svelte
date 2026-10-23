@@ -99,8 +99,8 @@
 		<div class="max-w-[42rem]">
 			<p class="lp-eyebrow text-accent">How it works</p>
 			<h2 id="how-title" class="lp-h2 lp-rise mt-4" use:reveal>
-				<span><span>Your photo goes to our server,</span></span>
-				<span><span>and comes back edited.</span></span>
+				<span><span>To our server,</span></span>
+				<span><span>and back, edited.</span></span>
 			</h2>
 			<p class="mt-6 text-lg leading-relaxed text-[#c9d8d1]">
 				Your AI plans the edit in the chat. Editmamei's server does each step on your photo and
