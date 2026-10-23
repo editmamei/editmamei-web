@@ -27,7 +27,7 @@
 			<span class="chip-back" style="--slot: {l.slot};">✎</span>
 		</div>
 		<span
-			class="absolute top-1/2 left-[calc(50%+14px)] -translate-y-1/2 text-[12.5px] leading-tight font-semibold whitespace-nowrap lg:hidden {l.kind ===
+			class="absolute top-1/2 left-[calc(50%+14px)] w-[calc(50%-14px)] -translate-y-1/2 text-[12.5px] leading-tight font-semibold lg:hidden {l.kind ===
 			'local'
 				? 'text-accent'
 				: 'text-[#ffb08f]'}">{l.label}</span
@@ -44,7 +44,7 @@
 <div class="flex flex-col items-stretch lg:flex-row lg:items-center">
 	<!-- Your computer -->
 	<div
-		class="relative flex flex-col items-stretch rounded-[26px] border border-accent/30 bg-white/[0.03] px-5 pt-11 pb-6 lg:flex-[3.2] lg:flex-row lg:items-center lg:px-7 lg:pb-14"
+		class="relative flex flex-col items-stretch rounded-[26px] border border-accent/30 bg-white/[0.03] px-5 pt-11 pb-6 lg:flex-[3.2] lg:flex-row lg:items-center lg:px-7 lg:pb-9"
 	>
 		<span
 			class="absolute top-4 left-5 flex items-center gap-2 text-[12px] font-bold tracking-[0.14em] text-accent uppercase lg:left-7"

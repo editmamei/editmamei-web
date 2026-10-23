@@ -11,6 +11,7 @@
 		before: string;
 		after: { src: string; label?: string; ratio: string }[];
 		ratio: string;
+		pos?: string;
 		alt: string;
 	};
 	const cards: Card[] = [
@@ -21,7 +22,7 @@
 			minutes: 'about 6 minutes',
 			before: '/desktop/beach-before.webp',
 			after: [{ src: '/desktop/beach-after.webp', ratio: '4 / 3' }],
-			ratio: '4 / 3',
+			ratio: '1 / 1',
 			alt: 'A beach with a rainbow umbrella under a deep blue sky'
 		},
 		{
@@ -31,7 +32,8 @@
 			minutes: 'about 8 minutes',
 			before: '/desktop/falls-before.webp',
 			after: [{ src: '/desktop/falls-after.webp', ratio: '3 / 4' }],
-			ratio: '3 / 4',
+			ratio: '1 / 1',
+			pos: 'center 22%',
 			alt: 'A waterfall under a sunset sky'
 		},
 		{
@@ -45,7 +47,7 @@
 				{ src: '/desktop/puppy-story.webp', label: 'Story', ratio: '618 / 1100' },
 				{ src: '/desktop/puppy-print.webp', label: '8×10 print', ratio: '4 / 5' }
 			],
-			ratio: '3 / 4',
+			ratio: '1 / 1',
 			alt: 'A puppy lying in autumn leaves'
 		}
 	];
@@ -79,7 +81,7 @@
 								alt="{card.alt}, as shot"
 								loading="lazy"
 								class="block w-full object-cover"
-								style="aspect-ratio: {card.ratio};"
+								style="aspect-ratio: {card.ratio}; object-position: {card.pos ?? 'center'};"
 							/>
 						{:else if card.after.length === 1}
 							<img
@@ -87,11 +89,11 @@
 								alt="{card.alt}, after the edit"
 								loading="lazy"
 								class="block w-full object-cover"
-								style="aspect-ratio: {card.ratio};"
+								style="aspect-ratio: {card.ratio}; object-position: {card.pos ?? 'center'};"
 							/>
 						{:else}
 							<div
-								class="flex items-end justify-center gap-2 bg-[#efe9dc] px-3 py-4"
+								class="flex items-center justify-center gap-2 bg-[#efe9dc] px-3 py-4"
 								style="aspect-ratio: {card.ratio};"
 							>
 								{#each card.after as a (a.src)}

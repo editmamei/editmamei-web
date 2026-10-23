@@ -177,12 +177,12 @@
 			<span><span>Pro for the whole shoot.</span></span>
 		</h2>
 		<div class="mt-12 grid gap-6 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]">
-			<div class="rounded-[22px] bg-paper p-7 ring-1 ring-brand/10">
+			<div class="flex flex-col rounded-[22px] bg-paper p-7 ring-1 ring-brand/10">
 				<div class="flex items-baseline justify-between gap-4">
 					<h3 class="text-2xl font-bold text-brand">Free</h3>
 					<span class="text-lg font-semibold text-brand">$0</span>
 				</div>
-				<p class="mt-4 text-[16px] leading-relaxed text-neutral-800">
+				<p class="mt-4 mb-6 text-[16px] leading-relaxed text-neutral-800">
 					{freeTools} Photoshop tools and {toolCounts.gimp} for GIMP: adjustment layers, masks, selections,
 					Select Subject and Select Sky, sky replacement, retouching, filters and text. Enough for a full
 					edit of any photo.
@@ -190,7 +190,7 @@
 				<a
 					href="#install"
 					onclick={() => track('desktop-install-free')}
-					class="mt-6 inline-flex min-h-12 items-center rounded-2xl bg-accent px-6 text-[16px] font-bold text-brand-deep transition-transform hover:-translate-y-0.5 motion-reduce:transition-none"
+					class="mt-auto inline-flex min-h-12 items-center self-start rounded-2xl bg-accent px-6 text-[16px] font-bold text-brand-deep transition-transform hover:-translate-y-0.5 motion-reduce:transition-none"
 					>Install free</a
 				>
 			</div>
