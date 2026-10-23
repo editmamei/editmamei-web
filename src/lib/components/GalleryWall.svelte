@@ -36,8 +36,8 @@
 
 <div class="wall">
 	{#each placed as t (t.id)}
-		<a class="tile {t.span}" href="/gallery/{t.id}" aria-label={t.title}>
-			<img src={t.after} alt="" loading="lazy" decoding="async" />
+		<a class="tile {t.span}" href="/gallery/{t.id}">
+			<img src={t.after} alt={t.title} loading="lazy" decoding="async" />
 		</a>
 	{/each}
 </div>

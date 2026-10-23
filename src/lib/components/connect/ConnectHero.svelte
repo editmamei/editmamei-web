@@ -39,9 +39,22 @@
 	const frame = $derived(phase >= LAST ? 9 : step ? step.frame : 0);
 	const done = $derived(phase >= LAST);
 
+	// Warm the session's frames only after the page has loaded, so they don't
+	// compete with the first paint on a slow connection.
 	onMount(() => {
-		for (const f of frames) new Image().src = f;
-		return () => clearInterval(timer);
+		let warm = 0;
+		const preload = () => {
+			warm = window.setTimeout(() => {
+				for (const f of frames) new Image().src = f;
+			}, 300);
+		};
+		if (document.readyState === 'complete') preload();
+		else window.addEventListener('load', preload, { once: true });
+		return () => {
+			clearInterval(timer);
+			clearTimeout(warm);
+			window.removeEventListener('load', preload);
+		};
 	});
 
 	function play(from: number) {
@@ -122,8 +135,8 @@
 				>
 			</div>
 			<p class="mt-5 max-w-[34em] text-[14px] leading-relaxed text-[#a9bcb4]">
-				150 free credits to start, plus up to 50 more each month. Works in Claude, and in ChatGPT
-				where your plan allows connectors.
+				150 free credits to start, plus up to 50 more each month. Works in Claude, ChatGPT and other
+				AI apps that add connectors.
 			</p>
 		</div>
 

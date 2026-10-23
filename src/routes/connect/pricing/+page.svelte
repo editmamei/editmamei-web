@@ -3,27 +3,28 @@
 	import Seo from '$lib/components/Seo.svelte';
 	import { track } from '$lib/analytics/clarity';
 	import { CONNECT_URL } from '$lib/links';
+	import { connectApp, faqPage } from '$lib/seo/schema';
 
 	// Connect's prices, from its billing configuration (POLAR_PRODUCTS) and the
 	// 10-22 product facts. A credit is never defined in public copy (owner rule):
 	// what a credit buys can change as the tools and hosting change.
 	const plans = [
 		{
-			name: 'Free',
+			name: 'Free credits',
 			price: '150 credits',
 			cadence: 'when you sign up',
 			body: 'Plus a top-up of up to 50 more credits each month.',
 			dark: false
 		},
 		{
-			name: 'Packs',
+			name: 'Credit packs',
 			price: 'From $7',
 			cadence: 'pay once',
 			body: '750 credits for $7, or 2,000 for $15. Pack credits never expire.',
 			dark: false
 		},
 		{
-			name: 'Monthly',
+			name: 'Monthly plans',
 			price: 'From $10',
 			cadence: 'a month',
 			body: '1,500 credits a month for $10, or 7,500 for $35. Unused monthly credits expire when the plan renews.',
@@ -48,15 +49,18 @@
 </script>
 
 <Seo
-	title="Editmamei Connect pricing: 150 free credits, then packs from $7 · Editmamei"
+	title="Editmamei Connect pricing: 150 free credits, packs from $7"
 	description="Editmamei Connect starts with 150 free credits and up to 50 more each month. Credit packs from $7 never expire; monthly plans start at $10."
 	path="/connect/pricing"
+	image="/og/connect-pricing.jpg"
+	imageAlt="Editmamei Connect pricing: 150 free credits, then packs from $7"
+	schema={[connectApp, faqPage(faqs)]}
 />
 
 <PageHero
 	crumbs={[{ label: 'Editmamei Connect', href: '/connect' }, { label: 'Pricing' }]}
 	eyebrow="Connect pricing"
-	title="Free to start. Pay as you go after that."
+	title="Connect is free to start. Pay as you go after that."
 	lede="Every account starts with free credits and a monthly top-up. When you want more, buy a pack or a monthly plan in your Connect account."
 >
 	<a

@@ -8,7 +8,7 @@ import { loadGallery } from '$lib/server/gallery';
  * the pages that are live and indexable.
  *
  * Indexable routes only. Pages that carry <meta name="robots" content="noindex">
- * at the page level (for example /desktop/download and /desktop/docs) are deliberately
+ * at the page level (for example /desktop/download) are deliberately
  * excluded here: including them would either signal noise to Google or,
  * worse, contradict the page-level directive. A route with real public
  * content, such as /license, is listed below.
@@ -30,19 +30,20 @@ const ORIGIN = 'https://editmamei.com';
 // when the post list does. /desktop/tools uses the TOOLS_SNAPSHOT sentinel:
 // its lastmod is the date of the generated tool snapshot it renders.
 const ROUTES: Array<{ path: string; lastmod: string; priority: string; changefreq: string }> = [
-	{ path: '/', lastmod: '2026-10-22', priority: '1.0', changefreq: 'weekly' },
+	{ path: '/', lastmod: '2026-10-23', priority: '1.0', changefreq: 'weekly' },
 	{ path: '/desktop', lastmod: '2026-10-23', priority: '0.9', changefreq: 'monthly' },
 	{ path: '/desktop/tools', lastmod: 'TOOLS_SNAPSHOT', priority: '0.7', changefreq: 'monthly' },
 	{ path: '/desktop/pricing', lastmod: '2026-10-23', priority: '0.8', changefreq: 'monthly' },
 	{ path: '/desktop/activate', lastmod: '2026-10-02', priority: '0.5', changefreq: 'monthly' },
+	{ path: '/desktop/docs', lastmod: '2026-10-23', priority: '0.5', changefreq: 'monthly' },
 	{ path: '/connect', lastmod: '2026-10-23', priority: '0.9', changefreq: 'monthly' },
 	{ path: '/connect/pricing', lastmod: '2026-10-23', priority: '0.8', changefreq: 'monthly' },
 	{ path: '/pricing', lastmod: '2026-10-23', priority: '0.7', changefreq: 'monthly' },
-	{ path: '/faq', lastmod: '2026-10-22', priority: '0.7', changefreq: 'monthly' },
-	{ path: '/contact', lastmod: '2026-10-02', priority: '0.5', changefreq: 'yearly' },
-	{ path: '/license', lastmod: '2026-10-02', priority: '0.4', changefreq: 'yearly' },
-	{ path: '/privacy', lastmod: '2026-10-02', priority: '0.4', changefreq: 'yearly' },
-	{ path: '/security', lastmod: '2026-10-02', priority: '0.3', changefreq: 'yearly' },
+	{ path: '/faq', lastmod: '2026-10-23', priority: '0.7', changefreq: 'monthly' },
+	{ path: '/contact', lastmod: '2026-10-23', priority: '0.5', changefreq: 'yearly' },
+	{ path: '/license', lastmod: '2026-10-23', priority: '0.4', changefreq: 'yearly' },
+	{ path: '/privacy', lastmod: '2026-10-23', priority: '0.4', changefreq: 'yearly' },
+	{ path: '/security', lastmod: '2026-10-23', priority: '0.3', changefreq: 'yearly' },
 	{ path: '/blog', lastmod: 'NEWEST_POST', priority: '0.6', changefreq: 'weekly' },
 	{ path: '/gallery', lastmod: 'NEWEST_ENTRY', priority: '0.6', changefreq: 'daily' }
 ];

@@ -55,10 +55,14 @@ function pageSource(route) {
 	return readFileSync(file, 'utf8');
 }
 
+/** A page opts out of search with a robots meta tag or Seo's `noindex` prop. */
+const isNoindexed = (source) =>
+	source.includes('content="noindex"') || /<Seo\b[^>]*\snoindex\b/.test(source);
+
 test('every route is either in the sitemap ROUTES or noindexed — never neither', () => {
 	const inSitemap = new Set(sitemapPaths());
 	for (const route of diskRoutes()) {
-		const noindexed = pageSource(route).includes('content="noindex"');
+		const noindexed = isNoindexed(pageSource(route));
 		assert.ok(
 			inSitemap.has(route) || noindexed,
 			`${route} is neither in the sitemap ROUTES array nor marked noindex — ` +
@@ -70,7 +74,7 @@ test('every route is either in the sitemap ROUTES or noindexed — never neither
 test('no route is both in the sitemap and noindexed — the two contradict', () => {
 	for (const route of sitemapPaths()) {
 		assert.ok(
-			!pageSource(route).includes('content="noindex"'),
+			!isNoindexed(pageSource(route)),
 			`${route} is listed in the sitemap ROUTES array but its page carries noindex`
 		);
 	}

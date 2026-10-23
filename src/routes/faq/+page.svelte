@@ -27,6 +27,16 @@
 			a: 'Desktop if you work in Photoshop or GIMP and want each edit as layers in your own document, on your own computer. Connect if you want to edit from a chat with your AI assistant on any device, including your phone, without installing any editing software.'
 		},
 		{
+			q: 'How is Editmamei different from asking ChatGPT to edit a photo?',
+			a: "Ask a typical AI app to edit your photo and it redraws it: it generates a new picture from yours, so faces, lettering and small details can change, and the size can shrink. With Editmamei, your AI edits the original photo with real editing tools (Photoshop or GIMP on your computer, or Connect's editor on Editmamei's server), so everything you didn't ask to change stays as it was. The home page shows the same street photo both ways.",
+			link: { href: '/#compare', label: 'See the comparison' }
+		},
+		{
+			q: 'Can I edit a photo in ChatGPT without it being redrawn?',
+			a: "Yes. Add Editmamei Connect to ChatGPT as a connector and ask for the edit with Editmamei. ChatGPT then works Connect's editing tools on your original photo instead of generating a new image, and hands back a download link.",
+			link: { href: '/connect', label: 'See Editmamei Connect' }
+		},
+		{
 			q: 'Is Editmamei a web app?',
 			a: "Editmamei Desktop isn't: it installs on your computer, as a one-click Claude Desktop extension or an npm package, and nothing runs in a browser. Editmamei Connect is the hosted option. You add it to your AI assistant as a connector and your photos are edited on Editmamei's server, so it works in a browser or a phone app with nothing installed."
 		},
@@ -44,7 +54,7 @@
 		},
 		{
 			q: 'Is Editmamei open source?',
-			a: "No. It is fair source. Editmamei CE's source is public on GitHub under the Functional Source License (FSL-1.1-MIT), which is not an OSI-approved open-source license. You can read, run, modify and redistribute the code for almost anything, including commercial photo-editing work. For two years per release, the license holds back one thing: offering the code in a commercial product or service that competes with Editmamei CE or Pro. After those two years, each version converts to the plain MIT license. Editmamei Pro is a separate, commercially licensed module, and its source is not published. Editmamei Connect is a hosted service, and its source is not published either.",
+			a: "No. It is fair source. Editmamei Community's source is public on GitHub under the Functional Source License (FSL-1.1-MIT), which is not an OSI-approved open-source license. You can read, run, modify and redistribute the code for almost anything, including commercial photo-editing work. For two years per release, the license holds back one thing: offering the code in a commercial product or service that competes with Editmamei Community or Pro. After those two years, each version converts to the plain MIT license. Editmamei Pro is a separate, commercially licensed module, and its source is not published. Editmamei Connect is a hosted service, and its source is not published either.",
 			link: { href: '/license', label: 'Read the license summary' }
 		},
 		{
@@ -59,8 +69,8 @@
 			a: 'Editmamei is one: a Model Context Protocol (MCP) server for Adobe Photoshop. Your AI client connects to it, and it drives desktop Photoshop on your computer. You describe the edit, the AI plans the steps, and Photoshop carries them out.'
 		},
 		{
-			q: 'Can an AI assistant edit photos in Photoshop for me?',
-			a: 'Yes: connect Claude Desktop, Claude Code or Cursor to Editmamei, the Photoshop MCP server described above, and it works the Photoshop tools on your computer, layer by layer, from what you say the photo needs.'
+			q: 'Can Claude or another AI assistant edit photos in Photoshop for me?',
+			a: 'Yes: connect Claude Desktop, Claude Code or Cursor to Editmamei Desktop, the Photoshop MCP server described above, and it works the Photoshop tools on your computer, layer by layer, from what you say the photo needs.'
 		},
 		{
 			q: 'Is Editmamei a Photoshop plugin?',
@@ -128,6 +138,10 @@
 		{
 			q: 'How do I add Editmamei Connect to my AI assistant?',
 			a: 'Add https://connect.editmamei.com/mcp as a remote MCP server, which some assistants call a custom connector, and sign up with your email address when it asks you to sign in. On claude.ai, that is Settings › Connectors › Add custom connector, and it then shows up in the Claude desktop and phone apps too. In Claude Code, run claude mcp add --transport http editmamei-connect https://connect.editmamei.com/mcp, then run /mcp and choose it to sign in.'
+		},
+		{
+			q: 'Can I edit photos from my phone with Editmamei Connect?',
+			a: "Yes. Add Connect to your AI app once, such as Claude or ChatGPT, then send a photo from the app on your phone and say what you want. The edit happens on Editmamei's server, and you get a download link back in the chat."
 		},
 		{
 			q: 'Do I need Photoshop to use Editmamei Connect?',
@@ -206,8 +220,8 @@
 </script>
 
 <Seo
-	title="FAQ: Desktop, Connect, privacy, editions · Editmamei"
-	description="Common questions about Editmamei Desktop, the Photoshop MCP server, and Editmamei Connect, the photo-editing connector for AI assistants: setup, GIMP support, your photos and data, credits and editions."
+	title="Editmamei FAQ: Desktop, Connect, privacy and pricing"
+	description="Answers about Editmamei Desktop, the MCP server for Photoshop and GIMP, and Editmamei Connect, the photo-editing connector: setup, AI apps, privacy and cost."
 	path="/faq"
 />
 
@@ -216,35 +230,45 @@
 	{@html jsonLd}
 </svelte:head>
 
-<PageHero eyebrow="FAQ" title="Common questions" />
-
-<section class="bg-paper py-14 md:py-20">
-	<div class="mx-auto max-w-2xl px-4">
-		<p class="mt-4 text-base leading-relaxed text-neutral-600">
-			What Editmamei is, what it isn't, and how it works.
-		</p>
-
-		<nav aria-label="FAQ sections" class="mt-6 flex flex-wrap gap-x-5 gap-y-2 text-sm">
-			{#each sections as s (s.id)}
-				<a href="#{s.id}" class="text-neutral-600 underline hover:text-neutral-950">{s.title}</a>
-			{/each}
-		</nav>
-
+<PageHero
+	eyebrow="FAQ"
+	title="Questions about Editmamei"
+	lede="Editmamei comes two ways: Desktop edits in Photoshop or GIMP on your computer, and Connect edits the photos you send from any device."
+>
+	<nav aria-label="FAQ sections" class="flex flex-wrap gap-2">
 		{#each sections as s (s.id)}
-			<section id={s.id} class="mt-16 scroll-mt-24">
-				<h2 class="text-2xl font-bold tracking-tight text-neutral-950">{s.title}</h2>
+			<a
+				href="#{s.id}"
+				class="lp-glass inline-flex min-h-10 items-center rounded-full px-4 text-[14px] font-semibold text-white"
+				>{s.title}</a
+			>
+		{/each}
+	</nav>
+</PageHero>
+
+<section class="bg-paper px-4 py-14 md:py-20">
+	<div class="mx-auto max-w-3xl">
+		{#each sections as s, i (s.id)}
+			<section id={s.id} class="scroll-mt-24 {i > 0 ? 'mt-16 md:mt-20' : ''}">
+				<h2
+					class="text-[1.75rem] leading-tight font-bold tracking-[-0.02em] text-brand md:text-[2rem]"
+				>
+					{s.title}
+				</h2>
 				{#if s.intro}
-					<p class="mt-2 text-sm leading-relaxed text-neutral-600">{s.intro}</p>
+					<p class="mt-2 text-[16px] leading-relaxed text-neutral-600">{s.intro}</p>
 				{/if}
-				<dl class="mt-8 space-y-10">
+				<dl class="mt-8 divide-y divide-[#ddd6c4] border-y border-[#ddd6c4]">
 					{#each s.faqs as { q, a, link } (q)}
-						<div>
-							<dt class="text-base font-semibold text-neutral-950">{q}</dt>
-							<dd class="mt-2 text-sm leading-relaxed text-neutral-700">
+						<div class="py-6">
+							<dt class="text-lg leading-snug font-bold text-brand">{q}</dt>
+							<dd class="mt-2.5 text-[16px] leading-relaxed text-neutral-700">
 								{a}
 								{#if link}
-									<a href={link.href} class="mt-2 block underline hover:text-neutral-950"
-										>{link.label}</a
+									<a
+										href={link.href}
+										class="mt-3 inline-flex min-h-9 items-center font-semibold text-brand underline underline-offset-2"
+										>{link.label} <span aria-hidden="true" class="ml-1">→</span></a
 									>
 								{/if}
 							</dd>
@@ -254,23 +278,27 @@
 			</section>
 		{/each}
 
-		<div class="mt-16 border-t border-neutral-200 pt-8">
-			<p class="text-sm text-neutral-600">
+		<div class="mt-14 grid gap-3 text-[15px] leading-relaxed text-neutral-700">
+			<p>
 				Still have questions? See the full <a
 					href={GITHUB_FAQ_DOCS_URL}
-					class="underline hover:text-neutral-950">documentation on GitHub</a
+					class="font-semibold text-brand underline underline-offset-2">documentation on GitHub</a
 				>
-				or <a href="/contact" class="underline hover:text-neutral-950">get in touch</a>.
+				or
+				<a href="/contact" class="font-semibold text-brand underline underline-offset-2"
+					>get in touch</a
+				>.
 			</p>
-			<p class="mt-3 text-sm text-neutral-600">
-				Using GIMP? The <a href={GITHUB_GIMP_DOCS_URL} class="underline hover:text-neutral-950"
-					>GIMP guide</a
+			<p>
+				Using GIMP? The <a
+					href={GITHUB_GIMP_DOCS_URL}
+					class="font-semibold text-brand underline underline-offset-2">GIMP guide</a
 				> covers requirements, detection, and what it can and can't do yet.
 			</p>
-			<p class="mt-3 text-sm text-neutral-600">
+			<p>
 				Something not working? The <a
 					href={GITHUB_TROUBLESHOOTING_DOCS_URL}
-					class="underline hover:text-neutral-950">troubleshooting guide</a
+					class="font-semibold text-brand underline underline-offset-2">troubleshooting guide</a
 				> covers Pro not unlocking, Photoshop not responding, and checking an update applied.
 			</p>
 		</div>

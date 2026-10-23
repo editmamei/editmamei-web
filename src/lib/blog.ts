@@ -20,7 +20,9 @@ import type { Component } from 'svelte';
  *
  * Frontmatter contract (validated here at build time — a bad post fails
  * `npm run build`): `title`, `description`, `date` (YYYY-MM-DD) required;
- * `updated` (YYYY-MM-DD) optional. Filenames are the URL slug and must be
+ * `updated` (YYYY-MM-DD) optional. `seoTitle` and `seoDescription` are
+ * optional search-result overrides, so a post's metadata can be tuned
+ * without rewriting the post itself. Filenames are the URL slug and must be
  * lowercase ASCII kebab-case.
  */
 
@@ -30,6 +32,9 @@ export interface PostSummary {
 	description: string;
 	date: string;
 	updated?: string;
+	/** Search-result title and description, when they differ from the post's own. */
+	seoTitle?: string;
+	seoDescription?: string;
 	/** True only for posts under drafts/ — which exist only in dev. */
 	draft: boolean;
 }
@@ -103,6 +108,9 @@ function toSummary(path: string, meta: Record<string, unknown>, draft: boolean):
 		description: requireString(path, meta, 'description'),
 		date: requireDate(path, meta, 'date'),
 		updated: meta.updated === undefined ? undefined : requireDate(path, meta, 'updated'),
+		seoTitle: meta.seoTitle === undefined ? undefined : requireString(path, meta, 'seoTitle'),
+		seoDescription:
+			meta.seoDescription === undefined ? undefined : requireString(path, meta, 'seoDescription'),
 		draft
 	};
 }

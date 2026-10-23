@@ -33,7 +33,7 @@
 			tag: 'Connect',
 			request:
 				'Make it look like the last light of the day: warm the dust until it glows, darken the hills behind, and make the elephant stand out.',
-			note: 'Edited in the cloud from a chat.',
+			note: 'Edited from a chat, on Editmamei’s server.',
 			credit: 'Photo: Signature Edits'
 		},
 		{
@@ -173,4 +173,8 @@
 		{/each}
 		<div class="w-1 flex-none" aria-hidden="true"></div>
 	</div>
+	<p class="mx-auto mt-4 max-w-6xl px-4 text-[15px] text-neutral-700">
+		More real edits, each with every step it took, are in the
+		<a href="/gallery" class="font-semibold text-brand underline underline-offset-2">gallery</a>.
+	</p>
 </section>

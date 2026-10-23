@@ -1,6 +1,8 @@
 ---
 title: 'Now available: Editmamei 1.9.0'
 description: A GIMP edit can now leave as a layered PSD, ready to finish in Photoshop. Plus outlines and glows, text that wraps and sizes itself to a box, and what the GIMP beta picked up in 1.7.0 and 1.8.0.
+seoTitle: 'Editmamei 1.9.0: GIMP edits export as a layered PSD'
+seoDescription: 'A GIMP edit can now leave as a layered PSD, ready to finish in Photoshop, plus outlines, glows, and text that wraps and sizes itself to a box.'
 date: 2026-10-18
 ---
 

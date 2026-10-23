@@ -22,30 +22,29 @@
 	});
 </script>
 
-<section bind:this={sectionEl} id="editions" class="bg-sage py-16 md:py-20">
-	<div class="mx-auto max-w-5xl px-4">
-		<div class="mb-10 max-w-2xl">
-			<p class="mb-2 text-xs font-semibold tracking-wider text-terracotta-ink uppercase">
-				Editions
-			</p>
-			<h2 class="text-2xl font-bold tracking-tight text-neutral-950 md:text-3xl">
-				Community covers the everyday editing surface. Pro adds the production toolkit.
+<section
+	bind:this={sectionEl}
+	id="editions"
+	class="scroll-mt-20 bg-sage px-4 py-20 md:py-24"
+	aria-labelledby="editions-title"
+>
+	<div class="mx-auto max-w-5xl">
+		<div class="mb-10 max-w-[42rem]">
+			<p class="lp-eyebrow text-terracotta-ink">Editions</p>
+			<h2 id="editions-title" class="lp-h2 mt-4 text-brand">
+				Community edits any photo. Pro is for raw files and whole shoots.
 			</h2>
-			<p class="mt-3 text-base leading-relaxed text-neutral-700">
-				Community installs free. Pro is a license: when you activate it, Editmamei downloads the
-				signed Pro module and loads it next to Community after a restart, with nothing to reinstall.
-			</p>
-			<p class="mt-3 text-base leading-relaxed text-neutral-700">
-				Pro's features are for Photoshop, so <a
+			<p class="mt-6 text-lg leading-relaxed text-neutral-700">
+				Pro is a license, not a second install: activate it and Editmamei loads the Pro tools next
+				to Community after a restart. Pro's features are for Photoshop, so <a
 					href="/desktop#gimp"
-					class="font-semibold text-neutral-900 underline decoration-neutral-300 underline-offset-4 hover:decoration-neutral-700"
-					>GIMP support</a
+					class="font-semibold text-brand underline underline-offset-2">GIMP support</a
 				> is the same in both editions.
 			</p>
 		</div>
 
-		<div class="overflow-hidden rounded-xl border border-neutral-200 bg-white shadow-sm">
-			<table class="w-full text-left text-sm">
+		<div class="overflow-hidden rounded-[22px] bg-white ring-1 ring-brand/10">
+			<table class="w-full text-left text-[15px]">
 				<thead>
 					<tr class="border-b border-neutral-200 bg-neutral-50">
 						<th
@@ -113,11 +112,8 @@
 				{/each}
 			</table>
 		</div>
-		<p class="mt-6 text-sm">
-			<a
-				href="/desktop/tools"
-				class="font-semibold text-neutral-900 underline decoration-neutral-300 underline-offset-4 hover:decoration-neutral-700"
-			>
+		<p class="mt-6 text-[15px]">
+			<a href="/desktop/tools" class="font-semibold text-brand underline underline-offset-2">
 				See every tool and the edition it is in <span aria-hidden="true">→</span>
 			</a>
 		</p>

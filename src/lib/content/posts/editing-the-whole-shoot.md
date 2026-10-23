@@ -1,6 +1,8 @@
 ---
 title: Editing the whole shoot
 description: Templates and batch processing bring one considered edit to an entire shoot, holding the look consistent across every frame while cutting the time and the tokens it takes to get there.
+seoTitle: 'Edit a whole shoot with AI: templates and batch'
+seoDescription: 'Templates carry one look across a whole shoot, fitted to each frame; batch handles the crop, resize and export. What that saved in time and tokens.'
 date: 2026-08-28
 updated: 2026-09-18
 ---

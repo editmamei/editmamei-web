@@ -3,11 +3,14 @@
 	import Seo from '$lib/components/Seo.svelte';
 	import { PRO_FEATURES } from '$lib/content/pro-features';
 	import { CUSTOMER_PORTAL_URL, GITHUB_PRO_TROUBLESHOOTING_URL } from '$lib/links';
+
+	const code = 'rounded bg-[#ece6d6] px-1.5 py-0.5 font-mono text-[14px]';
+	const link = 'font-semibold text-brand underline underline-offset-2';
 </script>
 
 <Seo
-	title="Activate Pro: enter your license key and restart · Editmamei"
-	description="Activate your Editmamei Pro license: run editmamei activate with your key (Claude Code / npm) or paste your key into the Claude Desktop extension settings. Then restart and your Pro tools appear."
+	title="Activate Editmamei Pro with your license key"
+	description="Find your Editmamei Pro key, enter it with editmamei activate or in Claude Desktop's extension settings, then restart. Your Pro tools appear."
 	path="/desktop/activate"
 />
 
@@ -16,178 +19,141 @@
 	eyebrow="Editmamei Pro"
 	title="Activate your Pro license"
 	lede="Thanks for going Pro. Activation takes about a minute: find your key, enter it the way that matches how you run Editmamei, and restart. Your Pro tools then appear in your AI app."
-/>
+>
+	<p class="max-w-[40em] text-[15px] leading-relaxed text-[#a9bcb4]">
+		Already subscribed and just need to manage it?
+		<a
+			href={CUSTOMER_PORTAL_URL}
+			rel="noopener"
+			class="font-semibold text-accent underline underline-offset-4">Open your account portal</a
+		>
+		to update payment, cancel, view invoices or remove a device. Sign in with the email you bought it
+		with; no password needed.
+	</p>
+</PageHero>
 
-<section class="bg-white pt-10 pb-4">
-	<div class="mx-auto max-w-3xl px-4">
-		<div class="rounded-xl border border-neutral-200 bg-cream px-5 py-4 text-sm text-neutral-700">
-			Already subscribed and just need to manage it?
-			<a
-				href={CUSTOMER_PORTAL_URL}
-				rel="noopener"
-				class="font-semibold text-brand underline underline-offset-2 hover:text-brand-light"
-				>Open your account portal →</a
-			>
-			to update payment, cancel, view invoices, or remove a device. Sign in with the email you purchased
-			with, no password needed.
-		</div>
-	</div>
-</section>
-
-<!-- Step 1 -->
-<section class="bg-white py-8">
-	<div class="mx-auto max-w-3xl px-4">
-		<div class="flex items-start gap-4">
-			<span
-				class="mt-0.5 flex h-7 w-7 flex-none items-center justify-center rounded-full bg-brand text-sm font-bold text-white"
-				>1</span
-			>
-			<div>
-				<h2 class="text-xl font-semibold tracking-tight text-neutral-950">Find your license key</h2>
-				<p class="mt-2 text-base leading-relaxed text-neutral-700">
-					Your key is in your <strong>purchase confirmation email</strong>, and any time in your
-					<a
-						href={CUSTOMER_PORTAL_URL}
-						rel="noopener"
-						class="font-medium text-brand underline underline-offset-2 hover:text-brand-light"
-						>account portal</a
-					>
-					(sign in with your purchase email). It looks like
-					<code class="rounded bg-neutral-100 px-1.5 py-0.5 font-mono text-sm">XXXX-XXXX-…</code>.
-				</p>
+<section class="bg-paper px-4 py-14 md:py-20">
+	<ol class="mx-auto grid max-w-3xl gap-5">
+		<li class="rounded-[22px] bg-white p-6 ring-1 ring-brand/10 md:p-7">
+			<div class="flex items-start gap-4">
+				<span
+					class="grid size-8 flex-none place-items-center rounded-full bg-brand text-sm font-bold text-accent"
+					>1</span
+				>
+				<div class="min-w-0">
+					<h2 class="text-xl font-bold text-brand">Find your license key</h2>
+					<p class="mt-2 text-[16px] leading-relaxed text-neutral-700">
+						It's in your purchase confirmation email, and any time in your
+						<a href={CUSTOMER_PORTAL_URL} rel="noopener" class={link}>account portal</a>
+						(sign in with your purchase email). It looks like
+						<code class={code}>XXXX-XXXX-…</code>.
+					</p>
+				</div>
 			</div>
-		</div>
-	</div>
-</section>
+		</li>
 
-<!-- Step 2 -->
-<section class="bg-cream py-12 md:py-16">
-	<div class="mx-auto max-w-3xl px-4">
-		<div class="flex items-start gap-4">
-			<span
-				class="mt-0.5 flex h-7 w-7 flex-none items-center justify-center rounded-full bg-brand text-sm font-bold text-white"
-				>2</span
-			>
-			<div class="w-full">
-				<h2 class="text-xl font-semibold tracking-tight text-neutral-950">Enter your key</h2>
-				<p class="mt-2 text-base leading-relaxed text-neutral-700">
-					Pick the one that matches how you installed Editmamei.
-				</p>
-
-				<div class="mt-6 grid gap-5 md:grid-cols-2">
-					<!-- Claude Code / npm -->
-					<div class="rounded-xl border border-neutral-200 bg-paper p-5">
-						<h3 class="text-base font-semibold tracking-tight text-neutral-950">
-							Claude Code / npm
-						</h3>
-						<p class="mt-2 text-sm leading-relaxed text-neutral-700">Run this in your terminal:</p>
-						<pre
-							class="mt-3 overflow-x-auto rounded-lg bg-brand-deep px-4 py-3 text-sm text-paper"><code
-								>editmamei activate YOUR-KEY</code
-							></pre>
-						<p class="mt-3 text-sm leading-relaxed text-neutral-600">
-							Then restart your AI client. Check anytime with
-							<code class="rounded bg-neutral-100 px-1.5 py-0.5 font-mono text-xs"
-								>editmamei license</code
-							>.
-						</p>
-					</div>
-
-					<!-- Claude Desktop / .mcpb -->
-					<div class="rounded-xl border border-neutral-200 bg-paper p-5">
-						<h3 class="text-base font-semibold tracking-tight text-neutral-950">Claude Desktop</h3>
-						<p class="mt-2 text-sm leading-relaxed text-neutral-700">
-							No terminal needed. In Claude Desktop, open
-							<strong>Settings → Extensions → Editmamei</strong>, paste your key into the
-							<strong>“Pro license key”</strong> field, and save.
-						</p>
-						<p class="mt-3 text-sm leading-relaxed text-neutral-600">
-							Then quit and reopen Claude Desktop so it picks up the key.
-						</p>
+		<li class="rounded-[22px] bg-white p-6 ring-1 ring-brand/10 md:p-7">
+			<div class="flex items-start gap-4">
+				<span
+					class="grid size-8 flex-none place-items-center rounded-full bg-brand text-sm font-bold text-accent"
+					>2</span
+				>
+				<div class="min-w-0 flex-1">
+					<h2 class="text-xl font-bold text-brand">Enter your key</h2>
+					<p class="mt-2 text-[16px] leading-relaxed text-neutral-700">
+						Pick the one that matches how you installed Editmamei.
+					</p>
+					<div class="mt-5 grid gap-4 md:grid-cols-2">
+						<div class="min-w-0 rounded-2xl bg-paper p-5">
+							<h3 class="font-bold text-brand">Claude Code, npm</h3>
+							<p class="mt-2 text-[15px] leading-relaxed text-neutral-700">
+								Run this in your terminal:
+							</p>
+							<pre
+								class="mt-3 overflow-x-auto rounded-xl bg-brand-deep px-4 py-3 font-mono text-[14px] text-[#f4f1e8]"><code
+									>editmamei activate YOUR-KEY</code
+								></pre>
+							<p class="mt-3 text-[15px] leading-relaxed text-neutral-700">
+								Then restart your AI app. Check any time with <code class={code}
+									>editmamei license</code
+								>.
+							</p>
+						</div>
+						<div class="min-w-0 rounded-2xl bg-paper p-5">
+							<h3 class="font-bold text-brand">Claude Desktop</h3>
+							<p class="mt-2 text-[15px] leading-relaxed text-neutral-700">
+								No terminal needed. Open <strong class="text-brand"
+									>Settings → Extensions → Editmamei</strong
+								>, paste your key into the <strong class="text-brand">Pro license key</strong> field,
+								and save. Then quit and reopen Claude Desktop so it picks up the key.
+							</p>
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-	</div>
-</section>
+		</li>
 
-<!-- Step 3 -->
-<section class="bg-white py-12 md:py-16">
-	<div class="mx-auto max-w-3xl px-4">
-		<div class="flex items-start gap-4">
-			<span
-				class="mt-0.5 flex h-7 w-7 flex-none items-center justify-center rounded-full bg-brand text-sm font-bold text-white"
-				>3</span
-			>
-			<div>
-				<h2 class="text-xl font-semibold tracking-tight text-neutral-950">Confirm Pro is on</h2>
-				<p class="mt-2 text-base leading-relaxed text-neutral-700">
-					After the restart, the Pro tools appear in your AI client:
-				</p>
-				<ul class="mt-3 space-y-1.5 text-base leading-relaxed text-neutral-700">
-					{#each PRO_FEATURES as feature (feature.title)}
-						<li class="flex gap-3">
-							<span class="text-brand" aria-hidden="true">•</span><span>{feature.title}</span>
-						</li>
-					{/each}
-				</ul>
-				<p class="mt-3 text-base leading-relaxed text-neutral-700">
-					If they're not there yet, double-check the key and that you fully restarted the client.
-				</p>
+		<li class="rounded-[22px] bg-white p-6 ring-1 ring-brand/10 md:p-7">
+			<div class="flex items-start gap-4">
+				<span
+					class="grid size-8 flex-none place-items-center rounded-full bg-brand text-sm font-bold text-accent"
+					>3</span
+				>
+				<div class="min-w-0">
+					<h2 class="text-xl font-bold text-brand">Confirm Pro is on</h2>
+					<p class="mt-2 text-[16px] leading-relaxed text-neutral-700">
+						After the restart, the Pro tools appear in your AI app:
+					</p>
+					<ul class="mt-3 grid gap-1.5 text-[16px] leading-relaxed text-neutral-700 sm:grid-cols-2">
+						{#each PRO_FEATURES as feature (feature.title)}
+							<li class="flex gap-2.5">
+								<span aria-hidden="true" class="mt-2.5 size-1.5 flex-none rounded-full bg-brand"
+								></span>{feature.title}
+							</li>
+						{/each}
+					</ul>
+					<p class="mt-3 text-[16px] leading-relaxed text-neutral-700">
+						Not there yet? Check the key, and that you fully restarted the app.
+					</p>
+				</div>
 			</div>
-		</div>
-	</div>
-</section>
+		</li>
+	</ol>
 
-<!-- Good to know -->
-<section class="bg-paper py-12 md:py-16">
-	<div class="mx-auto max-w-3xl px-4">
-		<h2 class="text-lg font-semibold tracking-tight text-neutral-950">Good to know</h2>
-		<ul class="mt-4 space-y-3 text-base leading-relaxed text-neutral-700">
-			<li class="flex gap-3">
-				<span class="text-brand">•</span><span
-					><strong>Two devices per license.</strong> Activate on a second machine the same way;
-					switch a device free with
-					<code class="rounded bg-neutral-100 px-1.5 py-0.5 font-mono text-sm"
+	<div class="mx-auto mt-14 max-w-3xl">
+		<h2 class="text-2xl font-bold tracking-[-0.02em] text-brand">Good to know</h2>
+		<dl class="mt-5 divide-y divide-[#ddd6c4] border-y border-[#ddd6c4] text-[16px]">
+			<div class="py-5">
+				<dt class="font-bold text-brand">Two devices per license</dt>
+				<dd class="mt-1.5 leading-relaxed text-neutral-700">
+					Activate a second computer the same way. To switch, run <code class={code}
 						>editmamei deactivate</code
 					>
-					on the old one, or remove it from your
-					<a
-						href={CUSTOMER_PORTAL_URL}
-						rel="noopener"
-						class="font-medium text-brand underline underline-offset-2 hover:text-brand-light"
-						>account portal</a
-					> if you no longer have it.</span
-				>
-			</li>
-			<li class="flex gap-3">
-				<span class="text-brand">•</span><span
-					><strong>Works offline.</strong> Pro checks its license about once a day and keeps working for
-					seven days without a connection.</span
-				>
-			</li>
-			<li class="flex gap-3">
-				<span class="text-brand">•</span><span
-					><strong>It never locks you out.</strong> If a subscription lapses, Editmamei keeps running
-					as free Community, and your work and settings are untouched. Renew, restart your AI client,
-					and Pro switches back on.</span
-				>
-			</li>
-		</ul>
-		<p class="mt-8 text-base leading-relaxed text-neutral-700">
+					on the old one, or remove it in your
+					<a href={CUSTOMER_PORTAL_URL} rel="noopener" class={link}>account portal</a> if you no longer
+					have it.
+				</dd>
+			</div>
+			<div class="py-5">
+				<dt class="font-bold text-brand">Works offline</dt>
+				<dd class="mt-1.5 leading-relaxed text-neutral-700">
+					Pro checks its license about once a day and keeps working for seven days without a
+					connection.
+				</dd>
+			</div>
+			<div class="py-5">
+				<dt class="font-bold text-brand">It never locks you out</dt>
+				<dd class="mt-1.5 leading-relaxed text-neutral-700">
+					If a subscription lapses, Editmamei keeps running as the free Community edition, and your
+					work and settings are untouched. Renew, restart your AI app, and Pro switches back on.
+				</dd>
+			</div>
+		</dl>
+		<p class="mt-8 text-[16px] leading-relaxed text-neutral-700">
 			Stuck? If Pro isn't unlocking, the
-			<a
-				href={GITHUB_PRO_TROUBLESHOOTING_URL}
-				rel="noopener"
-				class="font-medium text-brand underline underline-offset-2 hover:text-brand-light"
-				>troubleshooting guide</a
-			>
-			walks through it step by step. Still stuck?
-			<a
-				href="/contact"
-				class="font-medium text-brand underline underline-offset-2 hover:text-brand-light"
-				>Get in touch</a
-			> and we'll sort it out.
+			<a href={GITHUB_PRO_TROUBLESHOOTING_URL} rel="noopener" class={link}>troubleshooting guide</a>
+			walks through it step by step. Still stuck? <a href="/contact" class={link}>Get in touch</a> and
+			we'll sort it out.
 		</p>
 	</div>
 </section>

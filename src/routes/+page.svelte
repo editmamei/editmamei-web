@@ -8,6 +8,7 @@
 	import PhoneMock from '$lib/components/landing/PhoneMock.svelte';
 	import RangeStrip from '$lib/components/landing/RangeStrip.svelte';
 	import Seo from '$lib/components/Seo.svelte';
+	import { connectApp, desktopApp, faqPage } from '$lib/seo/schema';
 	import { reveal } from '$lib/actions/reveal';
 	import { track } from '$lib/analytics/clarity';
 
@@ -21,11 +22,11 @@
 	const faqs = [
 		{
 			q: 'Do I need Photoshop?',
-			a: 'No. Connect edits in the cloud, so all you need is an AI app that supports connectors. Desktop uses the editor on your own computer: Photoshop 2026, or GIMP 3.2 for free.'
+			a: "No. Connect edits on Editmamei's server, so all you need is an AI app that supports connectors. Desktop uses the editor on your own computer: Photoshop 2026, or GIMP 3.2 for free."
 		},
 		{
 			q: 'What does it cost?',
-			a: 'Desktop is free. Pro adds raw development, templates and whole-folder batches for $9 a month (early-adopter rate), $79 a year, or $199 once. Connect starts you with 150 free credits, plus up to 50 more each month; after that, credit packs start at $7.'
+			a: 'Desktop is free. Pro adds Camera Raw developing, templates and whole-folder batches for $9 a month (early-adopter rate), $79 a year, or $199 once. Connect starts you with 150 free credits, plus up to 50 more each month; after that, credit packs start at $7.'
 		},
 		{
 			q: 'Which AI apps work?',
@@ -35,9 +36,10 @@
 </script>
 
 <Seo
-	title="Editmamei · Give your AI a real photo editor"
-	description="A typical AI app redraws your photo. Editmamei lets your AI edit the real one with professional tools: an MCP server for Photoshop and GIMP, and a hosted MCP connector for AI apps."
+	title="Editmamei · AI photo editing that keeps your real photo"
+	description="A typical AI app redraws your photo. Editmamei lets your AI app edit the real one with pro tools: in Photoshop or GIMP, or from your phone."
 	path="/"
+	schema={[desktopApp, connectApp, faqPage(faqs)]}
 />
 
 <HeroStage desktopHref={DESKTOP_HREF} connectHref={CONNECT_HREF} />
@@ -113,7 +115,7 @@
 					class="grid w-full max-w-[520px] grid-cols-[110px_1fr] gap-x-5 gap-y-3.5 text-base leading-snug"
 				>
 					<dt class="text-[#9fb5ac]">Edits in</dt>
-					<dd>Editmamei's editor, in the cloud</dd>
+					<dd>Editmamei's editor, on our server</dd>
 					<dt class="text-[#9fb5ac]">You get</dt>
 					<dd>The finished photo, or a layered PSD</dd>
 					<dt class="text-[#9fb5ac]">Works with</dt>

@@ -1,6 +1,8 @@
 ---
 title: 'Now available: Editmamei 1.5.0'
 description: Raw files can be developed before Photoshop opens them, which reaches the leveling, perspective and lens corrections a filter cannot, and raw can now open straight to 16 bit.
+seoTitle: 'Editmamei 1.5.0: develop raw files before they open'
+seoDescription: 'Raw files can now be developed before Photoshop opens them, with leveling, perspective and lens corrections, and can open straight to 16-bit.'
 date: 2026-09-18
 ---
 

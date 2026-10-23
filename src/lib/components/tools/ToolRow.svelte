@@ -25,7 +25,7 @@
 	<div class="flex flex-col gap-2 md:flex-row md:items-start md:justify-between md:gap-6">
 		<div class="min-w-0">
 			<h3 id={tool.id} class="scroll-mt-24 text-base font-semibold text-neutral-950">
-				{tool.task}
+				{tool.task}<span class="sr-only"> ({tool.editor === 'gimp' ? 'GIMP' : 'Photoshop'})</span>
 			</h3>
 			<p class="mt-1 text-sm leading-relaxed text-neutral-700">{tool.summary}</p>
 		</div>

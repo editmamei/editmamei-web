@@ -2,75 +2,64 @@
 	import PageHero from '$lib/components/PageHero.svelte';
 	import Seo from '$lib/components/Seo.svelte';
 	import { GITHUB_SECURITY_ADVISORY_URL, GITHUB_SECURITY_POLICY_URL } from '$lib/links';
+
+	const link = 'font-semibold text-brand underline underline-offset-2';
+	const code = 'rounded bg-[#ece6d6] px-1.5 py-0.5 font-mono text-[14px]';
 </script>
 
 <Seo
-	title="Security: how to report a vulnerability · Editmamei"
-	description="How to report a security issue in Editmamei. Software vulnerabilities go through the GitHub security policy; website issues by email."
+	title="Report a security issue · Editmamei"
+	description="How to report a vulnerability in Editmamei: a private GitHub security advisory for the software, or email for Editmamei Connect and this website."
 	path="/security"
 />
 
-<PageHero eyebrow="Security" title="Reporting a security issue" />
+<PageHero
+	eyebrow="Security"
+	title="Reporting a security issue"
+	lede="Where a security report goes depends on what it's about. Whichever it is, please report it privately, not in a public issue."
+/>
 
-<section class="bg-paper py-14 md:py-20">
-	<div class="mx-auto max-w-2xl px-4">
-		<p class="mt-4 text-base leading-relaxed text-neutral-700">
-			Where a security report goes depends on what it's about.
+<section class="bg-paper px-4 py-14 md:py-20">
+	<div class="mx-auto max-w-3xl text-[16px] leading-relaxed text-neutral-700">
+		<h2 class="text-2xl font-bold tracking-[-0.02em] text-brand">Editmamei Desktop</h2>
+		<p class="mt-3">
+			For a vulnerability in the <code class={code}>editmamei</code> npm package (the CLI and the MCP
+			server you install), the full policy lives on GitHub: scope, what to include, and our response timelines.
+			The preferred channel is a private security advisory, which keeps your report confidential while
+			we work on a fix. You'll get an acknowledgment within a few business days.
 		</p>
-
-		<h2 class="mt-12 text-xl font-bold tracking-tight text-neutral-950">The Editmamei software</h2>
-		<p class="mt-3 text-sm leading-relaxed text-neutral-700">
-			For a vulnerability in the <code class="rounded bg-neutral-200 px-1 py-0.5 font-mono text-xs"
-				>editmamei</code
-			>
-			npm package (the CLI and the MCP server you install), the full policy lives on GitHub: scope, what
-			to include, and our response timelines. The preferred channel is a private security advisory, which
-			keeps your report confidential while we work on a fix. You'll get an acknowledgment within a few
-			business days.
-		</p>
-		<ul class="mt-4 space-y-2 text-sm leading-relaxed text-neutral-700">
+		<ul class="mt-4 grid gap-2">
 			<li>
-				<a
-					href={GITHUB_SECURITY_ADVISORY_URL}
-					rel="noopener noreferrer"
-					class="font-semibold text-neutral-900 underline decoration-neutral-300 underline-offset-4 hover:decoration-neutral-700"
+				<a href={GITHUB_SECURITY_ADVISORY_URL} rel="noopener noreferrer" class={link}
 					>Report a vulnerability privately</a
 				>
 				(preferred)
 			</li>
 			<li>
 				Read the
-				<a
-					href={GITHUB_SECURITY_POLICY_URL}
-					rel="noopener noreferrer"
-					class="font-semibold text-neutral-900 underline decoration-neutral-300 underline-offset-4 hover:decoration-neutral-700"
+				<a href={GITHUB_SECURITY_POLICY_URL} rel="noopener noreferrer" class={link}
 					>security policy</a
 				>
 				on GitHub.
 			</li>
 		</ul>
-		<p class="mt-4 text-sm leading-relaxed text-neutral-700">
+		<p class="mt-4">
 			Please don't open a public GitHub issue for a security bug. The tracker is public, so the
 			report would be too.
 		</p>
 
-		<h2 class="mt-12 text-xl font-bold tracking-tight text-neutral-950">This website</h2>
-		<p class="mt-3 text-sm leading-relaxed text-neutral-700">
-			For an issue in editmamei.com itself or its hosting, email
-			<a
-				href="mailto:security@editmamei.com"
-				class="font-semibold text-neutral-900 underline decoration-neutral-300 underline-offset-4 hover:decoration-neutral-700"
-				>security@editmamei.com</a
-			>. A PGP key is available on request.
+		<h2 class="mt-12 text-2xl font-bold tracking-[-0.02em] text-brand">Editmamei Connect</h2>
+		<p class="mt-3">
+			For an issue in Editmamei Connect at connect.editmamei.com, its sign-in or the files it
+			handles, email
+			<a href="mailto:security@editmamei.com" class={link}>security@editmamei.com</a>.
 		</p>
 
-		<div class="mt-12 border-t border-neutral-200 pt-6">
-			<a
-				href="/"
-				class="text-sm font-semibold text-neutral-900 underline underline-offset-2 hover:text-neutral-700"
-			>
-				Back to home →
-			</a>
-		</div>
+		<h2 class="mt-12 text-2xl font-bold tracking-[-0.02em] text-brand">This website</h2>
+		<p class="mt-3">
+			For an issue in editmamei.com itself or its hosting, email
+			<a href="mailto:security@editmamei.com" class={link}>security@editmamei.com</a>. A PGP key is
+			available on request.
+		</p>
 	</div>
 </section>

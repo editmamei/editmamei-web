@@ -1,6 +1,7 @@
 ---
 title: 'Now available: Editmamei 1.1.0'
 description: Smart Filters stay editable after they are applied, a clipped layer can be unclipped, and several near-identical tools are now one each.
+seoTitle: 'Editmamei 1.1.0: Smart Filters stay editable'
 date: 2026-08-14
 ---
 

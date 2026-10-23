@@ -1,5 +1,7 @@
-# allow crawling everything by default
+# Every crawler is welcome, AI crawlers included (search, answers and
+# training alike). The short and full plain-text overviews for AI tools are
+# https://editmamei.com/llms.txt and https://editmamei.com/llms-full.txt.
 User-agent: *
-Disallow:
+Allow: /
 
 Sitemap: https://editmamei.com/sitemap.xml

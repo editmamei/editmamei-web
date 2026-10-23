@@ -1,6 +1,8 @@
 <script lang="ts">
 	import '$lib/components/landing/landing.css';
 	import type { Snippet } from 'svelte';
+	import { page } from '$app/state';
+	import { ORIGIN, ldScript } from '$lib/seo/schema';
 
 	// The opening band of every inner page: the same dark stage, type and
 	// spacing as the home and product pages, so the site reads as one piece.
@@ -19,7 +21,30 @@
 		/** Optional actions or a note under the lede. */
 		children?: Snippet;
 	} = $props();
+
+	// The same trail as BreadcrumbList markup, with Home in front; the last
+	// item is this page.
+	const breadcrumbLd = $derived(
+		crumbs?.length
+			? ldScript({
+					'@type': 'BreadcrumbList',
+					itemListElement: [{ label: 'Home', href: '/' }, ...crumbs].map((c, i, all) => ({
+						'@type': 'ListItem',
+						position: i + 1,
+						name: c.label,
+						item: `${ORIGIN}${i === all.length - 1 ? page.url.pathname : c.href}`
+					}))
+				})
+			: ''
+	);
 </script>
+
+<svelte:head>
+	{#if breadcrumbLd}
+		<!-- eslint-disable-next-line svelte/no-at-html-tags -- built from our own crumbs, '<' escaped in ldScript -->
+		{@html breadcrumbLd}
+	{/if}
+</svelte:head>
 
 <section class="lp-stage lp-grain overflow-hidden px-4 pt-12 pb-14 md:pt-16 md:pb-16">
 	<div

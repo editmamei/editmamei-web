@@ -1,6 +1,7 @@
 ---
 title: Introducing Editmamei Connect
 description: Editmamei now has a cloud option alongside the desktop app. Add Editmamei Connect to Claude and edit photos in the browser or on your phone, with nothing to install.
+seoTitle: 'Introducing Editmamei Connect: photo editing from any device'
 date: 2026-10-11
 updated: 2026-10-12
 ---

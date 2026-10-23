@@ -13,6 +13,8 @@
 		before: string;
 		after: string;
 		alt: string;
+		/** The session's gallery entry, where it has one. */
+		gallery?: string;
 	};
 	const cases: Case[] = [
 		{
@@ -27,7 +29,8 @@
 			],
 			before: '/connect/case/pendant-before.webp',
 			after: '/connect/case/pendant-after.webp',
-			alt: 'A gold pendant'
+			alt: 'A gold pendant',
+			gallery: '/gallery/98232766e7a89771'
 		},
 		{
 			id: 'cleanup',
@@ -40,7 +43,8 @@
 			],
 			before: '/connect/case/stern-before.webp',
 			after: '/connect/case/stern-after.webp',
-			alt: 'A rocky cove seen from the stern of a boat'
+			alt: 'A rocky cove seen from the stern of a boat',
+			gallery: '/gallery/fe24b05586125aec'
 		},
 		{
 			id: 'portrait',
@@ -68,13 +72,15 @@
 			],
 			before: '/connect/case/still-before.webp',
 			after: '/connect/case/still-after.webp',
-			alt: 'A bouquet of roses in a vase'
+			alt: 'A bouquet of roses in a vase',
+			gallery: '/gallery/f1a583c46ff88cdb'
 		}
 	];
 
+	// Every case is in the page's HTML (only the picked one shows), so search
+	// engines and AI crawlers read all four, not just the first.
 	let at = $state(0);
 	let original = $state(false);
-	const c = $derived(cases[at]);
 
 	function pick(i: number) {
 		at = i;
@@ -114,64 +120,85 @@
 			{/each}
 		</div>
 
-		<div
-			class="mt-6 grid gap-8 rounded-[26px] bg-white p-4 ring-1 ring-brand/10 md:grid-cols-[minmax(0,6fr)_minmax(0,5fr)] md:p-6 lg:gap-12"
-		>
-			<figure class="relative m-0 overflow-hidden rounded-[18px] bg-neutral-900">
-				{#key `${c.id}-${original}`}
-					<img
-						src={original ? c.before : c.after}
-						alt={original ? `${c.alt}, as shot` : `${c.alt}, after the edit`}
-						class="case-in block aspect-[4/5] w-full object-cover"
-						loading="lazy"
-					/>
-				{/key}
-				<span
-					class="absolute top-3 left-3 rounded-full px-3 py-1 text-xs font-bold {original
-						? 'lp-glass text-white'
-						: 'bg-accent text-brand-deep'}">{original ? 'Original' : 'Edited with Connect'}</span
-				>
-				<button
-					type="button"
-					onclick={() => (original = !original)}
-					class="absolute right-3 bottom-3 inline-flex min-h-10 items-center rounded-full px-4 text-[13px] font-bold shadow-lg {original
-						? 'bg-white text-brand'
-						: 'lp-glass text-white'}">{original ? 'Show the result' : 'Show the original'}</button
-				>
-			</figure>
+		{#each cases as c, i (c.id)}
+			<article
+				hidden={at !== i}
+				aria-labelledby="case-{c.id}"
+				class="mt-6 grid gap-8 rounded-[26px] bg-white p-4 ring-1 ring-brand/10 md:grid-cols-[minmax(0,6fr)_minmax(0,5fr)] md:p-6 lg:gap-12"
+			>
+				<figure class="relative m-0 overflow-hidden rounded-[18px] bg-neutral-900">
+					{#key `${c.id}-${at === i && original}`}
+						<img
+							src={at === i && original ? c.before : c.after}
+							alt={at === i && original ? `${c.alt}, as shot` : `${c.alt}, after the edit`}
+							class="case-in block aspect-[4/5] w-full object-cover"
+							loading="lazy"
+						/>
+					{/key}
+					<span
+						class="absolute top-3 left-3 rounded-full px-3 py-1 text-xs font-bold {original
+							? 'lp-glass text-white'
+							: 'bg-accent text-brand-deep'}">{original ? 'Original' : 'Edited with Connect'}</span
+					>
+					<button
+						type="button"
+						onclick={() => (original = !original)}
+						class="absolute right-3 bottom-3 inline-flex min-h-10 items-center rounded-full px-4 text-[13px] font-bold shadow-lg {original
+							? 'bg-white text-brand'
+							: 'lp-glass text-white'}">{original ? 'Show the result' : 'Show the original'}</button
+					>
+				</figure>
 
-			<div class="flex flex-col py-2">
-				<h3 class="text-2xl leading-tight font-bold tracking-[-0.02em] text-brand md:text-[1.7rem]">
-					{c.title}
-				</h3>
-				{#if c.request}
-					<p class="mt-4 rounded-2xl bg-cream p-4 text-[16px] leading-relaxed text-neutral-800">
-						<span
-							class="mb-1 block text-[12px] font-bold tracking-wider text-terracotta-ink uppercase"
-							>The request</span
-						>
-						“{c.request}”
-					</p>
-				{/if}
-				<p class="mt-6 text-[12px] font-bold tracking-wider text-neutral-500 uppercase">
-					What it did
-				</p>
-				<ol class="mt-3 grid gap-3">
-					{#each c.steps as s, i (s)}
-						<li class="flex gap-3 text-[15.5px] leading-relaxed text-neutral-800">
+				<div class="flex flex-col py-2">
+					<h3
+						id="case-{c.id}"
+						class="text-2xl leading-tight font-bold tracking-[-0.02em] text-brand md:text-[1.7rem]"
+					>
+						{c.title}
+					</h3>
+					{#if c.request}
+						<p class="mt-4 rounded-2xl bg-cream p-4 text-[16px] leading-relaxed text-neutral-800">
 							<span
-								class="mt-0.5 grid size-6 flex-none place-items-center rounded-full bg-brand text-[12px] font-bold text-accent"
-								>{i + 1}</span
+								class="mb-1 block text-[12px] font-bold tracking-wider text-terracotta-ink uppercase"
+								>The request</span
 							>
-							{s}
-						</li>
-					{/each}
-				</ol>
-				<p class="mt-auto pt-6 text-[12.5px] text-neutral-500">
-					A real Connect session. Steps are from the session's own record.
-				</p>
-			</div>
-		</div>
+							“{c.request}”
+						</p>
+					{/if}
+					<p class="mt-6 text-[12px] font-bold tracking-wider text-neutral-500 uppercase">
+						What it did
+					</p>
+					<ol class="mt-3 grid gap-3">
+						{#each c.steps as step, n (step)}
+							<li class="flex gap-3 text-[15.5px] leading-relaxed text-neutral-800">
+								<span
+									class="mt-0.5 grid size-6 flex-none place-items-center rounded-full bg-brand text-[12px] font-bold text-accent"
+									>{n + 1}</span
+								>
+								{step}
+							</li>
+						{/each}
+					</ol>
+					<div class="mt-auto flex flex-wrap items-center gap-x-5 gap-y-2 pt-6">
+						{#if c.gallery}
+							<a
+								href={c.gallery}
+								onclick={() => track(`connect-case-gallery-${c.id}`)}
+								class="inline-flex min-h-10 items-center text-[15px] font-semibold text-brand underline underline-offset-4"
+								>See every step <span aria-hidden="true" class="ml-1">→</span></a
+							>
+						{/if}
+						<p class="text-[12.5px] text-neutral-500">
+							A real Connect session. Steps are from the session's own record.
+						</p>
+					</div>
+				</div>
+			</article>
+		{/each}
+		<p class="mt-6 text-[15px] text-neutral-700">
+			More real edits are in the
+			<a href="/gallery" class="font-semibold text-brand underline underline-offset-2">gallery</a>.
+		</p>
 	</div>
 </section>
 

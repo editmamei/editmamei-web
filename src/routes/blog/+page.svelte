@@ -9,8 +9,8 @@
 
 <Seo
 	path="/blog"
-	title="Blog: release notes and write-ups · Editmamei"
-	description="Release notes and longer write-ups from Editmamei, the MCP server that connects your AI assistant to desktop Photoshop and GIMP."
+	title="Editmamei blog: release notes and write-ups"
+	description="Release notes and write-ups from Editmamei: Desktop for Photoshop and GIMP, and Connect, the photo-editing connector for AI apps."
 />
 
 <PageHero

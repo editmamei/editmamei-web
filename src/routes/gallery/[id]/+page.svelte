@@ -1,5 +1,7 @@
 <script lang="ts">
+	import PageHero from '$lib/components/PageHero.svelte';
 	import Seo from '$lib/components/Seo.svelte';
+	import { CONNECT_ID, ORG_ID, ORIGIN } from '$lib/seo/schema';
 	import BeforeAfterSlider from '$lib/components/BeforeAfterSlider.svelte';
 	import GalleryPlayer from '$lib/components/GalleryPlayer.svelte';
 	import { formatDate } from '$lib/gallery/feed.js';
@@ -20,49 +22,85 @@
 	const stepWord = $derived(steps === 1 ? 'step' : 'steps');
 	const callWord = (n: number) => `${n} tool call${n === 1 ? '' : 's'}`;
 	const lead = $derived(share.chapters[0]?.text || share.chapters[0]?.title || '');
+
+	// Search snippet: the first step's story as a sentence, then the count,
+	// cut on a word boundary to fit a results page.
+	function clip(text: string, max = 155): string {
+		if (text.length <= max) return text;
+		const cut = text.slice(0, max - 1);
+		return `${cut.slice(0, cut.lastIndexOf(' ')).replace(/[\s,;:.]+$/, '')}…`;
+	}
+	const sentence = (text: string) => text.trim().replace(/[\s,;:.]*$/, '.');
+	const description = $derived(
+		clip(
+			`${lead ? `${sentence(lead)} ` : ''}${
+				steps > 0
+					? `Edited in ${steps} ${stepWord} with Editmamei Connect.`
+					: 'Edited with Editmamei Connect.'
+			}`
+		)
+	);
+	const title = $derived(
+		`${share.title}: before and after · Editmamei`.length <= 60
+			? `${share.title}: before and after · Editmamei`
+			: `${share.title} · Editmamei`
+	);
+	const schema = $derived([
+		{
+			'@type': 'ImageObject',
+			name: share.title,
+			description: lead || share.title,
+			contentUrl: share.after,
+			url: `${ORIGIN}/gallery/${share.id}`,
+			...(day !== '1970-01-01' ? { datePublished: day } : {}),
+			creator: { '@type': 'Person', name: share.by, ...(share.link ? { url: share.link } : {}) },
+			...(share.before ? { isBasedOn: { '@type': 'ImageObject', contentUrl: share.before } } : {}),
+			isPartOf: { '@type': 'CollectionPage', url: `${ORIGIN}/gallery` },
+			publisher: { '@id': ORG_ID },
+			about: { '@id': CONNECT_ID }
+		}
+	]);
 </script>
 
 <Seo
 	path={`/gallery/${share.id}`}
-	title={`${share.title}: a real photo edit · Editmamei`}
-	description={`${share.title}, by ${share.by}. ${lead ? `${lead} ` : ''}See the before and after${
-		steps > 0 ? ` and the ${steps} ${stepWord} it took` : ''
-	}, made in conversation with Claude.`}
+	{title}
+	{description}
 	image={share.after}
-	imageAlt={share.title}
+	imageAlt={`${share.title}, after the edit`}
 	noindex={!share.listed}
+	schema={share.listed ? schema : undefined}
 />
 
-<div class="mx-auto max-w-6xl px-4 py-8 md:py-12">
-	<a href="/gallery" class="text-sm text-neutral-500 hover:text-neutral-800">&larr; Gallery</a>
+<PageHero
+	crumbs={[{ label: 'Gallery', href: '/gallery' }, { label: share.title }]}
+	eyebrow="Edited with Editmamei Connect"
+	title={share.title}
+>
+	<p class="text-[15px] text-[#c3d2cb]">
+		{#if handle}
+			<span class="font-semibold text-[#f4f1e8]">{share.by}</span>
+			<span aria-hidden="true"> · </span>
+			<a href={share.link} rel="ugc nofollow noopener" class="underline hover:no-underline"
+				>@{handle}</a
+			>
+		{:else if share.link}
+			<a
+				href={share.link}
+				rel="ugc nofollow noopener"
+				class="font-semibold text-[#f4f1e8] underline hover:no-underline">{share.by}</a
+			>
+		{:else}
+			<span class="font-semibold text-[#f4f1e8]">{share.by}</span>
+		{/if}
+		{#if day !== '1970-01-01'}
+			<span aria-hidden="true"> · </span>
+			<time datetime={day}>{formatDate(day)}</time>
+		{/if}
+	</p>
+</PageHero>
 
-	<div class="mt-4 mb-5 flex flex-wrap items-end justify-between gap-x-6 gap-y-2">
-		<h1 class="text-3xl font-extrabold tracking-tight text-balance text-neutral-900 md:text-5xl">
-			{share.title}
-		</h1>
-		<p class="text-sm text-neutral-600">
-			{#if handle}
-				<span class="font-semibold text-neutral-900">{share.by}</span>
-				<span aria-hidden="true"> · </span>
-				<a href={share.link} rel="ugc nofollow noopener" class="underline hover:no-underline"
-					>@{handle}</a
-				>
-			{:else if share.link}
-				<a
-					href={share.link}
-					rel="ugc nofollow noopener"
-					class="font-semibold text-neutral-900 underline hover:no-underline">{share.by}</a
-				>
-			{:else}
-				<span class="font-semibold text-neutral-900">{share.by}</span>
-			{/if}
-			{#if day !== '1970-01-01'}
-				<span aria-hidden="true"> · </span>
-				<time datetime={day}>{formatDate(day)}</time>
-			{/if}
-		</p>
-	</div>
-
+<div class="mx-auto max-w-6xl px-4 py-10 md:py-14">
 	{#if share.before === null}
 		<div class="mx-auto w-full" style="max-width: min(100%, calc(74vh * {ratio}))">
 			<img
@@ -78,15 +116,15 @@
 			<BeforeAfterSlider
 				beforeSrc={share.before}
 				afterSrc={share.after}
-				beforeAlt="Before"
-				afterAlt={share.title}
+				beforeAlt={`${share.title}, before the edit`}
+				afterAlt={`${share.title}, after the edit`}
 			/>
 		</div>
 		<p class="mt-2 text-center text-sm text-neutral-500">Drag to compare</p>
 	{:else}
 		<!-- The edit changed the photo's shape, so the two sit side by side. -->
 		<div class="grid gap-3.5 sm:grid-cols-2">
-			{#each [{ src: share.before, name: 'Before', alt: 'Before' }, { src: share.after, name: 'After', alt: share.title }] as p (p.name)}
+			{#each [{ src: share.before, name: 'Before', alt: `${share.title}, before the edit` }, { src: share.after, name: 'After', alt: `${share.title}, after the edit` }] as p (p.name)}
 				<figure
 					class="relative m-0 grid h-[min(70vh,620px)] place-items-center overflow-hidden rounded-xl border border-neutral-200 bg-cream max-sm:h-auto"
 				>
@@ -174,7 +212,10 @@
 			{#if steps > 0}
 				<p class="mt-5 text-sm text-neutral-600">
 					{steps}
-					{stepWord} in one conversation with Claude.
+					{stepWord} in one conversation, with
+					<a href="/connect" class="font-semibold text-brand underline underline-offset-2"
+						>Editmamei Connect</a
+					>.
 				</p>
 			{/if}
 		</section>
@@ -188,10 +229,9 @@
 			</section>
 			<a
 				href={CONNECT_URL}
-				class="inline-flex w-fit items-center rounded-full bg-accent px-5 py-3 text-sm font-semibold text-brand-deep transition-colors hover:brightness-95"
+				class="inline-flex min-h-12 w-fit items-center rounded-2xl border-[1.5px] border-accent/50 bg-brand px-6 text-[16px] font-bold text-white transition-colors hover:bg-brand-light"
+				>Try this on your photo <span aria-hidden="true" class="ml-1.5">→</span></a
 			>
-				Try this on your photo
-			</a>
 		</aside>
 	</div>
 

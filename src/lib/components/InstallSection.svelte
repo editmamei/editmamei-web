@@ -49,7 +49,9 @@
 	// file downloads and the visitor stays put with no feedback at all. The reveal
 	// IS the feedback, and it keeps the section compact until it is relevant.
 	// The anchor stays a real href so the download still works without JS, on a
-	// middle-click, and from "copy link address".
+	// middle-click, and from "copy link address". Both panels are always in the
+	// HTML (hidden until opened), so search engines and AI crawlers can read the
+	// install steps.
 	let openRoute = $state<'mcpb' | 'npm' | null>(null);
 
 	function toggle(route: 'mcpb' | 'npm') {
@@ -58,8 +60,8 @@
 
 	// Highest-intent pre-conversion signal for the npm path: the visitor
 	// highlighted the command snippet, almost certainly to copy it. Detected via
-	// `selectionchange`. The snippet now lives behind the reveal, so this only
-	// fires once the panel is open.
+	// `selectionchange`. The snippet lives behind the reveal, so this only fires
+	// once the panel is open.
 	let snippetEl = $state<HTMLPreElement>();
 
 	onMount(() => {
@@ -81,19 +83,22 @@
 	});
 </script>
 
-<section id="install" class="bg-brand py-16 text-neutral-100 md:py-20">
-	<div class="mx-auto max-w-5xl px-4">
-		<div class="max-w-2xl">
-			<p class="mb-2 text-xs font-semibold tracking-wider text-accent uppercase">Install</p>
-			<h2 class="text-2xl font-bold tracking-tight text-white md:text-3xl">
-				Install in about a minute.
-			</h2>
-			<p class="mt-3 text-base leading-relaxed text-neutral-300">
-				One click for Claude Desktop, two commands for everything else.
+<section
+	id="install"
+	class="scroll-mt-16 bg-brand px-4 py-20 text-paper md:py-28"
+	aria-labelledby="install-title"
+>
+	<div class="mx-auto max-w-6xl">
+		<div class="max-w-[42rem]">
+			<p class="lp-eyebrow text-accent">Install</p>
+			<h2 id="install-title" class="lp-h2 mt-4 text-[#f7f4ec]">Install in about a minute.</h2>
+			<p class="mt-6 text-lg leading-relaxed text-[#c9d8d1]">
+				One click for Claude Desktop. For Claude Code, Cursor and other AI apps, two commands in a
+				terminal (they need Node.js).
 			</p>
 		</div>
 
-		<div class="mt-7 flex flex-wrap items-center gap-3">
+		<div class="mt-9 flex flex-wrap items-center gap-3">
 			<a
 				href={MCPB_URL}
 				onclick={() => {
@@ -104,7 +109,7 @@
 				}}
 				aria-expanded={openRoute === 'mcpb'}
 				aria-controls="install-mcpb"
-				class="inline-flex items-center justify-center gap-2 rounded-md bg-accent px-5 py-3 text-sm font-semibold text-brand-deep shadow-sm transition-colors hover:bg-accent/90"
+				class="inline-flex min-h-13 items-center justify-center gap-2 rounded-2xl bg-accent px-7 text-[17px] font-bold text-brand-deep shadow-[0_10px_40px_-12px_rgba(206,255,140,0.55)] transition-transform hover:-translate-y-0.5 motion-reduce:transition-none"
 			>
 				<span aria-hidden="true">↓</span> Download for Claude Desktop
 			</a>
@@ -116,73 +121,76 @@
 				}}
 				aria-expanded={openRoute === 'npm'}
 				aria-controls="install-npm"
-				class="inline-flex cursor-pointer items-center justify-center rounded-md border border-accent/40 px-5 py-3 text-sm font-semibold text-accent transition-colors hover:border-accent/70 hover:bg-accent/10"
+				class="inline-flex min-h-13 cursor-pointer items-center justify-center rounded-2xl border-[1.5px] border-accent/50 px-7 text-[17px] font-bold text-white transition-colors hover:bg-white/10"
 			>
 				Install with npm
 			</button>
 		</div>
 
-		{#if openRoute === 'mcpb'}
-			<div
-				id="install-mcpb"
-				class="mt-4 rounded-xl border border-accent/20 bg-brand-deep/60 p-5 md:p-6"
-			>
-				<p class="text-sm font-semibold text-neutral-100">
-					Downloading <code class="rounded bg-brand-deep px-1 py-0.5 text-xs text-accent"
+		<div
+			id="install-mcpb"
+			hidden={openRoute !== 'mcpb'}
+			class="mt-5 max-w-3xl rounded-[22px] bg-brand-deep/70 p-6 ring-1 ring-accent/20"
+		>
+			<p class="text-[16px] font-semibold text-white">
+				Downloading <code
+					class="rounded bg-brand-deep px-1.5 py-0.5 font-mono text-[14px] text-accent"
+					>editmamei.mcpb</code
+				>. Three steps left:
+			</p>
+			<ol class="mt-3 list-inside list-decimal space-y-1.5 text-[15px] text-[#c9d8d1]">
+				<li>In Claude Desktop, open Settings, then Extensions.</li>
+				<li>
+					Install the downloaded
+					<code class="rounded bg-brand-deep px-1.5 py-0.5 font-mono text-[14px] text-accent"
 						>editmamei.mcpb</code
-					>. Three steps left:
-				</p>
-				<ol class="mt-3 list-inside list-decimal space-y-1.5 text-sm text-neutral-300">
-					<li>In Claude Desktop, open Settings, then Extensions.</li>
-					<li>
-						Install the downloaded
-						<code class="rounded bg-brand-deep px-1 py-0.5 text-xs text-accent">editmamei.mcpb</code
-						>.
-					</li>
-					<li>Restart Claude Desktop, then ask it “Is Photoshop connected?”</li>
-				</ol>
-				<!-- Size is the .mcpb release asset, checked against the GitHub API on
-				     2026-09-17 (v1.4.0 = 36,359,161 bytes). Windows reports 34.7 and
-				     macOS 36.4 for the same file, so ~35 covers both. It said ~8 for a
-				     month after the Go core grew, so re-check this at a release. -->
-				<p class="mt-3 text-xs text-neutral-400">Free · Windows &amp; macOS · ~35&nbsp;MB</p>
-			</div>
-		{/if}
+					>.
+				</li>
+				<li>Restart Claude Desktop, then ask it “Is Photoshop connected?”</li>
+			</ol>
+			<!-- Size is the .mcpb release asset, checked against the GitHub API on
+			     2026-10-23 (v1.9.1 = 36,811,546 bytes). Windows reports about 35 for
+			     that, macOS about 37, so ~35 covers both. Re-check at a release. -->
+			<p class="mt-3 text-[13px] text-[#9fb5ac]">Free · Windows &amp; macOS · ~35&nbsp;MB</p>
+		</div>
 
-		{#if openRoute === 'npm'}
-			<div
-				id="install-npm"
-				class="mt-4 rounded-xl border border-accent/20 bg-brand-deep/60 p-5 md:p-6"
-			>
-				<p class="text-sm font-semibold text-neutral-100">Run these two commands:</p>
-				<pre
-					bind:this={snippetEl}
-					class="mt-3 overflow-x-auto rounded-lg border border-brand-light bg-brand-deep px-4 py-3 font-mono text-xs leading-relaxed"><code
-						><span class="text-neutral-500">$</span> <span class="text-accent">npm</span
-						> install -g editmamei
+		<div
+			id="install-npm"
+			hidden={openRoute !== 'npm'}
+			class="mt-5 max-w-3xl rounded-[22px] bg-brand-deep/70 p-6 ring-1 ring-accent/20"
+		>
+			<p class="text-[16px] font-semibold text-white">Run these two commands:</p>
+			<pre
+				bind:this={snippetEl}
+				class="mt-3 overflow-x-auto rounded-xl bg-brand-deep px-4 py-3 font-mono text-[14px] leading-relaxed text-[#f4f1e8]"><code
+					><span class="text-neutral-500">$</span> <span class="text-accent">npm</span
+					> install -g editmamei
 <span class="text-neutral-500">$</span> <span class="text-accent">editmamei</span> install</code
-					></pre>
-				<p class="mt-3 text-sm leading-relaxed text-neutral-300">
-					The second command registers Editmamei with every MCP client it finds. Then restart the
-					client and ask “Is Photoshop connected?”
-				</p>
-				<p class="mt-2 text-xs text-neutral-400">
-					That command also saves a skill file,
-					<code class="rounded bg-brand-deep px-1 py-0.5 text-accent">editmamei-skill.zip</code>, to
-					your Downloads folder. Upload it at claude.ai under Settings, then Skills (Add, then
-					Upload skill), and Claude gets Editmamei's editing workflow.
-				</p>
+				></pre>
+			<p class="mt-3 text-[15px] leading-relaxed text-[#c9d8d1]">
+				The second command registers Editmamei with Claude Desktop, Claude Code and Cursor. Then
+				restart your AI app and ask “Is Photoshop connected?” Other apps use the
+				<a
+					href={GITHUB_MANUAL_CONFIG_DOCS_URL}
+					class="font-semibold text-accent underline underline-offset-4">install guide</a
+				>.
+			</p>
+			<p class="mt-2 text-[13px] leading-relaxed text-[#9fb5ac]">
+				That command also saves a skill file,
+				<code class="rounded bg-brand-deep px-1 py-0.5 text-accent">editmamei-skill.zip</code>, to
+				your Downloads folder. Upload it at claude.ai under Settings, then Skills (Add, then Upload
+				skill), and Claude gets Editmamei's editing workflow.
+			</p>
 
-				<div class="mt-5 border-t border-accent/15 pt-4">
-					<SubscribeForm compact tone="dark" placement="install_npm" />
-				</div>
+			<div class="mt-5 border-t border-accent/15 pt-4">
+				<SubscribeForm compact tone="dark" placement="install_npm" />
 			</div>
-		{/if}
+		</div>
 
-		<div class="mt-10 grid gap-6 md:grid-cols-2">
-			<div class="rounded-xl border border-brand-light bg-brand-deep/60 p-5">
-				<h3 class="text-sm font-semibold tracking-tight text-white">Requirements</h3>
-				<ul class="mt-3 space-y-1.5 text-sm text-neutral-300">
+		<div class="mt-12 grid gap-5 md:grid-cols-2">
+			<div class="rounded-[22px] bg-brand-deep/60 p-6 ring-1 ring-white/10">
+				<h3 class="text-lg font-bold text-white">Requirements</h3>
+				<ul class="mt-3 space-y-2 text-[15px] leading-relaxed text-[#c9d8d1]">
 					<li>
 						Adobe Photoshop 2026, internal version 27.x (earlier versions unverified), or GIMP 3.2
 					</li>
@@ -190,42 +198,39 @@
 						Windows 10/11 or macOS 13+ (Apple Silicon or Intel). With GIMP it also runs on Linux,
 						through npm.
 					</li>
-					<li>Node.js 22+, only for the npm path (Claude Desktop bundles its own runtime)</li>
+					<li>Node.js 22+, only for the npm route (Claude Desktop bundles its own)</li>
 					<li>
-						An MCP-compatible AI client. Editmamei has no AI model, so every edit spends that
-						client's tokens (see <a
+						An AI app that supports MCP. Editmamei has no AI of its own, so edits count against that
+						app's plan (see <a
 							href="/blog/what-an-edit-costs"
-							class="text-accent underline decoration-accent/40 underline-offset-4 hover:decoration-accent"
-							>what an edit costs</a
+							class="font-semibold text-accent underline underline-offset-4">what an edit costs</a
 						>)
 					</li>
 				</ul>
 			</div>
-			<div class="rounded-xl border border-brand-light bg-brand-deep/60 p-5">
-				<h3 class="text-sm font-semibold tracking-tight text-white">Supported clients</h3>
-				<ul class="mt-3 space-y-1.5 text-sm text-neutral-300">
-					<li>Claude Desktop: one-click <span class="text-neutral-500">(.mcpb)</span></li>
+			<div class="rounded-[22px] bg-brand-deep/60 p-6 ring-1 ring-white/10">
+				<h3 class="text-lg font-bold text-white">AI apps</h3>
+				<ul class="mt-3 space-y-2 text-[15px] leading-relaxed text-[#c9d8d1]">
+					<li>Claude Desktop: one click <span class="text-[#9fb5ac]">(.mcpb)</span></li>
 					<li>Claude Code: npm</li>
 					<li>Cursor: npm</li>
 				</ul>
-				<p class="mt-3 text-sm text-neutral-300">
-					Other MCP clients use the same config; the
+				<p class="mt-3 text-[15px] leading-relaxed text-[#c9d8d1]">
+					Other MCP apps use the same setup; the
 					<a
 						href={GITHUB_MANUAL_CONFIG_DOCS_URL}
-						class="text-accent underline decoration-accent/40 underline-offset-4 hover:decoration-accent"
-						>install guide</a
+						class="font-semibold text-accent underline underline-offset-4">install guide</a
 					>
 					has it.
 				</p>
 			</div>
 		</div>
 
-		<p class="mt-8 text-sm text-neutral-400">
+		<p class="mt-8 text-[15px] text-[#9fb5ac]">
 			Full setup walkthrough in the
 			<a
 				href={GITHUB_GETTING_STARTED_DOCS_URL}
-				class="font-semibold text-accent underline decoration-accent/40 underline-offset-4 hover:decoration-accent"
-				>Getting Started guide</a
+				class="font-semibold text-accent underline underline-offset-4">Getting Started guide</a
 			>.
 		</p>
 	</div>

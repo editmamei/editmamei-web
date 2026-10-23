@@ -5,6 +5,7 @@
 	import ConnectHero from '$lib/components/connect/ConnectHero.svelte';
 	import UseCases from '$lib/components/connect/UseCases.svelte';
 	import Seo from '$lib/components/Seo.svelte';
+	import { connectApp, connectFilmVideo } from '$lib/seo/schema';
 	import { reveal } from '$lib/actions/reveal';
 	import { track } from '$lib/analytics/clarity';
 	import { mediaUrl } from '$lib/media';
@@ -67,7 +68,7 @@
 	const goodToKnow = [
 		{
 			title: 'What you get back',
-			body: 'The finished photo as JPG, PNG, WebP or TIFF, or a layered PSD to keep working on.'
+			body: 'The finished photo as JPEG, PNG, WebP or TIFF, or a layered PSD to keep working on.'
 		},
 		{
 			title: 'Up to ten at a time',
@@ -79,15 +80,18 @@
 		},
 		{
 			title: 'Which AI apps',
-			body: "Claude on the web, desktop and phone, ChatGPT where your plan allows connectors, and other apps that add connectors with a sign-in. Claude's free plan allows one custom connector."
+			body: 'Claude on the web, desktop and phone, ChatGPT, and other AI apps that add remote MCP servers as connectors, such as Cursor and VS Code.'
 		}
 	];
 </script>
 
 <Seo
-	title="Editmamei Connect · Send a photo, get it back edited"
-	description="A hosted MCP connector for Claude, and for ChatGPT where your plan allows connectors. Send a photo from your phone, say what you want, and it's edited with real tools on Editmamei's server. Nothing to install; 150 free credits to start."
+	title="Editmamei Connect: AI photo editing from your phone"
+	description="Add Connect to Claude, ChatGPT or another AI app. Send a photo from your phone, say what you want, and get it back edited with real tools, not redrawn."
 	path="/connect"
+	image="/og/connect.jpg"
+	imageAlt="Editmamei Connect: send a photo, get it back edited"
+	schema={[connectApp, connectFilmVideo]}
 />
 
 <ConnectHero startHref={CONNECT_URL} />

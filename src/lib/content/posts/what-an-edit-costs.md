@@ -1,6 +1,8 @@
 ---
 title: What an edit costs
 description: Editmamei ships no model of its own, so every edit spends tokens from whatever AI you connect to it. Here is what one photo costs, what changes when you carry a template across a whole shoot, and what to do about it before you install.
+seoTitle: 'What an AI photo edit costs in tokens'
+seoDescription: "Editmamei brings no chat model, so each edit spends your AI app's tokens. What one photo cost, what a shoot cost with a template, and how to spend less."
 date: 2026-09-18
 ---
 

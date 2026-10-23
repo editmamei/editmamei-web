@@ -71,8 +71,8 @@
 				>
 			</div>
 			<p class="mt-5 text-[14px] text-[#a9bcb4]">
-				Photoshop 2026 or GIMP 3.2 · Windows and macOS · Claude Desktop, Claude Code, Cursor and
-				more
+				Photoshop 2026 or GIMP 3.2 · Windows, macOS, and Linux with GIMP · Claude Desktop, Claude
+				Code, Cursor and more
 			</p>
 		</div>
 
@@ -130,4 +130,9 @@
 			</figcaption>
 		</figure>
 	</div>
+
+	<p class="mx-auto max-w-6xl px-4 pb-8 text-[12.5px] leading-normal text-[#8fa59c]">
+		Editmamei Desktop is an MCP server: it lets AI apps such as Claude Desktop, Claude Code and
+		Cursor edit photos in Adobe Photoshop or GIMP on your computer. Free, with Pro for whole shoots.
+	</p>
 </section>

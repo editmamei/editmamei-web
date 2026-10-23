@@ -6,6 +6,7 @@
 	import RequestCards from '$lib/components/desktop/RequestCards.svelte';
 	import InstallSection from '$lib/components/InstallSection.svelte';
 	import Seo from '$lib/components/Seo.svelte';
+	import { desktopApp, desktopHeroVideo } from '$lib/seo/schema';
 	import { reveal } from '$lib/actions/reveal';
 	import { track } from '$lib/analytics/clarity';
 	import { toolCounts } from '$lib/content/tools';
@@ -25,7 +26,7 @@
 		},
 		{
 			title: 'Your photos never come to us.',
-			body: 'Editmamei never sends us your photos or previews. It sends content-free usage data, which you can turn off, checks for updates, and with Pro checks its license.'
+			body: 'Editmamei never sends us your photos or previews. It sends content-free usage data, which you can turn off, checks for updates, and with Pro checks its license and asks us for Pro module updates.'
 		}
 	];
 
@@ -61,7 +62,7 @@
 		},
 		{
 			title: 'Checkpoints instead of undo',
-			body: 'Headless GIMP keeps no undo history, so a checkpoint saves the image with its live filters and restores it later. Save an .xcf for anything you want to keep.'
+			body: 'With no GIMP window open there is no undo history, so a checkpoint saves the image with its live filters and restores it later. Save an .xcf for anything you want to keep.'
 		}
 	];
 	const gimpNotYet = [
@@ -93,9 +94,12 @@
 </script>
 
 <Seo
-	title="Editmamei Desktop · Your AI, working in your Photoshop"
-	description="Ask your AI for the edit and it makes it in Photoshop or GIMP on your computer, in layers and masks you can keep editing. An MCP server for Photoshop and GIMP. Free, with Pro for the whole shoot."
+	title="Editmamei Desktop: the Photoshop and GIMP MCP server"
+	description="Ask your AI app for an edit and it makes it in Photoshop or GIMP on your computer, in layers you can keep editing. Free, with Pro for whole shoots."
 	path="/desktop"
+	image="/og/desktop.jpg"
+	imageAlt="Editmamei Desktop: your AI, working in your Photoshop"
+	schema={[desktopApp, desktopHeroVideo]}
 />
 
 <DesktopHero />
@@ -175,9 +179,9 @@
 			<div class="rounded-[22px] bg-white p-6 ring-1 ring-brand/10">
 				<p class="text-sm font-bold text-terracotta-ink">2 · An AI app on your computer</p>
 				<p class="mt-3 text-[16px] leading-relaxed text-neutral-800">
-					Claude Desktop installs it in one click. Claude Code, Cursor and other apps that run local
-					tools work too. Editmamei brings no chat model of its own, so edits use your AI app's
-					plan.
+					Claude Desktop installs it in one click. Claude Code, Cursor and other apps that support
+					MCP, the standard way AI apps plug into other software, work too. Editmamei brings no chat
+					model of its own, so edits use your AI app's plan.
 				</p>
 			</div>
 			<div class="rounded-[22px] bg-white p-6 ring-1 ring-brand/10">
@@ -359,17 +363,19 @@
 <section id="limits" class="scroll-mt-20 bg-paper px-4 py-16 md:py-20">
 	<div class="mx-auto max-w-6xl">
 		<p class="lp-eyebrow text-terracotta-ink">Not yet</p>
-		<h2 class="mt-3 text-2xl font-bold tracking-tight text-brand md:text-3xl">
-			What it doesn't do.
-		</h2>
-		<ul class="mt-8 grid gap-4 sm:grid-cols-2">
+		<h2 class="lp-h2 mt-4 text-brand">What it doesn't do.</h2>
+		<ul class="mt-10 grid gap-5 sm:grid-cols-2">
 			{#each notYet as item (item.title)}
-				<li class="rounded-xl bg-white p-5 ring-1 ring-brand/10">
-					<h3 class="text-sm font-semibold tracking-tight text-neutral-950">{item.title}</h3>
-					<p class="mt-1.5 text-sm leading-relaxed text-neutral-700">{item.body}</p>
+				<li class="rounded-[22px] bg-white p-6 ring-1 ring-brand/10">
+					<h3 class="text-lg font-bold text-brand">{item.title}</h3>
+					<p class="mt-2 text-[15px] leading-relaxed text-neutral-700">{item.body}</p>
 				</li>
 			{/each}
 		</ul>
+		<p class="mt-8 text-[15px] text-neutral-700">
+			More answers are in the
+			<a href="/faq#desktop" class="font-semibold text-brand underline underline-offset-2">FAQ</a>.
+		</p>
 
 		<div class="mt-14">
 			<a

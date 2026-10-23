@@ -2,20 +2,33 @@
 	import PageHero from '$lib/components/PageHero.svelte';
 	import Seo from '$lib/components/Seo.svelte';
 	import { cookieConsent } from '$lib/stores/cookieConsent';
+	import { CONNECT_PRIVACY_URL } from '$lib/links';
 </script>
 
 <Seo
-	title="Privacy: your photos, telemetry and cookies · Editmamei"
-	description="What Editmamei does with your data: no image content is sent to Editmamei, only content-free usage you can audit and switch off. Previews go to your chosen AI."
+	title="Editmamei Desktop privacy: photos, telemetry, cookies"
+	description="What Editmamei Desktop and this site collect: never your photos, only content-free usage data you can switch off. Editmamei Connect has its own policy."
 	path="/privacy"
 />
 
-<PageHero eyebrow="Privacy" title="What Editmamei does with your data." />
+<PageHero
+	eyebrow="Privacy"
+	title="What Editmamei Desktop does with your data."
+	lede="This page covers Editmamei Desktop, the software you install, and this website."
+>
+	<p class="max-w-[38em] text-[15px] leading-relaxed text-[#a9bcb4]">
+		Editmamei Connect works differently: it receives the photos you send it, to edit them on our
+		server, and has
+		<a href={CONNECT_PRIVACY_URL} class="font-semibold text-accent underline underline-offset-4"
+			>its own Privacy Policy</a
+		>.
+	</p>
+</PageHero>
 
 <section class="bg-paper py-14 md:py-20">
-	<div class="mx-auto max-w-2xl px-4">
-		<p class="mt-4 text-base leading-relaxed text-neutral-700">
-			Editmamei runs on your own computer and drives desktop Photoshop or GIMP. Your photos aren't
+	<div class="mx-auto max-w-3xl px-4">
+		<p class="text-[17px] leading-relaxed text-neutral-700">
+			Editmamei Desktop runs on your own computer and drives Photoshop or GIMP. Your photos aren't
 			uploaded to us. The only usage data Editmamei sends us is content-free, and you can audit it
 			and turn it off. The few other requests it makes, listed below, check for updates and handle a
 			Pro license, and none of them carries your images. When your AI assistant needs to see an
@@ -23,42 +36,38 @@
 			periods and your rights are further down this page.
 		</p>
 
-		<h2 class="mt-12 text-xl font-bold tracking-tight text-neutral-950">
+		<h2 class="mt-12 text-2xl font-bold tracking-[-0.02em] text-brand">
 			What Editmamei never sends to us
 		</h2>
-		<p class="mt-3 text-sm leading-relaxed text-neutral-700">
+		<p class="mt-3 text-[16px] leading-relaxed text-neutral-700">
 			There is one line we don't cross, on any setting:
 		</p>
-		<ul class="mt-3 space-y-2 text-sm leading-relaxed text-neutral-700">
+		<ul class="mt-3 space-y-2.5 text-[16px] leading-relaxed text-neutral-700">
 			<li>
-				<strong class="font-semibold text-neutral-900">Your image and document content.</strong>
+				<strong class="font-semibold text-brand">Your image and document content.</strong>
 				No photos, previews, thumbnails, layer renders, or document data are ever sent to Editmamei.
 			</li>
 			<li>
-				<strong class="font-semibold text-neutral-900">Your file paths.</strong>
+				<strong class="font-semibold text-brand">Your file paths.</strong>
 				Full paths stay local; nothing identifies where your work lives on disk.
 			</li>
 			<li>
-				<strong class="font-semibold text-neutral-900">Your metadata.</strong>
+				<strong class="font-semibold text-brand">Your metadata.</strong>
 				Camera info, GPS, and author fields are never sent to Editmamei. When your AI assistant inspects
 				a document, the camera details it reads, GPS included, go to that assistant with the rest of the
 				conversation.
 			</li>
 		</ul>
 
-		<h2 class="mt-12 text-xl font-bold tracking-tight text-neutral-950">
-			What Editmamei does send
-		</h2>
-		<p class="mt-3 text-sm leading-relaxed text-neutral-700">
+		<h2 class="mt-12 text-2xl font-bold tracking-[-0.02em] text-brand">What Editmamei does send</h2>
+		<p class="mt-3 text-[16px] leading-relaxed text-neutral-700">
 			Editmamei is built by a small team, so it sends a thin stream of content-free signals that
 			show what's working and what's breaking. It follows the way editors like VS Code handle
 			telemetry, and every field is documented one by one.
 		</p>
-		<ul class="mt-4 space-y-3 text-sm leading-relaxed text-neutral-700">
+		<ul class="mt-4 space-y-3 text-[16px] leading-relaxed text-neutral-700">
 			<li>
-				<strong class="font-semibold text-neutral-900"
-					>Usage and reliability (on by default).</strong
-				>
+				<strong class="font-semibold text-brand">Usage and reliability (on by default).</strong>
 				Per edit: which tool ran (a Photoshop or a GIMP tool), whether it succeeded, an error category
 				if it didn't, and how long it took. Per session: the Editmamei version, your Photoshop version
 				(no GIMP version is recorded), your operating system, which AI client connected, which install
@@ -69,55 +78,53 @@
 				content.
 			</li>
 			<li>
-				<strong class="font-semibold text-neutral-900"
-					>Diagnostics (off until you turn it on).</strong
-				>
+				<strong class="font-semibold text-brand">Diagnostics (off until you turn it on).</strong>
 				When you opt in, a sanitized error message and the name of the step that failed, so a bug can
 				be traced without you mailing a log by hand. File paths are reduced to bare names; still no image
 				content.
 			</li>
 		</ul>
-		<p class="mt-4 text-sm leading-relaxed text-neutral-700">
+		<p class="mt-4 text-[16px] leading-relaxed text-neutral-700">
 			This data goes to our own infrastructure, not a third-party analytics company. You can see the
 			current settings, and switch usage data off entirely, by editing
-			<code class="rounded bg-neutral-200 px-1 py-0.5 font-mono text-xs"
+			<code class="rounded bg-[#ece6d6] px-1.5 py-0.5 font-mono text-[14px]"
 				>~/.editmamei/settings.json</code
 			>
 			or running
-			<code class="rounded bg-neutral-200 px-1 py-0.5 font-mono text-xs">editmamei config</code>.
-			The file is plain text and yours to inspect at any time.
+			<code class="rounded bg-[#ece6d6] px-1.5 py-0.5 font-mono text-[14px]">editmamei config</code
+			>. The file is plain text and yours to inspect at any time.
 		</p>
 
-		<h2 class="mt-12 text-xl font-bold tracking-tight text-neutral-950">
+		<h2 class="mt-12 text-2xl font-bold tracking-[-0.02em] text-brand">
 			Other requests Editmamei makes
 		</h2>
-		<p class="mt-3 text-sm leading-relaxed text-neutral-700">
+		<p class="mt-3 text-[16px] leading-relaxed text-neutral-700">
 			Besides usage data, Editmamei makes four other kinds of request. None of them carries images,
 			documents or file paths.
 		</p>
-		<ul class="mt-4 space-y-3 text-sm leading-relaxed text-neutral-700">
+		<ul class="mt-4 space-y-3 text-[16px] leading-relaxed text-neutral-700">
 			<li>
-				<strong class="font-semibold text-neutral-900">Update check (on by default).</strong>
+				<strong class="font-semibold text-brand">Update check (on by default).</strong>
 				At startup, Editmamei asks the public npm registry for the latest version number. The request
 				carries no identifiers and no usage data, and it is skipped when you're offline. Switch it off
 				with
-				<code class="rounded bg-neutral-200 px-1 py-0.5 font-mono text-xs"
+				<code class="rounded bg-[#ece6d6] px-1.5 py-0.5 font-mono text-[14px]"
 					>editmamei config set update_check false</code
 				>, or with the Check for updates toggle in the Claude Desktop extension settings.
 			</li>
 			<li>
-				<strong class="font-semibold text-neutral-900">Pro activation.</strong>
+				<strong class="font-semibold text-brand">Pro activation.</strong>
 				Activating Pro sends your license key and a hashed device identifier to the licensing service,
 				a third-party licensing provider. The identifier is a salted hash, with no raw hostname or username
 				in it.
 			</li>
 			<li>
-				<strong class="font-semibold text-neutral-900">Pro license check.</strong>
+				<strong class="font-semibold text-brand">Pro license check.</strong>
 				About once a day, a Pro install sends your license key to the licensing service to confirm the
 				license is still valid. This request carries no device identifier.
 			</li>
 			<li>
-				<strong class="font-semibold text-neutral-900">Pro module update.</strong>
+				<strong class="font-semibold text-brand">Pro module update.</strong>
 				Each time Pro starts, Editmamei asks its own delivery service whether a newer Pro module exists,
 				and downloads it if so. The request carries your license key and a fixed user-agent that is the
 				same for every install. It is separate from the update check above, and the update check setting
@@ -125,28 +132,28 @@
 			</li>
 		</ul>
 
-		<h2 class="mt-12 text-xl font-bold tracking-tight text-neutral-950">
+		<h2 class="mt-12 text-2xl font-bold tracking-[-0.02em] text-brand">
 			Your AI assistant is a cloud service
 		</h2>
-		<p class="mt-3 text-sm leading-relaxed text-neutral-700">
+		<p class="mt-3 text-[16px] leading-relaxed text-neutral-700">
 			The AI assistant you drive Editmamei with is a cloud service. When you ask it to look at an
 			image (for example, the visual-verification preview), a downscaled JPEG goes to
 			<em>that AI provider</em>, exactly as if you'd dropped the file into a chat with it. That's a
 			property of using a cloud AI, and a function of which assistant you choose, not a hop
 			Editmamei adds.
 		</p>
-		<p class="mt-3 text-sm leading-relaxed text-neutral-700">
+		<p class="mt-3 text-[16px] leading-relaxed text-neutral-700">
 			Turning off previews in Editmamei's settings stops preview images going to the AI provider, in
 			both Photoshop and GIMP:
-			<code class="rounded bg-neutral-200 px-1 py-0.5 font-mono text-xs"
+			<code class="rounded bg-[#ece6d6] px-1.5 py-0.5 font-mono text-[14px]"
 				>editmamei config set privacy.send_previews_to_llm false</code
 			>.
 		</p>
 
-		<div class="mt-12 border-t border-neutral-200 pt-6">
+		<div class="mt-12 border-t border-[#ddd6c4] pt-6">
 			<a
 				href="/desktop#how"
-				class="text-sm font-semibold text-neutral-900 underline underline-offset-2 hover:text-neutral-700"
+				class="text-[15px] font-semibold text-brand underline underline-offset-2"
 			>
 				See how it fits together on the Desktop page →
 			</a>
@@ -154,25 +161,27 @@
 	</div>
 </section>
 
-<section id="legal" class="border-t border-neutral-200 py-16 md:py-20">
-	<div class="mx-auto max-w-3xl px-6">
-		<h2 class="text-xl font-bold tracking-tight text-neutral-950">
+<section id="legal" class="border-t border-[#ddd6c4] bg-paper py-16 md:py-20">
+	<div class="mx-auto max-w-3xl px-4">
+		<h2 class="text-2xl font-bold tracking-[-0.02em] text-brand">
 			Your rights, and the legal basis
 		</h2>
-		<p class="mt-3 text-sm leading-relaxed text-neutral-700">
+		<p class="mt-3 text-[16px] leading-relaxed text-neutral-700">
 			Who is responsible for this data, the basis for collecting each kind, how long it is kept, and
 			what you can require us to do. This applies to everyone, not only to people in the EU or UK.
 		</p>
-		<dl class="mt-6 space-y-4 text-sm leading-relaxed text-neutral-700">
+		<dl class="mt-6 space-y-4 text-[16px] leading-relaxed text-neutral-700">
 			<div>
-				<dt class="font-semibold text-neutral-900">Controller</dt>
+				<dt class="font-semibold text-brand">Controller</dt>
 				<dd class="mt-1">
 					EMBD Artifacts LLC, doing business as Editmamei. Contact us at
-					<a href="/contact" class="underline hover:text-neutral-950">editmamei.com/contact</a>.
+					<a href="/contact" class="font-semibold text-brand underline underline-offset-2"
+						>editmamei.com/contact</a
+					>.
 				</dd>
 			</div>
 			<div>
-				<dt class="font-semibold text-neutral-900">The install ID</dt>
+				<dt class="font-semibold text-brand">The install ID</dt>
 				<dd class="mt-1">
 					A random value generated on your machine. It is not derived from your name, account,
 					email, hardware, or anything else about you, and on its own it identifies nobody. It is
@@ -182,7 +191,7 @@
 				</dd>
 			</div>
 			<div>
-				<dt class="font-semibold text-neutral-900">Lawful basis</dt>
+				<dt class="font-semibold text-brand">Lawful basis</dt>
 				<dd class="mt-1">
 					Usage and reliability data (on by default) rests on legitimate interests: identifying
 					defects, and establishing which features are used and on which Photoshop versions. You
@@ -192,7 +201,7 @@
 				</dd>
 			</div>
 			<div>
-				<dt class="font-semibold text-neutral-900">Retention</dt>
+				<dt class="font-semibold text-brand">Retention</dt>
 				<dd class="mt-1">
 					Per-install daily counts: 24 months from the day they cover. The install record: 24 months
 					after the install was last seen. Opt-in diagnostic records: 90 days. All deleted
@@ -201,11 +210,11 @@
 				</dd>
 			</div>
 			<div>
-				<dt class="font-semibold text-neutral-900">Your rights</dt>
+				<dt class="font-semibold text-brand">Your rights</dt>
 				<dd class="mt-1">
 					Access, rectification, erasure, and objection. Your install ID is the reference for all of
 					them; print it with
-					<code class="rounded bg-neutral-200 px-1 py-0.5 font-mono text-xs"
+					<code class="rounded bg-[#ece6d6] px-1.5 py-0.5 font-mono text-[14px]"
 						>editmamei config get telemetry.install_id</code
 					>
 					and send it to us with your request. Two limits apply: erasure removes the stored records but
@@ -216,7 +225,7 @@
 				</dd>
 			</div>
 			<div>
-				<dt class="font-semibold text-neutral-900">Processing</dt>
+				<dt class="font-semibold text-brand">Processing</dt>
 				<dd class="mt-1">
 					Editmamei's own infrastructure, on Cloudflare and on equipment we operate. No third-party
 					analytics processor. Telemetry is not sold, shared, or used for advertising. Your IP
@@ -227,60 +236,60 @@
 				</dd>
 			</div>
 		</dl>
-		<p class="mt-6 text-sm leading-relaxed text-neutral-700">
+		<p class="mt-6 text-[16px] leading-relaxed text-neutral-700">
 			Every field Editmamei sends is documented one by one in the
 			<a
 				href="https://github.com/editmamei/editmamei/blob/main/docs/privacy.md"
 				rel="noopener noreferrer"
-				class="underline hover:text-neutral-950">privacy reference</a
+				class="font-semibold text-brand underline underline-offset-2">privacy reference</a
 			>.
 		</p>
 	</div>
 </section>
 
-<section id="cookies" class="border-t border-neutral-200 bg-neutral-50 py-16 md:py-20">
-	<div class="mx-auto max-w-2xl px-4">
-		<h2 class="text-xl font-bold tracking-tight text-neutral-950">This website</h2>
-		<p class="mt-4 text-sm leading-relaxed text-neutral-700">
-			Everything above is about the Editmamei software. This marketing site is a separate system
-			with its own, ordinary analytics.
+<section id="cookies" class="border-t border-[#ddd6c4] bg-cream py-16 md:py-20">
+	<div class="mx-auto max-w-3xl px-4">
+		<h2 class="text-2xl font-bold tracking-[-0.02em] text-brand">This website</h2>
+		<p class="mt-4 text-[16px] leading-relaxed text-neutral-700">
+			Everything above is about the Editmamei Desktop software. This marketing site is a separate
+			system with its own, ordinary analytics.
 		</p>
-		<p class="mt-4 text-sm leading-relaxed text-neutral-700">
+		<p class="mt-4 text-[16px] leading-relaxed text-neutral-700">
 			It uses <a
 				href="https://clarity.microsoft.com"
 				rel="noopener noreferrer"
-				class="underline hover:text-neutral-950">Microsoft Clarity</a
+				class="font-semibold text-brand underline underline-offset-2">Microsoft Clarity</a
 			> for analytics: session recordings and heatmaps that help us understand how visitors use the site.
 			Clarity operates in two modes depending on your consent:
 		</p>
-		<ul class="mt-4 space-y-2 text-sm leading-relaxed text-neutral-700">
+		<ul class="mt-4 space-y-2 text-[16px] leading-relaxed text-neutral-700">
 			<li>
-				<strong class="font-semibold text-neutral-900">No cookies (default).</strong> If you decline or
-				haven't yet made a choice, Clarity runs without setting any cookies. No cookies are persisted
-				to your device; Clarity may use session storage to correlate page views within a single tab, which
-				is cleared when the tab closes.
+				<strong class="font-semibold text-brand">No cookies (default).</strong> If you decline or haven't
+				yet made a choice, Clarity runs without setting any cookies. No cookies are persisted to your
+				device; Clarity may use session storage to correlate page views within a single tab, which is
+				cleared when the tab closes.
 			</li>
 			<li>
-				<strong class="font-semibold text-neutral-900">With cookies (if you accept).</strong>
+				<strong class="font-semibold text-brand">With cookies (if you accept).</strong>
 				Clarity sets two first-party cookies:
-				<code class="rounded bg-neutral-200 px-1 py-0.5 font-mono text-xs">_clck</code> (persists a
-				user ID across sessions, expires in 1 year) and
-				<code class="rounded bg-neutral-200 px-1 py-0.5 font-mono text-xs">_clsk</code> (ties page
-				views within a session, expires in 30 minutes). Both are set by
-				<code class="rounded bg-neutral-200 px-1 py-0.5 font-mono text-xs">editmamei.com</code> and
-				processed by Microsoft per their
+				<code class="rounded bg-[#ece6d6] px-1.5 py-0.5 font-mono text-[14px]">_clck</code>
+				(persists a user ID across sessions, expires in 1 year) and
+				<code class="rounded bg-[#ece6d6] px-1.5 py-0.5 font-mono text-[14px]">_clsk</code> (ties
+				page views within a session, expires in 30 minutes). Both are set by
+				<code class="rounded bg-[#ece6d6] px-1.5 py-0.5 font-mono text-[14px]">editmamei.com</code>
+				and processed by Microsoft per their
 				<a
 					href="https://privacy.microsoft.com/en-us/privacystatement"
 					rel="noopener noreferrer"
-					class="underline hover:text-neutral-950">privacy statement</a
+					class="font-semibold text-brand underline underline-offset-2">privacy statement</a
 				>.
 			</li>
 		</ul>
-		<p class="mt-6 text-sm leading-relaxed text-neutral-700">
+		<p class="mt-6 text-[16px] leading-relaxed text-neutral-700">
 			You can change your choice at any time using the
 			<button
 				onclick={() => cookieConsent.reopen()}
-				class="cursor-pointer underline hover:text-neutral-950"
+				class="cursor-pointer font-semibold text-brand underline underline-offset-2"
 			>
 				Cookie preferences
 			</button>
@@ -289,25 +298,25 @@
 	</div>
 </section>
 
-<section id="email" class="border-t border-neutral-200 py-16 md:py-20">
-	<div class="mx-auto max-w-2xl px-4">
-		<h2 class="text-xl font-bold tracking-tight text-neutral-950">The email list</h2>
-		<p class="mt-4 text-sm leading-relaxed text-neutral-700">
-			If you sign up for updates, we store the address you gave us and nothing else. No name, no
-			company, and nothing about how you use Editmamei.
+<section id="email" class="border-t border-[#ddd6c4] bg-paper py-16 md:py-20">
+	<div class="mx-auto max-w-3xl px-4">
+		<h2 class="text-2xl font-bold tracking-[-0.02em] text-brand">The email list</h2>
+		<p class="mt-4 text-[16px] leading-relaxed text-neutral-700">
+			If you sign up for updates, we store the address you gave us and which page or link you signed
+			up from, and nothing else. No name, no company, and nothing about how you use Editmamei.
 		</p>
-		<p class="mt-4 text-sm leading-relaxed text-neutral-700">
+		<p class="mt-4 text-[16px] leading-relaxed text-neutral-700">
 			Signing up stores your address right away, marked unconfirmed, and sends you a confirmation
 			link that expires after 48 hours. Until you click it, nothing is ever sent to that address
 			again. Addresses are held by
 			<a
 				href="https://resend.com"
 				rel="noopener noreferrer"
-				class="underline hover:text-neutral-950">Resend</a
+				class="font-semibold text-brand underline underline-offset-2">Resend</a
 			>, who send the mail on our behalf. Every message has an unsubscribe link, and using it takes
 			you off the list immediately.
 		</p>
-		<p class="mt-4 text-sm leading-relaxed text-neutral-700">
+		<p class="mt-4 text-[16px] leading-relaxed text-neutral-700">
 			The list is never joined to product telemetry. Telemetry carries a random install identifier
 			and never an email address or a name, so there is nothing to connect an address to, and we do
 			not try. They are separate systems with separate consent, and we intend to keep it that way.

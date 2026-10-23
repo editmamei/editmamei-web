@@ -1,17 +1,20 @@
 <script lang="ts">
 	import PageHero from '$lib/components/PageHero.svelte';
-	const BLOB = 'https://github.com/editmamei/editmamei/blob/main';
+	import Seo from '$lib/components/Seo.svelte';
+	import { CONNECT_URL, GITHUB_REPO_URL } from '$lib/links';
+
+	const BLOB = `${GITHUB_REPO_URL}/blob/main`;
 
 	const links = [
 		{
 			label: 'Install',
 			href: `${BLOB}/docs/installation.md`,
-			note: 'Claude Desktop, Claude Code, Cursor and other MCP clients.'
+			note: 'Claude Desktop, Claude Code, Cursor and other MCP apps.'
 		},
 		{
 			label: 'Getting started',
 			href: `${BLOB}/docs/getting-started.md`,
-			note: 'From first ping to first edit.'
+			note: 'From checking Photoshop is connected to your first edit.'
 		},
 		{ label: 'FAQ', href: `${BLOB}/docs/faq.md`, note: 'Compatibility, privacy, Pro and support.' },
 		{
@@ -29,43 +32,45 @@
 			href: `${BLOB}/docs/pro-features.md`,
 			note: 'What Pro adds and how to activate it.'
 		},
-		{ label: 'Privacy', href: '/privacy', note: 'Exactly what data leaves your machine.' },
-		{ label: 'Changelog', href: `${BLOB}/CHANGELOG.md`, note: 'Release notes.' }
+		{ label: 'Privacy', href: '/privacy', note: 'Exactly what data leaves your computer.' },
+		{ label: 'Changelog', href: `${BLOB}/CHANGELOG.md`, note: 'Release notes for every version.' }
 	];
 </script>
 
-<svelte:head>
-	<title>Documentation · Editmamei</title>
-	<meta
-		name="description"
-		content="Editmamei documentation: install, getting started, FAQ, troubleshooting, the GIMP guide, Pro features, privacy and the changelog."
-	/>
-	<meta name="robots" content="noindex" />
-</svelte:head>
+<Seo
+	title="Editmamei Desktop documentation"
+	description="Editmamei Desktop guides: install, getting started, FAQ, troubleshooting, the GIMP guide, Pro features, privacy and the changelog."
+	path="/desktop/docs"
+/>
 
 <PageHero
 	crumbs={[{ label: 'Editmamei Desktop', href: '/desktop' }, { label: 'Docs' }]}
 	eyebrow="Docs"
-	title="Documentation"
+	title="Editmamei Desktop documentation"
+	lede="Editmamei Desktop is the MCP server that lets your AI app edit photos in Photoshop or GIMP on your computer. Its guides live in the public repository on GitHub; pick one below."
 />
 
-<section class="bg-paper py-14 md:py-20">
-	<div class="mx-auto max-w-2xl px-4">
-		<p class="mt-4 text-base leading-relaxed text-neutral-700">
-			The guides live in the public repository on GitHub. Pick one below.
-		</p>
-
-		<ul class="mt-8 divide-y divide-neutral-200 border-y border-neutral-200">
+<section class="bg-paper px-4 py-14 md:py-20">
+	<div class="mx-auto max-w-3xl">
+		<ul class="divide-y divide-[#ddd6c4] border-y border-[#ddd6c4]">
 			{#each links as link (link.href)}
-				<li class="py-4">
+				<li class="py-5">
 					<a
 						href={link.href}
-						class="font-semibold text-neutral-900 underline decoration-neutral-300 underline-offset-4 hover:decoration-neutral-700"
-						>{link.label}</a
+						class="text-lg font-bold text-brand underline decoration-brand/30 underline-offset-4 hover:decoration-brand"
+						>{link.label}{#if link.href.startsWith('https://')}<span aria-hidden="true">
+								↗</span
+							><span class="sr-only"> (opens GitHub)</span>{/if}</a
 					>
-					<p class="mt-1 text-sm leading-relaxed text-neutral-600">{link.note}</p>
+					<p class="mt-1 text-[16px] leading-relaxed text-neutral-700">{link.note}</p>
 				</li>
 			{/each}
 		</ul>
+		<p class="mt-8 text-[15px] text-neutral-700">
+			Using Editmamei Connect instead? Its setup steps and tools are on
+			<a href={CONNECT_URL} class="font-semibold text-brand underline underline-offset-2"
+				>connect.editmamei.com</a
+			>.
+		</p>
 	</div>
 </section>

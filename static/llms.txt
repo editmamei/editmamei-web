@@ -1,77 +1,56 @@
 # Editmamei
 
-> Editmamei is a photo editor MCP (Model Context Protocol) server for desktop Adobe Photoshop: the editing assistant you always needed. You ask your AI assistant for an edit in plain language, and Editmamei carries it out in Photoshop on your own computer, layer by layer. GIMP 3.2 is also supported. It is not a web app and not a cloud image editor, and Editmamei's own servers never receive your images. (Editmamei Connect, a separate hosted product described below, is the exception: it edits the photos you send it on Editmamei's server.)
+> Editmamei lets AI apps edit your real photo with professional editing tools instead of redrawing it. It comes two ways: Editmamei Desktop, an MCP server that lets AI apps such as Claude Desktop, Claude Code and Cursor edit photos in Adobe Photoshop or GIMP on your computer; and Editmamei Connect, a hosted MCP connector for AI apps such as Claude and ChatGPT that edits the photos you send it, from your phone or computer, on Editmamei's server.
 
-Editmamei installs as an npm package or a one-click Claude Desktop extension and runs locally on macOS or Windows (and Linux with GIMP), alongside the editor it drives. An AI client (such as Claude Desktop or any MCP-compatible client) sends instructions to Editmamei, which turns them into native operations in the editor: ExtendScript in Photoshop, GIMP's own filters in GIMP. Your files stay on your machine. Editmamei's own servers receive content-free usage data (opt-out) and, on Pro, a check for a newer Pro module at each startup, which carries the license key. Pro activation and a daily license check go to a third-party licensing service, with the license key (and, at activation, a hashed device ID). None of these carry images, documents or file paths. No pixels leave your computer unless your AI client itself sends them (for example, a preview image to the assistant you are chatting with), and turning off previews in Editmamei's settings stops that for Photoshop and GIMP.
+Ask a typical AI app to edit a photo and it generates a new picture from yours, so faces, lettering and fine detail can change. With Editmamei, the AI app plans the edit and real editing tools carry it out on the original photo, so what you didn't ask to change stays as it was.
 
-## What Editmamei is
+## Editmamei Desktop
 
-- A local MCP server that bridges AI assistants and photo editors: Adobe Photoshop, and GIMP 3.2
-- Non-destructive AI photo editing for Photoshop: color grading, retouching, layer management, masking, adjustments, filters, and more
-- A Photoshop assistant: connect Claude Desktop, Claude Code, or Cursor and edit by conversation
-- Photoshop automation without scripting: repeatable Pro templates reapply a saved look photo by photo
-- Compatible with any MCP-capable AI client (Claude Desktop, Claude Code, Cursor, etc.)
-- GIMP support: Editmamei can also drive GIMP 3.2, which it runs in the background with nothing installed into GIMP. It covers documents, layers and composites (place another photo as a layer, extend the canvas), 13 non-destructive adjustment types and six effects (kept as live filters in the saved .xcf), geometric masks, crop, resize, rotate and flip, checkpoints (save and restore the image state), .xcf saving, metadata-stripped export, and previews and histograms. GIMP is free and needs no Photoshop. It works on Windows, macOS and Linux (including the Flathub Flatpak).
-- Local-first: your photo files and documents stay on your computer; Editmamei's own servers never receive your images (Editmamei Connect, below, works differently)
-- Reports content-free usage data tied to a random install ID (pseudonymous; opt-out); never your images, documents, or file paths
-- For Photoshop editing, requires an existing Adobe Photoshop license (it drives your copy, it is not a replacement). GIMP editing needs only GIMP 3.2.
+An MCP (Model Context Protocol) server that runs on your computer, next to the photo editor it drives.
 
-## What Editmamei is not
+- Edits in Adobe Photoshop 2026 (version 27.x) or GIMP 3.2, as layers, masks and adjustment layers you can keep editing by hand. Your AI app sees small previews so it can check its work.
+- Runs on Windows 10/11 and macOS 13+, and on Linux with GIMP.
+- Works with AI apps that run MCP servers on your computer: Claude Desktop (one-click extension), Claude Code, Cursor and other MCP apps. It can't run inside a web-only chat app.
+- Install for Claude Desktop: download https://github.com/editmamei/editmamei/releases/latest/download/editmamei.mcpb and install it under Settings → Extensions.
+- Install for Claude Code, Cursor and others (needs Node.js 22+): `npm install -g editmamei`, then `editmamei install`, which registers it with Claude Desktop, Claude Code and Cursor. Other apps use the install guide's configuration, which runs `npx -y editmamei`.
+- 112 tools: 83 for Photoshop (62 in the free Community edition, 21 more in Pro) and 29 for GIMP (all free).
+- Your photos stay on your computer and are never sent to Editmamei. It sends content-free usage data you can switch off, checks npm for updates, and with Pro checks its license and asks for Pro module updates. None of these carry images, documents or file paths.
+- Not a Photoshop plugin and not made by Adobe: a separate local program that sends Photoshop its instructions. It needs your own Photoshop license for Photoshop editing; GIMP is free.
+- Not for Lightroom or Photoshop Elements.
 
-These describe Editmamei itself, the local product. Editmamei Connect, the hosted version further down, works differently.
+Editions and prices:
 
-- Not a web app or browser-based editor
-- Not a cloud image editor (Editmamei does no cloud processing of your images)
-- Not a generative AI model or image generator
-- Not a Photoshop plugin or extension
-- Not a replacement for Photoshop: it orchestrates Photoshop, it does not replace it
-- Not affiliated with Adobe
+- Community: free, source-available under the Functional Source License (FSL-1.1-MIT). Source: https://github.com/editmamei/editmamei
+- Pro: $9 a month (7-day free trial), $79 a year, or $199 once with every future update. One license covers two computers. Pro adds Camera Raw as a re-editable filter, raw files developed before they open, whole-folder batches, templates that carry a look across a shoot, precise placement and warp, edits and selections aimed at a named object, face or subject, and Photoshop Actions and scripting. Pro is for Photoshop; GIMP support is the same in both editions.
 
-## Editions
+## Editmamei Connect
 
-- **Community Edition (CE)**: Free and source-available under the Functional Source License (FSL-1.1-MIT), available via npm as `editmamei`. Source: https://github.com/editmamei/editmamei. Covers the everyday editing surface: documents, layers, non-destructive adjustments, filters, masks, selections (including Photoshop's AI Select Subject and Select Sky), shape layers and pen paths, channel compositing, content-aware retouch, on-device scene awareness (object/face detection, selecting things by name), history, and visual verification.
-- **Pro Edition**: Paid license, activated over the same package. Pro adds Camera Raw as a re-editable filter, raw files developed before they open, folder batch, templates, precise placement and warp, edits and text aimed at a named object, selections of a named object, a face feature or one subject among several, and Photoshop Actions and scripting. Pro's features are Photoshop-only; GIMP support is the same in both editions.
+A hosted, remote MCP server that your AI app adds as a connector. Nothing to install, and no editing software needed.
 
-## Editmamei Connect (hosted)
-
-Editmamei Connect is a separate product: Editmamei running on Editmamei's server instead of your computer, as a remote MCP server. You add it to your AI app as a connector, sign up with your email address, then send a photo from your phone or laptop, describe the edit in plain words, and download the finished photo from a link that lasts 24 hours. Nothing is installed and no photo editor is needed on your side.
-
-- Photo editing on the photos you send: remove an object by naming it, heal dust spots and blemishes, fix brightness and color, portrait-mode background blur, light skin smoothing, a new sky, one-step looks you can save and reuse
-- Product photos: white or studio backgrounds, transparent cutouts, the same item in other colors, and a check against Amazon, Etsy, Shopify and eBay image guidelines
-- Social posts: crops for each platform, carousel slides, story frames, photo grids, memes and stickers
-- Batches of up to ten photos with the same edit
-- Unlike the local product, Connect receives the photos you send: they are uploaded to Editmamei's server for editing and deleted on the schedule in Connect's own Privacy Policy
-- New accounts start with free credits, and more come in packs or monthly plans
-- Connect has its own Terms of Service and Privacy Policy, separate from Editmamei's
-
-More: https://connect.editmamei.com/llms.txt
-
-## Prices
-
-- Community: free
-- Pro: $9 per month (7-day trial), $79 per year, or $199 one-time with every future update included. One license covers two devices.
-- Connect: 150 free credits to start plus up to 50 more each month; credit packs from $7 and monthly plans from $10
+- Add https://connect.editmamei.com/mcp as a custom connector (in Claude: Settings → Connectors → Add custom connector). Works in Claude on the web, desktop and phone, ChatGPT, and other AI apps that add remote MCP servers with a sign-in, such as Cursor and VS Code. You sign up with your email address the first time it asks you to sign in.
+- Ask for an edit and your AI app gives you an upload link: send up to ten photos from your phone's camera roll or your computer. Connect edits them on Editmamei's server and hands back a download link that lasts 24 hours.
+- Edits the original photo with ordinary editing tools: selections, masks, adjustments, filters, crops and retouching. AI is used to find what to select (a subject, the sky, an object you name) and to fill in where you remove something. It doesn't generate images.
+- Exports JPEG, PNG, WebP or TIFF, or a layered PSD to keep working on. RAW files up to 100 MiB work on the larger workspace.
+- Uploads are deleted 24 hours after upload. Connect has its own Terms of Service and Privacy Policy: https://connect.editmamei.com/terms and https://connect.editmamei.com/privacy
+- Pricing: new accounts start with 150 free credits and get up to 50 more each month. Credit packs (750 for $7, 2,000 for $15) never expire; monthly plans are 1,500 credits for $10 or 7,500 for $35.
+- Connect's own overview, with every tool: https://connect.editmamei.com/llms.txt
 
 ## Links
 
-- [Homepage](https://editmamei.com)
-- [Editmamei Desktop](https://editmamei.com/desktop): the MCP server for Photoshop and GIMP on your computer, with real sessions, how it's wired, and setup (GIMP included)
-- [Desktop tools](https://editmamei.com/desktop/tools): every Desktop tool for Photoshop and GIMP, with what each one does and its edition
-- [Desktop pricing](https://editmamei.com/desktop/pricing): Community vs Pro editions
-- [Download](https://editmamei.com/desktop/download)
-- [Activate a Pro license](https://editmamei.com/desktop/activate)
-- [Desktop docs](https://editmamei.com/desktop/docs)
-- [Editmamei Connect](https://editmamei.com/connect): the hosted connector for Claude, and for ChatGPT where your plan allows connectors
+- [Home](https://editmamei.com): both products, with a side-by-side comparison against a typical AI app's redraw
+- [Editmamei Desktop](https://editmamei.com/desktop): how it works, real sessions, the GIMP section, and install steps
+- [Desktop tools](https://editmamei.com/desktop/tools): every Photoshop and GIMP tool, with what it does and its edition
+- [Desktop pricing](https://editmamei.com/desktop/pricing): Community and Pro
+- [Desktop docs](https://editmamei.com/desktop/docs): the install, getting started, FAQ, troubleshooting and GIMP guides
+- [Activate Pro](https://editmamei.com/desktop/activate)
+- [Editmamei Connect](https://editmamei.com/connect): how it works, real sessions, and setup
 - [Connect pricing](https://editmamei.com/connect/pricing): free credits, packs and monthly plans
-- [Connect app](https://connect.editmamei.com): sign-up, setup steps, every Connect tool, and Connect's Terms and Privacy Policy
 - [Pricing](https://editmamei.com/pricing): both products side by side
-- [Privacy](https://editmamei.com/privacy)
-- [License](https://editmamei.com/license)
+- [Gallery](https://editmamei.com/gallery): real edits, each with its before and after and every step it took
 - [FAQ](https://editmamei.com/faq)
-- [Blog](https://editmamei.com/blog): feature announcements, tutorials, and example edits
+- [Blog](https://editmamei.com/blog): release notes and write-ups
+- [Privacy (Desktop and this site)](https://editmamei.com/privacy)
+- [License](https://editmamei.com/license)
 - [Contact](https://editmamei.com/contact)
 - [npm package](https://www.npmjs.com/package/editmamei)
-- [Source (GitHub)](https://github.com/editmamei/editmamei): CE source (FSL-1.1-MIT), docs, and issues
-- [Install guide](https://github.com/editmamei/editmamei/blob/main/docs/getting-started.md)
-- [GIMP guide](https://github.com/editmamei/editmamei/blob/main/docs/gimp.md)
-- [Full documentation as one text file](https://editmamei.com/llms-full.txt)
+- [Full Desktop documentation as one text file](https://editmamei.com/llms-full.txt)

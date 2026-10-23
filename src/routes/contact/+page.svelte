@@ -2,94 +2,99 @@
 	import PageHero from '$lib/components/PageHero.svelte';
 	import Seo from '$lib/components/Seo.svelte';
 	import {
+		CONNECT_URL,
 		CUSTOMER_PORTAL_URL,
 		GITHUB_ISSUES_URL,
 		GITHUB_README_URL,
 		GITHUB_SECURITY_ADVISORY_URL
 	} from '$lib/links';
+
+	const link = 'font-semibold text-brand underline underline-offset-2';
 </script>
 
 <Seo
-	title="Contact: support, billing and bug reports · Editmamei"
-	description="Get help with Editmamei: open a GitHub issue for bugs and setup questions, email support for billing and license questions, and report security issues privately."
+	title="Contact Editmamei: support, billing and bug reports"
+	description="Bugs and setup questions go to GitHub issues; billing, licenses, Connect accounts and anything private to support@editmamei.com; vulnerabilities privately."
 	path="/contact"
 />
 
-<PageHero eyebrow="Contact" title="Get in touch" />
+<PageHero
+	eyebrow="Contact"
+	title="Get in touch"
+	lede="Bugs and setup questions go to GitHub, where the answer helps the next person too. Billing, accounts and anything private go to support@editmamei.com."
+/>
 
-<section class="bg-paper py-14 md:py-20">
-	<div class="mx-auto max-w-2xl px-4">
-		<p class="mt-4 text-base leading-relaxed text-neutral-600">
-			Editmamei is an independent product, not affiliated with Adobe. The channels below cover
-			support, billing and security reports.
-		</p>
-
-		<dl class="mt-12 space-y-10">
-			<div>
-				<dt class="text-base font-semibold text-neutral-950">Support</dt>
-				<dd class="mt-2 text-sm leading-relaxed text-neutral-700">
-					For installation help, bug reports, and general questions, open a public issue on GitHub
-					first, since the answer will help others too. For anything private, email
-					<a href="mailto:support@editmamei.com" class="underline hover:text-neutral-950"
-						>support@editmamei.com</a
-					>.
+<section class="bg-paper px-4 py-14 md:py-20">
+	<div class="mx-auto max-w-3xl">
+		<dl class="divide-y divide-[#ddd6c4] border-y border-[#ddd6c4] text-[16px] leading-relaxed">
+			<div class="py-7">
+				<dt class="text-xl font-bold text-brand">Support</dt>
+				<dd class="mt-2 text-neutral-700">
+					For installation help, bug reports and general questions about Editmamei Desktop, open a
+					public issue on GitHub first, since the answer will help others too. For anything private,
+					email
+					<a href="mailto:support@editmamei.com" class={link}>support@editmamei.com</a>.
 				</dd>
-				<dd class="mt-3">
+				<dd class="mt-4">
 					<a
 						href={GITHUB_ISSUES_URL}
-						class="inline-flex items-center gap-1.5 rounded-md border border-neutral-300 bg-white px-4 py-2 text-sm font-semibold text-neutral-800 transition-colors hover:border-neutral-400 hover:bg-neutral-50"
+						class="inline-flex min-h-12 items-center rounded-2xl bg-brand px-6 text-[16px] font-bold text-white transition-colors hover:bg-brand-light"
+						>Open an issue on GitHub <span aria-hidden="true" class="ml-1.5">↗</span></a
 					>
-						Open an issue on GitHub ↗
-					</a>
 				</dd>
 			</div>
 
-			<div>
-				<dt class="text-base font-semibold text-neutral-950">Billing and licenses</dt>
-				<dd class="mt-2 text-sm leading-relaxed text-neutral-700">
+			<div class="py-7">
+				<dt class="text-xl font-bold text-brand">Editmamei Connect</dt>
+				<dd class="mt-2 text-neutral-700">
+					Your credit balance and purchases are in your account at
+					<a href={CONNECT_URL} class={link}>connect.editmamei.com</a>. For anything else about your
+					Connect account, including deleting it, email
+					<a href="mailto:support@editmamei.com" class={link}>support@editmamei.com</a> from the address
+					on the account.
+				</dd>
+			</div>
+
+			<div class="py-7">
+				<dt class="text-xl font-bold text-brand">Billing and Pro licenses</dt>
+				<dd class="mt-2 text-neutral-700">
 					For billing, license or account questions, email
-					<a href="mailto:support@editmamei.com" class="underline hover:text-neutral-950"
-						>support@editmamei.com</a
-					>. Please don't raise them in the public GitHub tracker, where invoice details would be
-					visible to everyone. To update payment, cancel, view invoices or remove a device yourself,
-					use your
-					<a href={CUSTOMER_PORTAL_URL} rel="noopener" class="underline hover:text-neutral-950"
-						>account portal</a
-					>.
+					<a href="mailto:support@editmamei.com" class={link}>support@editmamei.com</a>. Please
+					don't raise them in the public GitHub tracker, where invoice details would be visible to
+					everyone. To update payment, cancel, view invoices or remove a device yourself, use your
+					<a href={CUSTOMER_PORTAL_URL} rel="noopener" class={link}>Pro account portal</a>.
 				</dd>
 			</div>
 
-			<div>
-				<dt class="text-base font-semibold text-neutral-950">Security disclosures</dt>
-				<dd class="mt-2 text-sm leading-relaxed text-neutral-700">
-					If you have found a vulnerability in the Editmamei software, report it privately rather
-					than opening a public issue: through a
-					<a
-						href={GITHUB_SECURITY_ADVISORY_URL}
-						rel="noopener noreferrer"
-						class="underline hover:text-neutral-950">GitHub security advisory</a
+			<div class="py-7">
+				<dt class="text-xl font-bold text-brand">Security disclosures</dt>
+				<dd class="mt-2 text-neutral-700">
+					Found a vulnerability in the Editmamei software? Report it privately rather than in a
+					public issue: through a
+					<a href={GITHUB_SECURITY_ADVISORY_URL} rel="noopener noreferrer" class={link}
+						>GitHub security advisory</a
 					>
 					(preferred), or by email to
-					<a href="mailto:security@editmamei.com" class="underline hover:text-neutral-950"
-						>security@editmamei.com</a
-					>. You'll get an acknowledgment within a few business days.
-				</dd>
-				<dd class="mt-3">
-					<a href="/security" class="text-sm text-neutral-600 underline hover:text-neutral-950">
-						Security policy
-					</a>
+					<a href="mailto:security@editmamei.com" class={link}>security@editmamei.com</a>, which
+					also takes reports about Editmamei Connect and this website. You'll get an acknowledgment
+					within a few business days. More on the
+					<a href="/security" class={link}>security page</a>.
 				</dd>
 			</div>
 
-			<div>
-				<dt class="text-base font-semibold text-neutral-950">Documentation and community</dt>
-				<dd class="mt-2 text-sm leading-relaxed text-neutral-700">
+			<div class="py-7">
+				<dt class="text-xl font-bold text-brand">Documentation</dt>
+				<dd class="mt-2 text-neutral-700">
 					The
-					<a href={GITHUB_README_URL} class="underline hover:text-neutral-950">README on GitHub</a>
-					covers installation, configuration, and all available tools. Common setup questions are also
-					answered in the <a href="/faq" class="underline hover:text-neutral-950">FAQ</a>.
+					<a href={GITHUB_README_URL} class={link}>README on GitHub</a>
+					covers installation, configuration and every tool, and the
+					<a href="/desktop/docs" class={link}>docs page</a> links each guide. Common questions are
+					answered in the <a href="/faq" class={link}>FAQ</a>.
 				</dd>
 			</div>
 		</dl>
+		<p class="mt-8 text-[14px] text-neutral-500">
+			Editmamei is an independent product, not affiliated with Adobe.
+		</p>
 	</div>
 </section>

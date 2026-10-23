@@ -1,7 +1,9 @@
 <script lang="ts">
 	import PageHero from '$lib/components/PageHero.svelte';
 	import Seo from '$lib/components/Seo.svelte';
-	import { GITHUB_LICENSE_URL, GITHUB_README_URL } from '$lib/links';
+	import { CONNECT_TERMS_URL, GITHUB_LICENSE_URL } from '$lib/links';
+
+	const link = 'font-semibold text-brand underline underline-offset-2';
 
 	// Section (a): Editmamei Community Edition, FSL-1.1-MIT.
 	//
@@ -216,91 +218,78 @@ support@editmamei.com`;
 </script>
 
 <Seo
-	title="License: Community Edition (FSL-1.1-MIT) and Pro · Editmamei"
-	description="Editmamei Community Edition is source-available under the Functional Source License (FSL-1.1-MIT); Editmamei Pro is a separate commercial add-on."
+	title="Editmamei license: FSL-1.1-MIT Community and Pro"
+	description="Editmamei Community is source-available under the Functional Source License (FSL-1.1-MIT); Editmamei Pro is a separate commercial add-on."
 	path="/license"
 />
 
-<PageHero eyebrow="License" title="Two licenses, in plain words." />
+<PageHero
+	eyebrow="License"
+	title="Two licenses, in plain words."
+	lede="Two licenses cover Editmamei Desktop. Community's source is public and source-available; Pro is a separate, paid add-on with its own commercial terms."
+>
+	<p class="max-w-[40em] text-[15px] leading-relaxed text-[#a9bcb4]">
+		Editmamei Connect is a hosted service, not software you install, and runs under its own
+		<a href={CONNECT_TERMS_URL} class="font-semibold text-accent underline underline-offset-4"
+			>Terms of Service</a
+		>.
+	</p>
+</PageHero>
 
-<section class="bg-paper py-14 md:py-20">
-	<div class="mx-auto max-w-2xl px-4">
-		<p class="mt-4 text-base leading-relaxed text-neutral-700">
-			Two licenses cover Editmamei. Community Edition's source is public and source-available; Pro
-			is a separate, paid add-on with its own commercial terms.
-		</p>
-
-		<h2 class="mt-14 text-xl font-bold tracking-tight text-neutral-950">
-			Editmamei Community Edition: FSL-1.1-MIT
+<section class="bg-paper px-4 py-14 md:py-20">
+	<div class="mx-auto max-w-3xl text-[16px] leading-relaxed text-neutral-700">
+		<h2 class="text-2xl font-bold tracking-[-0.02em] text-brand">
+			Editmamei Community: FSL-1.1-MIT
 		</h2>
-		<p class="mt-4 text-sm leading-relaxed text-neutral-700">
-			Editmamei CE is <a
-				href="https://fair.io"
-				rel="noopener noreferrer"
-				class="underline hover:text-neutral-950">Fair Source</a
+		<p class="mt-4">
+			Editmamei Community is <a href="https://fair.io" rel="noopener noreferrer" class={link}
+				>Fair Source</a
 			>
 			software under the
-			<a
-				href={GITHUB_LICENSE_URL}
-				rel="noopener noreferrer"
-				class="underline hover:text-neutral-950"
+			<a href={GITHUB_LICENSE_URL} rel="noopener noreferrer" class={link}
 				>Functional Source License, v1.1, MIT Future License</a
 			> (FSL-1.1-MIT).
 		</p>
-		<p class="mt-3 text-sm leading-relaxed text-neutral-700">
+		<p class="mt-3">
 			You can read, run, modify, and redistribute the code for almost anything: commercial photo
 			editing, internal tools, education, research, security review. The one thing the license holds
 			back, for two years per release, is offering the code to others in a commercial product or
-			service that competes with Editmamei CE or Pro. If you redistribute the code, keep the license
-			and copyright notices with it. Two years after each version ships, that version automatically
-			becomes available under plain MIT.
+			service that competes with Editmamei Community or Pro. If you redistribute the code, keep the
+			license and copyright notices with it. Two years after each version ships, that version
+			automatically becomes available under plain MIT.
 		</p>
-		<p class="mt-3 text-sm leading-relaxed text-neutral-700">
+		<p class="mt-3">
 			This summary is plain English. The text below is the license; where they differ, the license
 			text controls.
 		</p>
-		<p class="mt-3 text-sm leading-relaxed text-neutral-700">
+		<p class="mt-3">
 			Editmamei is not open source under the OSI definition, and we don't call it that. It is
-			source-available, with the full CE stack developed in the open.
-		</p>
-		<p class="mt-3 text-sm leading-relaxed text-neutral-700">
-			Editmamei Pro is a separate, commercially licensed module; its source is not published. See
-			below.
+			source-available, with all of Community developed in the open. Editmamei Pro is a separate,
+			commercially licensed module; its source is not published. See below.
 		</p>
 
-		<div class="mt-8 rounded-2xl border border-neutral-200 bg-neutral-50/60 p-6 md:p-8">
+		<div class="mt-8 rounded-[22px] bg-white p-6 ring-1 ring-brand/10 md:p-8">
 			<pre
 				class="font-sans text-sm leading-relaxed whitespace-pre-wrap text-neutral-800">{FSL_LICENSE_TEXT}</pre>
 		</div>
 
-		<h2 class="mt-16 text-xl font-bold tracking-tight text-neutral-950">
+		<h2 class="mt-16 text-2xl font-bold tracking-[-0.02em] text-brand">
 			Editmamei Pro: commercial license
 		</h2>
-		<p class="mt-4 text-sm leading-relaxed text-neutral-700">
-			Editmamei Pro is a paid module and subscription, activated over Community Edition. It is not
-			covered by the FSL-1.1-MIT license above; its source is not published, and it is licensed
-			under the separate commercial agreement below.
+		<p class="mt-4">
+			Editmamei Pro is a paid module and subscription, activated over Community. It is not covered
+			by the FSL-1.1-MIT license above; its source is not published, and it is licensed under the
+			separate commercial agreement below.
 		</p>
 
-		<div class="mt-8 rounded-2xl border border-neutral-200 bg-neutral-50/60 p-6 md:p-8">
+		<div class="mt-8 rounded-[22px] bg-white p-6 ring-1 ring-brand/10 md:p-8">
 			<pre
 				class="font-sans text-sm leading-relaxed whitespace-pre-wrap text-neutral-800">{PRO_LICENSE_TEXT}</pre>
 		</div>
 
-		<div class="mt-10 flex flex-col gap-3 sm:flex-row">
-			<a
-				href={GITHUB_README_URL}
-				rel="noopener noreferrer"
-				class="inline-flex items-center justify-center rounded-md bg-neutral-900 px-5 py-3 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-neutral-800"
-			>
-				Read the docs
-			</a>
-			<a
-				href="/"
-				class="inline-flex items-center justify-center rounded-md border border-neutral-300 bg-white px-5 py-3 text-sm font-semibold text-neutral-800 transition-colors hover:border-neutral-400 hover:bg-neutral-50"
-			>
-				Back to home
-			</a>
-		</div>
+		<p class="mt-10">
+			Questions about either license? See the <a href="/faq" class={link}>FAQ</a> or
+			<a href="/contact" class={link}>get in touch</a>.
+		</p>
 	</div>
 </section>

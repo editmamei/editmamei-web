@@ -131,7 +131,11 @@
 	const lensSrc = $derived(lens ? ((lens.x / lens.w) * 100 < pos ? BEFORE : mode.src) : null);
 </script>
 
-<section class="relative bg-paper px-4 py-20 md:py-28" aria-labelledby="compare-title">
+<section
+	id="compare"
+	class="relative scroll-mt-16 bg-paper px-4 py-20 md:py-28"
+	aria-labelledby="compare-title"
+>
 	<div class="mx-auto max-w-6xl">
 		<div class="grid gap-10 lg:grid-cols-[minmax(0,4fr)_minmax(0,8fr)] lg:items-start lg:gap-14">
 			<div class="lg:sticky lg:top-28">
@@ -408,7 +412,7 @@
 						</p>
 					</details>
 					<p class="text-[12.5px] text-neutral-500">
-						ChatGPT's result is its first try, captured 22 October 2026. Photo: Signature Edits.
+						ChatGPT's result is its first try, captured October 22, 2026. Photo: Signature Edits.
 					</p>
 				</div>
 			</div>

@@ -4,6 +4,8 @@
 	// social metadata. Site-wide tags must NOT live in app.html: a shared
 	// canonical pointing at "/" would mark every other page as a duplicate
 	// of the home page.
+	import { ldScript } from '$lib/seo/schema';
+
 	let {
 		title,
 		description,
@@ -11,6 +13,7 @@
 		image = '/og-card.jpg',
 		imageAlt,
 		article,
+		schema,
 		noindex = false
 	}: {
 		title: string;
@@ -31,12 +34,18 @@
 		 * article:*_time tags. Dates are YYYY-MM-DD (valid ISO 8601).
 		 */
 		article?: { published: string; modified?: string };
+		/** This page's own structured data (schema.org nodes, no @context). */
+		schema?: Record<string, unknown>[];
 	} = $props();
 
 	const ORIGIN = 'https://editmamei.com';
 	const url = $derived(path === '/' ? `${ORIGIN}/` : `${ORIGIN}${path}`);
 	const ownImage = $derived(image.startsWith('https://'));
 	const imageUrl = $derived(ownImage ? image : `${ORIGIN}${image}`);
+	const DEFAULT_ALT =
+		'Editmamei: give your AI a real photo editor. A dark sunset photo beside the edited version, made from one request, in 8 layers that all stay editable.';
+	const alt = $derived(ownImage || image !== '/og-card.jpg' ? (imageAlt ?? title) : DEFAULT_ALT);
+	const ld = $derived(schema?.length ? ldScript(...schema) : '');
 </script>
 
 <svelte:head>
@@ -59,20 +68,20 @@
 	<meta property="og:url" content={url} />
 	<meta property="og:site_name" content="Editmamei" />
 	<meta property="og:image" content={imageUrl} />
-	{#if ownImage}
-		<meta property="og:image:alt" content={imageAlt ?? title} />
-	{:else}
+	{#if !ownImage}
 		<meta property="og:image:width" content="1200" />
 		<meta property="og:image:height" content="630" />
-		<meta
-			property="og:image:alt"
-			content="Editmamei, the photo editor MCP server: natural-language photo editing in desktop Photoshop. AI orchestration, not generation."
-		/>
 	{/if}
+	<meta property="og:image:alt" content={alt} />
 
 	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:site" content="@editmamei" />
 	<meta name="twitter:title" content={title} />
 	<meta name="twitter:description" content={description} />
 	<meta name="twitter:image" content={imageUrl} />
+	<meta name="twitter:image:alt" content={alt} />
+	{#if ld}
+		<!-- eslint-disable-next-line svelte/no-at-html-tags -- our own schema objects, '<' escaped in ldScript -->
+		{@html ld}
+	{/if}
 </svelte:head>

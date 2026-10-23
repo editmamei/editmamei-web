@@ -43,9 +43,11 @@ test('the wall puts no titles or text on the photos', () => {
 		join(REPO_ROOT, 'src', 'lib', 'components', 'GalleryWall.svelte'),
 		'utf8'
 	);
-	// Tiles carry the title only as an aria-label, with an empty alt.
-	assert.match(wall, /aria-label=/);
-	assert.match(wall, /alt=""/);
+	// A tile is a link around its photo and nothing else: the title rides only
+	// on the image's alt text (read by screen readers and image search, never
+	// drawn on the photo).
+	const tile = wall.match(/<a class="tile[^>]*>([\s\S]*?)<\/a>/)?.[1] ?? '';
+	assert.match(tile, /^\s*<img [^>]*alt=\{t\.title\}[^>]*\/>\s*$/);
 });
 
 test('an entry page offers no downloads and keeps an unlisted share out of search', () => {

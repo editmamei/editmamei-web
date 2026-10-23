@@ -4,6 +4,7 @@
 	import { cookieConsent } from '$lib/stores/cookieConsent';
 	import { productNavs } from '$lib/content/surfaces';
 	import {
+		CONNECT_PRIVACY_URL,
 		CUSTOMER_PORTAL_URL,
 		GITHUB_CHANGELOG_URL,
 		GITHUB_ISSUES_URL,
@@ -21,9 +22,6 @@
 				<p class="mt-2 max-w-md text-sm leading-relaxed text-neutral-600">
 					Give your AI a real photo editor: Photoshop or GIMP on your computer, or Connect from any
 					device.
-				</p>
-				<p class="mt-4 text-sm text-neutral-500 italic">
-					Pairs well with: a layered PSD, a willing AI, and a small bowl of edamame.
 				</p>
 				<ul class="mt-5 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-neutral-600">
 					<li>
@@ -125,6 +123,14 @@
 						{/each}
 						{#if p.id === 'desktop'}
 							<li><a href="/desktop/activate" class="hover:text-neutral-950">Activate Pro</a></li>
+						{:else}
+							<li>
+								<a href={CONNECT_PRIVACY_URL} class="hover:text-neutral-950"
+									>Connect privacy&nbsp;<span aria-hidden="true">↗</span><span class="sr-only"
+										>(opens connect.editmamei.com)</span
+									></a
+								>
+							</li>
 						{/if}
 					</ul>
 				</div>
@@ -142,14 +148,20 @@
 						<a
 							href={GITHUB_CHANGELOG_URL}
 							onclick={() => track('footer-outbound-changelog')}
-							class="hover:text-neutral-950">Changelog</a
+							class="hover:text-neutral-950"
+							>Changelog&nbsp;<span aria-hidden="true">↗</span><span class="sr-only"
+								>(opens GitHub)</span
+							></a
 						>
 					</li>
 					<li>
 						<a
 							href={GITHUB_REPO_URL}
 							onclick={() => track('footer-outbound-source')}
-							class="hover:text-neutral-950">Source</a
+							class="hover:text-neutral-950"
+							>Source&nbsp;<span aria-hidden="true">↗</span><span class="sr-only"
+								>(opens GitHub)</span
+							></a
 						>
 					</li>
 				</ul>
@@ -164,7 +176,10 @@
 						<a
 							href={GITHUB_ISSUES_URL}
 							onclick={() => track('footer-outbound-issues')}
-							class="hover:text-neutral-950">Report a bug</a
+							class="hover:text-neutral-950"
+							>Report a bug&nbsp;<span aria-hidden="true">↗</span><span class="sr-only"
+								>(opens GitHub)</span
+							></a
 						>
 					</li>
 					<li>
@@ -172,7 +187,10 @@
 							href={CUSTOMER_PORTAL_URL}
 							onclick={() => track('footer-outbound-portal')}
 							rel="noopener"
-							class="hover:text-neutral-950">Manage subscription</a
+							class="hover:text-neutral-950"
+							>Manage Pro subscription&nbsp;<span aria-hidden="true">↗</span><span class="sr-only"
+								>(opens the Polar customer portal)</span
+							></a
 						>
 					</li>
 					<li><a href="/privacy" class="hover:text-neutral-950">Privacy</a></li>

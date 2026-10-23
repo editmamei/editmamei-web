@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { goto } from '$app/navigation';
+	import StatusPage from '$lib/components/StatusPage.svelte';
 	import { SUBSCRIBE_API_URL } from '$lib/links';
 
 	// This page exists so the link in a confirmation email is on editmamei.com
@@ -40,22 +41,22 @@
 	<meta name="robots" content="noindex" />
 </svelte:head>
 
-<div class="mx-auto max-w-xl px-4 py-20 text-center">
-	{#if failed}
-		<h1 class="text-2xl font-bold tracking-tight text-neutral-900">That didn't go through</h1>
-		<p class="mt-3 text-neutral-600">
+{#if failed}
+	<StatusPage eyebrow="Email updates" title="That didn't go through">
+		<p>
 			The confirmation service couldn't be reached. Try this link again in a moment, or use the
 			second link in the email, which confirms directly.
 		</p>
-		<p class="mt-6"><a href="/blog" class="underline">Back to the blog</a></p>
-	{:else}
-		<h1 class="text-2xl font-bold tracking-tight text-neutral-900">Confirming</h1>
-		<p class="mt-3 text-neutral-600">One moment.</p>
-	{/if}
-	<noscript>
-		<p class="mt-6 text-neutral-600">
-			JavaScript is off in this browser, so this page can't finish the confirmation. Use the second
-			link in the email, the one that says it confirms directly. It works without scripts.
-		</p>
-	</noscript>
-</div>
+		<p class="mt-6"><a href="/blog">Back to the blog</a></p>
+	</StatusPage>
+{:else}
+	<StatusPage eyebrow="Email updates" title="Confirming">
+		<p>One moment.</p>
+		<noscript>
+			<p class="mt-6">
+				JavaScript is off in this browser, so this page can't finish the confirmation. Use the
+				second link in the email, the one that says it confirms directly. It works without scripts.
+			</p>
+		</noscript>
+	</StatusPage>
+{/if}

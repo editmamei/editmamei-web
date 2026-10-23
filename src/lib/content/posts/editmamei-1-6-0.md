@@ -1,6 +1,8 @@
 ---
 title: 'Now available: Editmamei 1.6.0'
 description: Editmamei can now edit in GIMP 3.2, in beta. GIMP runs in the background, and every adjustment stays a live filter in the .xcf you open afterwards.
+seoTitle: 'Editmamei 1.6.0: AI photo editing in GIMP 3.2'
+seoDescription: 'Editmamei can now edit in GIMP 3.2. GIMP runs in the background, and every adjustment stays a live filter in the .xcf you open afterwards.'
 date: 2026-09-26
 updated: 2026-10-02
 ---

@@ -2,7 +2,7 @@
 	import { afterNavigate } from '$app/navigation';
 	import { page } from '$app/state';
 	import { track } from '$lib/analytics/clarity';
-	import { GITHUB_REPO_URL } from '$lib/links';
+	import { CONNECT_URL, GITHUB_REPO_URL } from '$lib/links';
 	import { primaryNav, productNavs, type ProductNav } from '$lib/content/surfaces';
 
 	// Desktop: one disclosure per product (button + panel), opened by click or
@@ -66,6 +66,16 @@
 	afterNavigate(closeAll);
 
 	const isCurrent = (href: string) => page.url.pathname === href;
+
+	// The bar's button follows the section you're in: inside a product it starts
+	// that product, elsewhere it goes to the home page's choice between the two.
+	const cta = $derived(
+		page.url.pathname.startsWith('/connect')
+			? { label: 'Start free', href: CONNECT_URL, id: 'connect' }
+			: page.url.pathname.startsWith('/desktop')
+				? { label: 'Install free', href: '/desktop#install', id: 'desktop' }
+				: { label: 'Get started', href: '/#fork', id: 'fork' }
+	);
 	const inSection = (p: ProductNav) =>
 		page.url.pathname === p.overview.href || page.url.pathname.startsWith(`${p.overview.href}/`);
 
@@ -211,10 +221,11 @@
 			</nav>
 
 			<a
-				href="/#fork"
+				href={cta.href}
+				onclick={() => track(`nav-cta-${cta.id}`)}
 				class="rounded-md bg-brand px-3 py-1.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-brand-light"
 			>
-				Get started
+				{cta.label}
 			</a>
 
 			<button

@@ -1,14 +1,17 @@
 <!-- See ../+page.svelte for why these states are paths, not query strings. -->
+<script lang="ts">
+	import StatusPage from '$lib/components/StatusPage.svelte';
+</script>
+
 <svelte:head>
 	<title>That link has expired · Editmamei</title>
 	<meta name="robots" content="noindex" />
 </svelte:head>
 
-<div class="mx-auto max-w-xl px-4 py-20 text-center">
-	<h1 class="text-2xl font-bold tracking-tight text-neutral-900">That link has expired</h1>
-	<p class="mt-3 text-neutral-600">
+<StatusPage eyebrow="Email updates" title="That link has expired">
+	<p>
 		Confirmation links work for 48 hours. Sign up again with the form in the footer of any page, and
 		we'll send a fresh link.
 	</p>
-	<p class="mt-6"><a href="/blog" class="underline">Back to the blog</a></p>
-</div>
+	<p class="mt-6"><a href="/blog">Back to the blog</a></p>
+</StatusPage>

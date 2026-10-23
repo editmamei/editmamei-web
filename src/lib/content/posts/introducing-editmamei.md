@@ -1,6 +1,7 @@
 ---
 title: Introducing Editmamei
 description: The story behind Editmamei, and why photo editing needed AI that assists the craft instead of replacing it.
+seoTitle: 'Introducing Editmamei: AI that helps with the edit'
 date: 2026-08-05
 ---
 

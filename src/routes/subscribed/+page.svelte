@@ -7,16 +7,19 @@
 	blank page.
 	The subscribe Worker's redirects target these paths.
 -->
+<script lang="ts">
+	import StatusPage from '$lib/components/StatusPage.svelte';
+</script>
+
 <svelte:head>
 	<title>Check your inbox · Editmamei</title>
 	<meta name="robots" content="noindex" />
 </svelte:head>
 
-<div class="mx-auto max-w-xl px-4 py-20 text-center">
-	<h1 class="text-2xl font-bold tracking-tight text-neutral-900">Check your inbox</h1>
-	<p class="mt-3 text-neutral-600">
+<StatusPage eyebrow="Email updates" title="Check your inbox">
+	<p>
 		There's a confirmation link waiting. It works for 48 hours, and you are not on the list until
 		you confirm.
 	</p>
-	<p class="mt-6"><a href="/blog" class="underline">Back to the blog</a></p>
-</div>
+	<p class="mt-6"><a href="/blog">Back to the blog</a></p>
+</StatusPage>
