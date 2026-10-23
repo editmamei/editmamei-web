@@ -5,29 +5,20 @@
 	import { GITHUB_REPO_URL } from '$lib/links';
 	import {
 		connectLink,
-		desktopGroupLabel,
-		isOnSite,
+		desktopLink,
 		primaryNav,
 		productExtras,
-		productOverview,
-		surfaces
+		productOverview
 	} from '$lib/content/surfaces';
 
-	// Only surfaces with a page on this site appear in the menus.
-	const navSurfaces = surfaces.filter(isOnSite);
+	// The two products, side by side in the desktop Product menu.
+	const products = [desktopLink, connectLink];
 	// The mobile sheet lists primaryNav right below, so extras that duplicate a
 	// primary link are left out of its Product group.
 	const primaryHrefs = new Set(primaryNav.map((l) => l.href));
-	// `group` puts a heading over the links that share it (the desktop editors).
-	const productLinks: { label: string; href: string; beta?: boolean; group?: string }[] = [
+	const productLinks = [
 		productOverview,
-		...navSurfaces.map((s) => ({
-			label: s.name,
-			href: s.href,
-			beta: s.beta,
-			group: desktopGroupLabel
-		})),
-		connectLink,
+		...products,
 		...productExtras.filter((l) => !primaryHrefs.has(l.href))
 	];
 
@@ -159,48 +150,21 @@
 								{productOverview.description}
 							</span>
 						</a>
-						<!-- The desktop product's editors, under a group heading. -->
-						<p
-							id="nav-product-desktop"
-							class="mt-1 border-t border-neutral-100 px-3 pt-3 pb-0.5 text-[11px] font-semibold tracking-wider text-neutral-500 uppercase"
-						>
-							{desktopGroupLabel}
-						</p>
-						<ul aria-labelledby="nav-product-desktop" class="flex flex-wrap">
-							{#each navSurfaces as s (s.id)}
+						<ul class="mt-1 flex flex-wrap border-t border-neutral-100 pt-1">
+							{#each products as p (p.href)}
 								<li class="w-1/2 min-w-40 grow-0">
 									<a
-										href={s.href}
+										href={p.href}
 										onclick={closeAll}
-										aria-current={isCurrent(s.href) ? 'page' : undefined}
+										aria-current={isCurrent(p.href) ? 'page' : undefined}
 										class="block h-full rounded-lg px-3 py-2.5 hover:bg-neutral-50"
 									>
-										<span class="flex items-center gap-1.5 text-sm font-semibold text-neutral-950">
-											{s.name}
-											{#if s.beta}
-												<span
-													class="rounded-full border border-neutral-300 px-1.5 text-[10px] font-medium text-neutral-600"
-													>beta</span
-												>
-											{/if}
-										</span>
-										<span class="mt-0.5 block text-xs text-neutral-600">{s.descriptor}</span>
+										<span class="block text-sm font-semibold text-neutral-950">{p.label}</span>
+										<span class="mt-0.5 block text-xs text-neutral-600">{p.description}</span>
 									</a>
 								</li>
 							{/each}
 						</ul>
-						<!-- Connect is hosted, not an editor you install: a product of its own. -->
-						<a
-							href={connectLink.href}
-							onclick={closeAll}
-							aria-current={isCurrent(connectLink.href) ? 'page' : undefined}
-							class="mt-1 block rounded-lg border-t border-neutral-100 px-3 py-2.5 hover:bg-neutral-50"
-						>
-							<span class="block text-sm font-semibold text-neutral-950">
-								{connectLink.label}
-							</span>
-							<span class="mt-0.5 block text-xs text-neutral-600">{connectLink.description}</span>
-						</a>
 						{#if productExtras.length}
 							<ul class="mt-1 flex justify-end gap-1 border-t border-neutral-100 pt-1">
 								{#each productExtras as link (link.href)}
@@ -294,14 +258,7 @@
 			</p>
 			<ul aria-labelledby="site-nav-product">
 				{#each productLinks as link, i (link.href)}
-					{#if link.group && link.group !== productLinks[i - 1]?.group}
-						<li
-							class="px-4 pt-3 pb-1 text-[11px] font-semibold tracking-wider text-neutral-500 uppercase"
-						>
-							{link.group}
-						</li>
-					{/if}
-					<li class={link.group ? 'pl-3' : undefined}>
+					<li>
 						{#if i === 0}
 							<a
 								bind:this={firstSheetLink}
@@ -315,16 +272,8 @@
 								href={link.href}
 								onclick={closeAll}
 								aria-current={isCurrent(link.href) ? 'page' : undefined}
-								class={sheetLinkClass}
+								class={sheetLinkClass}>{link.label}</a
 							>
-								{link.label}
-								{#if link.beta}
-									<span
-										class="rounded-full border border-neutral-300 px-1.5 text-[10px] font-medium text-neutral-600"
-										>beta</span
-									>
-								{/if}
-							</a>
 						{/if}
 					</li>
 				{/each}

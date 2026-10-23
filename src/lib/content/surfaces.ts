@@ -1,9 +1,8 @@
 // Site navigation and the list of editor surfaces.
 //
-// The header's Product menu, the mobile menu, the footer's Product column and
-// the editor chooser on /product all render from these arrays, so adding a
-// surface or a nav item is a data change here, not a layout change in four
-// components.
+// The header's Product menu, the mobile menu and the footer's Product column
+// render from the nav links here; the editor chooser on /product renders from
+// `surfaces`. Adding a nav item is a data change here, not a layout change.
 
 export interface NavLink {
 	label: string;
@@ -42,9 +41,6 @@ export const surfaces: Surface[] = [
 	}
 ];
 
-/** True for surfaces whose page is on this site. */
-export const isOnSite = (s: Surface) => s.href.startsWith('/');
-
 /** The Product menu's first entry. */
 export const productOverview: NavLink = {
 	label: 'Overview',
@@ -53,21 +49,23 @@ export const productOverview: NavLink = {
 };
 
 /**
- * The heading the menus put over the editor surfaces. "Editmamei Desktop" is a
- * label for grouping, set against Connect; the product itself is still called
- * Editmamei, so this name stays out of install steps, READMEs and listings.
+ * The menus offer the two products, not the editors: Desktop (Photoshop or
+ * GIMP on your computer; its page leads with Photoshop and links to /gimp) and
+ * Connect, the hosted product, whose page hands off to connect.editmamei.com.
+ * "Editmamei Desktop" is a site label set against Connect; the installed
+ * product is still called Editmamei, so the name stays out of install steps,
+ * READMEs and listings.
  */
-export const desktopGroupLabel = 'Editmamei Desktop';
+export const desktopLink: NavLink = {
+	label: 'Editmamei Desktop',
+	href: '/photoshop',
+	description: 'Edit in Photoshop or GIMP, on your computer.'
+};
 
-/**
- * Editmamei Connect, the hosted product. It isn't an editor you install, so it
- * gets its own row in the Product menu rather than a slot among the surfaces,
- * and its page here hands off to connect.editmamei.com.
- */
 export const connectLink: NavLink = {
 	label: 'Editmamei Connect',
 	href: '/connect',
-	description: 'Edit photos from Claude on any device, with nothing to install.'
+	description: 'Edit from any device, with nothing to install.'
 };
 
 /** Product menu entries after the surfaces. */
