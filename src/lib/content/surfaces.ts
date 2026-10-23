@@ -18,6 +18,8 @@ export interface NavLink {
 	description?: string;
 	/** Opens connect.editmamei.com rather than a page on this site. */
 	external?: boolean;
+	/** Label in the phone menu, where it sits under both products' own links. */
+	sheetLabel?: string;
 }
 
 export interface ProductNav {
@@ -64,7 +66,7 @@ export const productNavs: ProductNav[] = [desktopNav, connectNav];
 
 /** Top-level nav items after the two product menus, in order. */
 export const primaryNav: NavLink[] = [
-	{ label: 'Pricing', href: '/pricing' },
+	{ label: 'Pricing', href: '/pricing', sheetLabel: 'Compare pricing' },
 	{ label: 'Gallery', href: '/gallery' },
 	{ label: 'Blog', href: '/blog' }
 ];

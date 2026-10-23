@@ -269,7 +269,7 @@
 							href={link.href}
 							onclick={closeAll}
 							aria-current={isCurrent(link.href) ? 'page' : undefined}
-							class={sheetLinkClass}>{link.label}</a
+							class={sheetLinkClass}>{link.sheetLabel ?? link.label}</a
 						>
 					</li>
 				{/each}

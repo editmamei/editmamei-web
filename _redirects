@@ -1,6 +1,6 @@
 # Permanent moves from the 2026-10 site overhaul. Copied into the build by
 # @sveltejs/adapter-cloudflare and applied by Workers static assets before any
-# file is served. Exact paths only: /product/city-street/* images still serve.
+# file is served. Exact paths only, so nothing under an old path is caught.
 # A #fragment on an old link carries over to the new address.
 /photoshop        /desktop        301
 /photoshop/       /desktop        301

@@ -1,5 +1,16 @@
+import { readFileSync } from 'node:fs';
 import adapter from '@sveltejs/adapter-cloudflare';
 import { mdsvex } from 'mdsvex';
+
+// Source paths in _redirects (trailing slash dropped). Old blog posts still
+// link some of them; at runtime the redirect answers before any page would.
+const redirected = new Set(
+	readFileSync(new URL('./_redirects', import.meta.url), 'utf8')
+		.split('\n')
+		.map((line) => line.trim())
+		.filter((line) => line && !line.startsWith('#'))
+		.map((line) => line.split(/\s+/)[0].replace(/(.)\/$/, '$1'))
+);
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
@@ -17,6 +28,12 @@ const config = {
 		// data so an approved, edited or removed share shows at once (src/routes/gallery).
 		adapter: adapter(),
 		prerender: {
+			// A link to a moved address is fine: _redirects sends it on. Any
+			// other missing page still fails the build.
+			handleHttpError: ({ status, path, message }) => {
+				if (status === 404 && redirected.has(path.replace(/(.)\/$/, '$1'))) return;
+				throw new Error(message);
+			},
 			// A blog with zero published posts leaves /blog/[slug] with no
 			// pages to generate, which is valid (its entries() returned []).
 			// Every OTHER unseen route keeps the default hard failure —
