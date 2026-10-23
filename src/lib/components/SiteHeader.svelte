@@ -72,10 +72,41 @@
 	const topLinkClass =
 		'rounded-md px-3 py-1.5 text-sm font-medium text-neutral-700 transition-colors hover:bg-neutral-100 hover:text-neutral-950';
 	const sheetLinkClass =
-		'flex min-h-11 items-center gap-2 px-4 text-base text-neutral-800 hover:bg-neutral-50 hover:text-neutral-950';
+		'flex min-h-10 items-center gap-1.5 rounded-lg px-3 text-[15px] text-neutral-800 hover:bg-neutral-50 hover:text-neutral-950';
+	const sheetHeadClass =
+		'flex items-center gap-3 rounded-xl bg-paper px-3 py-2.5 ring-1 ring-brand/10 hover:ring-brand/30';
 </script>
 
 <svelte:window onkeydown={onKeydown} onpointerdown={onPointerdown} />
+
+{#snippet sheetHead(p: ProductNav)}
+	<span
+		class="grid size-9 flex-none place-items-center rounded-lg {p.id === 'desktop'
+			? 'bg-accent text-brand-deep'
+			: 'bg-brand text-accent'}"
+		aria-hidden="true"
+	>
+		<svg
+			class="size-5"
+			viewBox="0 0 32 32"
+			fill="none"
+			stroke="currentColor"
+			stroke-width="2.4"
+			stroke-linejoin="round"
+		>
+			{#if p.id === 'desktop'}
+				<rect x="6" y="7" width="20" height="13" rx="2" /><path d="M3 24h26l-2 2.5H5L3 24z" />
+			{:else}
+				<rect x="10" y="3.5" width="12" height="25" rx="3" /><path d="M14 24.5h4" />
+			{/if}
+		</svg>
+	</span>
+	<span class="flex min-w-0 flex-1 flex-col">
+		<span class="text-[16px] leading-tight font-bold text-brand">{p.overview.label}</span>
+		<span class="mt-0.5 text-[12.5px] leading-snug text-neutral-600">{p.overview.description}</span>
+	</span>
+	<span aria-hidden="true" class="text-lg text-brand">→</span>
+{/snippet}
 
 {#snippet arrow()}
 	<span aria-hidden="true" class="text-neutral-400">↗</span>
@@ -221,48 +252,43 @@
 			bind:this={sheetEl}
 			id="site-nav-menu"
 			aria-label="Site"
-			class="absolute inset-x-0 top-full z-40 max-h-[calc(100vh-4rem)] overflow-y-auto border-b border-neutral-200 bg-white pb-2 shadow-lg md:hidden"
+			class="absolute inset-x-0 top-full z-40 max-h-[calc(100vh-4rem)] overflow-y-auto border-b border-neutral-200 bg-white pb-3 shadow-lg md:hidden"
 		>
+			<!-- One card per product: its header opens the product page, its pages sit in two columns. -->
 			{#each productNavs as p, gi (p.id)}
-				<p
-					id="site-nav-{p.id}"
-					class="px-4 pt-4 pb-1 text-xs font-semibold tracking-wider text-neutral-500 uppercase"
-				>
-					{p.overview.label}
-				</p>
-				<ul aria-labelledby="site-nav-{p.id}">
-					<li>
-						{#if gi === 0}
-							<a
-								bind:this={firstSheetLink}
-								href={p.overview.href}
-								onclick={closeAll}
-								aria-current={isCurrent(p.overview.href) ? 'page' : undefined}
-								class={sheetLinkClass}>Overview</a
-							>
-						{:else}
-							<a
-								href={p.overview.href}
-								onclick={closeAll}
-								aria-current={isCurrent(p.overview.href) ? 'page' : undefined}
-								class={sheetLinkClass}>Overview</a
-							>
-						{/if}
-					</li>
-					{#each p.links as link (link.href)}
-						<li>
-							<a
-								href={link.href}
-								onclick={closeAll}
-								aria-current={isCurrent(link.href) ? 'page' : undefined}
-								class={sheetLinkClass}
-								>{link.label}{#if link.external}{@render arrow()}{/if}</a
-							>
-						</li>
-					{/each}
-				</ul>
+				<div class="px-3 pt-3">
+					{#if gi === 0}
+						<a
+							bind:this={firstSheetLink}
+							href={p.overview.href}
+							onclick={closeAll}
+							aria-current={isCurrent(p.overview.href) ? 'page' : undefined}
+							class={sheetHeadClass}>{@render sheetHead(p)}</a
+						>
+					{:else}
+						<a
+							href={p.overview.href}
+							onclick={closeAll}
+							aria-current={isCurrent(p.overview.href) ? 'page' : undefined}
+							class={sheetHeadClass}>{@render sheetHead(p)}</a
+						>
+					{/if}
+					<ul aria-label="{p.overview.label} pages" class="mt-1 grid grid-cols-2 gap-x-1">
+						{#each p.links as link (link.href)}
+							<li>
+								<a
+									href={link.href}
+									onclick={closeAll}
+									aria-current={isCurrent(link.href) ? 'page' : undefined}
+									class={sheetLinkClass}
+									>{link.label}{#if link.external}{@render arrow()}{/if}</a
+								>
+							</li>
+						{/each}
+					</ul>
+				</div>
 			{/each}
-			<ul class="mt-2 border-t border-neutral-100 pt-2">
+			<ul class="mx-3 mt-3 grid grid-cols-2 gap-x-1 border-t border-neutral-100 pt-2">
 				{#each primaryNav as link (link.href)}
 					<li>
 						<a
