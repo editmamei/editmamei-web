@@ -1,0 +1,186 @@
+/* Wiring diagrams (Desktop, Connect): nodes, link lines and the chips that
+   travel along them. Motion is off under prefers-reduced-motion, where the
+   outgoing chip rests at the middle of its link. */
+
+.fl-node {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
+	min-width: 0;
+}
+@media (min-width: 1024px) {
+	.fl-node {
+		width: 8rem;
+		flex: none;
+	}
+}
+.fl-node-title {
+	font-size: 1rem;
+	font-weight: 700;
+	color: #f4f1e8;
+}
+.fl-node-sub {
+	margin-top: 0.25rem;
+	font-size: 0.8125rem;
+	line-height: 1.35;
+	color: #a9bcb4;
+	max-width: 16rem;
+}
+
+.fl-line {
+	position: relative;
+}
+/* solid green: Editmamei and the editor */
+.fl-line-editor {
+	border-left: 3px solid #ceff8c;
+	filter: drop-shadow(0 0 6px rgba(206, 255, 140, 0.55));
+}
+/* dashed orange: the AI's side */
+.fl-line-ai {
+	border-left: 3px dashed #ff9b70;
+	filter: drop-shadow(0 0 6px rgba(255, 138, 92, 0.45));
+}
+@media (min-width: 1024px) {
+	.fl-line-editor {
+		border-left: 0;
+		border-top: 3px solid #ceff8c;
+	}
+	.fl-line-ai {
+		border-left: 0;
+		border-top: 3px dashed #ff9b70;
+	}
+}
+
+.fl-chip {
+	position: absolute;
+	left: -1.5px;
+	top: 0;
+	translate: -50% -50%;
+	opacity: 0;
+	pointer-events: none;
+}
+.fl-chip-photo {
+	width: 18px;
+	height: 24px;
+	padding: 2px;
+	border-radius: 4px;
+	background: #f4f1e8;
+	box-shadow: 0 4px 14px rgba(0, 0, 0, 0.5);
+}
+.fl-chip-edit,
+.fl-chip-text {
+	display: grid;
+	place-items: center;
+	width: 22px;
+	height: 22px;
+	border-radius: 999px;
+	font-size: 12px;
+	font-weight: 800;
+}
+.fl-chip-edit {
+	background: #ceff8c;
+	color: #0b1f1a;
+}
+.fl-chip-text {
+	background: #ffb08f;
+	color: #2b1208;
+}
+@media (min-width: 1024px) {
+	.fl-chip {
+		left: 0;
+		top: -1.5px;
+	}
+}
+
+@media (prefers-reduced-motion: no-preference) {
+	.fl-out {
+		animation: fl-out-y 8s linear infinite;
+		animation-delay: var(--at);
+	}
+	.fl-back {
+		animation: fl-back-y 8s linear infinite;
+		animation-delay: var(--at);
+	}
+	@media (min-width: 1024px) {
+		.fl-out {
+			animation-name: fl-out-x;
+		}
+		.fl-back {
+			animation-name: fl-back-x;
+		}
+	}
+}
+@media (prefers-reduced-motion: reduce) {
+	.fl-out {
+		opacity: 1;
+		top: 50%;
+	}
+	@media (min-width: 1024px) {
+		.fl-out {
+			top: -1.5px;
+			left: 50%;
+		}
+	}
+}
+
+@keyframes fl-out-y {
+	0% {
+		top: 0%;
+		opacity: 0;
+	}
+	2%,
+	13% {
+		opacity: 1;
+	}
+	15%,
+	100% {
+		top: 100%;
+		opacity: 0;
+	}
+}
+@keyframes fl-back-y {
+	0% {
+		top: 100%;
+		opacity: 0;
+	}
+	2%,
+	13% {
+		opacity: 1;
+	}
+	15%,
+	100% {
+		top: 0%;
+		opacity: 0;
+	}
+}
+@keyframes fl-out-x {
+	0% {
+		left: 0%;
+		opacity: 0;
+	}
+	2%,
+	13% {
+		opacity: 1;
+	}
+	15%,
+	100% {
+		left: 100%;
+		opacity: 0;
+	}
+}
+@keyframes fl-back-x {
+	0% {
+		left: 100%;
+		opacity: 0;
+	}
+	2%,
+	13% {
+		opacity: 1;
+	}
+	15%,
+	100% {
+		left: 0%;
+		opacity: 0;
+	}
+}
