@@ -4,7 +4,7 @@
 	import { GITHUB_SECURITY_ADVISORY_URL, GITHUB_SECURITY_POLICY_URL } from '$lib/links';
 
 	const link = 'font-semibold text-brand underline underline-offset-2';
-	const code = 'rounded bg-[#ece6d6] px-1.5 py-0.5 font-mono text-[14px]';
+	const code = 'rounded bg-prompt-border px-1.5 py-0.5 font-mono text-[14px]';
 </script>
 
 <Seo

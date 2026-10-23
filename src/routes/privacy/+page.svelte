@@ -7,7 +7,7 @@
 
 <Seo
 	title="Editmamei Desktop privacy: photos, telemetry, cookies"
-	description="What Editmamei Desktop and this site collect: never your photos, only content-free usage data you can switch off. Editmamei Connect has its own policy."
+	description="What Editmamei Desktop sends (never your photos; content-free usage data you can switch off) and what this site collects. Connect has its own policy."
 	path="/privacy"
 />
 
@@ -87,11 +87,12 @@
 		<p class="mt-4 text-[16px] leading-relaxed text-neutral-700">
 			This data goes to our own infrastructure, not a third-party analytics company. You can see the
 			current settings, and switch usage data off entirely, by editing
-			<code class="rounded bg-[#ece6d6] px-1.5 py-0.5 font-mono text-[14px]"
+			<code class="rounded bg-prompt-border px-1.5 py-0.5 font-mono text-[14px]"
 				>~/.editmamei/settings.json</code
 			>
 			or running
-			<code class="rounded bg-[#ece6d6] px-1.5 py-0.5 font-mono text-[14px]">editmamei config</code
+			<code class="rounded bg-prompt-border px-1.5 py-0.5 font-mono text-[14px]"
+				>editmamei config</code
 			>. The file is plain text and yours to inspect at any time.
 		</p>
 
@@ -108,7 +109,7 @@
 				At startup, Editmamei asks the public npm registry for the latest version number. The request
 				carries no identifiers and no usage data, and it is skipped when you're offline. Switch it off
 				with
-				<code class="rounded bg-[#ece6d6] px-1.5 py-0.5 font-mono text-[14px]"
+				<code class="rounded bg-prompt-border px-1.5 py-0.5 font-mono text-[14px]"
 					>editmamei config set update_check false</code
 				>, or with the Check for updates toggle in the Claude Desktop extension settings.
 			</li>
@@ -145,7 +146,7 @@
 		<p class="mt-3 text-[16px] leading-relaxed text-neutral-700">
 			Turning off previews in Editmamei's settings stops preview images going to the AI provider, in
 			both Photoshop and GIMP:
-			<code class="rounded bg-[#ece6d6] px-1.5 py-0.5 font-mono text-[14px]"
+			<code class="rounded bg-prompt-border px-1.5 py-0.5 font-mono text-[14px]"
 				>editmamei config set privacy.send_previews_to_llm false</code
 			>.
 		</p>
@@ -214,7 +215,7 @@
 				<dd class="mt-1">
 					Access, rectification, erasure, and objection. Your install ID is the reference for all of
 					them; print it with
-					<code class="rounded bg-[#ece6d6] px-1.5 py-0.5 font-mono text-[14px]"
+					<code class="rounded bg-prompt-border px-1.5 py-0.5 font-mono text-[14px]"
 						>editmamei config get telemetry.install_id</code
 					>
 					and send it to us with your request. Two limits apply: erasure removes the stored records but
@@ -272,11 +273,13 @@
 			<li>
 				<strong class="font-semibold text-brand">With cookies (if you accept).</strong>
 				Clarity sets two first-party cookies:
-				<code class="rounded bg-[#ece6d6] px-1.5 py-0.5 font-mono text-[14px]">_clck</code>
+				<code class="rounded bg-prompt-border px-1.5 py-0.5 font-mono text-[14px]">_clck</code>
 				(persists a user ID across sessions, expires in 1 year) and
-				<code class="rounded bg-[#ece6d6] px-1.5 py-0.5 font-mono text-[14px]">_clsk</code> (ties
-				page views within a session, expires in 30 minutes). Both are set by
-				<code class="rounded bg-[#ece6d6] px-1.5 py-0.5 font-mono text-[14px]">editmamei.com</code>
+				<code class="rounded bg-prompt-border px-1.5 py-0.5 font-mono text-[14px]">_clsk</code>
+				(ties page views within a session, expires in 30 minutes). Both are set by
+				<code class="rounded bg-prompt-border px-1.5 py-0.5 font-mono text-[14px]"
+					>editmamei.com</code
+				>
 				and processed by Microsoft per their
 				<a
 					href="https://privacy.microsoft.com/en-us/privacystatement"

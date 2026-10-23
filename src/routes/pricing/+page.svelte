@@ -28,7 +28,7 @@
 		},
 		{
 			label: 'Your photo',
-			desktop: 'Stays on your computer',
+			desktop: 'Never sent to Editmamei; your AI app sees small previews',
 			connect: 'Uploaded, edited, and deleted after 24 hours'
 		},
 		{
@@ -114,7 +114,7 @@
 				</thead>
 				<tbody>
 					{#each compare as row (row.label)}
-						<tr class="border-b border-[#ece6d6] last:border-b-0">
+						<tr class="border-b border-prompt-border last:border-b-0">
 							<th scope="row" class="px-5 py-4 align-top font-semibold text-neutral-500"
 								>{row.label}</th
 							>

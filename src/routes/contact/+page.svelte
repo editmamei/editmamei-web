@@ -47,9 +47,9 @@
 			<div class="py-7">
 				<dt class="text-xl font-bold text-brand">Editmamei Connect</dt>
 				<dd class="mt-2 text-neutral-700">
-					Your credit balance and purchases are in your account at
-					<a href={CONNECT_URL} class={link}>connect.editmamei.com</a>. For anything else about your
-					Connect account, including deleting it, email
+					Your credit balance, purchases and the option to delete your account are in your account
+					at <a href={CONNECT_URL} class={link}>connect.editmamei.com</a>. For anything else about
+					your Connect account, email
 					<a href="mailto:support@editmamei.com" class={link}>support@editmamei.com</a> from the address
 					on the account.
 				</dd>

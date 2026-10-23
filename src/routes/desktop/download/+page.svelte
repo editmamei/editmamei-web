@@ -33,7 +33,7 @@
 		<h2 class="mt-12 text-2xl font-bold tracking-[-0.02em] text-brand">Claude Desktop</h2>
 		<p class="mt-3">
 			If you installed Editmamei as a one-click extension, download the current
-			<code class="rounded bg-[#ece6d6] px-1.5 py-0.5 font-mono text-[14px]">.mcpb</code> and
+			<code class="rounded bg-prompt-border px-1.5 py-0.5 font-mono text-[14px]">.mcpb</code> and
 			reinstall it under <strong class="font-semibold text-brand">Settings → Extensions</strong>,
 			then restart Claude Desktop. Your settings are kept. If you use Pro, check the extension's Pro
 			license key field is still filled in afterwards.
@@ -49,7 +49,7 @@
 			Claude Code, Cursor and other MCP apps
 		</h2>
 		<p class="mt-3">
-			If your AI app runs <code class="rounded bg-[#ece6d6] px-1.5 py-0.5 font-mono text-[14px]"
+			If your AI app runs <code class="rounded bg-prompt-border px-1.5 py-0.5 font-mono text-[14px]"
 				>npx -y editmamei</code
 			>, there is nothing to download: it fetches the latest version each time it starts, so
 			restarting the app is enough.

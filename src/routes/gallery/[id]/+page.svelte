@@ -30,7 +30,10 @@
 		const cut = text.slice(0, max - 1);
 		return `${cut.slice(0, cut.lastIndexOf(' ')).replace(/[\s,;:.]+$/, '')}…`;
 	}
-	const sentence = (text: string) => text.trim().replace(/[\s,;:.]*$/, '.');
+	const sentence = (text: string) => {
+		const t = text.trim().replace(/[\s,;:]+$/, '');
+		return /[.!?…]$/.test(t) ? t : `${t}.`;
+	};
 	const description = $derived(
 		clip(
 			`${lead ? `${sentence(lead)} ` : ''}${

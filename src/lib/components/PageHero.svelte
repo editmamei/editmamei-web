@@ -56,7 +56,7 @@
 		{#if crumbs?.length}
 			<nav aria-label="Breadcrumb" class="mb-4 text-[13px] text-[#9fb5ac]">
 				<ol class="flex flex-wrap items-center gap-1.5">
-					{#each crumbs as c, i (c.label)}
+					{#each crumbs as c, i (i)}
 						<li>
 							{#if c.href && i < crumbs.length - 1}
 								<a href={c.href} class="hover:text-[#f4f1e8]">{c.label}</a>

@@ -92,7 +92,7 @@ test('every indexable page has one h1 and a self-referencing canonical', { skip 
 test('all structured data parses, and each product stays on its own pages', { skip }, () => {
 	for (const { path, html } of pages()) {
 		const blocks = [
-			...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)
+			...html.matchAll(/<script[^>]*type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/g)
 		].map((m) => m[1]);
 		const types = blocks.flatMap((b) => {
 			let json;
@@ -104,6 +104,13 @@ test('all structured data parses, and each product stays on its own pages', { sk
 		}
 		if (path.startsWith('/desktop')) {
 			assert.ok(!types.includes('WebApplication'), `${path} carries the Connect entity`);
+		}
+		// Each product's own page and pricing page describe it.
+		if (path === '/desktop' || path === '/desktop/pricing') {
+			assert.ok(types.includes('SoftwareApplication'), `${path} lacks the Desktop entity`);
+		}
+		if (path === '/connect' || path === '/connect/pricing') {
+			assert.ok(types.includes('WebApplication'), `${path} lacks the Connect entity`);
 		}
 	}
 });

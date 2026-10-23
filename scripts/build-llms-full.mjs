@@ -39,8 +39,8 @@ const pkg = JSON.parse(readFileSync(join(source, 'package.json'), 'utf8'));
 function absolutize(text, path) {
 	const base = dirname(path);
 	return text.replace(/\]\((?!https?:|mailto:|#)([^)\s]+)\)/g, (_, target) => {
-		const resolved = new URL(target, `https://x/${base}/`).pathname.slice(1);
-		return `](${BLOB}/${resolved})`;
+		const url = new URL(target, `https://x/${base}/`);
+		return `](${BLOB}/${url.pathname.slice(1)}${url.hash})`;
 	});
 }
 
@@ -48,7 +48,7 @@ const rule = '='.repeat(80);
 const parts = [
 	'# Editmamei Desktop: full user documentation',
 	'',
-	`This file bundles the user docs for Editmamei Desktop, the MCP server that lets AI apps edit photos in Adobe Photoshop or GIMP on your computer, as plain text for AI assistants and crawlers. Each section is copied from the public repository's docs for the ${pkg.version} release, at the path shown in its header, with relative links rewritten to GitHub URLs. The short overview of both Editmamei products is at https://editmamei.com/llms.txt, and Editmamei Connect, the hosted product, describes itself at https://connect.editmamei.com/llms.txt.`,
+	`This file bundles the user docs for Editmamei Desktop, the MCP server that lets AI apps edit photos in Adobe Photoshop or GIMP on your computer, as plain text for AI assistants and crawlers. Each section is copied from the public repository's docs for the ${pkg.version} release, at the path shown in its header, with relative links rewritten to GitHub URLs (on the repository's main branch). The short overview of both Editmamei products is at https://editmamei.com/llms.txt, and Editmamei Connect, the hosted product, describes itself at https://connect.editmamei.com/llms.txt.`,
 	'',
 	`Contents: ${SECTIONS.map(([title]) => title).join(', ')}.`,
 	''
