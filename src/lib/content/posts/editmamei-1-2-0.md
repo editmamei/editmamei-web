@@ -2,6 +2,7 @@
 title: 'Now available: Editmamei 1.2.0'
 description: A folder of photos can be cropped, resized and exported in one pass, plus fixes for accented layer names and a thirty-second wait that shouldn't have been there.
 seoTitle: 'Editmamei 1.2.0: batch crop, resize and export a folder'
+seoDescription: 'A folder of photos can be cropped, resized and exported in one pass, plus fixes for accented layer names and a needless thirty-second wait.'
 date: 2026-08-24
 ---
 
