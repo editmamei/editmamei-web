@@ -70,9 +70,9 @@
 
 	<div class="mx-auto mt-10 max-w-6xl">
 		<p class="max-w-[46em] text-[15px] leading-relaxed text-neutral-700">
-			<span class="font-semibold text-brand">Your AI app's plan is separate.</span> Editmamei has no
-			AI of its own, so on either product your AI app's usage counts against your plan with it, as
-			usual. Not sure which product fits?
+			<span class="font-semibold text-brand">Your AI app's plan is separate.</span> Editmamei brings
+			no chat model of its own, so on either product your AI app's usage counts against your plan
+			with it, as usual. Not sure which product fits?
 			<a href="/faq" class="font-semibold text-brand underline underline-offset-2"
 				>The FAQ compares them</a
 			>.

@@ -109,7 +109,9 @@
 {/snippet}
 
 {#snippet arrow()}
-	<span aria-hidden="true" class="text-neutral-400">↗</span>
+	<span aria-hidden="true" class="text-neutral-400">↗</span><span class="sr-only"
+		>(opens connect.editmamei.com)</span
+	>
 {/snippet}
 
 <header class="sticky top-0 z-30 border-b border-neutral-200/80 bg-white/85 backdrop-blur">

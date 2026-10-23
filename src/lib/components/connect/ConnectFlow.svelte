@@ -4,12 +4,12 @@
 	// How Connect is wired, as one triangle: your phone, the AI model and
 	// Editmamei's server. The conversation (dashed orange) runs through the AI;
 	// the photo itself (solid green) goes straight to Editmamei's server by an
-	// upload link and comes back as a download. Two cues, never colour alone:
+	// upload link and comes back as a download. Two cues, never color alone:
 	// line style, and a text label on every link. Facts follow Connect's privacy
 	// policy (uploads deleted 24 hours after upload).
 	//
 	// Drawn twice, wide for large screens and tall for phones, so text stays at
-	// its real size. Travellers run on one 8 s cycle; with reduced motion, and
+	// its real size. Travelers run on one 8 s cycle; with reduced motion, and
 	// before scripts run, one rests at the middle of each link.
 
 	type Key = 'phone' | 'ai' | 'server';
@@ -202,7 +202,7 @@
 							keyTimes="0;0.02;0.12;0.14;1"
 							dur="8s"
 							begin="{t.at}s"
-							repeatCount="indefinite"
+							repeatCount="3"
 						/>
 						<animateMotion
 							path={line(n[t.from].at, n[t.to].at)}
@@ -211,7 +211,7 @@
 							calcMode="linear"
 							dur="8s"
 							begin="{t.at}s"
-							repeatCount="indefinite"
+							repeatCount="3"
 						/>
 					{/if}
 					{#if t.chip === 'photo'}

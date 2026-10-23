@@ -1,6 +1,6 @@
 // Pins the sitemap/noindex invariant that previously drifted and caused
 // the "Crawled — currently not indexed" suppression (see the comment block
-// in src/routes/sitemap.xml/+server.ts): every top-level route is either
+// in src/routes/sitemap.xml/+server.ts): every static route, nested ones included, is either
 //   (a) listed in the ROUTES array of the dynamic sitemap, or
 //   (b) marked <meta name="robots" content="noindex"> in its <svelte:head>
 // — never neither, never both. Also pins the per-page SEO contract: every

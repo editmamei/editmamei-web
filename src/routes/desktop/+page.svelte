@@ -25,13 +25,16 @@
 		},
 		{
 			title: 'Your photos never come to us.',
-			body: 'Editmamei never sends us your photos or previews. It sends content-free usage data, which you can turn off, and Pro checks its license and its updates.'
+			body: 'Editmamei never sends us your photos or previews. It sends content-free usage data, which you can turn off, checks for updates, and with Pro checks its license.'
 		}
 	];
 
 	const pro = [
 		{ title: 'Templates', body: 'Save a look once, then put it on the next photo.' },
-		{ title: 'Batch', body: 'One recipe across a whole folder, run by Photoshop itself.' },
+		{
+			title: 'Batch',
+			body: 'The same crop, resize and export across a whole folder, run by Photoshop itself.'
+		},
 		{
 			title: 'Camera Raw',
 			body: 'A re-editable develop, and raw files developed before they open.'
@@ -46,7 +49,7 @@
 	const GIMP_GUIDE_PIN_EDITOR_URL = `${GIMP_GUIDE_URL}#pinning-the-editor`;
 	const GIMP_DOWNLOAD_URL = 'https://www.gimp.org/downloads/';
 
-	// GIMP, checked against docs/gimp.md ("What the beta covers", "What it can't do yet").
+	// GIMP, checked against docs/gimp.md (what it covers, and "What it can't do yet").
 	const gimpFacts = [
 		{
 			title: 'Live filters, in a real .xcf',
@@ -173,7 +176,8 @@
 				<p class="text-sm font-bold text-terracotta-ink">2 · An AI app on your computer</p>
 				<p class="mt-3 text-[16px] leading-relaxed text-neutral-800">
 					Claude Desktop installs it in one click. Claude Code, Cursor and other apps that run local
-					tools work too. Editmamei has no AI of its own, so edits use your AI app's plan.
+					tools work too. Editmamei brings no chat model of its own, so edits use your AI app's
+					plan.
 				</p>
 			</div>
 			<div class="rounded-[22px] bg-white p-6 ring-1 ring-brand/10">

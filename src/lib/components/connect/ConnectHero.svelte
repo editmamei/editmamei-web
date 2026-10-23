@@ -26,8 +26,13 @@
 	const LAST = steps.length + 2; // 0 request, 1 thinking, 2.. steps, then done
 	const HOLD = 4;
 
+	// Plays twice, then rests on the finished photo; the button pauses or
+	// replays it (WCAG 2.2.2: moving content can be paused).
+	const CYCLES = 2;
 	let phase = $state(LAST);
-	let playing = false;
+	let playing = $state(false);
+	let cycles = 0;
+	let userPaused = false;
 	let timer = 0;
 
 	const step = $derived(phase >= 2 && phase < 2 + steps.length ? steps[phase - 2] : null);
@@ -39,17 +44,43 @@
 		return () => clearInterval(timer);
 	});
 
+	function play(from: number) {
+		clearInterval(timer);
+		playing = true;
+		phase = from;
+		timer = window.setInterval(() => {
+			if (phase < LAST + HOLD) {
+				phase += 1;
+				return;
+			}
+			cycles += 1;
+			if (cycles >= CYCLES) {
+				stop();
+				phase = LAST;
+			} else {
+				phase = 0;
+			}
+		}, 950);
+	}
+	function stop() {
+		playing = false;
+		clearInterval(timer);
+	}
+
 	function setVisible(v: boolean) {
-		if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-		if (v && !playing) {
-			playing = true;
-			phase = 0;
-			timer = window.setInterval(() => {
-				phase = phase >= LAST + HOLD ? 0 : phase + 1;
-			}, 950);
-		} else if (!v && playing) {
-			playing = false;
-			clearInterval(timer);
+		if (matchMedia('(prefers-reduced-motion: reduce)').matches || userPaused) return;
+		if (v && !playing && cycles < CYCLES) play(phase >= LAST ? 0 : phase);
+		else if (!v && playing) stop();
+	}
+
+	function toggle() {
+		if (playing) {
+			userPaused = true;
+			stop();
+		} else {
+			userPaused = false;
+			cycles = 0;
+			play(phase >= LAST ? 0 : phase);
 		}
 	}
 </script>
@@ -91,8 +122,8 @@
 				>
 			</div>
 			<p class="mt-5 max-w-[34em] text-[14px] leading-relaxed text-[#a9bcb4]">
-				150 free credits to start, plus up to 50 more each month. Works in Claude, ChatGPT and other
-				AI apps that add connectors.
+				150 free credits to start, plus up to 50 more each month. Works in Claude, and in ChatGPT
+				where your plan allows connectors.
 			</p>
 		</div>
 
@@ -167,7 +198,30 @@
 					</div>
 				</div>
 			</div>
-			<figcaption class="mt-4 text-center text-[12.5px] leading-relaxed text-[#8fa59c]">
+			<div class="mt-4 flex justify-center">
+				<button
+					type="button"
+					onclick={toggle}
+					class="lp-glass inline-flex min-h-10 items-center gap-2 rounded-full px-4 text-[13px] font-semibold text-white"
+				>
+					{#if playing}
+						<svg aria-hidden="true" class="size-4" viewBox="0 0 24 24" fill="currentColor"
+							><rect x="6" y="5" width="4" height="14" rx="1" /><rect
+								x="14"
+								y="5"
+								width="4"
+								height="14"
+								rx="1"
+							/></svg
+						>Pause the session
+					{:else}
+						<svg aria-hidden="true" class="size-4" viewBox="0 0 24 24" fill="currentColor"
+							><path d="M7 5l12 7-12 7z" /></svg
+						>Play the session
+					{/if}
+				</button>
+			</div>
+			<figcaption class="mt-3 text-center text-[12.5px] leading-relaxed text-[#8fa59c]">
 				A real Connect session: the request is the one that was sent, and each step is the session's
 				own.
 			</figcaption>

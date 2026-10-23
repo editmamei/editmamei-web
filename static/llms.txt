@@ -34,14 +34,14 @@ These describe Editmamei itself, the local product. Editmamei Connect, the hoste
 
 ## Editmamei Connect (hosted)
 
-Editmamei Connect is a separate product: Editmamei running on Editmamei's server instead of your computer, as a remote MCP server. You add it to Claude as a connector, sign up with your email address, then send a photo from your phone or laptop, describe the edit in plain words, and download the finished photo from a link that lasts 24 hours. Nothing is installed and no photo editor is needed on your side.
+Editmamei Connect is a separate product: Editmamei running on Editmamei's server instead of your computer, as a remote MCP server. You add it to your AI app as a connector, sign up with your email address, then send a photo from your phone or laptop, describe the edit in plain words, and download the finished photo from a link that lasts 24 hours. Nothing is installed and no photo editor is needed on your side.
 
 - Photo editing on the photos you send: remove an object by naming it, heal dust spots and blemishes, fix brightness and color, portrait-mode background blur, light skin smoothing, a new sky, one-step looks you can save and reuse
 - Product photos: white or studio backgrounds, transparent cutouts, the same item in other colors, and a check against Amazon, Etsy, Shopify and eBay image guidelines
 - Social posts: crops for each platform, carousel slides, story frames, photo grids, memes and stickers
 - Batches of up to ten photos with the same edit
 - Unlike the local product, Connect receives the photos you send: they are uploaded to Editmamei's server for editing and deleted on the schedule in Connect's own Privacy Policy
-- New accounts start with free credits; editing time is paid for in credits
+- New accounts start with free credits, and more come in packs or monthly plans
 - Connect has its own Terms of Service and Privacy Policy, separate from Editmamei's
 
 More: https://connect.editmamei.com/llms.txt
@@ -61,7 +61,7 @@ More: https://connect.editmamei.com/llms.txt
 - [Download](https://editmamei.com/desktop/download)
 - [Activate a Pro license](https://editmamei.com/desktop/activate)
 - [Desktop docs](https://editmamei.com/desktop/docs)
-- [Editmamei Connect](https://editmamei.com/connect): the hosted connector for Claude, ChatGPT and other AI apps
+- [Editmamei Connect](https://editmamei.com/connect): the hosted connector for Claude, and for ChatGPT where your plan allows connectors
 - [Connect pricing](https://editmamei.com/connect/pricing): free credits, packs and monthly plans
 - [Connect app](https://connect.editmamei.com): sign-up, setup steps, every Connect tool, and Connect's Terms and Privacy Policy
 - [Pricing](https://editmamei.com/pricing): both products side by side

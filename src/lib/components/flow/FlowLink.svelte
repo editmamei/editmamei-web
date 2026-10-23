@@ -3,8 +3,8 @@
 
 	// One link in a wiring diagram: a line (vertical on phones, horizontal on
 	// large screens), its label, and what travels along it. Two cues, never
-	// colour alone: `editor` links are solid green (Editmamei and the editor),
-	// `ai` links are dashed orange (the AI's side). Travellers run on one shared
+	// color alone: `editor` links are solid green (Editmamei and the editor),
+	// `ai` links are dashed orange (the AI's side). Travelers run on one shared
 	// 8 s cycle; `out` moves start to end, `back` end to start, each starting
 	// at its own delay so a chip can hop link to link.
 	type Chip = 'photo' | 'edit' | 'text';

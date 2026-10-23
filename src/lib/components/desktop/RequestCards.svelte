@@ -114,7 +114,6 @@
 						{/if}
 						<button
 							type="button"
-							aria-pressed={!!original[card.id]}
 							onclick={() => (original[card.id] = !original[card.id])}
 							class="absolute top-3 right-3 inline-flex min-h-9 items-center rounded-full px-3 text-[12.5px] font-bold shadow-lg {original[
 								card.id

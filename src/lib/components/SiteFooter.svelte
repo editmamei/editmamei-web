@@ -117,7 +117,9 @@
 						{#each p.links as link (link.href)}
 							<li>
 								<a href={link.href} class="hover:text-neutral-950"
-									>{link.label}{#if link.external}&nbsp;<span aria-hidden="true">↗</span>{/if}</a
+									>{link.label}{#if link.external}&nbsp;<span aria-hidden="true">↗</span><span
+											class="sr-only">(opens connect.editmamei.com)</span
+										>{/if}</a
 								>
 							</li>
 						{/each}

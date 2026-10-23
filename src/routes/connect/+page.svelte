@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { onDestroy } from 'svelte';
 	import '$lib/components/landing/landing.css';
 	import ConnectFlow from '$lib/components/connect/ConnectFlow.svelte';
 	import ConnectHero from '$lib/components/connect/ConnectHero.svelte';
@@ -21,12 +22,15 @@
 
 	const MCP_URL = 'https://connect.editmamei.com/mcp';
 	let copied = $state(false);
+	let copiedTimer = 0;
+	onDestroy(() => clearTimeout(copiedTimer));
 	async function copyUrl() {
 		try {
 			await navigator.clipboard.writeText(MCP_URL);
 			copied = true;
 			track('connect-copy-url');
-			setTimeout(() => (copied = false), 2000);
+			clearTimeout(copiedTimer);
+			copiedTimer = window.setTimeout(() => (copied = false), 2000);
 		} catch {
 			/* no clipboard access; the URL is on screen to select */
 		}
@@ -41,7 +45,7 @@
 			body: 'Selections, masks, adjustments and retouching, on the photo you sent. AI finds things in the photo and fills in where you remove something; the rest is ordinary editing.'
 		},
 		{
-			title: 'Kept for a day.',
+			title: 'Uploads deleted after 24 hours.',
 			body: 'Uploaded photos are deleted 24 hours after upload, and download links stop working after 24 hours.'
 		},
 		{
@@ -82,7 +86,7 @@
 
 <Seo
 	title="Editmamei Connect · Send a photo, get it back edited"
-	description="A hosted MCP connector for Claude, ChatGPT and other AI apps. Send a photo from your phone, say what you want, and it's edited with real tools on Editmamei's server. Nothing to install; 150 free credits to start."
+	description="A hosted MCP connector for Claude, and for ChatGPT where your plan allows connectors. Send a photo from your phone, say what you want, and it's edited with real tools on Editmamei's server. Nothing to install; 150 free credits to start."
 	path="/connect"
 />
 
@@ -199,7 +203,7 @@
 						onclick={copyUrl}
 						class="min-h-9 flex-none rounded-lg bg-accent px-3 text-[13px] font-bold text-brand-deep"
 						>{copied ? 'Copied' : 'Copy'}</button
-					>
+					><span class="sr-only" aria-live="polite">{copied ? 'Link copied' : ''}</span>
 				</div>
 			</li>
 			<li class="lp-glass flex min-w-0 flex-col rounded-[22px] p-6">

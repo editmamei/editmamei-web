@@ -95,11 +95,11 @@
 
 @media (prefers-reduced-motion: no-preference) {
 	.fl-out {
-		animation: fl-out-y 8s linear infinite;
+		animation: fl-out-y 8s linear 3;
 		animation-delay: var(--at);
 	}
 	.fl-back {
-		animation: fl-back-y 8s linear infinite;
+		animation: fl-back-y 8s linear 3;
 		animation-delay: var(--at);
 	}
 	@media (min-width: 1024px) {

@@ -31,7 +31,7 @@
 		},
 		{
 			id: 'cleanup',
-			tab: 'Clean-up',
+			tab: 'Cleanup',
 			title: 'The stern line out, the water turquoise',
 			steps: [
 				'Selected the rope with AI: 0.3% of the photo.',
@@ -133,7 +133,6 @@
 				>
 				<button
 					type="button"
-					aria-pressed={original}
 					onclick={() => (original = !original)}
 					class="absolute right-3 bottom-3 inline-flex min-h-10 items-center rounded-full px-4 text-[13px] font-bold shadow-lg {original
 						? 'bg-white text-brand'

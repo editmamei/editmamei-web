@@ -148,7 +148,7 @@
 				href="/desktop#how"
 				class="text-sm font-semibold text-neutral-900 underline underline-offset-2 hover:text-neutral-700"
 			>
-				See how it fits together on the Photoshop page →
+				See how it fits together on the Desktop page →
 			</a>
 		</div>
 	</div>
