@@ -11,6 +11,8 @@
 	type Mode = {
 		id: 'editmamei' | 'default';
 		tab: string;
+		sub: string;
+		chip: string;
 		src: string;
 		how: string;
 		line: string;
@@ -22,6 +24,8 @@
 		{
 			id: 'editmamei',
 			tab: 'Editmamei',
+			sub: 'Edited in Photoshop',
+			chip: 'Edited by Editmamei',
 			src: '/landing/street/edited.webp',
 			how: 'Desktop · edited in Photoshop, in layers',
 			line: 'bg-accent shadow-[0_0_22px_5px_rgba(206,255,140,0.6)]',
@@ -35,6 +39,8 @@
 		{
 			id: 'default',
 			tab: CHAT,
+			sub: 'Default mode',
+			chip: `Redrawn by ${CHAT}`,
 			src: '/landing/street/chatgpt-default.webp',
 			how: 'GPT-6, default mode · image generation',
 			line: 'bg-[#ff7a5c] shadow-[0_0_22px_5px_rgba(255,122,92,0.55)]',
@@ -56,7 +62,8 @@
 
 	const chatPrompt = `Edit this exact photo. Do not generate a new image or recreate the scene. Treat it the way a professional retoucher would in Photoshop: only adjust light and color, as if using adjustment layers (Curves, Color Balance, Hue/Saturation) on top of the original pixels. Make it look like golden hour: warm, low sunlight raking across the building fronts; warmer highlights and midtones, gently lifted shadows; a soft warm glow in the sky. Keep everything else identical to the original: the same framing, crop and aspect ratio; every building, window, roof line and the church spire exactly where they are; every sign and its text, unchanged and readable; every person exactly as they are: same faces, clothes, poses and positions; do not add, remove, move or reshape anything. Return the edited photo at the same size as the original (3000 × 2004).`;
 
-	let current = $state(1);
+	// Opens on Editmamei's edit; ChatGPT's is one tap away.
+	let current = $state(0);
 	let pos = $state(50);
 	let dragging = $state(false);
 	let box = $state<HTMLElement>();
@@ -141,22 +148,35 @@
 
 			<div class="lp-fade min-w-0" use:reveal>
 				<!-- Which result to compare against the original -->
+				<p id="compare-pick" class="text-sm font-semibold text-brand">Compare your photo with</p>
 				<div
-					class="lp-glass-light inline-flex max-w-full overflow-x-auto rounded-full p-1 text-sm font-semibold"
+					class="mt-2 grid max-w-[30rem] grid-cols-2 gap-2"
 					role="group"
-					aria-label="Which result to compare with your photo"
+					aria-labelledby="compare-pick"
 				>
 					{#each modes as m, i (m.id)}
 						<button
 							type="button"
 							aria-pressed={current === i}
 							onclick={() => choose(i)}
-							class="min-h-10 rounded-full px-4 whitespace-nowrap transition-colors {current === i
+							class="flex min-h-14 items-center gap-2.5 rounded-2xl border-2 px-3.5 py-2 text-left transition-colors {current ===
+							i
 								? m.id === 'editmamei'
-									? 'bg-brand text-accent'
-									: 'bg-[#3b2a24] text-white'
-								: 'text-brand hover:bg-brand/5'}">{m.tab}</button
+									? 'border-brand bg-brand text-white'
+									: 'border-[#3b2a24] bg-[#3b2a24] text-white'
+								: 'border-brand/20 bg-white text-brand hover:border-brand/50'}"
 						>
+							<span
+								class="size-3 flex-none rounded-full {m.id === 'editmamei'
+									? 'bg-accent'
+									: 'bg-[#ff7a5c]'}"
+								aria-hidden="true"
+							></span>
+							<span class="flex min-w-0 flex-col">
+								<span class="text-base leading-tight font-bold">{m.tab}</span>
+								<span class="text-[12.5px] leading-tight opacity-75">{m.sub}</span>
+							</span>
+						</button>
 					{/each}
 				</div>
 				<p class="mt-3 text-sm text-neutral-600">{mode.how}</p>
@@ -235,10 +255,10 @@
 						>Your photo</span
 					>
 					<span
-						class="absolute top-3 right-3 rounded-full px-3 py-1 text-xs font-semibold {mode.id ===
+						class="absolute top-3 right-3 rounded-full px-3.5 py-1.5 text-[13px] font-bold shadow-lg sm:text-sm {mode.id ===
 						'editmamei'
 							? 'bg-accent text-brand-deep'
-							: 'bg-[#3b2a24] text-white'}">{mode.tab}</span
+							: 'bg-[#3b2a24] text-white'}">{mode.chip}</span
 					>
 					{#if mode.badge}
 						<span
