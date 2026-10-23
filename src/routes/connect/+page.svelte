@@ -184,7 +184,7 @@
 		</div>
 
 		<ol class="mt-12 grid gap-5 lg:grid-cols-3">
-			<li class="lp-glass flex flex-col rounded-[22px] p-6">
+			<li class="lp-glass flex min-w-0 flex-col rounded-[22px] p-6">
 				<p class="text-sm font-bold text-accent">1 · Add the connector</p>
 				<p class="mt-3 text-[15.5px] leading-relaxed text-[#dfe8e3]">
 					In Claude, open Settings, then Connectors, and add a custom connector with this URL. Other
@@ -202,14 +202,14 @@
 					>
 				</div>
 			</li>
-			<li class="lp-glass flex flex-col rounded-[22px] p-6">
+			<li class="lp-glass flex min-w-0 flex-col rounded-[22px] p-6">
 				<p class="text-sm font-bold text-accent">2 · Sign up with your email</p>
 				<p class="mt-3 text-[15.5px] leading-relaxed text-[#dfe8e3]">
 					Your AI app opens Connect's sign-in. Confirm your email and you're in, with 150 free
 					credits to start.
 				</p>
 			</li>
-			<li class="lp-glass flex flex-col rounded-[22px] p-6">
+			<li class="lp-glass flex min-w-0 flex-col rounded-[22px] p-6">
 				<p class="text-sm font-bold text-accent">3 · Edit from your phone</p>
 				<p class="mt-3 text-[15.5px] leading-relaxed text-[#dfe8e3]">
 					A connector you add in Claude comes with you to the Claude app on your phone. Ask for an
