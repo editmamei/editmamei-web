@@ -144,9 +144,10 @@
 							? 'bg-accent text-brand-deep'
 							: 'bg-brand text-white hover:bg-brand-light'}">{p.cta}</a
 					>
-					{#if p.fine}
-						<p class="mt-2.5 text-center text-xs leading-relaxed text-neutral-500">{p.fine}</p>
-					{/if}
+					<!-- Same slot on every card, so the buttons line up across the row. -->
+					<p class="mt-2.5 min-h-10 text-center text-xs leading-relaxed text-neutral-500">
+						{p.fine}
+					</p>
 				</div>
 			{/each}
 		</div>
