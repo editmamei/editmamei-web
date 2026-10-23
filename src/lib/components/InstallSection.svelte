@@ -185,10 +185,9 @@
 				<ul class="mt-3 space-y-1.5 text-sm text-neutral-300">
 					<li>
 						Adobe Photoshop 2026, internal version 27.x (earlier versions unverified), or GIMP 3.2
-						for the GIMP beta
 					</li>
 					<li>
-						Windows 10/11 or macOS 13+ (Apple Silicon or Intel). The GIMP beta also runs on Linux,
+						Windows 10/11 or macOS 13+ (Apple Silicon or Intel). With GIMP it also runs on Linux,
 						through npm.
 					</li>
 					<li>Node.js 22+, only for the npm path (Claude Desktop bundles its own runtime)</li>
