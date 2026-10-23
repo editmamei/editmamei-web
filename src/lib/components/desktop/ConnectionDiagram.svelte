@@ -33,7 +33,7 @@
 				: 'text-[#ffb08f]'}">{l.label}</span
 		>
 		<span
-			class="absolute top-[calc(50%+12px)] left-1/2 hidden w-[9.5rem] -translate-x-1/2 text-center text-[12px] leading-tight font-semibold lg:block {l.kind ===
+			class="absolute inset-x-1 bottom-[calc(50%+12px)] hidden text-center text-[12px] leading-tight font-semibold lg:block {l.kind ===
 			'local'
 				? 'text-accent'
 				: 'text-[#ffb08f]'}">{l.label}</span
@@ -44,7 +44,7 @@
 <div class="flex flex-col items-stretch lg:flex-row lg:items-center">
 	<!-- Your computer -->
 	<div
-		class="relative flex flex-col items-stretch rounded-[26px] border border-accent/30 bg-white/[0.03] px-5 pt-11 pb-6 lg:flex-[3.2] lg:flex-row lg:items-center lg:px-7 lg:pb-9"
+		class="relative flex flex-col items-stretch rounded-[26px] border border-accent/30 bg-white/[0.03] px-5 pt-11 pb-6 lg:flex-[4] lg:flex-row lg:items-center lg:px-7 lg:pb-9"
 	>
 		<span
 			class="absolute top-4 left-5 flex items-center gap-2 text-[12px] font-bold tracking-[0.14em] text-accent uppercase lg:left-7"
@@ -144,7 +144,7 @@
 	}
 	@media (min-width: 1024px) {
 		.node {
-			width: 9.5rem;
+			width: 8rem;
 			flex: none;
 		}
 	}
