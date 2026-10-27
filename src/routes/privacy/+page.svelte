@@ -44,8 +44,10 @@
 		</p>
 		<ul class="mt-3 space-y-2.5 text-[16px] leading-relaxed text-neutral-700">
 			<li>
-				<strong class="font-semibold text-brand">Your image and document content.</strong>
-				No photos, previews, thumbnails, layer renders, or document data are ever sent to Editmamei.
+				<strong class="font-semibold text-brand">Your images.</strong>
+				No photos, previews, thumbnails, layer renders, or other pixel data are ever sent to Editmamei.
+				(If you opt in to diagnostics, an error message can name a layer or repeat a value you gave a
+				tool; see below.)
 			</li>
 			<li>
 				<strong class="font-semibold text-brand">Your file paths.</strong>
@@ -81,7 +83,8 @@
 				<strong class="font-semibold text-brand">Diagnostics (off until you turn it on).</strong>
 				When you opt in, a sanitized error message and the name of the step that failed, so a bug can
 				be traced without you mailing a log by hand. File paths are reduced to bare names; still no image
-				content.
+				content. The message is the error's own text, so it can name a layer, group or channel, or repeat
+				a value you gave a tool; those names are sent as written.
 			</li>
 		</ul>
 		<p class="mt-4 text-[16px] leading-relaxed text-neutral-700">
