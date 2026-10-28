@@ -22,13 +22,12 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  deploy:
+  # Build, typecheck, lint and test run with NO secrets and no environment:
+  # `npm ci` executes dependency install scripts, which must not share a job with
+  # the Cloudflare token or the Resend key (V1). GALLERY_FEED_REQUIRED is read
+  # from repository-level variables here, not from the production environment.
+  build:
     runs-on: ubuntu-latest
-    # The production environment allows the main branch only and holds the
-    # Cloudflare secrets, so no other ref can reach them.
-    environment:
-      name: production
-      url: https://editmamei.com
     steps:
       - name: Refuse to deploy any ref but main
         if: github.ref != 'refs/heads/main'
@@ -39,12 +38,12 @@ jobs:
           exit 1
 
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
           persist-credentials: false
 
       - name: Setup Node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
           # 22+: `node --test` glob args (the test script) need Node >= 21,
           # and Node 20 is past EOL on the runners.
@@ -72,6 +71,68 @@ jobs:
 
       - name: Leak guard
         run: node scripts/check-leak-guard.mjs
+
+      # Hand the build to the secret-bearing job below. Nothing here is secret.
+      # cloudflare-tmp holds the route manifest _worker.js imports.
+      - name: Upload the build
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: site-build
+          path: |
+            wrangler.jsonc
+            .svelte-kit/cloudflare
+            .svelte-kit/cloudflare-tmp
+            .svelte-kit/output
+          include-hidden-files: true
+          if-no-files-found: error
+          retention-days: 1
+
+  # Holds the production secrets. Dependencies install with --ignore-scripts, so
+  # no package's install script runs beside the Cloudflare token; wrangler then
+  # bundles the artifact built above against the locked packages.
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    # The production environment allows the main branch only and holds the
+    # Cloudflare and Resend secrets, so no other ref can reach them.
+    environment:
+      name: production
+      url: https://editmamei.com
+    steps:
+      - name: Refuse to deploy any ref but main
+        if: github.ref != 'refs/heads/main'
+        env:
+          REF: ${{ github.ref }}
+        run: |
+          echo "production deploys main only (got: $REF)"
+          exit 1
+
+      # Root files (package.json, the lockfile) come with cone-mode sparse
+      # checkout; plus the email script and the posts it reads. Credentials are
+      # not persisted.
+      - name: Checkout (manifests, scripts and posts only)
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          persist-credentials: false
+          sparse-checkout: |
+            scripts
+            src/lib/content/posts
+
+      - name: Setup Node
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: 22
+
+      # The server output keeps bare imports that wrangler bundles, so it needs
+      # the locked packages; esbuild and workerd binaries arrive as optional
+      # dependencies, so no install script is needed.
+      - name: Install locked dependencies (no install scripts)
+        run: npm ci --ignore-scripts
+
+      - name: Download the build
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+        with:
+          name: site-build
 
       - name: Deploy the editmamei-web Worker
         env:

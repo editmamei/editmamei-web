@@ -20,7 +20,71 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  # Build, typecheck, lint and test run with NO secrets and no environment:
+  # `npm ci` executes dependency install scripts, which must not share a job with
+  # the Cloudflare token (V1).
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Refuse to run from any ref but dev
+        if: github.ref != 'refs/heads/dev'
+        env:
+          REF: ${{ github.ref }}
+        run: |
+          echo "staging previews dev only (got: $REF)"
+          exit 1
+
+      - name: Checkout
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          persist-credentials: false
+
+      - name: Setup Node
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Typecheck (svelte-check)
+        run: npm run check
+
+      - name: Lint
+        run: npm run lint
+
+      # Build before test so tests/blog-build-artifacts.test.mjs inspects the
+      # artifact that gets uploaded.
+      - name: Build
+        run: npm run build
+
+      - name: Test
+        run: npm test
+
+      - name: Leak guard
+        run: node scripts/check-leak-guard.mjs
+
+      # Hand the build to the secret-bearing job below. Nothing here is secret.
+      # cloudflare-tmp holds the route manifest _worker.js imports.
+      - name: Upload the build
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: site-build
+          path: |
+            wrangler.jsonc
+            .svelte-kit/cloudflare
+            .svelte-kit/cloudflare-tmp
+            .svelte-kit/output
+          include-hidden-files: true
+          if-no-files-found: error
+          retention-days: 1
+
+  # Holds the staging secrets. Dependencies install with --ignore-scripts, so no
+  # package's install script runs beside the Cloudflare token; wrangler then
+  # bundles the artifact above against the locked packages.
   preview:
+    needs: build
     runs-on: ubuntu-latest
     # The staging environment allows the dev branch only and holds the
     # Cloudflare secrets, so no other ref can reach them.
@@ -69,36 +133,29 @@ jobs:
             *) echo "::error::$WORKERS_DEV_URL answered '$RESULT'; turn off the workers.dev route (wrangler triggers deploy applies workers_dev: false)"; exit 1 ;;
           esac
 
-      - name: Checkout
-        uses: actions/checkout@v4
+      # Only the root files (package.json, the lockfile): cone-mode sparse
+      # checkout always includes them. Credentials are not persisted.
+      - name: Checkout (manifests only)
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
           persist-credentials: false
+          sparse-checkout: .github
+
+      - name: Download the build
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+        with:
+          name: site-build
 
       - name: Setup Node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
           node-version: 22
-          cache: npm
 
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Typecheck (svelte-check)
-        run: npm run check
-
-      - name: Lint
-        run: npm run lint
-
-      # Build before test so tests/blog-build-artifacts.test.mjs inspects the
-      # artifact that gets uploaded.
-      - name: Build
-        run: npm run build
-
-      - name: Test
-        run: npm test
-
-      - name: Leak guard
-        run: node scripts/check-leak-guard.mjs
+      # The server output keeps bare imports that wrangler bundles, so it needs
+      # the locked packages; esbuild and workerd binaries arrive as optional
+      # dependencies, so no install script is needed.
+      - name: Install locked dependencies (no install scripts)
+        run: npm ci --ignore-scripts
 
       - name: Upload staging version
         env:
