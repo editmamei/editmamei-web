@@ -139,6 +139,7 @@
 					</p>
 					<a
 						href={p.href}
+						rel="nofollow"
 						onclick={() => track(`desktop-plan-${p.id}`)}
 						class="mt-auto inline-flex min-h-12 items-center justify-center rounded-2xl px-5 text-[16px] font-bold transition-transform hover:-translate-y-0.5 motion-reduce:transition-none {p.dark
 							? 'bg-accent text-brand-deep'
