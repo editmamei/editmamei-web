@@ -6,7 +6,7 @@ seoDescription: 'Editmamei has 83 Photoshop tools. Across 61,977 real tool calls
 date: 2026-10-30
 ---
 
-Glama, a directory of MCP servers, grades every server partly on how many tools it has. Its rubric wants fewer than 25, and that's a fair rule of thumb: give a model too many tools and it starts confusing them, calling the wrong one or filling in the wrong arguments, and every miss costs the user tokens. Editmamei scores 2 out of 5 on that check.
+Glama, a directory of MCP servers, grades every server's tool definitions, and one of the things it grades is how many tools there are. Its rubric calls 3 to 15 tools well scoped and 25 or more too many. Editmamei's free edition gets an A overall but 1 out of 5 on tool count: "the surface is still extremely heavy and imposes substantial cognitive load." That's a fair rule of thumb for most servers: give a model too many tools and it starts confusing them, calling the wrong one or filling in the wrong arguments, and every miss costs the user tokens.
 
 That rule works for a lot of servers. It doesn't work for a photo editor. Anyone who has used Photoshop knows the shape of it: a dozen menus, one to two dozen items under each, and half of those open dialogs with their own options and modes. Natively, that's hundreds of distinct operations. Mapping them one to one onto MCP tools would be a mess, and cutting them down to 25 would leave the AI unable to do the job.
 
