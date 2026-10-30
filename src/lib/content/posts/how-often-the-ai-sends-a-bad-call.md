@@ -1,7 +1,7 @@
 ---
 title: Not every MCP server fits in 25 tools
 description: The usual advice is to keep an MCP server under 25 tools. Editmamei has 83 Photoshop tools, so I measured how often the AI sends a bad call across 61,977 real tool calls.
-seoTitle: 'Not every MCP server fits in 25 tools: real error rates from 83'
+seoTitle: '83 MCP tools: how often the AI sends a bad call'
 seoDescription: 'Editmamei has 83 Photoshop tools. Across 61,977 real tool calls, 98.2% ran without an error and bad calls from the AI were 0.35% in October.'
 date: 2026-10-30
 ---
