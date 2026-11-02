@@ -80,7 +80,7 @@
 		},
 		{
 			title: 'Which AI apps',
-			body: 'Claude on the web, desktop and phone, ChatGPT, and other AI apps that add remote MCP servers as connectors, such as Cursor and VS Code.'
+			body: 'Claude on the web, desktop and phone, ChatGPT, and other AI apps that add remote MCP servers as connectors, such as Cursor, VS Code and Muse.'
 		}
 	];
 </script>

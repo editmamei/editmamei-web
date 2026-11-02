@@ -176,7 +176,7 @@
 		},
 		{
 			q: 'Which AI assistants work with Editmamei Connect?',
-			a: 'Claude (claude.ai, the Claude desktop and phone apps, and Claude Code), ChatGPT, Cursor, VS Code with GitHub Copilot, Codex, Gemini CLI and Goose all add Connect as a remote MCP server and sign in to it.'
+			a: 'Claude (claude.ai, the Claude desktop and phone apps, and Claude Code), ChatGPT, Cursor, VS Code with GitHub Copilot, Codex, Gemini CLI, Goose and Muse all add Connect as a remote MCP server and sign in to it.'
 		}
 	];
 
