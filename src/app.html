@@ -3,6 +3,26 @@
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+		<script type="text/javascript">
+			// Checkout adds session tokens to the address. Nothing here reads them: they come off
+			// before any other script runs, so analytics never records them.
+			(function (l, h) {
+				try {
+					var url = new URL(l.href);
+					var found = false;
+					['customer_session_token', 'member_session_token'].forEach(function (name) {
+						if (url.searchParams.has(name)) {
+							url.searchParams.delete(name);
+							found = true;
+						}
+					});
+					if (found) h.replaceState(h.state, '', url.href);
+				} catch (e) {
+					// An old browser keeps the address as it was; the page still works.
+				}
+			})(location, history);
+		</script>
 		<meta name="theme-color" content="#0d2818" />
 
 		<link rel="icon" type="image/x-icon" href="/icons/favicon.ico" />
