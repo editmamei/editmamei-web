@@ -164,6 +164,14 @@
 							></a
 						>
 					</li>
+					<li>
+						<a
+							href="https://launchator.com"
+							target="_blank"
+							onclick={() => track('footer-outbound-launchator')}
+							class="hover:text-neutral-950">Launchator</a
+						>
+					</li>
 				</ul>
 			</div>
 
