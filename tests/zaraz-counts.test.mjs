@@ -7,9 +7,7 @@ const { track } = await import('../src/lib/analytics/clarity.ts');
 function run(href, fetchImpl) {
 	const url = new URL(href);
 	const calls = [];
-	globalThis.window = {
-		location: { hostname: url.hostname, origin: url.origin, pathname: url.pathname }
-	};
+	globalThis.window = { location: url };
 	globalThis.fetch = (path, init) => {
 		calls.push({ path, init });
 		return fetchImpl ? fetchImpl() : Promise.resolve();
@@ -24,6 +22,7 @@ test('sends the event name and the page without its query string', () => {
 	assert.equal(call.init.method, 'POST');
 	assert.equal(call.init.credentials, 'omit');
 	assert.equal(call.init.keepalive, true);
+	assert.equal(call.init.referrerPolicy, 'no-referrer');
 	assert.deepEqual(JSON.parse(call.init.body), {
 		events: [
 			{

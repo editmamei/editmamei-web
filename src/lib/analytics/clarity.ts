@@ -46,6 +46,7 @@ function countInZaraz(name: string): void {
 		method: 'POST',
 		keepalive: true,
 		credentials: 'omit',
+		referrerPolicy: 'no-referrer',
 		headers: { 'Content-Type': 'application/json' },
 		body: JSON.stringify({
 			events: [
