@@ -19,6 +19,10 @@
  * Marketing infrastructure per editmamei-web/CLAUDE.md "Marketing
  * infrastructure" section — these events don't reconcile into the
  * product's privacy framing.
+ *
+ * `track()` also posts each event to Cloudflare Zaraz, whose counts can be read
+ * by API. It calls Zaraz's HTTP Events API rather than loading the Zaraz script,
+ * because the script sets a cookie before any cookie choice.
  */
 
 type ClarityFn = (
@@ -29,13 +33,35 @@ type ClarityFn = (
 declare global {
 	interface Window {
 		clarity?: ClarityFn;
-		zaraz?: { track: (name: string) => unknown };
 	}
+}
+
+/** `eventsApiPath` in the zone's Zaraz config. */
+const ZARAZ_EVENTS_PATH = '/z/c7f3a9';
+
+function countInZaraz(name: string): void {
+	// Previews and local dev have no Zaraz, and would otherwise add to the counts.
+	if (window.location.hostname !== 'editmamei.com') return;
+	void fetch(ZARAZ_EVENTS_PATH, {
+		method: 'POST',
+		keepalive: true,
+		credentials: 'omit',
+		headers: { 'Content-Type': 'application/json' },
+		body: JSON.stringify({
+			events: [
+				{
+					client: { __zarazTrack: name },
+					// No query string: the page's address can carry session tokens.
+					system: { page: { url: window.location.origin + window.location.pathname } }
+				}
+			]
+		})
+	}).catch(() => {});
 }
 
 /**
  * Fire a discrete user-action event. Shows up in the Clarity dashboard's
- * Events tab and is filterable in Watchlists. Also sent to Cloudflare Zaraz,
+ * Events tab and is filterable in Watchlists. Also counted in Cloudflare Zaraz,
  * whose counts can be read by API; Clarity's export doesn't include events.
  * Use for things that happen at a point in time ("user clicked install").
  *
@@ -51,7 +77,7 @@ export function track(name: string): void {
 		// Clarity errors must never break the page. Swallow.
 	}
 	try {
-		void Promise.resolve(window.zaraz?.track(name)).catch(() => {});
+		countInZaraz(name);
 	} catch {
 		// see above
 	}

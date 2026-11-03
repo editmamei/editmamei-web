@@ -310,7 +310,11 @@
 			>
 			to count page views and visits, see which sites send visitors here, and measure page speed. It reports
 			the page, the referring site, your browser and device type, your country, and load timings. It sets
-			no cookies, so it runs whichever choice you make above. Cloudflare processes this data under its
+			no cookies, so it runs whichever choice you make above. The site also counts some actions, such as
+			clicks on install and pricing links, using Cloudflare Zaraz. Each count reports only the name of
+			the action and the page it happened on. It sets no cookies and stores nothing on your device, so
+			it also runs whichever choice you make. These counts aren't sent to anyone else. Cloudflare
+			processes this data under its
 			<a
 				href="https://www.cloudflare.com/privacypolicy/"
 				rel="noopener noreferrer"
