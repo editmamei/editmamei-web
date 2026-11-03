@@ -29,13 +29,15 @@ type ClarityFn = (
 declare global {
 	interface Window {
 		clarity?: ClarityFn;
+		zaraz?: { track: (name: string) => unknown };
 	}
 }
 
 /**
  * Fire a discrete user-action event. Shows up in the Clarity dashboard's
- * Events tab and is filterable in Watchlists. Use for things that happen
- * at a point in time ("user clicked install").
+ * Events tab and is filterable in Watchlists. Also sent to Cloudflare Zaraz,
+ * whose counts can be read by API; Clarity's export doesn't include events.
+ * Use for things that happen at a point in time ("user clicked install").
  *
  * @param name - Event identifier. Use kebab-case verbs ("install-cta-clicked",
  *   "demo-slider-used"). Keep stable: renaming an event creates a new event
@@ -47,6 +49,11 @@ export function track(name: string): void {
 		window.clarity?.('event', name);
 	} catch {
 		// Clarity errors must never break the page. Swallow.
+	}
+	try {
+		void Promise.resolve(window.zaraz?.track(name)).catch(() => {});
+	} catch {
+		// see above
 	}
 }
 

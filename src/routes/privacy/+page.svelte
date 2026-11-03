@@ -301,6 +301,22 @@
 			</button>
 			link in the site footer.
 		</p>
+		<p class="mt-6 text-[16px] leading-relaxed text-neutral-700">
+			The site also uses
+			<a
+				href="https://www.cloudflare.com/web-analytics/"
+				rel="noopener noreferrer"
+				class="font-semibold text-brand underline underline-offset-2">Cloudflare Web Analytics</a
+			>
+			to count page views and visits, see which sites send visitors here, and measure page speed. It reports
+			the page, the referring site, your browser and device type, your country, and load timings. It sets
+			no cookies, so it runs whichever choice you make above. Cloudflare processes this data under its
+			<a
+				href="https://www.cloudflare.com/privacypolicy/"
+				rel="noopener noreferrer"
+				class="font-semibold text-brand underline underline-offset-2">privacy policy</a
+			>.
+		</p>
 	</div>
 </section>
 
