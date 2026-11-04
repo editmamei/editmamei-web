@@ -34,9 +34,12 @@
 		<p class="mt-3">
 			If you installed Editmamei as a one-click extension, download the current
 			<code class="rounded bg-prompt-border px-1.5 py-0.5 font-mono text-[14px]">.mcpb</code> and
-			reinstall it under <strong class="font-semibold text-brand">Settings → Extensions</strong>,
-			then restart Claude Desktop. Your settings are kept. If you use Pro, check the extension's Pro
-			license key field is still filled in afterwards.
+			reinstall it under
+			<strong class="font-semibold text-brand"
+				>Settings → Desktop app → Manage (next to Extensions) → Advanced settings → Install
+				Extension…</strong
+			>, then restart Claude Desktop. Your settings are kept. If you use Pro, check the extension's
+			Pro license key field is still filled in afterwards.
 		</p>
 		<a
 			href={MCPB_DOWNLOAD_URL}

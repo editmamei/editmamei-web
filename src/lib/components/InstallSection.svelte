@@ -139,9 +139,11 @@
 				>. Three steps left:
 			</p>
 			<ol class="mt-3 list-inside list-decimal space-y-1.5 text-[15px] text-[#c9d8d1]">
-				<li>In Claude Desktop, open Settings, then Extensions.</li>
 				<li>
-					Install the downloaded
+					In Claude Desktop, open Settings, then Desktop app, and select Manage next to Extensions.
+				</li>
+				<li>
+					Select Advanced settings, then Install Extension…, and choose the downloaded
 					<code class="rounded bg-brand-deep px-1.5 py-0.5 font-mono text-[14px] text-accent"
 						>editmamei.mcpb</code
 					>.

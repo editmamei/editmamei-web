@@ -11,7 +11,7 @@ An MCP (Model Context Protocol) server that runs on your computer, next to the p
 - Edits in Adobe Photoshop 2026 (version 27.x) or GIMP 3.2, as layers, masks and adjustment layers you can keep editing by hand. Your AI app sees small previews so it can check its work.
 - Runs on Windows 10/11 and macOS 13+, and on Linux with GIMP.
 - Works with AI apps that run MCP servers on your computer: Claude Desktop (one-click extension), Claude Code, Cursor and other MCP apps. It can't run inside a web-only chat app.
-- Install for Claude Desktop: download https://github.com/editmamei/editmamei/releases/latest/download/editmamei.mcpb and install it under Settings → Extensions.
+- Install for Claude Desktop: download https://github.com/editmamei/editmamei/releases/latest/download/editmamei.mcpb and install it under Settings → Desktop app → Manage (next to Extensions) → Advanced settings → Install Extension….
 - Install for Claude Code, Cursor and others (needs Node.js 22+): `npm install -g editmamei`, then `editmamei install`, which registers it with Claude Desktop, Claude Code and Cursor. Other apps use the install guide's configuration, which runs `npx -y editmamei`.
 - 112 tools: 83 for Photoshop (62 in the free Community edition, 21 more in Pro) and 29 for GIMP (all free).
 - Your photos stay on your computer and are never sent to Editmamei. It sends content-free usage data you can switch off, checks npm for updates, and with Pro checks its license and asks for Pro module updates. None of these carry images, documents or file paths.

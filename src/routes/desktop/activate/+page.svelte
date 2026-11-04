@@ -83,7 +83,7 @@
 							<h3 class="font-bold text-brand">Claude Desktop</h3>
 							<p class="mt-2 text-[15px] leading-relaxed text-neutral-700">
 								No terminal needed. Open <strong class="text-brand"
-									>Settings → Extensions → Editmamei</strong
+									>Settings → Desktop app → Manage (next to Extensions) → Editmamei</strong
 								>, paste your key into the <strong class="text-brand">Pro license key</strong> field,
 								and save. Then quit and reopen Claude Desktop so it picks up the key.
 							</p>
