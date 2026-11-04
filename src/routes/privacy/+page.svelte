@@ -32,8 +32,8 @@
 			uploaded to us. The only usage data Editmamei sends us is content-free, and you can audit it
 			and turn it off. The few other requests it makes, listed below, check for updates and handle a
 			Pro license, and none of them carries your images. When your AI assistant needs to see an
-			edit, a downscaled preview goes to that assistant, covered below. The legal basis, retention
-			periods and your rights are further down this page.
+			edit, a preview goes to that assistant, along with tool results, covered below. The legal
+			basis, retention periods and your rights are further down this page.
 		</p>
 
 		<h2 class="mt-12 text-2xl font-bold tracking-[-0.02em] text-brand">
@@ -51,7 +51,7 @@
 			</li>
 			<li>
 				<strong class="font-semibold text-brand">Your file paths.</strong>
-				Full paths stay local; nothing identifies where your work lives on disk.
+				Full paths are never sent to Editmamei. Tool results can show them to your AI assistant.
 			</li>
 			<li>
 				<strong class="font-semibold text-brand">Your metadata.</strong>
@@ -119,20 +119,20 @@
 			<li>
 				<strong class="font-semibold text-brand">Pro activation.</strong>
 				Activating Pro sends your license key and a hashed device identifier to the licensing service,
-				a third-party licensing provider. The identifier is a salted hash, with no raw hostname or username
-				in it.
+				a third-party licensing provider, which assigns an activation ID to that device. The identifier
+				is a salted hash, with no raw hostname or username in it.
 			</li>
 			<li>
 				<strong class="font-semibold text-brand">Pro license check.</strong>
-				About once a day, a Pro install sends your license key to the licensing service to confirm the
-				license is still valid. This request carries no device identifier.
+				About once a day, a Pro install sends your license key and activation ID to the licensing service
+				to confirm the license is still valid. This request does not carry the hashed device identifier.
 			</li>
 			<li>
 				<strong class="font-semibold text-brand">Pro module update.</strong>
 				Each time Pro starts, Editmamei asks its own delivery service whether a newer Pro module exists,
-				and downloads it if so. The request carries your license key and a fixed user-agent that is the
-				same for every install. It is separate from the update check above, and the update check setting
-				does not switch it off.
+				and downloads it if so. The request carries your license key, your activation ID and a fixed user-agent
+				that is the same for every install. It is separate from the update check above, and the update
+				check setting does not switch it off.
 			</li>
 		</ul>
 
@@ -141,10 +141,12 @@
 		</h2>
 		<p class="mt-3 text-[16px] leading-relaxed text-neutral-700">
 			The AI assistant you drive Editmamei with is a cloud service. When you ask it to look at an
-			image (for example, the visual-verification preview), a downscaled JPEG goes to
-			<em>that AI provider</em>, exactly as if you'd dropped the file into a chat with it. That's a
-			property of using a cloud AI, and a function of which assistant you choose, not a hop
-			Editmamei adds.
+			image (for example, the visual-verification preview), a preview JPEG goes to
+			<em>that AI provider</em>, exactly as if you'd dropped the file into a chat with it. Previews
+			are 1024 pixels on the long edge by default, and your AI assistant can ask for up to 8192, so
+			a smaller photo can go at full size. Tool results go to the same provider, and they can
+			include file paths, layer names, measurements and document metadata. That's a property of
+			using a cloud AI, and a function of which assistant you choose, not a hop Editmamei adds.
 		</p>
 		<p class="mt-3 text-[16px] leading-relaxed text-neutral-700">
 			Turning off previews in Editmamei's settings stops preview images going to the AI provider, in
