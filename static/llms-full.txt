@@ -1,6 +1,6 @@
 # Editmamei Desktop: full user documentation
 
-This file bundles the user docs for Editmamei Desktop, the MCP server that lets AI apps edit photos in Adobe Photoshop or GIMP on your computer, as plain text for AI assistants and crawlers. Each section is copied from the public repository's docs for the 1.9.1 release, at the path shown in its header, with relative links rewritten to GitHub URLs (on the repository's main branch). The short overview of both Editmamei products is at https://editmamei.com/llms.txt, and Editmamei Connect, the hosted product, describes itself at https://connect.editmamei.com/llms.txt.
+This file bundles the user docs for Editmamei Desktop, the MCP server that lets AI apps edit photos in Adobe Photoshop or GIMP on your computer, as plain text for AI assistants and crawlers. Each section is copied from the public repository's docs for the 1.9.5 release, at the path shown in its header, with relative links rewritten to GitHub URLs (on the repository's main branch). The short overview of both Editmamei products is at https://editmamei.com/llms.txt, and Editmamei Connect, the hosted product, describes itself at https://connect.editmamei.com/llms.txt.
 
 Contents: Getting started, Installation, AI apps, FAQ, Pro features, GIMP, Troubleshooting, Privacy and data handling.
 
@@ -192,11 +192,12 @@ Editmamei is an MCP server that drives desktop Adobe Photoshop. It installs two 
 The fastest path if you use Claude Desktop. No terminal, and nothing else to install: Claude Desktop ships its own Node runtime.
 
 1. Download the latest [`editmamei.mcpb`](https://github.com/editmamei/editmamei/releases/latest/download/editmamei.mcpb).
-2. In Claude Desktop, open **Settings → Extensions**.
-3. Install the downloaded `editmamei.mcpb`.
-4. Restart Claude Desktop.
+2. In Claude Desktop, open **Settings → Desktop app** and select **Manage** next to Extensions. On older versions this page is **Settings → Extensions**.
+3. Select **Advanced settings**, then under **Extension Developer** select **Install Extension…** and choose the downloaded `editmamei.mcpb`.
+4. Follow the prompts to finish installing.
+5. Restart Claude Desktop.
 
-The telemetry switches and your Pro license key (if you have one) live in the extension's own settings under Settings → Extensions → Editmamei, so there's no config file to edit. Then skip ahead to [Photoshop preferences](#photoshop-preferences) and [Verify](#verify).
+The telemetry switches and your Pro license key (if you have one) live in the extension's own settings under Settings → Desktop app → Manage (next to Extensions) → Editmamei, so there's no config file to edit. Then skip ahead to [Photoshop preferences](#photoshop-preferences) and [Verify](#verify).
 
 ---
 
@@ -380,10 +381,10 @@ Restart your MCP client afterwards.
 **Claude Desktop extension (replace the bundle).** The `.mcpb` is a frozen copy and never updates
 on its own. Download the current
 [`editmamei.mcpb`](https://github.com/editmamei/editmamei/releases/latest/download/editmamei.mcpb),
-open **Settings → Extensions** in Claude Desktop, drag the new file onto that page to replace the
-installed one, then restart Claude Desktop.
+install it with the [same steps](#one-click-install-claude-desktop) to replace the installed one,
+then restart Claude Desktop.
 
-If you have Pro, check **Settings → Extensions → Editmamei → Pro license key** afterwards and paste
+If you have Pro, check **Settings → Desktop app → Manage (next to Extensions) → Editmamei → Pro license key** afterwards and paste
 your key back if the field came up empty. Your stored license keeps Pro working for a while even
 when that field is blank, so a missing key doesn't show up until days later.
 
@@ -419,7 +420,7 @@ requirements, detection locations, and troubleshooting: [docs/gimp.md](https://g
 
 ## Pro
 
-Pro is a downloaded **module**, not a separate install. Keep your Community setup as-is; when you activate a license, Editmamei fetches the signed Pro module and loads it alongside Community after a restart. Buy at [editmamei.com/desktop/pricing](https://editmamei.com/desktop/pricing), then activate with your license key: with an npm install, run `editmamei activate YOUR-KEY` and restart your client; with the Claude Desktop extension, paste your key into **Settings → Extensions → Editmamei → Pro license key** and restart. The license re-validates roughly daily in the background; if a subscription lapses there's a seven-day grace window, then Editmamei keeps running as Community rather than locking you out. Full steps at [editmamei.com/desktop/activate](https://editmamei.com/desktop/activate). See [pro-features.md](https://github.com/editmamei/editmamei/blob/main/docs/pro-features.md) for what Pro adds and [roadmap.md](https://github.com/editmamei/editmamei/blob/main/docs/roadmap.md) for what's planned next.
+Pro is a downloaded **module**, not a separate install. Keep your Community setup as-is; when you activate a license, Editmamei fetches the signed Pro module and loads it alongside Community after a restart. Buy at [editmamei.com/desktop/pricing](https://editmamei.com/desktop/pricing), then activate with your license key: with an npm install, run `editmamei activate YOUR-KEY` and restart your client; with the Claude Desktop extension, paste your key into **Settings → Desktop app → Manage (next to Extensions) → Editmamei → Pro license key** and restart. The license re-validates roughly daily in the background; if a subscription lapses there's a seven-day grace window, then Editmamei keeps running as Community rather than locking you out. Full steps at [editmamei.com/desktop/activate](https://editmamei.com/desktop/activate). See [pro-features.md](https://github.com/editmamei/editmamei/blob/main/docs/pro-features.md) for what Pro adds and [roadmap.md](https://github.com/editmamei/editmamei/blob/main/docs/roadmap.md) for what's planned next.
 
 
 ================================================================================
@@ -815,7 +816,7 @@ Not with Photoshop. Editmamei drives Photoshop through Windows COM automation or
 
 ### Does Editmamei work with GIMP?
 
-Yes. Editmamei can drive GIMP headless as a second editor, on Windows, macOS, or Linux, with GIMP 3.2. Use it when you ask for GIMP, or when Photoshop isn't available. It covers a smaller slice of editing than the Photoshop side today: documents, layers and composites, 13 non-destructive adjustment types and six effects, geometric masks, crop/resize/rotate/flip, checkpoints, and the same kind of preview/histogram verification. See [docs/gimp.md](https://github.com/editmamei/editmamei/blob/main/docs/gimp.md) for requirements, detection, and what it can't do yet. It's Community only; Pro's tools are Photoshop-only.
+Yes. Editmamei can drive GIMP headless as a second editor, on Windows, macOS, or Linux, with GIMP 3.2. Use it when you ask for GIMP, or when Photoshop isn't available. It covers a smaller slice of editing than the Photoshop side today: documents, layers and composites, 13 non-destructive adjustment types and nine effects, geometric masks, crop/resize/rotate/flip, checkpoints, and the same kind of preview/histogram verification. See [docs/gimp.md](https://github.com/editmamei/editmamei/blob/main/docs/gimp.md) for requirements, detection, and what it can't do yet. It's Community only; Pro's tools are Photoshop-only.
 
 ### Does it need an internet connection?
 
@@ -882,7 +883,7 @@ This is a property of the AI client, not of Editmamei or Photoshop. Two things h
 
 ### What's the difference between Community and Pro?
 
-See the full breakdown in [pro-features.md](https://github.com/editmamei/editmamei/blob/main/docs/pro-features.md). Short version: Community covers the full working-photographer editing surface: documents, layers, layer transforms and straightening, non-destructive adjustment layers, filters, content-aware retouch, layer styles, masks, selections (including Photoshop's Select Subject and Select Sky), shape layers and pen paths, channel compositing, on-device scene awareness, per-channel histograms and visual verification, history, text, and image placement. Pro adds the develop-grade and precision toolkit: **Camera Raw** as a re-editable Smart Filter, **raw files developed before they open**, **folder batch**, **precision placement** (name a location, get verified geometry), **named-object masks**, **face-mesh perception**, **subject-instance targeting**, **warp**, the **whole reproducible-template system**, and **Photoshop Actions + ExtendScript scripting**. The [main README](https://github.com/editmamei/editmamei/blob/main/README.md#editions) carries the same split at a glance; [pro-features.md](https://github.com/editmamei/editmamei/blob/main/docs/pro-features.md) is the canonical version.
+See the full breakdown in [pro-features.md](https://github.com/editmamei/editmamei/blob/main/docs/pro-features.md). Short version: Community covers the full working-photographer editing surface: documents, layers, layer transforms and straightening, non-destructive adjustment layers, filters, content-aware retouch, layer styles, masks, selections (including Photoshop's Select Subject and Select Sky), shape layers and pen paths, channel compositing, on-device scene awareness, per-channel histograms and visual verification, history, text, and image placement. Pro adds the develop-grade and precision toolkit: **Camera Raw** as a re-editable Smart Filter, **raw files developed before they open**, **folder batch**, **precision placement** (name a location, get verified geometry), **named-object masks**, **face-mesh perception**, **subject-instance targeting**, **warp**, the **whole reproducible-template system**, and **Photoshop Actions + ExtendScript scripting**. The [main README](https://github.com/editmamei/editmamei/blob/main/README.md#free-and-pro) carries the same split at a glance; [pro-features.md](https://github.com/editmamei/editmamei/blob/main/docs/pro-features.md) is the canonical version.
 
 ### Can it drive Camera Raw?
 
@@ -894,13 +895,13 @@ It replaces coordinate guessing. The AI names a location in words, local vision 
 
 ### How do I activate a Pro license?
 
-Buy Pro at [editmamei.com/desktop/pricing](https://editmamei.com/desktop/pricing), then activate it. Pro is delivered as a downloaded module: activating your license makes Editmamei fetch and load the Pro module alongside your Community install, so nothing gets reinstalled. If you run Editmamei through Claude Code or another npm client, run `editmamei activate YOUR-KEY` in your terminal and restart the client (check status anytime with `editmamei license`). If you use the Claude Desktop extension, open **Settings → Extensions → Editmamei**, paste your key into the **Pro license key** field, save, and restart Claude Desktop. Full walkthrough at [editmamei.com/desktop/activate](https://editmamei.com/desktop/activate). See [pro-features.md](https://github.com/editmamei/editmamei/blob/main/docs/pro-features.md) for what Pro adds.
+Buy Pro at [editmamei.com/desktop/pricing](https://editmamei.com/desktop/pricing), then activate it. Pro is delivered as a downloaded module: activating your license makes Editmamei fetch and load the Pro module alongside your Community install, so nothing gets reinstalled. If you run Editmamei through Claude Code or another npm client, run `editmamei activate YOUR-KEY` in your terminal and restart the client (check status anytime with `editmamei license`). If you use the Claude Desktop extension, open **Settings → Desktop app → Manage (next to Extensions) → Editmamei**, paste your key into the **Pro license key** field, save, and restart Claude Desktop. Full walkthrough at [editmamei.com/desktop/activate](https://editmamei.com/desktop/activate). See [pro-features.md](https://github.com/editmamei/editmamei/blob/main/docs/pro-features.md) for what Pro adds.
 
 ### Pro stopped unlocking. How do I fix it?
 
 Run `editmamei license` first. Its last line says whether Pro is unlocked and, if not, why: `grace-expired` means your license hasn't checked in recently enough, `revoked` or `expired` are subscription states, and `granted` means the license is fine and you just need to restart your AI client so the module loads.
 
-The most common cause is `grace-expired` on a healthy subscription, which usually means your AI client is restarting Editmamei faster than the license check can finish. Quit the client completely, wait a minute, start it once, and leave it running; if checks have been failing for a while, Pro can take a few hours to come back rather than returning at the next start. If `Last check` in that output is within the past week yet Pro still says `grace-expired`, the cause is a system clock that was once set ahead, and the fix is different: see [a clock set behind](https://github.com/editmamei/editmamei/blob/main/docs/troubleshooting.md#a-clock-set-behind). If you use the Claude Desktop extension and recently installed a new bundle, also check your key is still in **Settings → Extensions → Editmamei → Pro license key**.
+The most common cause is `grace-expired` on a healthy subscription, which usually means your AI client is restarting Editmamei faster than the license check can finish. Quit the client completely, wait a minute, start it once, and leave it running; if checks have been failing for a while, Pro can take a few hours to come back rather than returning at the next start. If `Last check` in that output is within the past week yet Pro still says `grace-expired`, the cause is a system clock that was once set ahead, and the fix is different: see [a clock set behind](https://github.com/editmamei/editmamei/blob/main/docs/troubleshooting.md#a-clock-set-behind). If you use the Claude Desktop extension and recently installed a new bundle, also check your key is still in **Settings → Desktop app → Manage (next to Extensions) → Editmamei → Pro license key**.
 
 `editmamei repair` re-downloads the Pro module and is the right fix for a damaged download, not for a license that isn't checking in, so try it after `editmamei license` rather than before. Full walkthrough in [troubleshooting.md](https://github.com/editmamei/editmamei/blob/main/docs/troubleshooting.md#pro-tools-are-missing-or-pro-shows-as-community). If none of it helps, email [support@editmamei.com](mailto:support@editmamei.com).
 
@@ -951,7 +952,7 @@ Everything on this page is Photoshop-only. Editmamei's GIMP support (see [docs/g
 Pro is available now. Community is free; Pro is a paid license you buy at [editmamei.com/desktop/pricing](https://editmamei.com/desktop/pricing) and activate. Activating downloads the Pro module and loads it alongside your Community install.
 
 - **Claude Code / npm clients:** run `editmamei activate YOUR-KEY` in your terminal, then restart your AI client. Check status anytime with `editmamei license`.
-- **Claude Desktop extension:** open **Settings → Extensions → Editmamei**, paste your key into the **Pro license key** field, save, and restart Claude Desktop.
+- **Claude Desktop extension:** open **Settings → Desktop app → Manage (next to Extensions) → Editmamei**, paste your key into the **Pro license key** field, save, and restart Claude Desktop.
 
 One license covers two devices; switch a device with `editmamei deactivate` or from your account portal. Pro works offline between periodic check-ins (roughly daily, with a seven-day grace window), and if a subscription lapses Editmamei keeps running as Community rather than locking you out. If Pro stops unlocking, run `editmamei license` to see whether the license is the problem before reaching for `editmamei repair`, which re-downloads the module and fixes a damaged download rather than a license that isn't checking in. Either way your templates, settings, and license stay untouched. Step-by-step: [troubleshooting.md](https://github.com/editmamei/editmamei/blob/main/docs/troubleshooting.md#pro-tools-are-missing-or-pro-shows-as-community). Full activation walkthrough: [editmamei.com/desktop/activate](https://editmamei.com/desktop/activate).
 
@@ -1336,8 +1337,8 @@ Two install types, and they update and store settings differently.
 
 | | **Claude Desktop extension** | **npm / npx** |
 |---|---|---|
-| You installed it by | dragging `editmamei.mcpb` onto the Extensions page | a config entry, or `npm install -g editmamei` |
-| Settings live in | Claude Desktop → **Settings → Extensions → Editmamei** | `~/.editmamei/`, and the `editmamei` CLI |
+| You installed it by | installing `editmamei.mcpb` from Claude Desktop's extension settings | a config entry, or `npm install -g editmamei` |
+| Settings live in | Claude Desktop → **Settings → Desktop app → Manage (next to Extensions) → Editmamei** | `~/.editmamei/`, and the `editmamei` CLI |
 | Updates | only when you install a new bundle | see [Did my update apply?](#did-my-update-apply) |
 
 If you're not sure, run `editmamei status`. It reports which MCP clients Editmamei is registered
@@ -1431,7 +1432,7 @@ Installing a new bundle can reset the extension's settings, including the **Pro 
 field. Your stored license in `~/.editmamei/` keeps working for a while on its own, so Pro won't
 break immediately. It stops days later, which makes it easy to miss the connection to the update.
 
-After installing a new bundle, open **Settings → Extensions → Editmamei** and check the **Pro
+After installing a new bundle, open **Settings → Desktop app → Manage (next to Extensions) → Editmamei** and check the **Pro
 license key** field still has your key in it. If it's empty, paste it back, save, and restart
 Claude Desktop.
 
@@ -1489,8 +1490,8 @@ Then restart your AI client.
 **If you use the Claude Desktop extension**, the bundle is a frozen copy. It never updates on its
 own. Download the current
 [`editmamei.mcpb`](https://github.com/editmamei/editmamei/releases/latest/download/editmamei.mcpb),
-drag it onto **Settings → Extensions** in Claude Desktop to replace the installed one, then restart
-Claude Desktop. Afterwards, check your **Pro license key** field is still populated.
+install it with the [same steps](https://github.com/editmamei/editmamei/blob/main/docs/installation.md#one-click-install-claude-desktop) to replace the
+installed one, then restart Claude Desktop. Afterwards, check your **Pro license key** field is still populated.
 
 To see what you're actually running, ask your assistant to run `ps_ping`, which reports the
 Editmamei version along with the Photoshop connection.
@@ -1580,12 +1581,18 @@ goes to that assistant; covered under "Your AI assistant is a cloud service" bel
 
 There is one line Editmamei does not cross, on any setting or edition:
 
-- **Your image and document content.** No photos, previews, thumbnails, layer renders, or
-  Photoshop document data are ever sent to Editmamei.
+- **Your images.** No photos, previews, thumbnails, layer renders, or other pixel data are ever
+  sent to Editmamei.
 - **Your file paths.** Full paths stay local. Where a path is unavoidable in an opt-in
   diagnostic message, it's reduced to a bare filename first (see [Sanitization](#sanitization)).
 - **Your metadata.** Camera info, GPS, and author fields are never sent to Editmamei. Your
   AI assistant can read them (for example when it requests a document's metadata).
+
+**Names in error messages, only if you opt in.** Diagnostics are off by default. If you turn them
+on, an error message is sent as Photoshop or Editmamei wrote it, after the cleanup in
+[Sanitization](#sanitization). An error can name what it was about, such as a layer, group or
+channel, or a value you gave a tool, and that name is sent as written. See
+[Diagnostic event](#diagnostic-event-only-if-you-opt-in).
 
 The previews your AI assistant looks at are a separate matter: that's your AI client talking
 to its own cloud, not Editmamei. See [Your AI assistant is a cloud service](#your-ai-assistant-is-a-cloud-service).
@@ -1601,10 +1608,11 @@ uploads it. You review the file and attach it to a bug report yourself.
 
 The bundle is sanitized to the same hard line as everything above:
 
-- **No image or document content**, **no tool arguments**, and file paths reduced to basenames.
+- **No images**, and file paths reduced to basenames.
 - It holds recent server log lines, your OS / Editmamei / Photoshop versions, your
   `install_id`, and a content-free summary of recent tool calls (name, success, duration, error
-  class, never the arguments). If a Claude Desktop log is present, a redacted tail is included
+  class, never the arguments). The log lines include error messages, which can name a layer or
+  repeat a value you passed a tool. If a Claude Desktop log is present, a redacted tail is included
   with every request and response **body** removed; only method names and timing are kept.
 
 Because it's a local file, you can open it and see exactly what you're sharing before you send it.
@@ -1622,7 +1630,6 @@ run. These are the keys:
 | `telemetry.diagnostics` | boolean | `false` (off) | Extra sanitized error detail for bug-hunting. The opt-in tier. |
 | `telemetry.install_id` | string | random | A random ID, minted once, so installs can be counted without knowing who you are. It is not derived from anything about you, but it is stable, so it is still personal data and you have rights over it — see [Your rights, and the legal basis](#your-rights-and-the-legal-basis). **Read-only**: you can see it, but it isn't something you set. |
 | `privacy.send_previews_to_llm` | boolean | `true` | A control over sending images to your AI assistant. When `false`, no tool returns image bytes to the model: Photoshop previews (`ps_get_preview`, selection previews, annotated detection images) and GIMP previews (`gimp_get_preview`, `gimp_compare`, see [docs/gimp.md](https://github.com/editmamei/editmamei/blob/main/docs/gimp.md)) come back as text only, with dimensions, numbers and a note that the image was withheld. This includes an image inside another tool's result, such as the last step of `ps_sequence`. GIMP's `latest-preview.jpg`, written on your own disk, is unaffected. |
-| `ps_path` | string \| null | `null` | Pin a specific Photoshop binary. `null` = auto-detect (the `PHOTOSHOP_PATH` env var still wins if set). |
 | `update_check` | boolean | `true` (on) | Check the public npm registry at startup for a newer version (see "Update check" below). The opt-out tier. |
 | `editor` | string | `"auto"` | Pin which editor(s) register at boot: `auto`, `photoshop`, or `gimp`. The `EDITMAMEI_EDITOR` env var still wins if set. See [docs/gimp.md](https://github.com/editmamei/editmamei/blob/main/docs/gimp.md#pinning-the-editor). |
 | `gimp_path` | string \| null | `null` | Pin a specific GIMP binary (an absolute path; `EDITMAMEI_GIMP_PATH=flatpak` is the way to use Flatpak). `null` = auto-detect (the `EDITMAMEI_GIMP_PATH` env var still wins if set). See [docs/gimp.md](https://github.com/editmamei/editmamei/blob/main/docs/gimp.md#pointing-at-a-custom-install). |
@@ -1658,6 +1665,8 @@ Three equivalent ways, all writing the same `~/.editmamei/settings.json`:
 }
 ```
 
+`ps_path` is unused and has no effect. To point Editmamei at a specific Photoshop, set the `PHOTOSHOP_PATH` environment variable.
+
 **Use the CLI.** The `editmamei config` command reads and writes the same file:
 
 ```bash
@@ -1669,10 +1678,10 @@ editmamei config set telemetry.diagnostics true  # opt in to diagnostic detail
 
 Boolean values accept `true`/`false`, `on`/`off`, `yes`/`no`, or `1`/`0`.
 
-`automation.allow_execute_script` (default `true`): set to `false` to make tools that run script code refuse.
+`automation.allow_execute_script` (default `true`): set to `false` to make every tool that runs code refuse: arbitrary scripts (`ps_execute_script`) and recorded Actions (`ps_play_action`), since an Action can contain a script step.
 
 **In Claude Desktop.** The one-click extension has no terminal, so the same two switches appear in
-the extension's own settings (Settings → Extensions → Editmamei): **Share usage stats**
+the extension's own settings (Settings → Desktop app → Manage (next to Extensions) → Editmamei): **Share usage stats**
 (opt-out) and **Share error diagnostics** (opt-in). Toggling them there controls telemetry for
 Claude Desktop without editing any file.
 
@@ -1682,13 +1691,15 @@ log so the default is never a surprise:
 > First run: Editmamei collects content-free usage telemetry (tool name, success,
 > duration, bytes returned, version/edition/OS/PS-version, install channel, which AI client
 > connected, Node/OS/architecture versions, and per-session counts like edits made and retries)
-> to find what breaks. It never sends image content, file paths, or tool arguments. The only
-> identifier is a random install ID. Opt out anytime: `editmamei config set telemetry.usage false`
-> (or edit `~/.editmamei/settings.json`). Opt in to sanitized diagnostics:
-> `editmamei config set telemetry.diagnostics true`.
+> to find what breaks. Usage telemetry never sends image content, file paths, or tool
+> arguments. The only identifier is a random install ID. Opt out anytime:
+> `editmamei config set telemetry.usage false` (or edit `~/.editmamei/settings.json`). Opt in
+> to sanitized diagnostics (error messages, which can name a layer or repeat a value you
+> passed): `editmamei config set telemetry.diagnostics true`.
 
-> **Note:** Editmamei reads the settings file once at startup. After changing a setting, restart
-> your AI client so the server picks it up.
+> **Note:** Editmamei reads most settings once at startup, so after changing one, restart your AI
+> client. `privacy.send_previews_to_llm` and `automation.allow_execute_script` are read each time
+> they're needed and take effect right away.
 
 ---
 
@@ -1735,6 +1746,7 @@ serving datacenter that the network edge derives from the connection. See *Proce
 | `error_class` | On failure, a short error **category** (e.g. `wrong_layer_kind`), never a message or free text. `null` on success. |
 | `duration_ms` | How long the call took, in milliseconds. |
 | `result_bytes` | The **size** of the tool's response, in bytes — never its content. `0` when the tool returned nothing, and omitted entirely if the size wasn't measured. |
+| `items` | Sent only for `ps_batch` and `ps_sequence`: how many documents the call processed, up to 10,000. A count read from the tool's response, never its arguments, and nothing about which documents they were. Omitted when the call failed or processed none. |
 
 ### Session start: once when Editmamei launches (on by default)
 
@@ -1854,6 +1866,8 @@ No image content, no paths, no tool arguments, just an enum outcome plus the mod
   "dropped_outbox": 0,
   "dropped_unsafe": 0,
   "usage_calls_sent": 47,
+  "result_bytes": 1048576,
+  "recipe_calls": 1,
   "module_update": "none",
   "templates_saved": 6,
   "action_sets": 2
@@ -1875,6 +1889,8 @@ many tool calls happened, how many distinct tools, whether anything failed. No p
 | `dropped_outbox` | Events dropped from the on-disk retry queue — because it hit its size limit, because a line in it was corrupt and could not be read back, or because writing to it failed. Almost always `0`. |
 | `dropped_unsafe` | Events this client refused to send because one of their own fields failed its content check. Should always be `0`; anything else is a bug worth reporting. |
 | `usage_calls_sent` | How many tool calls the client believes it successfully sent. A count, nothing about which calls they were — it exists so we can tell "you did less" apart from "we lost some of it", which we previously could not. |
+| `result_bytes` | The total **size** of the responses returned to your AI client this session, in bytes — never their content. |
+| `recipe_calls` | How many successful calls used a template, batch, sequence, or Photoshop Action. A count only, never which one. |
 | `module_update` | Whether the background Pro-module refresh installed something (`updated`), failed (`failed`), or did neither (`none`). Sent only for installs with a Pro license on file — a Community install never sends this field. |
 | `templates_saved` / `action_sets` | How many templates you've saved and how many Photoshop Action Sets you have loaded, as counts only — never their names or content. `templates_saved` is read from your own disk and is omitted if that read fails; `action_sets` is omitted until a connection to Photoshop has reported it. |
 
@@ -1888,7 +1904,7 @@ than any other summary.
 `duration_s`, `ended_after_failure`, `behind_latest`, `module_update`, `templates_saved`, and
 `action_sets` are each omitted (never sent as a false zero) when this session never learned
 them. `retry_count`, `edits_ok`, `kept_work`, `dropped_events`, `dropped_outbox`, `dropped_unsafe`,
-and `usage_calls_sent` are present on any summary this version writes normally: `0` is a real
+`usage_calls_sent`, `result_bytes`, and `recipe_calls` are present on any summary this version writes normally: `0` is a real
 observation (no retries, no edits kept, nothing dropped), not an unknown. The one exception is
 a summary reconstructed after the program was killed outright. It carries only the counters
 that had been written to disk before the kill, so an older build's leftover state file can
@@ -1922,6 +1938,11 @@ This adds a sanitized error message, the name of the failing step (`snippet`), a
 tail of error output, enough to trace a bug without you mailing a log by hand. Still no image
 content.
 
+The message is the error's own text, so it can include a name from your document (a layer, group
+or channel name) or a value you passed a tool, such as the name of a sky you asked for. Only file
+paths and the name lists after `not found:` are cleaned out (see [Sanitization](#sanitization));
+other names are sent as written. Leave diagnostics off if you'd rather not share them.
+
 | Field | Meaning |
 |---|---|
 | `doc_depth` | The open document's bit depth at the last successful connection to Photoshop: `8`, `16`, or `32` — present only for a document at one of those three depths. Omitted if no document was open, or its depth is none of the three. |
@@ -1930,8 +1951,9 @@ content.
 
 ### What is deliberately never in any event
 
-- The arguments you passed a tool (no prompts, no values, no text).
-- Any image, preview, thumbnail, or document content.
+- The arguments you passed a tool (no prompts, no values, no text). The one exception is an
+  opt-in diagnostic message, which repeats a value when the error itself does (see above).
+- Any image, preview, thumbnail, or pixel data.
 - Full file paths.
 - A precise timestamp (day-granularity only).
 - A session ID or anything that links events back to a specific editing session beyond the
@@ -1947,8 +1969,9 @@ Before any diagnostic string leaves, it runs through a fixed cleanup pass:
 2. Absolute paths collapsed to their final filename (`C:\photos\client\shot.psd` → `shot.psd`).
 3. Name-miss detail redacted: everything after a `not found:` marker (the name that was
    asked for and any list of the layer/group/channel names that exist) becomes
-   `[redacted]`. Layer names are your content; the full message stays in the local
-   session log on your machine only.
+   `[redacted]`, and the full message stays in the local session log on your machine only.
+   Names an error quotes in any other form (for example "Cannot fill a fully locked layer:
+   Background") are not redacted.
 4. Backslashes normalized to forward slashes; leading separators stripped.
 5. Length capped (error message 2000 chars, step name 128, error-output tail 4000).
 
@@ -2002,7 +2025,8 @@ public data `npm` itself reads.
 Separately from telemetry, Editmamei keeps a richer local log of each session at
 `~/.editmamei/sessions/<session-id>.ndjson`. This is used for debugging and by the Templates
 system to reconstruct an edit. It **stays on your disk**; it is not transmitted, and telemetry
-is only the small content-free subset described above, never this file. There's no automatic
+is only the small subset described above (content-free, plus opt-in diagnostics), never this
+file. There's no automatic
 cleanup; delete the files whenever you like.
 
 ---
