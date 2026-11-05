@@ -6,7 +6,7 @@ seoDescription: People keep refining prompts that break on the next model, or le
 date: 2026-11-05
 ---
 
-My X feed keeps showing me the same post: stop asking ChatGPT to make your photo better, use these prompts instead.
+My X feed keeps showing me the same post: stop asking ChatGPT to make your photo better, use these prompts instead. One of them, from September, has 1.2 million views.
 
 I get the appeal. Everyone has always enjoyed a good photo edit, and there have always been tools that could take something washed out, grainy or out of focus and turn it into something amazing. Then AI made it possible to edit and make anything.
 
