@@ -1,7 +1,7 @@
 ---
-title: Why does AI photo editing keep doing it the hard way?
+title: Photo editors existed long before AI. Don't replace something that's not broken.
 description: People keep refining prompts that break on the next model, or letting AI rebuild an editor in a sandbox every time. Why not let AI use the photo editors we already have?
-seoTitle: Why AI photo editing keeps taking the hard way
+seoTitle: Photo editors existed long before AI
 seoDescription: People keep refining prompts that break on the next model, or letting AI rebuild an editor every time. Why not let AI use the photo editors we have?
 date: 2026-11-05
 ---
