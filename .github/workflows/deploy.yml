@@ -73,13 +73,16 @@ jobs:
         run: node scripts/check-leak-guard.mjs
 
       # Hand the build to the secret-bearing job below. Nothing here is secret.
-      # cloudflare-tmp holds the route manifest _worker.js imports.
+      # cloudflare-tmp holds the route manifest _worker.js imports; worker/ is the
+      # deployed main, which imports _worker.js and src/lib/pricing.
       - name: Upload the build
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
           name: site-build
           path: |
             wrangler.jsonc
+            worker
+            src/lib/pricing
             .svelte-kit/cloudflare
             .svelte-kit/cloudflare-tmp
             .svelte-kit/output

@@ -7,6 +7,7 @@
 	import InstallSection from '$lib/components/InstallSection.svelte';
 	import Seo from '$lib/components/Seo.svelte';
 	import { desktopApp, desktopHeroVideo } from '$lib/seo/schema';
+	import { price } from '$lib/pricing/price';
 	import { reveal } from '$lib/actions/reveal';
 	import { track } from '$lib/analytics/clarity';
 	import { toolCounts } from '$lib/content/tools';
@@ -215,7 +216,7 @@
 			<div class="flex flex-col rounded-[22px] bg-paper p-7 ring-1 ring-brand/10">
 				<div class="flex items-baseline justify-between gap-4">
 					<h3 class="text-2xl font-bold text-brand">Free</h3>
-					<span class="text-lg font-semibold text-brand">$0</span>
+					<span class="text-lg font-semibold text-brand">{price('free')}</span>
 				</div>
 				<p class="mt-4 mb-6 text-[16px] leading-relaxed text-neutral-800">
 					{freeTools} Photoshop tools and {toolCounts.gimp} for GIMP: adjustment layers, masks, selections,
@@ -233,7 +234,9 @@
 				<div class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
 					<h3 class="text-2xl font-bold">Pro</h3>
 					<span class="text-[15px] text-white/80"
-						><span class="text-lg font-semibold text-white">$9</span>/month, $79/year, or $199 once</span
+						><span class="text-lg font-semibold text-white">{price('pro-monthly')}</span>/month, {price(
+							'pro-annual'
+						)}/year, or {price('pro-lifetime')} once</span
 					>
 				</div>
 				<p class="mt-4 text-[16px] leading-relaxed text-white/85">

@@ -25,8 +25,9 @@ const config = {
 	kit: {
 		// Cloudflare Workers with static assets (wrangler.jsonc): every page is prerendered and served as a
 		// file, except the gallery's two routes, which the Worker renders on request from Connect's share
-		// data so an approved, edited or removed share shows at once (src/routes/gallery).
-		adapter: adapter(),
+		// data so an approved, edited or removed share shows at once (src/routes/gallery). The adapter reads
+		// wrangler.kit.jsonc, so it writes its Worker where worker/index.js (the deployed main) imports it.
+		adapter: adapter({ config: 'wrangler.kit.jsonc' }),
 		prerender: {
 			// A link to a moved address is fine: _redirects sends it on. Any
 			// other missing page still fails the build.

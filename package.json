@@ -16,6 +16,8 @@
 		"build:favicons": "node scripts/build-favicons.mjs",
 		"sync:tools": "node scripts/sync-tools.mjs",
 		"check:tools": "node scripts/sync-tools.mjs --check",
+		"sync:prices": "node scripts/sync-prices.mjs",
+		"check:prices": "node scripts/sync-prices.mjs --check",
 		"upload:media": "node scripts/upload-media.mjs",
 		"check:media": "node scripts/upload-media.mjs --check"
 	},

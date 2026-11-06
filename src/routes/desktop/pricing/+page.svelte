@@ -7,10 +7,11 @@
 	import { PRO_FEATURES } from '$lib/content/pro-features';
 	import { toolCounts } from '$lib/content/tools';
 	import { desktopApp, faqPage } from '$lib/seo/schema';
+	import { price } from '$lib/pricing/price';
 
 	// ──────────────────────────────────────────────────────────────────────
 	// PRODUCTION Polar checkout links (org `editmamei`). Checkout shows
-	// $9 / $79 / $199 directly, with no code needed.
+	// the early-adopter prices directly, with no code needed.
 	// Created via POST /v1/checkout-links/.
 	// ──────────────────────────────────────────────────────────────────────
 	const CHECKOUT = {
@@ -36,7 +37,7 @@
 		{
 			id: 'monthly',
 			name: 'Pro monthly',
-			price: '$9',
+			price: price('pro-monthly'),
 			cadence: 'a month',
 			body: 'Starts with a 7-day free trial.',
 			cta: 'Start free trial',
@@ -47,9 +48,9 @@
 		{
 			id: 'annual',
 			name: 'Pro annual',
-			price: '$79',
+			price: price('pro-annual'),
 			cadence: 'a year',
-			body: '$29 a year less than paying monthly.',
+			body: `${price('pro-annual-saving')} a year less than paying monthly.`,
 			cta: 'Get Pro annual',
 			fine: '',
 			href: CHECKOUT.annual,
@@ -58,7 +59,7 @@
 		{
 			id: 'perpetual',
 			name: 'Pro perpetual',
-			price: '$199',
+			price: price('pro-lifetime'),
 			cadence: 'once',
 			body: 'Pay once, with every future update included.',
 			cta: 'Get Pro perpetual',

@@ -4,9 +4,10 @@
 	import { track } from '$lib/analytics/clarity';
 	import { CONNECT_URL } from '$lib/links';
 	import { connectApp, faqPage } from '$lib/seo/schema';
+	import { price } from '$lib/pricing/price';
 
-	// Connect's prices, from its billing configuration (POLAR_PRODUCTS) and the
-	// 10-22 product facts. A credit is never defined in public copy (owner rule):
+	// Connect's prices come from src/lib/pricing/prices.json (synced from Polar);
+	// the rest from the 10-22 product facts. A credit is never defined in public copy (owner rule):
 	// what a credit buys can change as the tools and hosting change.
 	const plans = [
 		{
@@ -18,16 +19,16 @@
 		},
 		{
 			name: 'Credit packs',
-			price: 'From $7',
+			price: `From ${price('connect-pack-750')}`,
 			cadence: 'pay once',
-			body: '750 credits for $7, or 2,000 for $15. Pack credits never expire.',
+			body: `750 credits for ${price('connect-pack-750')}, or 2,000 for ${price('connect-pack-2000')}. Pack credits never expire.`,
 			dark: false
 		},
 		{
 			name: 'Monthly plans',
-			price: 'From $10',
+			price: `From ${price('connect-monthly-1500')}`,
 			cadence: 'a month',
-			body: '1,500 credits a month for $10, or 7,500 for $35. Unused monthly credits expire when the plan renews.',
+			body: `1,500 credits a month for ${price('connect-monthly-1500')}, or 7,500 for ${price('connect-monthly-7500')}. Unused monthly credits expire when the plan renews.`,
 			dark: true
 		}
 	];
@@ -112,7 +113,7 @@
 			<span>
 				<span class="block text-lg font-bold text-brand">Editing on your own computer?</span>
 				<span class="mt-1 block text-[15px] text-neutral-700"
-					>Editmamei Desktop is free in Photoshop or GIMP, with Pro from $9 a month.</span
+					>Editmamei Desktop is free in Photoshop or GIMP, with Pro from {price('pro-monthly')} a month.</span
 				>
 			</span>
 			<span

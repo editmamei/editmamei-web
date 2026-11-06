@@ -1,6 +1,8 @@
 # Permanent moves from the 2026-10 site overhaul. Copied into the build by
-# @sveltejs/adapter-cloudflare and applied by Workers static assets before any
-# file is served. Exact paths only, so nothing under an old path is caught.
+# @sveltejs/adapter-cloudflare and applied by Workers static assets. The Worker
+# runs first for every page, so it asks the router for these when SvelteKit has
+# no page there (worker/redirects.js). Exact paths only, so nothing under an old
+# path is caught.
 # A #fragment on an old link carries over, except where the target sets its own (/gimp).
 /photoshop        /desktop        301
 /photoshop/       /desktop        301

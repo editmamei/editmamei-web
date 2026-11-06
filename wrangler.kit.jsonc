@@ -1,0 +1,13 @@
+// Read only by @sveltejs/adapter-cloudflare (svelte.config.js), which writes SvelteKit's Worker to `main` and the
+// site's files to `assets.directory`. Nothing deploys from this file: wrangler.jsonc does, with worker/index.js as its
+// main, which wraps the Worker written here. Keep name, compatibility_date and assets equal to wrangler.jsonc's
+// (tests/local-prices.test.mjs checks). Bindings belong in wrangler.jsonc: `vite dev` reads that file, not this one.
+{
+	"name": "editmamei-web",
+	"compatibility_date": "2026-10-06",
+	"main": ".svelte-kit/cloudflare/_worker.js",
+	"assets": {
+		"binding": "ASSETS",
+		"directory": ".svelte-kit/cloudflare"
+	}
+}

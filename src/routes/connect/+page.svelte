@@ -6,6 +6,7 @@
 	import UseCases from '$lib/components/connect/UseCases.svelte';
 	import Seo from '$lib/components/Seo.svelte';
 	import { connectApp, connectFilmVideo } from '$lib/seo/schema';
+	import { price } from '$lib/pricing/price';
 	import { reveal } from '$lib/actions/reveal';
 	import { track } from '$lib/analytics/clarity';
 	import { mediaUrl } from '$lib/media';
@@ -284,14 +285,16 @@
 			<div class="rounded-[22px] bg-paper p-7 ring-1 ring-brand/10">
 				<h3 class="text-xl font-bold text-brand">Packs</h3>
 				<p class="mt-3 text-[16px] leading-relaxed text-neutral-800">
-					750 credits for $7, or 2,000 for $15. Pack credits never expire.
+					750 credits for {price('connect-pack-750')}, or 2,000 for {price('connect-pack-2000')}.
+					Pack credits never expire.
 				</p>
 			</div>
 			<div class="rounded-[22px] bg-brand p-7 text-white">
 				<h3 class="text-xl font-bold">Monthly</h3>
 				<p class="mt-3 text-[16px] leading-relaxed text-white/85">
-					1,500 credits a month for $10, or 7,500 for $35. Unused monthly credits expire when the
-					plan renews.
+					1,500 credits a month for {price('connect-monthly-1500')}, or 7,500 for {price(
+						'connect-monthly-7500'
+					)}. Unused monthly credits expire when the plan renews.
 				</p>
 			</div>
 		</div>

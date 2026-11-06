@@ -2,20 +2,23 @@
 	"$schema": "./node_modules/wrangler/config-schema.json",
 	"name": "editmamei-web",
 	"compatibility_date": "2026-10-06",
-	// SvelteKit's Worker (@sveltejs/adapter-cloudflare). A request that matches a file in the build (every
-	// prerendered page, every asset) is served from it without running the script; the rest reach the
-	// script, which renders the gallery's two routes on request and the 404 page.
-	"main": ".svelte-kit/cloudflare/_worker.js",
+	// worker/index.js wraps SvelteKit's Worker (@sveltejs/adapter-cloudflare, configured by wrangler.kit.jsonc)
+	// to show prices in the visitor's currency (src/lib/pricing/local-prices.js). It runs first for every
+	// request but the build's hashed files under /_app/, which are served without running it. SvelteKit's
+	// Worker serves each prerendered page and asset from the build, and renders the gallery's two routes on
+	// request and the 404 page.
+	"main": "worker/index.js",
 	"assets": {
 		"binding": "ASSETS",
 		"directory": ".svelte-kit/cloudflare",
-		"html_handling": "auto-trailing-slash"
+		"html_handling": "auto-trailing-slash",
+		"run_worker_first": ["/*", "!/_app/*"]
 	},
 	// No public workers.dev URL. Preview URLs (the `staging` alias uploaded by
 	// staging.yml) stay on, behind Cloudflare Access.
 	"workers_dev": false,
-	// Workers Logs and traces, in the Worker's Observability tab. Only requests that reach the script are
-	// recorded (the gallery routes and the 404 page); static files are served without running it.
+	// Workers Logs and traces, in the Worker's Observability tab. Every request that runs the script is
+	// recorded: every page and asset but the hashed files under /_app/ (run_worker_first above).
 	"observability": {
 		"enabled": true,
 		"logs": { "enabled": true, "head_sampling_rate": 1, "invocation_logs": true },

@@ -4,6 +4,7 @@
 	import { track } from '$lib/analytics/clarity';
 	import { CONNECT_URL } from '$lib/links';
 	import { connectApp, desktopApp } from '$lib/seo/schema';
+	import { price } from '$lib/pricing/price';
 
 	// Both products' prices on one screen, each card handing off to its own
 	// pricing page. Facts match /desktop/pricing and /connect/pricing; a Connect
@@ -33,8 +34,8 @@
 		},
 		{
 			label: 'Price',
-			desktop: 'Free. Pro from $9 a month',
-			connect: '150 free credits, then packs from $7'
+			desktop: `Free. Pro from ${price('pro-monthly')} a month`,
+			connect: `150 free credits, then packs from ${price('connect-pack-750')}`
 		}
 	];
 </script>
@@ -59,8 +60,10 @@
 			<p class="mt-1 text-sm text-neutral-600">In Photoshop or GIMP, on your computer</p>
 			<p class="mt-6 text-5xl font-bold tracking-[-0.03em] text-brand">Free</p>
 			<p class="mt-4 text-[16px] leading-relaxed text-neutral-800">
-				Pro adds Camera Raw developing, templates and whole-folder batches for $9 a month, $79 a
-				year, or $199 once. The monthly plan has a 7-day free trial.
+				Pro adds Camera Raw developing, templates and whole-folder batches for {price(
+					'pro-monthly'
+				)} a month, {price('pro-annual')} a year, or {price('pro-lifetime')} once. The monthly plan has
+				a 7-day free trial.
 			</p>
 			<div class="mt-auto flex flex-wrap items-center gap-4 pt-8">
 				<a
@@ -81,8 +84,9 @@
 			<p class="mt-1 text-sm text-white/70">From any device, with nothing to install</p>
 			<p class="mt-6 text-5xl font-bold tracking-[-0.03em]">150 free credits</p>
 			<p class="mt-4 text-[16px] leading-relaxed text-white/85">
-				Plus up to 50 more each month. After that, credit packs start at $7, and monthly plans at
-				$10.
+				Plus up to 50 more each month. After that, credit packs start at {price(
+					'connect-pack-750'
+				)}, and monthly plans at {price('connect-monthly-1500')}.
 			</p>
 			<div class="mt-auto flex flex-wrap items-center gap-4 pt-8">
 				<a

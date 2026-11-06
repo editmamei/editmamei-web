@@ -9,6 +9,7 @@
 	import RangeStrip from '$lib/components/landing/RangeStrip.svelte';
 	import Seo from '$lib/components/Seo.svelte';
 	import { connectApp, desktopApp, faqPage } from '$lib/seo/schema';
+	import { price } from '$lib/pricing/price';
 	import { reveal } from '$lib/actions/reveal';
 	import { track } from '$lib/analytics/clarity';
 
@@ -26,7 +27,7 @@
 		},
 		{
 			q: 'What does it cost?',
-			a: 'Desktop is free. Pro adds Camera Raw developing, templates and whole-folder batches for $9 a month (early-adopter rate), $79 a year, or $199 once. Connect starts you with 150 free credits, plus up to 50 more each month; after that, credit packs start at $7.'
+			a: `Desktop is free. Pro adds Camera Raw developing, templates and whole-folder batches for ${price('pro-monthly')} a month (early-adopter rate), ${price('pro-annual')} a year, or ${price('pro-lifetime')} once. Connect starts you with 150 free credits, plus up to 50 more each month; after that, credit packs start at ${price('connect-pack-750')}.`
 		},
 		{
 			q: 'Which AI apps work?',
@@ -121,7 +122,7 @@
 					<dt class="text-[#9fb5ac]">Works with</dt>
 					<dd>Claude, ChatGPT and other apps that add connectors</dd>
 					<dt class="text-[#9fb5ac]">Price</dt>
-					<dd>150 free credits to start, then packs from $7</dd>
+					<dd>150 free credits to start, then packs from {price('connect-pack-750')}</dd>
 				</dl>
 				<a
 					href={CONNECT_HREF}
