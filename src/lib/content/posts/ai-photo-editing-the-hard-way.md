@@ -1,7 +1,7 @@
 ---
-title: Photo editors existed long before AI. Don't replace something that's not broken.
+title: 'AI photo editing: build on the editors we have instead of replacing them'
 description: People keep refining prompts that break on the next model, or letting AI rebuild an editor in a sandbox every time. Why not let AI use the photo editors we already have?
-seoTitle: Photo editors existed long before AI
+seoTitle: 'AI photo editing: build on the editors we have'
 seoDescription: People keep refining prompts that break on the next model, or letting AI rebuild an editor every time. Why not let AI use the photo editors we have?
 date: 2026-11-05
 ---
