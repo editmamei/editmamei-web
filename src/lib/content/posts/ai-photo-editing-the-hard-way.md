@@ -20,6 +20,8 @@ The second is having the AI build its own editor. Every time you want a photo ed
 
 AI is meant to make everything easier and faster. So why is so much of what goes viral about AI focused on doing things the hard way?
 
+Because AI can build things from scratch, everyone builds their own version instead of using what's been developed for years.
+
 Photo editors have had decades of time, energy and investment put into them, and we know what they can do. I think the better approach is to make those tools accessible to AI, and let it accelerate and automate the work.
 
 That's why I'm building Editmamei. I'm tired of seeing all these poor approaches to photo editing with AI. Editmamei connects your AI assistant to a desktop photo editor, Photoshop or GIMP. The AI decides what the edit should be and the editor does the work, layer by layer, with real masks and adjustments, following professional workflows.
