@@ -27,7 +27,7 @@
 		},
 		{
 			title: 'Your photos never come to us.',
-			body: 'Editmamei never sends us your photos or previews. It sends content-free usage data, which you can turn off, checks for updates, and with Pro checks its license and asks us for Pro module updates.'
+			body: 'Editmamei never sends us your photos or previews. It sends content-free usage data, including which editing features are used, which you can turn off, checks for updates, and with Pro checks its license and asks us for Pro module updates.'
 		}
 	];
 

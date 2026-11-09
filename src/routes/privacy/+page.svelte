@@ -80,6 +80,28 @@
 				content.
 			</li>
 			<li>
+				<strong class="font-semibold text-brand"
+					>Feature names (on by default for new installs).</strong
+				>
+				Daily counts of which editing features were used: which filter, blend mode or effect a tool was
+				asked for, and which operations a script used. A tool's option is counted only when its value
+				is one of the fixed values that tool declares, and a script operation only when it is on a
+				<a
+					href="https://github.com/editmamei/editmamei/blob/main/docs/feature-names.md"
+					rel="noopener noreferrer"
+					class="font-semibold text-brand underline underline-offset-2">published list</a
+				>; any other name in a script is counted as
+				<code class="rounded bg-prompt-border px-1.5 py-0.5 font-mono text-[14px]">unknown</code>. A
+				file path, layer name, text or the script itself is never sent. These counts carry no
+				install ID. An install from before this setting existed is asked once, in your AI client,
+				before anything is sent, and an unanswered question means off. Your answer is recorded with
+				your install ID, so we know who was asked. Turn it off with
+				<code class="rounded bg-prompt-border px-1.5 py-0.5 font-mono text-[14px]"
+					>editmamei config set telemetry.features false</code
+				>
+				or the Share feature names toggle in Claude Desktop. Switching usage data off stops it too.
+			</li>
+			<li>
 				<strong class="font-semibold text-brand">Diagnostics (off until you turn it on).</strong>
 				When you opt in, a sanitized error message and the name of the step that failed, so a bug can
 				be traced without you mailing a log by hand. File paths are reduced to bare names; still no image
@@ -199,20 +221,22 @@
 			<div>
 				<dt class="font-semibold text-brand">Lawful basis</dt>
 				<dd class="mt-1">
-					Usage and reliability data (on by default) rests on legitimate interests: identifying
-					defects, and establishing which features are used and on which Photoshop versions. You
-					have the right to object, and the setting is the mechanism. Diagnostic detail (off by
-					default) rests on consent, given by enabling it and withdrawn by disabling it. The two
-					settings are independent: switching usage off does not switch diagnostics off.
+					Usage and reliability data, and feature names (on by default), rest on legitimate
+					interests: identifying defects, and establishing which features are used and on which
+					Photoshop versions. You have the right to object, and the settings are the mechanism.
+					Diagnostic detail (off by default) rests on consent, given by enabling it and withdrawn by
+					disabling it. Usage and diagnostics are independent: switching usage off stops feature
+					names too, but does not switch diagnostics off.
 				</dd>
 			</div>
 			<div>
 				<dt class="font-semibold text-brand">Retention</dt>
 				<dd class="mt-1">
 					Per-install daily counts: 24 months from the day they cover. The install record: 24 months
-					after the install was last seen. Opt-in diagnostic records: 90 days. All deleted
-					automatically. Aggregate daily totals carry no install ID and are not subject to these
-					windows.
+					after the install was last seen, and your latest answer to a consent question goes with
+					it. Opt-in diagnostic records: 90 days. Daily feature names and consent counts carry no
+					install ID: 24 months. All deleted automatically. Other aggregate daily totals carry no
+					install ID and are not subject to these windows.
 				</dd>
 			</div>
 			<div>
