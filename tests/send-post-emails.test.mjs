@@ -8,7 +8,7 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import {
 	EMAIL_POSTS_SINCE,
-	AUDIENCE_ID,
+	SEGMENT_ID,
 	FROM,
 	loadPosts,
 	selectPosts,
@@ -72,24 +72,24 @@ const opts = (dir, extra = {}) => ({
 
 test('selection: since-date cutoff, drafts and _ files excluded, slug from filename', () => {
 	const dir = postsDir({
-		'old-post.md': post('x', '2026-10-17'),
-		'new-post.md': post('x', '2026-10-18'),
-		'newer-post.md': post('x', '2026-11-02'),
+		'old-post.md': post('x', '2026-11-11'),
+		'new-post.md': post('x', '2026-11-12'),
+		'newer-post.md': post('x', '2026-11-20'),
 		'_TEMPLATE.md': post('x', '2026-12-01'),
 		'drafts/secret.md': post('x', '2026-12-01'),
 		'notes.txt': 'nope'
 	});
 	const slugs = selectPosts(loadPosts(dir)).map((p) => p.slug);
 	assert.deepEqual(slugs, ['new-post', 'newer-post']);
-	assert.equal(EMAIL_POSTS_SINCE, '2026-10-18');
+	assert.equal(EMAIL_POSTS_SINCE, '2026-11-12');
 });
 
 test('selection: quoted frontmatter values are unquoted', () => {
-	const dir = postsDir({ 'a.md': post('a', "'2026-10-20'", '"Quoted: title"', "'It''s fine'") });
+	const dir = postsDir({ 'a.md': post('a', "'2026-11-13'", '"Quoted: title"', "'It''s fine'") });
 	const [p] = loadPosts(dir);
 	assert.equal(p.title, 'Quoted: title');
 	assert.equal(p.description, "It's fine");
-	assert.equal(p.date, '2026-10-20');
+	assert.equal(p.date, '2026-11-13');
 });
 
 test('decide: sent and queued are skipped, draft is sent, missing is created', () => {
@@ -105,7 +105,7 @@ test('decide: sent and queued are skipped, draft is sent, missing is created', (
 });
 
 test('run: creates then sends a missing broadcast with the agreed fields', async () => {
-	const dir = postsDir({ 'hello.md': post('x', '2026-10-20', 'Hello world', 'A note') });
+	const dir = postsDir({ 'hello.md': post('x', '2026-11-13', 'Hello world', 'A note') });
 	const { impl, calls } = fakeFetch();
 	const code = await run(opts(dir, { fetchImpl: impl }));
 	assert.equal(code, 0);
@@ -114,7 +114,7 @@ test('run: creates then sends a missing broadcast with the agreed fields', async
 		['GET /broadcasts', 'POST /broadcasts', 'POST /broadcasts/new-id/send']
 	);
 	const create = calls[1].body;
-	assert.equal(create.audience_id, AUDIENCE_ID);
+	assert.equal(create.segment_id, SEGMENT_ID);
 	assert.equal(create.from, FROM);
 	assert.equal(create.subject, 'Hello world');
 	assert.equal(create.name, 'post:hello');
@@ -124,8 +124,8 @@ test('run: creates then sends a missing broadcast with the agreed fields', async
 
 test('run: an existing draft is sent, not recreated; a sent one does nothing', async () => {
 	const dir = postsDir({
-		'drafty.md': post('x', '2026-10-20'),
-		'done.md': post('x', '2026-10-21')
+		'drafty.md': post('x', '2026-11-13'),
+		'done.md': post('x', '2026-11-14')
 	});
 	const { impl, calls } = fakeFetch({
 		broadcasts: [
@@ -141,7 +141,7 @@ test('run: an existing draft is sent, not recreated; a sent one does nothing', a
 });
 
 test('run: follows list pagination before deciding', async () => {
-	const dir = postsDir({ 'late.md': post('x', '2026-10-20') });
+	const dir = postsDir({ 'late.md': post('x', '2026-11-13') });
 	const { impl, calls } = fakeFetch({
 		pages: {
 			first: { data: [{ id: 'a', name: 'other', status: 'sent' }], has_more: true },
@@ -154,7 +154,7 @@ test('run: follows list pagination before deciding', async () => {
 });
 
 test('run: --dry-run calls only the list endpoint', async () => {
-	const dir = postsDir({ 'hello.md': post('x', '2026-10-20') });
+	const dir = postsDir({ 'hello.md': post('x', '2026-11-13') });
 	const { impl, calls } = fakeFetch();
 	const lines = [];
 	const code = await run(
@@ -169,7 +169,7 @@ test('run: --dry-run calls only the list endpoint', async () => {
 });
 
 test('run: missing key skips with exit 0 and makes no calls', async () => {
-	const dir = postsDir({ 'hello.md': post('x', '2026-10-20') });
+	const dir = postsDir({ 'hello.md': post('x', '2026-11-13') });
 	const { impl, calls } = fakeFetch();
 	const lines = [];
 	const code = await run(opts(dir, { fetchImpl: impl, env: {}, log: (l) => lines.push(l) }));
@@ -180,7 +180,7 @@ test('run: missing key skips with exit 0 and makes no calls', async () => {
 });
 
 test('run: an API error exits non-zero and never prints the key', async () => {
-	const dir = postsDir({ 'hello.md': post('x', '2026-10-20') });
+	const dir = postsDir({ 'hello.md': post('x', '2026-11-13') });
 	const { impl } = fakeFetch({ failOn: (m) => m === 'POST' });
 	const errors = [];
 	const code = await run(opts(dir, { fetchImpl: impl, logError: (l) => errors.push(l) }));
@@ -190,7 +190,7 @@ test('run: an API error exits non-zero and never prints the key', async () => {
 });
 
 test('run: a network failure that echoes the key is scrubbed', async () => {
-	const dir = postsDir({ 'hello.md': post('x', '2026-10-20') });
+	const dir = postsDir({ 'hello.md': post('x', '2026-11-13') });
 	const errors = [];
 	const code = await run(
 		opts(dir, {

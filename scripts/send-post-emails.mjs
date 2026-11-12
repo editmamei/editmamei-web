@@ -24,8 +24,8 @@ import { readdirSync, readFileSync, existsSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-export const EMAIL_POSTS_SINCE = '2026-10-18';
-export const AUDIENCE_ID = '4496fce6-cedd-4a45-ab8b-cea7e58e2292';
+export const EMAIL_POSTS_SINCE = '2026-11-12';
+export const SEGMENT_ID = '4496fce6-cedd-4a45-ab8b-cea7e58e2292';
 export const FROM = 'Editmamei <updates@noreply.editmamei.com>';
 export const SITE = 'https://editmamei.com';
 const API = 'https://api.resend.com';
@@ -231,7 +231,7 @@ function makeClient(key, fetchImpl) {
 		},
 		async createBroadcast(post) {
 			const body = await call('POST', '/broadcasts', {
-				audience_id: AUDIENCE_ID,
+				segment_id: SEGMENT_ID,
 				from: FROM,
 				subject: post.title,
 				name: broadcastName(post.slug),
