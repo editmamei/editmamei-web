@@ -11,7 +11,7 @@
  * @typedef {{ title: string, detail: string, frame: number | null, call: string }} GalleryStep
  * @typedef {{ title: string, text: string, from: number, to: number, frame: number | null }} GalleryChapter
  * @typedef {{
- *   id: string, title: string, by: string, link: string | null, date: string,
+ *   id: string, title: string, by: string, named: boolean, link: string | null, date: string,
  *   featured: boolean, width: number, height: number, aligned: boolean,
  *   before: string | null, after: string, frames: string[], steps: GalleryStep[],
  *   chapters: GalleryChapter[], credit?: string
@@ -153,6 +153,8 @@ export function validateEntry(raw) {
 		id: e.id,
 		title: e.title,
 		by: e.by,
+		// The maker typed `by` (Connect's own fallback name is not theirs): only then do the tiles show it.
+		named: e.named === true,
 		link,
 		date,
 		featured: e.featured === true,

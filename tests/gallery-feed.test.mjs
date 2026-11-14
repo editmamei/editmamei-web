@@ -45,6 +45,14 @@ test('a well-formed entry is accepted', () => {
 	assert.equal(e?.steps[0].frame, 0);
 });
 
+test('an entry is named only when Connect says true, and an older feed reads as unnamed', () => {
+	assert.equal(validateEntry(good({ named: true }))?.named, true);
+	assert.equal(validateEntry(good())?.named, false);
+	for (const named of ['true', 1, 'yes', null, {}]) {
+		assert.equal(validateEntry(good({ named }))?.named, false, String(named));
+	}
+});
+
 test('bad ids are dropped', () => {
 	for (const id of ['Upper', 'has space', 'a/b', '..', '', 'x'.repeat(41), 'ünï', '<b>']) {
 		assert.equal(validateEntry(good({ id })), null, id);

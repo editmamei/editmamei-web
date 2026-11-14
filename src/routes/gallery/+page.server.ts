@@ -13,6 +13,8 @@ export const load: PageServerLoad = async ({ platform, setHeaders }) => {
 	const pick = (e: (typeof entries)[number]) => ({
 		id: e.id,
 		title: e.title,
+		// The maker's name on the wall, only when they gave one.
+		by: e.named ? e.by : null,
 		after: e.after,
 		width: e.width,
 		height: e.height

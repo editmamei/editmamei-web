@@ -5,6 +5,7 @@
 	interface Tile {
 		id: string;
 		title: string;
+		by: string | null;
 		after: string;
 		width: number;
 		height: number;
@@ -38,6 +39,7 @@
 	{#each placed as t (t.id)}
 		<a class="tile {t.span}" href="/gallery/{t.id}">
 			<img src={t.after} alt={t.title} loading="lazy" decoding="async" />
+			{#if t.by}<span class="by">{t.by}</span>{/if}
 		</a>
 	{/each}
 </div>
@@ -52,6 +54,7 @@
 		gap: 8px;
 	}
 	.tile {
+		position: relative;
 		display: block;
 		overflow: hidden;
 		border-radius: 6px;
@@ -77,6 +80,22 @@
 		height: 100%;
 		object-fit: cover;
 		transition: transform 0.5s ease;
+	}
+	/* The maker's name, small, over the bottom of the photo. */
+	.by {
+		position: absolute;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		padding: 14px 6px 4px;
+		font-size: 11px;
+		line-height: 1.2;
+		color: #fff;
+		background: linear-gradient(to top, rgb(0 0 0 / 0.6), transparent);
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		pointer-events: none;
 	}
 	.tile:hover img,
 	.tile:focus-visible img {

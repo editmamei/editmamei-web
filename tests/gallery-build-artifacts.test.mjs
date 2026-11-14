@@ -38,16 +38,25 @@ test('the sitemap lists /gallery', { skip }, () => {
 	assert.ok(xml.includes('<loc>https://editmamei.com/gallery</loc>'));
 });
 
-test('the wall puts no titles or text on the photos', () => {
+test('the wall puts no titles on the photos, only the maker’s name when they gave one', () => {
 	const wall = readFileSync(
 		join(REPO_ROOT, 'src', 'lib', 'components', 'GalleryWall.svelte'),
 		'utf8'
 	);
-	// A tile is a link around its photo and nothing else: the title rides only
-	// on the image's alt text (read by screen readers and image search, never
-	// drawn on the photo).
+	// A tile is a link around its photo: the title rides only on the image's
+	// alt text (read by screen readers and image search, never drawn on the
+	// photo). The one text on it is the maker's name, and only when Connect
+	// says they typed one (`named`, owner 2026-11-14).
 	const tile = wall.match(/<a class="tile[^>]*>([\s\S]*?)<\/a>/)?.[1] ?? '';
-	assert.match(tile, /^\s*<img [^>]*alt=\{t\.title\}[^>]*\/>\s*$/);
+	assert.match(
+		tile,
+		/^\s*<img [^>]*alt=\{t\.title\}[^>]*\/>\s*\{#if t\.by\}<span class="by">\{t\.by\}<\/span>\{\/if\}\s*$/
+	);
+	const server = readFileSync(
+		join(REPO_ROOT, 'src', 'routes', 'gallery', '+page.server.ts'),
+		'utf8'
+	);
+	assert.match(server, /by: e\.named \? e\.by : null/);
 });
 
 test('an entry page offers no downloads and keeps an unlisted share out of search', () => {
