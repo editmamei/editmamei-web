@@ -297,6 +297,19 @@ test('a share from Connect is an entry plus whether it is listed in the gallery'
 	assert.ok(validateShare({ ...good(), v: 1, listed: false, date: null }));
 });
 
+test("a share carries its maker's invite code, and only one shaped like Connect's", () => {
+	assert.equal(validateShare({ ...good(), v: 1, listed: false })?.invite, null);
+	assert.equal(
+		validateShare({ ...good(), v: 1, listed: false, invite: 'Ab3_dE-9x' })?.invite,
+		'Ab3_dE-9x'
+	);
+	for (const bad of ['short', 'has space!', 'a'.repeat(11), 42, '../x/y', 'javascript:x', null]) {
+		const share = validateShare({ ...good(), v: 1, listed: false, invite: bad });
+		assert.ok(share, JSON.stringify(bad));
+		assert.equal(share.invite, null, JSON.stringify(bad));
+	}
+});
+
 test('chapters must cover every step once, in order; anything else is no chapters, never a dropped entry', () => {
 	const steps = [
 		{ title: 'A', detail: '', frame: null, call: 'select_with_ai · target sky' },

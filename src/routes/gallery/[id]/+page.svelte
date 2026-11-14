@@ -19,6 +19,10 @@
 			: null
 	);
 	const steps = $derived(share.steps.length);
+	// Through the maker's invite link when the share carries one, counted by Connect as a visit from a shared page.
+	const tryHref = $derived(
+		share.invite ? `${CONNECT_URL}/r/${share.invite}?from=share` : CONNECT_URL
+	);
 	const stepWord = $derived(steps === 1 ? 'step' : 'steps');
 	const callWord = (n: number) => `${n} tool call${n === 1 ? '' : 's'}`;
 	const lead = $derived(share.chapters[0]?.text || share.chapters[0]?.title || '');
@@ -231,7 +235,7 @@
 				{/key}
 			</section>
 			<a
-				href={CONNECT_URL}
+				href={tryHref}
 				class="inline-flex min-h-12 w-fit items-center rounded-2xl border-[1.5px] border-accent/50 bg-brand px-6 text-[16px] font-bold text-white transition-colors hover:bg-brand-light"
 				>Try this on your photo <span aria-hidden="true" class="ml-1.5">→</span></a
 			>

@@ -16,7 +16,7 @@
  *   before: string | null, after: string, frames: string[], steps: GalleryStep[],
  *   chapters: GalleryChapter[], credit?: string
  * }} GalleryEntry
- * @typedef {GalleryEntry & { listed: boolean }} GalleryShare
+ * @typedef {GalleryEntry & { listed: boolean, invite: string | null }} GalleryShare
  */
 
 export const DEFAULT_FEED_URL = 'https://connect.editmamei.com/gallery.json';
@@ -200,11 +200,14 @@ export function validateChapters(raw, steps, frames) {
 	return next === steps ? out : [];
 }
 
+/** An invite code as Connect makes them; anything else is dropped, so the page links to Connect plainly. */
+export const INVITE_RE = /^[A-Za-z0-9_-]{8,10}$/;
+
 /**
  * One share's page data from Connect (`/g/<id>.json`): an entry plus `listed`,
  * true once the owner approved it into the gallery. Until then the page works
- * for anyone with the link but stays off the wall and out of search. Null when
- * it fails any check.
+ * for anyone with the link but stays off the wall and out of search. `invite`
+ * is the maker's invite code, or null. Null when it fails any check.
  * @param {unknown} raw
  * @returns {GalleryShare | null}
  */
@@ -214,7 +217,9 @@ export function validateShare(raw) {
 	if (o.v !== 1 || typeof o.listed !== 'boolean') return null;
 	// A share confirmed before Connect recorded the time has no date: show none rather than a wrong one.
 	const entry = validateEntry({ ...o, featured: false, date: o.date ?? '1970-01-01' });
-	return entry ? { ...entry, listed: o.listed } : null;
+	// The maker's invite code: "Try this on your photo" then goes through their invite link.
+	const invite = typeof o.invite === 'string' && INVITE_RE.test(o.invite) ? o.invite : null;
+	return entry ? { ...entry, listed: o.listed, invite } : null;
 }
 
 /**
