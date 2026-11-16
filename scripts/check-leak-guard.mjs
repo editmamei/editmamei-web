@@ -39,10 +39,14 @@ const SELF_PATH = fileURLToPath(import.meta.url);
 // Auto-generated from Editmamei/src/core/tool-tiers.ts (entries
 // classified 'dev' or 'none'). Do NOT hand-edit — re-run
 // `npm run sync:leak-guard` from Editmamei to refresh.
-// Source: 6 dev/none tier names at sync time.
+// Source: 10 dev/none tier names at sync time.
 const BLOCKED = [
+	'gimp_batch',
+	'gimp_develop_raw',
 	'gimp_fill',
+	'gimp_look',
 	'gimp_match_layer',
+	'gimp_preset_look',
 	'gimp_retouch',
 	'ps_apply_brush_stroke',
 	'ps_portrait_touchup',
