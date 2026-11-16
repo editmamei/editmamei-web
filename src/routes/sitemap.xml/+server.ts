@@ -1,7 +1,7 @@
 import type { RequestHandler } from './$types';
-import { posts } from '$lib/blog';
-import { snapshot as toolsSnapshot } from '$lib/content/tools';
-import { loadGallery } from '$lib/server/gallery';
+import { posts } from '#lib/blog.ts';
+import { snapshot as toolsSnapshot } from '#lib/content/tools/index.ts';
+import { loadGallery } from '#lib/server/gallery.ts';
 
 /**
  * Dynamic sitemap, built from the route list below so it stays in step with

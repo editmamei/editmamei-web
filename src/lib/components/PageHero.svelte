@@ -1,8 +1,8 @@
 <script lang="ts">
-	import '$lib/components/landing/landing.css';
+	import '#lib/components/landing/landing.css';
 	import type { Snippet } from 'svelte';
 	import { page } from '$app/state';
-	import { ORIGIN, ldScript } from '$lib/seo/schema';
+	import { ORIGIN, ldScript } from '#lib/seo/schema.ts';
 
 	// The opening band of every inner page: the same dark stage, type and
 	// spacing as the home and product pages, so the site reads as one piece.

@@ -7,7 +7,7 @@ date: 2026-11-12
 ---
 
 <script>
-  import YouTubeShort from '$lib/components/YouTubeShort.svelte';
+  import YouTubeShort from '#lib/components/YouTubeShort.svelte';
 </script>
 
 Photoshop 2027 brought Relight, which adds new light to a photo that's already been taken, and

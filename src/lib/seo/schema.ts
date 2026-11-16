@@ -3,9 +3,9 @@
 // on its own pages, so /connect never describes Desktop and the reverse. The
 // @ids let any page point at an entity without repeating it.
 
-import { snapshot } from '$lib/content/tools';
-import { mediaUrl } from '$lib/media';
-import { CONNECT_URL, GITHUB_REPO_URL } from '$lib/links';
+import { snapshot } from '#lib/content/tools/index.ts';
+import { mediaUrl } from '#lib/media.ts';
+import { CONNECT_URL, GITHUB_REPO_URL } from '#lib/links.ts';
 
 export const ORIGIN = 'https://editmamei.com';
 export const ORG_ID = `${ORIGIN}/#org`;

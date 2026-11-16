@@ -4,7 +4,7 @@
 	// social metadata. Site-wide tags must NOT live in app.html: a shared
 	// canonical pointing at "/" would mark every other page as a duplicate
 	// of the home page.
-	import { ldScript } from '$lib/seo/schema';
+	import { ldScript } from '#lib/seo/schema.ts';
 
 	let {
 		title,

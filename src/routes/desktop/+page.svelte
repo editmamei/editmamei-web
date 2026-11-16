@@ -1,17 +1,17 @@
 <script lang="ts">
-	import '$lib/components/landing/landing.css';
-	import ConnectionDiagram from '$lib/components/desktop/ConnectionDiagram.svelte';
-	import DesktopHero from '$lib/components/desktop/DesktopHero.svelte';
-	import LayeredFile from '$lib/components/desktop/LayeredFile.svelte';
-	import RequestCards from '$lib/components/desktop/RequestCards.svelte';
-	import InstallSection from '$lib/components/InstallSection.svelte';
-	import Seo from '$lib/components/Seo.svelte';
-	import { desktopApp, desktopHeroVideo } from '$lib/seo/schema';
-	import { price } from '$lib/pricing/price';
-	import { reveal } from '$lib/actions/reveal';
-	import { track } from '$lib/analytics/clarity';
-	import { toolCounts } from '$lib/content/tools';
-	import { GITHUB_GIMP_DOCS_URL as GIMP_GUIDE_URL } from '$lib/links';
+	import '#lib/components/landing/landing.css';
+	import ConnectionDiagram from '#lib/components/desktop/ConnectionDiagram.svelte';
+	import DesktopHero from '#lib/components/desktop/DesktopHero.svelte';
+	import LayeredFile from '#lib/components/desktop/LayeredFile.svelte';
+	import RequestCards from '#lib/components/desktop/RequestCards.svelte';
+	import InstallSection from '#lib/components/InstallSection.svelte';
+	import Seo from '#lib/components/Seo.svelte';
+	import { desktopApp, desktopHeroVideo } from '#lib/seo/schema.ts';
+	import { price } from '#lib/pricing/price.ts';
+	import { reveal } from '#lib/actions/reveal.ts';
+	import { track } from '#lib/analytics/clarity.ts';
+	import { toolCounts } from '#lib/content/tools/index.ts';
+	import { GITHUB_GIMP_DOCS_URL as GIMP_GUIDE_URL } from '#lib/links.ts';
 
 	const freeTools = toolCounts.photoshop - toolCounts.photoshopPro;
 

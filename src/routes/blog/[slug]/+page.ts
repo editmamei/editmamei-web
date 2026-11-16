@@ -1,5 +1,5 @@
 import { error } from '@sveltejs/kit';
-import { loadPost, posts } from '$lib/blog';
+import { loadPost, posts } from '#lib/blog.ts';
 import type { EntryGenerator, PageLoad } from './$types';
 
 // Tells the static adapter every published post URL to prerender. An empty

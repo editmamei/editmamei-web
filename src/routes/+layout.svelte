@@ -1,10 +1,10 @@
 <script lang="ts">
 	import './layout.css';
 	import { afterNavigate } from '$app/navigation';
-	import SiteHeader from '$lib/components/SiteHeader.svelte';
-	import SiteFooter from '$lib/components/SiteFooter.svelte';
-	import ConsentBanner from '$lib/components/ConsentBanner.svelte';
-	import { identifyPage, resetOnceGuards } from '$lib/analytics/clarity';
+	import SiteHeader from '#lib/components/SiteHeader.svelte';
+	import SiteFooter from '#lib/components/SiteFooter.svelte';
+	import ConsentBanner from '#lib/components/ConsentBanner.svelte';
+	import { identifyPage, resetOnceGuards } from '#lib/analytics/clarity.ts';
 
 	let { children } = $props();
 
@@ -14,6 +14,9 @@
 	// guards are module-scoped, so they would suppress engagement events on every
 	// page after the first.
 	afterNavigate((nav) => {
+		// The /tools filters update the URL with a shallow goto: not a new page view.
+		if (nav.shallow && nav.type === 'goto') return;
+
 		resetOnceGuards();
 		identifyPage(nav.to?.url.pathname ?? '/');
 	});

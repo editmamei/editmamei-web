@@ -1,8 +1,8 @@
 <script lang="ts">
-	import PageHero from '$lib/components/PageHero.svelte';
-	import Seo from '$lib/components/Seo.svelte';
-	import { formatDate } from '$lib/blog';
-	import { ORG_ID, ORIGIN, ldScript } from '$lib/seo/schema';
+	import PageHero from '#lib/components/PageHero.svelte';
+	import Seo from '#lib/components/Seo.svelte';
+	import { formatDate } from '#lib/blog.ts';
+	import { ORG_ID, ORIGIN, ldScript } from '#lib/seo/schema.ts';
 
 	let { data } = $props();
 	const post = $derived(data.post);

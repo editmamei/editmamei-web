@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { track } from '$lib/analytics/clarity';
-	import { inView } from '$lib/actions/reveal';
+	import { track } from '#lib/analytics/clarity.ts';
+	import { inView } from '#lib/actions/reveal.ts';
 
 	let { desktopHref, connectHref }: { desktopHref: string; connectHref: string } = $props();
 

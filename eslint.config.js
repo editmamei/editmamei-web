@@ -6,7 +6,17 @@ import svelte from 'eslint-plugin-svelte';
 import { defineConfig } from 'eslint/config';
 import globals from 'globals';
 import ts from 'typescript-eslint';
-import svelteConfig from './svelte.config.js';
+import { loadConfig } from '@sveltejs/load-config';
+
+// The Svelte options from the sveltekit() plugin in vite.config.ts, so the parser knows about .md and the
+// preprocessor. Fail here rather than lint .svelte files without them.
+const loaded = await loadConfig(import.meta.dirname, { traverse: false });
+if (!loaded || 'error' in loaded) {
+	throw new Error(
+		`eslint: could not load the Svelte config: ${String(loaded?.error ?? 'none found')}`
+	);
+}
+const svelteConfig = loaded.config;
 
 const gitignorePath = path.resolve(import.meta.dirname, '.gitignore');
 
@@ -48,7 +58,7 @@ export default defineConfig(
 			// for SvelteKit apps deployed at a base path (e.g.
 			// `editmamei.com/sub-path`) — `resolve('/foo')` then renders the
 			// correct `/sub-path/foo`. This site is configured with NO base
-			// path (see the `kit` block in svelte.config.js), so `href="/"`
+			// path (see the sveltekit() options in vite.config.ts), so `href="/"`
 			// is always correct today and stays correct as long as we deploy
 			// at root. The rule was off-by-default before the 2026 upgrade
 			// of the recommended preset; disabling it here documents the

@@ -2,8 +2,8 @@
 	// The edit as a short 9:16 video, drawn by the share kit (the same drawing Connect uses for the
 	// maker's downloads). It only plays here: downloads are for the maker, on Connect.
 	import { onMount } from 'svelte';
-	import { loadFonts, loadPictures, play, timeline } from '$lib/gallery/share-kit.js';
-	import type { GalleryShare } from '$lib/gallery/feed.js';
+	import { loadFonts, loadPictures, play, timeline } from '#lib/gallery/share-kit.js';
+	import type { GalleryShare } from '#lib/gallery/feed.js';
 
 	let { share }: { share: GalleryShare } = $props();
 	let canvas: HTMLCanvasElement | undefined = $state();

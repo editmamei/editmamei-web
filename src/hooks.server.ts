@@ -1,4 +1,4 @@
-import type { Handle } from '@sveltejs/kit';
+import type { Handle } from '@sveltejs/kit/hooks';
 
 /**
  * The security headers `_headers` gives every file the site serves, given here to the pages the Worker renders

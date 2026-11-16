@@ -100,7 +100,7 @@ test('the [slug] route declares prerender entries from the posts loader', () => 
 		/export const entries/,
 		'entries export missing — the static adapter needs it'
 	);
-	assert.match(source, /from '\$lib\/blog'/, 'entries must derive from the posts loader');
+	assert.match(source, /from '#lib\/blog\.ts'/, 'entries must derive from the posts loader');
 });
 
 test('the sitemap appends blog post URLs from the posts loader', () => {
@@ -108,12 +108,12 @@ test('the sitemap appends blog post URLs from the posts loader', () => {
 		join(REPO_ROOT, 'src', 'routes', 'sitemap.xml', '+server.ts'),
 		'utf8'
 	);
-	assert.match(source, /from '\$lib\/blog'/, 'sitemap must import the posts loader');
+	assert.match(source, /from '#lib\/blog\.ts'/, 'sitemap must import the posts loader');
 	assert.match(source, /\$\{ORIGIN\}\/blog\/\$\{post\.slug\}/, 'sitemap must emit per-post URLs');
 });
 
 test('the unseen-routes carve-out exempts exactly /blog/[slug] and nothing else', () => {
-	const source = readFileSync(join(REPO_ROOT, 'svelte.config.js'), 'utf8');
+	const source = readFileSync(join(REPO_ROOT, 'vite.config.ts'), 'utf8');
 	const exemptions = Array.from(source.matchAll(/id !== '([^']+)'/g), (m) => m[1]);
 	// The gallery's routes are not prerendered at all (the Worker renders them on request), so they need no carve-out.
 	assert.deepEqual(

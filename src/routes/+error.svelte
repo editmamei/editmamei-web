@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/state';
-	import StatusPage from '$lib/components/StatusPage.svelte';
+	import StatusPage from '#lib/components/StatusPage.svelte';
 </script>
 
 <svelte:head>

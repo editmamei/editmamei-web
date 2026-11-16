@@ -4,12 +4,12 @@
 	// The prerendered HTML holds every tool, unfiltered. Filters live in the
 	// query string (?editor=&edition=&category=&q=), which is read only in the
 	// browser after mount, because reading it during prerender throws. Changes
-	// are written back with replaceState, so filtering adds no history entries.
+	// are written back with a shallow, replacing goto, so filtering adds no history entries.
 	import { onMount, tick } from 'svelte';
-	import { replaceState } from '$app/navigation';
+	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import { trackOnce } from '$lib/analytics/clarity';
-	import { categories, tools, type CategoryId, type Tool } from '$lib/content/tools';
+	import { trackOnce } from '#lib/analytics/clarity.ts';
+	import { categories, tools, type CategoryId, type Tool } from '#lib/content/tools/index.ts';
 	import ToolRow from './ToolRow.svelte';
 
 	type EditorFilter = 'all' | 'photoshop' | 'gimp';
@@ -126,7 +126,7 @@
 		).toString();
 		const next = `${window.location.pathname}${search ? `?${search}` : ''}${window.location.hash}`;
 		if (next !== `${window.location.pathname}${window.location.search}${window.location.hash}`) {
-			replaceState(next, page.state);
+			goto(next, { shallow: true, replace: true, state: page.state });
 		}
 	});
 

@@ -1,6 +1,6 @@
 <script lang="ts">
-	import SubscribeForm from '$lib/components/SubscribeForm.svelte';
-	import { track } from '$lib/analytics/clarity';
+	import SubscribeForm from '#lib/components/SubscribeForm.svelte';
+	import { track } from '#lib/analytics/clarity.ts';
 
 	// Shown right after the .mcpb download fires. It deliberately does NOT gate
 	// anything: the anchor's default action has already started the download by

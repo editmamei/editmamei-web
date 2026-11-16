@@ -1,7 +1,7 @@
 // Pins the permanent redirects in _redirects (served by Workers static assets
 // before any file): every target is a real page, no source shadows a real
 // page, and every source is covered with and without its trailing slash.
-// svelte.config.js lets prerender follow links to these sources, so a typo
+// vite.config.ts lets prerender follow links to these sources, so a typo
 // here would otherwise ship a 301 to a 404 with nothing failing.
 
 import { test } from 'node:test';

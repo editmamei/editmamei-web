@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { cookieConsent } from '$lib/stores/cookieConsent';
-	import { setConsent } from '$lib/analytics/clarity';
+	import { cookieConsent } from '#lib/stores/cookieConsent.ts';
+	import { setConsent } from '#lib/analytics/clarity.ts';
 
 	let mounted = $state(false);
 

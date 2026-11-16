@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { track } from '$lib/analytics/clarity';
-	import { inView } from '$lib/actions/reveal';
-	import { mediaUrl } from '$lib/media';
+	import { track } from '#lib/analytics/clarity.ts';
+	import { inView } from '#lib/actions/reveal.ts';
+	import { mediaUrl } from '#lib/media.ts';
 
 	// The loop is the ch3 take of "Prompting Photoshop": one real Claude Desktop
 	// session replacing a sky in Photoshop, sped up. Frames where Photoshop showed

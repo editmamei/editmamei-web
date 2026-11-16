@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { afterNavigate } from '$app/navigation';
 	import { page } from '$app/state';
-	import { track } from '$lib/analytics/clarity';
-	import { CONNECT_URL, GITHUB_REPO_URL } from '$lib/links';
-	import { primaryNav, productNavs, type ProductNav } from '$lib/content/surfaces';
+	import { track } from '#lib/analytics/clarity.ts';
+	import { CONNECT_URL, GITHUB_REPO_URL } from '#lib/links.ts';
+	import { primaryNav, productNavs, type ProductNav } from '#lib/content/surfaces.ts';
 
 	// Desktop: one disclosure per product (button + panel), opened by click or
 	// Enter/Space, closed by Escape, an outside click, focus leaving it, or

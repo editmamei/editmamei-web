@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { prefersReducedMotion } from '$lib/a11y/reducedMotion.svelte';
+	import { prefersReducedMotion } from '#lib/a11y/reducedMotion.svelte.ts';
 
 	interface Slide {
 		id: string;

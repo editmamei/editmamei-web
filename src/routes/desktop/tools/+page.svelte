@@ -1,9 +1,9 @@
 <script lang="ts">
-	import PageHero from '$lib/components/PageHero.svelte';
-	import Seo from '$lib/components/Seo.svelte';
-	import ToolDirectory from '$lib/components/tools/ToolDirectory.svelte';
-	import { snapshot, toolCounts } from '$lib/content/tools';
-	import { CONNECT_TOOLS_URL } from '$lib/links';
+	import PageHero from '#lib/components/PageHero.svelte';
+	import Seo from '#lib/components/Seo.svelte';
+	import ToolDirectory from '#lib/components/tools/ToolDirectory.svelte';
+	import { snapshot, toolCounts } from '#lib/content/tools/index.ts';
+	import { CONNECT_TOOLS_URL } from '#lib/links.ts';
 </script>
 
 <Seo

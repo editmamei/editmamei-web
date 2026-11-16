@@ -8,7 +8,7 @@
 	The subscribe Worker's redirects target these paths.
 -->
 <script lang="ts">
-	import StatusPage from '$lib/components/StatusPage.svelte';
+	import StatusPage from '#lib/components/StatusPage.svelte';
 </script>
 
 <svelte:head>

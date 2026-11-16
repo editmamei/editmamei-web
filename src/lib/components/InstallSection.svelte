@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { track, trackOnce, upgradeSession } from '$lib/analytics/clarity';
+	import { track, trackOnce, upgradeSession } from '#lib/analytics/clarity.ts';
 
 	// Stable "latest release" asset URL: it always resolves to the newest published
 	// release, so a new version never needs a site edit. Shared with /download.
@@ -8,9 +8,9 @@
 		GITHUB_GETTING_STARTED_DOCS_URL,
 		GITHUB_INSTALLATION_DOCS_URL,
 		MCPB_DOWNLOAD_URL as MCPB_URL
-	} from '$lib/links';
-	import SubscribeForm from '$lib/components/SubscribeForm.svelte';
-	import DownloadSignupDialog from '$lib/components/DownloadSignupDialog.svelte';
+	} from '#lib/links.ts';
+	import SubscribeForm from '#lib/components/SubscribeForm.svelte';
+	import DownloadSignupDialog from '#lib/components/DownloadSignupDialog.svelte';
 
 	const GITHUB_MANUAL_CONFIG_DOCS_URL = `${GITHUB_INSTALLATION_DOCS_URL}#manual-configuration`;
 

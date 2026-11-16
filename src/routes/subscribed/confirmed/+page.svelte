@@ -1,6 +1,6 @@
 <!-- See ../+page.svelte for why these states are paths, not query strings. -->
 <script lang="ts">
-	import StatusPage from '$lib/components/StatusPage.svelte';
+	import StatusPage from '#lib/components/StatusPage.svelte';
 </script>
 
 <svelte:head>

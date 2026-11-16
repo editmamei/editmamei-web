@@ -1,8 +1,8 @@
 <script lang="ts">
-	import PageHero from '$lib/components/PageHero.svelte';
-	import Seo from '$lib/components/Seo.svelte';
-	import SubscribeForm from '$lib/components/SubscribeForm.svelte';
-	import { formatDate } from '$lib/blog';
+	import PageHero from '#lib/components/PageHero.svelte';
+	import Seo from '#lib/components/Seo.svelte';
+	import SubscribeForm from '#lib/components/SubscribeForm.svelte';
+	import { formatDate } from '#lib/blog.ts';
 
 	let { data } = $props();
 </script>

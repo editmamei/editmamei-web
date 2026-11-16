@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { editionGroups } from '$lib/content/editions';
-	import { trackOnce } from '$lib/analytics/clarity';
+	import { editionGroups } from '#lib/content/editions.ts';
+	import { trackOnce } from '#lib/analytics/clarity.ts';
 
 	// Scroll-depth engagement: made it to the feature-comparison section.
 	// Strong "evaluating purchase" signal vs visitors who bounced earlier.

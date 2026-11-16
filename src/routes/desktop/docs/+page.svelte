@@ -1,7 +1,7 @@
 <script lang="ts">
-	import PageHero from '$lib/components/PageHero.svelte';
-	import Seo from '$lib/components/Seo.svelte';
-	import { CONNECT_URL, GITHUB_REPO_URL } from '$lib/links';
+	import PageHero from '#lib/components/PageHero.svelte';
+	import Seo from '#lib/components/Seo.svelte';
+	import { CONNECT_URL, GITHUB_REPO_URL } from '#lib/links.ts';
 
 	const BLOB = `${GITHUB_REPO_URL}/blob/main`;
 

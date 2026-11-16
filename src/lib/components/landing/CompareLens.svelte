@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { reveal } from '$lib/actions/reveal';
+	import { reveal } from '#lib/actions/reveal.ts';
 
 	// The street photo: the original, Editmamei's real edit, and ChatGPT's real
 	// default-mode result (owner's capture, 2026-10-22, its first result, given the

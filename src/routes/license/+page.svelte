@@ -1,7 +1,7 @@
 <script lang="ts">
-	import PageHero from '$lib/components/PageHero.svelte';
-	import Seo from '$lib/components/Seo.svelte';
-	import { CONNECT_TERMS_URL, GITHUB_LICENSE_URL } from '$lib/links';
+	import PageHero from '#lib/components/PageHero.svelte';
+	import Seo from '#lib/components/Seo.svelte';
+	import { CONNECT_TERMS_URL, GITHUB_LICENSE_URL } from '#lib/links.ts';
 
 	const link = 'font-semibold text-brand underline underline-offset-2';
 

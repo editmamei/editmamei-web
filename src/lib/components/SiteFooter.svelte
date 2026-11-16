@@ -1,15 +1,15 @@
 <script lang="ts">
-	import { track } from '$lib/analytics/clarity';
-	import SubscribeForm from '$lib/components/SubscribeForm.svelte';
-	import { cookieConsent } from '$lib/stores/cookieConsent';
-	import { productNavs } from '$lib/content/surfaces';
+	import { track } from '#lib/analytics/clarity.ts';
+	import SubscribeForm from '#lib/components/SubscribeForm.svelte';
+	import { cookieConsent } from '#lib/stores/cookieConsent.ts';
+	import { productNavs } from '#lib/content/surfaces.ts';
 	import {
 		CONNECT_PRIVACY_URL,
 		CUSTOMER_PORTAL_URL,
 		GITHUB_CHANGELOG_URL,
 		GITHUB_ISSUES_URL,
 		GITHUB_REPO_URL
-	} from '$lib/links';
+	} from '#lib/links.ts';
 	const year = new Date().getFullYear();
 </script>
 

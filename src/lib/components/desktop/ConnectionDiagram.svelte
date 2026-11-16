@@ -1,5 +1,5 @@
 <script lang="ts">
-	import FlowLink from '$lib/components/flow/FlowLink.svelte';
+	import FlowLink from '#lib/components/flow/FlowLink.svelte';
 
 	// How Desktop is wired: the editor, Editmamei and the AI app all run on your
 	// computer; only the AI app talks to the cloud model. A small preview hops

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { track } from '$lib/analytics/clarity';
-	import { SUBSCRIBE_API_URL } from '$lib/links';
+	import { track } from '#lib/analytics/clarity.ts';
+	import { SUBSCRIBE_API_URL } from '#lib/links.ts';
 
 	// `compact` is the footer treatment: one line, no heading. The blog index
 	// uses the fuller one, where someone has just finished reading a post.

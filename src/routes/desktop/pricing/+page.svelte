@@ -1,13 +1,13 @@
 <script lang="ts">
-	import '$lib/components/landing/landing.css';
-	import PageHero from '$lib/components/PageHero.svelte';
-	import EditionsTable from '$lib/components/EditionsTable.svelte';
-	import Seo from '$lib/components/Seo.svelte';
-	import { track } from '$lib/analytics/clarity';
-	import { PRO_FEATURES } from '$lib/content/pro-features';
-	import { toolCounts } from '$lib/content/tools';
-	import { desktopApp, faqPage } from '$lib/seo/schema';
-	import { price } from '$lib/pricing/price';
+	import '#lib/components/landing/landing.css';
+	import PageHero from '#lib/components/PageHero.svelte';
+	import EditionsTable from '#lib/components/EditionsTable.svelte';
+	import Seo from '#lib/components/Seo.svelte';
+	import { track } from '#lib/analytics/clarity.ts';
+	import { PRO_FEATURES } from '#lib/content/pro-features.ts';
+	import { toolCounts } from '#lib/content/tools/index.ts';
+	import { desktopApp, faqPage } from '#lib/seo/schema.ts';
+	import { price } from '#lib/pricing/price.ts';
 
 	// ──────────────────────────────────────────────────────────────────────
 	// PRODUCTION Polar checkout links (org `editmamei`). Checkout shows

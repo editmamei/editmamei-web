@@ -1,12 +1,12 @@
 <script lang="ts">
-	import PageHero from '$lib/components/PageHero.svelte';
-	import Seo from '$lib/components/Seo.svelte';
-	import { CONNECT_ID, ORG_ID, ORIGIN } from '$lib/seo/schema';
-	import BeforeAfterSlider from '$lib/components/BeforeAfterSlider.svelte';
-	import GalleryPlayer from '$lib/components/GalleryPlayer.svelte';
-	import { formatDate } from '$lib/gallery/feed.js';
-	import { CONNECT_URL } from '$lib/links';
-	import { CONNECT_ORIGIN } from '$lib/gallery/connect-origin';
+	import PageHero from '#lib/components/PageHero.svelte';
+	import Seo from '#lib/components/Seo.svelte';
+	import { CONNECT_ID, ORG_ID, ORIGIN } from '#lib/seo/schema.ts';
+	import BeforeAfterSlider from '#lib/components/BeforeAfterSlider.svelte';
+	import GalleryPlayer from '#lib/components/GalleryPlayer.svelte';
+	import { formatDate } from '#lib/gallery/feed.js';
+	import { CONNECT_URL } from '#lib/links.ts';
+	import { CONNECT_ORIGIN } from '#lib/gallery/connect-origin.ts';
 
 	let { data } = $props();
 	const share = $derived(data.share);

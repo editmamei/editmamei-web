@@ -9,7 +9,7 @@
 // product is still called Editmamei, so the name stays out of install steps,
 // READMEs and listings.
 
-import { CONNECT_TOOLS_URL, CONNECT_URL } from '$lib/links';
+import { CONNECT_TOOLS_URL, CONNECT_URL } from '#lib/links.ts';
 
 export interface NavLink {
 	label: string;

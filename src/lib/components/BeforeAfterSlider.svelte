@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { trackOnce } from '$lib/analytics/clarity';
+	import { trackOnce } from '#lib/analytics/clarity.ts';
 
 	interface Props {
 		beforeSrc: string;

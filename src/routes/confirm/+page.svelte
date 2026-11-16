@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { goto } from '$app/navigation';
-	import StatusPage from '$lib/components/StatusPage.svelte';
-	import { SUBSCRIBE_API_URL } from '$lib/links';
+	import StatusPage from '#lib/components/StatusPage.svelte';
+	import { SUBSCRIBE_API_URL } from '#lib/links.ts';
 
 	// This page exists so the link in a confirmation email is on editmamei.com
 	// rather than a workers.dev hostname nobody recognizes. It relays the token

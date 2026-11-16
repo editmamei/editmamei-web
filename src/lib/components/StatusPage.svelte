@@ -1,5 +1,5 @@
 <script lang="ts">
-	import '$lib/components/landing/landing.css';
+	import '#lib/components/landing/landing.css';
 	import type { Snippet } from 'svelte';
 
 	// A one-message page (not found, email confirmation states) on the same

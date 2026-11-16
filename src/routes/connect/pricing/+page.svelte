@@ -1,10 +1,10 @@
 <script lang="ts">
-	import PageHero from '$lib/components/PageHero.svelte';
-	import Seo from '$lib/components/Seo.svelte';
-	import { track } from '$lib/analytics/clarity';
-	import { CONNECT_URL } from '$lib/links';
-	import { connectApp, faqPage } from '$lib/seo/schema';
-	import { price } from '$lib/pricing/price';
+	import PageHero from '#lib/components/PageHero.svelte';
+	import Seo from '#lib/components/Seo.svelte';
+	import { track } from '#lib/analytics/clarity.ts';
+	import { CONNECT_URL } from '#lib/links.ts';
+	import { connectApp, faqPage } from '#lib/seo/schema.ts';
+	import { price } from '#lib/pricing/price.ts';
 
 	// Connect's prices come from src/lib/pricing/prices.json (synced from Polar);
 	// the rest from the 10-22 product facts. A credit is never defined in public copy (owner rule):

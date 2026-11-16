@@ -24,8 +24,9 @@
 	"devDependencies": {
 		"@eslint/compat": "^2.0.4",
 		"@eslint/js": "^10.0.1",
-		"@sveltejs/adapter-cloudflare": "^7.2.10",
-		"@sveltejs/kit": "^2.70.4",
+		"@sveltejs/adapter-cloudflare": "^8.0.0",
+		"@sveltejs/kit": "^3.0.0",
+		"@sveltejs/load-config": "^0.2.2",
 		"@sveltejs/vite-plugin-svelte": "^7.0.0",
 		"@tailwindcss/typography": "^0.5.19",
 		"@tailwindcss/vite": "^4.2.2",
@@ -40,18 +41,20 @@
 		"prettier-plugin-svelte": "^3.5.1",
 		"prettier-plugin-tailwindcss": "^0.7.2",
 		"sharp": "^0.35.3",
-		"svelte": "^5.55.2",
-		"svelte-check": "^4.4.6",
+		"svelte": "^5.57.2",
+		"svelte-check": "^4.7.5",
 		"tailwindcss": "^4.2.2",
 		"typescript": "^6.0.2",
 		"typescript-eslint": "^8.58.1",
-		"vite": "^8.0.7",
+		"vite": "^8.0.12",
 		"wrangler": "^4.148.0"
 	},
 	"overrides": {
-		"cookie": "^0.7.0",
 		"@tailwindcss/typography": {
 			"postcss-selector-parser": "^6.1.5"
 		}
+	},
+	"imports": {
+		"#lib/*": "./src/lib/*"
 	}
 }

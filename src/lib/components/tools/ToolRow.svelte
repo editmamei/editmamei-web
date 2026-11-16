@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { track } from '$lib/analytics/clarity';
-	import type { Tool } from '$lib/content/tools';
+	import { track } from '#lib/analytics/clarity.ts';
+	import type { Tool } from '#lib/content/tools/index.ts';
 	import ToolMedia from './ToolMedia.svelte';
 
 	let { tool, showEditor = true }: { tool: Tool; showEditor?: boolean } = $props();

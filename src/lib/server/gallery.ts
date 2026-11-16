@@ -1,4 +1,4 @@
-import { DEFAULT_FEED_URL, fetchFeed, type GalleryEntry } from '$lib/gallery/feed.js';
+import { DEFAULT_FEED_URL, fetchFeed, type GalleryEntry } from '#lib/gallery/feed.js';
 
 /**
  * The approved gallery entries as they are at build time, for the sitemap (the gallery's own pages read

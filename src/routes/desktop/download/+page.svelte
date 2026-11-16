@@ -1,9 +1,9 @@
 <script lang="ts">
-	import PageHero from '$lib/components/PageHero.svelte';
-	import Seo from '$lib/components/Seo.svelte';
+	import PageHero from '#lib/components/PageHero.svelte';
+	import Seo from '#lib/components/Seo.svelte';
 	// Shared with InstallSection so the two cannot drift, and so the repository
-	// move at the split is one edit rather than a hunt. See $lib/links.
-	import { MCPB_DOWNLOAD_URL, RELEASES_URL, GITHUB_TROUBLESHOOTING_DOCS_URL } from '$lib/links';
+	// move at the split is one edit rather than a hunt. See #lib/links.ts.
+	import { MCPB_DOWNLOAD_URL, RELEASES_URL, GITHUB_TROUBLESHOOTING_DOCS_URL } from '#lib/links.ts';
 </script>
 
 <!-- noindex: the in-app update notice links here; new installs start at /desktop#install. -->

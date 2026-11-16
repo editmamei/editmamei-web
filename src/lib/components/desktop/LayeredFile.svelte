@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { inView, reveal } from '$lib/actions/reveal';
+	import { inView, reveal } from '#lib/actions/reveal.ts';
 
 	// Set Sail, a real session's PSD. Each state was exported from the file in
 	// Photoshop: every edit layer hidden, then turned on one at a time, bottom

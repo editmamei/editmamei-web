@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { reveal } from '$lib/actions/reveal';
-	import { track } from '$lib/analytics/clarity';
+	import { reveal } from '#lib/actions/reveal.ts';
+	import { track } from '#lib/analytics/clarity.ts';
 
 	// Four real Connect sessions. Titles and steps are each session's own share
 	// story; a request is quoted only where its wording was recorded.

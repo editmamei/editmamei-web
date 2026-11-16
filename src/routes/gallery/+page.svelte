@@ -1,11 +1,11 @@
 <script lang="ts">
-	import PageHero from '$lib/components/PageHero.svelte';
-	import Seo from '$lib/components/Seo.svelte';
-	import GalleryCarousel from '$lib/components/GalleryCarousel.svelte';
-	import GalleryWall from '$lib/components/GalleryWall.svelte';
-	import { track } from '$lib/analytics/clarity';
-	import { CONNECT_URL } from '$lib/links';
-	import { CONNECT_ID, ORIGIN } from '$lib/seo/schema';
+	import PageHero from '#lib/components/PageHero.svelte';
+	import Seo from '#lib/components/Seo.svelte';
+	import GalleryCarousel from '#lib/components/GalleryCarousel.svelte';
+	import GalleryWall from '#lib/components/GalleryWall.svelte';
+	import { track } from '#lib/analytics/clarity.ts';
+	import { CONNECT_URL } from '#lib/links.ts';
+	import { CONNECT_ID, ORIGIN } from '#lib/seo/schema.ts';
 
 	let { data } = $props();
 

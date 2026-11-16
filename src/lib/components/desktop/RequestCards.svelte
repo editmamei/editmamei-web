@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { reveal } from '$lib/actions/reveal';
+	import { reveal } from '#lib/actions/reveal.ts';
 
 	// Real requests from the "Prompting Photoshop" sessions (Claude Desktop,
 	// medium effort, a fresh chat each). Prompts are verbatim; minutes are from

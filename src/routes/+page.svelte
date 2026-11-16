@@ -1,17 +1,17 @@
 <script lang="ts">
-	import '$lib/components/landing/landing.css';
-	import BatchWall from '$lib/components/landing/BatchWall.svelte';
-	import CompareLens from '$lib/components/landing/CompareLens.svelte';
-	import ConversationBuild from '$lib/components/landing/ConversationBuild.svelte';
-	import HeroStage from '$lib/components/landing/HeroStage.svelte';
-	import LaptopMock from '$lib/components/landing/LaptopMock.svelte';
-	import PhoneMock from '$lib/components/landing/PhoneMock.svelte';
-	import RangeStrip from '$lib/components/landing/RangeStrip.svelte';
-	import Seo from '$lib/components/Seo.svelte';
-	import { connectApp, desktopApp, faqPage } from '$lib/seo/schema';
-	import { price } from '$lib/pricing/price';
-	import { reveal } from '$lib/actions/reveal';
-	import { track } from '$lib/analytics/clarity';
+	import '#lib/components/landing/landing.css';
+	import BatchWall from '#lib/components/landing/BatchWall.svelte';
+	import CompareLens from '#lib/components/landing/CompareLens.svelte';
+	import ConversationBuild from '#lib/components/landing/ConversationBuild.svelte';
+	import HeroStage from '#lib/components/landing/HeroStage.svelte';
+	import LaptopMock from '#lib/components/landing/LaptopMock.svelte';
+	import PhoneMock from '#lib/components/landing/PhoneMock.svelte';
+	import RangeStrip from '#lib/components/landing/RangeStrip.svelte';
+	import Seo from '#lib/components/Seo.svelte';
+	import { connectApp, desktopApp, faqPage } from '#lib/seo/schema.ts';
+	import { price } from '#lib/pricing/price.ts';
+	import { reveal } from '#lib/actions/reveal.ts';
+	import { track } from '#lib/analytics/clarity.ts';
 
 	// Every fork click is counted by product and by where on the page it was made,
 	// so the split between Desktop and Connect interest can be read directly.

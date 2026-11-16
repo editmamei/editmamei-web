@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { reveal } from '$lib/actions/reveal';
+	import { reveal } from '#lib/actions/reveal.ts';
 
 	type Card = {
 		after: string;

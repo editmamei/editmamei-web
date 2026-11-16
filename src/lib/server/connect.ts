@@ -1,10 +1,11 @@
-import { CONNECT_ORIGIN } from '$lib/gallery/connect-origin';
+import { waitUntil } from 'cloudflare:workers';
+import { CONNECT_ORIGIN } from '#lib/gallery/connect-origin.ts';
 import {
 	validateEntries,
 	validateShare,
 	type GalleryEntry,
 	type GalleryShare
-} from '$lib/gallery/feed.js';
+} from '#lib/gallery/feed.js';
 
 /**
  * The gallery's data, read from Editmamei Connect when a gallery page is rendered (on the Worker, at request
@@ -17,12 +18,15 @@ const KEEP_SECONDS = 60;
 const MAX_BYTES = 2_000_000;
 const SHARE_ID_RE = /^[a-f0-9]{16}$/;
 
-type Platform = App.Platform | undefined;
+/** The Worker's default cache: a global on Cloudflare, and set by the adapter under `vite dev`. */
+function workerCache(): Cache | undefined {
+	return (globalThis as { caches?: { default?: Cache } }).caches?.default;
+}
 
 /** JSON from Connect: the cached copy when there is one, else a fresh read; null for a 404. Throws on anything else. */
-async function connectJson(path: string, platform: Platform): Promise<unknown | null> {
+async function connectJson(path: string): Promise<unknown | null> {
 	const url = `${CONNECT_ORIGIN}${path}`;
-	const cache = platform?.caches?.default;
+	const cache = workerCache();
 	const key = new Request(url);
 	let res = cache ? await cache.match(key) : undefined;
 	if (!res) {
@@ -43,23 +47,23 @@ async function connectJson(path: string, platform: Platform): Promise<unknown | 
 				'cache-control': `public, max-age=${KEEP_SECONDS}`
 			}
 		});
-		if (cache) platform?.context?.waitUntil(cache.put(key, res.clone()));
+		if (cache) waitUntil(cache.put(key, res.clone()));
 	}
 	if (res.status === 404) return null;
 	return JSON.parse(await res.text());
 }
 
 /** A share's page data, or null when there is no live share by that id (never asked about an id that is not one). */
-export async function loadShare(id: string, platform: Platform): Promise<GalleryShare | null> {
+export async function loadShare(id: string): Promise<GalleryShare | null> {
 	if (!SHARE_ID_RE.test(id)) return null;
-	const raw = await connectJson(`/g/${id}.json`, platform);
+	const raw = await connectJson(`/g/${id}.json`);
 	return raw === null ? null : validateShare(raw);
 }
 
 /** The approved entries for the wall, newest first; empty when Connect cannot be read just now. */
-export async function loadWall(platform: Platform): Promise<GalleryEntry[]> {
+export async function loadWall(): Promise<GalleryEntry[]> {
 	try {
-		const raw = (await connectJson('/gallery.json', platform)) as {
+		const raw = (await connectJson('/gallery.json')) as {
 			v?: unknown;
 			entries?: unknown;
 		} | null;

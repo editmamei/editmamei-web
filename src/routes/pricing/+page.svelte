@@ -1,10 +1,10 @@
 <script lang="ts">
-	import PageHero from '$lib/components/PageHero.svelte';
-	import Seo from '$lib/components/Seo.svelte';
-	import { track } from '$lib/analytics/clarity';
-	import { CONNECT_URL } from '$lib/links';
-	import { connectApp, desktopApp } from '$lib/seo/schema';
-	import { price } from '$lib/pricing/price';
+	import PageHero from '#lib/components/PageHero.svelte';
+	import Seo from '#lib/components/Seo.svelte';
+	import { track } from '#lib/analytics/clarity.ts';
+	import { CONNECT_URL } from '#lib/links.ts';
+	import { connectApp, desktopApp } from '#lib/seo/schema.ts';
+	import { price } from '#lib/pricing/price.ts';
 
 	// Both products' prices on one screen, each card handing off to its own
 	// pricing page. Facts match /desktop/pricing and /connect/pricing; a Connect

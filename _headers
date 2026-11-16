@@ -4,5 +4,5 @@
   Referrer-Policy: strict-origin-when-cross-origin
   X-Frame-Options: DENY
 
-/_app/immutable/*
-  Cache-Control: public, max-age=31536000, immutable
+# The adapter appends /_app/* (no-cache) and then /_app/immutable/* (a year, immutable). An /_app/immutable/* block
+# here would have the adapter merge its rules into this one instead, setting Cache-Control on the hashed files twice.

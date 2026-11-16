@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { idHash, tileSpan } from '$lib/gallery/feed.js';
+	import { idHash, tileSpan } from '#lib/gallery/feed.js';
 
 	interface Tile {
 		id: string;

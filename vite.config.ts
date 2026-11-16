@@ -1,9 +1,65 @@
+import { readFileSync } from 'node:fs';
+import adapter from '@sveltejs/adapter-cloudflare';
+import { mdsvex } from 'mdsvex';
 import tailwindcss from '@tailwindcss/vite';
 import { sveltekit } from '@sveltejs/kit/vite';
 import { defineConfig } from 'vite';
 
+// Source paths in _redirects (trailing slash dropped). Old blog posts still
+// link some of them; at runtime the redirect answers before any page would.
+const redirected = new Set(
+	readFileSync(new URL('./_redirects', import.meta.url), 'utf8')
+		.split('\n')
+		.map((line) => line.trim())
+		.filter((line) => line && !line.startsWith('#'))
+		.map((line) => line.split(/\s+/)[0].replace(/(.)\/$/, '$1'))
+);
+
 export default defineConfig({
-	plugins: [tailwindcss(), sveltekit()],
+	plugins: [
+		tailwindcss(),
+		sveltekit({
+			// .md is for blog posts under src/lib/content/posts/ (mdsvex compiles
+			// them to Svelte components with a `metadata` export from frontmatter).
+			extensions: ['.svelte', '.md'],
+			preprocess: [mdsvex({ extensions: ['.md'] })],
+			compilerOptions: {
+				// Force runes mode for the project, except for libraries. Can be removed in svelte 6.
+				runes: ({ filename }) =>
+					filename.split(/[/\\]/).includes('node_modules') ? undefined : true
+			},
+
+			// Cloudflare Workers with static assets (wrangler.jsonc): every page is prerendered and served as a
+			// file, except the gallery's two routes, which the Worker renders on request from Connect's share
+			// data so an approved, edited or removed share shows at once (src/routes/gallery). The adapter reads
+			// wrangler.kit.jsonc, so it writes its Worker where worker/index.js (the deployed main) imports it.
+			adapter: adapter({ config: 'wrangler.kit.jsonc' }),
+
+			prerender: {
+				// A link to a moved address is fine: _redirects sends it on. Any
+				// other missing page still fails the build.
+				handleHttpError: ({ status, path, message }) => {
+					if (status === 404 && redirected.has(path.replace(/(.)\/$/, '$1'))) return;
+
+					throw new Error(message);
+				},
+
+				// A blog with zero published posts leaves /blog/[slug] with no
+				// pages to generate, which is valid (its entries() returned []).
+				// Every OTHER unseen route keeps the default hard failure —
+				// unreachable-route drift is the bug class the sitemap tests pin.
+				handleUnseenRoutes: ({ routes }) => {
+					const unexpected = routes.filter((id) => id !== '/blog/[slug]');
+
+					if (unexpected.length > 0) {
+						throw new Error(
+							`The following routes were marked as prerenderable, but were not prerendered: ${unexpected.join(', ')}`
+						);
+					}
+				}
+			}
+		})
+	],
 	// Dev server only (no effect on the static build). 5173 is taken by another
 	// Vite instance; strictPort keeps the port predictable so the Polar sandbox
 	// checkout success_url (localhost:5264/activate) always matches.

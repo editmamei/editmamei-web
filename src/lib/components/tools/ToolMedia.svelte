@@ -3,8 +3,8 @@
 	// scrolls near the viewport, plays while it is in view or hovered, and
 	// pauses otherwise. A visible button pauses it until the viewer presses
 	// play again. Under prefers-reduced-motion only the poster shows.
-	import { prefersReducedMotion } from '$lib/a11y/reducedMotion.svelte';
-	import type { ToolMedia } from '$lib/content/tools/tool-copy';
+	import { prefersReducedMotion } from '#lib/a11y/reducedMotion.svelte.ts';
+	import type { ToolMedia } from '#lib/content/tools/tool-copy.ts';
 
 	let { media }: { media: ToolMedia } = $props();
 

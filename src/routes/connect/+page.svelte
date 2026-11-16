@@ -1,21 +1,21 @@
 <script lang="ts">
 	import { onDestroy } from 'svelte';
-	import '$lib/components/landing/landing.css';
-	import ConnectFlow from '$lib/components/connect/ConnectFlow.svelte';
-	import ConnectHero from '$lib/components/connect/ConnectHero.svelte';
-	import UseCases from '$lib/components/connect/UseCases.svelte';
-	import Seo from '$lib/components/Seo.svelte';
-	import { connectApp, connectFilmVideo } from '$lib/seo/schema';
-	import { price } from '$lib/pricing/price';
-	import { reveal } from '$lib/actions/reveal';
-	import { track } from '$lib/analytics/clarity';
-	import { mediaUrl } from '$lib/media';
+	import '#lib/components/landing/landing.css';
+	import ConnectFlow from '#lib/components/connect/ConnectFlow.svelte';
+	import ConnectHero from '#lib/components/connect/ConnectHero.svelte';
+	import UseCases from '#lib/components/connect/UseCases.svelte';
+	import Seo from '#lib/components/Seo.svelte';
+	import { connectApp, connectFilmVideo } from '#lib/seo/schema.ts';
+	import { price } from '#lib/pricing/price.ts';
+	import { reveal } from '#lib/actions/reveal.ts';
+	import { track } from '#lib/analytics/clarity.ts';
+	import { mediaUrl } from '#lib/media.ts';
 	import {
 		CONNECT_PRIVACY_URL,
 		CONNECT_TERMS_URL,
 		CONNECT_TOOLS_URL,
 		CONNECT_URL
-	} from '$lib/links';
+	} from '#lib/links.ts';
 
 	// The page for Editmamei Connect, the hosted product. connect.editmamei.com
 	// has the sign-up, setup, the tool list and Connect's own Terms and Privacy

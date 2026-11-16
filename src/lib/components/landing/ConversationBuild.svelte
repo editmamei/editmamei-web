@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { reveal } from '$lib/actions/reveal';
+	import { reveal } from '#lib/actions/reveal.ts';
 
 	// A real session ("Prompting Photoshop", chapter 6): four prompts in one chat,
 	// each result exported from Photoshop as it landed. Prompts are verbatim.

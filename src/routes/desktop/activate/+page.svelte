@@ -1,8 +1,8 @@
 <script lang="ts">
-	import PageHero from '$lib/components/PageHero.svelte';
-	import Seo from '$lib/components/Seo.svelte';
-	import { PRO_FEATURES } from '$lib/content/pro-features';
-	import { CUSTOMER_PORTAL_URL, GITHUB_PRO_TROUBLESHOOTING_URL } from '$lib/links';
+	import PageHero from '#lib/components/PageHero.svelte';
+	import Seo from '#lib/components/Seo.svelte';
+	import { PRO_FEATURES } from '#lib/content/pro-features.ts';
+	import { CUSTOMER_PORTAL_URL, GITHUB_PRO_TROUBLESHOOTING_URL } from '#lib/links.ts';
 
 	const code = 'rounded bg-prompt-border px-1.5 py-0.5 font-mono text-[14px]';
 	const link = 'font-semibold text-brand underline underline-offset-2';

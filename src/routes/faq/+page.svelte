@@ -1,14 +1,14 @@
 <script lang="ts">
-	import PageHero from '$lib/components/PageHero.svelte';
-	import Seo from '$lib/components/Seo.svelte';
-	import { PRO_FEATURES_SENTENCE } from '$lib/content/pro-features';
+	import PageHero from '#lib/components/PageHero.svelte';
+	import Seo from '#lib/components/Seo.svelte';
+	import { PRO_FEATURES_SENTENCE } from '#lib/content/pro-features.ts';
 	import {
 		CONNECT_PRIVACY_URL,
 		CONNECT_TOOLS_URL,
 		GITHUB_FAQ_DOCS_URL,
 		GITHUB_GIMP_DOCS_URL,
 		GITHUB_TROUBLESHOOTING_DOCS_URL
-	} from '$lib/links';
+	} from '#lib/links.ts';
 
 	type Faq = { q: string; a: string; link?: { href: string; label: string } };
 

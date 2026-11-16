@@ -1,8 +1,8 @@
 <script lang="ts">
-	import PageHero from '$lib/components/PageHero.svelte';
-	import Seo from '$lib/components/Seo.svelte';
-	import { cookieConsent } from '$lib/stores/cookieConsent';
-	import { CONNECT_PRIVACY_URL } from '$lib/links';
+	import PageHero from '#lib/components/PageHero.svelte';
+	import Seo from '#lib/components/Seo.svelte';
+	import { cookieConsent } from '#lib/stores/cookieConsent.ts';
+	import { CONNECT_PRIVACY_URL } from '#lib/links.ts';
 </script>
 
 <Seo
