@@ -1,8 +1,8 @@
 ---
 title: Not every MCP server fits in 25 tools
-description: The usual advice is to keep an MCP server under 25 tools. Editmamei has 83 Photoshop tools, so I measured how often the AI sends a bad call across 61,977 real tool calls.
+description: The usual advice is to keep an MCP server under 25 tools. Editmamei has 83 MCP tools for Photoshop, so I measured how often the AI sends a bad call across 61,977 real tool calls.
 seoTitle: '83 MCP tools: how often the AI sends a bad call'
-seoDescription: 'Editmamei has 83 Photoshop tools. Across 61,977 real tool calls, 98.2% ran without an error and bad calls from the AI were 0.35% in October.'
+seoDescription: 'Editmamei has 83 MCP tools for Photoshop. Across 61,977 real tool calls, 98.2% ran without an error and bad calls from the AI were 0.35% in October.'
 date: 2026-10-30
 ---
 
@@ -10,7 +10,7 @@ Glama, a directory of MCP servers, grades every server's tool definitions, and o
 
 That rule works for a lot of servers. It doesn't work for a photo editor. Anyone who has used Photoshop knows the shape of it: a dozen menus, one to two dozen items under each, and half of those open dialogs with their own options and modes. Natively, that's hundreds of distinct operations. Mapping them one to one onto MCP tools would be a mess, and cutting them down to 25 would leave the AI unable to do the job.
 
-I build Editmamei, an MCP server that lets Claude and other AI apps edit in desktop Photoshop using Photoshop's own layers, masks and adjustments. It has 83 Photoshop tools. So I've been watching one number closely: how often the AI sends a call that's wrong.
+I build Editmamei, an MCP server that lets Claude and other AI apps edit in desktop Photoshop using Photoshop's own layers, masks and adjustments. It has 83 MCP tools for Photoshop. So I've been watching one number closely: how often the AI sends a call that's wrong.
 
 ## The numbers
 

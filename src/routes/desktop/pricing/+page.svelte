@@ -6,6 +6,7 @@
 	import { track } from '#lib/analytics/clarity.ts';
 	import { PRO_FEATURES } from '#lib/content/pro-features.ts';
 	import { toolCounts } from '#lib/content/tools/index.ts';
+	import { photoshopFeatureFloor } from '#lib/content/photoshop-features.ts';
 	import { desktopApp, faqPage } from '#lib/seo/schema.ts';
 	import { price } from '#lib/pricing/price.ts';
 
@@ -20,15 +21,13 @@
 		perpetual: 'https://buy.polar.sh/polar_cl_Q7TCkUeGqGBmO5qfq2qaLMbtCiMXXKJtL9A014TEJw3'
 	};
 
-	const freeTools = toolCounts.photoshop - toolCounts.photoshopPro;
-
 	const plans = [
 		{
 			id: 'community',
 			name: 'Community',
 			price: 'Free',
 			cadence: 'no time limit',
-			body: `${freeTools} Photoshop tools and ${toolCounts.gimp} for GIMP. A complete edit of any photo.`,
+			body: `More than ${photoshopFeatureFloor} Photoshop features, plus GIMP. A complete edit of any photo.`,
 			cta: 'Install free',
 			fine: '',
 			href: '/desktop#install',

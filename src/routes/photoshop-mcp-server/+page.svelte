@@ -81,7 +81,7 @@ tool_timeout_sec = 600`;
 	const faqs = [
 		{
 			q: 'What is a Photoshop MCP server?',
-			a: 'MCP (Model Context Protocol) is the standard way AI apps plug into other software. A Photoshop MCP server gives an AI app a set of Photoshop tools, so when you ask for an edit in a chat, the AI can open your photo, add adjustment layers, make selections and export the result in Photoshop itself.'
+			a: 'MCP (Model Context Protocol) is the standard way AI apps plug into other software. A Photoshop MCP server lets an AI app use Photoshop’s own features, so when you ask for an edit in a chat, the AI can open your photo, add adjustment layers, make selections and export the result in Photoshop itself.'
 		},
 		{
 			q: 'Is Editmamei free?',

@@ -11,9 +11,8 @@
 	import { reveal } from '#lib/actions/reveal.ts';
 	import { track } from '#lib/analytics/clarity.ts';
 	import { toolCounts } from '#lib/content/tools/index.ts';
+	import { photoshopFeatureFloor } from '#lib/content/photoshop-features.ts';
 	import { GITHUB_GIMP_DOCS_URL as GIMP_GUIDE_URL } from '#lib/links.ts';
-
-	const freeTools = toolCounts.photoshop - toolCounts.photoshopPro;
 
 	// What travels where. Checked against /privacy and the public privacy doc.
 	const facts = [
@@ -224,7 +223,7 @@
 					<span class="text-lg font-semibold text-brand">{price('free')}</span>
 				</div>
 				<p class="mt-4 mb-6 text-[16px] leading-relaxed text-neutral-800">
-					{freeTools} Photoshop tools and {toolCounts.gimp} for GIMP: adjustment layers, masks, selections,
+					More than {photoshopFeatureFloor} Photoshop features, plus GIMP: adjustment layers, masks, selections,
 					Select Subject and Select Sky, sky replacement, retouching, filters and text. Enough for a full
 					edit of any photo.
 				</p>
