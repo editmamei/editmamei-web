@@ -3,7 +3,10 @@
 	import Seo from '#lib/components/Seo.svelte';
 	import { desktopApp, faqPage } from '#lib/seo/schema.ts';
 	import { track } from '#lib/analytics/clarity.ts';
-	import { categories, toolCounts, tools } from '#lib/content/tools/index.ts';
+	import {
+		photoshopFeatureFloor,
+		photoshopFeatureGroups
+	} from '#lib/content/photoshop-features.ts';
 	import {
 		CURSOR_INSTALL_URL,
 		GITHUB_INSTALLATION_DOCS_URL,
@@ -18,12 +21,6 @@
 	// installation.md, faq.md, privacy.md) and the /desktop page.
 
 	const CLIENTS_DOCS_URL = `${GITHUB_REPO_URL}/blob/main/docs/clients.md`;
-	const freeTools = toolCounts.photoshop - toolCounts.photoshopPro;
-
-	// Categories with at least one Photoshop tool, from the same data as /desktop/tools.
-	const psCategories = categories.filter((c) =>
-		tools.some((t) => t.editor === 'photoshop' && t.category === c.id)
-	);
 
 	const INSTALL_CMD = 'npx -y editmamei install';
 	const JSON_CONFIG = `{
@@ -88,7 +85,7 @@ tool_timeout_sec = 600`;
 		},
 		{
 			q: 'Is Editmamei free?',
-			a: `Yes. The free edition has ${freeTools} Photoshop tools, enough for a full edit of any photo. Pro adds saved looks, batch editing across a folder, Camera Raw development and precision tools for whole shoots.`
+			a: `Yes. The free edition uses more than ${photoshopFeatureFloor} of Photoshop's features, from Curves and Select Subject to Content-Aware Fill, enough for a full edit of any photo. Pro adds Camera Raw, Warp, your recorded Actions, saved looks and batch editing across a folder.`
 		},
 		{
 			q: 'Does it work with ChatGPT?',
@@ -167,7 +164,7 @@ tool_timeout_sec = 600`;
 		<div class="space-y-5 text-[17px] leading-relaxed text-neutral-800">
 			<p>
 				MCP is the standard way AI apps plug into other software. Editmamei is an MCP server that
-				runs on your computer and gives your AI app a set of Photoshop tools: open a file, add a
+				runs on your computer and lets your AI app use Photoshop's own features: open a file, add a
 				Curves layer, select the sky, mask a subject, retouch, add text, export.
 			</p>
 			<p>
@@ -274,10 +271,10 @@ tool_timeout_sec = 600`;
 		</div>
 
 		<div class="mt-10 max-w-3xl">
-			<h3 class="text-lg font-bold text-white">Only the Photoshop tools</h3>
+			<h3 class="text-lg font-bold text-white">Photoshop only</h3>
 			<p class="mt-2 text-[15px] leading-relaxed text-[#c9d8d1]">
-				Editmamei also drives GIMP. If your app caps how many tools it loads, this package starts
-				the same server with the Photoshop tools only. Use it in place of <code class="text-accent"
+				Editmamei also drives GIMP. If your app caps how many MCP tools it loads, this package
+				starts the same server for Photoshop only. Use it in place of <code class="text-accent"
 					>editmamei</code
 				> in any config above:
 			</p>
@@ -298,27 +295,41 @@ tool_timeout_sec = 600`;
 <section class="bg-white px-4 py-16 md:py-24" aria-labelledby="tools-title">
 	<div class="mx-auto max-w-6xl">
 		<p class="lp-eyebrow text-terracotta-ink">What it can do</p>
-		<h2 id="tools-title" class="lp-h2 mt-4 text-brand">
-			{toolCounts.photoshop} Photoshop tools, {freeTools} of them free.
+		<h2 id="tools-title" class="lp-h2 mt-4 max-w-[24ch] text-brand">
+			More than {photoshopFeatureFloor} Photoshop features, free.
 		</h2>
+		<p class="mt-5 max-w-[42rem] text-lg leading-relaxed text-neutral-700">
+			Your AI works with Photoshop's own adjustments, filters, selections and retouching, called by
+			the same names you know from its menus.
+		</p>
 		<ul class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-			{#each psCategories as c (c.id)}
+			{#each photoshopFeatureGroups as g (g.title)}
 				<li class="rounded-[22px] bg-paper p-6 ring-1 ring-brand/10">
-					<h3 class="text-lg font-bold text-brand">{c.label}</h3>
-					<p class="mt-2 text-[15px] leading-relaxed text-neutral-700">{c.blurb}</p>
+					<div class="flex items-baseline justify-between gap-3">
+						<h3 class="text-lg font-bold text-brand">{g.title}</h3>
+						<span class="text-[14px] text-neutral-600">{g.items.length}</span>
+					</div>
+					<p class="mt-2 text-[15px] leading-relaxed text-neutral-700">
+						{g.summary ?? g.items.join(', ')}
+					</p>
 				</li>
 			{/each}
 		</ul>
-		<p class="mt-8 text-[15px] text-neutral-700">
+		<p class="mt-8 max-w-[48rem] text-[16px] leading-relaxed text-neutral-800">
+			<strong class="text-brand">Pro adds</strong> Camera Raw as a re-editable filter, raw files
+			developed before they open, Warp, your recorded Actions, selections of a named object or a
+			face, saved looks, and batch runs across a whole folder.
+			<a
+				href="/desktop/pricing"
+				onclick={() => track('psmcp-pro-link')}
+				class="font-semibold text-brand underline underline-offset-2">See Pro</a
+			>
+			·
 			<a
 				href="/desktop/tools"
 				onclick={() => track('psmcp-tools-link')}
 				class="font-semibold text-brand underline underline-offset-2"
-				>See every tool, with what each one does <span aria-hidden="true">→</span></a
-			>
-			·
-			<a href="/desktop/pricing" class="font-semibold text-brand underline underline-offset-2"
-				>What Pro adds</a
+				>How Editmamei reaches each one <span aria-hidden="true">→</span></a
 			>
 		</p>
 	</div>
