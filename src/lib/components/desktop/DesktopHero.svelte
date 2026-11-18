@@ -71,8 +71,8 @@
 				>
 			</div>
 			<p class="mt-5 text-[14px] text-[#a9bcb4]">
-				Photoshop 2026 or GIMP 3.2 · Windows, macOS, and Linux with GIMP · Claude Desktop, ChatGPT,
-				Cursor and more
+				Photoshop 2026 or later, or GIMP 3.2 · Windows, macOS, and Linux with GIMP · Claude Desktop,
+				ChatGPT, Cursor and more
 			</p>
 		</div>
 

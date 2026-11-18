@@ -8,7 +8,7 @@ Ask a typical AI app to edit a photo and it generates a new picture from yours, 
 
 An MCP (Model Context Protocol) server that runs on your computer, next to the photo editor it drives.
 
-- Edits in Adobe Photoshop 2026 (version 27.x) or GIMP 3.2, as layers, masks and adjustment layers you can keep editing by hand. Your AI app sees small previews so it can check its work.
+- Edits in Adobe Photoshop 2026 or later (earlier versions back to Photoshop 2020 may also work) or GIMP 3.2, as layers, masks and adjustment layers you can keep editing by hand. Your AI app sees small previews so it can check its work.
 - Runs on Windows 10/11 and macOS 13+, and on Linux with GIMP.
 - Works with AI apps that run MCP servers on your computer: Claude Desktop (one-click extension), Claude Code, Cursor and other MCP apps. It can't run inside a web-only chat app.
 - Install for Claude Desktop: download https://github.com/editmamei/editmamei/releases/latest/download/editmamei.mcpb and install it under Settings → Desktop app → Manage (next to Extensions) → Advanced settings → Install Extension….

@@ -87,7 +87,7 @@
 		},
 		{
 			q: 'Which Photoshop versions does Editmamei support?',
-			a: 'Photoshop 2026 (version 27.x) is the version Editmamei is verified against, on Windows and macOS. Earlier versions may work, but they are unverified.'
+			a: 'Photoshop 2026 or later, on Windows and macOS. It may also work with earlier versions, back to Photoshop 2020.'
 		},
 		{
 			q: 'Does Editmamei Desktop work on Mac, Windows and Linux?',

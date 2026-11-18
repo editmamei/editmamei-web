@@ -93,7 +93,7 @@ tool_timeout_sec = 600`;
 		},
 		{
 			q: 'Which versions of Photoshop does it support?',
-			a: 'Adobe Photoshop 2026 (version 27) on Windows 10 or 11 and macOS 13 or later. It does not work with Photoshop Elements, which lacks the scripting interface it uses, and it does not drive Lightroom.'
+			a: 'Adobe Photoshop 2026 or later, on Windows 10 or 11 and macOS 13 or later. It may also work with earlier versions, back to Photoshop 2020. It does not work with Photoshop Elements, which lacks the scripting interface it uses, and it does not drive Lightroom.'
 		},
 		{
 			q: 'Is it generative AI?',
@@ -283,8 +283,9 @@ tool_timeout_sec = 600`;
 		</div>
 
 		<p class="mt-10 text-[15px] text-[#9fb5ac]">
-			Requirements: Adobe Photoshop 2026 on Windows 10/11 or macOS 13+, and Node.js 22 or later
-			(except with the Claude Desktop download). Full steps are in the
+			Requirements: Adobe Photoshop 2026 or later (earlier versions back to 2020 may also work) on
+			Windows 10/11 or macOS 13+, and Node.js 22 or later (except with the Claude Desktop download).
+			Full steps are in the
 			<a
 				href={GITHUB_INSTALLATION_DOCS_URL}
 				class="font-semibold text-accent underline underline-offset-4">install guide</a

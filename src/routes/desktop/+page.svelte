@@ -171,7 +171,7 @@
 			<div class="rounded-[22px] bg-white p-6 ring-1 ring-brand/10">
 				<p class="text-sm font-bold text-terracotta-ink">1 · An editor</p>
 				<p class="mt-3 text-[16px] leading-relaxed text-neutral-800">
-					Photoshop 2026 on Windows or macOS. Or
+					Photoshop 2026 or later on Windows or macOS. Or
 					<a href="#gimp" class="font-semibold text-brand underline underline-offset-2">GIMP 3.2</a
 					>, which is free and also runs on Linux.
 				</p>

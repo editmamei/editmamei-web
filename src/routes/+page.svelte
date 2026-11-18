@@ -23,7 +23,7 @@
 	const faqs = [
 		{
 			q: 'Do I need Photoshop?',
-			a: "No. Connect edits on Editmamei's server, so all you need is an AI app that supports connectors. Desktop uses the editor on your own computer: Photoshop 2026, or GIMP 3.2 for free."
+			a: "No. Connect edits on Editmamei's server, so all you need is an AI app that supports connectors. Desktop uses the editor on your own computer: Photoshop 2026 or later, or GIMP 3.2 for free."
 		},
 		{
 			q: 'What does it cost?',

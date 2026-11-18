@@ -43,7 +43,8 @@ export const desktopApp: Json = {
 	image: `${ORIGIN}/icons/icon-512.png`,
 	applicationCategory: 'DesignApplication',
 	operatingSystem: 'Windows 10/11, macOS 13+, Linux (with GIMP)',
-	softwareRequirements: 'Adobe Photoshop 2026 or GIMP 3.2, and an AI app that supports MCP',
+	softwareRequirements:
+		'Adobe Photoshop 2026 or later, or GIMP 3.2, and an AI app that supports MCP',
 	softwareVersion: snapshot.version,
 	isAccessibleForFree: true,
 	downloadUrl: 'https://www.npmjs.com/package/editmamei',

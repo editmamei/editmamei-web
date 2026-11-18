@@ -1,6 +1,6 @@
 # Editmamei Desktop: full user documentation
 
-This file bundles the user docs for Editmamei Desktop, the MCP server that lets AI apps edit photos in Adobe Photoshop or GIMP on your computer, as plain text for AI assistants and crawlers. Each section is copied from the public repository's docs for the 1.9.5 release, at the path shown in its header, with relative links rewritten to GitHub URLs (on the repository's main branch). The short overview of both Editmamei products is at https://editmamei.com/llms.txt, and Editmamei Connect, the hosted product, describes itself at https://connect.editmamei.com/llms.txt.
+This file bundles the user docs for Editmamei Desktop, the MCP server that lets AI apps edit photos in Adobe Photoshop or GIMP on your computer, as plain text for AI assistants and crawlers. Each section is copied from the public repository's docs for the 1.11.0 release, at the path shown in its header, with relative links rewritten to GitHub URLs (on the repository's main branch). The short overview of both Editmamei products is at https://editmamei.com/llms.txt, and Editmamei Connect, the hosted product, describes itself at https://connect.editmamei.com/llms.txt.
 
 Contents: Getting started, Installation, AI apps, FAQ, Pro features, GIMP, Troubleshooting, Privacy and data handling.
 
@@ -12,7 +12,7 @@ SOURCE: https://github.com/editmamei/editmamei/blob/main/docs/getting-started.md
 
 # Getting started
 
-This guide walks you through your first session with Editmamei, the MCP server that drives Adobe Photoshop from your AI assistant. It goes from confirming Photoshop is connected to making your first real edit, and assumes you've already done the [installation](https://github.com/editmamei/editmamei/blob/main/docs/installation.md).
+This guide walks you through your first session with Editmamei, the MCP server that lets your AI app edit photos in desktop Photoshop or GIMP. It uses Photoshop, going from confirming Photoshop is connected to making your first real edit, and assumes you've already done the [installation](https://github.com/editmamei/editmamei/blob/main/docs/installation.md). Using GIMP? See [gimp.md](https://github.com/editmamei/editmamei/blob/main/docs/gimp.md).
 
 The pattern throughout is the same: **you describe what you want in your own words; the AI plans it; Photoshop carries it out.** You're not learning a new app; you're learning to ask for what you already know how to do.
 
@@ -20,7 +20,7 @@ The pattern throughout is the same: **you describe what you want in your own wor
 
 ## Step 1: ping Photoshop
 
-With Photoshop open and the MCP client you want to use restarted (any of Claude Desktop, Cursor, or Claude Code; `editmamei install` writes to all three in one pass), start a new conversation and ask:
+With Photoshop open and the MCP client you want to use restarted (any of Claude Desktop, Claude Code, Cursor, or the ChatGPT desktop app or Codex; `npx -y editmamei install` writes to all of them in one pass), start a new conversation and ask:
 
 > "Is Photoshop connected? What version is running?"
 
@@ -56,7 +56,7 @@ Editmamei always prefers non-destructive operations (adjustment layers, masks, a
 
 > "Show me what the image looks like now."
 
-The AI calls `ps_get_preview`, which returns a downscaled JPEG of the current document state inline. This is how the AI sees its own work; the preview goes to your AI assistant, which is a cloud service (see [privacy.md](https://github.com/editmamei/editmamei/blob/main/docs/privacy.md#your-ai-assistant-is-a-cloud-service)). You can ask it to compare against the original, evaluate exposure, or check if a particular edit landed.
+The AI calls `ps_get_preview`, which returns a preview JPEG of the current document state inline. This is how the AI sees its own work; the preview goes to your AI assistant, which is a cloud service (see [privacy.md](https://github.com/editmamei/editmamei/blob/main/docs/privacy.md#your-ai-assistant-is-a-cloud-service)). You can ask it to compare against the original, evaluate exposure, or check if a particular edit landed.
 
 ---
 
@@ -133,7 +133,7 @@ If you hit a Photoshop operation Editmamei doesn't have a dedicated tool for, Pr
 
 ### Photoshop version support
 
-Editmamei is tested against **Photoshop 2026 (internal version 27.x)**, the only Photoshop version every ActionManager descriptor has been ground-truth captured against. Earlier versions (Photoshop 2025 / 2024 / 2023 / 2022) may work, but they're unverified; Adobe rotates event IDs between major versions and silent-no-op descriptor failures on untested PS majors cannot be ruled out. The auto-detector still finds older installs so you can try.
+Editmamei supports **Photoshop 2026 or later**. It may also work with earlier versions, back to Photoshop 2020. Adobe sometimes changes scripting details between major versions, so a tool can behave differently on an older one.
 
 PS 2026 introduced a few descriptor changes that affected some adjustment-layer and selection paths; current builds work around the known ones. If you hit a tool that fails (on PS 2026 or any other version), [open an issue](https://github.com/editmamei/editmamei/issues) and include the output of `editmamei status` plus the relevant snippet from `~/.editmamei/sessions/<session-id>.ndjson`. Please mention your Photoshop version so we can route the bug correctly.
 
@@ -168,19 +168,20 @@ SOURCE: https://github.com/editmamei/editmamei/blob/main/docs/installation.md
 
 # Installation
 
-Editmamei is an MCP server that drives desktop Adobe Photoshop. It installs two ways: a one-click `.mcpb` extension for Claude Desktop (no terminal, no Node), or the `editmamei` npm package for Claude Code, Cursor, and any other MCP client. Both deliver the same tools. On the npm path, the `editmamei install` subcommand detects your MCP clients and writes each one's config in a single pass; manual configuration is documented below as a fallback.
+Editmamei is an MCP server that drives desktop Adobe Photoshop. It installs two ways: a one-click `.mcpb` extension for Claude Desktop (no terminal, no Node), or the `editmamei` npm package for Claude Code, Cursor, the ChatGPT desktop app, Codex, and any other MCP client. Both deliver the same tools. On the npm path, the `editmamei install` subcommand detects your MCP clients and writes each one's config in a single pass; manual configuration is documented below as a fallback.
 
 ---
 
-## Requirements: Photoshop 2026, Node 22+, Windows or macOS
+## Requirements: Photoshop 2026 or later, Node 22+, Windows or macOS
 
-- **Adobe Photoshop 2026 (internal version 27.x).** The only version Editmamei has been verified against. Earlier majors may work but are unverified; see [faq.md](https://github.com/editmamei/editmamei/blob/main/docs/faq.md#which-photoshop-versions-are-supported) for the rationale.
+- **Adobe Photoshop 2026 or later.** It may also work with earlier versions, back to Photoshop 2020; see [faq.md](https://github.com/editmamei/editmamei/blob/main/docs/faq.md#which-photoshop-versions-are-supported).
 - **Operating system:** Windows 10/11 or macOS 13+.
 - **Node.js 22 or later** ([nodejs.org](https://nodejs.org/)), for the npm install path only. The `.mcpb` extension doesn't need it; Claude Desktop bundles its own runtime.
 - An **MCP-compatible client**, at least one of:
   - [Claude Desktop](https://claude.ai/download)
   - [Cursor](https://cursor.com/)
   - [Claude Code](https://claude.ai/code)
+  - The [ChatGPT desktop app](https://chatgpt.com/download) (Work mode) or Codex
 
   Editmamei ships no model of its own and runs on whichever client you connect, so every edit
   spends that client's tokens. That client might be a subscription, an API key, or a model you run yourself.
@@ -201,26 +202,24 @@ The telemetry switches and your Pro license key (if you have one) live in the ex
 
 ---
 
-## Install from npm (Claude Code, Cursor, any MCP client)
+## Install from npm (Claude Code, Cursor, ChatGPT, any MCP client)
 
-For clients that already have Node. Confirm your Node.js version:
+Cursor and VS Code can add Editmamei in one click: [Install in Cursor](https://cursor.com/en/install-mcp?name=editmamei&config=eyJjb21tYW5kIjoibnB4IiwiYXJncyI6WyIteSIsImVkaXRtYW1laSJdfQ==) or [Install in VS Code](https://vscode.dev/redirect/mcp/install?name=editmamei&config=%7B%22command%22%3A%22npx%22%2C%22args%22%3A%5B%22-y%22%2C%22editmamei%22%5D%7D). Each app asks before it adds the server, then runs `npx -y editmamei`. Both need Node.js, as below.
+
+Confirm your Node.js version:
 
 ```bash
 node --version
 ```
 
-If you see `v22` or higher, install the CLI globally:
-
-```bash
-npm install -g editmamei
-```
+If you see `v22` or higher, you're ready for the next step. (`npm install -g editmamei` also works if you'd rather have the `editmamei` command installed for good; then drop the `npx -y` from the commands below.)
 
 ---
 
 ## Register with your MCP client(s)
 
 ```bash
-editmamei install
+npx -y editmamei install
 ```
 
 `editmamei install` runs against every supported client in one pass and prints a per-client result line. The clients today are:
@@ -230,12 +229,15 @@ editmamei install
 | **Claude Desktop** | always written (canonical client) | `%APPDATA%\Claude\claude_desktop_config.json` (Windows) or `~/Library/Application Support/Claude/claude_desktop_config.json` (macOS) |
 | **Cursor** | written if `~/.cursor/` exists or `cursor` is on your PATH | `~/.cursor/mcp.json` |
 | **Claude Code** | written if the `claude` binary is on your PATH | uses `claude mcp add --scope user editmamei -- npx -y editmamei` under the hood |
+| **ChatGPT desktop app and Codex** | written if the Codex home folder (`~/.codex`, or `$CODEX_HOME`) exists or `codex` is on your PATH | `config.toml` in that folder, shared by the ChatGPT desktop app, the Codex CLI and the Codex IDE extension |
 
 For each detected client, the command:
 
 1. Reads the existing config (refuses to overwrite if the JSON is malformed; fix that first).
 2. Backs up the existing file to `<config>.bak` only if no `.bak` is already there. The pre-install state is more valuable than any of our own first-run output, so a second install never clobbers the original backup.
 3. Adds an `editmamei` entry to `mcpServers`, or no-ops if the entry already matches. Any env vars you've hand-added to the `editmamei` entry (e.g. `LOG_LEVEL`) are preserved; install only overrides the keys it explicitly sets.
+
+For the ChatGPT desktop app and Codex, the entry is the `[mcp_servers.editmamei]` table in `config.toml`, with a 60-second start timeout and a 600-second tool timeout added when they're missing. Only that table changes: comments, other servers and the per-tool approvals the app saves are kept as they are. See [clients.md](https://github.com/editmamei/editmamei/blob/main/docs/clients.md#chatgpt-desktop-app-and-codex) for using it in the app.
 
 If a client isn't detected, that line is reported as "skipped" and doesn't abort the run.
 
@@ -259,7 +261,7 @@ Restart your AI client(s) after this completes. Config changes only take effect 
 ### Check your install state
 
 ```bash
-editmamei status
+npx -y editmamei status
 ```
 
 Reports, per client, whether Editmamei is registered and what command would launch it. Run this when troubleshooting.
@@ -326,7 +328,7 @@ The AI talks to whatever instance of Photoshop is currently running, so Photosho
 
 ### Optional: pin a specific Photoshop install
 
-Editmamei auto-detects Photoshop. If you have multiple versions installed and want to pin a specific one, set the `PHOTOSHOP_PATH` env var in your MCP client config:
+Editmamei auto-detects Photoshop. With several versions installed, it uses the newest one. To use a different one, set the `PHOTOSHOP_PATH` env var in your MCP client config:
 
 ```json
 {
@@ -344,7 +346,7 @@ Editmamei auto-detects Photoshop. If you have multiple versions installed and wa
 
 ### Optional: raise script timeouts on a slow machine
 
-Each tool has its own timeout budget, tuned from typical execution times. If Photoshop is routinely slower than that on your machine — an older CPU, a heavily loaded system, a very large document — set `EDITMAMEI_SCRIPT_TIMEOUT_MS` in the same `env` block to scale every tool's budget up together, rather than each one failing early on your machine specifically. The value is milliseconds for what would otherwise be a 30-second budget; `"60000"` doubles every timeout, `"90000"` triples them. It's capped at 10x and ignored (with a warning in the server's logs) if it isn't a positive number.
+Each tool has its own timeout budget of at least 30 seconds. If Photoshop is routinely slower than that on your machine — an older CPU, a heavily loaded system, a very large document — set `EDITMAMEI_SCRIPT_TIMEOUT_MS` in the same `env` block to scale every tool's budget up together, rather than each one failing early on your machine specifically. The value is milliseconds for what would otherwise be a 30-second budget; `"60000"` doubles every timeout, `"90000"` triples them. It's capped at 10x and ignored (with a warning in the server's logs) if it isn't a positive number.
 
 ---
 
@@ -399,11 +401,10 @@ Problems after an upgrade are covered in [troubleshooting.md](https://github.com
 ## Uninstall
 
 ```bash
-editmamei uninstall
-npm uninstall -g editmamei
+npx -y editmamei uninstall
 ```
 
-The `uninstall` subcommand removes Editmamei from your MCP client configs. The `npm uninstall` removes the package itself. Your per-user data at `~/.editmamei/` (templates, session logs) is left in place; delete it manually if you don't want it.
+The `uninstall` subcommand removes Editmamei from your MCP client configs. If you also installed the package globally, `npm uninstall -g editmamei` removes it. Your per-user data at `~/.editmamei/` (templates, session logs) is left in place; delete it manually if you don't want it.
 
 ---
 
@@ -418,9 +419,22 @@ requirements, detection locations, and troubleshooting: [docs/gimp.md](https://g
 
 ---
 
+## Editor-named packages
+
+Two small npm packages start the same server with one editor's tools:
+
+| Package | Starts | Same as |
+|---|---|---|
+| [`@editmamei/photoshop-mcp`](https://www.npmjs.com/package/@editmamei/photoshop-mcp) | the Photoshop tools only | `npx -y editmamei` with `EDITMAMEI_EDITOR=photoshop` |
+| [`@editmamei/gimp-mcp`](https://www.npmjs.com/package/@editmamei/gimp-mcp) | the GIMP tools only | `npx -y editmamei` with `EDITMAMEI_EDITOR=gimp` |
+
+Use one in place of `editmamei` in any client config, for example `"args": ["-y", "@editmamei/photoshop-mcp"]`. Each is published with every release and depends on exactly that release of `editmamei`, so `npx` keeps it current the same way. A shorter tool list helps in clients that cap it. An `EDITMAMEI_EDITOR` you set in the server's `env` still wins.
+
+---
+
 ## Pro
 
-Pro is a downloaded **module**, not a separate install. Keep your Community setup as-is; when you activate a license, Editmamei fetches the signed Pro module and loads it alongside Community after a restart. Buy at [editmamei.com/desktop/pricing](https://editmamei.com/desktop/pricing), then activate with your license key: with an npm install, run `editmamei activate YOUR-KEY` and restart your client; with the Claude Desktop extension, paste your key into **Settings → Desktop app → Manage (next to Extensions) → Editmamei → Pro license key** and restart. The license re-validates roughly daily in the background; if a subscription lapses there's a seven-day grace window, then Editmamei keeps running as Community rather than locking you out. Full steps at [editmamei.com/desktop/activate](https://editmamei.com/desktop/activate). See [pro-features.md](https://github.com/editmamei/editmamei/blob/main/docs/pro-features.md) for what Pro adds and [roadmap.md](https://github.com/editmamei/editmamei/blob/main/docs/roadmap.md) for what's planned next.
+Pro is a downloaded **module**, not a separate install. Keep your Community setup as-is; when you activate a license, Editmamei fetches the signed Pro module and loads it alongside Community after a restart. Buy at [editmamei.com/desktop/pricing](https://editmamei.com/desktop/pricing), then activate with your license key: with an npm install, run `npx -y editmamei activate YOUR-KEY` and restart your client; with the Claude Desktop extension, paste your key into **Settings → Desktop app → Manage (next to Extensions) → Editmamei → Pro license key** and restart. The license re-validates roughly daily in the background; if a subscription lapses there's a seven-day grace window, then Editmamei keeps running as Community rather than locking you out. Full steps at [editmamei.com/desktop/activate](https://editmamei.com/desktop/activate). See [pro-features.md](https://github.com/editmamei/editmamei/blob/main/docs/pro-features.md) for what Pro adds and [roadmap.md](https://github.com/editmamei/editmamei/blob/main/docs/roadmap.md) for what's planned next.
 
 
 ================================================================================
@@ -430,7 +444,7 @@ SOURCE: https://github.com/editmamei/editmamei/blob/main/docs/clients.md
 
 # AI clients
 
-Editmamei is a local MCP stdio server. Any client that can launch a local command and run MCP tools can in principle connect to it. This page lists the clients we document, what has been tested, and the settings each one needs.
+Editmamei is a local MCP stdio server, so any client that can launch a local command and run MCP tools can connect to it. This page lists the supported clients and the settings each one needs.
 
 The launch command is the same everywhere:
 
@@ -438,31 +452,36 @@ The launch command is the same everywhere:
 npx -y editmamei
 ```
 
-It needs Node.js 22 or later (see [installation.md](https://github.com/editmamei/editmamei/blob/main/docs/installation.md)), except for the Claude Desktop extension, which bundles its own runtime. Browser-only clients (claude.ai and ChatGPT on the web) accept only remote connectors, so they can't launch a local server.
+It needs Node.js 22 or later (see [installation.md](https://github.com/editmamei/editmamei/blob/main/docs/installation.md)), except for the Claude Desktop extension, which bundles its own runtime. Browser-only clients (claude.ai and ChatGPT on the web) accept only remote connectors, so they can't launch a local server; [Editmamei Connect](https://editmamei.com/connect) is the hosted option for those.
 
-## Status
+One command sets up every supported app it finds on your computer (Claude Desktop, Claude Code, Cursor, and the ChatGPT desktop app and Codex):
 
-| Client | Status | Config |
-|---|---|---|
-| [Claude Desktop](#claude-desktop) | Tested | `.mcpb` extension or JSON |
-| [Claude Code](#claude-code) | Tested | CLI command |
-| [Cursor](#cursor) | The tool cap may apply (see the tool limit note); set `EDITMAMEI_EDITOR=photoshop` to reduce the tool count | JSON or deeplink |
-| [VS Code (Copilot agent mode)](#vs-code-copilot-agent-mode) | Not yet tested | JSON, CLI or install link |
-| [Visual Studio](#visual-studio) | Not yet tested | JSON |
-| [Codex](#codex) | Not yet tested | TOML or CLI command |
-| [Windsurf / Devin Desktop](#windsurf--devin-desktop) | Not yet tested | JSON |
-| [Warp](#warp) | Not yet tested | JSON |
-| [Zed](#zed) | Not yet tested | JSON |
-| [Gemini CLI](#gemini-cli) | Not yet tested | JSON or CLI command |
-| [Google Antigravity](#google-antigravity) | Not yet tested | JSON |
-| [Cline](#cline) | Not yet tested | JSON |
-| [Goose](#goose) | Not yet tested | YAML or deeplink |
-| [opencode](#opencode) | Not yet tested | JSON |
-| [Kiro](#kiro) | Not yet tested | JSON |
-| [JetBrains AI Assistant](#jetbrains-ai-assistant) | Not yet tested | Settings UI |
-| [Trae](#trae) | Not yet tested | Settings UI |
+```
+npx -y editmamei install
+```
 
-"Tested" means the client is part of our regular checks. "Not yet tested" means the configuration below comes from the vendor's documentation and has not been run end to end with Editmamei. It may work, and it may hit one of the known limits in the next section. Status lines will carry a client version and a date once a client has been tested.
+## Supported clients
+
+| Client | Config |
+|---|---|
+| [Claude Desktop](#claude-desktop) | `.mcpb` extension, `editmamei install` or JSON |
+| [Claude Code](#claude-code) | `editmamei install` or CLI command |
+| [ChatGPT desktop app](#chatgpt-desktop-app-and-codex) | `editmamei install` or TOML |
+| [Cursor](#cursor) | `editmamei install`, install link or JSON |
+| [VS Code (Copilot agent mode)](#vs-code-copilot-agent-mode) | JSON, CLI or install link |
+| [Visual Studio](#visual-studio) | JSON |
+| [Codex](#chatgpt-desktop-app-and-codex) | `editmamei install`, TOML or CLI command |
+| [Windsurf / Devin Desktop](#windsurf--devin-desktop) | JSON |
+| [Warp](#warp) | JSON |
+| [Zed](#zed) | JSON |
+| [Gemini CLI](#gemini-cli) | JSON or CLI command |
+| [Google Antigravity](#google-antigravity) | JSON |
+| [Cline](#cline) | JSON |
+| [Goose](#goose) | YAML or deeplink |
+| [opencode](#opencode) | JSON |
+| [Kiro](#kiro) | JSON |
+| [JetBrains AI Assistant](#jetbrains-ai-assistant) | Settings UI |
+| [Trae](#trae) | Settings UI |
 
 Not supported: LM Studio (the model does not receive images that tools return, so Editmamei's preview loop can't work) and Raycast (MCP is limited to its paid plan and isn't covered here).
 
@@ -476,9 +495,9 @@ Not supported: LM Studio (the model does not receive images that tools return, s
 
 If your client truncates the list, set `EDITMAMEI_EDITOR=photoshop` in the server's `env` block to register only the Photoshop tools (or `gimp` for only the GIMP tools). See [gimp.md](https://github.com/editmamei/editmamei/blob/main/docs/gimp.md#pinning-the-editor). Most clients also let you switch off individual tools.
 
-**Timeouts.** Some operations take longer than a minute, such as AI selection and large scene reads. Codex defaults to 300 seconds per tool call ([openai/codex#28234](https://github.com/openai/codex/pull/28234)) and Cline's default is reported as 60 seconds. Raise those limits where the client section below says so.
+**Timeouts.** Some operations take longer than a minute, such as AI selection and large scene reads. The ChatGPT desktop app and Codex document a 60-second default per tool call ([docs](https://learn.chatgpt.com/docs/extend/mcp)), and Cline's default is reported as 60 seconds. Raise those limits where the client section below says so.
 
-**Images and structured results.** Editmamei returns preview images alongside structured results. Two clients have open upstream issues around structured results. VS Code still passes tool-result images to the model, but replaces the text content when structured content is present ([microsoft/vscode#290063](https://github.com/microsoft/vscode/issues/290063)). Codex can drop the rest of a tool result when a structured result is present ([openai/codex#10334](https://github.com/openai/codex/issues/10334)), so the model may not see previews there. Until this is tested, treat Codex as possibly limited.
+**Images and structured results.** Editmamei returns preview images alongside structured results. Two clients have open upstream issues around structured results. VS Code still passes tool-result images to the model, but replaces the text content when structured content is present ([microsoft/vscode#290063](https://github.com/microsoft/vscode/issues/290063)). Codex can drop the rest of a tool result when a structured result is present ([openai/codex#10334](https://github.com/openai/codex/issues/10334)), so the model may not see previews there. The ChatGPT desktop app shares that engine.
 
 ## Claude Desktop
 
@@ -507,7 +526,7 @@ On Windows, if the server fails to start, use `-- cmd /c npx -y editmamei` ([Cla
 
 ## Cursor
 
-Edit `~/.cursor/mcp.json` (global) or `.cursor/mcp.json` (project):
+`npx -y editmamei install` adds Editmamei to `~/.cursor/mcp.json`. To do it by hand, edit `~/.cursor/mcp.json` (global) or `.cursor/mcp.json` (project):
 
 ```json
 {
@@ -517,7 +536,9 @@ Edit `~/.cursor/mcp.json` (global) or `.cursor/mcp.json` (project):
 }
 ```
 
-Cursor's install-link format is documented at [cursor.com/docs/context/mcp/install-links](https://cursor.com/docs/context/mcp/install-links). This link adds Editmamei (paste it into a browser address bar):
+One click: [Install in Cursor](https://cursor.com/en/install-mcp?name=editmamei&config=eyJjb21tYW5kIjoibnB4IiwiYXJncyI6WyIteSIsImVkaXRtYW1laSJdfQ==). Cursor opens and asks before it adds the server.
+
+The same link in Cursor's own scheme, for pasting into a browser address bar (the format is documented at [cursor.com/docs/context/mcp/install-links](https://cursor.com/docs/context/mcp/install-links)):
 
 ```
 cursor://anysphere.cursor-deeplink/mcp/install?name=editmamei&config=eyJjb21tYW5kIjoibnB4IiwiYXJncyI6WyIteSIsImVkaXRtYW1laSJdfQ==
@@ -543,7 +564,9 @@ From a terminal:
 code --add-mcp "{\"name\":\"editmamei\",\"command\":\"npx\",\"args\":[\"-y\",\"editmamei\"]}"
 ```
 
-VS Code also accepts install links of the form `vscode:mcp/install?<URL-encoded JSON>`:
+One click: [Install in VS Code](https://vscode.dev/redirect/mcp/install?name=editmamei&config=%7B%22command%22%3A%22npx%22%2C%22args%22%3A%5B%22-y%22%2C%22editmamei%22%5D%7D). VS Code opens the server's details so you can review them before installing.
+
+The same link in VS Code's own scheme, `vscode:mcp/install?<URL-encoded JSON>`:
 
 ```
 vscode:mcp/install?%7B%22name%22%3A%22editmamei%22%2C%22command%22%3A%22npx%22%2C%22args%22%3A%5B%22-y%22%2C%22editmamei%22%5D%7D
@@ -565,18 +588,33 @@ Windows only. Visual Studio 2026, or 2022 version 17.14 or later. Create `%USERP
 
 Tools are disabled by default. Open the tool picker in Copilot agent mode and enable the Editmamei tools. Docs: [learn.microsoft.com/visualstudio/ide/mcp-servers](https://learn.microsoft.com/en-us/visualstudio/ide/mcp-servers). It shares VS Code's Copilot engine, so the VS Code limits above may apply.
 
-## Codex
+## ChatGPT desktop app and Codex
 
-Shared by the CLI, IDE extension and desktop app: `~/.codex/config.toml`.
+The ChatGPT desktop app, the Codex CLI and the Codex IDE extension share one configuration file, so one entry adds Editmamei to all three. With Node.js 22 or later installed, run:
+
+```bash
+npx -y editmamei install
+```
+
+It writes the entry below into `config.toml` in the Codex home folder (`~/.codex`, or `$CODEX_HOME` when set), changing nothing else in the file. The first time it changes the file, it keeps a copy of the original as `config.toml.bak`. If the folder doesn't exist yet, open the ChatGPT desktop app once and run the command again. To add it by hand instead:
 
 ```toml
 [mcp_servers.editmamei]
 command = "npx"
 args = ["-y", "editmamei"]
+startup_timeout_sec = 60
 tool_timeout_sec = 600
 ```
 
-Or `codex mcp add editmamei -- npx -y editmamei`, then add the `tool_timeout_sec` line by hand. The default is 300 seconds ([openai/codex#28234](https://github.com/openai/codex/pull/28234)). Known limit: issue #10334 above.
+The two timeouts matter. The documented defaults are 10 seconds to start, which the first `npx` download can exceed, and 60 seconds per tool call, which AI selection and large scene reads can exceed. `codex mcp add editmamei -- npx -y editmamei` also works, but then add both lines by hand. Docs: [learn.chatgpt.com/docs/extend/mcp](https://learn.chatgpt.com/docs/extend/mcp).
+
+In the ChatGPT desktop app:
+
+- Quit it fully after the change. It keeps running in the system tray when you close the window, so close it from the tray icon, then open it again.
+- Editmamei's tools are in **Work** mode. Chat mode doesn't run local servers.
+- The app asks before each tool call that changes your document. Choose **Always allow** for a tool to stop the prompts for it; the app records that choice in the same file.
+
+Known limit: issue #10334 above.
 
 ## Windsurf / Devin Desktop
 
@@ -756,7 +794,7 @@ SOURCE: https://github.com/editmamei/editmamei/blob/main/docs/faq.md
 
 # FAQ
 
-Common questions about Editmamei, the MCP server that drives Adobe Photoshop from your AI assistant.
+Common questions about Editmamei, the MCP server that lets your AI app edit photos in desktop Photoshop or GIMP.
 
 ---
 
@@ -764,7 +802,7 @@ Common questions about Editmamei, the MCP server that drives Adobe Photoshop fro
 
 ### What is Editmamei?
 
-Editmamei is a Model Context Protocol (MCP) server for Adobe Photoshop. It runs locally, your AI client (Claude Desktop, Claude Code, Cursor, or any MCP-compatible client) connects to it, and it drives desktop Photoshop. You describe the edit in plain language; the AI plans the steps; Photoshop carries them out with its own standard tools.
+Editmamei is a Model Context Protocol (MCP) server for AI photo editing in Adobe Photoshop and GIMP. It runs on your computer, your AI app (Claude Desktop, Claude Code, Cursor, or another MCP-compatible app) connects to it, and it drives the desktop editor. You describe the edit in plain language, the AI plans the steps, and Photoshop or GIMP carries them out with its own tools, layer by layer. Let AI do the parts of the edit you don't want to, and keep the final touches for yourself.
 
 ### Is Editmamei affiliated with Adobe?
 
@@ -772,7 +810,7 @@ No. Editmamei is an independent product. It is not affiliated with, endorsed by,
 
 ### Does Editmamei generate pixels with AI?
 
-No. Editmamei is an *orchestration* layer, not a *generation* layer. The AI assistant plans the steps (which adjustments, which selections, in what order), and Photoshop carries them out using its own standard non-generative tools (adjustment layers, masks, selections, filters). Your pixels are only ever changed by Photoshop itself; no generative model touches them. "AI orchestration, not generation" is the short version.
+Editmamei itself doesn't. It ships no image model and never generates a picture. Your AI app plans the steps (which adjustments, which selections, in what order), and Photoshop or GIMP carries them out on the photo you have, with the editor's own tools: adjustment layers, masks, selections, filters. Some of those tools have AI built in, like Photoshop's Select Subject, Select Sky and Sky Replacement, and Editmamei can use them when an edit calls for it. Either way, you get back a layered file you can keep working on.
 
 ### Is Editmamei open source?
 
@@ -790,7 +828,7 @@ Officially:
 - [Cursor](https://cursor.com/)
 - [Claude Code](https://claude.ai/code)
 
-Any MCP-compatible client should work (per-client setup is in [clients.md](https://github.com/editmamei/editmamei/blob/main/docs/clients.md)); Editmamei is a standard MCP stdio server. `editmamei install` detects your installed clients (Claude Desktop, Cursor, Claude Code) and writes each one's config in a single pass; for other clients, the [manual configuration steps](https://github.com/editmamei/editmamei/blob/main/docs/installation.md#manual-configuration) show what to put in your client's config.
+Any MCP-compatible client should work (per-client setup is in [clients.md](https://github.com/editmamei/editmamei/blob/main/docs/clients.md)); Editmamei is a standard MCP stdio server. `npx -y editmamei install` detects your installed clients (Claude Desktop, Cursor, Claude Code, and the ChatGPT desktop app and Codex) and writes each one's config in a single pass; for other clients, the [manual configuration steps](https://github.com/editmamei/editmamei/blob/main/docs/installation.md#manual-configuration) show what to put in your client's config.
 
 ### Which AI client should I use?
 
@@ -806,9 +844,9 @@ If you're not sure: start on Desktop. Move to Code the first time you feel a ses
 
 ### Which Photoshop versions are supported?
 
-**Photoshop 2026 (internal version 27.x).** That's the only Photoshop version Editmamei has been verified against; every ActionManager descriptor we emit was captured against PS 27.x on Windows and macOS.
+**Photoshop 2026 or later** (internal version 27 and up), on Windows and macOS.
 
-Earlier versions (Photoshop 2025 / 2024 / 2023 / 2022) may work (the DOM-level APIs and most AM events are stable across recent majors), but they're unverified. Adobe is known to rotate event IDs between major versions, and a tool that string-match-tests fine in the source can still silent-no-op against a different PS major. The auto-detector still finds older installs so you can try, but failing tools on unsupported versions are a known unsupported-version risk, not a bug.
+It may also work with earlier versions, back to Photoshop 2020. Adobe sometimes changes scripting details between major versions, so if a tool misbehaves on an older Photoshop, include your version when you [open an issue](https://github.com/editmamei/editmamei/issues).
 
 ### Does Editmamei work on Linux?
 
@@ -822,11 +860,11 @@ Yes. Editmamei can drive GIMP headless as a second editor, on Windows, macOS, or
 
 Core editing doesn't. Editmamei never requires a network call to drive Photoshop. Its own network calls are few and content-free: usage telemetry (which tools ran, whether they succeeded, versions, and per-session counts), sent best-effort in the background and switchable off with `editmamei config set telemetry.usage false`; a boot-time update check (an anonymous version lookup against the npm registry, also switchable off in settings); and, on Pro, license activation and daily revalidation (sent to a third-party licensing service, carrying your license key) plus a check on every startup against Editmamei's delivery endpoint for a newer Pro module (your license key in a request header and a fixed user-agent string that is the same for every install; not governed by the update-check setting). None of these carry images, paths, or tool arguments; usage telemetry is tied to a random install ID. Every telemetry field is documented in [privacy.md](https://github.com/editmamei/editmamei/blob/main/docs/privacy.md).
 
-Your AI assistant is separate. Editmamei runs as a stdio subprocess of your AI assistant (Claude Desktop, Cursor, etc.), and that assistant is itself a cloud service governed by its own privacy policy. When you ask the AI to look at a visual preview, Editmamei sends a downscaled JPEG to *that AI provider* on your behalf, exactly as if you'd dropped the file into a chat with it. To stop that, set `privacy.send_previews_to_llm` to `false` (it covers Photoshop and GIMP; see [privacy.md](https://github.com/editmamei/editmamei/blob/main/docs/privacy.md)). So an internet connection is required for the AI to function, even if Editmamei the server isn't transmitting anything itself.
+Your AI assistant is separate. Editmamei runs as a stdio subprocess of your AI assistant (Claude Desktop, Cursor, etc.), and that assistant is itself a cloud service governed by its own privacy policy. When you ask the AI to look at a visual preview, Editmamei sends a preview JPEG to *that AI provider* on your behalf, exactly as if you'd dropped the file into a chat with it. To stop that, set `privacy.send_previews_to_llm` to `false` (it covers Photoshop and GIMP; see [privacy.md](https://github.com/editmamei/editmamei/blob/main/docs/privacy.md)). So an internet connection is required for the AI to function, even if Editmamei the server isn't transmitting anything itself.
 
 ### Does it need Generative Fill / Adobe cloud features?
 
-No generative feature is required or invoked: Editmamei runs against the standard ExtendScript automation surface, which has been in every Photoshop install since the early 2010s, and no tool in the current build touches Generative Fill or any other Adobe generative feature. One nuance on cloud: Photoshop's own Select Subject and Select Sky (included in Community) are Sensei-backed, and whether they run in Adobe's cloud or on-device depends on your **Preferences → Image Processing** setting; see [getting-started.md](https://github.com/editmamei/editmamei/blob/main/docs/getting-started.md#troubleshooting) if they error.
+No. Editmamei runs against the standard ExtendScript automation surface, which has been in every Photoshop install since the early 2010s, and it doesn't use Generative Fill or Generative Expand today. Some Photoshop features it can use do rely on Adobe's AI, such as Select Subject, Select Sky and Sky Replacement. One nuance on cloud: Photoshop's own Select Subject and Select Sky (included in Community) are Sensei-backed, and whether they run in Adobe's cloud or on-device depends on your **Preferences → Image Processing** setting; see [getting-started.md](https://github.com/editmamei/editmamei/blob/main/docs/getting-started.md#troubleshooting) if they error.
 
 ### Does Editmamei work with Photoshop Elements?
 
@@ -854,7 +892,7 @@ Yes. A Pro template carries the look, photo by photo: save a look once, then hav
 
 ### How does the AI know what the image looks like?
 
-Through `ps_get_preview`, which returns a downscaled JPEG of the current document state. The AI calls this when it needs to verify its own work or judge an aesthetic outcome. It can also call `ps_get_histogram` for per-channel pixel distributions and `ps_inspect` for dimensions, color mode, and embedded profile.
+Through `ps_get_preview`, which returns a preview JPEG of the current document state. The AI calls this when it needs to verify its own work or judge an aesthetic outcome. It can also call `ps_get_histogram` for per-channel pixel distributions and `ps_inspect` for dimensions, color mode, and embedded profile.
 
 ### Does the AI see my photos? Where do the vision models run?
 
@@ -866,7 +904,7 @@ Nothing about the content of your edits goes to us: no images, document data, or
 
 ### Can I run Editmamei against multiple Photoshop versions installed side by side?
 
-Yes. Editmamei auto-detects Photoshop, and you can pin a specific install via the `PHOTOSHOP_PATH` env var in your MCP client config. See [installation.md](https://github.com/editmamei/editmamei/blob/main/docs/installation.md#optional-pin-a-specific-photoshop-install).
+Yes. Editmamei auto-detects Photoshop and uses the newest version installed. To use a different one, pin it with the `PHOTOSHOP_PATH` env var in your MCP client config. See [installation.md](https://github.com/editmamei/editmamei/blob/main/docs/installation.md#optional-pin-a-specific-photoshop-install).
 
 ### Why does the AI take longer between edits as my session gets longer?
 
@@ -915,7 +953,7 @@ Yes. The monthly Pro plan has a 7-day free trial, which turns into the monthly p
 
 ### Where do I file bugs?
 
-[github.com/editmamei/editmamei/issues](https://github.com/editmamei/editmamei/issues). Pick the appropriate template (bug report or feature request) and fill it in.
+[github.com/editmamei/editmamei/issues](https://github.com/editmamei/editmamei/issues). Pick the appropriate template (bug report or feature request) and fill it in. Feature ideas also work well in [Discussions → Ideas](https://github.com/editmamei/editmamei/discussions/categories/ideas), where others can upvote them.
 
 ### Where do I ask account or billing questions?
 
@@ -927,7 +965,7 @@ See [SECURITY.md](https://github.com/editmamei/editmamei/blob/main/SECURITY.md) 
 
 ### Is there a community?
 
-Not a dedicated one yet. The [issue tracker](https://github.com/editmamei/editmamei/issues) is the primary public forum, and [@editmamei on Instagram](https://www.instagram.com/editmamei/) is where demos and announcements land.
+Yes: [GitHub Discussions](https://github.com/editmamei/editmamei/discussions) is the place for questions, ideas and edits you want to share, and each release is announced there. Bugs go in the [issue tracker](https://github.com/editmamei/editmamei/issues), and [@editmamei on Instagram](https://www.instagram.com/editmamei/) is where demos land.
 
 
 ================================================================================
@@ -937,9 +975,9 @@ SOURCE: https://github.com/editmamei/editmamei/blob/main/docs/pro-features.md
 
 # Pro features
 
-Editmamei, the MCP server that drives Adobe Photoshop from your AI assistant, ships in two editions. Community installs free from the public npm registry. Pro is a **downloaded module**: you keep your Community install, activate a license, and Editmamei fetches the signed Pro module and loads it after a restart. Same CLI, same MCP server name; the Pro module is fetched and loaded automatically when your license entitles it, so there's no second package to install by hand.
+Editmamei, the MCP server that lets your AI app edit photos in desktop Photoshop or GIMP, ships in two editions. Community installs free from the public npm registry. Pro is a **downloaded module**: you keep your Community install, activate a license, and Editmamei fetches the signed Pro module and loads it after a restart. Same CLI, same MCP server name; the Pro module is fetched and loaded automatically when your license entitles it, so there's no second package to install by hand.
 
-Both editions follow the same rule: AI orchestration, not generation. Photoshop edits with its own real tools; Pro just gives the AI a deeper toolkit to orchestrate.
+Both editions follow the same rule: your photo is edited, not regenerated. Photoshop edits with its own real tools; Pro gives the AI a deeper Photoshop toolkit to work with.
 
 This page describes the line between Community and Pro as it stands today. The split may evolve; see [editmamei.com/desktop/pricing](https://editmamei.com/desktop/pricing) for the current state.
 
@@ -973,12 +1011,13 @@ The Community edition covers the core editing surface most photographers need da
 - **Layer transforms and straightening:** move, scale, rotate, and fit-to-document on the active layer; background layers auto-promote instead of erroring, so you can straighten a tilted phone shot in one step
 - **Content-aware retouch:** Content-Aware Fill, Patch, and Content-Aware Move, each driven against a selection the AI can verify first. Erase a distraction or repair a blemish without leaving the conversation
 - **History:** undo, redo, inspect history states
-- **Visual verification:** downscaled preview JPEGs returned inline, layer-bounds diffs, region comparison, and 256-bin per-channel histograms with mean, stdev, and median
+- **Visual verification:** preview JPEGs returned inline, layer-bounds diffs, region comparison, and 256-bin per-channel histograms with mean, stdev, and median
 - **Document insight:** camera metadata (make, model, lens, ISO, focal length, GPS), ACR develop settings, full layer tree as JSON, capability overview, plus `ps_document` to list the open documents and switch which one is active
 - **Text:** create text layers, set font, size, color, and alignment, update content
 - **Image placement:** place image files into the document
 - **Scene awareness, on your machine:** `ps_detect` finds faces and objects on-device; `ps_read_scene` reads the scene; `ps_select_by_reference` turns a named thing ("the sky", "the person on the left") into a real selection
 - **AI selections and sky replacement:** `ps_select_subject` and `ps_select_sky` (Photoshop's Sensei selections), each returning the same rich feedback bundle as every other selection so the AI can verify before committing, plus `ps_replace_sky` to swap a sky from a preset or your own file
+- **Relight (Photoshop 2027 and later):** `ps_relight` adds up to three lights to a photo with Photoshop's generative Relight, as a new layer above the original, or re-renders an existing Relight layer in place. A free preview (Windows for now) shows Photoshop's own low-resolution look at the lights first, with nothing rendered. Each render, an in-place edit included, spends 30 Adobe Firefly generative credits from your Adobe account, so you're asked first every time, and the whole feature can be turned off in [settings](https://github.com/editmamei/editmamei/blob/main/docs/mcp-reference.md#settings)
 - **Vector shapes and pen paths:** `ps_shape` (rectangle, ellipse, line), `ps_path` (editable paths, path-to-selection and back), and `ps_vector_mask`
 - **Channel compositing:** `ps_apply_image` and `ps_calculations` for luminosity blends and channel-math masks, plus save / load / duplicate / delete of selection channels
 - **Canvas and guides:** rotate and flip the canvas, add guides and guide layouts, and skew / free-transform layers
@@ -1219,10 +1258,11 @@ metadata (including any GPS location); only `gimp_export` removes it.
   visibility, merge down, flatten (`gimp_layer`). Place another photo into the document as a new
   layer (`gimp_place_image`) to build a composite, and extend the canvas for borders and frames
   (`gimp_canvas`).
-- **Non-destructive adjustments** (`gimp_add_adjustment`), 13 types: curves, levels, exposure,
+- **Non-destructive adjustments** (`gimp_add_adjustment`), 14 types: curves, levels, exposure,
   brightness/contrast, hue/saturation, color balance, color temperature, shadows/highlights,
-  saturation, vibrance, sharpen, noise reduction, gaussian blur. Each stays live and re-editable by
-  its `filter_id`; exporting writes a copy and leaves the live document as it was.
+  saturation, vibrance, sharpen, noise reduction, gaussian blur, clarity (midtone local
+  contrast). Each stays live and re-editable by its `filter_id`; exporting writes a copy and
+  leaves the live document as it was.
 - **Effects** (`gimp_add_effect`): vignette, black and white, motion blur, lens blur, noise, drop
   shadow, outline, outer glow and surface blur (an edge-preserving blur), live and re-editable the
   same way. Outline width and glow spread go up to 50 px. `gimp_bake` merges a layer's live filters
@@ -1268,8 +1308,8 @@ reports a new image id to use from then on. `gimp_checkpoint` op=list shows the 
 might want to take back. Each image keeps up to 5 checkpoints (20 in all); they're deleted when
 Editmamei exits, so save a `.xcf` for anything you want to keep.
 
-Adjustments are the opposite: reversible any time. `gimp_filter` (op=delete) removes one, and passing
-its `filter_id` back to `gimp_add_adjustment` re-edits it in place rather than stacking a second
+Adjustments are the opposite: reversible any time. `gimp_filter` (op=delete) removes one, or several
+at once with `filter_ids`, and passing its `filter_id` back to `gimp_add_adjustment` re-edits it in place rather than stacking a second
 correction on top.
 
 One ordering rule ties the two together: straighten, flip, and resize the canvas **before** adding any
@@ -1375,6 +1415,7 @@ Read the reason in brackets and follow the matching row:
 | `granted` | Pro is unlocked | If tools are still missing, restart your AI client. A newly downloaded module only loads on the next start. |
 | `grace-expired` | Your license hasn't checked in recently enough | Usually [the restart loop](#the-restart-loop) below. If your system clock has been wrong, see [a clock set behind](#a-clock-set-behind) instead. |
 | `revoked` / `disabled` | The license is no longer active | Check your subscription status. Once it's running again, run `editmamei license` to re-check it, then restart your AI client so the Pro tools load. |
+| `activation-removed` | This device was removed from your license | If you removed it on purpose, also clear the key from your AI client's settings if it's set there, or Pro will activate on this device again. Otherwise, if your license is on its maximum of 2 devices, remove one in your account portal (the "Manage" link in your purchase email). Then run `editmamei activate YOUR-KEY` and restart your AI client so the Pro tools load. If your key is set in your AI client's settings, restarting the client is enough. |
 | `expired` | The license has an end date that has passed | Renew, then run `editmamei activate YOUR-KEY` and restart your AI client so the Pro tools load. |
 
 If `editmamei license` says **"No license activated on this device"** instead of printing the
@@ -1457,7 +1498,7 @@ Work through these in order:
 1. **Is Photoshop actually running, with a document open?** Editmamei drives a running copy. It
    won't launch one for you.
 2. **Restart Photoshop, then your AI client**, in that order.
-3. **Check you're on a supported version.** See [Requirements](https://github.com/editmamei/editmamei/blob/main/docs/installation.md#requirements-photoshop-2026-node-22-windows-or-macos).
+3. **Check you're on a supported version.** See [Requirements](https://github.com/editmamei/editmamei/blob/main/docs/installation.md#requirements-photoshop-2026-or-later-node-22-windows-or-macos).
 4. **If you have more than one Photoshop installed**, Editmamei may be talking to the wrong one.
    Pin the one you want with `--photoshop-path`, described under
    [Optional: pin a specific Photoshop install](https://github.com/editmamei/editmamei/blob/main/docs/installation.md#optional-pin-a-specific-photoshop-install).
@@ -1561,7 +1602,7 @@ SOURCE: https://github.com/editmamei/editmamei/blob/main/docs/privacy.md
 
 # Privacy & data handling
 
-Editmamei is an MCP server that drives Adobe Photoshop on your own machine. This page describes
+Editmamei is an MCP server that drives Adobe Photoshop or GIMP on your own machine. This page describes
 exactly what it does with your data: what stays on your machine, what you control, how to
 control it, and the precise shape of everything that leaves. It's about the npm package you
 install (the `editmamei` MCP server), not about the
@@ -1572,8 +1613,8 @@ The short version: your photos aren't uploaded to us. What Editmamei sends to it
 servers is content-free usage data, tied to a random install ID (documented field-for-field
 below, and you can switch it off with one command). If you have Pro, your license key also goes
 to a third-party licensing service, and to Editmamei's delivery endpoint on each startup (see
-[Pro](#pro)). (When your AI assistant needs to see an edit, a downscaled preview
-goes to that assistant; covered under "Your AI assistant is a cloud service" below.)
+[Pro](#pro)). (When your AI assistant needs to see an edit, a preview goes to
+that assistant, along with tool results; covered under "Your AI assistant is a cloud service" below.)
 
 ---
 
@@ -1583,7 +1624,8 @@ There is one line Editmamei does not cross, on any setting or edition:
 
 - **Your images.** No photos, previews, thumbnails, layer renders, or other pixel data are ever
   sent to Editmamei.
-- **Your file paths.** Full paths stay local. Where a path is unavoidable in an opt-in
+- **Your file paths.** Full paths are never sent to Editmamei. Tool results can show them to your
+  AI assistant. Where a path is unavoidable in an opt-in
   diagnostic message, it's reduced to a bare filename first (see [Sanitization](#sanitization)).
 - **Your metadata.** Camera info, GPS, and author fields are never sent to Editmamei. Your
   AI assistant can read them (for example when it requests a document's metadata).
@@ -1627,12 +1669,16 @@ run. These are the keys:
 | Key | Type | Default | What it does |
 |---|---|---|---|
 | `telemetry.usage` | boolean | `true` (on) | Content-free usage and reliability data. The opt-out tier. |
+| `telemetry.features` | boolean | `true` (on) for a new install | The names of editing features and tool options used: values a tool's schema declares, and script operations from a [published list](https://github.com/editmamei/editmamei/blob/main/docs/feature-names.md), with no install ID. Only sent while `telemetry.usage` is on. On an install from before this setting existed, it is absent, which means off, until you answer. |
 | `telemetry.diagnostics` | boolean | `false` (off) | Extra sanitized error detail for bug-hunting. The opt-in tier. |
 | `telemetry.install_id` | string | random | A random ID, minted once, so installs can be counted without knowing who you are. It is not derived from anything about you, but it is stable, so it is still personal data and you have rights over it — see [Your rights, and the legal basis](#your-rights-and-the-legal-basis). **Read-only**: you can see it, but it isn't something you set. |
 | `privacy.send_previews_to_llm` | boolean | `true` | A control over sending images to your AI assistant. When `false`, no tool returns image bytes to the model: Photoshop previews (`ps_get_preview`, selection previews, annotated detection images) and GIMP previews (`gimp_get_preview`, `gimp_compare`, see [docs/gimp.md](https://github.com/editmamei/editmamei/blob/main/docs/gimp.md)) come back as text only, with dimensions, numbers and a note that the image was withheld. This includes an image inside another tool's result, such as the last step of `ps_sequence`. GIMP's `latest-preview.jpg`, written on your own disk, is unaffected. |
 | `update_check` | boolean | `true` (on) | Check the public npm registry at startup for a newer version (see "Update check" below). The opt-out tier. |
 | `editor` | string | `"auto"` | Pin which editor(s) register at boot: `auto`, `photoshop`, or `gimp`. The `EDITMAMEI_EDITOR` env var still wins if set. See [docs/gimp.md](https://github.com/editmamei/editmamei/blob/main/docs/gimp.md#pinning-the-editor). |
 | `gimp_path` | string \| null | `null` | Pin a specific GIMP binary (an absolute path; `EDITMAMEI_GIMP_PATH=flatpak` is the way to use Flatpak). `null` = auto-detect (the `EDITMAMEI_GIMP_PATH` env var still wins if set). See [docs/gimp.md](https://github.com/editmamei/editmamei/blob/main/docs/gimp.md#pointing-at-a-custom-install). |
+| `desktop_toggles` | object | absent | The Claude Desktop extension's toggle values at its last launch, so Editmamei can tell when one was changed. Written by Editmamei, and never sent anywhere. |
+| `consent` | object | absent | Your answer to a question about a telemetry setting: the question's version, the answer, how it was given, and the day. Written by Editmamei. |
+| `consent_dismissals` | object | absent | How many times a question was closed without an answer. Written by Editmamei, and never sent anywhere. |
 
 `install_id` is a random value; it is **not** derived from your username, machine name, email,
 or any other identifier.
@@ -1641,7 +1687,7 @@ or any other identifier.
 
 ## How to control it
 
-Three equivalent ways, all writing the same `~/.editmamei/settings.json`:
+Three ways, all controlling the same settings in `~/.editmamei/settings.json`:
 
 **Edit the file directly.** It's plain JSON and yours to inspect at any time:
 
@@ -1673,6 +1719,7 @@ Three equivalent ways, all writing the same `~/.editmamei/settings.json`:
 editmamei config list                          # print all current settings as JSON
 editmamei config get telemetry.usage           # read one setting
 editmamei config set telemetry.usage false     # turn usage telemetry off
+editmamei config set telemetry.features false  # turn feature names off, keep usage telemetry
 editmamei config set telemetry.diagnostics true  # opt in to diagnostic detail
 ```
 
@@ -1680,10 +1727,27 @@ Boolean values accept `true`/`false`, `on`/`off`, `yes`/`no`, or `1`/`0`.
 
 `automation.allow_execute_script` (default `true`): set to `false` to make every tool that runs code refuse: arbitrary scripts (`ps_execute_script`) and recorded Actions (`ps_play_action`), since an Action can contain a script step.
 
-**In Claude Desktop.** The one-click extension has no terminal, so the same two switches appear in
+**In Claude Desktop.** The one-click extension has no terminal, so the same switches appear in
 the extension's own settings (Settings → Desktop app → Manage (next to Extensions) → Editmamei): **Share usage stats**
-(opt-out) and **Share error diagnostics** (opt-in). Toggling them there controls telemetry for
-Claude Desktop without editing any file.
+(opt-out), **Share feature names** (opt-out) and **Share error diagnostics** (opt-in). A change there is saved to the settings file
+the next time Claude Desktop starts Editmamei. After that first start, a choice made in the file or
+the CLI stays in place unless you change the toggle. On that first start, an off **Share usage
+stats** toggle sets usage off in the file, and an on **Share error diagnostics** toggle sets
+diagnostics on in the file. The other position of each toggle leaves the file as it is. A toggle
+that is off keeps that switch off whenever Claude Desktop starts Editmamei, whatever the file says.
+**Check for updates** works the same way as **Share usage stats**.
+
+**Share feature names** shows as on before you have answered. On an install from before this
+setting existed, it stays off until you answer the question below or move the toggle. Off at
+Editmamei's first start, or moved either way later, counts as your answer.
+
+**When a setting's scope changes.** If a change to this policy widens what a setting covers, existing
+installs are asked about that change through their AI client's own prompt (MCP elicitation). The
+request goes to your AI client rather than into a tool result, and your client decides how to show
+it. If you decline, close it, or your client doesn't show it, the new data stays off and your other
+settings don't change. A prompt you close or leave unanswered is shown at most 3 times. A new
+install isn't asked, because this policy is available before you install. Anyone with
+`telemetry.usage` off, or with the Claude Desktop toggle for that setting off, isn't asked.
 
 **First-run notice.** The first time Editmamei creates the settings file, it prints this to its
 log so the default is never a surprise:
@@ -1691,11 +1755,12 @@ log so the default is never a surprise:
 > First run: Editmamei collects content-free usage telemetry (tool name, success,
 > duration, bytes returned, version/edition/OS/PS-version, install channel, which AI client
 > connected, Node/OS/architecture versions, and per-session counts like edits made and retries)
-> to find what breaks. Usage telemetry never sends image content, file paths, or tool
-> arguments. The only identifier is a random install ID. Opt out anytime:
-> `editmamei config set telemetry.usage false` (or edit `~/.editmamei/settings.json`). Opt in
-> to sanitized diagnostics (error messages, which can name a layer or repeat a value you
-> passed): `editmamei config set telemetry.diagnostics true`.
+> to find what breaks. It also sends the names of editing features and tool options used, from fixed lists.
+> It never sends image content, file paths, script text, or other free-form text. The only
+> identifier is a random install ID. Opt out anytime: `editmamei config set telemetry.usage false`
+> (or edit `~/.editmamei/settings.json`), or `editmamei config set telemetry.features false` for
+> feature names alone. Opt in to sanitized diagnostics (error messages, which can name a layer or
+> repeat a value you passed): `editmamei config set telemetry.diagnostics true`.
 
 > **Note:** Editmamei reads most settings once at startup, so after changing one, restart your AI
 > client. `privacy.send_previews_to_llm` and `automation.allow_execute_script` are read each time
@@ -1799,12 +1864,12 @@ content-free fields as above, with **no tool name, no counts, no free text**. `p
 
 Sent once the MCP handshake with your AI client completes, so we can tell which clients people
 actually connect Editmamei to (and prioritize testing against the popular ones). Content-free: the
-client's self-reported name is mapped to a fixed short list, never sent as free text, and its
+client's self-reported name is mapped to a fixed list, never sent as free text, and its
 version is reduced to a bare major number.
 
 | Field | Meaning |
 |---|---|
-| `client` | Which AI client connected, one of: `claude_desktop`, `claude_code`, `cursor`, `windsurf`, `vscode`, or `other`. Never the raw client name string. |
+| `client` | Which AI client connected, one of: `claude_desktop`, `claude_code`, `cursor`, `windsurf`, `vscode`, `visual_studio`, `jetbrains`, `xcode_copilot`, `copilot_cli`, `codex`, `gemini_cli`, `cline`, `roo_code`, `kilo_code`, `continue`, `zed`, `goose`, `opencode`, `crush`, `amp`, `factory`, `amazon_q`, `kiro`, `antigravity`, `warp`, `lm_studio`, `cherry_studio`, `raycast`, `librechat`, `jan`, `lobehub`, `chatgpt`, or `other`. Never the raw client name string. |
 | `client_major` | The client's major version number, or `null` if it didn't report one or the version doesn't parse. Among the fields added after this event type shipped, it is the only one sent as `null` rather than omitted — a connected client with an unreadable version is still a known fact. (`error_class` is also sent as `null`, on a successful call.) |
 | `cap_sampling` / `cap_elicitation` / `cap_roots` | Whether the client declared support for these MCP capabilities. Booleans only. |
 
@@ -1910,6 +1975,71 @@ a summary reconstructed after the program was killed outright. It carries only t
 that had been written to disk before the kill, so an older build's leftover state file can
 produce a summary with some of them missing.
 
+### Feature usage: how often a named feature was used (on by default for new installs)
+
+Sent only while both `telemetry.usage` and `telemetry.features` are on. It has **no install ID**, and
+no platform, Photoshop version or edition:
+
+```json
+{
+  "v": 2,
+  "type": "feature_usage",
+  "ts_bucket": "2026-11-20",
+  "editmamei_version": "1.9.7",
+  "kind": "option",
+  "tool": "ps_filter",
+  "name": "type",
+  "value": "gaussian_blur",
+  "count": 4
+}
+```
+
+| Field | Meaning |
+|---|---|
+| `kind` | `option`, `script_operation`, `script_capability` or `script_before`. |
+| `tool` | The tool the name belongs to. For `script_before`, the tool called just before a script. |
+| `name` | `option`: the name of the tool's option. `script_operation` and `script_capability`: a name from the [published list](https://github.com/editmamei/editmamei/blob/main/docs/feature-names.md), or `unknown`. `script_before`: `success` or `failure`. |
+| `value` | `option`: the value, only if it exactly matches the fixed values that tool's schema declares. For `unknown`: `dom`, `action` or `dynamic`. Otherwise absent. |
+| `count` | How many times that day, within one send. |
+
+An option with a free-form value, like a file path, layer name or text, is never recorded. For a
+script, the names are read on your machine and compared with the [published list](https://github.com/editmamei/editmamei/blob/main/docs/feature-names.md).
+A name on the list is sent. Any other name is sent as `unknown`, so it is a count and never the name.
+The script itself is never sent or stored by this feature.
+
+These events travel in the same request as your other usage events, and are stored apart from them
+with nothing that links them back. Each stored row is a day and a version, so on a day with very
+few users it could be matched to one install's activity.
+
+### Consent result: when a question is answered or can't be asked (on by default)
+
+Sent while `telemetry.usage` is on, whatever you answered, so that we can tell who was asked:
+
+```json
+{
+  "v": 2,
+  "type": "consent_result",
+  "install_id": "9f3c…",
+  "ts_bucket": "2026-11-20",
+  "editmamei_version": "1.9.7",
+  "edition": "community",
+  "platform": "win32",
+  "client": "claude_code",
+  "question": "features",
+  "question_version": 1,
+  "result": "declined",
+  "via": "elicitation"
+}
+```
+
+| Field | Meaning |
+|---|---|
+| `client` | Your AI client, from the same fixed list as the client connected event. |
+| `question` | Which setting was asked about. |
+| `question_version` | Which version of the question. |
+| `result` | `accepted`, `declined`, `dismissed`, `unsupported` (the client can't show a prompt), `timed_out`, `failed`, or `install_default` (a new install, not asked). |
+| `via` | How it was set: `elicitation`, `install`, `cli` or `desktop`. |
+
 ### Diagnostic event: only if you opt in
 
 Sent **only** when you set `telemetry.diagnostics true`, and only when something fails:
@@ -1951,9 +2081,13 @@ other names are sent as written. Leave diagnostics off if you'd rather not share
 
 ### What is deliberately never in any event
 
-- The arguments you passed a tool (no prompts, no values, no text). The one exception is an
-  opt-in diagnostic message, which repeats a value when the error itself does (see above).
-- Any image, preview, thumbnail, or pixel data.
+- Free-form input: no prompts, script text, file paths, layer names, on-image text or numbers. The
+  only argument values ever sent are fixed values a tool's schema declares, and names from the
+  [published list](https://github.com/editmamei/editmamei/blob/main/docs/feature-names.md) read out of a script (see
+  [Feature usage](#feature-usage-how-often-a-named-feature-was-used-on-by-default-for-new-installs)).
+  The one other exception is an opt-in diagnostic message, which repeats a value when the error
+  itself does (see above).
+- Any image, preview, thumbnail, or document content.
 - Full file paths.
 - A precise timestamp (day-granularity only).
 - A session ID or anything that links events back to a specific editing session beyond the
@@ -2035,8 +2169,11 @@ cleanup; delete the files whenever you like.
 
 The AI assistant you drive Editmamei with (Claude Desktop, Cursor, and the like) is a cloud
 service governed by its own privacy policy. When you ask it to look at an image (for example,
-the visual-verification preview), Editmamei hands a downscaled JPEG to **that AI provider** on
-your behalf, exactly as if you'd dropped the file into a chat with it. That's a property of
+the visual-verification preview), Editmamei hands a preview JPEG to **that AI provider** on
+your behalf, exactly as if you'd dropped the file into a chat with it. Previews are 1024 pixels on
+the long edge by default, and your AI assistant can ask for up to 8192, so a smaller photo can go at
+full size. Tool results go to the same provider, and they can include file paths, layer names,
+measurements, and document metadata. That's a property of
 using a cloud AI, and a function of which assistant you choose, not a hop Editmamei adds.
 
 ---
@@ -2045,13 +2182,14 @@ using a cloud AI, and a function of which assistant you choose, not a hop Editma
 
 Pro licensing is content-free. Activation sends your license key and a hashed device identifier
 (a salted SHA-256 of hostname, username, platform and architecture, so no raw values; Pro covers
-two devices per license) to the licensing service, a third-party licensing provider. About once a
-day, revalidation sends the license key (plus the store's organization ID) to the same service,
-without the device identifier. Neither request carries document, image, or path data.
+two devices per license) to the licensing service, a third-party licensing provider, which assigns
+an activation ID to that device. About once a day, revalidation sends the license key and activation
+ID (plus the store's organization ID) to the same service, without the hashed device identifier.
+Neither request carries document, image, or path data.
 
 On every Pro startup, Editmamei also asks its own delivery endpoint whether a newer Pro module
-exists, and downloads the signed, encrypted module if so. That request carries your license key (in
-a request header) and a fixed user-agent string that is the same for every install, and no document
+exists, and downloads the signed, encrypted module if so. That request carries your license key and
+activation ID (in request headers) and a fixed user-agent string that is the same for every install, and no document
 data. It is not governed by the `update_check` setting. Your photos stay on your machine, exactly as
 with the rest of Editmamei.
 
@@ -2073,24 +2211,27 @@ to the rights below.
 
 **Lawful basis.**
 
-- **Usage and reliability data** (on by default): legitimate interests: identifying defects, and
-  establishing which features are used and on which Photoshop versions. You have the right to
-  object, and the setting is the mechanism.
+- **Usage and reliability data, and feature names** (on by default): legitimate interests:
+  identifying defects, and establishing which features are used and on which Photoshop versions.
+  You have the right to object, and the settings are the mechanism.
 - **Diagnostic detail** (off by default): consent, given by enabling it and withdrawn by
   disabling it.
 
-The two settings are independent. Disabling usage telemetry stops that stream entirely, including
-anything already queued on disk; it does not disable diagnostics.
+Usage and diagnostics are independent. Disabling usage telemetry stops that stream entirely,
+including feature names and anything already queued on disk; it does not disable diagnostics.
+Disabling `telemetry.features` stops feature names alone, including any queued on disk.
 
 ```sh
 editmamei config set telemetry.usage false
+editmamei config set telemetry.features false
 editmamei config set telemetry.diagnostics false
 ```
 
 **Retention.** Per-install daily counts: 24 months from the day they cover. The install record:
-24 months after the install was last seen. Opt-in diagnostic records: 90 days. All deleted
-automatically. Aggregate daily totals carry no install ID and are not subject to
-these windows.
+24 months after the install was last seen, and your latest answer to a consent question goes with
+it. Opt-in diagnostic records: 90 days. Daily feature names and consent counts carry no install ID:
+24 months. All deleted automatically. Other aggregate daily totals carry no install ID and are not
+subject to these windows.
 
 **Your rights.** Access, rectification, erasure, and objection. Your install ID is the reference
 for all of them:

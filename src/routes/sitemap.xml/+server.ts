@@ -40,7 +40,7 @@ const ROUTES: Array<{ path: string; lastmod: string; priority: string; changefre
 	{ path: '/connect', lastmod: '2026-10-23', priority: '0.9', changefreq: 'monthly' },
 	{ path: '/connect/pricing', lastmod: '2026-10-23', priority: '0.8', changefreq: 'monthly' },
 	{ path: '/pricing', lastmod: '2026-10-23', priority: '0.7', changefreq: 'monthly' },
-	{ path: '/faq', lastmod: '2026-10-23', priority: '0.7', changefreq: 'monthly' },
+	{ path: '/faq', lastmod: '2026-11-18', priority: '0.7', changefreq: 'monthly' },
 	{ path: '/contact', lastmod: '2026-10-23', priority: '0.5', changefreq: 'yearly' },
 	{ path: '/license', lastmod: '2026-10-23', priority: '0.4', changefreq: 'yearly' },
 	{ path: '/privacy', lastmod: '2026-11-03', priority: '0.4', changefreq: 'yearly' },

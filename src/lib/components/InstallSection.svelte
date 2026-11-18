@@ -217,7 +217,8 @@
 				<h3 class="text-lg font-bold text-white">Requirements</h3>
 				<ul class="mt-3 space-y-2 text-[15px] leading-relaxed text-[#c9d8d1]">
 					<li>
-						Adobe Photoshop 2026, internal version 27.x (earlier versions unverified), or GIMP 3.2
+						Adobe Photoshop 2026 or later, or GIMP 3.2. Earlier Photoshop versions may also work,
+						back to Photoshop 2020.
 					</li>
 					<li>
 						Windows 10/11 or macOS 13+ (Apple Silicon or Intel). With GIMP it also runs on Linux,
