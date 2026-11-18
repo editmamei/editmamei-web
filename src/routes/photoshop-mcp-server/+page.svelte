@@ -62,7 +62,7 @@ tool_timeout_sec = 600`;
 		},
 		{
 			title: 'Photoshop’s own tools, not a redraw',
-			body: 'Every change is made by Photoshop on your full-size photo. Nothing is generated or repainted, so the people, products and places in it stay exactly as they are.'
+			body: 'Editmamei doesn’t generate or redraw your photo. Every change is made by Photoshop on your full-size photo, and Photoshop’s own AI features, like Relight, run only when you ask for them.'
 		},
 		{
 			title: 'Nothing added to Photoshop',
@@ -70,11 +70,11 @@ tool_timeout_sec = 600`;
 		},
 		{
 			title: 'Your photos stay on your computer',
-			body: 'Only small previews go to your AI, and you can switch those off. Editmamei never sends your photos or previews to us.'
+			body: 'Your AI sees small previews and details it reads, like layer names, so it can check its work. You can switch previews off. Editmamei never sends your photos or previews to us.'
 		},
 		{
 			title: 'Works in the AI app you already use',
-			body: 'One server for Claude, ChatGPT, Cursor, VS Code, Codex and any other app that runs local MCP servers, with one-click and one-command installs.'
+			body: 'One server for Claude Desktop, the ChatGPT desktop app, Cursor, VS Code, Codex and any other app that runs local MCP servers, with one-click and one-command installs.'
 		}
 	];
 
@@ -143,7 +143,7 @@ tool_timeout_sec = 600`;
 >
 	<div class="max-w-xl">
 		<p class="text-[15px] font-semibold text-[#dfe8e3]">
-			Install it in every AI app on your computer at once:
+			Install it in Claude, ChatGPT, Cursor and Codex at once:
 		</p>
 		{@render code('hero', INSTALL_CMD, 'the install command')}
 		<p class="mt-3 text-[14px] text-[#9fb5ac]">
@@ -274,9 +274,10 @@ tool_timeout_sec = 600`;
 			<h3 class="text-lg font-bold text-white">Photoshop only</h3>
 			<p class="mt-2 text-[15px] leading-relaxed text-[#c9d8d1]">
 				Editmamei also drives GIMP. If your app caps how many MCP tools it loads, this package
-				starts the same server for Photoshop only. Use it in place of <code class="text-accent"
-					>editmamei</code
-				> in any config above:
+				starts the same server for Photoshop only. In any config above, put this package after <code
+					class="text-accent">npx -y</code
+				>
+				instead of <code class="text-accent">editmamei</code>:
 			</p>
 			{@render code('ps-only', PS_ONLY_CMD, 'the Photoshop-only command')}
 		</div>

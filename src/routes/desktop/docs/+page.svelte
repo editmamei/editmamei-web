@@ -52,7 +52,7 @@
 	crumbs={[{ label: 'Editmamei Desktop', href: '/desktop' }, { label: 'Docs' }]}
 	eyebrow="Docs"
 	title="Editmamei Desktop documentation"
-	lede="Editmamei Desktop is the MCP server that lets your AI app edit photos in Photoshop or GIMP on your computer. Its guides live in the public repository on GitHub; pick one below."
+	lede="Editmamei Desktop is the MCP server that lets your AI app edit photos in Photoshop or GIMP on your computer. Most of its guides live in the public repository on GitHub; pick one below."
 />
 
 <section class="bg-paper px-4 py-14 md:py-20">
