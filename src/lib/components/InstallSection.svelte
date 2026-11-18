@@ -5,9 +5,11 @@
 	// Stable "latest release" asset URL: it always resolves to the newest published
 	// release, so a new version never needs a site edit. Shared with /download.
 	import {
+		CURSOR_INSTALL_URL,
 		GITHUB_GETTING_STARTED_DOCS_URL,
 		GITHUB_INSTALLATION_DOCS_URL,
-		MCPB_DOWNLOAD_URL as MCPB_URL
+		MCPB_DOWNLOAD_URL as MCPB_URL,
+		VSCODE_INSTALL_URL
 	} from '#lib/links.ts';
 	import SubscribeForm from '#lib/components/SubscribeForm.svelte';
 	import DownloadSignupDialog from '#lib/components/DownloadSignupDialog.svelte';
@@ -93,8 +95,8 @@
 			<p class="lp-eyebrow text-accent">Install</p>
 			<h2 id="install-title" class="lp-h2 mt-4 text-[#f7f4ec]">Install in about a minute.</h2>
 			<p class="mt-6 text-lg leading-relaxed text-[#c9d8d1]">
-				One click for Claude Desktop. For Claude Code, Cursor and other AI apps, two commands in a
-				terminal (they need Node.js).
+				One click for Claude Desktop, Cursor and VS Code. One command in a terminal for ChatGPT,
+				Claude Code and Codex (it needs Node.js).
 			</p>
 		</div>
 
@@ -113,6 +115,26 @@
 			>
 				<span aria-hidden="true">↓</span> Download for Claude Desktop
 			</a>
+			<!-- Each app opens and asks before adding Editmamei. New tab, because the
+			     page hands off to the app and the visitor should keep this one. -->
+			<a
+				href={CURSOR_INSTALL_URL}
+				target="_blank"
+				rel="noopener"
+				onclick={() => track('install-cursor-clicked')}
+				class="inline-flex min-h-13 items-center justify-center rounded-2xl border-[1.5px] border-accent/50 px-7 text-[17px] font-bold text-white transition-colors hover:bg-white/10"
+			>
+				Install in Cursor
+			</a>
+			<a
+				href={VSCODE_INSTALL_URL}
+				target="_blank"
+				rel="noopener"
+				onclick={() => track('install-vscode-clicked')}
+				class="inline-flex min-h-13 items-center justify-center rounded-2xl border-[1.5px] border-accent/50 px-7 text-[17px] font-bold text-white transition-colors hover:bg-white/10"
+			>
+				Install in VS Code
+			</a>
 			<button
 				type="button"
 				onclick={() => {
@@ -123,7 +145,7 @@
 				aria-controls="install-npm"
 				class="inline-flex min-h-13 cursor-pointer items-center justify-center rounded-2xl border-[1.5px] border-accent/50 px-7 text-[17px] font-bold text-white transition-colors hover:bg-white/10"
 			>
-				Install with npm
+				Install with one command
 			</button>
 		</div>
 
@@ -161,17 +183,18 @@
 			hidden={openRoute !== 'npm'}
 			class="mt-5 max-w-3xl rounded-[22px] bg-brand-deep/70 p-6 ring-1 ring-accent/20"
 		>
-			<p class="text-[16px] font-semibold text-white">Run these two commands:</p>
+			<p class="text-[16px] font-semibold text-white">Run this in a terminal:</p>
 			<pre
 				bind:this={snippetEl}
 				class="mt-3 overflow-x-auto rounded-xl bg-brand-deep px-4 py-3 font-mono text-[14px] leading-relaxed text-[#f4f1e8]"><code
-					><span class="text-neutral-500">$</span> <span class="text-accent">npm</span
-					> install -g editmamei
-<span class="text-neutral-500">$</span> <span class="text-accent">editmamei</span> install</code
+					><span class="text-neutral-500">$</span> <span class="text-accent">npx</span
+					> -y editmamei install</code
 				></pre>
 			<p class="mt-3 text-[15px] leading-relaxed text-[#c9d8d1]">
-				The second command registers Editmamei with Claude Desktop, Claude Code and Cursor. Then
-				restart your AI app and ask “Is Photoshop connected?” Other apps use the
+				It adds Editmamei to each of these apps it finds on your computer: the ChatGPT desktop app,
+				Claude Desktop, Claude Code, Cursor and Codex. Then restart your AI app and ask “Is
+				Photoshop connected?” In the ChatGPT desktop app, Editmamei works in Work mode. Other apps
+				use the
 				<a
 					href={GITHUB_MANUAL_CONFIG_DOCS_URL}
 					class="font-semibold text-accent underline underline-offset-4">install guide</a
@@ -200,7 +223,9 @@
 						Windows 10/11 or macOS 13+ (Apple Silicon or Intel). With GIMP it also runs on Linux,
 						through npm.
 					</li>
-					<li>Node.js 22+, only for the npm route (Claude Desktop bundles its own)</li>
+					<li>
+						Node.js 22+, for every route except the Claude Desktop download (it bundles its own)
+					</li>
 					<li>
 						An AI app that supports MCP. Editmamei has no AI of its own, so edits count against that
 						app's plan (see <a
@@ -214,8 +239,8 @@
 				<h3 class="text-lg font-bold text-white">AI apps</h3>
 				<ul class="mt-3 space-y-2 text-[15px] leading-relaxed text-[#c9d8d1]">
 					<li>Claude Desktop: one click <span class="text-[#9fb5ac]">(.mcpb)</span></li>
-					<li>Claude Code: npm</li>
-					<li>Cursor: npm</li>
+					<li>Cursor and VS Code: one click</li>
+					<li>ChatGPT desktop app, Claude Code and Codex: one command</li>
 				</ul>
 				<p class="mt-3 text-[15px] leading-relaxed text-[#c9d8d1]">
 					Other MCP apps use the same setup; the

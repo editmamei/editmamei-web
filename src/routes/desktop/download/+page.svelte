@@ -49,7 +49,7 @@
 		<p class="mt-3 text-[14px] text-neutral-500">This link always gets the newest release.</p>
 
 		<h2 class="mt-12 text-2xl font-bold tracking-[-0.02em] text-brand">
-			Claude Code, Cursor and other MCP apps
+			ChatGPT, Claude Code, Cursor and other MCP apps
 		</h2>
 		<p class="mt-3">
 			If your AI app runs <code class="rounded bg-prompt-border px-1.5 py-0.5 font-mono text-[14px]"

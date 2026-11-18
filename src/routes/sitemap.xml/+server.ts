@@ -31,7 +31,7 @@ const ORIGIN = 'https://editmamei.com';
 // its lastmod is the date of the generated tool snapshot it renders.
 const ROUTES: Array<{ path: string; lastmod: string; priority: string; changefreq: string }> = [
 	{ path: '/', lastmod: '2026-10-23', priority: '1.0', changefreq: 'weekly' },
-	{ path: '/desktop', lastmod: '2026-10-23', priority: '0.9', changefreq: 'monthly' },
+	{ path: '/desktop', lastmod: '2026-11-17', priority: '0.9', changefreq: 'monthly' },
 	{ path: '/desktop/tools', lastmod: 'TOOLS_SNAPSHOT', priority: '0.7', changefreq: 'monthly' },
 	{ path: '/desktop/pricing', lastmod: '2026-10-23', priority: '0.8', changefreq: 'monthly' },
 	{ path: '/desktop/activate', lastmod: '2026-10-23', priority: '0.5', changefreq: 'monthly' },

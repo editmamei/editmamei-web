@@ -26,6 +26,16 @@ export const MCPB_DOWNLOAD_URL =
 	'https://github.com/editmamei/editmamei/releases/latest/download/editmamei.mcpb';
 export const RELEASES_URL = 'https://github.com/editmamei/editmamei/releases/latest';
 
+// One-click installs. Each opens the app, which asks before adding a server that
+// runs `npx -y editmamei`. The web forms are used because GitHub and some
+// browsers won't follow the raw cursor:// and vscode: schemes from a link.
+// Cursor's config is base64 JSON; VS Code's is URL-encoded JSON. The same links
+// are in the public repo's README and docs/clients.md.
+export const CURSOR_INSTALL_URL =
+	'https://cursor.com/en/install-mcp?name=editmamei&config=eyJjb21tYW5kIjoibnB4IiwiYXJncyI6WyIteSIsImVkaXRtYW1laSJdfQ==';
+export const VSCODE_INSTALL_URL =
+	'https://vscode.dev/redirect/mcp/install?name=editmamei&config=%7B%22command%22%3A%22npx%22%2C%22args%22%3A%5B%22-y%22%2C%22editmamei%22%5D%7D';
+
 // Signup capture (the `editmamei-subscribe` Worker).
 //
 // A workers.dev hostname rather than a custom domain because editmamei.com's

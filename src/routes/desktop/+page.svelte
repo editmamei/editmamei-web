@@ -180,9 +180,10 @@
 			<div class="rounded-[22px] bg-white p-6 ring-1 ring-brand/10">
 				<p class="text-sm font-bold text-terracotta-ink">2 · An AI app on your computer</p>
 				<p class="mt-3 text-[16px] leading-relaxed text-neutral-800">
-					Claude Desktop installs it in one click. Claude Code, Cursor and other apps that support
-					MCP, the standard way AI apps plug into other software, work too. Editmamei brings no chat
-					model of its own, so edits use your AI app's plan.
+					Claude Desktop, Cursor and VS Code install it in one click. The ChatGPT desktop app,
+					Claude Code and other apps that support MCP, the standard way AI apps plug into other
+					software, work too. Editmamei brings no chat model of its own, so edits use your AI app's
+					plan.
 				</p>
 			</div>
 			<div class="rounded-[22px] bg-white p-6 ring-1 ring-brand/10">
