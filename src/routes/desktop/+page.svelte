@@ -196,7 +196,11 @@
 			</div>
 		</div>
 		<p class="mt-6 text-[14px] text-neutral-600">
-			Curious what an edit costs in usage?
+			Setting up a different AI app? The
+			<a href="/photoshop-mcp-server" class="font-semibold text-brand underline underline-offset-2"
+				>Photoshop MCP server setup</a
+			>
+			has the config for each one. Curious what an edit costs in usage?
 			<a
 				href="/blog/what-an-edit-costs"
 				class="font-semibold text-brand underline underline-offset-2">We measured it</a

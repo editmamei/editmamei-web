@@ -7,6 +7,11 @@
 
 	const links = [
 		{
+			label: 'Photoshop MCP server setup',
+			href: '/photoshop-mcp-server',
+			note: 'Add Editmamei to any AI app, with the config for each.'
+		},
+		{
 			label: 'Install',
 			href: `${BLOB}/docs/installation.md`,
 			note: 'Claude Desktop, Claude Code, Cursor and other MCP apps.'
