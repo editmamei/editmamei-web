@@ -33,3 +33,6 @@ vite.config.ts.timestamp-*
 
 # Playwright MCP output
 .playwright-mcp/
+
+# Python (design/svg/build scripts)
+__pycache__/
