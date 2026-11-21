@@ -42,6 +42,10 @@ python design/svg/build/build_mark.py design/Editmamei-icon.png design/svg/build
 
 If the master PNG changes, run both steps. The build is deterministic: re-running it reproduces the files byte for byte.
 
+## Open: wordmark optical size
+
+The wordmark, the lockups and `explorations/` use the font file's default instance, **opsz 96, weight 800** (display cut: narrower, tighter, sharper). The site never shows that cut: it sets everything in **weight 700**, and `font-optical-sizing: auto` picks the opsz from the rendered size, so the header's 18 px "Editmamei" is **opsz 18, weight 700** (wider, softer). The owner noticed the difference (2026-11-21). Pending the owner's pick, rebuild with opsz 18 / wght 700 (matches the header) or opsz 48 / wght 700 (matches the large headings): instance the font with `fontTools.varLib.instancer.instantiateVariableFont(font, {"opsz": 18, "wght": 700})` in `build/wordmark.py` and `build/explore_bricolage_e.py`, then rebuild.
+
 ## Explorations (not the logo)
 
 `explorations/` holds a 2026-11-21 test of the mark with Bricolage Grotesque's own capital E in place of the engraved E: lime (A), evergreen (B), lime with an evergreen 3D shadow (C), C for dark fabric (D), and lockups. None is adopted; the engraved E is the mark. Regenerate with `python design/svg/build/explore_bricolage_e.py`.
