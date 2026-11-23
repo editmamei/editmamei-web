@@ -1,8 +1,8 @@
 ---
 title: "A photographer's mindset for every edit in Editmamei Connect"
 description: Ask your assistant to make a photo better and it now edits with a mindset, a photographer's way of seeing that decides the crop, the light and the color. Plus 50 photos per upload and oversized photos that open instead of being refused.
-seoTitle: 'Mindsets in Editmamei Connect: photo edits that think like a photographer'
-seoDescription: 'Editmamei Connect now edits open requests like "make it better" with a mindset: a family photographer, a darkroom printer or a cinematographer. Plus 50 photos per upload.'
+seoTitle: 'Mindsets in Editmamei Connect: edits like a photographer'
+seoDescription: 'Editmamei Connect now edits open requests like "make it better" with a mindset: a family photographer, darkroom printer or cinematographer, and more.'
 date: 2026-11-23
 ---
 
