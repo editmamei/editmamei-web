@@ -111,6 +111,7 @@
 				<button
 					type="button"
 					aria-pressed={at === i}
+					data-tracked
 					onclick={() => pick(i)}
 					class="min-h-11 flex-none rounded-full border-2 px-3.5 text-[14px] font-semibold transition-colors sm:px-5 sm:text-[15px] {at ===
 					i
@@ -183,6 +184,7 @@
 						{#if c.gallery}
 							<a
 								href={c.gallery}
+								data-tracked
 								onclick={() => track(`connect-case-gallery-${c.id}`)}
 								class="inline-flex min-h-10 items-center text-[15px] font-semibold text-brand underline underline-offset-4"
 								>See every step <span aria-hidden="true" class="ml-1">→</span></a

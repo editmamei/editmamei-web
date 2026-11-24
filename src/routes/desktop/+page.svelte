@@ -229,6 +229,7 @@
 				</p>
 				<a
 					href="#install"
+					data-tracked
 					onclick={() => track('desktop-install-free')}
 					class="mt-auto inline-flex min-h-12 items-center self-start rounded-2xl bg-accent px-6 text-[16px] font-bold text-brand-deep transition-transform hover:-translate-y-0.5 motion-reduce:transition-none"
 					>Install free</a
@@ -256,6 +257,7 @@
 				</ul>
 				<a
 					href="/desktop/pricing"
+					data-tracked
 					onclick={() => track('desktop-pricing')}
 					class="mt-7 inline-flex min-h-12 items-center rounded-2xl border-[1.5px] border-accent/60 px-6 text-[16px] font-bold text-white transition-colors hover:bg-white/10"
 					>See Pro, with a 7-day trial <span aria-hidden="true" class="ml-1.5">→</span></a
@@ -265,6 +267,7 @@
 		<p class="mt-6 text-[14px] text-neutral-600">
 			<a
 				href="/desktop/tools"
+				data-tracked
 				onclick={() => track('desktop-tools-link')}
 				class="font-semibold text-brand underline underline-offset-2"
 				>See every tool, with what each one does <span aria-hidden="true">→</span></a
@@ -387,6 +390,7 @@
 		<div class="mt-14">
 			<a
 				href="/connect"
+				data-tracked
 				onclick={() => track('desktop-xlink-connect')}
 				class="group flex items-center justify-between gap-4 rounded-[22px] bg-brand p-6 text-white transition-shadow hover:shadow-lg"
 			>

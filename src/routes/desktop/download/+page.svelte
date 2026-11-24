@@ -43,6 +43,7 @@
 		</p>
 		<a
 			href={MCPB_DOWNLOAD_URL}
+			data-track="download-page-mcpb-clicked"
 			class="mt-5 inline-flex min-h-12 items-center rounded-2xl bg-brand px-6 text-[16px] font-bold text-white transition-colors hover:bg-brand-light"
 			>Download editmamei.mcpb</a
 		>

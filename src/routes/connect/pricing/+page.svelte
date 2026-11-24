@@ -66,6 +66,7 @@
 >
 	<a
 		href={CONNECT_URL}
+		data-tracked
 		onclick={() => track('connect-start-pricing')}
 		class="inline-flex min-h-13 items-center gap-2 rounded-2xl border-[1.5px] border-accent/50 bg-brand px-7 text-[17px] font-bold text-white shadow-[0_10px_40px_-14px_rgba(206,255,140,0.4)] transition-transform hover:-translate-y-0.5 hover:bg-brand-light motion-reduce:transition-none"
 		>Start free <span aria-hidden="true">→</span></a

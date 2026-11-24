@@ -59,12 +59,14 @@
 			<div class="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row md:mt-10">
 				<a
 					href="#install"
+					data-tracked
 					onclick={() => track('desktop-install-hero')}
 					class="inline-flex min-h-13 items-center gap-2 rounded-2xl bg-accent px-7 text-[17px] font-bold text-brand-deep shadow-[0_10px_40px_-12px_rgba(206,255,140,0.55)] transition-transform hover:-translate-y-0.5 motion-reduce:transition-none"
 					>Install free <span aria-hidden="true">↓</span></a
 				>
 				<a
 					href="#how"
+					data-tracked
 					onclick={() => track('desktop-how-hero')}
 					class="text-[15px] font-semibold text-[#dfe8e3] underline decoration-white/30 underline-offset-4 hover:decoration-white/70"
 					>See how it works</a

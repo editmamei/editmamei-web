@@ -50,6 +50,7 @@
 		<code class="font-mono text-xs break-all text-neutral-500">{tool.id}</code>
 		<button
 			type="button"
+			data-tracked
 			onclick={copyId}
 			aria-label="Copy tool name {tool.id}"
 			class="rounded border border-neutral-200 px-1.5 py-0.5 text-xs text-neutral-600 hover:border-neutral-400 hover:text-neutral-900 focus-visible:outline-2 focus-visible:outline-brand"

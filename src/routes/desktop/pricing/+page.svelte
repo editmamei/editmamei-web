@@ -101,6 +101,7 @@
 >
 	<a
 		href="/desktop#install"
+		data-tracked
 		onclick={() => track('desktop-install-pricing-hero')}
 		class="inline-flex min-h-13 items-center gap-2 rounded-2xl bg-accent px-7 text-[17px] font-bold text-brand-deep shadow-[0_10px_40px_-12px_rgba(206,255,140,0.55)] transition-transform hover:-translate-y-0.5 motion-reduce:transition-none"
 		>Install free <span aria-hidden="true">→</span></a
@@ -140,6 +141,7 @@
 					<a
 						href={p.href}
 						rel="nofollow"
+						data-tracked
 						onclick={() => track(`desktop-plan-${p.id}`)}
 						class="mt-auto inline-flex min-h-12 items-center justify-center rounded-2xl px-5 text-[16px] font-bold transition-transform hover:-translate-y-0.5 motion-reduce:transition-none {p.dark
 							? 'bg-accent text-brand-deep'
@@ -264,6 +266,7 @@
 		</p>
 		<a
 			href="/desktop#install"
+			data-tracked
 			onclick={() => track('desktop-install-pricing-footer')}
 			class="mt-8 inline-flex min-h-13 items-center gap-2 rounded-2xl bg-accent px-7 text-[17px] font-bold text-brand-deep transition-transform hover:-translate-y-0.5 motion-reduce:transition-none"
 			>Install free <span aria-hidden="true">→</span></a

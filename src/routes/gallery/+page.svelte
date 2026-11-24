@@ -67,6 +67,7 @@
 		</div>
 		<a
 			href={CONNECT_URL}
+			data-tracked
 			onclick={() => track('gallery-share-cta')}
 			class="inline-flex min-h-12 items-center rounded-2xl border-[1.5px] border-accent/50 bg-brand px-6 text-[16px] font-bold whitespace-nowrap text-white transition-colors hover:bg-brand-light"
 			>Start free <span aria-hidden="true" class="ml-1.5">→</span></a

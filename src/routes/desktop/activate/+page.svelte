@@ -24,6 +24,7 @@
 		Already subscribed and just need to manage it?
 		<a
 			href={CUSTOMER_PORTAL_URL}
+			data-track="activate-portal-clicked"
 			rel="noopener"
 			class="font-semibold text-accent underline underline-offset-4">Open your account portal</a
 		>

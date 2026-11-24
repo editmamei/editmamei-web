@@ -127,6 +127,7 @@ tool_timeout_sec = 600`;
 			></pre>
 		<button
 			type="button"
+			data-tracked
 			onclick={() => copy(id, text)}
 			aria-label={`Copy ${label}`}
 			class="absolute top-2 right-2 cursor-pointer rounded-lg bg-white/10 px-3 py-1.5 text-[13px] font-semibold text-accent transition-colors hover:bg-white/20"
@@ -175,6 +176,7 @@ tool_timeout_sec = 600`;
 			<p>
 				<a
 					href="/desktop"
+					data-tracked
 					onclick={() => track('psmcp-desktop-link')}
 					class="font-semibold text-brand underline underline-offset-2"
 					>See real requests and results on the Editmamei Desktop page <span aria-hidden="true"
@@ -202,6 +204,7 @@ tool_timeout_sec = 600`;
 		<div class="mt-10 flex flex-wrap gap-3">
 			<a
 				href={MCPB_DOWNLOAD_URL}
+				data-tracked
 				onclick={() => track('psmcp-download-mcpb')}
 				class="inline-flex min-h-12 items-center justify-center gap-2 rounded-2xl bg-accent px-6 text-[16px] font-bold text-brand-deep transition-transform hover:-translate-y-0.5 motion-reduce:transition-none"
 				><span aria-hidden="true">↓</span> Download for Claude Desktop</a
@@ -210,6 +213,7 @@ tool_timeout_sec = 600`;
 				href={CURSOR_INSTALL_URL}
 				target="_blank"
 				rel="noopener"
+				data-tracked
 				onclick={() => track('psmcp-install-cursor')}
 				class="inline-flex min-h-12 items-center justify-center rounded-2xl border-[1.5px] border-accent/50 px-6 text-[16px] font-bold text-white transition-colors hover:bg-white/10"
 				>Install in Cursor</a
@@ -218,6 +222,7 @@ tool_timeout_sec = 600`;
 				href={VSCODE_INSTALL_URL}
 				target="_blank"
 				rel="noopener"
+				data-tracked
 				onclick={() => track('psmcp-install-vscode')}
 				class="inline-flex min-h-12 items-center justify-center rounded-2xl border-[1.5px] border-accent/50 px-6 text-[16px] font-bold text-white transition-colors hover:bg-white/10"
 				>Install in VS Code</a
@@ -323,12 +328,14 @@ tool_timeout_sec = 600`;
 			face, saved looks, and batch runs across a whole folder.
 			<a
 				href="/desktop/pricing"
+				data-tracked
 				onclick={() => track('psmcp-pro-link')}
 				class="font-semibold text-brand underline underline-offset-2">See Pro</a
 			>
 			·
 			<a
 				href="/desktop/tools"
+				data-tracked
 				onclick={() => track('psmcp-tools-link')}
 				class="font-semibold text-brand underline underline-offset-2"
 				>How Editmamei reaches each one <span aria-hidden="true">→</span></a
@@ -376,6 +383,7 @@ tool_timeout_sec = 600`;
 		<div class="mt-12 grid gap-4 sm:grid-cols-2">
 			<a
 				href="/desktop#gimp"
+				data-tracked
 				onclick={() => track('psmcp-xlink-gimp')}
 				class="group rounded-[22px] bg-paper p-6 ring-1 ring-brand/10 transition-shadow hover:shadow-md"
 			>
@@ -386,6 +394,7 @@ tool_timeout_sec = 600`;
 			</a>
 			<a
 				href="/connect"
+				data-tracked
 				onclick={() => track('psmcp-xlink-connect')}
 				class="group rounded-[22px] bg-brand p-6 text-white transition-shadow hover:shadow-lg"
 			>

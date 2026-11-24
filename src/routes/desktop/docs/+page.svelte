@@ -73,8 +73,10 @@
 		</ul>
 		<p class="mt-8 text-[15px] text-neutral-700">
 			Using Editmamei Connect instead? Its setup steps and tools are on
-			<a href={CONNECT_URL} class="font-semibold text-brand underline underline-offset-2"
-				>connect.editmamei.com</a
+			<a
+				href={CONNECT_URL}
+				data-track="docs-connect-link-clicked"
+				class="font-semibold text-brand underline underline-offset-2">connect.editmamei.com</a
 			>.
 		</p>
 	</div>

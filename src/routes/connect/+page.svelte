@@ -169,6 +169,7 @@
 		<p class="mt-6 text-[14px]">
 			<a
 				href={CONNECT_TOOLS_URL}
+				data-tracked
 				onclick={() => track('connect-open-tools')}
 				class="font-semibold text-brand underline underline-offset-2"
 				>See everything Connect can do <span aria-hidden="true">→</span></a
@@ -205,6 +206,7 @@
 					<code class="min-w-0 flex-1 truncate font-mono text-[13.5px] text-accent">{MCP_URL}</code>
 					<button
 						type="button"
+						data-tracked
 						onclick={copyUrl}
 						class="min-h-9 flex-none rounded-lg bg-accent px-3 text-[13px] font-bold text-brand-deep"
 						>{copied ? 'Copied' : 'Copy'}</button
@@ -230,6 +232,7 @@
 		<div class="mt-10 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
 			<a
 				href={CONNECT_URL}
+				data-tracked
 				onclick={() => track('connect-start-setup')}
 				class="inline-flex min-h-13 items-center gap-2 rounded-2xl border-[1.5px] border-accent/50 bg-brand px-7 text-[17px] font-bold text-white shadow-[0_10px_40px_-14px_rgba(206,255,140,0.4)] transition-transform hover:-translate-y-0.5 hover:bg-brand-light motion-reduce:transition-none"
 				>Start free <span aria-hidden="true">→</span></a
@@ -324,6 +327,7 @@
 
 		<a
 			href="/desktop"
+			data-tracked
 			onclick={() => track('connect-xlink-desktop')}
 			class="group mt-14 flex items-center justify-between gap-4 rounded-[22px] bg-white p-6 ring-1 ring-brand/10 transition-shadow hover:shadow-lg"
 		>

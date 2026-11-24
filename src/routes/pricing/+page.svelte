@@ -68,6 +68,7 @@
 			<div class="mt-auto flex flex-wrap items-center gap-4 pt-8">
 				<a
 					href="/desktop/pricing"
+					data-tracked
 					onclick={() => track('pricing-desktop')}
 					class="inline-flex min-h-12 items-center rounded-2xl bg-accent px-6 text-[16px] font-bold text-brand-deep transition-transform hover:-translate-y-0.5 motion-reduce:transition-none"
 					>See Desktop pricing <span aria-hidden="true" class="ml-1.5">→</span></a
@@ -91,6 +92,7 @@
 			<div class="mt-auto flex flex-wrap items-center gap-4 pt-8">
 				<a
 					href="/connect/pricing"
+					data-tracked
 					onclick={() => track('pricing-connect')}
 					class="inline-flex min-h-12 items-center rounded-2xl border-[1.5px] border-accent/50 bg-brand-light px-6 text-[16px] font-bold text-white transition-transform hover:-translate-y-0.5 motion-reduce:transition-none"
 					>See Connect pricing <span aria-hidden="true" class="ml-1.5">→</span></a

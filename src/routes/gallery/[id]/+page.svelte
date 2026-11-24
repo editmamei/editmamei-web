@@ -236,6 +236,7 @@
 			</section>
 			<a
 				href={tryHref}
+				data-track="gallery-share-try-clicked"
 				rel="nofollow"
 				class="inline-flex min-h-12 w-fit items-center rounded-2xl border-[1.5px] border-accent/50 bg-brand px-6 text-[16px] font-bold text-white transition-colors hover:bg-brand-light"
 				>Try this on your photo <span aria-hidden="true" class="ml-1.5">→</span></a

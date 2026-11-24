@@ -127,6 +127,7 @@
 			<div class="mt-8 flex max-w-[30rem] flex-col-reverse gap-3 md:mt-10 lg:flex-col">
 				<a
 					href={desktopHref}
+					data-tracked
 					onclick={() => track('fork-desktop-hero')}
 					class="group flex flex-1 items-center gap-3.5 rounded-2xl bg-accent px-5 py-4 text-brand-deep shadow-[0_10px_40px_-12px_rgba(206,255,140,0.55)] transition-transform hover:-translate-y-0.5 motion-reduce:transition-none"
 				>
@@ -154,6 +155,7 @@
 				</a>
 				<a
 					href={connectHref}
+					data-tracked
 					onclick={() => track('fork-connect-hero')}
 					class="group flex flex-1 items-center gap-3.5 rounded-2xl border-[1.5px] border-accent/50 bg-brand px-5 py-4 text-white shadow-[0_10px_40px_-14px_rgba(206,255,140,0.4)] transition-transform hover:-translate-y-0.5 hover:bg-brand-light motion-reduce:transition-none"
 				>

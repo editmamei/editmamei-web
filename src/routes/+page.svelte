@@ -100,6 +100,7 @@
 				</dl>
 				<a
 					href={DESKTOP_HREF}
+					data-tracked
 					onclick={fork('desktop', 'cards')}
 					class="inline-flex min-h-13 items-center gap-2 rounded-2xl bg-accent px-7 text-[17px] font-bold text-brand-deep shadow-[0_10px_40px_-12px_rgba(206,255,140,0.55)] transition-transform hover:-translate-y-0.5 motion-reduce:transition-none"
 					>See Editmamei Desktop <span aria-hidden="true">→</span></a
@@ -126,6 +127,7 @@
 				</dl>
 				<a
 					href={CONNECT_HREF}
+					data-tracked
 					onclick={fork('connect', 'cards')}
 					class="inline-flex min-h-13 items-center gap-2 rounded-2xl border-[1.5px] border-accent/50 bg-brand px-7 text-[17px] font-bold text-white shadow-[0_10px_40px_-14px_rgba(206,255,140,0.4)] transition-transform hover:-translate-y-0.5 hover:bg-brand-light motion-reduce:transition-none"
 					>See Editmamei Connect <span aria-hidden="true">→</span></a
@@ -182,12 +184,14 @@
 		<div class="mt-10 flex flex-col-reverse justify-center gap-3 sm:flex-row">
 			<a
 				href={DESKTOP_HREF}
+				data-tracked
 				onclick={fork('desktop', 'footer')}
 				class="inline-flex min-h-13 items-center justify-center rounded-2xl bg-accent px-7 text-[17px] font-bold text-brand-deep transition-transform hover:-translate-y-0.5 motion-reduce:transition-none"
 				>Edit on your computer →</a
 			>
 			<a
 				href={CONNECT_HREF}
+				data-tracked
 				onclick={fork('connect', 'footer')}
 				class="inline-flex min-h-13 items-center justify-center rounded-2xl border-[1.5px] border-accent/50 bg-brand px-7 text-[17px] font-bold text-white shadow-[0_10px_40px_-14px_rgba(206,255,140,0.4)] transition-transform hover:-translate-y-0.5 hover:bg-brand-light motion-reduce:transition-none"
 				>Edit from any device →</a

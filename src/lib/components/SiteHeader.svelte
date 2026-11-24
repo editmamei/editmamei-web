@@ -147,6 +147,7 @@
 								: ''}"
 							aria-expanded={open === p.id}
 							aria-controls="nav-{p.id}-panel"
+							data-tracked
 							onclick={() => toggle(p.id)}
 						>
 							{p.menu}
@@ -222,6 +223,7 @@
 
 			<a
 				href={cta.href}
+				data-tracked
 				onclick={() => track(`nav-cta-${cta.id}`)}
 				class="rounded-md bg-brand px-3 py-1.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-brand-light"
 			>

@@ -27,6 +27,7 @@
 					<li>
 						<a
 							href="https://github.com/editmamei"
+							data-tracked
 							onclick={() => track('footer-outbound-github')}
 							class="hover:text-neutral-950">GitHub</a
 						>
@@ -34,6 +35,7 @@
 					<li>
 						<a
 							href="https://www.npmjs.com/package/editmamei"
+							data-tracked
 							onclick={() => track('footer-outbound-npm')}
 							class="hover:text-neutral-950">npm</a
 						>
@@ -41,6 +43,7 @@
 					<li>
 						<a
 							href="https://www.instagram.com/editmamei/"
+							data-tracked
 							onclick={() => track('footer-outbound-instagram')}
 							rel="me noopener"
 							class="inline-flex items-center gap-1.5 hover:text-neutral-950"
@@ -65,6 +68,7 @@
 					<li>
 						<a
 							href="https://x.com/editmamei"
+							data-tracked
 							onclick={() => track('footer-outbound-x')}
 							rel="me noopener"
 							class="inline-flex items-center gap-1.5 hover:text-neutral-950"
@@ -80,6 +84,7 @@
 					<li>
 						<a
 							href="https://www.youtube.com/@editmamei"
+							data-tracked
 							onclick={() => track('footer-outbound-youtube')}
 							rel="me noopener"
 							class="inline-flex items-center gap-1.5 hover:text-neutral-950"
@@ -147,6 +152,7 @@
 					<li>
 						<a
 							href={GITHUB_CHANGELOG_URL}
+							data-tracked
 							onclick={() => track('footer-outbound-changelog')}
 							class="hover:text-neutral-950"
 							>Changelog&nbsp;<span aria-hidden="true">↗</span><span class="sr-only"
@@ -157,6 +163,7 @@
 					<li>
 						<a
 							href={GITHUB_REPO_URL}
+							data-tracked
 							onclick={() => track('footer-outbound-source')}
 							class="hover:text-neutral-950"
 							>Source&nbsp;<span aria-hidden="true">↗</span><span class="sr-only"
@@ -168,6 +175,7 @@
 						<a
 							href="https://launchator.com"
 							target="_blank"
+							data-tracked
 							onclick={() => track('footer-outbound-launchator')}
 							class="hover:text-neutral-950">Launchator</a
 						>
@@ -183,6 +191,7 @@
 					<li>
 						<a
 							href={GITHUB_ISSUES_URL}
+							data-tracked
 							onclick={() => track('footer-outbound-issues')}
 							class="hover:text-neutral-950"
 							>Report a bug&nbsp;<span aria-hidden="true">↗</span><span class="sr-only"
@@ -193,6 +202,7 @@
 					<li>
 						<a
 							href={CUSTOMER_PORTAL_URL}
+							data-tracked
 							onclick={() => track('footer-outbound-portal')}
 							rel="noopener"
 							class="hover:text-neutral-950"

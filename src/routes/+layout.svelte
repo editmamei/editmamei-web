@@ -5,8 +5,13 @@
 	import SiteFooter from '#lib/components/SiteFooter.svelte';
 	import ConsentBanner from '#lib/components/ConsentBanner.svelte';
 	import { identifyPage, resetOnceGuards } from '#lib/analytics/clarity.ts';
+	import { startClickTracking } from '#lib/analytics/click-tracking.ts';
+	import { onMount } from 'svelte';
 
 	let { children } = $props();
+
+	// Every link and button reports a click (see CLAUDE.md, "Click tracking").
+	onMount(startClickTracking);
 
 	// Two things have to happen on every navigation, including the initial one.
 	// Clarity files each page view as its own session unless we hand it a session

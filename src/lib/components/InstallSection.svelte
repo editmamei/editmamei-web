@@ -103,6 +103,7 @@
 		<div class="mt-9 flex flex-wrap items-center gap-3">
 			<a
 				href={MCPB_URL}
+				data-tracked
 				onclick={() => {
 					track('download-mcpb-clicked');
 					// Reveal the steps FIRST, so dismissing the dialog lands on them.
@@ -121,6 +122,7 @@
 				href={CURSOR_INSTALL_URL}
 				target="_blank"
 				rel="noopener"
+				data-tracked
 				onclick={() => track('install-cursor-clicked')}
 				class="inline-flex min-h-13 items-center justify-center rounded-2xl border-[1.5px] border-accent/50 px-7 text-[17px] font-bold text-white transition-colors hover:bg-white/10"
 			>
@@ -130,6 +132,7 @@
 				href={VSCODE_INSTALL_URL}
 				target="_blank"
 				rel="noopener"
+				data-tracked
 				onclick={() => track('install-vscode-clicked')}
 				class="inline-flex min-h-13 items-center justify-center rounded-2xl border-[1.5px] border-accent/50 px-7 text-[17px] font-bold text-white transition-colors hover:bg-white/10"
 			>
@@ -137,6 +140,7 @@
 			</a>
 			<button
 				type="button"
+				data-tracked
 				onclick={() => {
 					track('install-npm-clicked');
 					toggle('npm');
