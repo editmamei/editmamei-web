@@ -66,14 +66,24 @@
 		'Is this photo ready for an Amazon listing?'
 	];
 
+	// The mindsets an open request can take on, as Connect names them.
+	const mindsets = [
+		'Family Photographer',
+		'Darkroom Printer',
+		'Cinematographer',
+		'Documentarian',
+		'Art Director',
+		'Feed Creator'
+	];
+
 	const goodToKnow = [
 		{
 			title: 'What you get back',
 			body: 'The finished photo as JPEG, PNG, WebP or TIFF, or a layered PSD to keep working on.'
 		},
 		{
-			title: 'Up to ten at a time',
-			body: 'Send up to ten photos on one upload link, and run the same edit across up to ten at once.'
+			title: 'Up to 50 photos at a time',
+			body: 'Send up to 50 photos on one upload link, and run the same edit across up to ten at once. A photo too big for your workspace opens scaled down to fit.'
 		},
 		{
 			title: 'RAW files',
@@ -150,6 +160,46 @@
 </section>
 
 <UseCases />
+
+<!-- Mindsets -->
+<section
+	id="mindsets"
+	class="scroll-mt-16 bg-white px-4 py-16 md:py-20"
+	aria-labelledby="mindsets-title"
+>
+	<div class="mx-auto max-w-6xl">
+		<h2 id="mindsets-title" class="text-2xl font-bold tracking-tight text-brand md:text-3xl">
+			Edits like a photographer would.
+		</h2>
+		<p class="mt-5 max-w-[42rem] text-[16px] leading-relaxed text-neutral-800">
+			Ask for something open, like “make it better,” and your AI takes on the mindset that fits the
+			photo: how that kind of photographer would crop it, light it and color it. It tells you which
+			mindset it chose and what it plans to change, then waits for your go.
+		</p>
+		<ul class="mt-6 flex flex-wrap gap-2">
+			{#each mindsets as m (m)}
+				<li
+					class="rounded-full border border-prompt-border bg-prompt px-3.5 py-1.5 text-[14px] font-semibold text-brand"
+				>
+					{m}
+				</li>
+			{/each}
+		</ul>
+		<p class="mt-6 max-w-[42rem] text-[15px] leading-relaxed text-neutral-700">
+			Say what the photo is for, or name a mindset. Prefer exact edits? Turn mindsets off in your
+			Connect settings.
+		</p>
+		<p class="mt-4 text-[14px]">
+			<a
+				href="/blog/editmamei-connect-mindsets"
+				data-tracked
+				onclick={() => track('connect-open-mindsets')}
+				class="font-semibold text-brand underline underline-offset-2"
+				>Read more about mindsets <span aria-hidden="true">→</span></a
+			>
+		</p>
+	</div>
+</section>
 
 <!-- Things to ask -->
 <section class="bg-cream px-4 py-16 md:py-20" aria-labelledby="ask-title">

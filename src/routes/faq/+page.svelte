@@ -149,7 +149,7 @@
 		},
 		{
 			q: 'How do I get photos into Editmamei Connect?',
-			a: 'Ask your assistant to edit a photo and it gives you an upload link. Open it and choose photos from your camera roll on a phone or from your files on a laptop, up to ten at once. Connect can also open a photo from an https:// link.'
+			a: 'Ask your assistant to edit a photo and it gives you an upload link. Open it and choose photos from your camera roll on a phone or from your files on a laptop, up to 50 at once. Connect can also open a photo from an https:// link.'
 		},
 		{
 			q: 'What can Editmamei Connect do?',
