@@ -10,7 +10,12 @@
 		GITHUB_TROUBLESHOOTING_DOCS_URL
 	} from '#lib/links.ts';
 
-	type Faq = { q: string; a: string; link?: { href: string; label: string } };
+	type Faq = {
+		q: string;
+		a: string;
+		link?: { href: string; label: string };
+		extra?: { href: string; label: string; track: string };
+	};
 
 	// Each entry renders once on the page and once in the FAQPage JSON-LD.
 	// `a` is the plain-text answer used in both places; the optional `link`
@@ -33,8 +38,13 @@
 		},
 		{
 			q: 'Can I edit a photo in ChatGPT without it being redrawn?',
-			a: "Yes. Add Editmamei Connect to ChatGPT as a connector and ask for the edit with Editmamei. ChatGPT then works Connect's editing tools on your original photo instead of generating a new image, and hands back a download link.",
-			link: { href: '/connect', label: 'See Editmamei Connect' }
+			a: "Yes. Add Editmamei Connect to ChatGPT as a connector and ask for the edit with Editmamei. ChatGPT then works Connect's editing tools on your original photo instead of generating a new image, and hands back a download link. Editmamei Connect is also listed as an app in ChatGPT.",
+			link: { href: '/connect', label: 'See Editmamei Connect' },
+			extra: {
+				href: 'https://chatgpt.com/plugins/plugin_asdk_app_6aedbd2d8cc881919acaef935494c0b9',
+				label: 'Add to ChatGPT',
+				track: 'faq-add-to-chatgpt-clicked'
+			}
 		},
 		{
 			q: 'Is Editmamei a web app?',
@@ -259,7 +269,7 @@
 					<p class="mt-2 text-[16px] leading-relaxed text-neutral-600">{s.intro}</p>
 				{/if}
 				<dl class="mt-8 divide-y divide-[#ddd6c4] border-y border-[#ddd6c4]">
-					{#each s.faqs as { q, a, link } (q)}
+					{#each s.faqs as { q, a, link, extra } (q)}
 						<div class="py-6">
 							<dt class="text-lg leading-snug font-bold text-brand">{q}</dt>
 							<dd class="mt-2.5 text-[16px] leading-relaxed text-neutral-700">
@@ -269,6 +279,16 @@
 										href={link.href}
 										class="mt-3 inline-flex min-h-9 items-center font-semibold text-brand underline underline-offset-2"
 										>{link.label} <span aria-hidden="true" class="ml-1">→</span></a
+									>
+								{/if}
+								{#if extra}
+									<a
+										href={extra.href}
+										target="_blank"
+										rel="noopener"
+										data-track={extra.track}
+										class="mt-3 ml-5 inline-flex min-h-9 items-center font-semibold text-brand underline underline-offset-2"
+										>{extra.label} <span aria-hidden="true" class="ml-1">→</span></a
 									>
 								{/if}
 							</dd>

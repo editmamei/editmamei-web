@@ -23,6 +23,8 @@
 	// underneath is never named, and a credit is never defined in public copy.
 
 	const MCP_URL = 'https://connect.editmamei.com/mcp';
+	const CHATGPT_APP_URL =
+		'https://chatgpt.com/plugins/plugin_asdk_app_6aedbd2d8cc881919acaef935494c0b9';
 	let copied = $state(false);
 	let copiedTimer = 0;
 	onDestroy(() => clearTimeout(copiedTimer));
@@ -262,6 +264,17 @@
 						>{copied ? 'Copied' : 'Copy'}</button
 					><span class="sr-only" aria-live="polite">{copied ? 'Link copied' : ''}</span>
 				</div>
+				<p class="mt-5 text-[15.5px] leading-relaxed text-[#dfe8e3]">
+					In ChatGPT, add Editmamei Connect from its app listing.
+				</p>
+				<a
+					href={CHATGPT_APP_URL}
+					target="_blank"
+					rel="noopener"
+					data-track="connect-add-to-chatgpt-clicked"
+					class="mt-3 inline-flex min-h-11 items-center gap-2 self-start rounded-xl bg-accent px-5 text-[15px] font-bold text-brand-deep transition-transform hover:-translate-y-0.5 motion-reduce:transition-none"
+					>Add to ChatGPT <span aria-hidden="true">→</span></a
+				>
 			</li>
 			<li class="lp-glass flex min-w-0 flex-col rounded-[22px] p-6">
 				<p class="text-sm font-bold text-accent">2 · Sign up with your email</p>
